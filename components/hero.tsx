@@ -53,7 +53,7 @@ export default function Hero() {
      * CSS-only fade-in so the section is never seen as a blank page during
      * the ~200ms before Framer Motion hydrates.
      */
-    <section className="relative overflow-hidden bg-bone pt-24 pb-12 [animation:heroFadeIn_0.35s_ease-out_both] md:pb-14">
+    <section id="hero" className="relative overflow-hidden bg-bone pt-24 pb-12 [animation:heroFadeIn_0.35s_ease-out_both] md:pb-14">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-start gap-8 px-6 py-12 md:grid-cols-12 md:px-12 md:py-16">
 
         {/* ── Left: copy ── */}
@@ -116,7 +116,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.a
-              href="#footer"
+              href="#contact"
               variants={{ rest: {}, hover: {} }}
               initial="rest"
               whileHover="hover"

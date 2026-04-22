@@ -10,7 +10,7 @@ import FooterSection from '@/components/footer-section'
 
 export default function Home() {
   return (
-    <main className="bg-bone text-charcoal">
+    <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <Hero />
       <MarqueeStrip />

@@ -53,7 +53,7 @@ export default function MenuPage() {
         </p>
         <div className="mt-8">
           <Link
-            href="/#footer"
+            href="/#contact"
             className="inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal transition-colors hover:bg-amber"
           >
             Βρες μας

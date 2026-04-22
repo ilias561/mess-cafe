@@ -12,7 +12,7 @@ const mapEmbedSrc =
 
 export default function FooterSection() {
   return (
-    <footer id="footer" className="scroll-mt-28 bg-charcoal px-6 pt-24 pb-0 text-bone md:px-12">
+    <footer id="contact" className="scroll-mt-28 bg-charcoal px-6 pt-24 pb-0 text-bone md:px-12">
       <div className="mx-auto max-w-[1400px]">
         <motion.p
           className="mb-6 inline-flex rounded-full border border-bone/15 bg-bone/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90"
