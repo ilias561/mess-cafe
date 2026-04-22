@@ -4,6 +4,7 @@ import MarqueeStrip from '@/components/marquee-strip'
 import AboutSection from '@/components/about-section'
 import MenuPreview from '@/components/menu-preview'
 import StoriaSection from '@/components/storia-section'
+import ActionsSection from '@/components/actions-section'
 import GallerySection from '@/components/gallery-section'
 import ReviewsSection from '@/components/reviews-section'
 import FooterSection from '@/components/footer-section'
@@ -17,6 +18,7 @@ export default function Home() {
       <AboutSection />
       <MenuPreview />
       <StoriaSection />
+      <ActionsSection />
       <GallerySection />
       <ReviewsSection />
       <FooterSection />
