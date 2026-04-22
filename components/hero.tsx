@@ -1,13 +1,50 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { images } from '@/lib/images'
 
 const headline = 'A quiet kind of chaos.'
 const words = headline.split(' ')
+
+/* ── Hero video with prefers-reduced-motion + poster fallback ── */
+function HeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const pause = () => ref.current?.pause()
+    if (mq.matches) {
+      pause()
+      return
+    }
+    // Ensure autoplay fires even after hydration
+    ref.current?.play().catch(() => {/* autoplay blocked by browser policy */})
+    mq.addEventListener('change', pause)
+    return () => mq.removeEventListener('change', pause)
+  }, [])
+
+  return (
+    <video
+      ref={ref}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      poster={images.heroInterior}
+      aria-label="Ο χώρος του M.E.S.S. παίρνει ζωή"
+      className="absolute inset-0 h-full w-full object-cover object-center"
+    >
+      {/* WebM first (Chrome/Firefox), MP4 as fallback (Safari/iOS) */}
+      <source src="/videos/hero-transformation.webm" type="video/webm" />
+      <source src="/videos/hero-transformation.mp4" type="video/mp4" />
+      {/* Browsers that can't play video show the poster image via the element itself */}
+    </video>
+  )
+}
 
 export default function Hero() {
   return (
@@ -95,36 +132,15 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* ── Right: single interior photo with Ken Burns zoom ── */}
+        {/* ── Right: looping hero video (poster = interior photo while video loads) ── */}
         <div className="col-span-12 mt-8 md:col-span-6 md:mt-0">
-          {/* Desktop: Ken Burns */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.2, ease: EASE }}
-            className="relative ml-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden rounded-xl bg-[#eee7dc]"
+            className="relative ml-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden rounded-[4px] bg-[#eee7dc]"
           >
-            <motion.div
-              className="absolute inset-0"
-              animate={{ scale: 1.05 }}
-              initial={{ scale: 1.0 }}
-              transition={{
-                duration: 4,
-                ease: 'easeInOut',
-                repeat: Infinity,
-                repeatType: 'reverse',
-              }}
-            >
-              <Image
-                src={images.heroInterior}
-                alt="Εσωτερικός χώρος του M.E.S.S. café με φυτά και ζεστό φωτισμό"
-                fill
-                priority
-                unoptimized
-                sizes="(max-width: 768px) 100vw, 560px"
-                className="object-cover object-center"
-              />
-            </motion.div>
+            <HeroVideo />
           </motion.div>
         </div>
       </div>
