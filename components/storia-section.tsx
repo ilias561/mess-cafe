@@ -7,9 +7,9 @@ import { EASE } from '@/lib/motion'
 import { images } from '@/lib/images'
 
 const paragraphs = [
-  'Το M.E.S.S. δημιουργήθηκε για να προάγει ένα πιο υγιές lifestyle — με κεντρικό άξονα την δημιουργικότητα, την πρωτοβουλία και την δικτύωση. Θα μας βρεις στον 1ο όροφο του ΚΕΠΑΒΙ, δίπλα στη λίμνη Παμβώτιδα: ένα «κρυμμένο διαμαντάκι», όπως μας λένε όσοι μας ανακαλύπτουν.',
-  'Η φιλοσοφία μας είναι απλή: φαγητό ως φάρμακο. Specialty καφές από επιλεγμένες μονές προελεύσεις, ακατέργαστα υλικά και συνταγές που θρέφουν το σώμα χωρίς να θυσιάζουν τη γεύση. Κάθε bowl, κάθε smoothie, κάθε brunch plate φτιάχνεται με αυτή την πρόθεση.',
-  'Σήμερα, το M.E.S.S. είναι κάτι περισσότερο από ένα café. Είναι ένας χώρος για όσους θέλουν να εργαστούν, να συναντηθούν, να δικτυωθούν — ή απλώς να απολαύσουν έναν εξαιρετικό καφέ με θέα στη λίμνη. Μόλις ξεκινήσαμε.',
+  'Το M.E.S.S. γεννήθηκε από δύο ανθρώπους που ήθελαν να φτιάξουν ένα μέρος με ρυθμό, αλλά χωρίς θόρυβο. Στον 1ο όροφο του ΚΕΠΑΒΙ, στην Ιωάννινα, το Κεραμί έγινε η αφορμή να στηθεί ένας χώρος που αγκαλιάζει την πόλη χωρίς να την ακολουθεί βιαστικά.',
+  'Η φιλοσοφία μας μένει σταθερή: specialty καφές με συνέπεια, φαγητό ως φάρμακο και καθημερινές επιλογές που στηρίζουν σώμα και ενέργεια. Κάθε φλιτζάνι και κάθε πιάτο υπηρετεί την ίδια ιδέα: ποιότητα με καθαρή πρόθεση.',
+  'Ανάμεσα στις ταχύτητες της ημέρας, το M.E.S.S. λειτουργεί σαν ήσυχο καταφύγιο. Ένα σημείο για εργασία, για σύνδεση, για μικρές παύσεις που τελικά γίνονται ιστορίες.',
 ]
 
 const bodyVariants = {
@@ -25,7 +25,7 @@ const paraVariants = {
 export default function StoriaSection() {
   return (
     <section
-      id="storia"
+      id="philosophy"
       className="relative scroll-mt-20 overflow-hidden px-6 py-32 md:px-12"
       style={{ backgroundColor: '#2A2520' }}
     >
@@ -67,7 +67,7 @@ export default function StoriaSection() {
             transition={{ duration: 0.6, ease: EASE }}
             className="mb-6 font-sans text-[11px] uppercase tracking-[0.22em] text-mustard/80"
           >
-            Η ΙΣΤΟΡΙΑ ΜΑΣ
+            Η ΦΙΛΟΣΟΦΙΑ ΜΑΣ
           </motion.p>
 
           {/* Heading with clip-path mask reveal */}
@@ -80,10 +80,7 @@ export default function StoriaSection() {
               className="font-serif text-[clamp(32px,4.5vw,60px)] leading-[1.08] tracking-tight text-balance"
               style={{ color: '#F5F0E6' }}
             >
-              Ξεκινήσαμε με ένα φλιτζάνι.{' '}
-              <span className="italic" style={{ color: '#e8b547' }}>
-                Τώρα έχουμε 211 ιστορίες.
-              </span>
+              Ξεκινήσαμε με ένα φλιτζάνι. Τώρα έχουμε 211 ιστορίες.
             </motion.h2>
           </div>
 
@@ -119,11 +116,11 @@ export default function StoriaSection() {
               className="font-serif text-[15px] italic"
               style={{ color: 'rgba(245,240,230,0.45)' }}
             >
-              — Απόστολος, ιδιοκτήτης
+              — Οι ιδρυτές του M.E.S.S.
             </p>
 
             <Link
-              href="/menu"
+              href="#menu"
               className="group inline-flex w-fit items-center gap-1.5 font-sans text-sm font-medium"
               style={{ color: '#e8b547' }}
             >
