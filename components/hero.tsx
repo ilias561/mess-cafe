@@ -162,7 +162,7 @@ export default function Hero() {
                   transition={{ delay: i * 0.08, duration: 0.8, ease: EASE }}
                 >
                   {word}
-                  {i < words.length - 1 ? '\u00A0' : ''}
+                  {i < heroWords.length - 1 ? '\u00A0' : ''}
                 </motion.span>
               </span>
             ))}
@@ -210,7 +210,10 @@ export default function Hero() {
             {stats.map((item) => (
               <div key={item.key}>
                 <p className="font-serif text-[30px] leading-none text-[#F5F0E6]">
-                  {item.value ?? <AnimatedCount from={Math.max(item.to - 45, 100)} to={item.to} prefix={item.prefix} />}
+                  {'value' in item
+                    ? item.value
+                    : <AnimatedCount from={Math.max(item.to - 45, 100)} to={item.to} prefix={item.prefix ?? ''} />
+                  }
                 </p>
                 <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.14em] text-bone/75 md:text-[11px]">
                   {item.label}
@@ -219,7 +222,7 @@ export default function Hero() {
             ))}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="pointer-events-none absolute bottom-8 left-6 z-30 flex items-start gap-3 md:left-12">
         <span className="pt-1 font-sans text-[11px] uppercase tracking-[0.2em] text-bone/75">

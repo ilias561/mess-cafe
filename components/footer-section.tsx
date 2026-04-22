@@ -172,7 +172,7 @@ export default function FooterSection() {
             <a
               href="https://merakidigital.gr"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="underline underline-offset-2 transition-colors hover:text-bone/70"
             >
               Meraki Digital
