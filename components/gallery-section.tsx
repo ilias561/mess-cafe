@@ -87,16 +87,18 @@ function GalleryCard({
         }
       }}
     >
-      <Image
-        src={item.src}
-        alt={item.alt}
-        fill
-        unoptimized
-        priority={item.priority}
-        loading={item.priority ? 'eager' : 'lazy'}
-        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-        className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
-      />
+      <motion.div layoutId={`gallery-image-${item.id}`} className="absolute inset-0">
+        <Image
+          src={item.src}
+          alt={item.alt}
+          fill
+          unoptimized
+          priority={item.priority}
+          loading={item.priority ? 'eager' : 'lazy'}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+        />
+      </motion.div>
 
       {/* Hover overlay — desktop only */}
       <div className="absolute inset-0 hidden bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block" />
@@ -203,7 +205,9 @@ function Lightbox({
         exit={{ opacity: 0, scale: 0.96 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
-        <div className="relative max-h-[80vh] w-auto overflow-hidden rounded-[2px]"
+        <motion.div
+          layoutId={`gallery-image-${item.id}`}
+          className="relative max-h-[80vh] w-auto overflow-hidden rounded-[2px]"
           style={{ aspectRatio: '4/3', maxWidth: 'min(85vw, 1100px)' }}>
           <Image
             src={item.src}
@@ -212,7 +216,7 @@ function Lightbox({
             unoptimized
             className="object-contain"
           />
-        </div>
+        </motion.div>
 
         {/* Caption */}
         <div className="mt-4 text-center">
