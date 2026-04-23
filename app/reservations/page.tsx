@@ -4,6 +4,7 @@ import BookingForm from '@/components/reservations/booking-form'
 import BookingInfo from '@/components/reservations/booking-info'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
+import PreFooterCta from '@/components/pre-footer-cta'
 import { getAllEvents } from '@/lib/events/events'
 import { getSettings } from '@/lib/settings'
 
@@ -39,6 +40,16 @@ export default function ReservationsPage() {
         </div>
       </section>
 
+      <PreFooterCta
+        variant="olive"
+        eyebrow="ΕΧΕΙΣ ΕΡΩΤΗΣΕΙΣ;"
+        heading="Μίλα μας απευθείας."
+        body="Το WhatsApp είναι το πιο γρήγορο. Απαντάμε συνήθως σε λίγα λεπτά, κατά τις ώρες λειτουργίας του καταστήματος."
+        primaryLabel="WhatsApp"
+        primaryHref={`https://wa.me/${settings.whatsapp.replace(/[^\d]/g, '')}`}
+        secondaryLabel="Τηλέφωνο"
+        secondaryHref={`tel:${settings.phone.replace(/\s+/g, '')}`}
+      />
       <FooterSection variant="minimal" />
     </main>
   )

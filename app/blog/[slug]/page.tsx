@@ -6,6 +6,7 @@ import PostHero from '@/components/blog/post-hero'
 import PostBody from '@/components/blog/post-body'
 import RelatedPosts from '@/components/blog/related-posts'
 import ShareRow from '@/components/blog/share-row'
+import PreFooterCta from '@/components/pre-footer-cta'
 import { formatPostDate } from '@/lib/blog/format-date'
 import { getAllPosts, getPostBySlug } from '@/lib/blog/posts'
 
@@ -74,6 +75,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       ) : null}
 
       <RelatedPosts currentSlug={post.slug} category={post.category} />
+      <PreFooterCta
+        variant="olive"
+        eyebrow="ΚΑΘΕ ΕΒΔΟΜΑΔΑ ΚΑΤΙ ΝΕΟ"
+        heading="Επίσκεψέ μας."
+        body="Η καλύτερη έκδοση του blog γράφεται ζωντανά στην καφετέρια. Σε περιμένουμε."
+        primaryLabel="Δες το μενού"
+        primaryHref="/menu"
+        secondaryLabel="Δες τις δράσεις"
+        secondaryHref="/actions"
+      />
       <FooterSection />
     </main>
   )

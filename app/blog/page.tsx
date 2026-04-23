@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import BlogIndexContent from '@/components/blog/blog-index-content'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
+import PreFooterCta from '@/components/pre-footer-cta'
 import { getAllPosts } from '@/lib/blog/posts'
 
 export const metadata: Metadata = {
@@ -24,6 +25,16 @@ export default function BlogPage() {
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <BlogIndexContent posts={posts} />
+      <PreFooterCta
+        variant="mustard"
+        eyebrow="ΜΗ ΧΑΣΕΙΣ ΕΠΟΜΕΝΑ"
+        heading="Ακολούθησέ μας."
+        body="Ό,τι συμβαίνει στο M.E.S.S. — νέα events, νέα στο μενού, ιστορίες από την κουζίνα — πρώτα στο Instagram."
+        primaryLabel="Instagram"
+        primaryHref="https://instagram.com/messcafe"
+        secondaryLabel="Όλες οι δράσεις"
+        secondaryHref="/actions"
+      />
       <FooterSection />
     </main>
   )
