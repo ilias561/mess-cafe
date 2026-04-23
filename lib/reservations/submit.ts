@@ -38,7 +38,7 @@ export async function submitBooking(formData: BookingFormValues): Promise<Submit
   const callmebotPhone = sanitizePhone(process.env.NEXT_PUBLIC_CALLMEBOT_PHONE)
   const callmebotKey = process.env.NEXT_PUBLIC_CALLMEBOT_KEY || ''
 
-  const web3formsPayload = {
+  const web3formsPayload = new URLSearchParams({
     access_key: web3formsKey,
     subject: `Νέα κράτηση event: ${formData.eventType}`,
     from_name: 'M.E.S.S. Website',
@@ -47,24 +47,25 @@ export async function submitBooking(formData: BookingFormValues): Promise<Submit
     phone: formData.phone,
     eventType: formData.eventType,
     date: formData.date,
-    guests: formData.guests,
+    guests: String(formData.guests),
     message: formData.message || '',
     eventSlug: formData.eventSlug || '',
-  }
+  })
 
   const web3formsRequest = fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
       Accept: 'application/json',
     },
-    body: JSON.stringify(web3formsPayload),
+    body: web3formsPayload.toString(),
   })
 
   const callmebotMessage = buildCallmebotMessage(formData)
   const callmebotRequest = callmebotPhone && callmebotKey
     ? fetch(
         `https://api.callmebot.com/whatsapp.php?phone=${callmebotPhone}&text=${encodeURIComponent(callmebotMessage)}&apikey=${callmebotKey}`,
+        { mode: 'no-cors' },
       )
     : Promise.resolve(null)
 
