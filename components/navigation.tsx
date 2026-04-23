@@ -9,6 +9,7 @@ import {
 import { Menu, Phone, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { getOpenStatus } from '@/lib/hours'
 import { EASE } from '@/lib/motion'
 
 const UNDERLINE_ID = 'nav-active-line'
@@ -23,15 +24,6 @@ const navLinks = [
   { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
 ] as const
-
-function getOpenStatus() {
-  const d = new Date()
-  const mins = d.getHours() * 60 + d.getMinutes()
-  const open = mins >= 480 && mins < 1320
-  return open
-    ? { open: true, label: 'Ανοιχτά τώρα' }
-    : { open: false, label: 'Κλειστά · Ανοίγουμε στις 08:00' }
-}
 
 function OpenBadge({
   light = false,
