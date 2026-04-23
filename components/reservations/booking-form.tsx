@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { type BaseSyntheticEvent, useEffect, useMemo, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -65,9 +65,15 @@ export default function BookingForm({ events }: BookingFormProps) {
     })
   }, [defaultDate, defaultEventSlug, defaultEventTitle, reset])
 
-  const onSubmit = async (values: BookingFormValues) => {
+  const onSubmit = async (values: BookingFormValues, event?: BaseSyntheticEvent) => {
     setStatus('idle')
     setSubmitError('')
+
+    const formElement = event?.target as HTMLFormElement | undefined
+    const gotcha = formElement ? String(new FormData(formElement).get('_gotcha') || '').trim() : ''
+    if (gotcha) {
+      return
+    }
 
     const result = await submitBooking(values)
     if (!result.ok) {
@@ -176,6 +182,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           </div>
 
           <input type="hidden" {...register('eventSlug')} />
+          <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
           {status === 'error' ? (
             <div className="rounded-[2px] border border-line/40 bg-bone-warm p-4">

@@ -39,7 +39,7 @@ export default function ReservationsPage() {
         </div>
       </section>
 
-      <FooterSection />
+      <FooterSection variant="minimal" />
     </main>
   )
 }

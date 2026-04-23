@@ -13,11 +13,13 @@ const fallbackSlides = [
   images.gallery1,
   images.aboutPlants,
 ] as const
-const stats = [
+const stats: ReadonlyArray<
+  { key: string; label: string; value: string } | { key: string; label: string; to: number; prefix?: string }
+> = [
   { key: 'rating', label: 'Google rating', value: '4.8★' },
   { key: 'reviews', label: 'Κριτικές', to: 165 },
   { key: 'location', label: 'ΚΕΠΑΒΙ · Όροφος', to: 211, prefix: '#' },
-] as const
+]
 
 function AnimatedCount({
   from,
