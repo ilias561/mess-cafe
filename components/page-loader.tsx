@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 
 const MIN_MS = 950
+const LOADER_DONE_EVENT = 'mess:loader-complete'
 
 export default function PageLoader() {
   const [visible, setVisible] = useState(true)
@@ -32,7 +33,11 @@ export default function PageLoader() {
   }, [visible])
 
   return (
-    <AnimatePresence>
+    <AnimatePresence
+      onExitComplete={() => {
+        window.dispatchEvent(new CustomEvent(LOADER_DONE_EVENT))
+      }}
+    >
       {visible ? (
         <motion.div
           key="page-loader"

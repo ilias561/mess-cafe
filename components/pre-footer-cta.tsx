@@ -31,7 +31,7 @@ const variantStyles = {
     secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
   },
   charcoal: {
-    bg: 'bg-charcoal',
+    bg: 'bg-espresso',
     text: 'text-bone',
     eyebrow: 'text-mustard',
     primary: 'bg-mustard text-charcoal hover:bg-amber',

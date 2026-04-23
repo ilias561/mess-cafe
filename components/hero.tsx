@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { animate, motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, animate, motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
@@ -45,12 +45,13 @@ function AnimatedCount({
 }
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isMobile, setIsMobile] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const [videoFinished, setVideoFinished] = useState(false)
-  const [showSlides, setShowSlides] = useState(false)
-  const [slideshowStarted, setSlideshowStarted] = useState(false)
+  const [isHeroVisible, setIsHeroVisible] = useState(true)
+  const [loaderReady, setLoaderReady] = useState(false)
+  const [mediaPhase, setMediaPhase] = useState<'video' | 'photos'>('video')
   const [slideIndex, setSlideIndex] = useState(0)
 
   const { scrollY } = useScroll()
@@ -74,9 +75,45 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    if (!videoRef.current) return
+    const onLoaderDone = () => setLoaderReady(true)
+    window.addEventListener('mess:loader-complete', onLoaderDone)
+    const fallback = window.setTimeout(() => setLoaderReady(true), 1700)
+    return () => {
+      window.removeEventListener('mess:loader-complete', onLoaderDone)
+      window.clearTimeout(fallback)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!sectionRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.isIntersecting)
+      },
+      { threshold: 0.35 },
+    )
+    observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!loaderReady || reducedMotion) {
+      setMediaPhase('photos')
+      setSlideIndex(0)
+      return
+    }
+    setMediaPhase('video')
+    setSlideIndex(0)
+    const switchToPhotos = window.setTimeout(() => {
+      setMediaPhase('photos')
+    }, 3000)
+    return () => window.clearTimeout(switchToPhotos)
+  }, [loaderReady, reducedMotion])
+
+  useEffect(() => {
+    if (mediaPhase !== 'video' || reducedMotion || !loaderReady || !videoRef.current) return
     const video = videoRef.current
-    if (reducedMotion) {
+    if (!isHeroVisible) {
       video.pause()
       return
     }
@@ -86,35 +123,24 @@ export default function Hero() {
     }
     setPlaybackSpeed()
     video.addEventListener('loadedmetadata', setPlaybackSpeed)
+    video.currentTime = 0
     video.play().catch(() => { /* autoplay policy */ })
     return () => video.removeEventListener('loadedmetadata', setPlaybackSpeed)
-  }, [reducedMotion])
+  }, [reducedMotion, isHeroVisible, loaderReady, mediaPhase])
 
   useEffect(() => {
-    if (!videoFinished) {
-      setShowSlides(false)
-      setSlideshowStarted(false)
-      return
-    }
-    const holdId = window.setTimeout(() => {
-      setShowSlides(true)
-      setSlideshowStarted(true)
-    }, 4000)
-    return () => window.clearTimeout(holdId)
-  }, [videoFinished])
-
-  useEffect(() => {
-    if (!slideshowStarted) return
+    if (reducedMotion || !loaderReady || mediaPhase !== 'photos') return
     const id = window.setInterval(() => {
       setSlideIndex((prev) => (prev + 1) % fallbackSlides.length)
-    }, 4000)
+    }, 6000)
     return () => window.clearInterval(id)
-  }, [slideshowStarted])
+  }, [loaderReady, mediaPhase, reducedMotion])
 
   const heroWords = useMemo(() => headline.split(' '), [])
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="relative min-h-screen overflow-hidden bg-white [animation:heroFadeIn_0.35s_ease-out_both]"
     >
@@ -125,36 +151,44 @@ export default function Hero() {
         }}
         className="absolute inset-y-0 right-0 z-0 w-full md:w-[58%]"
       >
-        {!showSlides ? (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload="metadata"
-            poster="/videos/hero-transformation-poster.jpg"
-            aria-label="Ο χώρος του M.E.S.S. παίρνει ζωή"
-            className="h-full w-full object-cover object-center"
-            onEnded={() => {
-              if (!videoRef.current) return
-              videoRef.current.currentTime = videoRef.current.duration
-              videoRef.current.pause()
-              setSlideIndex(0)
-              setVideoFinished(true)
-            }}
-          >
-            <source src="/videos/hero-transformation.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <Image
-            src={fallbackSlides[slideIndex]}
-            alt="Ο χώρος του M.E.S.S."
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 58vw"
-            className="object-cover object-center transition-opacity duration-500"
-          />
-        )}
+        <AnimatePresence mode="wait">
+          {mediaPhase === 'video' && !reducedMotion ? (
+            <motion.video
+              key="hero-video"
+              ref={videoRef}
+              muted
+              playsInline
+              preload="metadata"
+              poster="/videos/hero-transformation-poster.jpg"
+              aria-label="Ο χώρος του M.E.S.S. παίρνει ζωή"
+              className="h-full w-full object-cover object-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: EASE }}
+            >
+              <source src="/videos/hero-transformation.mp4" type="video/mp4" />
+            </motion.video>
+          ) : (
+            <motion.div
+              key={`hero-photo-${slideIndex}`}
+              className="absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: EASE }}
+            >
+              <Image
+                src={fallbackSlides[slideIndex]}
+                alt="Ο χώρος του M.E.S.S."
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 58vw"
+                className="object-cover object-center"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-[1400px] items-end px-3 pb-12 pt-32 md:px-10 md:pb-16 md:pt-36 lg:px-12">

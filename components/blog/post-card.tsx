@@ -31,7 +31,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
         href={`/blog/${post.slug}`}
         className="block focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
-        <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-bone-warm`}>
+        <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-cream`}>
           <Image
             src={post.coverImage}
             alt={post.coverAlt}

@@ -45,7 +45,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
           <motion.span
             whileHover={{ x: 3 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="mt-8 inline-flex w-fit items-center gap-1 font-sans text-[13px] uppercase tracking-[0.18em] text-mustard underline decoration-mustard underline-offset-[6px]"
+            className="mt-8 inline-flex w-fit items-center gap-1 font-sans text-[13px] uppercase tracking-[0.18em] text-mustard underline decoration-terracotta underline-offset-[6px]"
           >
             Διάβασε →
           </motion.span>

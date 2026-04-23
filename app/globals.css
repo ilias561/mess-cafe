@@ -26,6 +26,9 @@
   --ring: #e8b547;
   --radius: 0.625rem;
   --mustard: #e8b547;
+  --terracotta: #b54f2a;
+  --espresso: #2a1d14;
+  --cream: #faf6ed;
 }
 
 @theme inline {
@@ -37,6 +40,9 @@
   --color-olive: #3d4a2a;
   --color-olive-deep: #2a3418;
   --color-charcoal: #2b2b28;
+  --color-terracotta: #b54f2a;
+  --color-espresso: #2a1d14;
+  --color-cream: #faf6ed;
   --color-concrete: #6b6b63;
   --color-line: #d9d0be;
 
