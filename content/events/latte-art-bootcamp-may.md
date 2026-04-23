@@ -1,15 +1,16 @@
 ---
-title: "Latte Art Bootcamp για αρχάριους"
-slug: "latte-art-bootcamp-may"
-description: "Ένα πρακτικό δίωρο εργαστήριο για όσους θέλουν να μάθουν σωστό steaming και τα πρώτα μοτίβα στο φλιτζάνι."
-category: "workshop"
-coverImage: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&q=80&auto=format&fit=crop"
-coverAlt: "Barista δημιουργεί latte art πάνω σε espresso"
-date: "2026-05-16T11:30:00+03:00"
-location: "M.E.S.S. — ΚΕΠΑΒΙ, Ιωάννινα"
-price: "€18"
-capacity: 18
+title: Latte Art Bootcamp για αρχάριουςwwww
+slug: latte-art-bootcamp-may
+description: Ένα πρακτικό δίωρο εργαστήριο για όσους θέλουν να μάθουν σωστό
+  steaming και τα πρώτα μοτίβα στο φλιτζάνι.
+category: workshop
+coverImage: https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1800&q=80&auto=format&fit=crop
+coverAlt: Barista δημιουργεί latte art πάνω σε espresso
+date: 2026-05-16T11:30:00+03:00
+price: €18
 featured: true
+location: M.E.S.S. — ΚΕΠΑΒΙ, Ιωάννινα
+capacity: 18
 bookingRequired: true
 ---
 
