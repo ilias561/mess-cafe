@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,11 +14,36 @@ type ActionsSectionProps = {
 
 export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
+  const updateScrollState = () => {
+    if (!scrollerRef.current) return
+    const { scrollLeft, scrollWidth, clientWidth } = scrollerRef.current
+    const maxScrollLeft = Math.max(scrollWidth - clientWidth, 0)
+    setCanScrollLeft(scrollLeft > 4)
+    setCanScrollRight(scrollLeft < maxScrollLeft - 4)
+  }
+
+  useEffect(() => {
+    updateScrollState()
+    const node = scrollerRef.current
+    if (!node) return
+    node.addEventListener('scroll', updateScrollState, { passive: true })
+    window.addEventListener('resize', updateScrollState)
+    return () => {
+      node.removeEventListener('scroll', updateScrollState)
+      window.removeEventListener('resize', updateScrollState)
+    }
+  }, [actionCards.length])
 
   const scrollByAmount = (direction: 'left' | 'right') => {
     if (!scrollerRef.current) return
+    const card = scrollerRef.current.querySelector('article')
+    const cardWidth = card instanceof HTMLElement ? card.offsetWidth : 320
+    const gap = 20
     scrollerRef.current.scrollBy({
-      left: direction === 'left' ? -360 : 360,
+      left: direction === 'left' ? -(cardWidth + gap) : cardWidth + gap,
       behavior: 'smooth',
     })
   }
@@ -43,26 +68,9 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
         </motion.div>
 
         <div className="relative hidden md:block">
-          <button
-            type="button"
-            aria-label="Προηγούμενες δράσεις"
-            onClick={() => scrollByAmount('left')}
-            className="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line/70 bg-bone/95 text-charcoal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            aria-label="Επόμενες δράσεις"
-            onClick={() => scrollByAmount('right')}
-            className="absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line/70 bg-bone/95 text-charcoal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </button>
-
           <div
             ref={scrollerRef}
-            className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 pr-24"
+            className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4"
             style={{ scrollbarWidth: 'thin', scrollbarColor: '#e8b547 #efe8d8' }}
           >
             {actionCards.map((card, index) => (
@@ -94,6 +102,26 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                 </div>
               </motion.article>
             ))}
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 hidden md:block">
+            <button
+              type="button"
+              aria-label="Προηγούμενες δράσεις"
+              onClick={() => scrollByAmount('left')}
+              disabled={!canScrollLeft}
+              className="pointer-events-auto absolute left-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line/70 bg-bone/95 text-charcoal transition-all duration-200 hover:-translate-y-[52%] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              aria-label="Επόμενες δράσεις"
+              onClick={() => scrollByAmount('right')}
+              disabled={!canScrollRight}
+              className="pointer-events-auto absolute right-2 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line/70 bg-bone/95 text-charcoal transition-all duration-200 hover:-translate-y-[52%] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
 
