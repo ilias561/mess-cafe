@@ -32,7 +32,7 @@ export default function PageLoader() {
   }, [visible])
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {visible ? (
         <motion.div
           key="page-loader"

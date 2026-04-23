@@ -8,8 +8,11 @@ import ActionsSection from '@/components/actions-section'
 import GallerySection from '@/components/gallery-section'
 import ReviewsSection from '@/components/reviews-section'
 import FooterSection from '@/components/footer-section'
+import { getUpcomingEvents } from '@/lib/events/events'
 
 export default function Home() {
+  const actionCards = getUpcomingEvents().slice(0, 4)
+
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
@@ -18,7 +21,7 @@ export default function Home() {
       <AboutSection />
       <MenuPreview />
       <StoriaSection />
-      <ActionsSection />
+      <ActionsSection actionCards={actionCards} />
       <GallerySection />
       <ReviewsSection />
       <FooterSection />

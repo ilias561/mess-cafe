@@ -91,7 +91,7 @@ function ReviewsCarousel() {
   return (
     <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           {visible.map((review, i) => (
             <ReviewCard key={`${index}-${i}`} review={review} cardIndex={i} />
           ))}

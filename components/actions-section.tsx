@@ -6,35 +6,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { EASE } from '@/lib/motion'
+import type { Event } from '@/lib/events/events'
 
-const actionCards = [
-  {
-    eyebrow: 'WORKSHOP',
-    title: 'Workshops καφέ',
-    description: 'Barista training και specialty coffee tastings για ομάδες και αρχάριους.',
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=960&q=80&auto=format&fit=crop',
-  },
-  {
-    eyebrow: 'ΠΟΛΙΤΙΣΜΟΣ',
-    title: 'Πολιτιστικές βραδιές',
-    description: 'Ποίηση, παρουσιάσεις βιβλίων και talks που φέρνουν κόσμο γύρω από ιδέες.',
-    image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=960&q=80&auto=format&fit=crop',
-  },
-  {
-    eyebrow: 'ΜΟΥΣΙΚΗ',
-    title: 'Live μουσική',
-    description: 'Τζαζ και ακουστικά sets από local artists σε χαμηλό, ατμοσφαιρικό φωτισμό.',
-    image: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=960&q=80&auto=format&fit=crop',
-  },
-  {
-    eyebrow: 'ΣΥΝΕΡΓΑΣΙΑ',
-    title: 'Τοπικές συνεργασίες',
-    description: 'Δράσεις με τοπικούς παραγωγούς και δημιουργικά brands της περιοχής.',
-    image: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=960&q=80&auto=format&fit=crop',
-  },
-] as const
+type ActionsSectionProps = {
+  actionCards: Event[]
+}
 
-export default function ActionsSection() {
+export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
 
   const scrollByAmount = (direction: 'left' | 'right') => {
@@ -89,7 +67,7 @@ export default function ActionsSection() {
           >
             {actionCards.map((card, index) => (
               <motion.article
-                key={card.title}
+                key={card.slug}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
@@ -98,8 +76,8 @@ export default function ActionsSection() {
               >
                 <div className="relative h-[60%] overflow-hidden">
                   <Image
-                    src={card.image}
-                    alt={card.title}
+                    src={card.coverImage}
+                    alt={card.coverAlt}
                     fill
                     loading="lazy"
                     sizes="320px"
@@ -107,7 +85,7 @@ export default function ActionsSection() {
                   />
                 </div>
                 <div className="flex h-[40%] flex-col px-5 py-4">
-                  <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{card.eyebrow}</p>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{card.categoryLabel}</p>
                   <h3 className="mt-2 font-serif text-[24px] leading-tight tracking-tight text-charcoal">{card.title}</h3>
                   <p className="mt-2 line-clamp-2 font-sans text-[14px] leading-relaxed text-concrete">{card.description}</p>
                   <span className="mt-auto inline-block font-sans text-sm text-charcoal underline decoration-mustard underline-offset-[5px]">
@@ -122,7 +100,7 @@ export default function ActionsSection() {
         <div className="flex flex-col gap-5 md:hidden">
           {actionCards.map((card, index) => (
             <motion.article
-              key={card.title}
+              key={card.slug}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30px' }}
@@ -131,8 +109,8 @@ export default function ActionsSection() {
             >
               <div className="relative aspect-[4/3]">
                 <Image
-                  src={card.image}
-                  alt={card.title}
+                  src={card.coverImage}
+                  alt={card.coverAlt}
                   fill
                   loading="lazy"
                   sizes="100vw"
@@ -140,7 +118,7 @@ export default function ActionsSection() {
                 />
               </div>
               <div className="px-5 py-4">
-                <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{card.eyebrow}</p>
+                <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{card.categoryLabel}</p>
                 <h3 className="mt-2 font-serif text-[30px] leading-[1.02] tracking-tight text-charcoal">{card.title}</h3>
                 <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{card.description}</p>
                 <span className="mt-3 inline-block font-sans text-sm text-charcoal underline decoration-mustard underline-offset-[5px]">

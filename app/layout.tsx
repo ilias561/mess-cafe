@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
 import PageLoader from '@/components/page-loader'
 import SmoothScroll from '@/components/smooth-scroll'
+import WhatsAppFloat from '@/components/whatsapp-float'
 import './globals.css'
 
 const inter = Inter({
@@ -38,8 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="el" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <PageLoader />
+        <WhatsAppFloat />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
