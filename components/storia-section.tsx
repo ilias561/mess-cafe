@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
+import MaskReveal from '@/components/mask-reveal'
 import { EASE } from '@/lib/motion'
 import { images } from '@/lib/images'
 
@@ -71,18 +72,14 @@ export default function StoriaSection() {
           </motion.p>
 
           {/* Heading with clip-path mask reveal */}
-          <div className="mb-10 overflow-hidden">
-            <motion.h2
-              initial={{ clipPath: 'inset(0 0 100% 0)' }}
-              whileInView={{ clipPath: 'inset(0 0 0% 0)' }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.95, ease: EASE }}
+          <MaskReveal className="mb-10" delay={0.05}>
+            <h2
               className="font-serif text-[clamp(32px,4.5vw,60px)] leading-[1.08] tracking-tight text-balance"
               style={{ color: '#F5F0E6' }}
             >
               Ξεκινήσαμε με ένα φλιτζάνι. Τώρα έχουμε 211 ιστορίες.
-            </motion.h2>
-          </div>
+            </h2>
+          </MaskReveal>
 
           {/* Staggered paragraphs */}
           <motion.div

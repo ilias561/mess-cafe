@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, animate } from 'framer-motion'
 import Image from 'next/image'
+import MaskReveal from '@/components/mask-reveal'
 import { EASE } from '@/lib/motion'
 import { images } from '@/lib/images'
 
@@ -118,15 +119,11 @@ export default function AboutSection() {
               Ο ΧΩΡΟΣ
             </motion.p>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.06 }}
-              className="mb-8 font-serif text-[clamp(44px,5vw,72px)] leading-[1.02] tracking-tight text-balance text-charcoal"
-            >
-              Ένας χώρος που μένει στο μυαλό.
-            </motion.h2>
+            <MaskReveal className="mb-8" delay={0.06}>
+              <h2 className="font-serif text-[clamp(44px,5vw,72px)] leading-[1.02] tracking-tight text-balance text-charcoal">
+                Ένας χώρος που μένει στο μυαλό.
+              </h2>
+            </MaskReveal>
 
             <motion.p
               initial={{ opacity: 0, y: 24 }}

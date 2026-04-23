@@ -1,28 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 
-const MIN_MS = 950
 const LOADER_DONE_EVENT = 'mess:loader-complete'
+const CURTAIN_TOTAL_MS = 1200
 
 export default function PageLoader() {
+  const pathname = usePathname()
+  const isFirstPath = useRef(true)
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    const started = performance.now()
-
-    const finish = () => {
-      const elapsed = performance.now() - started
-      window.setTimeout(() => setVisible(false), Math.max(0, MIN_MS - elapsed))
+    setVisible(true)
+    if (!isFirstPath.current) {
+      window.scrollTo({ top: 0, behavior: 'auto' })
     }
+    isFirstPath.current = false
 
-    if (document.readyState === 'complete') finish()
-    else window.addEventListener('load', finish, { once: true })
-
-    return () => window.removeEventListener('load', finish)
-  }, [])
+    const timeout = window.setTimeout(() => setVisible(false), CURTAIN_TOTAL_MS)
+    return () => window.clearTimeout(timeout)
+  }, [pathname])
 
   useEffect(() => {
     if (visible) document.body.style.overflow = 'hidden'
@@ -32,35 +32,30 @@ export default function PageLoader() {
     }
   }, [visible])
 
+  useEffect(() => {
+    if (!visible) {
+      window.dispatchEvent(new CustomEvent(LOADER_DONE_EVENT))
+    }
+  }, [visible])
+
   return (
-    <AnimatePresence
-      onExitComplete={() => {
-        window.dispatchEvent(new CustomEvent(LOADER_DONE_EVENT))
-      }}
-    >
+    <AnimatePresence>
       {visible ? (
         <motion.div
           key="page-loader"
-          className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-bone"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.55, ease: EASE } }}
+          className="fixed inset-0 z-[200] overflow-hidden bg-espresso"
+          initial={{ y: 0 }}
+          animate={{ y: '-100%' }}
+          transition={{ duration: 0.7, delay: 0.5, ease: EASE }}
         >
-          <motion.div
-            className="flex flex-col items-center gap-8"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12, transition: { duration: 0.45, ease: EASE } }}
-            transition={{ duration: 0.55, ease: EASE }}
+          <motion.span
+            className="absolute left-1/2 top-[17%] -translate-x-1/2 font-serif text-[clamp(26px,4vw,34px)] tracking-tight text-bone"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: [0, 1, 1, 0], y: [8, 0, 0, -4] }}
+            transition={{ duration: 1.2, times: [0, 0.33, 0.66, 1], ease: EASE }}
           >
-            <span className="font-serif text-[clamp(28px,6vw,40px)] font-medium tracking-tight text-charcoal">M.E.S.S.</span>
-            <motion.div
-              className="h-px w-28 origin-center bg-olive/50"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.9, ease: EASE, delay: 0.08 }}
-            />
-            <span className="font-sans text-[10px] uppercase tracking-[0.28em] text-concrete">Specialty · Ioannina</span>
-          </motion.div>
+            M.E.S.S.
+          </motion.span>
         </motion.div>
       ) : null}
     </AnimatePresence>

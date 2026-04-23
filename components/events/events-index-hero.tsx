@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import MaskReveal from '@/components/mask-reveal'
 import { fadeUp, fadeUpDelayed } from '@/lib/motion'
 
 export default function EventsIndexHero() {
@@ -26,7 +27,7 @@ export default function EventsIndexHero() {
           </motion.p>
         </div>
 
-        <motion.div {...fadeUpDelayed(0.2)} className="relative mx-auto w-full max-w-[420px] md:mx-0 md:max-w-none">
+        <MaskReveal className="relative mx-auto w-full max-w-[420px] md:mx-0 md:max-w-none" delay={0.2}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
             <Image
               src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&q=80&auto=format&fit=crop"
@@ -36,7 +37,7 @@ export default function EventsIndexHero() {
               className="object-cover"
             />
           </div>
-        </motion.div>
+        </MaskReveal>
       </div>
     </section>
   )

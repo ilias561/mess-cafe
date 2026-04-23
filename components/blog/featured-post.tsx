@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import CategoryPill from '@/components/blog/category-pill'
+import MaskReveal from '@/components/mask-reveal'
 import ParallaxImage from '@/components/parallax-image'
 import PostMeta from '@/components/blog/post-meta'
 import { EASE, fadeUp } from '@/lib/motion'
@@ -23,15 +24,17 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
         className="group grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12 focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
         <div className="md:col-span-7">
-          <div className="aspect-[16/11] overflow-hidden rounded-[2px] bg-bone-warm">
-            <ParallaxImage
-              src={post.coverImage}
-              alt={post.coverAlt}
-              width={980}
-              height={1200}
-              className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
-            />
-          </div>
+          <MaskReveal>
+            <div className="aspect-[16/11] overflow-hidden rounded-[2px] bg-bone-warm">
+              <ParallaxImage
+                src={post.coverImage}
+                alt={post.coverAlt}
+                width={980}
+                height={1200}
+                className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+              />
+            </div>
+          </MaskReveal>
         </div>
         <div className="flex flex-col justify-center md:col-span-5">
           <CategoryPill category={post.category} label={post.categoryLabel} light />
