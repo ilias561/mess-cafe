@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import Link from 'next/link'
 import CategoryPill from '@/components/blog/category-pill'
+import ParallaxImage from '@/components/parallax-image'
 import PostMeta from '@/components/blog/post-meta'
 import { EASE, fadeUp } from '@/lib/motion'
 import type { Post } from '@/lib/blog/posts'
@@ -24,7 +24,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
       >
         <div className="md:col-span-7">
           <div className="aspect-[16/11] overflow-hidden rounded-[2px] bg-bone-warm">
-            <Image
+            <ParallaxImage
               src={post.coverImage}
               alt={post.coverAlt}
               width={980}

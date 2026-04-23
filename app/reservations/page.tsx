@@ -5,6 +5,7 @@ import BookingInfo from '@/components/reservations/booking-info'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
 import PreFooterCta from '@/components/pre-footer-cta'
+import SectionReveal from '@/components/section-reveal'
 import { getAllEvents } from '@/lib/events/events'
 import { getSettings } from '@/lib/settings'
 
@@ -20,7 +21,7 @@ export default function ReservationsPage() {
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <section className="px-6 pt-36 md:px-12 md:pt-44">
-        <div className="mx-auto max-w-[1400px]">
+        <SectionReveal className="mx-auto max-w-[1400px]">
           <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">EVENT BOOKING</p>
           <h1 className="mt-5 max-w-[14ch] font-serif text-[clamp(44px,6.5vw,96px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[16ch]">
             Κλείσε την εκδήλωσή σου.
@@ -28,7 +29,7 @@ export default function ReservationsPage() {
           <p className="mt-8 max-w-[72ch] font-sans text-[16px] leading-[1.7] text-concrete md:text-[17px]">
             Συμπλήρωσε τη φόρμα για να οργανώσουμε μαζί workshop, μουσική βραδιά, ιδιωτικό event ή παρουσίαση.
           </p>
-        </div>
+        </SectionReveal>
       </section>
 
       <section className="px-6 pb-24 pt-14 md:px-12 md:pb-32 md:pt-16">

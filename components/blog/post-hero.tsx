@@ -1,7 +1,7 @@
 'use client'
 
-import Image from 'next/image'
 import CategoryPill from '@/components/blog/category-pill'
+import ParallaxImage from '@/components/parallax-image'
 import PostMeta from '@/components/blog/post-meta'
 import type { Post } from '@/lib/blog/posts'
 
@@ -12,13 +12,12 @@ type PostHeroProps = {
 export default function PostHero({ post }: PostHeroProps) {
   return (
     <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
-      <Image
+      <ParallaxImage
         src={post.coverImage}
         alt={post.coverAlt}
         fill
         priority
         sizes="100vw"
-        className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 px-6 pb-16 md:px-12 md:pb-20">

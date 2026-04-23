@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { formatGreekDate, formatGreekTime } from '@/lib/format-date'
+import ParallaxImage from '@/components/parallax-image'
 import type { Event } from '@/lib/events/events'
 
 type EventHeroProps = {
@@ -10,13 +10,12 @@ export default function EventHero({ event }: EventHeroProps) {
   return (
     <section>
       <div className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
-        <Image
+        <ParallaxImage
           src={event.coverImage}
           alt={event.coverAlt}
           fill
           priority
           sizes="100vw"
-          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 px-6 pb-16 md:px-12 md:pb-20">
