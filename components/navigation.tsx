@@ -81,6 +81,8 @@ function OliveMark({ light = false }: { light?: boolean }) {
 export default function Navigation() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const [hasPastHero, setHasPastHero] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
@@ -122,6 +124,23 @@ export default function Navigation() {
       window.removeEventListener('resize', onScroll)
     }
   }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY < 120) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false)
+      } else {
+        setIsVisible(true)
+      }
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
   // Body scroll lock when mobile menu open
   useEffect(() => {
@@ -197,8 +216,10 @@ export default function Navigation() {
         Μετάβαση στο περιεχόμενο
       </a>
 
-      <header
+      <motion.header
         className={`fixed top-0 right-0 left-0 z-50 h-20 transition-all duration-350 ease-in-out ${headerClasses}`}
+        animate={{ y: isVisible ? 0 : -120 }}
+        transition={{ duration: 0.3, ease: EASE }}
       >
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-8">
           <Link href="/" className={`flex shrink-0 items-center gap-3 transition-colors ${navTextColor}`}>
@@ -296,7 +317,7 @@ export default function Navigation() {
             </motion.button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {menuOpen && (
