@@ -5,6 +5,7 @@ import { AnimatePresence, animate, motion, useScroll, useTransform } from 'frame
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
+import { LOADING_DURATION_MS } from '@/lib/timing'
 import { imagePlaceholder, images } from '@/lib/images'
 const headline = 'A quiet kind of chaos.'
 const fallbackSlides = [
@@ -51,7 +52,7 @@ export default function Hero() {
   const [reducedMotion, setReducedMotion] = useState(false)
   const [isHeroVisible, setIsHeroVisible] = useState(true)
   const [loaderReady, setLoaderReady] = useState(false)
-  const [mediaPhase, setMediaPhase] = useState<'video' | 'photos'>('video')
+  const [mediaPhase, setMediaPhase] = useState<'poster' | 'video' | 'hold' | 'photos'>('poster')
   const [slideIndex, setSlideIndex] = useState(0)
 
   const { scrollY } = useScroll()
@@ -77,7 +78,11 @@ export default function Hero() {
   useEffect(() => {
     const onLoaderDone = () => setLoaderReady(true)
     window.addEventListener('mess:loader-complete', onLoaderDone)
-    const fallback = window.setTimeout(() => setLoaderReady(true), 1700)
+    const hasLoaderCompleted = (window as Window & { __messLoaderComplete?: boolean }).__messLoaderComplete
+    if (hasLoaderCompleted) {
+      setLoaderReady(true)
+    }
+    const fallback = window.setTimeout(() => setLoaderReady(true), LOADING_DURATION_MS)
     return () => {
       window.removeEventListener('mess:loader-complete', onLoaderDone)
       window.clearTimeout(fallback)
@@ -97,17 +102,16 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    if (!loaderReady || reducedMotion) {
+    if (reducedMotion) {
       setMediaPhase('photos')
       setSlideIndex(0)
       return
     }
+    if (!loaderReady) {
+      setMediaPhase('poster')
+      return
+    }
     setMediaPhase('video')
-    setSlideIndex(0)
-    const switchToPhotos = window.setTimeout(() => {
-      setMediaPhase('photos')
-    }, 3000)
-    return () => window.clearTimeout(switchToPhotos)
   }, [loaderReady, reducedMotion])
 
   useEffect(() => {
@@ -117,16 +121,24 @@ export default function Hero() {
       video.pause()
       return
     }
-    const setPlaybackSpeed = () => {
-      if (!video.duration || !Number.isFinite(video.duration)) return
-      video.playbackRate = video.duration / 2.3
-    }
-    setPlaybackSpeed()
-    video.addEventListener('loadedmetadata', setPlaybackSpeed)
     video.currentTime = 0
+    video.playbackRate = 1
     video.play().catch(() => { /* autoplay policy */ })
-    return () => video.removeEventListener('loadedmetadata', setPlaybackSpeed)
+    const onEnded = () => {
+      setMediaPhase('hold')
+    }
+    video.addEventListener('ended', onEnded)
+    return () => video.removeEventListener('ended', onEnded)
   }, [reducedMotion, isHeroVisible, loaderReady, mediaPhase])
+
+  useEffect(() => {
+    if (mediaPhase !== 'hold') return
+    const holdTimeout = window.setTimeout(() => {
+      setMediaPhase('photos')
+      setSlideIndex(0)
+    }, 3000)
+    return () => window.clearTimeout(holdTimeout)
+  }, [mediaPhase])
 
   useEffect(() => {
     if (reducedMotion || !loaderReady || mediaPhase !== 'photos') return
@@ -152,9 +164,9 @@ export default function Hero() {
         className="absolute inset-y-0 right-0 z-0 w-full md:w-[58%]"
       >
         <AnimatePresence mode="wait">
-          {mediaPhase === 'video' && !reducedMotion ? (
+          {(mediaPhase === 'video' || mediaPhase === 'hold' || mediaPhase === 'poster') && !reducedMotion ? (
             <motion.video
-              key="hero-video"
+              key={`hero-video-${mediaPhase}`}
               ref={videoRef}
               muted
               playsInline
@@ -165,7 +177,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: EASE }}
+              transition={{ duration: 0.5, ease: EASE }}
             >
               <source src="/videos/hero-transformation.mp4" type="video/mp4" />
             </motion.video>
@@ -176,7 +188,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: EASE }}
+              transition={{ duration: 0.5, ease: EASE }}
             >
               <Image
                 src={fallbackSlides[slideIndex]}
