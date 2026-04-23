@@ -1,0 +1,13 @@
+{
+  "name": "mess-cms-auth",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Decap CMS GitHub OAuth handler for mess-cafe",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

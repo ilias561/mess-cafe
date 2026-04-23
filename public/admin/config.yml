@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: ilias/mess-cafe
+  repo: ilias561/mess-cafe
   branch: main
-  base_url: https://mess-oauth.YOUR-SUBDOMAIN.workers.dev
-  auth_endpoint: auth
+  base_url: https://mess-cms-auth.iliasgkla000.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
