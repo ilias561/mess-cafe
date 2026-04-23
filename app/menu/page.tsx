@@ -6,6 +6,7 @@ import MenuCategory from '@/components/menu/MenuCategory'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
 import { menuData } from '@/lib/menu-data'
+import { getSettings } from '@/lib/settings'
 
 export const metadata: Metadata = {
   title: 'Menu — M.E.S.S. · Specialty Coffee & Healthy Brunch Ιωάννινα',
@@ -16,13 +17,19 @@ export const metadata: Metadata = {
 const PHILOSOPHY_INDEX = 3
 
 export default function MenuPage() {
+  const updatedAt = new Date().toLocaleDateString('el-GR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+  const settings = getSettings()
   const beforePhilosophy = menuData.slice(0, PHILOSOPHY_INDEX)
   const afterPhilosophy = menuData.slice(PHILOSOPHY_INDEX)
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
-      <MenuHeader />
+      <MenuHeader updatedAt={updatedAt} />
       <MenuAnchorNav />
 
       {beforePhilosophy.map((category, i) => (
@@ -52,7 +59,7 @@ export default function MenuPage() {
       {/* CTA */}
       <section className="border-t border-line/30 bg-bone px-6 py-24 text-center md:px-12">
         <p className="font-serif text-[clamp(24px,4vw,40px)] tracking-tight text-charcoal">
-          Κάθε μέρα · 08:00 — 22:00
+          Κάθε μέρα · {settings.hours?.[0]?.open ?? '08:00'} — {settings.hours?.[0]?.close ?? '22:00'}
         </p>
         <div className="mt-8">
           <Link

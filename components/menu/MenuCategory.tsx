@@ -45,10 +45,19 @@ export default function MenuCategory({
   category: MenuCategoryType
   index: number
 }) {
-  const bg = index % 2 === 0 ? 'bg-bone' : 'bg-bone-warm'
+  const backgrounds = ['bg-bone', 'bg-bone-warm', 'bg-bone'] as const
+  const bg = backgrounds[index % backgrounds.length]
+  const editorialIntro: Partial<Record<string, string>> = {
+    brunch: 'Άνετο πρωινό με πιάτα που στηρίζουν την ημέρα χωρίς περιττή ένταση.',
+    bowls: 'Πλήρη bowls με ισορροπία υφών, θερμοκρασιών και καθαρών πρωτεϊνών.',
+    salads: 'Σαλάτες με εποχικό χαρακτήρα, ζωντανή οξύτητα και χορταστικό τελείωμα.',
+    coffee: 'Single origin εκχυλίσεις και ήπιες επιλογές για όλη τη διάρκεια της ημέρας.',
+    smoothies: 'Μείγματα με πραγματικό φρούτο, φυσική γλυκύτητα και καθαρή ενέργεια.',
+    treats: 'Γλυκά και snacks με ελαφριά σύσταση και ισορροπημένη γεύση.',
+  }
 
   return (
-    <section id={category.id} className={`scroll-mt-14 ${bg} px-6 py-20 md:px-12`}>
+    <section id={category.id} className={`scroll-mt-28 ${bg} px-6 py-20 md:px-12 md:py-28`}>
       <div className="mx-auto max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -57,12 +66,17 @@ export default function MenuCategory({
           transition={{ duration: 0.75, ease: EASE }}
           className="mb-12"
         >
-          <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.22em] text-olive">
+          <p className="mb-2 font-sans text-[11px] uppercase tracking-[0.22em] text-olive">
             {category.title}
           </p>
-          <h2 className="font-serif text-[clamp(40px,5vw,64px)] leading-[1.0] tracking-tight text-charcoal">
+          <h2 className="font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-charcoal">
             {category.titleGr}
           </h2>
+          {editorialIntro[category.id] && (
+            <p className="mt-4 max-w-[64ch] font-sans text-[15px] leading-relaxed text-concrete">
+              {editorialIntro[category.id]}
+            </p>
+          )}
         </motion.div>
 
         <div>
