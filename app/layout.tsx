@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
+import NewsletterPopup from '@/components/newsletter-popup'
 import PageLoader from '@/components/page-loader'
 import RouteScrollTop from '@/components/route-scroll-top'
 import ScrollProgress from '@/components/scroll-progress'
@@ -46,6 +47,7 @@ export default function RootLayout({
         <RouteScrollTop />
         <ScrollProgress />
         <WhatsAppFloat />
+        <NewsletterPopup />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
