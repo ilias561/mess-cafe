@@ -37,3 +37,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# Working files (not for production)
+BLOG_CURSOR_PROMPT.md
+123.mp4

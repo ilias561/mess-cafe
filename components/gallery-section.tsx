@@ -250,7 +250,7 @@ export default function GallerySection() {
 
   return (
     <>
-      <section className="scroll-mt-20 border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32">
+      <section id="gallery" className="scroll-mt-20 border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[1400px]">
 
           {/* Heading */}

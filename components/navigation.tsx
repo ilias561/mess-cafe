@@ -15,14 +15,14 @@ const UNDERLINE_ID = 'nav-active-line'
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
 const navLinks = [
-  { label: 'Αρχική', href: '#hero', sectionId: 'hero' },
-  { label: 'Η φιλοσοφία μας', href: '#philosophy', sectionId: 'philosophy' },
-  { label: 'Οι δράσεις μας', href: '#actions', sectionId: 'actions' },
+  { label: 'Αρχική', href: '/', sectionId: null },
+  { label: 'Η φιλοσοφία μας', href: '/#about', sectionId: 'about' },
+  { label: 'Οι δράσεις μας', href: '/actions', sectionId: null },
   { label: 'Το μενού μας', href: '/menu', sectionId: null },
   { label: 'Κράτηση για event', href: '/reservations', sectionId: null, isCta: true },
   { label: 'Blog', href: '/blog', sectionId: null },
-  { label: 'Επικοινωνία', href: '#contact', sectionId: 'contact' },
-]
+  { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact' },
+] as const
 
 function getOpenStatus() {
   const d = new Date()
@@ -183,18 +183,18 @@ export default function Navigation() {
     return () => window.removeEventListener('keydown', trap)
   }, [menuOpen])
 
-  const handleAnchorNavigation = (href: string) => {
-    const id = href.replace('#', '')
+  const handleAnchorNavigation = (sectionId: string) => {
+    if (pathname !== '/') return false
+    const id = sectionId
     const target = document.getElementById(id)
-    if (!target) return
+    if (!target) return false
     target.scrollIntoView({ behavior: 'smooth', block: 'start' })
     setMenuOpen(false)
+    return true
   }
 
-  const navTextColor = hasPastHero ? 'text-charcoal' : 'text-bone'
-  const headerClasses = hasPastHero
-    ? 'bg-[rgba(245,240,230,0.92)] backdrop-blur-[14px] border-b border-black/[0.06]'
-    : 'bg-transparent'
+  const navTextColor = 'text-charcoal'
+  const headerClasses = 'bg-[rgba(245,240,230,0.94)] backdrop-blur-[14px] border-b border-black/[0.06]'
 
   return (
     <>
@@ -210,7 +210,7 @@ export default function Navigation() {
       >
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-8">
           <Link href="/" className={`flex shrink-0 items-center gap-3 transition-colors ${navTextColor}`}>
-            <OliveMark light={!hasPastHero} />
+            <OliveMark light={false} />
             <span className="font-serif text-[22px] font-medium tracking-tight">M.E.S.S.</span>
           </Link>
 
@@ -220,20 +220,32 @@ export default function Navigation() {
               aria-label="Κύρια πλοήγηση"
             >
               {navLinks.map((link) => {
-                const isActive = link.sectionId ? activeSection === link.sectionId : false
-                const isAnchor = link.href.startsWith('#')
+                const isHomeAnchor = link.href.startsWith('/#')
+                const isRouteActive = !isHomeAnchor && pathname === link.href
+                const isAnchorActive = isHomeAnchor && pathname === '/' && link.sectionId
+                  ? activeSection === link.sectionId
+                  : false
+                const isActive = isRouteActive || isAnchorActive
+                const shiftRightCluster = link.label === 'Το μενού μας'
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     aria-current={isActive ? 'page' : undefined}
                     onClick={(e) => {
-                      if (isAnchor) {
-                        e.preventDefault()
-                        handleAnchorNavigation(link.href)
+                      if (isHomeAnchor && link.sectionId) {
+                        const didNavigate = handleAnchorNavigation(link.sectionId)
+                        if (didNavigate) {
+                          e.preventDefault()
+                        }
+                      }
+                      if (!isHomeAnchor) {
+                        setMenuOpen(false)
                       }
                     }}
-                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${
+                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] text-charcoal transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${
+                      shiftRightCluster ? 'ml-5 xl:ml-7 2xl:ml-9' : ''
+                    } ${
                       link.isCta
                         ? 'rounded-full bg-[rgba(212,165,80,0.12)] px-[14px] py-[6px] hover:bg-mustard hover:text-charcoal'
                         : 'px-0'
@@ -262,35 +274,19 @@ export default function Navigation() {
           </LayoutGroup>
 
           <div className="ml-auto flex shrink-0 items-center gap-2">
-            <OpenBadge
-              light={!hasPastHero}
-              showText
-              className="hidden min-[1200px]:flex"
-            />
-            <OpenBadge
-              light={!hasPastHero}
-              showText={false}
-              className="flex min-[1200px]:hidden"
-            />
+            <OpenBadge light={false} showText className="hidden min-[1200px]:flex" />
+            <OpenBadge light={false} showText={false} className="flex min-[1200px]:hidden" />
             <a
               href="tel:+306945777808"
               aria-label="Κάλεσέ μας"
-              className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${
-                hasPastHero
-                  ? 'border-black/20 text-charcoal hover:border-mustard hover:text-mustard'
-                  : 'border-bone/30 text-bone hover:border-mustard hover:text-mustard'
-              }`}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/20 text-charcoal transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
             >
               <Phone className="h-3.5 w-3.5" strokeWidth={1.5} />
             </a>
 
             <motion.button
               type="button"
-              className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden ${
-                hasPastHero
-                  ? 'text-charcoal hover:bg-bone-warm'
-                  : 'text-bone hover:bg-white/10'
-              }`}
+              className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal transition-colors hover:bg-bone-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden"
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού'}
               aria-controls={MOBILE_MENU_ID}
@@ -348,7 +344,7 @@ export default function Navigation() {
                 variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05, delayChildren: 0.3 } } }}
               >
                 {navLinks.map((link) => {
-                  const isAnchor = link.href.startsWith('#')
+                  const isHomeAnchor = link.href.startsWith('/#')
                   return (
                     <motion.div
                       key={link.href}
@@ -361,10 +357,12 @@ export default function Navigation() {
                       <Link
                         href={link.href}
                         onClick={(e) => {
-                          if (isAnchor) {
-                            e.preventDefault()
-                            handleAnchorNavigation(link.href)
-                            return
+                          if (isHomeAnchor && link.sectionId) {
+                            const didNavigate = handleAnchorNavigation(link.sectionId)
+                            if (didNavigate) {
+                              e.preventDefault()
+                              return
+                            }
                           }
                           setMenuOpen(false)
                         }}

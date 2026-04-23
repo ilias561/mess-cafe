@@ -1,10 +1,18 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react'
-import { animate, motion, useMotionValue, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { animate, motion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
+import { images } from '@/lib/images'
 const headline = 'A quiet kind of chaos.'
+const fallbackSlides = [
+  images.heroInterior,
+  images.aboutBar,
+  images.gallery1,
+  images.aboutPlants,
+] as const
 const stats = [
   { key: 'rating', label: 'Google rating', value: '4.8★' },
   { key: 'reviews', label: 'Κριτικές', to: 165 },
@@ -35,18 +43,16 @@ function AnimatedCount({
 }
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isMobile, setIsMobile] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
-
-  const rotateX = useMotionValue(0)
-  const rotateY = useMotionValue(0)
-  const videoRotateX = useTransform(rotateX, (v) => -v * 0.3)
-  const videoRotateY = useTransform(rotateY, (v) => -v * 0.3)
+  const [videoFinished, setVideoFinished] = useState(false)
+  const [showSlides, setShowSlides] = useState(false)
+  const [slideshowStarted, setSlideshowStarted] = useState(false)
+  const [slideIndex, setSlideIndex] = useState(0)
 
   const { scrollY } = useScroll()
-  const parallaxRatio = isMobile ? 0.5 : 0.3
+  const parallaxRatio = isMobile ? 0.02 : 0.04
   const videoParallaxY = useTransform(scrollY, (v) => reducedMotion ? 0 : v * parallaxRatio)
 
   useEffect(() => {
@@ -67,89 +73,101 @@ export default function Hero() {
 
   useEffect(() => {
     if (!videoRef.current) return
+    const video = videoRef.current
     if (reducedMotion) {
-      videoRef.current.pause()
+      video.pause()
       return
     }
-    videoRef.current.play().catch(() => { /* autoplay policy */ })
+    const setPlaybackSpeed = () => {
+      if (!video.duration || !Number.isFinite(video.duration)) return
+      video.playbackRate = video.duration / 2.3
+    }
+    setPlaybackSpeed()
+    video.addEventListener('loadedmetadata', setPlaybackSpeed)
+    video.play().catch(() => { /* autoplay policy */ })
+    return () => video.removeEventListener('loadedmetadata', setPlaybackSpeed)
   }, [reducedMotion])
 
-  const onMouseMove = (event: MouseEvent<HTMLElement>) => {
-    if (isMobile || reducedMotion || !sectionRef.current) return
-    const rect = sectionRef.current.getBoundingClientRect()
-    const x = (event.clientX - rect.left) / rect.width
-    const y = (event.clientY - rect.top) / rect.height
-    rotateY.set((x - 0.5) * 8)
-    rotateX.set((0.5 - y) * 8)
-  }
+  useEffect(() => {
+    if (!videoFinished) {
+      setShowSlides(false)
+      setSlideshowStarted(false)
+      return
+    }
+    const holdId = window.setTimeout(() => {
+      setShowSlides(true)
+      setSlideshowStarted(true)
+    }, 4000)
+    return () => window.clearTimeout(holdId)
+  }, [videoFinished])
 
-  const onMouseLeave = () => {
-    rotateX.set(0)
-    rotateY.set(0)
-  }
+  useEffect(() => {
+    if (!slideshowStarted) return
+    const id = window.setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % fallbackSlides.length)
+    }, 4000)
+    return () => window.clearInterval(id)
+  }, [slideshowStarted])
 
   const heroWords = useMemo(() => headline.split(' '), [])
 
   return (
     <section
       id="hero"
-      ref={sectionRef}
-      className="relative min-h-screen overflow-hidden [perspective:1000px] [animation:heroFadeIn_0.35s_ease-out_both]"
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
+      className="relative min-h-screen overflow-hidden bg-white [animation:heroFadeIn_0.35s_ease-out_both]"
     >
       <motion.div
         style={{
           y: videoParallaxY,
-          rotateX: reducedMotion ? 0 : videoRotateX,
-          rotateY: reducedMotion ? 0 : videoRotateY,
-          transformStyle: 'preserve-3d',
         }}
-        className="absolute inset-0 z-0 [transform:translateZ(-100px)_scale(1.12)] transition-transform duration-400 [transition-timing-function:cubic-bezier(0.2,0.9,0.3,1)]"
+        className="absolute inset-y-0 right-0 z-0 w-full md:w-[58%]"
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/videos/hero-transformation-poster.jpg"
-          aria-label="Ο χώρος του M.E.S.S. παίρνει ζωή"
-          className="h-full w-full object-cover object-center"
-        >
-          <source src="/videos/hero-transformation.webm" type="video/webm" />
-          <source src="/videos/hero-transformation.mp4" type="video/mp4" />
-        </video>
+        {!showSlides ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            playsInline
+            preload="metadata"
+            poster="/videos/hero-transformation-poster.jpg"
+            aria-label="Ο χώρος του M.E.S.S. παίρνει ζωή"
+            className="h-full w-full object-cover object-center"
+            onEnded={() => {
+              if (!videoRef.current) return
+              videoRef.current.currentTime = videoRef.current.duration
+              videoRef.current.pause()
+              setSlideIndex(0)
+              setVideoFinished(true)
+            }}
+          >
+            <source src="/videos/hero-transformation.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            src={fallbackSlides[slideIndex]}
+            alt="Ο χώρος του M.E.S.S."
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 58vw"
+            className="object-cover object-center transition-opacity duration-500"
+          />
+        )}
       </motion.div>
 
-      <div
-        className="pointer-events-none absolute inset-0 z-10"
-        style={{
-          background:
-            'linear-gradient(to right, rgba(20,15,10,0.55) 0%, rgba(20,15,10,0.25) 60%, rgba(20,15,10,0.05) 100%)',
-        }}
-      />
-
-      <motion.div
-        style={{
-          rotateX: reducedMotion ? 0 : rotateX,
-          rotateY: reducedMotion ? 0 : rotateY,
-          transformStyle: 'preserve-3d',
-        }}
-        className="relative z-20 mx-auto flex min-h-screen w-full max-w-[1400px] items-end px-6 pb-12 pt-32 md:px-12 md:pb-16 md:pt-36 [transform:translateZ(60px)] transition-transform duration-400 [transition-timing-function:cubic-bezier(0.2,0.9,0.3,1)]"
-      >
-        <div className="max-w-[720px]">
+      <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-[1400px] items-end px-3 pb-12 pt-32 md:px-10 md:pb-16 md:pt-36 lg:px-12">
+        <div className="w-full md:w-[42%] md:pr-8 lg:pr-12">
+          <div className="relative max-w-[560px] md:-ml-8 lg:-ml-12">
+            <div className="relative">
           <motion.p
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: EASE }}
-            className="font-sans text-[11px] tracking-[0.2em] text-bone/85"
+            className="font-sans text-[11px] tracking-[0.2em] text-charcoal"
           >
             SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA
           </motion.p>
 
-          <h1 className="hero-headline mt-5 font-serif tracking-tight text-balance text-[#F5F0E6] [text-shadow:0_8px_32px_rgba(0,0,0,0.4)]">
+          <h1 className="hero-headline mt-5 font-serif tracking-tight text-balance text-charcoal [text-shadow:0_3px_14px_rgba(255,255,255,0.35)]">
             {heroWords.map((word, i) => (
               <span
                 key={`${word}-${i}`}
@@ -172,7 +190,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.32, ease: EASE }}
-            className="mt-6 max-w-[560px] font-sans text-[17px] leading-relaxed text-bone/80 md:text-[18px]"
+            className="mt-6 max-w-[560px] font-sans text-[17px] leading-relaxed text-charcoal md:text-[18px]"
           >
             Specialty καφές, fresh bowls και θέα στη λίμνη — στον 1ο όροφο του ΚΕΠΑΒΙ, Ιωάννινα.
           </motion.p>
@@ -191,7 +209,7 @@ export default function Hero() {
             </Link>
             <Link
               href="#contact"
-              className="relative inline-block font-sans text-sm font-medium text-bone"
+              className="relative inline-block font-sans text-sm font-medium text-charcoal"
             >
               <motion.span
                 transition={{ duration: 0.45, ease: EASE }}
@@ -205,30 +223,32 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
-            className="mt-10 grid w-full max-w-[560px] grid-cols-3 gap-4 border-t border-bone/25 pt-6 md:gap-6"
+            className="mt-10 grid w-full max-w-[560px] grid-cols-3 gap-4 border-t border-charcoal/20 pt-6 md:gap-6"
           >
             {stats.map((item) => (
               <div key={item.key}>
-                <p className="font-serif text-[30px] leading-none text-[#F5F0E6]">
+                <p className="font-serif text-[30px] leading-none text-charcoal">
                   {'value' in item
                     ? item.value
                     : <AnimatedCount from={Math.max(item.to - 45, 100)} to={item.to} prefix={item.prefix ?? ''} />
                   }
                 </p>
-                <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.14em] text-bone/75 md:text-[11px]">
+                <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.14em] text-charcoal md:text-[11px]">
                   {item.label}
                 </p>
               </div>
             ))}
           </motion.div>
+            </div>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       <div className="pointer-events-none absolute bottom-8 left-6 z-30 flex items-start gap-3 md:left-12">
-        <span className="pt-1 font-sans text-[11px] uppercase tracking-[0.2em] text-bone/75">
+        <span className="pt-1 font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal">
           SCROLL
         </span>
-        <div className="relative h-[60px] w-px overflow-visible bg-bone/40">
+        <div className="relative h-[60px] w-px overflow-visible bg-charcoal/20">
           <motion.div
             className="absolute left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-mustard"
             animate={{ y: [0, 48, 0] }}

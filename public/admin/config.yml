@@ -1,0 +1,96 @@
+backend:
+  name: github
+  repo: ilias/mess-cafe
+  branch: main
+  base_url: https://mess-oauth.YOUR-SUBDOMAIN.workers.dev
+  auth_endpoint: auth
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: 'el'
+
+collections:
+  - name: "posts"
+    label: "Άρθρα Blog"
+    folder: "content/posts"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { name: title, label: "Τίτλος", widget: string }
+      - { name: slug, label: "URL slug", widget: string, hint: "π.χ. open-mic-nights" }
+      - { name: excerpt, label: "Περίληψη", widget: text }
+      - name: category
+        label: "Κατηγορία"
+        widget: select
+        options:
+          - { label: "Καφές", value: "kafes" }
+          - { label: "Κουζίνα", value: "kouzina" }
+          - { label: "Κοινότητα", value: "koinotita" }
+          - { label: "Events", value: "events" }
+      - { name: coverImage, label: "Φωτογραφία εξωφύλλου", widget: image }
+      - { name: coverAlt, label: "Alt text φωτογραφίας", widget: string }
+      - name: author
+        label: "Συγγραφέας"
+        widget: object
+        fields:
+          - { name: name, label: "Όνομα", widget: string }
+          - { name: bio, label: "Βιογραφικό", widget: text, required: false }
+      - { name: publishedAt, label: "Ημερομηνία δημοσίευσης", widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { name: readingMinutes, label: "Λεπτά ανάγνωσης", widget: number, default: 5 }
+      - { name: featured, label: "Εμφανές (featured)", widget: boolean, default: false, required: false }
+      - { name: tags, label: "Tags", widget: list, required: false }
+      - { name: body, label: "Κείμενο", widget: markdown }
+
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { name: title, label: "Τίτλος event", widget: string }
+      - { name: slug, label: "URL slug", widget: string }
+      - { name: description, label: "Περίληψη", widget: text }
+      - name: category
+        label: "Κατηγορία"
+        widget: select
+        options:
+          - { label: "Workshop", value: "workshop" }
+          - { label: "Μουσική", value: "music" }
+          - { label: "Πολιτισμός", value: "culture" }
+          - { label: "Συνεργασία", value: "collaboration" }
+      - { name: coverImage, label: "Φωτογραφία", widget: image }
+      - { name: coverAlt, label: "Alt text", widget: string }
+      - { name: date, label: "Έναρξη (ημερομηνία + ώρα)", widget: datetime }
+      - { name: endDate, label: "Λήξη", widget: datetime, required: false }
+      - { name: location, label: "Τοποθεσία", widget: string, default: "M.E.S.S., Ιωάννινα" }
+      - { name: price, label: "Τιμή (π.χ. Ελεύθερη είσοδος ή 8€)", widget: string }
+      - { name: capacity, label: "Χωρητικότητα", widget: number, required: false }
+      - { name: bookingRequired, label: "Απαιτείται κράτηση", widget: boolean, default: false }
+      - { name: body, label: "Περιγραφή", widget: markdown }
+
+  - name: "settings"
+    label: "Ρυθμίσεις καταστήματος"
+    files:
+      - name: "general"
+        label: "Γενικές πληροφορίες"
+        file: "content/settings/general.md"
+        fields:
+          - { name: addressLine1, label: "Διεύθυνση", widget: string }
+          - { name: addressLine2, label: "Πόλη / TK", widget: string }
+          - { name: phone, label: "Τηλέφωνο", widget: string }
+          - { name: whatsapp, label: "WhatsApp (+30...)", widget: string }
+          - { name: email, label: "Email", widget: string }
+          - name: hours
+            label: "Ωράριο"
+            widget: list
+            fields:
+              - { name: day, label: "Μέρες", widget: string }
+              - { name: open, label: "Άνοιγμα", widget: string }
+              - { name: close, label: "Κλείσιμο", widget: string }
+          - { name: instagram, label: "Instagram URL", widget: string, required: false }
+          - { name: facebook, label: "Facebook URL", widget: string, required: false }

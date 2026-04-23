@@ -3,6 +3,8 @@ import Link from 'next/link'
 import MenuHeader from '@/components/menu/MenuHeader'
 import MenuAnchorNav from '@/components/menu/MenuAnchorNav'
 import MenuCategory from '@/components/menu/MenuCategory'
+import Navigation from '@/components/navigation'
+import FooterSection from '@/components/footer-section'
 import { menuData } from '@/lib/menu-data'
 
 export const metadata: Metadata = {
@@ -18,7 +20,8 @@ export default function MenuPage() {
   const afterPhilosophy = menuData.slice(PHILOSOPHY_INDEX)
 
   return (
-    <main className="bg-bone text-charcoal">
+    <main id="main-content" className="bg-bone text-charcoal">
+      <Navigation />
       <MenuHeader />
       <MenuAnchorNav />
 
@@ -60,6 +63,7 @@ export default function MenuPage() {
           </Link>
         </div>
       </section>
+      <FooterSection />
     </main>
   )
 }
