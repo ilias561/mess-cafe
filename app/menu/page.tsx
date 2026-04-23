@@ -64,7 +64,7 @@ export default function MenuPage() {
         <div className="mt-8">
           <Link
             href="/#contact"
-            className="inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal transition-colors hover:bg-amber"
+            className="inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
           >
             Βρες μας
           </Link>

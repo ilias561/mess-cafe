@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { EASE } from '@/lib/motion'
-import { images } from '@/lib/images'
+import { imagePlaceholder, images } from '@/lib/images'
 
 /* ── Curated editorial selection ── */
 const galleryItems = [
@@ -74,7 +74,10 @@ function GalleryCard({
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.7, delay: index * 0.08, ease: EASE }}
-      style={{ gridArea: item.gridArea }}
+      style={{
+        gridArea: item.gridArea,
+        background: item.src ? undefined : imagePlaceholder(),
+      }}
       className="group relative cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm"
       onClick={onClick}
       role="button"
@@ -276,6 +279,7 @@ export default function GallerySection() {
               <div
                 key={item.id}
                 className="aspect-[3/2] cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm"
+                style={!item.src ? { background: imagePlaceholder() } : undefined}
                 onClick={() => open(i)}
               >
                 <motion.div

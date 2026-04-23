@@ -5,7 +5,7 @@ import { animate, motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
-import { images } from '@/lib/images'
+import { imagePlaceholder, images } from '@/lib/images'
 const headline = 'A quiet kind of chaos.'
 const fallbackSlides = [
   images.heroInterior,
@@ -121,6 +121,7 @@ export default function Hero() {
       <motion.div
         style={{
           y: videoParallaxY,
+          background: imagePlaceholder(),
         }}
         className="absolute inset-y-0 right-0 z-0 w-full md:w-[58%]"
       >
@@ -205,7 +206,7 @@ export default function Hero() {
           >
             <Link
               href="/menu"
-              className="inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal transition-colors hover:bg-amber"
+              className="inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
             >
               Δες το menu
             </Link>

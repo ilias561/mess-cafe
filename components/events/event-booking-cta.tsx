@@ -27,7 +27,7 @@ export default function EventBookingCta({ event }: EventBookingCtaProps) {
         <div className="mt-8 flex flex-wrap gap-4">
           <Link
             href={`/reservations?event=${event.slug}`}
-            className="rounded-full bg-mustard px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-colors hover:bg-amber"
+            className="rounded-full bg-mustard px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
           >
             Κράτησε θέση
           </Link>

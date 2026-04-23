@@ -409,7 +409,7 @@ export default function Navigation() {
                   </a>
                   <Link
                     href="/reservations"
-                    className="flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-5 py-3 font-sans text-sm font-medium text-charcoal"
+                    className="flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-5 py-3 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
                     onClick={() => setMenuOpen(false)}
                   >
                     Κράτηση για event

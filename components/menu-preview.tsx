@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE, fadeUpSoft } from '@/lib/motion'
-import { images } from '@/lib/images'
+import { imagePlaceholder, images } from '@/lib/images'
 
 const items = [
   {
@@ -110,7 +110,7 @@ export default function MenuPreview() {
                   transition={{ duration: 0.35, ease: EASE }}
                   className="group w-full"
                 >
-                  <div className="aspect-[4/5] overflow-hidden bg-bone">
+                  <div className="aspect-[4/5] overflow-hidden bg-bone" style={!images[item.img] ? { background: imagePlaceholder() } : undefined}>
                     <Image
                       src={images[item.img]}
                       alt={item.name}

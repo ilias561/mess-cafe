@@ -96,7 +96,7 @@ export default function FooterSectionClient({ settings, variant }: FooterSection
         >
           <a
             href={`tel:${primaryPhoneHref}`}
-            className="inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all hover:-translate-y-0.5 hover:bg-amber"
+            className="inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
           >
             {settings.phone} — Κάλεσέ μας
           </a>
@@ -126,7 +126,7 @@ export default function FooterSectionClient({ settings, variant }: FooterSection
                 <textarea name="message" rows={4} required placeholder="Μήνυμα" className="w-full rounded-[2px] border border-bone/25 bg-transparent px-4 py-3 font-sans text-[15px] text-bone placeholder:text-bone/35 md:col-span-2" />
                 <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
                 {contactStatus === 'error' ? <p className="md:col-span-2 font-sans text-[12px] text-bone/65">{contactError}</p> : null}
-                <button type="submit" disabled={sendingContact} className="rounded-full bg-mustard px-8 py-3.5 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-colors hover:bg-amber disabled:opacity-70">
+                <button type="submit" disabled={sendingContact} className="rounded-full bg-mustard px-8 py-3.5 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber disabled:opacity-70">
                   {sendingContact ? 'Αποστολή...' : 'Στείλε μήνυμα'}
                 </button>
               </form>

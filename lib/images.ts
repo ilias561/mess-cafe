@@ -36,3 +36,7 @@ export const images = {
 } as const
 
 export type ImageKey = keyof typeof images
+
+export function imagePlaceholder() {
+  return 'linear-gradient(135deg, var(--bone-warm), var(--bone), var(--bone-warm))'
+}
