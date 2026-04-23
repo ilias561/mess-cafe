@@ -23,9 +23,9 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
   return (
     <motion.article
       {...fadeUpSoft}
-      whileHover={{ y: -6 }}
+      whileHover={{ y: -2 }}
       transition={{ duration: 0.35, ease: EASE }}
-      className="group"
+      className="group rounded-[2px] transition-shadow duration-200 hover:shadow-[0_12px_24px_rgba(43,43,40,0.10)]"
     >
       <Link
         href={`/blog/${post.slug}`}
@@ -37,7 +37,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
             alt={post.coverAlt}
             width={760}
             height={950}
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition-[transform,filter] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] group-hover:[filter:sepia(0.15)_saturate(1.1)]"
           />
         </div>
         <div className="mt-5">

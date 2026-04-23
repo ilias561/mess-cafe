@@ -37,14 +37,10 @@ export default function MarqueeStrip() {
       transition={{ duration: 0.6, ease: EASE }}
       className="flex h-[80px] items-center overflow-hidden border-y border-olive-deep bg-olive text-bone"
     >
-      <motion.div
-        className="flex w-max"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-      >
+      <div className="marquee-track flex w-max">
         <Strip stripId="a" />
         <Strip stripId="b" />
-      </motion.div>
+      </div>
     </motion.section>
   )
 }

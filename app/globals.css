@@ -123,6 +123,11 @@
   to   { opacity: 1 }
 }
 
+@keyframes editorialMarquee {
+  from { transform: translateX(0%) }
+  to { transform: translateX(-50%) }
+}
+
 /* Hero headline fluid sizing */
 .hero-headline {
   font-size: clamp(56px, 9vw, 140px);
@@ -149,4 +154,32 @@ html.lenis {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+.marquee-track {
+  animation: editorialMarquee 35s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+main p a,
+main li a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  transition: background-size 300ms ease;
+}
+
+main p a:hover,
+main li a:hover {
+  background-size: 100% 1px;
+}
+
+button.bg-mustard:active,
+a.bg-mustard:active {
+  transform: scale(0.98);
 }
