@@ -1,5 +1,5 @@
 ---
-title: Latte Art Bootcamp για αρχάριουςwwww
+title: Latte Art Bootcamp για αρχάριοs
 slug: latte-art-bootcamp-may
 description: Ένα πρακτικό δίωρο εργαστήριο για όσους θέλουν να μάθουν σωστό
   steaming και τα πρώτα μοτίβα στο φλιτζάνι.
