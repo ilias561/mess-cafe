@@ -18,9 +18,9 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -3 }}
       transition={{ duration: 0.7, ease: EASE }}
-      className="group/card relative overflow-hidden rounded-[3px] transition-shadow duration-200 hover:shadow-[0_12px_24px_rgba(43,43,40,0.12)]"
+      className="group/card relative overflow-hidden rounded-[3px] transition-shadow duration-200 hover:shadow-[0_14px_28px_rgba(43,43,40,0.12)]"
     >
       <Link
         href={`/actions/${event.slug}`}

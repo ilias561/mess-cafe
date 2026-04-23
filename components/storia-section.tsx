@@ -27,7 +27,7 @@ export default function StoriaSection() {
   return (
     <section
       id="philosophy"
-      className="relative scroll-mt-20 overflow-hidden px-6 py-32 md:px-12"
+      className="relative scroll-mt-20 overflow-hidden px-6 py-24 md:px-12 md:py-32"
       style={{ backgroundColor: '#2A2520' }}
     >
       {/* SVG noise texture overlay */}
@@ -66,7 +66,7 @@ export default function StoriaSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="mb-6 font-sans text-[11px] uppercase tracking-[0.22em] text-mustard/80"
+            className="eyebrow mb-6 font-sans text-mustard/80"
           >
             Η ΦΙΛΟΣΟΦΙΑ ΜΑΣ
           </motion.p>

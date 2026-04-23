@@ -74,7 +74,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
 
         <motion.div
           {...staggerContainer}
-          className="mt-12 grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3"
+          className="mt-12 grid grid-cols-1 gap-6 md:gap-10 lg:grid-cols-3"
         >
           {visiblePosts.map((post, i) => {
             const pattern: Array<'tall' | 'square' | 'wide'> = ['tall', 'square', 'wide', 'square', 'wide', 'tall']

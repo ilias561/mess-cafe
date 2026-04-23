@@ -23,9 +23,9 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
   return (
     <motion.article
       {...fadeUpSoft}
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -3 }}
       transition={{ duration: 0.35, ease: EASE }}
-      className="group rounded-[2px] transition-shadow duration-200 hover:shadow-[0_12px_24px_rgba(43,43,40,0.10)]"
+      className="group rounded-[2px] transition-shadow duration-200 hover:shadow-[0_14px_28px_rgba(43,43,40,0.10)]"
     >
       <Link
         href={`/blog/${post.slug}`}

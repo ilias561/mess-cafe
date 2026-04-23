@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
 import PageLoader from '@/components/page-loader'
+import RouteScrollTop from '@/components/route-scroll-top'
 import ScrollProgress from '@/components/scroll-progress'
 import SmoothScroll from '@/components/smooth-scroll'
 import WhatsAppFloat from '@/components/whatsapp-float'
@@ -42,6 +43,7 @@ export default function RootLayout({
     <html lang="el" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="font-sans antialiased" suppressHydrationWarning>
         <PageLoader />
+        <RouteScrollTop />
         <ScrollProgress />
         <WhatsAppFloat />
         <SmoothScroll>{children}</SmoothScroll>

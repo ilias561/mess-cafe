@@ -226,7 +226,7 @@ export default function Hero() {
                   className="inline-block"
                   initial={{ y: '100%', opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.08, duration: 0.8, ease: EASE }}
+                  transition={{ delay: i * 0.06, duration: 0.8, ease: EASE }}
                 >
                   {word}
                   {i < heroWords.length - 1 ? '\u00A0' : ''}

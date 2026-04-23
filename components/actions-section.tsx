@@ -80,7 +80,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.7, ease: EASE, delay: index * 0.12 }}
-                className="group/card flex h-[420px] min-w-[320px] snap-start flex-col overflow-hidden rounded-[2px] border border-line/50 bg-bone-warm transition-all duration-200 ease-out hover:-translate-y-[2px] hover:shadow-[0_12px_24px_rgba(43,43,40,0.10)]"
+                className="group/card flex h-[420px] min-w-[320px] snap-start flex-col overflow-hidden rounded-[2px] border border-line/50 bg-bone-warm transition-all duration-200 ease-out hover:-translate-y-[3px] hover:shadow-[0_14px_28px_rgba(43,43,40,0.10)]"
               >
                 <div className="relative h-[60%] overflow-hidden">
                   <Image

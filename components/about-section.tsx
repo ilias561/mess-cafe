@@ -103,14 +103,14 @@ const stats = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="scroll-mt-28 border-t border-line/30 bg-bone px-6 py-32 md:px-12">
+    <section id="about" className="scroll-mt-28 border-t border-line/30 bg-cream px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 md:grid-cols-12">
 
         {/* LEFT: sticky */}
         <div className="md:col-span-5">
           <div className="md:sticky md:top-24">
             <motion.p
-              className="mb-6 font-sans text-[11px] uppercase tracking-[0.2em] text-olive"
+              className="eyebrow mb-6 font-sans text-olive"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -158,7 +158,7 @@ export default function AboutSection() {
                   <p className="font-serif text-[clamp(36px,8vw,48px)] leading-none tracking-tight text-charcoal">
                     {stat.renderValue()}
                   </p>
-                  <p className="mt-2 font-sans text-[10px] uppercase leading-snug tracking-[0.14em] text-olive sm:text-[11px]">
+                  <p className="mt-2 font-sans text-[10px] uppercase leading-snug tracking-[0.16em] text-olive sm:text-[11px]">
                     {stat.label}
                   </p>
                 </motion.div>
@@ -189,7 +189,7 @@ export default function AboutSection() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: '-10% 0px' }}
                 transition={{ duration: 0.6, ease: EASE, delay: i * 0.12 + 0.3 }}
-                className="mt-2 font-sans text-[11px] uppercase tracking-[0.2em] text-olive"
+                className="eyebrow mt-2 font-sans text-olive"
               >
                 {img.caption}
               </motion.p>

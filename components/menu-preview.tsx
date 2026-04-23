@@ -69,11 +69,11 @@ const lineVariants = {
 
 export default function MenuPreview() {
   return (
-    <section id="menu" className="scroll-mt-28 bg-bone-warm px-6 py-32 md:px-12">
+    <section id="menu" className="scroll-mt-28 bg-bone-warm px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <div className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <motion.div {...fadeUpSoft}>
-            <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">MENU HIGHLIGHTS</p>
+            <p className="eyebrow mb-4 font-sans text-olive">MENU HIGHLIGHTS</p>
             <h2 className="font-serif text-[clamp(40px,5vw,56px)] leading-[1.02] tracking-tight text-charcoal">
               Αγαπημένα μας.
             </h2>
