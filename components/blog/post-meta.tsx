@@ -6,11 +6,12 @@ type PostMetaProps = {
   post: Pick<Post, 'publishedAt' | 'readingMinutes' | 'author'>
   showAvatar?: boolean
   className?: string
+  light?: boolean
 }
 
-export default function PostMeta({ post, showAvatar = false, className = '' }: PostMetaProps) {
+export default function PostMeta({ post, showAvatar = false, className = '', light = false }: PostMetaProps) {
   return (
-    <div className={`flex flex-wrap items-center gap-2 font-sans text-[12px] text-concrete ${className}`}>
+    <div className={`flex flex-wrap items-center gap-2 font-sans text-[12px] ${light ? 'text-bone/70' : 'text-concrete'} ${className}`}>
       {showAvatar && post.author.avatar ? (
         <Image
           src={post.author.avatar}

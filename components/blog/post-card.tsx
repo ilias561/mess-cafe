@@ -10,9 +10,16 @@ import type { Post } from '@/lib/blog/posts'
 
 type PostCardProps = {
   post: Post
+  variant?: 'tall' | 'square' | 'wide'
 }
 
-export default function PostCard({ post }: PostCardProps) {
+const ratioClassByVariant: Record<NonNullable<PostCardProps['variant']>, string> = {
+  tall: 'aspect-[4/5]',
+  square: 'aspect-[1/1]',
+  wide: 'aspect-[5/4]',
+}
+
+export default function PostCard({ post, variant = 'square' }: PostCardProps) {
   return (
     <motion.article
       {...fadeUpSoft}
@@ -24,7 +31,7 @@ export default function PostCard({ post }: PostCardProps) {
         href={`/blog/${post.slug}`}
         className="block focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
-        <div className="aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
+        <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-bone-warm`}>
           <Image
             src={post.coverImage}
             alt={post.coverAlt}
