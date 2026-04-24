@@ -13,7 +13,7 @@ export default function PostHero({ post }: PostHeroProps) {
   return (
     <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
       <ParallaxImage
-        src={post.coverImage}
+        src={post.cover}
         alt={post.coverAlt}
         fill
         priority

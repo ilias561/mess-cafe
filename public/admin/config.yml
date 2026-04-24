@@ -30,8 +30,8 @@ collections:
           - { label: "Κουζίνα", value: "kouzina" }
           - { label: "Κοινότητα", value: "koinotita" }
           - { label: "Events", value: "events" }
-      - { name: coverImage, label: "Φωτογραφία εξωφύλλου", widget: image }
-      - { name: coverAlt, label: "Alt text φωτογραφίας", widget: string }
+      - { name: cover, label: "Φωτογραφία εξωφύλλου", widget: image, required: true }
+      - { name: coverAlt, label: "Alt text φωτογραφίας", widget: string, required: true }
       - name: author
         label: "Συγγραφέας"
         widget: object

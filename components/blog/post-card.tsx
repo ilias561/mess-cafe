@@ -33,7 +33,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
       >
         <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-cream`}>
           <Image
-            src={post.coverImage}
+            src={post.cover}
             alt={post.coverAlt}
             width={760}
             height={950}

@@ -27,7 +27,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
           <MaskReveal>
             <div className="aspect-[16/11] overflow-hidden rounded-[2px] bg-bone-warm">
               <ParallaxImage
-                src={post.coverImage}
+                src={post.cover}
                 alt={post.coverAlt}
                 width={980}
                 height={1200}

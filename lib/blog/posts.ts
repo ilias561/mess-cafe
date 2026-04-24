@@ -1,28 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
+import type { Post, PostCategory } from './types'
 
-export type PostCategory = 'kafes' | 'kouzina' | 'koinotita' | 'events'
-
-export type Post = {
-  slug: string
-  title: string
-  excerpt: string
-  category: PostCategory
-  categoryLabel: string
-  coverImage: string
-  coverAlt: string
-  author: {
-    name: string
-    avatar?: string
-    bio?: string
-  }
-  publishedAt: string
-  readingMinutes: number
-  featured?: boolean
-  body: string
-  tags?: string[]
-}
+export type { Post, PostCategory }
 
 const CATEGORY_LABELS: Record<PostCategory, string> = {
   kafes: 'Καφές',
@@ -49,6 +30,8 @@ export function getAllPosts(): Post[] {
       category,
       body: content.trim(),
       categoryLabel: CATEGORY_LABELS[category],
+      // Accept both `cover` (current) and legacy `coverImage` field name
+      cover: (data.cover ?? data.coverImage) as string,
     } as Post
   })
 

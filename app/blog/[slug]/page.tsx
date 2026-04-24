@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: 'article',
       publishedTime: post.publishedAt,
       authors: [post.author.name],
-      images: [{ url: post.coverImage, alt: post.coverAlt }],
+      images: [{ url: post.cover, alt: post.coverAlt }],
       locale: 'el_GR',
     },
   }
