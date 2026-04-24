@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import BlogIndexContent from '@/components/blog/blog-index-content'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
 import PreFooterCta from '@/components/pre-footer-cta'
+import BlogTagFilter from '@/components/blog/BlogTagFilter'
 import { getAllPosts } from '@/lib/blog/posts'
 
 export const metadata: Metadata = {
@@ -24,7 +24,24 @@ export default function BlogPage() {
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
-      <BlogIndexContent posts={posts} />
+
+      {/* Page header */}
+      <section className="px-6 pb-0 pt-36 md:px-12 md:pt-44">
+        <div className="mx-auto max-w-[1400px]">
+          <p className="font-sans text-[12px] font-medium uppercase tracking-wider text-mustard [font-variant-caps:small-caps]">
+            Blog
+          </p>
+          <h1 className="mt-5 max-w-[20ch] font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
+            Καφές, γεύσεις και ό,τι συμβαίνει στην κοινότητα.
+          </h1>
+        </div>
+      </section>
+
+      {/* Tag filter + grid */}
+      <section className="mt-16 px-6 pb-24 md:px-12 md:pb-32">
+        <BlogTagFilter posts={posts} />
+      </section>
+
       <PreFooterCta
         variant="mustard"
         eyebrow="ΜΗ ΧΑΣΕΙΣ ΕΠΟΜΕΝΑ"
