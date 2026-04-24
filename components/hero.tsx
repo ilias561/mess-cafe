@@ -181,7 +181,7 @@ export default function Hero() {
 
       <div className="relative z-20 mx-auto flex min-h-screen w-full max-w-[1400px] items-end px-3 pb-12 pt-32 md:px-10 md:pb-16 md:pt-36 lg:px-12">
         <div className="w-full md:w-[42%] md:pr-8 lg:pr-12">
-          <div className="relative max-w-[560px] md:-ml-8 lg:-ml-12">
+          <div className="relative mx-auto max-w-[560px]">
             <div className="relative">
           <motion.p
             initial={false}
