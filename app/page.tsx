@@ -2,14 +2,14 @@ import Navigation from '@/components/navigation'
 import Hero from '@/components/hero'
 import MarqueeStrip from '@/components/marquee-strip'
 import TodayModule from '@/components/today-module'
-import AboutSection from '@/components/about-section'
+import AboutUsSection from '@/components/about-us-section'
+import FeatureCards from '@/components/feature-cards'
 import MenuPreview from '@/components/menu-preview'
-import StoriaSection from '@/components/storia-section'
-import ActionsSection from '@/components/actions-section'
 import GoalsSection from '@/components/goals-section'
+import ActionsSection from '@/components/actions-section'
 import GallerySection from '@/components/gallery-section'
-import ContactSection from '@/components/contact-section'
 import ReviewsSection from '@/components/reviews-section'
+import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
 import { getAllEvents } from '@/lib/events/events'
 import { getUpcomingEvents } from '@/lib/events/events'
@@ -24,14 +24,14 @@ export default function Home() {
       <Hero />
       <MarqueeStrip />
       <TodayModule events={events} />
-      <AboutSection />
+      <AboutUsSection />
+      <FeatureCards />
       <MenuPreview />
-      <StoriaSection />
-      <ActionsSection actionCards={actionCards} />
       <GoalsSection />
+      <ActionsSection actionCards={actionCards} />
       <GallerySection />
-      <ContactSection />
       <ReviewsSection />
+      <ContactSection />
       <FooterSection />
     </main>
   )

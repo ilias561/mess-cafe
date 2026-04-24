@@ -33,7 +33,7 @@ export default function BlogPage() {
         primaryLabel="Instagram"
         primaryHref="https://instagram.com/messcafe"
         secondaryLabel="Ποιοι είμαστε"
-        secondaryHref="/#about"
+        secondaryHref="/#about-us"
       />
       <FooterSection />
     </main>
