@@ -3,7 +3,7 @@ title: "Πέντε βιβλία που διαβάζει η ομάδα του M.E
 slug: "five-books-team-reads-autumn"
 excerpt: "Μικρή λίστα με βιβλία που κυκλοφορούν από τραπέζι σε τραπέζι στην ομάδα μας, μαζί με τις αφορμές που άνοιξαν ενδιαφέρουσες συζητήσεις."
 category: "koinotita"
-coverImage: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1800&q=80&auto=format&fit=crop"
+cover: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Στοίβα από βιβλία και ένα φλιτζάνι καφέ"
 author:
   name: "Έλενα · Community"

@@ -3,7 +3,7 @@ title: qweqw
 slug: ewqewqe
 excerpt: qqewqeeq
 category: kouzina
-coverImage: /uploads/8798bb09-5679-4555-9449-f68ee29d7d71.jpg
+cover: /uploads/8798bb09-5679-4555-9449-f68ee29d7d71.jpg
 coverAlt: wqeqwewqw
 author:
   name: wqeqwe

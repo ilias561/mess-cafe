@@ -30,8 +30,7 @@ export function getAllPosts(): Post[] {
       category,
       body: content.trim(),
       categoryLabel: CATEGORY_LABELS[category],
-      // Accept both `cover` (current) and legacy `coverImage` field name
-      cover: (data.cover ?? data.coverImage) as string,
+      cover: data.cover as string,
     } as Post
   })
 

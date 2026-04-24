@@ -3,7 +3,7 @@ title: "Open mic nights: πώς ξεκίνησε η μουσική στο ΚΕΠ
 slug: "open-mic-nights-kepavi"
 excerpt: "Από μια μικρή δοκιμή Τετάρτης, οι μουσικές βραδιές στο M.E.S.S. έγιναν σημείο συνάντησης για φίλους, φοιτητές και καλλιτέχνες της πόλης."
 category: "events"
-coverImage: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1800&q=80&auto=format&fit=crop"
+cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Μικρή μουσική σκηνή με μικρόφωνο σε ζεστό φωτισμό"
 author:
   name: "Ομάδα M.E.S.S."

@@ -3,7 +3,7 @@ title: "Γιατί φτιάχνουμε τα bowls μας με εποχικά υ
 slug: "seasonal-bowls-philosophy"
 excerpt: "Στην κουζίνα μας, η εποχικότητα δεν είναι τάση. Είναι ο πιο απλός τρόπος να έχεις καλύτερη γεύση, λιγότερη σπατάλη και καθαρότερη ενέργεια στο πιάτο."
 category: "kouzina"
-coverImage: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1800&q=80&auto=format&fit=crop"
+cover: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Πολύχρωμο bowl με λαχανικά εποχής σε ξύλινο τραπέζι"
 author:
   name: "Μαρία · Kitchen Team"
