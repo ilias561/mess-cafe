@@ -62,32 +62,37 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           </a>
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 gap-4 border-t border-bone/10 pt-12 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl border border-bone/10 bg-bone/5 p-5 backdrop-blur-[2px]">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">ADDRESS</p>
-            <p className="font-sans text-sm leading-relaxed text-bone/70">{settings.addressLine1}<br />{settings.addressLine2}</p>
+        <div className="mt-16 grid grid-cols-1 gap-0 border-t border-bone/10 pt-0 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">ADDRESS</p>
+            <p className="font-sans text-sm leading-relaxed text-bone">{settings.addressLine1}<br />{settings.addressLine2}</p>
           </div>
-          <div className="rounded-2xl border border-bone/10 bg-bone/5 p-5 backdrop-blur-[2px]">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">HOURS</p>
-            <p className="font-sans text-sm leading-relaxed text-bone/70">
+          <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">HOURS</p>
+            <p className="font-sans text-sm leading-relaxed text-bone">
               {settings.hours.map((slot) => (
                 <span key={slot.day}>{slot.day}: {slot.open} — {slot.close}<br /></span>
               ))}
             </p>
           </div>
-          <div className="rounded-2xl border border-bone/10 bg-bone/5 p-5 backdrop-blur-[2px]">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">PHONE</p>
-            <a href={`tel:${primaryPhoneHref}`} className="font-sans text-sm text-bone/70 transition-colors hover:text-mustard">{settings.phone}</a>
-            <p className="mt-2 font-sans text-sm text-bone/70">{settings.email}</p>
+          <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">PHONE</p>
+            <a
+              href={`tel:${primaryPhoneHref}`}
+              className="font-sans text-sm text-bone underline-offset-4 transition-colors hover:text-mustard hover:underline"
+            >
+              {settings.phone}
+            </a>
+            <p className="mt-2 font-sans text-sm text-bone">{settings.email}</p>
           </div>
-          <div className="rounded-2xl border border-bone/10 bg-bone/5 p-5 backdrop-blur-[2px]">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">INSTAGRAM</p>
+          <div className="border-t border-mustard/25 pt-6 px-0">
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">INSTAGRAM</p>
             {settings.instagram ? (
               <a
                 href={settings.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-sans text-sm text-bone/70 transition-colors hover:text-mustard"
+                className="inline-flex items-center gap-1.5 font-sans text-sm text-bone underline-offset-4 transition-colors hover:text-mustard hover:underline"
               >
                 {settings.instagram.replace('https://', '')}
                 <ExternalLink className="h-3 w-3 shrink-0 opacity-60" strokeWidth={1.5} />
