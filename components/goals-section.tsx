@@ -17,12 +17,12 @@ const goals = [
   {
     num: '02',
     title: 'Sustainable',
-    body: 'Παρασκευάζουμε πιάτα με φρέσκες και τοπικές ύλες, με όσο το δυνατόν λιγότερη επεξεργασία.',
+    body: 'Φρέσκες, τοπικές ύλες. Όσο λιγότερη επεξεργασία γίνεται — γάλα αμυγδάλου, βρώμης, καρυδιού, iceberg, τοματίνι από τον δικό μας μπαξέ.',
   },
   {
     num: '03',
     title: 'Space',
-    body: 'Όλα τα παραπάνω συνθέτουν τον αγαπημένο μας — και ελπίζουμε αγαπημένο σας — χώρο.',
+    body: 'Ο αγαπημένος μας χώρος. Ελπίζουμε και δικός σας.',
   },
 ]
 
@@ -99,7 +99,7 @@ export default function GoalsSection() {
             transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
             className="mt-6 max-w-[16ch] font-serif text-[clamp(48px,6vw,88px)] leading-[1.02] tracking-tight text-bone"
           >
-            Περισσότερα από ένα μενού.
+            Δεν είναι καφέ. Είναι ιδέα.
           </motion.h2>
 
           {/* Intro */}
@@ -110,7 +110,17 @@ export default function GoalsSection() {
             transition={{ duration: 0.65, ease: EASE, delay: 0.2 }}
             className="mt-6 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80"
           >
-            Το <span className="text-bone">#keeprising</span> δεν είναι hashtag για τα social. Είναι ο τρόπος που κινούμαστε.
+            Ενότητα, δημιουργικότητα, ευεξία — αρμονικά δεμένα στον ίδιο χώρο.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.65, ease: EASE, delay: 0.28 }}
+            className="mt-4 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80"
+          >
+            Ένας πιο χαλαρός τρόπος ζωής, μέσα στις πιεστικές ανάγκες του σήμερα.
           </motion.p>
 
           {/* Pull-quote */}
@@ -119,9 +129,14 @@ export default function GoalsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.36 }}
-            className="mt-10 border-l-2 border-mustard/70 pl-6 font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]"
+            className="mt-10 border-l-2 border-mustard/70 pl-6"
           >
-            «Το <span className="not-italic text-mustard">#keeprising</span> ξεκινά από τον ίδιο σου τον εαυτό — αλλά μετράει μόνο όταν κάποιος άλλος σηκώνεται μαζί.»
+            <p className="font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]">
+              «Τα πάντα ρεί.»
+            </p>
+            <p className="mt-2 font-sans text-[13px] not-italic text-concrete">
+              — Ηράκλειτος
+            </p>
           </motion.blockquote>
 
           {/* Numbered goals */}
@@ -149,17 +164,6 @@ export default function GoalsSection() {
               </motion.div>
             ))}
           </div>
-
-          {/* Closing italic line */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.3 }}
-            className="mt-8 font-serif text-[17px] italic text-bone/60"
-          >
-            Η κίνηση δεν είναι μόνο έννοια. Είναι πράξη.
-          </motion.p>
 
           {/* CTA */}
           <motion.div
