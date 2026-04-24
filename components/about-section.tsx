@@ -1,200 +1,278 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { motion, useInView, animate } from 'framer-motion'
-import Image from 'next/image'
-import MaskReveal from '@/components/mask-reveal'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { EASE } from '@/lib/motion'
-import { images } from '@/lib/images'
 
 const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
 
-const imageReveal = {
-  initial: { opacity: 0, y: 64, scale: 1.04 },
-  whileInView: { opacity: 1, y: 0, scale: 1 },
-  viewport: { once: true, margin: '-15% 0px -15% 0px' },
-  transition: { duration: 1.1, ease: EASE_TUPLE },
-}
+/* ── M.E.S.S. acronym rows ── */
+const acronym = [
+  { letter: 'M', word: 'Mindful', sub: 'Φαγητό φτιαγμένο με πρόθεση' },
+  { letter: 'E', word: 'Elevating', sub: 'Εμπειρία που σε ανυψώνει' },
+  { letter: 'S', word: 'Specialty', sub: 'Καφές ανώτατης ποιότητας' },
+  { letter: 'S', word: 'Social', sub: 'Χώρος για αληθινή σύνδεση' },
+]
 
-const aboutImages = [
+/* ── 4 pillars ── */
+const pillars = [
   {
-    key: 'aboutInterior',
-    src: images.aboutInterior,
-    alt: 'Café interior with plants and natural light',
-    aspect: 'aspect-[4/5]',
-    caption: 'Ο ΠΡΩΤΟΣ ΟΡΟΦΟΣ',
-  },
-  {
-    key: 'aboutBar',
-    src: images.aboutBar,
-    alt: 'Coffee bar and service area',
-    aspect: 'aspect-[3/2]',
-    caption: 'ΤΟ BAR',
-  },
-  {
-    key: 'aboutStairs',
-    src: images.aboutStairs,
-    alt: 'Stairs and workspace seating',
-    aspect: 'aspect-square',
-    caption: 'ΣΚΑΛΑ ΠΡΟΣ ΜΕΖΟΝΙ',
-  },
-  {
-    key: 'aboutPlants',
-    src: images.aboutPlants,
-    alt: 'Dense plants against concrete',
-    aspect: 'aspect-[4/5]',
-    caption: 'ΦΥΤΑ & ΦΩΣ',
-  },
-] as const
-
-function CountUp({
-  to,
-  duration = 1.2,
-  decimals = 0,
-}: {
-  to: number
-  duration?: number
-  decimals?: number
-}) {
-  const [display, setDisplay] = useState('0' + (decimals > 0 ? '.' + '0'.repeat(decimals) : ''))
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-20% 0px' })
-
-  useEffect(() => {
-    if (!inView) return
-    const ctrl = animate(0, to, {
-      duration,
-      ease: EASE_TUPLE,
-      onUpdate: (v) => setDisplay(v.toFixed(decimals)),
-    })
-    return () => ctrl.stop()
-  }, [inView, to, duration, decimals])
-
-  return <span ref={ref}>{display}</span>
-}
-
-const stats = [
-  {
-    id: 'rating',
-    // Fade-in the final value — a rating isn't a quantity you "count up to"
-    renderValue: () => (
-      <motion.span
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.6, ease: EASE_TUPLE }}
-      >
-        4.8★
-      </motion.span>
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-mustard" strokeWidth="1.5" aria-hidden>
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8Z" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="6" y1="1" x2="6" y2="4" strokeLinecap="round" />
+        <line x1="10" y1="1" x2="10" y2="4" strokeLinecap="round" />
+        <line x1="14" y1="1" x2="14" y2="4" strokeLinecap="round" />
+      </svg>
     ),
-    label: '165 κριτικές Google',
+    title: 'Specialty Coffee',
+    body: 'Single-origin, μικρά ψητήρια, χειροποίητα φλιτζάνια. Κάθε κόκκος έχει ιστορία.',
   },
   {
-    id: 'hours',
-    renderValue: () => <>08—22</>,
-    label: '7 μέρες την εβδομάδα',
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-mustard" strokeWidth="1.5" aria-hidden>
+        <path d="M12 2a10 10 0 1 0 10 10" strokeLinecap="round" />
+        <path d="M12 6v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="19" cy="5" r="3" />
+      </svg>
+    ),
+    title: 'Healthy Brunch',
+    body: 'Poke bowls, acai, smoothies και γλυκά χωρίς ζάχαρη. Τροφή που σε κρατά ζωντανό.',
   },
   {
-    id: 'floor',
-    renderValue: () => <>#211</>,
-    label: 'ΚΕΠΑΒΙ · Ιωάννινα',
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-mustard" strokeWidth="1.5" aria-hidden>
+        <path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0" />
+        <path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" strokeLinecap="round" />
+      </svg>
+    ),
+    title: 'Lake Views',
+    body: 'Στον 1ο όροφο του ΚΕΠΑΒΙ, με θέα στη λίμνη Ιωαννίνων. Ένα σκηνικό για ήσυχα πρωινά.',
   },
-] as const
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-6 w-6 fill-none stroke-mustard" strokeWidth="1.5" aria-hidden>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    title: 'Community',
+    body: 'Events, workshops, open mics. Ένα μέρος για να γνωριστείς με ανθρώπους που αξίζει.',
+  },
+]
+
+/* ── Letter + word row ── */
+function AcronymRow({
+  letter,
+  word,
+  sub,
+  index,
+}: {
+  letter: string
+  word: string
+  sub: string
+  index: number
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-60px 0px' })
+
+  return (
+    <div
+      ref={ref}
+      className="flex items-baseline gap-4 border-t border-line/30 py-5 first:border-t-0 md:gap-8"
+    >
+      {/* Letter */}
+      <motion.span
+        initial={{ opacity: 0, x: -20 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.5, ease: EASE_TUPLE, delay: index * 0.07 }}
+        className="w-12 shrink-0 font-serif text-[clamp(48px,7vw,80px)] leading-none tracking-tight text-mustard"
+        aria-hidden
+      >
+        {letter}
+      </motion.span>
+
+      {/* Word + sub */}
+      <div className="min-w-0 overflow-hidden">
+        <motion.p
+          initial={{ opacity: 0, x: -16 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.55, ease: EASE_TUPLE, delay: index * 0.07 + 0.1 }}
+          className="font-serif text-[clamp(22px,3.5vw,38px)] leading-none tracking-tight text-charcoal"
+        >
+          {word}
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, ease: EASE, delay: index * 0.07 + 0.22 }}
+          className="mt-1.5 font-sans text-[13px] text-concrete"
+        >
+          {sub}
+        </motion.p>
+      </div>
+    </div>
+  )
+}
+
+/* ── Pillar card ── */
+function PillarCard({
+  pillar,
+  index,
+}: {
+  pillar: (typeof pillars)[number]
+  index: number
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, ease: EASE_TUPLE, delay: index * 0.08 }}
+      className="flex flex-col gap-4 rounded-2xl border border-line/40 bg-bone-warm/60 p-6"
+    >
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-olive/8">
+        {pillar.icon}
+      </div>
+      <div>
+        <p className="font-serif text-[18px] leading-snug tracking-tight text-charcoal">
+          {pillar.title}
+        </p>
+        <p className="mt-2 font-sans text-[13px] leading-relaxed text-concrete">
+          {pillar.body}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function AboutSection() {
   return (
-    <section id="about" className="scroll-mt-28 border-t border-line/30 bg-cream px-6 py-24 md:px-12 md:py-32">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 md:grid-cols-12">
+    <section
+      id="about"
+      className="scroll-mt-28 border-t border-line/30 bg-cream px-6 py-24 md:px-12 md:py-32"
+    >
+      <div className="mx-auto max-w-[1400px]">
 
-        {/* LEFT: sticky */}
-        <div className="md:col-span-5">
-          <div className="md:sticky md:top-24">
+        {/* ── Top header ── */}
+        <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2 md:items-end">
+          <div>
             <motion.p
-              className="eyebrow mb-6 font-sans text-olive"
+              className="eyebrow mb-4 font-sans text-olive"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              ΠΟΙΟΙ ΕΙΜΑΣΤΕ
+            </motion.p>
+            <motion.h2
+              className="font-serif text-[clamp(36px,5vw,64px)] leading-[1.02] tracking-tight text-charcoal"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.75, ease: EASE }}
+              transition={{ duration: 0.75, ease: EASE, delay: 0.06 }}
             >
-              Ο ΧΩΡΟΣ
-            </motion.p>
-
-            <MaskReveal className="mb-8" delay={0.06}>
-              <h2 className="font-serif text-[clamp(44px,5vw,72px)] leading-[1.02] tracking-tight text-balance text-charcoal">
-                Ένας χώρος που μένει στο μυαλό.
-              </h2>
-            </MaskReveal>
-
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.75, ease: EASE, delay: 0.12 }}
-              className="mb-6 max-w-md font-sans text-[17px] leading-relaxed text-concrete"
-            >
-              Δύο επίπεδα, άφθονο πράσινο και θέα στη λίμνη Ιωαννίνων. Ένα σκηνικό για ήσυχα πρωινά, δημιουργικές συναντήσεις και brunch που θυμάσαι.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.75, ease: EASE, delay: 0.18 }}
-              className="max-w-md font-sans text-[17px] leading-relaxed text-concrete"
-            >
-              Ανοιχτά 08:00 — 22:00, 7 μέρες την εβδομάδα.
-            </motion.p>
-
-            <div className="mt-16 grid grid-cols-3 gap-4 sm:gap-6">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.id}
-                  className="min-w-0"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.65, ease: EASE, delay: 0.22 + i * 0.08 }}
-                >
-                  <p className="font-serif text-[clamp(36px,8vw,48px)] leading-none tracking-tight text-charcoal">
-                    {stat.renderValue()}
-                  </p>
-                  <p className="mt-2 font-sans text-[10px] uppercase leading-snug tracking-[0.16em] text-olive sm:text-[11px]">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+              Ένας χώρος που μένει στο μυαλό.
+            </motion.h2>
           </div>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.14 }}
+            className="max-w-md font-sans text-[16px] leading-relaxed text-concrete md:text-right"
+          >
+            Δύο επίπεδα, άφθονο πράσινο και θέα στη λίμνη Ιωαννίνων. Ανοιχτά{' '}
+            <span className="text-charcoal">08:00–22:00</span>, 7 μέρες.
+          </motion.p>
         </div>
 
-        {/* RIGHT: natural flow, taller than left */}
-        <div className="flex flex-col gap-4 md:col-span-7">
-          {aboutImages.map((img, i) => (
-            <div key={img.key}>
-              <motion.div
-                {...imageReveal}
-                transition={{ ...imageReveal.transition, delay: i * 0.12 }}
-                className={`relative w-full overflow-hidden ${img.aspect}`}
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                />
-              </motion.div>
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, margin: '-10% 0px' }}
-                transition={{ duration: 0.6, ease: EASE, delay: i * 0.12 + 0.3 }}
-                className="eyebrow mt-2 font-sans text-olive"
-              >
-                {img.caption}
-              </motion.p>
-            </div>
+        {/* ── M.E.S.S. acronym ── */}
+        <div className="mb-20 max-w-[720px]" aria-label="Τι σημαίνει M.E.S.S.">
+          {acronym.map((row, i) => (
+            <AcronymRow key={row.letter + i} {...row} index={i} />
           ))}
+        </div>
+
+        {/* ── 4 pillars ── */}
+        <div className="mb-20 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {pillars.map((pillar, i) => (
+            <PillarCard key={pillar.title} pillar={pillar} index={i} />
+          ))}
+        </div>
+
+        {/* ── Heraclitus MODULAR quote card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.75, ease: EASE }}
+          className="mb-16 overflow-hidden rounded-2xl bg-olive-deep px-8 py-10 md:px-12 md:py-14"
+        >
+          <div className="mx-auto max-w-[780px]">
+            <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.22em] text-mustard/70">
+              ΦΙΛΟΣΟΦΙΑ
+            </p>
+            <blockquote>
+              <p className="font-serif text-[clamp(28px,4.5vw,52px)] leading-[1.12] tracking-tight text-bone">
+                &ldquo;Τα πάντα ρεῖ.&rdquo;
+              </p>
+              <footer className="mt-6 flex items-center gap-3">
+                <div className="h-px flex-1 bg-bone/15" />
+                <cite className="font-sans text-[12px] not-italic uppercase tracking-[0.18em] text-bone/45">
+                  Ηράκλειτος, 535–475 π.Χ.
+                </cite>
+              </footer>
+            </blockquote>
+            <p className="mt-6 max-w-[52ch] font-sans text-[15px] leading-relaxed text-bone/60">
+              Όλα κυλούν. Κι εμείς μαζί τους — μέσα από κάθε πρωινό, κάθε φλιτζάνι, κάθε στιγμή που επιλέγεις να ζεις πιο συνειδητά.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ── #keeprising stamp ── */}
+        <div className="flex items-center justify-end">
+          <motion.div
+            initial={{ opacity: 0, rotate: -6, scale: 0.88 }}
+            whileInView={{ opacity: 1, rotate: -6, scale: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.65, ease: EASE_TUPLE }}
+            className="relative inline-flex h-24 w-24 items-center justify-center rounded-full border-2 border-olive/40 md:h-28 md:w-28"
+            aria-label="#keeprising"
+          >
+            {/* Circular text path */}
+            <svg
+              viewBox="0 0 100 100"
+              className="absolute inset-0 h-full w-full"
+              aria-hidden
+            >
+              <defs>
+                <path
+                  id="stamp-circle"
+                  d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                />
+              </defs>
+              <text
+                className="fill-olive/60"
+                style={{ fontSize: '9.5px', fontFamily: 'var(--font-inter)', letterSpacing: '0.18em' }}
+              >
+                <textPath href="#stamp-circle">
+                  #KEEPRISING · #KEEPRISING ·{' '}
+                </textPath>
+              </text>
+            </svg>
+            {/* Centre mark */}
+            <span
+              className="font-serif text-[22px] leading-none tracking-tight text-olive/70"
+              aria-hidden
+            >
+              ↑
+            </span>
+          </motion.div>
         </div>
 
       </div>

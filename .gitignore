@@ -41,3 +41,6 @@ next-env.d.ts
 # Working files (not for production)
 BLOG_CURSOR_PROMPT.md
 123.mp4
+
+# Cowork session handoff (cross-session baton, not for git)
+HANDOFF.md

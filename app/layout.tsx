@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
+import AnchorScroll from '@/components/anchor-scroll'
 import NewsletterPopup from '@/components/newsletter-popup'
 import PageLoader from '@/components/page-loader'
 import RouteScrollTop from '@/components/route-scroll-top'
@@ -45,6 +46,7 @@ export default function RootLayout({
       <body className="font-sans antialiased" suppressHydrationWarning>
         <PageLoader />
         <RouteScrollTop />
+        <AnchorScroll />
         <ScrollProgress />
         <WhatsAppFloat />
         <NewsletterPopup />

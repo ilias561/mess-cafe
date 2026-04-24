@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, animate, motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
@@ -14,36 +14,12 @@ const fallbackSlides = [
   images.gallery1,
   images.aboutPlants,
 ] as const
-const stats: ReadonlyArray<
-  { key: string; label: string; value: string } | { key: string; label: string; to: number; prefix?: string }
-> = [
+const stats: ReadonlyArray<{ key: string; label: string; value: string }> = [
   { key: 'rating', label: 'Google rating', value: '4.8★' },
-  { key: 'reviews', label: 'Κριτικές', to: 165 },
-  { key: 'location', label: 'ΚΕΠΑΒΙ · Όροφος', to: 211, prefix: '#' },
+  { key: 'hours', label: 'Ανοιχτά καθημερινά', value: '08—22' },
+  { key: 'location', label: 'ΚΕΠΑΒΙ · Ιωάννινα', value: 'Ιωάννινα' },
 ]
 
-function AnimatedCount({
-  from,
-  to,
-  prefix = '',
-}: {
-  from: number
-  to: number
-  prefix?: string
-}) {
-  const [value, setValue] = useState(from)
-
-  useEffect(() => {
-    const controls = animate(from, to, {
-      duration: 0.9,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setValue(Math.round(v)),
-    })
-    return () => controls.stop()
-  }, [from, to])
-
-  return <span>{prefix}{value}</span>
-}
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -277,10 +253,7 @@ export default function Hero() {
             {stats.map((item) => (
               <div key={item.key}>
                 <p className="font-serif text-[30px] leading-none text-charcoal">
-                  {'value' in item
-                    ? item.value
-                    : <AnimatedCount from={Math.max(item.to - 45, 100)} to={item.to} prefix={item.prefix ?? ''} />
-                  }
+                  {item.value}
                 </p>
                 <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.14em] text-charcoal md:text-[11px]">
                   {item.label}

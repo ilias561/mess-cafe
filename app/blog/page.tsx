@@ -32,8 +32,8 @@ export default function BlogPage() {
         body="Ό,τι συμβαίνει στο M.E.S.S. — νέα events, νέα στο μενού, ιστορίες από την κουζίνα — πρώτα στο Instagram."
         primaryLabel="Instagram"
         primaryHref="https://instagram.com/messcafe"
-        secondaryLabel="Όλες οι δράσεις"
-        secondaryHref="/actions"
+        secondaryLabel="Ποιοι είμαστε"
+        secondaryHref="/#about"
       />
       <FooterSection />
     </main>
