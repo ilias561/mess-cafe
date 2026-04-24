@@ -186,7 +186,7 @@ export default function AboutUsSection() {
                 transition={{ duration: 0.75, ease: EASE, delay: 0.32 }}
                 className="max-w-md font-sans text-[17px] leading-relaxed text-charcoal/80"
               >
-                Για εμάς αυτό σημαίνει ότι ο χώρος κινείται μαζί σου. Από καφέ σε workshop, σε σκηνή για events. Από πρωινό brunch σε community dinner. Το M.E.S.S. αλλάζει σχήμα — εσύ αλλάζεις μαζί του.
+                Για εμάς αυτό σημαίνει ότι ο χώρος κινείται μαζί σου. Από καφέ σε workshop, σε σκηνή για events. Από πρωινό brunch σε low beverage cocktails και crafted beers. Το M.E.S.S. αλλάζει σχήμα — εσύ αλλάζεις μαζί του.
               </motion.p>
             </div>
 
