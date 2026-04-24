@@ -3,7 +3,6 @@ import Hero from '@/components/hero'
 import MarqueeStrip from '@/components/marquee-strip'
 import TodayModule from '@/components/today-module'
 import AboutUsSection from '@/components/about-us-section'
-import FeatureCards from '@/components/feature-cards'
 import MenuPreview from '@/components/menu-preview'
 import GoalsSection from '@/components/goals-section'
 import ActionsSection from '@/components/actions-section'
@@ -25,7 +24,6 @@ export default function Home() {
       <MarqueeStrip />
       <TodayModule events={events} />
       <AboutUsSection />
-      <FeatureCards />
       <MenuPreview />
       <GoalsSection />
       <ActionsSection actionCards={actionCards} />

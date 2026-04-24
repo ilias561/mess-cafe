@@ -12,17 +12,17 @@ const goals = [
   {
     num: '01',
     title: 'Κοινότητα',
-    body: 'Open mic βραδιές, community dinners, workshops που δίνουν σκηνή στους νέους δημιουργούς των Ιωαννίνων.',
+    body: 'Open mic βραδιές, community dinners, workshops που δίνουν σκηνή στους νέους δημιουργούς των Ιωαννίνων. Ο χώρος μας είναι ανοιχτός σε πρωτοβουλίες που ενώνουν ανθρώπους — όχι απλώς τους σερβίρουν.',
   },
   {
     num: '02',
     title: 'Αλληλεγγύη',
-    body: 'Δωρεάν γεύματα σε ανθρώπους που το χρειάζονται. Συνεργασίες με τοπικούς φορείς και οργανώσεις.',
+    body: 'Δωρεάν γεύματα σε ανθρώπους που το χρειάζονται, κάθε εβδομάδα. Συνεργασίες με τοπικούς φορείς και οργανώσεις της πόλης, όχι μόνο σε γιορτές. Όποιος μπαίνει στο M.E.S.S. έχει θέση στο τραπέζι — ανεξάρτητα από το τι μπορεί να πληρώσει.',
   },
   {
     num: '03',
     title: 'Τέχνη',
-    body: 'Εκθέσεις, παρουσιάσεις βιβλίων, μουσικές βραδιές. Ο χώρος γίνεται σκηνή για τις ιστορίες της πόλης.',
+    body: 'Εκθέσεις, παρουσιάσεις βιβλίων, μουσικές βραδιές, συζητήσεις για το μέλλον της πόλης. Ο χώρος γίνεται σκηνή για τις ιστορίες των Ιωαννίνων — και για όσους δεν έχουν ακόμα βρει πού να τις πουν.',
   },
 ]
 
@@ -71,7 +71,7 @@ export default function GoalsSection() {
   return (
     <section
       id="goals"
-      className="relative scroll-mt-28 overflow-hidden bg-olive-deep px-6 py-24 md:px-12 md:py-32"
+      className="relative scroll-mt-28 bg-olive-deep px-6 py-24 md:px-12 md:py-32"
     >
       {/* Thin terracotta rule at top */}
       <div className="mx-auto mb-20 max-w-[1400px]">
@@ -102,6 +102,7 @@ export default function GoalsSection() {
             Περισσότερα από ένα μενού.
           </motion.h2>
 
+          {/* Expanded intro — two paragraphs */}
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -109,8 +110,29 @@ export default function GoalsSection() {
             transition={{ duration: 0.65, ease: EASE, delay: 0.2 }}
             className="mt-6 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80"
           >
-            Θέλουμε το M.E.S.S. να κινείται με στόχο. Όχι μόνο να σερβίρει καφέ και φαγητό — αλλά να δημιουργεί χώρο για ανθρώπους, ιδέες και πράξεις που έχουν σημασία.
+            Το <span className="text-bone">#keeprising</span> δεν είναι hashtag για τα social. Είναι ο τρόπος που κινούμαστε: να σηκώνεσαι ξανά, να ανεβάζεις κι άλλους μαζί σου. Το M.E.S.S. ξεκίνησε ως χώρος για καφέ και φαγητό — γρήγορα έγινε κάτι πιο ουσιαστικό.
           </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.65, ease: EASE, delay: 0.28 }}
+            className="mt-5 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80"
+          >
+            Πιστεύουμε ότι ένας χώρος οφείλει κάτι στην κοινότητα που τον κρατά ζωντανό. Γι' αυτό επενδύουμε χρόνο, χώρο και πόρους σε ανθρώπους που έχουν ανάγκη — από δωρεάν γεύματα μέχρι συνεργασίες με τοπικούς φορείς, από ανοιχτές σκηνές μέχρι δράσεις αλληλεγγύης.
+          </motion.p>
+
+          {/* Pull-quote */}
+          <motion.blockquote
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.36 }}
+            className="mt-10 border-l-2 border-mustard/70 pl-6 font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]"
+          >
+            «Το <span className="not-italic text-mustard">#keeprising</span> ξεκινά από τον ίδιο σου τον εαυτό — αλλά μετράει μόνο όταν κάποιος άλλος σηκώνεται μαζί.»
+          </motion.blockquote>
 
           {/* Numbered goals */}
           <div className="mt-12 flex flex-col gap-8">
@@ -169,7 +191,7 @@ export default function GoalsSection() {
           </motion.div>
         </div>
 
-        {/* ── RIGHT: 5 cols — photo ── */}
+        {/* ── RIGHT: 5 cols — article card ── */}
         <div className="md:col-span-5">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -177,20 +199,42 @@ export default function GoalsSection() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.9, ease: EASE_TUPLE }}
           >
-            <Link href="/actions" aria-label="Δράσεις της κοινότητας M.E.S.S.">
-              <div className="group relative aspect-[4/5] w-full overflow-hidden">
+            <Link
+              href="/actions"
+              aria-label="Διάβασε για τις δράσεις της κοινότητας M.E.S.S."
+              className="group block overflow-hidden border border-bone/15 bg-bone/[0.04] backdrop-blur-[2px] transition-all duration-300 hover:border-mustard/60 hover:bg-bone/[0.07]"
+            >
+              {/* Photo */}
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
                 <Image
                   src={images.gallery3}
                   alt="Δράσεις της κοινότητας M.E.S.S."
                   fill
                   unoptimized
-                  className="object-cover transition-all duration-500 group-hover:saturate-50 group-hover:sepia-[0.3]"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover transition-all duration-500 group-hover:scale-[1.03]"
                 />
               </div>
+
+              {/* Article text */}
+              <div className="px-6 py-6 md:px-7 md:py-7">
+                <p className="font-sans text-[10px] uppercase tracking-[0.22em] text-mustard">
+                  ΔΡΑΣΗ · ΚΟΙΝΟΤΗΤΑ
+                </p>
+                <h3 className="mt-3 font-serif text-[26px] leading-[1.1] tracking-tight text-bone md:text-[28px]">
+                  Κάθε Τετάρτη, ένα τραπέζι για όλους.
+                </h3>
+                <p className="mt-3 font-sans text-[14.5px] leading-relaxed text-bone/70">
+                  Community dinner στο M.E.S.S. — δωρεάν γεύμα, ανοιχτή κουβέντα, μουσική από μέλη της κοινότητας. Για όσους θέλουν να φάνε, να βοηθήσουν ή απλώς να μην είναι μόνοι τους.
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 font-sans text-[13px] font-medium text-mustard underline decoration-mustard/40 underline-offset-[5px] transition-all group-hover:decoration-mustard group-hover:underline-offset-[6px]">
+                  Διάβασε περισσότερα
+                  <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5" aria-hidden>
+                    <path d="M3 8h10M8 3l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </div>
             </Link>
-            <p className="mt-3 font-sans text-[12px] italic text-bone/50">
-              Από κάθε workshop. Κάθε κοινή στιγμή.
-            </p>
           </motion.div>
         </div>
 
