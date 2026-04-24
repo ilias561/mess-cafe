@@ -217,7 +217,7 @@ export default function Hero() {
             transition={{ duration: 0.75, delay: 0.32, ease: EASE }}
             className="mt-6 max-w-[560px] font-sans text-[17px] leading-relaxed text-charcoal md:text-[18px]"
           >
-            Specialty καφές, fresh bowls και θέα στη λίμνη — στον 1ο όροφο του ΚΕΠΑΒΙ, Ιωάννινα.
+            Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.
           </motion.p>
 
           <motion.p
