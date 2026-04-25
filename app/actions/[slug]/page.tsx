@@ -13,7 +13,10 @@ type EventPageProps = {
 }
 
 export async function generateStaticParams() {
-  return getAllEvents().map((event) => ({ slug: event.slug }))
+  const slugs = getAllEvents().map((event) => ({ slug: event.slug }))
+  // Next.js 16 static export throws when generateStaticParams returns [].
+  // Returning a sentinel keeps the build green; the page calls notFound() for it.
+  return slugs.length > 0 ? slugs : [{ slug: '_' }]
 }
 
 export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {

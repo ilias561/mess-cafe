@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
-import EventsIndexHero from '@/components/events/events-index-hero'
+import ActionsShell from '@/components/events/actions-shell'
 import UpcomingDatesMarquee from '@/components/events/upcoming-dates-marquee'
 import FeaturedNextEvent from '@/components/events/featured-next-event'
-import UpcomingSection from '@/components/events/upcoming-section'
 import ActionsManifesto from '@/components/events/actions-manifesto'
 import EventsArchiveList from '@/components/events/events-archive-list'
 import PreFooterCta from '@/components/pre-footer-cta'
@@ -23,18 +22,17 @@ export default function ActionsPage() {
   const featured = upcomingEvents[0] ?? null
   const restUpcoming = upcomingEvents.slice(1)
 
-  // Render UpcomingSection only when there are rest events to show, OR when
-  // there are no upcoming events at all (empty state). When exactly 1 event
-  // exists it's already covered by FeaturedNextEvent — no grid needed.
-  const showUpcomingSection = restUpcoming.length > 0 || upcomingEvents.length === 0
-
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
-      <EventsIndexHero />
-      <UpcomingDatesMarquee events={upcomingEvents} />
-      {featured && <FeaturedNextEvent event={featured} settings={settings} />}
-      {showUpcomingSection && <UpcomingSection events={restUpcoming} />}
+      <ActionsShell
+        upcomingEvents={upcomingEvents}
+        restUpcoming={restUpcoming}
+        settings={settings}
+      >
+        <UpcomingDatesMarquee events={upcomingEvents} />
+        {featured && <FeaturedNextEvent event={featured} settings={settings} />}
+      </ActionsShell>
       <ActionsManifesto />
       {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
       <PreFooterCta
