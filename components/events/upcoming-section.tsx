@@ -6,24 +6,23 @@ import Link from 'next/link'
 import EventCard from '@/components/events/event-card'
 import SectionReveal from '@/components/section-reveal'
 import { EASE } from '@/lib/motion'
-import type { Event, EventCategory } from '@/lib/events/events'
-
-const CHIP_CATEGORIES: { label: string; key: EventCategory | null }[] = [
-  { label: 'Όλες', key: null },
-  { label: 'Workshops', key: 'workshop' },
-  { label: 'Μουσική', key: 'music' },
-  { label: 'Πολιτισμός', key: 'culture' },
-  { label: 'Συνεργασίες', key: 'collaboration' },
-]
+import type { Event } from '@/lib/events/events'
 
 type Props = { events: Event[] }
 
 export default function UpcomingSection({ events }: Props) {
-  const [activeKey, setActiveKey] = useState<EventCategory | null>(null)
+  const [activeLabel, setActiveLabel] = useState<string | null>(null)
 
   const hasEvents = events.length > 0
-  const filtered = activeKey ? events.filter((e) => e.category === activeKey) : events
-  const activeLabel = CHIP_CATEGORIES.find((c) => c.key === activeKey)?.label ?? 'Όλες'
+  // Filtering a single item is pointless — hide chips when ≤1 event
+  const showChips = events.length > 1
+
+  // Derive unique category labels from the actual event set (no phantom chips)
+  const presentLabels = [...new Set(events.map((e) => e.categoryLabel))]
+
+  const filtered = activeLabel
+    ? events.filter((e) => e.categoryLabel === activeLabel)
+    : events
 
   return (
     <section className="bg-bone px-6 py-20 md:px-12 md:py-28">
@@ -35,20 +34,30 @@ export default function UpcomingSection({ events }: Props) {
           </p>
         </SectionReveal>
 
-        {/* Category filter chips — hidden when no events */}
-        {hasEvents && (
+        {/* Category filter chips — only shown when >1 event, only with present categories */}
+        {showChips && (
           <div className="mt-8 mb-10 flex flex-wrap gap-2">
-            {CHIP_CATEGORIES.map((cat) => (
+            <button
+              onClick={() => setActiveLabel(null)}
+              className={`rounded-full border px-[13px] py-[6px] font-sans text-[11px] tracking-[0.06em] transition-colors duration-150 ${
+                activeLabel === null
+                  ? 'border-charcoal bg-charcoal text-bone'
+                  : 'border-line text-charcoal hover:border-charcoal/40'
+              }`}
+            >
+              Όλες
+            </button>
+            {presentLabels.map((label) => (
               <button
-                key={cat.label}
-                onClick={() => setActiveKey(cat.key)}
+                key={label}
+                onClick={() => setActiveLabel(label)}
                 className={`rounded-full border px-[13px] py-[6px] font-sans text-[11px] tracking-[0.06em] transition-colors duration-150 ${
-                  activeKey === cat.key
+                  activeLabel === label
                     ? 'border-charcoal bg-charcoal text-bone'
                     : 'border-line text-charcoal hover:border-charcoal/40'
                 }`}
               >
-                {cat.label}
+                {label}
               </button>
             ))}
           </div>
@@ -93,12 +102,10 @@ export default function UpcomingSection({ events }: Props) {
           </p>
         )}
 
-        {/* Filter status indicator — hidden when no events */}
-        {hasEvents && (
+        {/* Filter status indicator — only when a specific category is active */}
+        {hasEvents && activeLabel !== null && (
           <p className="mt-10 font-sans text-[11px] uppercase tracking-[0.2em] text-concrete">
-            {activeKey === null
-              ? 'ΟΛΕΣ ΟΙ ΚΑΤΗΓΟΡΙΕΣ'
-              : `ΦΙΛΤΡΟ: ${activeLabel.toUpperCase()}`}
+            {`ΦΙΛΤΡΟ · ${activeLabel.toUpperCase()}`}
           </p>
         )}
 
