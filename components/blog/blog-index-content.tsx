@@ -47,7 +47,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
           <FeaturedPost post={featured} />
         </SectionReveal>
 
-        <div className="sticky top-16 z-20 -mx-6 mt-14 border-y border-line/30 bg-bone/90 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
+        <div className="sticky top-20 z-20 -mx-6 mt-14 border-y border-line/30 bg-bone/90 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
           <div className="mx-auto flex max-w-[1400px] flex-wrap gap-3 md:gap-4">
             {filters.map((filter) => {
               const isActive = activeFilter === filter.key

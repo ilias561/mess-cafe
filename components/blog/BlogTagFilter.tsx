@@ -38,7 +38,7 @@ export default function BlogTagFilter({ posts }: BlogTagFilterProps) {
   return (
     <div>
       {/* Sticky tag filter bar */}
-      <div className="sticky top-16 z-20 -mx-6 border-y border-line/30 bg-bone/90 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
+      <div className="sticky top-20 z-20 -mx-6 border-y border-line/30 bg-bone/90 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
         <div className="mx-auto flex max-w-[1400px] flex-wrap gap-3">
           {PILLS.map(({ key, label }) => {
             const isActive = activeFilter === key

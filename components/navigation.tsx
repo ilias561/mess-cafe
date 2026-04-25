@@ -126,7 +126,8 @@ export default function Navigation() {
       const currentScrollY = window.scrollY
       if (currentScrollY < 120) {
         setIsVisible(true)
-      } else if (currentScrollY > lastScrollY) {
+      } else if (currentScrollY > lastScrollY && pathname === '/') {
+        // collapse nav on scroll-down only on the homepage; keep it pinned everywhere else
         setIsVisible(false)
       } else {
         setIsVisible(true)
@@ -136,7 +137,7 @@ export default function Navigation() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY])
+  }, [lastScrollY, pathname])
 
   // Body scroll lock when mobile menu open
   useEffect(() => {
@@ -150,6 +151,8 @@ export default function Navigation() {
 
   useEffect(() => {
     setMenuOpen(false)
+    // Ensure nav is visible when landing on any non-homepage route
+    if (pathname !== '/') setIsVisible(true)
   }, [pathname])
 
   // ESC closes mobile menu
