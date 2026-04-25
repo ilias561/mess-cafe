@@ -4,7 +4,6 @@ import AnchorScroll from '@/components/anchor-scroll'
 import NewsletterPopup from '@/components/newsletter-popup'
 import PageLoader from '@/components/page-loader'
 import RouteScrollTop from '@/components/route-scroll-top'
-import ScrollProgress from '@/components/scroll-progress'
 import SmoothScroll from '@/components/smooth-scroll'
 import WhatsAppFloat from '@/components/whatsapp-float'
 import './globals.css'
@@ -47,7 +46,6 @@ export default function RootLayout({
         <PageLoader />
         <RouteScrollTop />
         <AnchorScroll />
-        <ScrollProgress />
         <WhatsAppFloat />
         <NewsletterPopup />
         <SmoothScroll>{children}</SmoothScroll>
