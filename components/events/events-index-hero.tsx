@@ -48,7 +48,7 @@ export default function EventsIndexHero({
 
   return (
     <section className="px-6 pt-36 md:px-12 md:pt-44">
-      <div className="mx-auto grid max-w-[1400px] gap-10 md:grid-cols-[7fr_5fr] md:items-end md:gap-12">
+      <div className="mx-auto grid max-w-[1400px] gap-10 md:grid-cols-[7fr_5fr] md:items-start md:gap-12">
 
         <div>
           <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
