@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
-import EventsGrid from '@/components/events/events-grid'
-import EventsIndexHero from '@/components/events/events-index-hero'
 import Navigation from '@/components/navigation'
-import FooterSection from '@/components/footer-section'
+import EventsIndexHero from '@/components/events/events-index-hero'
+import UpcomingDatesMarquee from '@/components/events/upcoming-dates-marquee'
+import FeaturedNextEvent from '@/components/events/featured-next-event'
+import UpcomingSection from '@/components/events/upcoming-section'
+import ActionsManifesto from '@/components/events/actions-manifesto'
+import EventsArchiveList from '@/components/events/events-archive-list'
 import PreFooterCta from '@/components/pre-footer-cta'
+import FooterSection from '@/components/footer-section'
 import { getPastEvents, getUpcomingEvents } from '@/lib/events/events'
 import { getSettings } from '@/lib/settings'
 
@@ -16,12 +20,21 @@ export default function ActionsPage() {
   const settings = getSettings()
   const upcomingEvents = getUpcomingEvents()
   const pastEvents = getPastEvents()
+  const featured = upcomingEvents[0] ?? null
+  const restUpcoming = upcomingEvents.slice(1)
+
+  // When only 1 upcoming event exists it becomes the featured block AND appears in the grid
+  const gridEvents = restUpcoming.length > 0 ? restUpcoming : upcomingEvents
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <EventsIndexHero />
-      <EventsGrid upcomingEvents={upcomingEvents} pastEvents={pastEvents} />
+      <UpcomingDatesMarquee events={upcomingEvents} />
+      {featured && <FeaturedNextEvent event={featured} settings={settings} />}
+      <UpcomingSection events={gridEvents} />
+      <ActionsManifesto />
+      {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
       <PreFooterCta
         variant="charcoal"
         eyebrow="ΘΕΛΕΙΣ ΝΑ ΚΛΕΙΣΕΙΣ ΘΕΣΗ;"
