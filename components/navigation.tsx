@@ -15,7 +15,7 @@ const navLinks = [
   { label: 'Ποιοι είμαστε', href: '/#about-us', sectionId: 'about-us', isCta: false },
   { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
   { label: 'Οι δράσεις μας', href: '/actions', sectionId: null, isCta: false },
-  { label: 'Το μενού μας', href: '/menu', sectionId: null, isCta: false },
+  { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
   { label: 'Κράτηση για event', href: '/reservations', sectionId: null, isCta: true },
   { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
