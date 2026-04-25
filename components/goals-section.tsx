@@ -224,7 +224,7 @@ export default function GoalsSection() {
                   Κάθε Τετάρτη, ένα τραπέζι για όλους.
                 </h3>
                 <p className="mt-3 font-sans text-[14.5px] leading-relaxed text-bone/70">
-                  Community dinner στο M.E.S.S. — δωρεάν γεύμα, ανοιχτή κουβέντα, μουσική από μέλη της κοινότητας. Για όσους θέλουν να φάνε, να βοηθήσουν ή απλώς να μην είναι μόνοι τους.
+                  Κοινοτική βραδιά στο M.E.S.S. — ανοιχτή κουβέντα, μουσική από μέλη της κοινότητας, low beverage cocktails και crafted beers. Για όσους θέλουν να μοιραστούν τη βραδιά τους ή απλώς να μην είναι μόνοι τους.
                 </p>
                 <span className="mt-5 inline-flex items-center gap-2 font-sans text-[13px] font-medium text-mustard underline decoration-mustard/40 underline-offset-[5px] transition-all group-hover:decoration-mustard group-hover:underline-offset-[6px]">
                   Διάβασε περισσότερα
