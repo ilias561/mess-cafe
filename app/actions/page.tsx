@@ -23,8 +23,10 @@ export default function ActionsPage() {
   const featured = upcomingEvents[0] ?? null
   const restUpcoming = upcomingEvents.slice(1)
 
-  // When only 1 upcoming event exists it becomes the featured block AND appears in the grid
-  const gridEvents = restUpcoming.length > 0 ? restUpcoming : upcomingEvents
+  // Render UpcomingSection only when there are rest events to show, OR when
+  // there are no upcoming events at all (empty state). When exactly 1 event
+  // exists it's already covered by FeaturedNextEvent — no grid needed.
+  const showUpcomingSection = restUpcoming.length > 0 || upcomingEvents.length === 0
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
@@ -32,7 +34,7 @@ export default function ActionsPage() {
       <EventsIndexHero />
       <UpcomingDatesMarquee events={upcomingEvents} />
       {featured && <FeaturedNextEvent event={featured} settings={settings} />}
-      <UpcomingSection events={gridEvents} />
+      {showUpcomingSection && <UpcomingSection events={restUpcoming} />}
       <ActionsManifesto />
       {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
       <PreFooterCta
