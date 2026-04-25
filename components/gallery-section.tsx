@@ -178,6 +178,7 @@ function Lightbox({
       </button>
 
       {/* Prev */}
+      {items.length > 1 && (
       <button
         type="button"
         onClick={(e) => { e.stopPropagation(); onPrev() }}
@@ -186,8 +187,10 @@ function Lightbox({
       >
         <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
       </button>
+      )}
 
       {/* Next */}
+      {items.length > 1 && (
       <button
         type="button"
         onClick={(e) => { e.stopPropagation(); onNext() }}
@@ -196,6 +199,7 @@ function Lightbox({
       >
         <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
       </button>
+      )}
 
       {/* Image container */}
       <motion.div

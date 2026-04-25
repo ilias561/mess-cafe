@@ -138,7 +138,7 @@ function ReviewsCarousel() {
         </AnimatePresence>
       </div>
 
-      {/* Controls */}
+      {totalPages > 1 && (
       <div className="mt-8 flex items-center justify-between">
         <div className="flex gap-1.5">
           {Array.from({ length: totalPages }).map((_, i) => (
@@ -173,6 +173,7 @@ function ReviewsCarousel() {
           </button>
         </div>
       </div>
+      )}
     </div>
   )
 }

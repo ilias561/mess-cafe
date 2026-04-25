@@ -103,6 +103,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
               </motion.article>
             ))}
           </div>
+          {actionCards.length > 1 && (
           <div className="pointer-events-none absolute inset-y-0 left-0 right-0 hidden md:block">
             <button
               type="button"
@@ -123,6 +124,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-5 md:hidden">
