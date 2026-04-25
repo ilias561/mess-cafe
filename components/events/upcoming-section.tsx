@@ -1,31 +1,27 @@
 'use client'
 
-import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Link from 'next/link'
 import EventCard from '@/components/events/event-card'
 import SectionReveal from '@/components/section-reveal'
 import { EASE } from '@/lib/motion'
 import type { Event } from '@/lib/events/events'
 
-type Props = { events: Event[] }
+type Props = {
+  events: Event[]           // restUpcoming — never includes the featured event
+  activeCategory: string | null
+  proposeHref: string
+}
 
-export default function UpcomingSection({ events }: Props) {
-  const [activeLabel, setActiveLabel] = useState<string | null>(null)
-
-  const hasEvents = events.length > 0
-  // Filtering a single item is pointless — hide chips when ≤1 event
-  const showChips = events.length > 1
-
-  // Derive unique category labels from the actual event set (no phantom chips)
-  const presentLabels = [...new Set(events.map((e) => e.categoryLabel))]
-
-  const filtered = activeLabel
-    ? events.filter((e) => e.categoryLabel === activeLabel)
+export default function UpcomingSection({ events, activeCategory, proposeHref }: Props) {
+  const filtered = activeCategory
+    ? events.filter((e) => e.categoryLabel === activeCategory)
     : events
 
   return (
-    <section className="bg-bone px-6 py-20 md:px-12 md:py-28">
+    <section
+      id="upcoming"
+      className={`bg-bone px-6 md:px-12 ${events.length === 0 ? 'py-24 md:py-32' : 'py-20 md:py-28'}`}
+    >
       <div className="mx-auto max-w-[1400px]">
 
         <SectionReveal>
@@ -34,54 +30,33 @@ export default function UpcomingSection({ events }: Props) {
           </p>
         </SectionReveal>
 
-        {/* Category filter chips — only shown when >1 event, only with present categories */}
-        {showChips && (
-          <div className="mt-8 mb-10 flex flex-wrap gap-2">
-            <button
-              onClick={() => setActiveLabel(null)}
-              className={`rounded-full border px-[13px] py-[6px] font-sans text-[11px] tracking-[0.06em] transition-colors duration-150 ${
-                activeLabel === null
-                  ? 'border-charcoal bg-charcoal text-bone'
-                  : 'border-line text-charcoal hover:border-charcoal/40'
-              }`}
-            >
-              Όλες
-            </button>
-            {presentLabels.map((label) => (
-              <button
-                key={label}
-                onClick={() => setActiveLabel(label)}
-                className={`rounded-full border px-[13px] py-[6px] font-sans text-[11px] tracking-[0.06em] transition-colors duration-150 ${
-                  activeLabel === label
-                    ? 'border-charcoal bg-charcoal text-bone'
-                    : 'border-line text-charcoal hover:border-charcoal/40'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Grid or empty state */}
-        {!hasEvents ? (
-          <div className="mx-auto py-16 text-center" style={{ maxWidth: '36em' }}>
+        {events.length === 0 ? (
+          /* 3c empty state — programme is genuinely empty */
+          <div className="mx-auto mt-6 max-w-[36em] text-center">
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΣΥΝΤΟΜΑ</p>
-            <h2 className="mt-5 font-serif text-[clamp(24px,3.5vw,36px)] leading-[1.1] tracking-[-0.02em] text-charcoal">
-              Δεν υπάρχει προγραμματισμένη δράση αυτή τη στιγμή.
+            <h2 className="mt-6 font-serif text-[clamp(28px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
+              Δεν έχουμε προγραμματίσει δράση ακόμα.
             </h2>
-            <p className="mt-5 font-sans text-[14px] leading-[1.65] text-concrete md:text-[15px]">
-              Όταν στήσουμε την επόμενη — workshop, βραδιά, παρουσίαση — θα εμφανιστεί εδώ αυτόματα. Στο μεταξύ, βρες μας στον χώρο για καφέ.
+            <p className="mt-6 font-sans text-[15px] leading-[1.7] text-concrete">
+              Στήνουμε σιγά σιγά τα επόμενα — workshops, μουσικές βραδιές, παρουσιάσεις, συνεργασίες. Όταν κλειδώσουν, θα εμφανιστούν εδώ αυτόματα. Στο μεταξύ, μπορείς να μας προτείνεις κάτι ή απλά να περάσεις από τον χώρο για καφέ.
             </p>
-            <Link
-              href="/#contact"
-              className="mt-5 inline-block font-sans text-[14px] text-charcoal underline decoration-terracotta underline-offset-[5px] transition-opacity hover:opacity-70"
-            >
-              Δες πού είμαστε →
-            </Link>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <a
+                href={proposeHref}
+                className="font-sans text-[14px] text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
+              >
+                Πρότεινε δράση →
+              </a>
+              <a
+                href="/#contact"
+                className="font-sans text-[14px] text-charcoal underline decoration-mustard underline-offset-[5px] hover:decoration-2"
+              >
+                Δες πού είμαστε →
+              </a>
+            </div>
           </div>
         ) : filtered.length > 0 ? (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
             <AnimatePresence mode="popLayout">
               {filtered.map((event) => (
                 <motion.div
@@ -97,15 +72,15 @@ export default function UpcomingSection({ events }: Props) {
             </AnimatePresence>
           </div>
         ) : (
-          <p className="py-12 font-sans text-[14px] text-concrete">
+          <p className="mt-10 py-12 font-sans text-[14px] text-concrete">
             Καμία δράση σε αυτή την κατηγορία αυτή τη στιγμή.
           </p>
         )}
 
-        {/* Filter status indicator — only when a specific category is active */}
-        {hasEvents && activeLabel !== null && (
+        {/* Filter indicator — only when a category is active */}
+        {events.length > 0 && activeCategory !== null && (
           <p className="mt-10 font-sans text-[11px] uppercase tracking-[0.2em] text-concrete">
-            {`ΦΙΛΤΡΟ · ${activeLabel.toUpperCase()}`}
+            {`ΦΙΛΤΡΟ · ${activeCategory.toUpperCase()}`}
           </p>
         )}
 
