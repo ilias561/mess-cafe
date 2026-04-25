@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
@@ -24,6 +24,7 @@ const stats: ReadonlyArray<{ key: string; label: string; value: string }> = [
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const parallaxContainerRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
   const [isHeroVisible, setIsHeroVisible] = useState(true)
@@ -31,9 +32,24 @@ export default function Hero() {
   const [mediaPhase, setMediaPhase] = useState<'poster' | 'video' | 'hold' | 'photos'>('poster')
   const [slideIndex, setSlideIndex] = useState(0)
 
-  const { scrollY } = useScroll()
-  const parallaxRatio = isMobile ? 0.02 : 0.04
-  const videoParallaxY = useTransform(scrollY, (v) => reducedMotion ? 0 : v * parallaxRatio)
+  useEffect(() => {
+    const el = parallaxContainerRef.current
+    if (!el) return
+    let rafId = 0
+    const update = () => {
+      const ratio = isMobile ? 0.02 : 0.04
+      el.style.transform = reducedMotion ? '' : `translateY(${window.scrollY * ratio}px)`
+    }
+    const onScroll = () => {
+      cancelAnimationFrame(rafId)
+      rafId = requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(rafId)
+    }
+  }, [isMobile, reducedMotion])
 
   useEffect(() => {
     const mediaMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -231,12 +247,10 @@ export default function Hero() {
 
         {/* RIGHT COLUMN — photo/video */}
         <div className="relative min-h-[60vh] md:min-h-0">
-          <motion.div
-            style={{
-              y: videoParallaxY,
-              background: imagePlaceholder(),
-            }}
-            className="absolute inset-0"
+          <div
+            ref={parallaxContainerRef}
+            style={{ background: imagePlaceholder() }}
+            className="absolute inset-0 will-change-transform"
           >
             <AnimatePresence mode="wait">
               {(mediaPhase === 'video' || mediaPhase === 'hold' || mediaPhase === 'poster') && !reducedMotion ? (
@@ -276,7 +290,7 @@ export default function Hero() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
         </div>
 
       </div>

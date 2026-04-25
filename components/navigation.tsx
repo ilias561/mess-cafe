@@ -1,18 +1,13 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import {
-  AnimatePresence,
-  LayoutGroup,
-  motion,
-} from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, Phone, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getOpenStatus } from '@/lib/hours'
 import { EASE } from '@/lib/motion'
 
-const UNDERLINE_ID = 'nav-active-line'
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
 const navLinks = [
@@ -228,11 +223,10 @@ export default function Navigation() {
             <span className="font-serif text-[22px] font-medium tracking-tight">M.E.S.S.</span>
           </Link>
 
-          <LayoutGroup id="desktop-nav">
-            <nav
-              className={`hidden items-center lg:flex ${navTextColor}`}
-              aria-label="Κύρια πλοήγηση"
-            >
+          <nav
+            className={`hidden items-center lg:flex ${navTextColor}`}
+            aria-label="Κύρια πλοήγηση"
+          >
               {navLinks.map((link) => {
                 const isHomeAnchor = link.href.startsWith('/#')
                 const isRouteActive = !isHomeAnchor && (
@@ -280,16 +274,16 @@ export default function Navigation() {
 
                     {isActive && (
                       <motion.span
-                        layoutId={UNDERLINE_ID}
                         className="absolute -bottom-1 left-0 right-0 h-px bg-mustard"
-                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
                       />
                     )}
                   </Link>
                 )
               })}
-            </nav>
-          </LayoutGroup>
+          </nav>
 
           <div className="ml-auto flex shrink-0 items-center gap-2">
             <OpenBadge light={false} showText className="hidden min-[1200px]:flex" />

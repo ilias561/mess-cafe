@@ -90,7 +90,7 @@ function GalleryCard({
         }
       }}
     >
-      <motion.div layoutId={`gallery-image-${item.id}`} className="absolute inset-0">
+      <motion.div className="absolute inset-0">
         <Image
           src={item.src}
           alt={item.alt}
@@ -208,7 +208,6 @@ function Lightbox({
         transition={{ duration: 0.3, ease: EASE }}
       >
         <motion.div
-          layoutId={`gallery-image-${item.id}`}
           className="relative max-h-[80vh] w-auto overflow-hidden rounded-[2px]"
           style={{ aspectRatio: '4/3', maxWidth: 'min(85vw, 1100px)' }}>
           <Image
