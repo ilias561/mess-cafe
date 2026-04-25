@@ -7,9 +7,12 @@ export default function RouteScrollTop() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // If navigating to an anchor (hash present), let AnchorScroll handle it
+    // Let AnchorScroll handle hash navigations
     if (window.location.hash) return
-    window.scrollTo({ top: 0, behavior: 'auto' })
+    // Do not override scroll restoration on browser back/forward
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+    if (nav?.type === 'back_forward') return
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname])
 
   return null
