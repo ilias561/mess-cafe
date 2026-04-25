@@ -160,7 +160,7 @@ export default function Hero() {
                 transition={{ duration: 0.45, ease: EASE }}
                 className="font-sans text-[11px] tracking-[0.2em] text-charcoal"
               >
-                SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA
+                SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING
               </motion.p>
 
               <h1 className="hero-headline mt-5 font-serif tracking-tight text-balance text-charcoal [text-shadow:0_3px_14px_rgba(255,255,255,0.35)]">
