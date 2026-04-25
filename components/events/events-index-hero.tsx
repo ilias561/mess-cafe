@@ -30,8 +30,8 @@ export default function EventsIndexHero() {
         <MaskReveal className="relative mx-auto w-full max-w-[420px] md:mx-0 md:max-w-none" delay={0.2}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
             <Image
-              src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&q=80&auto=format&fit=crop"
-              alt="Ζεστό στιγμιότυπο live μουσικής σε μικρό χώρο"
+              src="/images/about-2.jpg"
+              alt="Εσωτερικό του M.E.S.S. — το δωμάτιο όπου στήνονται οι δράσεις."
               fill
               sizes="(min-width: 768px) 34vw, 92vw"
               className="object-cover"
