@@ -5,6 +5,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'date-fns', 'recharts'],
+  },
   images: {
     unoptimized: true,
     remotePatterns: [
