@@ -146,7 +146,6 @@ function Lightbox({
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose, onPrev, onNext])
 
-  // Lock scroll (works alongside Lenis)
   useEffect(() => {
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
