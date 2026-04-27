@@ -34,6 +34,7 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 420px"
             className={`object-cover transition-[transform,filter] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.05] group-hover/card:[filter:sepia(0.15)_saturate(1.1)] ${dimmed ? 'opacity-70' : ''}`}
+            style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/20 to-transparent" />
           <div className="absolute left-4 top-4 rounded-full bg-bone/95 px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.16em] text-charcoal">

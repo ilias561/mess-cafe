@@ -27,6 +27,7 @@ export default function ActionSpotlight({ event }: Props) {
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, 42vw"
+                style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
               />
             </div>
           </Link>

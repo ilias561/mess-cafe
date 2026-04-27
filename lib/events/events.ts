@@ -12,6 +12,7 @@ export type Event = {
   categoryLabel: string
   coverImage: string
   coverAlt: string
+  coverObjectPosition?: string
   date: string
   endDate?: string
   location: string

@@ -10,11 +10,12 @@ import GallerySection from '@/components/gallery-section'
 import ReviewsSection from '@/components/reviews-section'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
-import { getAllEvents, getEventBySlug } from '@/lib/events/events'
+import { getAllEvents, getEventBySlug, type Event } from '@/lib/events/events'
 
 export default function Home() {
-  const keepRising = getEventBySlug('keep-rising-bazaar')
-  const actionCards = keepRising ? [keepRising] : []
+  const keepRisingBazaar = getEventBySlug('keep-rising-bazaar')
+  const keepRisingDelivery = getEventBySlug('keep-rising-ceramics')
+  const actionCards = [keepRisingBazaar, keepRisingDelivery].filter((e): e is Event => !!e)
   const events = getAllEvents()
 
   return (
