@@ -102,19 +102,50 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
         </div>
 
         <motion.div
-          className="relative mt-16 h-[360px] w-full overflow-hidden rounded-2xl border border-bone/10"
+          id="map"
+          className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.75, ease: EASE }}
         >
-          <iframe
-            title="M.E.S.S. — χάρτης τοποθεσίας"
-            src={mapEmbedSrc}
-            className="absolute inset-0 h-full w-full border-0 opacity-80 grayscale"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {/* Street-view video thumbnail — links to Google Maps video */}
+          <a
+            href="https://www.google.com/maps/place/M.E.S.S./@39.6624739,20.8602479,3a,75y,90t/data=!3m8!1e5!3m6!1sCIHM0ogKEICAgMDohajpTw!2e10!3e10!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X%3Dw203-h114-k-no!7i960!8i540!4m11!1m2!2m1!1zzpnPic6szr3Ovc65zr3OsSBtZXNz!3m7!1s0x135be9a182aaef6f:0x8faae1439da23f07!8m2!3d39.6624739!4d20.8602479!10e5!15sChXOmc-JzqzOvc69zrnOvc6xIG1lc3NaFyIVzrnPic6szr3Ovc65zr3OsSBtZXNzkgELY29mZmVlX3Nob3DgAQA!16s%2Fg%2F11wvls4by2?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative h-[360px] overflow-hidden rounded-2xl border border-bone/10 block"
+            aria-label="Δες το M.E.S.S. σε Street View"
+          >
+            {/* Thumbnail image from Google Maps */}
+            <img
+              src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X=w960-h540-k-no"
+              alt="Street View του M.E.S.S."
+              className="absolute inset-0 h-full w-full object-cover opacity-80 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+            />
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-charcoal/30 transition-opacity duration-300 group-hover:bg-charcoal/10" />
+            {/* Play button */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-bone/20 backdrop-blur-sm ring-2 ring-bone/40 transition-transform duration-300 group-hover:scale-110">
+                <svg className="ml-1 h-6 w-6 text-bone" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-bone/80">Street View</p>
+            </div>
+          </a>
+
+          {/* Map iframe */}
+          <div className="relative h-[360px] overflow-hidden rounded-2xl border border-bone/10">
+            <iframe
+              title="M.E.S.S. — χάρτης τοποθεσίας"
+              src={mapEmbedSrc}
+              className="absolute inset-0 h-full w-full border-0 opacity-80 grayscale"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </motion.div>
 
         <motion.div

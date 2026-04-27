@@ -22,8 +22,7 @@ export default function ActionsShell({
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
 
   const nextEvent = upcomingEvents[0] ?? null
-  // No /contact route exists — resolve to mailto
-  const proposeHref = `mailto:${settings.email}`
+  const proposeHref = '/reservations'
   const showUpcomingSection = restUpcoming.length > 0 || upcomingEvents.length === 0
 
   return (

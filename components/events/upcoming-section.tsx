@@ -48,7 +48,7 @@ export default function UpcomingSection({ events, activeCategory, proposeHref }:
                 Πρότεινε δράση →
               </a>
               <a
-                href="/#contact"
+                href="/#map"
                 className="font-sans text-[14px] text-charcoal underline decoration-mustard underline-offset-[5px] hover:decoration-2"
               >
                 Δες πού είμαστε →

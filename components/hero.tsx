@@ -213,7 +213,7 @@ export default function Hero() {
                   Δες το menu
                 </Link>
                 <Link
-                  href="#contact"
+                  href="#map"
                   className="relative inline-block font-sans text-sm font-medium text-charcoal"
                 >
                   <motion.span
