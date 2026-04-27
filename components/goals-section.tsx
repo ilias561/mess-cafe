@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
-import { images } from '@/lib/images'
 
 const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
 
@@ -190,7 +189,7 @@ export default function GoalsSection() {
           </motion.div>
         </div>
 
-        {/* ── RIGHT: 5 cols — article card ── */}
+        {/* ── RIGHT: 5 cols — Keep Rising IG post card ── */}
         <div className="md:col-span-5">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -198,42 +197,63 @@ export default function GoalsSection() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.9, ease: EASE_TUPLE }}
           >
-            <Link
-              href="/actions"
-              aria-label="Διάβασε για τις δράσεις της κοινότητας M.E.S.S."
-              className="group block overflow-hidden border border-bone/15 bg-bone/[0.04] backdrop-blur-[2px] transition-all duration-300 hover:border-mustard/60 hover:bg-bone/[0.07]"
-            >
-              {/* Photo */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
-                <Image
-                  src={images.gallery3}
-                  alt="Δράσεις της κοινότητας M.E.S.S."
-                  fill
-                  unoptimized
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  className="object-cover transition-all duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
+            {/* Photo */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
+              <Image
+                src="/images/keep-rising.jpg"
+                alt="Η ομάδα του M.E.S.S. με τις προσφορές του μπαζάρ Keep Rising για τη μονή Ντουραχάνι"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
 
-              {/* Article text */}
-              <div className="px-6 py-6 md:px-7 md:py-7">
-                <p className="font-sans text-[10px] uppercase tracking-[0.22em] text-mustard">
-                  ΔΡΑΣΗ · ΚΟΙΝΟΤΗΤΑ
-                </p>
-                <h3 className="mt-3 font-serif text-[26px] leading-[1.1] tracking-tight text-bone md:text-[28px]">
-                  Κάθε Τετάρτη, ένα τραπέζι για όλους.
-                </h3>
-                <p className="mt-3 font-sans text-[14.5px] leading-relaxed text-bone/70">
-                  Κοινοτική βραδιά στο M.E.S.S. — ανοιχτή κουβέντα, μουσική από μέλη της κοινότητας, low beverage cocktails και crafted beers. Για όσους θέλουν να μοιραστούν τη βραδιά τους ή απλώς να μην είναι μόνοι τους.
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 font-sans text-[13px] font-medium text-mustard underline decoration-mustard/40 underline-offset-[5px] transition-all group-hover:decoration-mustard group-hover:underline-offset-[6px]">
-                  Διάβασε περισσότερα
-                  <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5" aria-hidden>
-                    <path d="M3 8h10M8 3l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-              </div>
-            </Link>
+            {/* Eyebrow row */}
+            <div className="mt-5 flex items-center gap-3">
+              <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-terracotta" aria-hidden />
+              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+                8 ΜΑΡΤΙΟΥ · #KEEPRISING
+              </p>
+            </div>
+
+            {/* Caption */}
+            <div className="mt-4 max-w-[40em] font-sans text-[14px] leading-[1.7] text-concrete">
+              <p>Ένα μεγάλο ευχαριστώ σε όλους όσους στήριξαν το μπαζάρ μας με την παρουσία και την αγάπη τους. 🖤</p>
+              <p className="mt-3">Χάρη σε εσάς καταφέραμε να προσφέρουμε για φιλανθρωπικό σκοπό παπούτσια, φρούτα, λαχανικά και χαρτικά είδη στα παιδάκια που φιλοξενεί η μονή Ντουραχάνι.</p>
+              <p className="mt-3">Με το Keep Rising προσπαθούμε μέσα από τέτοιες δράσεις να περνάμε αξίες προσφοράς και αλληλεγγύης.</p>
+              <p className="mt-3">Ευχαριστούμε θερμά και τους συνεργάτες μας για τη στήριξη.</p>
+            </div>
+
+            {/* Mentions */}
+            <p className="mt-4 font-sans text-[13px] leading-[1.6] text-charcoal">
+              <a href="https://www.instagram.com/cage.thrift/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@cage.thrift</a>{' '}
+              <a href="https://www.instagram.com/rare_pair_kicks/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@rare_pair_kicks</a>{' '}
+              <a href="https://www.instagram.com/coolwolf_store/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@coolwolf_store</a>{' '}
+              <a href="https://www.instagram.com/vintagecloset_skg/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@vintagecloset_skg</a>{' '}
+              <a href="https://www.instagram.com/planet_m_jewelry/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@planet_m_jewelry</a>{' '}
+              <a href="https://www.instagram.com/tane_twatattoo/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@tane_twatattoo</a>{' '}
+              <a href="https://www.instagram.com/asanakis._/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@asanakis._</a>{' '}
+              <a href="https://www.instagram.com/apostolos_cortez/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@apostolos_cortez</a>{' '}
+              <a href="https://www.instagram.com/_karydis/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@_karydis</a>
+            </p>
+
+            {/* Hashtags */}
+            <p className="mt-3 font-sans text-[13px] text-olive">
+              <a href="https://www.instagram.com/explore/tags/messioannina/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">#messioannina</a>{' '}
+              <a href="https://www.instagram.com/explore/tags/keeprising/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">#keeprising</a>
+            </p>
+
+            {/* Footer link */}
+            <div className="mt-6">
+              <a
+                href="https://www.instagram.com/p/DVn6qGhlgVW/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
+              >
+                Δες την ανάρτηση στο Instagram →
+              </a>
+            </div>
           </motion.div>
         </div>
 
