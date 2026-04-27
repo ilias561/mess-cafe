@@ -148,8 +148,8 @@ export default function EventsIndexHero({
           </motion.div>
         </div>
 
-        {/* Right: photo with optional date tag */}
-        <MaskReveal className="relative mx-auto w-full max-w-[420px] md:mx-0 md:max-w-none" delay={0.2}>
+        {/* Right: photo with optional date tag — hidden on mobile to avoid blank clip-path space */}
+        <MaskReveal className="relative mx-auto hidden w-full max-w-[420px] md:mx-0 md:block md:max-w-none" delay={0.2}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
             <Image
               src="/images/about-2.jpg"
