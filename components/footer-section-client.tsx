@@ -121,6 +121,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             <img
               src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X=w960-h540-k-no"
               alt="Street View του M.E.S.S."
+              loading="lazy"
               className="absolute inset-0 h-full w-full object-cover opacity-80 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
             />
             {/* Dark overlay */}

@@ -83,7 +83,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
             </>
           ) : (
             <>
-              <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Today we recommend:</p>
+              <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Προτείνουμε σήμερα:</p>
               {fallbackEvent ? (
                 <div className="space-y-2">
                   <p className="font-serif text-xl leading-tight text-charcoal">{fallbackEvent.title}</p>

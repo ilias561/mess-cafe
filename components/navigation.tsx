@@ -32,12 +32,12 @@ function OpenBadge({
 }) {
   const status = getOpenStatus()
   const dotColor = status.open
-    ? 'bg-[#4da35a]'
-    : 'bg-[#d29e4f]'
+    ? 'bg-green-600'
+    : 'bg-mustard'
   const textColor = light
     ? 'text-bone/90'
     : 'text-charcoal/80'
-  const pulseColor = status.open ? 'bg-[#6ec67b]' : 'bg-[#d29e4f]'
+  const pulseColor = status.open ? 'bg-green-400' : 'bg-mustard'
   const titleText = status.label
 
   return (
@@ -216,7 +216,7 @@ export default function Navigation() {
       </a>
 
       <motion.header
-        className={`fixed top-0 right-0 left-0 z-50 h-20 transition-all duration-350 ease-in-out ${headerClasses}`}
+        className={`fixed top-0 right-0 left-0 z-50 h-20 transition-all duration-300 ease-in-out ${headerClasses}`}
         animate={{ y: isVisible ? 0 : -120 }}
         transition={{ duration: 0.3, ease: EASE }}
       >

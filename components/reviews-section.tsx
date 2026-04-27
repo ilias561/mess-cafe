@@ -38,13 +38,13 @@ function initials(name: string) {
 }
 
 const AVATAR_PALETTES = [
-  'bg-[#e8b547] text-charcoal',      // mustard
-  'bg-[#3d4a2a] text-bone',           // olive
-  'bg-[#b54f2a] text-bone',           // terracotta
-  'bg-[#2a1d14] text-bone',           // espresso
-  'bg-[#4285F4] text-white',          // google blue
-  'bg-[#34A853] text-white',          // google green
-  'bg-[#EA4335] text-white',          // google red
+  'bg-mustard text-charcoal',
+  'bg-olive text-bone',
+  'bg-terracotta text-bone',
+  'bg-espresso text-bone',
+  'bg-[#4285F4] text-white',
+  'bg-[#34A853] text-white',
+  'bg-[#EA4335] text-white',
 ]
 
 function avatarColor(name: string) {
@@ -146,17 +146,19 @@ function ReviewsCarousel() {
               key={i}
               onClick={() => setIndex(i)}
               aria-label={`Σελίδα ${i + 1}`}
-              className={`h-0.5 rounded-full transition-all duration-500 ${
+              className="flex items-center py-3 px-0.5"
+            >
+              <span className={`block h-0.5 rounded-full transition-all duration-500 ${
                 i === index ? 'w-8 bg-mustard' : 'w-3 bg-bone/25 hover:bg-bone/45'
-              }`}
-            />
+              }`} />
+            </button>
           ))}
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => setIndex((i) => (i - 1 + totalPages) % totalPages)}
             aria-label="Προηγούμενο"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-bone/60 transition hover:bg-white/15 hover:text-mustard"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8 text-bone/60 transition hover:bg-white/15 hover:text-mustard"
           >
             <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.5">
               <path d="M10 3L5 8l5 5" strokeLinecap="round" strokeLinejoin="round" />
@@ -165,7 +167,7 @@ function ReviewsCarousel() {
           <button
             onClick={() => setIndex((i) => (i + 1) % totalPages)}
             aria-label="Επόμενο"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-bone/60 transition hover:bg-white/15 hover:text-mustard"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8 text-bone/60 transition hover:bg-white/15 hover:text-mustard"
           >
             <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.5">
               <path d="M6 3l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />

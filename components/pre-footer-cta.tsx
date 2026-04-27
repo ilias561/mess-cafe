@@ -31,11 +31,11 @@ const variantStyles = {
     secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
   },
   charcoal: {
-    bg: 'bg-mustard',
-    text: 'text-charcoal',
-    eyebrow: 'text-espresso',
-    primary: 'bg-charcoal text-bone hover:bg-espresso',
-    secondary: 'border-charcoal text-charcoal hover:bg-charcoal hover:text-bone',
+    bg: 'bg-charcoal',
+    text: 'text-bone',
+    eyebrow: 'text-mustard/80',
+    primary: 'bg-mustard text-charcoal hover:bg-amber',
+    secondary: 'border-bone/30 text-bone hover:border-bone/60',
   },
 }
 

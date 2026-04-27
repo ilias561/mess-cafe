@@ -151,7 +151,7 @@ export default function Hero() {
       <div className="grid min-h-screen grid-cols-1 md:grid-cols-[42%_58%]">
 
         {/* LEFT COLUMN — text */}
-        <div className="relative z-20 flex items-end bg-white">
+        <div className="relative z-20 flex items-end bg-bone">
           <div className="mx-auto w-full max-w-[520px] px-6 py-16 md:px-10 md:py-20 lg:px-14 lg:py-24">
             <div className="relative">
               <motion.p
@@ -295,7 +295,7 @@ export default function Hero() {
 
       </div>
 
-      <div className="pointer-events-none absolute bottom-8 left-6 z-30 flex items-start gap-3 md:left-12">
+      <div className="pointer-events-none absolute bottom-8 left-6 z-30 hidden items-start gap-3 md:flex md:left-12">
         <span className="pt-1 font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal">
           SCROLL
         </span>

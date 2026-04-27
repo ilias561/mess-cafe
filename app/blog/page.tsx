@@ -48,7 +48,7 @@ export default function BlogPage() {
         heading="Ακολούθησέ μας."
         body="Ό,τι συμβαίνει στο M.E.S.S. — νέα events, νέα στο μενού, ιστορίες από την κουζίνα — πρώτα στο Instagram."
         primaryLabel="Instagram"
-        primaryHref="https://instagram.com/messcafe"
+        primaryHref="https://www.instagram.com/m.e.s.s._ioannina/"
         secondaryLabel="Ποιοι είμαστε"
         secondaryHref="/#about-us"
       />

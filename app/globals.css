@@ -134,6 +134,10 @@
   html {
     scroll-behavior: auto;
   }
+  #hero,
+  .marquee-track {
+    animation: none !important;
+  }
 }
 
 /* CSS-only hero reveal — fires before Framer Motion hydrates so the page

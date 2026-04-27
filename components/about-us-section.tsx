@@ -79,8 +79,8 @@ const stats = [
   },
   {
     id: 'hours',
-    renderValue: () => <>08—23</>,
-    label: 'ΔΕΥ–ΠΑΡ / ΣΑΒ–ΚΥΡ 09–24',
+    renderValue: () => <>08—22</>,
+    label: '7 ημέρες την εβδομάδα',
   },
   {
     id: 'location',

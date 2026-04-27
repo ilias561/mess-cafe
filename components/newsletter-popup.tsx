@@ -190,7 +190,7 @@ export default function NewsletterPopup() {
                   {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
                 </button>
                 {status === 'error' && (
-                  <p className="font-sans text-[12px] text-[#b42318]">{error}</p>
+                  <p className="font-sans text-[12px] text-red-700">{error}</p>
                 )}
               </form>
             )}
