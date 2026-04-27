@@ -2,9 +2,6 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', 'date-fns', 'recharts'],
   },

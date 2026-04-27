@@ -31,6 +31,9 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   return {
     title: `${post.title} — Blog | M.E.S.S.`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
       title: `${post.title} — Blog | M.E.S.S.`,
       description: post.excerpt,
@@ -39,6 +42,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       authors: [post.author.name],
       images: [{ url: post.cover, alt: post.coverAlt }],
       locale: 'el_GR',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.title} — Blog | M.E.S.S.`,
+      description: post.excerpt,
+      images: [post.cover],
     },
   }
 }
@@ -53,8 +62,29 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const canonicalUrl = `https://mess-cafe.gr/blog/${post.slug}`
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.cover,
+    url: canonicalUrl,
+    datePublished: post.publishedAt,
+    author: {
+      '@type': 'Person',
+      name: post.author.name,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'M.E.S.S.',
+      url: 'https://mess-cafe.gr',
+    },
+    inLanguage: 'el',
+  }
+
   return (
     <main id="main-content" className="bg-bone text-charcoal">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navigation />
       <PostHero post={post} />
       <PostBody markdown={post.body} />

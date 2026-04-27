@@ -241,7 +241,7 @@ export default function Navigation() {
                   ? activeSection === link.sectionId
                   : false
                 const isActive = isRouteActive || isAnchorActive
-                const shiftRightCluster = link.label === 'Το μενού μας'
+                const shiftRightCluster = link.isCta
                 return (
                   <Link
                     key={link.href}

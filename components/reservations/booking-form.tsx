@@ -110,24 +110,24 @@ export default function BookingForm({ events }: BookingFormProps) {
             <label htmlFor="name" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
               Ονοματεπώνυμο
             </label>
-            <input id="name" type="text" {...register('name')} className={INPUT_CLASSNAME} />
-            {errors.name ? <p className="mt-2 font-sans text-[12px] text-concrete">{errors.name.message}</p> : null}
+            <input id="name" type="text" autoComplete="name" aria-describedby={errors.name ? 'name-error' : undefined} {...register('name')} className={INPUT_CLASSNAME} />
+            {errors.name ? <p id="name-error" role="alert" className="mt-2 font-sans text-[12px] text-concrete">{errors.name.message}</p> : null}
           </div>
 
           <div>
             <label htmlFor="email" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
               Email
             </label>
-            <input id="email" type="email" {...register('email')} className={INPUT_CLASSNAME} />
-            {errors.email ? <p className="mt-2 font-sans text-[12px] text-concrete">{errors.email.message}</p> : null}
+            <input id="email" type="email" autoComplete="email" aria-describedby={errors.email ? 'email-error' : undefined} {...register('email')} className={INPUT_CLASSNAME} />
+            {errors.email ? <p id="email-error" role="alert" className="mt-2 font-sans text-[12px] text-concrete">{errors.email.message}</p> : null}
           </div>
 
           <div>
             <label htmlFor="phone" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
               Τηλέφωνο
             </label>
-            <input id="phone" type="tel" {...register('phone')} className={INPUT_CLASSNAME} />
-            {errors.phone ? <p className="mt-2 font-sans text-[12px] text-concrete">{errors.phone.message}</p> : null}
+            <input id="phone" type="tel" autoComplete="tel" aria-describedby={errors.phone ? 'phone-error' : undefined} {...register('phone')} className={INPUT_CLASSNAME} />
+            {errors.phone ? <p id="phone-error" role="alert" className="mt-2 font-sans text-[12px] text-concrete">{errors.phone.message}</p> : null}
           </div>
 
           <div>
@@ -137,7 +137,7 @@ export default function BookingForm({ events }: BookingFormProps) {
             >
               Είδος εκδήλωσης
             </label>
-            <select id="eventType" {...register('eventType')} disabled={eventLocked} className={INPUT_CLASSNAME}>
+            <select id="eventType" {...register('eventType')} disabled={eventLocked} aria-describedby={errors.eventType ? 'eventType-error' : undefined} className={`${INPUT_CLASSNAME} appearance-none`}>
               {!eventLocked ? <option value="">Επίλεξε είδος</option> : null}
               <option value="Workshop">Workshop</option>
               <option value="Live μουσική">Live μουσική</option>
@@ -146,7 +146,7 @@ export default function BookingForm({ events }: BookingFormProps) {
               <option value="Άλλο">Άλλο</option>
               {eventLocked && defaultEventTitle ? <option value={defaultEventTitle}>{defaultEventTitle}</option> : null}
             </select>
-            {errors.eventType ? <p className="mt-2 font-sans text-[12px] text-concrete">{errors.eventType.message}</p> : null}
+            {errors.eventType ? <p id="eventType-error" role="alert" className="mt-2 font-sans text-[12px] text-concrete">{errors.eventType.message}</p> : null}
           </div>
 
           <div>

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -16,6 +17,7 @@ const mapEmbedSrc = 'https://www.google.com/maps?q=Archbishop+Makariou+11+45221+
 
 export default function FooterSectionClient({ settings }: FooterSectionClientProps) {
   const primaryPhoneHref = settings.phone.replace(/\s+/g, '')
+  const [mapConsent, setMapConsent] = useState(false)
 
   return (
     <footer id="footer" className="bg-charcoal px-6 pt-24 pb-0 text-bone md:px-12">
@@ -137,15 +139,34 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             </div>
           </a>
 
-          {/* Map iframe */}
+          {/* Map — consent gate (GDPR: Google Maps sets cookies on load) */}
           <div className="relative h-[360px] overflow-hidden rounded-2xl border border-bone/10">
-            <iframe
-              title="M.E.S.S. — χάρτης τοποθεσίας"
-              src={mapEmbedSrc}
-              className="absolute inset-0 h-full w-full border-0 opacity-80 grayscale"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            {mapConsent ? (
+              <iframe
+                title="M.E.S.S. — χάρτης τοποθεσίας"
+                src={mapEmbedSrc}
+                className="absolute inset-0 h-full w-full border-0 opacity-80 grayscale"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center gap-4 bg-charcoal/60 px-6 text-center">
+                <svg className="h-8 w-8 text-bone/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                <p className="max-w-[28ch] font-sans text-[13px] leading-relaxed text-bone/60">
+                  Ο χάρτης χρησιμοποιεί cookies τρίτων (Google Maps). Κάνε κλικ για φόρτωση.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setMapConsent(true)}
+                  className="rounded-full border border-bone/25 px-5 py-2 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/70 transition-colors hover:border-bone/50 hover:text-bone"
+                >
+                  Φόρτωση χάρτη
+                </button>
+              </div>
+            )}
           </div>
         </motion.div>
 

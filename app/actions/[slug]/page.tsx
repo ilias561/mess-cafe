@@ -30,12 +30,21 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
   return {
     title: `${event.title} — Δράσεις | M.E.S.S.`,
     description: event.description,
+    alternates: {
+      canonical: `/actions/${event.slug}`,
+    },
     openGraph: {
       title: `${event.title} — Δράσεις | M.E.S.S.`,
       description: event.description,
       type: 'article',
       locale: 'el_GR',
       images: [{ url: event.coverImage, alt: event.coverAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${event.title} — Δράσεις | M.E.S.S.`,
+      description: event.description,
+      images: [event.coverImage],
     },
   }
 }
@@ -46,8 +55,36 @@ export default async function EventPage({ params }: EventPageProps) {
 
   if (!event) notFound()
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    description: event.description,
+    image: event.coverImage,
+    url: `https://mess-cafe.gr/actions/${event.slug}`,
+    startDate: event.date,
+    location: {
+      '@type': 'Place',
+      name: event.location || 'M.E.S.S.',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Ναπολέοντος Ζέρβα 12',
+        addressLocality: 'Ιωάννινα',
+        postalCode: '45332',
+        addressCountry: 'GR',
+      },
+    },
+    organizer: {
+      '@type': 'Organization',
+      name: 'M.E.S.S.',
+      url: 'https://mess-cafe.gr',
+    },
+    inLanguage: 'el',
+  }
+
   return (
     <main id="main-content" className="bg-bone text-charcoal">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navigation />
       <EventHero event={event} />
       <PostBody markdown={event.body} />
