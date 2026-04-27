@@ -1,76 +1,71 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
-import { formatGreekDate, formatGreekTime } from '@/lib/format-date'
-import ParallaxImage from '@/components/parallax-image'
+import { formatGreekDate } from '@/lib/format-date'
 import type { Event } from '@/lib/events/events'
 
-type EventHeroProps = {
-  event: Event
-}
-
-export default function EventHero({ event }: EventHeroProps) {
+export default function EventHero({ event }: { event: Event }) {
   return (
-    <section>
-      <div className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
-        <ParallaxImage
-          src={event.coverImage}
-          alt={event.coverAlt}
-          fill
-          priority
-          sizes="100vw"
-          style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
-        <div className="absolute inset-x-0 top-0 px-6 pt-6 md:px-12 md:pt-8">
-          <div className="mx-auto max-w-[1400px]">
-            <Link
-              href="/actions"
-              className="inline-flex items-center gap-2 rounded-full border border-bone/30 bg-bone/10 px-4 py-2 font-sans text-[12px] uppercase tracking-[0.16em] text-bone backdrop-blur-sm transition-all duration-150 hover:bg-bone/20"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              Δράσεις
-            </Link>
+    <section className="bg-bone px-6 pb-16 pt-8 md:px-12 md:pt-12">
+      <div className="mx-auto max-w-[1400px]">
+
+        <Link
+          href="/actions"
+          className="mb-10 inline-flex items-center gap-2 font-sans text-[12px] uppercase tracking-[0.16em] text-olive transition-colors duration-150 hover:text-charcoal"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Δράσεις
+        </Link>
+
+        <div className="grid gap-10 md:grid-cols-[1fr_1fr] md:items-start md:gap-16">
+
+          {/* Full photo — natural aspect ratio, no crop */}
+          <div className="overflow-hidden rounded-[2px] border border-line/30">
+            <Image
+              src={event.coverImage}
+              alt={event.coverAlt}
+              width={900}
+              height={1100}
+              className="h-auto w-full"
+              priority
+              style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
+            />
           </div>
-        </div>
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-16 md:px-12 md:pb-20">
-          <div className="mx-auto max-w-[1400px]">
-            <div className="inline-flex rounded-full border border-bone/30 bg-bone/10 px-4 py-1 font-sans text-[11px] uppercase tracking-[0.18em] text-bone">
+
+          {/* Info panel */}
+          <div className="flex flex-col">
+            <div className="inline-flex w-fit rounded-full border border-line/50 bg-bone-warm px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
               {event.categoryLabel}
             </div>
-            <h1 className="mt-5 max-w-[22ch] font-serif text-[clamp(36px,6vw,78px)] leading-[1.02] tracking-[-0.02em] text-bone">
+
+            <h1 className="mt-5 font-serif text-[clamp(30px,4vw,56px)] leading-[1.03] tracking-[-0.01em] text-charcoal">
               {event.title}
             </h1>
-            <p className="mt-5 max-w-[62ch] font-sans text-[16px] leading-[1.7] text-bone/75 md:text-[18px]">
+
+            <p className="mt-5 max-w-[52ch] font-sans text-[16px] leading-[1.75] text-concrete">
               {event.description}
             </p>
-          </div>
-        </div>
-      </div>
 
-      <div className="bg-bone px-6 py-14 md:px-12">
-        <div className="mx-auto max-w-[1400px] border border-line/30 bg-bone-warm p-8">
-          <div className="grid gap-6 md:grid-cols-5">
-            <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Ημερομηνία</p>
-              <p className="mt-3 font-serif text-[28px] leading-[1.1] text-charcoal">{formatGreekDate(event.date)}</p>
-            </div>
-            <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Ώρα</p>
-              <p className="mt-3 font-sans text-[17px] text-charcoal">{formatGreekTime(event.date)}</p>
-            </div>
-            <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Τοποθεσία</p>
-              <p className="mt-3 font-sans text-[17px] text-charcoal">{event.location}</p>
-            </div>
-            <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Τιμή</p>
-              <p className="mt-3 font-sans text-[17px] text-charcoal">{event.price || 'Δωρεάν'}</p>
-            </div>
-            <div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Χωρητικότητα</p>
-              <p className="mt-3 font-sans text-[17px] text-charcoal">{event.capacity ? `${event.capacity} άτομα` : 'Χωρίς όριο'}</p>
+            <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-7 border-t border-line/40 pt-8">
+              <div>
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">Ημερομηνία</p>
+                <p className="mt-2 font-serif text-[22px] leading-tight text-charcoal">
+                  {formatGreekDate(event.date)}
+                </p>
+              </div>
+              <div>
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">Τοποθεσία</p>
+                <p className="mt-2 font-sans text-[15px] leading-snug text-charcoal">{event.location}</p>
+              </div>
+              {event.price && (
+                <div>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">Τιμή</p>
+                  <p className="mt-2 font-sans text-[15px] text-charcoal">{event.price}</p>
+                </div>
+              )}
             </div>
           </div>
+
         </div>
       </div>
     </section>
