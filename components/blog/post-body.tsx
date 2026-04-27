@@ -2,9 +2,11 @@ import Image from 'next/image'
 
 type PostBodyProps = {
   markdown: string
+  /** Inline prose block without article section wrapper — for embedded excerpts (e.g. action spotlight). */
+  variant?: 'article' | 'inline'
 }
 
-export default function PostBody({ markdown }: PostBodyProps) {
+export default function PostBody({ markdown, variant = 'article' }: PostBodyProps) {
   const blocks = markdown
     .trim()
     .split('\n\n')
@@ -39,6 +41,9 @@ export default function PostBody({ markdown }: PostBodyProps) {
       return <span key={`${segment}-${index}`}>{segment}</span>
     })
   }
+
+  const compact = variant === 'inline'
+  const pClass = compact ? 'mb-4 last:mb-0' : 'mb-6'
 
   const renderBlock = (block: string, index: number) => {
     if (block.startsWith('## ')) {
@@ -103,9 +108,17 @@ export default function PostBody({ markdown }: PostBodyProps) {
     }
 
     return (
-      <p key={`p-${index}`} className="mb-6">
+      <p key={`p-${index}`} className={pClass}>
         {renderInline(block)}
       </p>
+    )
+  }
+
+  if (variant === 'inline') {
+    return (
+      <div className="font-sans text-[15px] leading-[1.75] text-concrete">
+        {blocks.map(renderBlock)}
+      </div>
     )
   }
 

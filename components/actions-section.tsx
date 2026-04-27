@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 import type { Event } from '@/lib/events/events'
-import InstagramPostEmbed from '@/components/instagram-post-embed'
 
 type ActionsSectionProps = {
   actionCards: Event[]
@@ -173,10 +172,6 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           ))}
         </div>
         )}
-
-        <div className={actionCards.length > 0 ? 'mt-12 md:mt-16' : 'mt-0'}>
-          <InstagramPostEmbed />
-        </div>
 
         <div className="mt-12 text-center">
           <Link

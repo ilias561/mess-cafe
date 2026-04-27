@@ -5,10 +5,10 @@ import UpcomingDatesMarquee from '@/components/events/upcoming-dates-marquee'
 import FeaturedNextEvent from '@/components/events/featured-next-event'
 import ActionsManifesto from '@/components/events/actions-manifesto'
 import EventsArchiveList from '@/components/events/events-archive-list'
-import InstagramPostEmbed from '@/components/instagram-post-embed'
+import ActionSpotlight from '@/components/events/action-spotlight'
 import PreFooterCta from '@/components/pre-footer-cta'
 import FooterSection from '@/components/footer-section'
-import { getPastEvents, getUpcomingEvents } from '@/lib/events/events'
+import { getEventBySlug, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
 import { getSettings } from '@/lib/settings'
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function ActionsPage() {
   const settings = getSettings()
   const upcomingEvents = getUpcomingEvents()
   const pastEvents = getPastEvents()
+  const keepRisingSpotlight = getEventBySlug('keep-rising-bazaar')
   const featured = upcomingEvents[0] ?? null
   const restUpcoming = upcomingEvents.slice(1)
 
@@ -35,11 +36,7 @@ export default function ActionsPage() {
         {featured && <FeaturedNextEvent event={featured} settings={settings} />}
       </ActionsShell>
       <ActionsManifesto />
-      <section className="px-6 py-12 md:px-12 md:py-16" aria-label="Κεντρική ανάρτηση στο Instagram">
-        <div className="mx-auto max-w-[560px]">
-          <InstagramPostEmbed />
-        </div>
-      </section>
+      {keepRisingSpotlight ? <ActionSpotlight event={keepRisingSpotlight} /> : null}
       {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
       <PreFooterCta
         variant="charcoal"
