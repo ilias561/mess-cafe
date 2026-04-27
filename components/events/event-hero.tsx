@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 import { formatGreekDate, formatGreekTime } from '@/lib/format-date'
 import ParallaxImage from '@/components/parallax-image'
 import type { Event } from '@/lib/events/events'
@@ -16,8 +18,20 @@ export default function EventHero({ event }: EventHeroProps) {
           fill
           priority
           sizes="100vw"
+          style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
+        <div className="absolute inset-x-0 top-0 px-6 pt-6 md:px-12 md:pt-8">
+          <div className="mx-auto max-w-[1400px]">
+            <Link
+              href="/actions"
+              className="inline-flex items-center gap-2 rounded-full border border-bone/30 bg-bone/10 px-4 py-2 font-sans text-[12px] uppercase tracking-[0.16em] text-bone backdrop-blur-sm transition-all duration-150 hover:bg-bone/20"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              Δράσεις
+            </Link>
+          </div>
+        </div>
         <div className="absolute inset-x-0 bottom-0 px-6 pb-16 md:px-12 md:pb-20">
           <div className="mx-auto max-w-[1400px]">
             <div className="inline-flex rounded-full border border-bone/30 bg-bone/10 px-4 py-1 font-sans text-[11px] uppercase tracking-[0.18em] text-bone">

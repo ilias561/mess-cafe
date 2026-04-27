@@ -12,20 +12,20 @@ type ActionsSectionProps = {
 
 export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   return (
-    <section id="actions" className="scroll-mt-24 bg-bone px-6 py-24 md:px-12 md:py-32">
+    <section id="actions" className="scroll-mt-24 bg-bone px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.75, ease: EASE }}
-          className="mb-14 max-w-[860px]"
+          className="mb-10 max-w-[860px]"
         >
-          <p className="mb-4 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>
-          <h2 className="font-serif text-[clamp(36px,5vw,62px)] leading-[1.04] tracking-tight text-charcoal">
+          <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>
+          <h2 className="font-serif text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-tight text-charcoal">
             Περισσότερο από έναν καφέ.
           </h2>
-          <p className="mt-5 max-w-3xl font-sans text-[16px] leading-relaxed text-concrete">
+          <p className="mt-4 max-w-3xl font-sans text-[15px] leading-relaxed text-concrete">
             Workshops, πολιτιστικές βραδιές, παρουσιάσεις βιβλίων, live μουσική. Ο χώρος μας γίνεται σκηνή για τις ιστορίες των Ιωαννίνων.
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent" />
                   </div>
 
-                  <div className="flex flex-col gap-2 p-6">
+                  <div className="flex flex-col gap-2 p-5">
                     <div className="flex items-center gap-2">
                       <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-terracotta" aria-hidden />
                       <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">{card.categoryLabel}</p>
