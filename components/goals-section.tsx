@@ -200,7 +200,7 @@ export default function GoalsSection() {
             {/* Photo */}
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
               <Image
-                src="/images/keep-rising.jpg"
+                src="/images/keep-rising-2.jpg"
                 alt="Η ομάδα του M.E.S.S. με τις προσφορές του μπαζάρ Keep Rising για τη μονή Ντουραχάνι"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
@@ -211,13 +211,13 @@ export default function GoalsSection() {
             {/* Eyebrow row */}
             <div className="mt-5 flex items-center gap-3">
               <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-terracotta" aria-hidden />
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
                 8 ΜΑΡΤΙΟΥ · #KEEPRISING
               </p>
             </div>
 
             {/* Caption */}
-            <div className="mt-4 max-w-[40em] font-sans text-[14px] leading-[1.7] text-concrete">
+            <div className="mt-4 max-w-[40em] font-sans text-[14px] leading-[1.7] text-bone/70">
               <p>Ένα μεγάλο ευχαριστώ σε όλους όσους στήριξαν το μπαζάρ μας με την παρουσία και την αγάπη τους. 🖤</p>
               <p className="mt-3">Χάρη σε εσάς καταφέραμε να προσφέρουμε για φιλανθρωπικό σκοπό παπούτσια, φρούτα, λαχανικά και χαρτικά είδη στα παιδάκια που φιλοξενεί η μονή Ντουραχάνι.</p>
               <p className="mt-3">Με το Keep Rising προσπαθούμε μέσα από τέτοιες δράσεις να περνάμε αξίες προσφοράς και αλληλεγγύης.</p>
@@ -225,7 +225,7 @@ export default function GoalsSection() {
             </div>
 
             {/* Mentions */}
-            <p className="mt-4 font-sans text-[13px] leading-[1.6] text-charcoal">
+            <p className="mt-4 font-sans text-[13px] leading-[1.6] text-bone/55">
               <a href="https://www.instagram.com/cage.thrift/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@cage.thrift</a>{' '}
               <a href="https://www.instagram.com/rare_pair_kicks/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@rare_pair_kicks</a>{' '}
               <a href="https://www.instagram.com/coolwolf_store/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">@coolwolf_store</a>{' '}
@@ -238,7 +238,7 @@ export default function GoalsSection() {
             </p>
 
             {/* Hashtags */}
-            <p className="mt-3 font-sans text-[13px] text-olive">
+            <p className="mt-3 font-sans text-[13px] text-mustard/70">
               <a href="https://www.instagram.com/explore/tags/messioannina/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">#messioannina</a>{' '}
               <a href="https://www.instagram.com/explore/tags/keeprising/" target="_blank" rel="noopener noreferrer" className="hover:text-terracotta transition-colors">#keeprising</a>
             </p>
@@ -249,7 +249,7 @@ export default function GoalsSection() {
                 href="https://www.instagram.com/p/DVn6qGhlgVW/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
+                className="font-sans text-[12px] uppercase tracking-[0.18em] text-bone/50 underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
               >
                 Δες την ανάρτηση στο Instagram →
               </a>
