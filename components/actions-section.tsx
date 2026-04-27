@@ -6,11 +6,16 @@ import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import type { Event } from '@/lib/events/events'
 
+const MAX_VISIBLE = 3
+
 type ActionsSectionProps = {
   actionCards: Event[]
 }
 
 export default function ActionsSection({ actionCards }: ActionsSectionProps) {
+  const visible = actionCards.slice(0, MAX_VISIBLE)
+  const hasMore = actionCards.length > MAX_VISIBLE
+
   return (
     <section id="actions" className="scroll-mt-24 bg-bone px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
@@ -30,51 +35,45 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           </p>
         </motion.div>
 
-        {actionCards.length > 0 && (
-          <div
-            className={`grid gap-6 ${
-              actionCards.length === 1
-                ? 'grid-cols-1 md:max-w-[520px]'
-                : 'grid-cols-1 sm:grid-cols-2'
-            }`}
-          >
-            {actionCards.map((card, index) => (
+        {visible.length > 0 && (
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+            {visible.map((card, index) => (
               <motion.div
                 key={card.slug}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.7, ease: EASE, delay: index * 0.12 }}
+                transition={{ duration: 0.65, ease: EASE, delay: index * 0.1 }}
               >
                 <Link
                   href={`/actions/${card.slug}`}
-                  className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_12px_rgba(43,43,40,0.06)] transition-all duration-300 ease-out hover:-translate-y-[4px] hover:shadow-[0_16px_40px_rgba(43,43,40,0.12)]"
+                  className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={card.coverImage}
                       alt={card.coverAlt}
                       fill
                       loading="lazy"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 ease-out group-hover/card:scale-[1.04]"
                       style={{ objectPosition: card.coverObjectPosition ?? 'center' }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent" />
                   </div>
 
-                  <div className="flex flex-col gap-2 p-5">
+                  <div className="flex flex-col gap-1.5 p-4">
                     <div className="flex items-center gap-2">
-                      <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-terracotta" aria-hidden />
+                      <span className="h-[4px] w-[4px] shrink-0 rounded-full bg-terracotta" aria-hidden />
                       <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">{card.categoryLabel}</p>
                     </div>
-                    <h3 className="font-serif text-[clamp(22px,2.5vw,28px)] leading-tight tracking-tight text-charcoal">
+                    <h3 className="font-serif text-[20px] leading-tight tracking-tight text-charcoal">
                       {card.title}
                     </h3>
-                    <p className="line-clamp-2 font-sans text-[14px] leading-relaxed text-concrete">
+                    <p className="line-clamp-2 font-sans text-[13px] leading-relaxed text-concrete">
                       {card.description}
                     </p>
-                    <span className="mt-3 inline-block font-sans text-sm text-charcoal underline decoration-mustard underline-offset-[5px] transition-colors duration-150 group-hover/card:text-terracotta group-hover/card:decoration-terracotta">
+                    <span className="mt-2 inline-block font-sans text-[13px] text-charcoal underline decoration-mustard underline-offset-[4px] transition-colors duration-150 group-hover/card:text-terracotta group-hover/card:decoration-terracotta">
                       Μάθε περισσότερα →
                     </span>
                   </div>
@@ -84,13 +83,22 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           </div>
         )}
 
-        <div className="mt-12 text-center">
-          <Link
-            href="/actions"
-            className="inline-block font-sans text-sm font-medium text-charcoal underline decoration-mustard underline-offset-[6px]"
-          >
-            Δες όλες τις δράσεις →
-          </Link>
+        <div className="mt-10 text-center">
+          {hasMore ? (
+            <Link
+              href="/actions"
+              className="inline-block rounded-[2px] border border-charcoal/20 bg-bone-warm px-6 py-3 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:border-charcoal/40 hover:shadow-[0_4px_16px_rgba(43,43,40,0.08)]"
+            >
+              Δες όλες τις δράσεις ({actionCards.length}) →
+            </Link>
+          ) : (
+            <Link
+              href="/actions"
+              className="inline-block font-sans text-sm font-medium text-charcoal underline decoration-mustard underline-offset-[6px]"
+            >
+              Δες όλες τις δράσεις →
+            </Link>
+          )}
         </div>
       </div>
     </section>
