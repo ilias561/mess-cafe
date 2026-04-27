@@ -5,6 +5,7 @@ import UpcomingDatesMarquee from '@/components/events/upcoming-dates-marquee'
 import FeaturedNextEvent from '@/components/events/featured-next-event'
 import ActionsManifesto from '@/components/events/actions-manifesto'
 import EventsArchiveList from '@/components/events/events-archive-list'
+import InstagramPostEmbed from '@/components/instagram-post-embed'
 import PreFooterCta from '@/components/pre-footer-cta'
 import FooterSection from '@/components/footer-section'
 import { getPastEvents, getUpcomingEvents } from '@/lib/events/events'
@@ -34,6 +35,11 @@ export default function ActionsPage() {
         {featured && <FeaturedNextEvent event={featured} settings={settings} />}
       </ActionsShell>
       <ActionsManifesto />
+      <section className="px-6 py-12 md:px-12 md:py-16" aria-label="Κεντρική ανάρτηση στο Instagram">
+        <div className="mx-auto max-w-[560px]">
+          <InstagramPostEmbed />
+        </div>
+      </section>
       {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
       <PreFooterCta
         variant="charcoal"
