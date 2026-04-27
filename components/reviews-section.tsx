@@ -54,7 +54,7 @@ function avatarColor(name: string) {
 
 function StarRow({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1" aria-label={`${rating} αστέρια από 5`}>
       {Array.from({ length: 5 }).map((_, s) => (
         <svg
           key={s}

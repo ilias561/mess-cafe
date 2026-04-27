@@ -18,18 +18,7 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/admin',
-        destination: '/admin/index.html',
-      },
-      {
-        source: '/admin/',
-        destination: '/admin/index.html',
-      },
-    ]
-  },
+  // rewrites() is incompatible with output:'export' — admin routing handled by netlify.toml/_redirects
 }
 
 export default nextConfig

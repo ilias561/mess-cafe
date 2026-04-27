@@ -280,9 +280,13 @@ export default function GallerySection() {
             {galleryItems.map((item, i) => (
               <div
                 key={item.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`Άνοιγμα φωτογραφίας: ${item.alt}`}
                 className="aspect-[3/2] cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm"
                 style={!item.src ? { background: imagePlaceholder() } : undefined}
                 onClick={() => open(i)}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i) } }}
               >
                 <motion.div
                   initial={{ opacity: 0, scale: 0.96 }}

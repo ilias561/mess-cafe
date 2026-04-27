@@ -163,12 +163,15 @@ export default function NewsletterPopup() {
               </p>
             ) : (
               <form onSubmit={onSubmit} className="mt-4 space-y-3">
+                <label htmlFor="newsletter-email" className="sr-only">Email</label>
                 <input
+                  id="newsletter-email"
                   type="email"
                   required
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@example.com"
+                  autoComplete="email"
                   className="w-full rounded-[2px] border border-line/70 bg-bone px-3 py-2.5 font-sans text-[14px] text-charcoal"
                 />
                 <label className="flex items-start gap-2">

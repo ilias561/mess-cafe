@@ -210,7 +210,7 @@ export default function Navigation() {
     <>
       <a
         href="#main-content"
-        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-charcoal transition-transform focus:translate-y-0 focus:outline-none"
+        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-charcoal transition-transform focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
       >
         Μετάβαση στο περιεχόμενο
       </a>
@@ -353,7 +353,7 @@ export default function Navigation() {
 
               <motion.nav
                 className="flex flex-1 flex-col gap-5"
-                aria-label="Κινητό μενού"
+                aria-label="Σύνδεσμοι πλοήγησης"
                 initial="hidden"
                 animate="visible"
                 variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05, delayChildren: 0.3 } } }}

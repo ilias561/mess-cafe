@@ -106,26 +106,41 @@ export default function ContactSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
-                <input
-                  name="name"
-                  required
-                  placeholder="Όνομα"
-                  className={INPUT_BASE}
-                />
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email"
-                  className={INPUT_BASE}
-                />
-                <textarea
-                  name="message"
-                  rows={5}
-                  required
-                  placeholder="Μήνυμα"
-                  className={`${INPUT_BASE} resize-none md:col-span-2`}
-                />
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-bone/50">Όνομα</label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    required
+                    autoComplete="name"
+                    placeholder="Όνομα"
+                    className={INPUT_BASE}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-bone/50">Email</label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="Email"
+                    className={INPUT_BASE}
+                  />
+                </div>
+                <div className="flex flex-col gap-1.5 md:col-span-2">
+                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-bone/50">Μήνυμα</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={5}
+                    required
+                    placeholder="Μήνυμα"
+                    className={`${INPUT_BASE} resize-none`}
+                  />
+                </div>
                 <input
                   type="text"
                   name="_gotcha"

@@ -16,7 +16,7 @@ const fallbackSlides = [
 ] as const
 const stats: ReadonlyArray<{ key: string; label: string; value: string }> = [
   { key: 'rating', label: 'Google rating', value: '4.8★' },
-  { key: 'hours', label: 'Ανοιχτά καθημερινά', value: '08—22' },
+  { key: 'hours', label: 'Ανοιχτά καθημερινά', value: '08—23' },
   { key: 'location', label: 'ΚΕΠΑΒΙ · Ιωάννινα', value: 'Ιωάννινα' },
 ]
 
@@ -213,7 +213,7 @@ export default function Hero() {
                   Δες το menu
                 </Link>
                 <Link
-                  href="#map"
+                  href="/#map"
                   className="relative inline-block font-sans text-sm font-medium text-charcoal"
                 >
                   <motion.span

@@ -79,8 +79,8 @@ const stats = [
   },
   {
     id: 'hours',
-    renderValue: () => <>08—22</>,
-    label: '7 ημέρες την εβδομάδα',
+    renderValue: () => <>08—23</>,
+    label: 'ΔΕΥ–ΠΑΡ / ΣΑΒ–ΚΥΡ 09–24',
   },
   {
     id: 'location',
@@ -252,6 +252,7 @@ export default function AboutUsSection() {
                   alt={img.alt}
                   fill
                   unoptimized
+                  loading="lazy"
                   className="object-cover"
                 />
               </motion.div>
