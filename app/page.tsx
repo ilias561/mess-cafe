@@ -10,11 +10,12 @@ import GallerySection from '@/components/gallery-section'
 import ReviewsSection from '@/components/reviews-section'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
-import { getAllEvents } from '@/lib/events/events'
-import { getUpcomingEvents } from '@/lib/events/events'
+import { getAllEvents, getUpcomingEvents, getPastEvents } from '@/lib/events/events'
 
 export default function Home() {
-  const actionCards = getUpcomingEvents().slice(0, 4)
+  const upcoming = getUpcomingEvents()
+  const past = getPastEvents()
+  const actionCards = [...upcoming, ...past].slice(0, 4)
   const events = getAllEvents()
 
   return (
