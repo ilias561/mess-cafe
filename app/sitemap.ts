@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/blog/posts'
 import { getAllEvents } from '@/lib/events/events'
 
+export const dynamic = 'force-static'
+
 const BASE = 'https://mess-cafe.gr'
 
 export default function sitemap(): MetadataRoute.Sitemap {
