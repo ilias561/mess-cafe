@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Event } from '@/lib/events/events'
+import { getSettings } from '@/lib/settings'
 
 type EventBookingCtaProps = {
   event: Event
@@ -10,7 +11,8 @@ function normalizeWhatsappPhone(value: string): string {
 }
 
 export default function EventBookingCta({ event }: EventBookingCtaProps) {
-  const phone = normalizeWhatsappPhone(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '306900000000')
+  const settings = getSettings()
+  const phone = normalizeWhatsappPhone(settings.whatsapp || settings.phone || '306900000000')
   const message = `Γεια σας! Θα ήθελα να κλείσω θέση για την εκδήλωση "${event.title}".`
   const whatsappHref = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 

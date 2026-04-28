@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -134,13 +134,34 @@ function Lightbox({
   onNext: () => void
 }) {
   const item = items[index]
+  const containerRef = useRef<HTMLDivElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  // Keyboard navigation
+  // Focus close button on open; restore trigger element on close
+  useEffect(() => {
+    const trigger = document.activeElement as HTMLElement | null
+    closeButtonRef.current?.focus()
+    return () => { trigger?.focus() }
+  }, [])
+
+  // Keyboard: arrows + escape + tab trap
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowLeft') onPrev()
-      if (e.key === 'ArrowRight') onNext()
+      if (e.key === 'Escape') { onClose(); return }
+      if (e.key === 'ArrowLeft') { onPrev(); return }
+      if (e.key === 'ArrowRight') { onNext(); return }
+      if (e.key === 'Tab' && containerRef.current) {
+        const focusable = Array.from(
+          containerRef.current.querySelectorAll<HTMLElement>('button:not([disabled])')
+        )
+        if (!focusable.length) return
+        const first = focusable[0], last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus()
+        }
+      }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
@@ -158,7 +179,11 @@ function Lightbox({
 
   return (
     <motion.div
+      ref={containerRef}
       key="lightbox-backdrop"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Φωτογραφία: ${item.caption}`}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
       style={{ backgroundColor: 'rgba(10,8,6,0.95)' }}
       initial={{ opacity: 0 }}
@@ -169,6 +194,7 @@ function Lightbox({
     >
       {/* Close */}
       <button
+        ref={closeButtonRef}
         type="button"
         onClick={onClose}
         aria-label="Κλείσιμο"

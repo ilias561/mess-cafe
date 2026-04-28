@@ -204,7 +204,7 @@ export default function AboutUsSection() {
                   <p className="font-serif text-[clamp(30px,6vw,42px)] leading-none tracking-tight text-charcoal">
                     {stat.renderValue()}
                   </p>
-                  <p className="mt-2 font-sans text-[10px] uppercase leading-snug tracking-[0.16em] text-olive sm:text-[11px]">
+                  <p className="mt-2 font-sans text-[11px] uppercase leading-snug tracking-[0.16em] text-olive sm:text-[12px]">
                     {stat.label}
                   </p>
                 </motion.div>

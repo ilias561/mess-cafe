@@ -11,6 +11,6 @@ hours:
   - day: "Σαβ–Κυρ"
     open: "09:00"
     close: "24:00"
-instagram: "https://instagram.com/messcafe"
-facebook: "https://facebook.com/messcafe"
+instagram: "https://www.instagram.com/m.e.s.s._ioannina/"
+facebook: "https://www.facebook.com/messcafe"
 ---

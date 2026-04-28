@@ -81,7 +81,7 @@ function ReviewCard({ review, cardIndex }: { review: Review; cardIndex: number }
       {/* Top row: stars + time */}
       <div className="flex items-center justify-between">
         <StarRow rating={review.rating} />
-        <span className="font-sans text-[11px] text-concrete/60">{review.time}</span>
+        <span className="font-sans text-[12px] text-concrete/60">{review.time}</span>
       </div>
 
       {/* Quote */}
