@@ -1,13 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useRef, useEffect, useCallback } from 'react'
+import { motion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import { reviews } from '@/lib/reviews-data'
 import type { Review } from '@/lib/reviews-data'
-
-const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
-const PER_PAGE = 3
 
 /* ── Google coloured "G" logo ── */
 function GoogleG({ className = 'h-5 w-5' }: { className?: string }) {
@@ -69,14 +66,14 @@ function StarRow({ rating }: { rating: number }) {
   )
 }
 
-function ReviewCard({ review, cardIndex }: { review: Review; cardIndex: number }) {
+function ReviewCard({ review }: { review: Review }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.5, ease: EASE_TUPLE, delay: cardIndex * 0.06 }}
-      className="flex flex-col gap-5 rounded-2xl bg-cream p-6 ring-1 ring-line/40"
+    <a
+      href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Κριτική από ${review.name}`}
+      className="flex w-[min(320px,calc(100vw-3rem))] shrink-0 flex-col gap-5 rounded-2xl bg-cream p-6 ring-1 ring-line/40 transition hover:ring-2 hover:ring-mustard/40 focus-visible:ring-2 focus-visible:ring-mustard"
     >
       {/* Top row: stars + time */}
       <div className="flex items-center justify-between">
@@ -102,90 +99,147 @@ function ReviewCard({ review, cardIndex }: { review: Review; cardIndex: number }
             <p className="font-sans text-[10px] uppercase tracking-[0.12em] text-olive">Local Guide</p>
           )}
         </div>
-        {/* Google G on every card */}
         <div className="ml-auto shrink-0">
           <GoogleG className="h-4 w-4 opacity-60" />
         </div>
       </div>
-    </motion.article>
+    </a>
   )
 }
 
-function ReviewsCarousel() {
-  const totalPages = Math.ceil(reviews.length / PER_PAGE)
-  const [index, setIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
+/* px/s — with 12 cards at ~340 px each the half-width is ~4 080 px → ~60 s per loop */
+const SCROLL_SPEED = 68
 
-  const advance = useCallback(() => {
-    setIndex((i) => (i + 1) % totalPages)
-  }, [totalPages])
+function ReviewsTrack() {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const isPausedRef = useRef(false)
+  const isDraggingRef = useRef(false)
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const rafRef = useRef<number | null>(null)
+  const dragStartXRef = useRef(0)
+  const scrollStartRef = useRef(0)
 
+  const scheduleResume = useCallback(() => {
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+    resumeTimerRef.current = setTimeout(() => {
+      isPausedRef.current = false
+    }, 2000)
+  }, [])
+
+  /* ── auto-scroll RAF loop ── */
   useEffect(() => {
-    if (paused) return
-    const id = setInterval(advance, 6000)
-    return () => clearInterval(id)
-  }, [paused, advance])
+    const wrapper = wrapperRef.current
+    if (!wrapper) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  const visible = reviews.slice(index * PER_PAGE, index * PER_PAGE + PER_PAGE)
+    let lastTime = 0
+
+    function tick(time: number) {
+      if (lastTime === 0) lastTime = time
+      const dt = Math.min(time - lastTime, 50) // cap to avoid large jumps after tab switch
+      lastTime = time
+
+      if (!isPausedRef.current && !isDraggingRef.current) {
+        const el = wrapperRef.current!
+        const halfWidth = el.scrollWidth / 2
+        el.scrollLeft += SCROLL_SPEED * dt / 1000
+        if (el.scrollLeft >= halfWidth) {
+          el.scrollLeft -= halfWidth
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    rafRef.current = requestAnimationFrame(tick)
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
+  }, [])
+
+  /* ── drag / touch / wheel interaction ── */
+  useEffect(() => {
+    const wrapper = wrapperRef.current
+    if (!wrapper) return
+
+    function onMouseDown(e: MouseEvent) {
+      isDraggingRef.current = true
+      dragStartXRef.current = e.pageX
+      scrollStartRef.current = wrapper!.scrollLeft
+      wrapper!.style.cursor = 'grabbing'
+      wrapper!.style.userSelect = 'none'
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+    }
+
+    function onMouseMove(e: MouseEvent) {
+      if (!isDraggingRef.current) return
+      wrapper!.scrollLeft = scrollStartRef.current - (e.pageX - dragStartXRef.current)
+    }
+
+    function onMouseUp() {
+      if (!isDraggingRef.current) return
+      isDraggingRef.current = false
+      wrapper!.style.cursor = ''
+      wrapper!.style.userSelect = ''
+      scheduleResume()
+    }
+
+    function onTouchStart() {
+      isPausedRef.current = true
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+    }
+
+    function onTouchEnd() {
+      scheduleResume()
+    }
+
+    function onWheel() {
+      isPausedRef.current = true
+      scheduleResume()
+    }
+
+    wrapper.addEventListener('mousedown', onMouseDown)
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseup', onMouseUp)
+    wrapper.addEventListener('touchstart', onTouchStart, { passive: true })
+    wrapper.addEventListener('touchend', onTouchEnd, { passive: true })
+    wrapper.addEventListener('wheel', onWheel, { passive: true })
+
+    return () => {
+      wrapper.removeEventListener('mousedown', onMouseDown)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseup', onMouseUp)
+      wrapper.removeEventListener('touchstart', onTouchStart)
+      wrapper.removeEventListener('touchend', onTouchEnd)
+      wrapper.removeEventListener('wheel', onWheel)
+    }
+  }, [scheduleResume])
 
   return (
-    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {visible.map((review, i) => (
-            <ReviewCard key={`${index}-${i}`} review={review} cardIndex={i} />
-          ))}
-        </AnimatePresence>
-      </div>
+    <div className="relative">
+      {/* gradient fade masks */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-olive-deep to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-olive-deep to-transparent" />
 
-      {totalPages > 1 && (
-      <div className="mt-8 flex items-center justify-between">
-        <div className="flex gap-1.5">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              aria-label={`Σελίδα ${i + 1}`}
-              className="flex items-center py-3 px-0.5"
-            >
-              <span className={`block h-0.5 rounded-full transition-all duration-500 ${
-                i === index ? 'w-8 bg-mustard' : 'w-3 bg-bone/25 hover:bg-bone/45'
-              }`} />
-            </button>
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={() => setIndex((i) => (i - 1 + totalPages) % totalPages)}
-            aria-label="Προηγούμενο"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8 text-bone/60 transition hover:bg-white/15 hover:text-mustard"
-          >
-            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.5">
-              <path d="M10 3L5 8l5 5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button
-            onClick={() => setIndex((i) => (i + 1) % totalPages)}
-            aria-label="Επόμενο"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-white/8 text-bone/60 transition hover:bg-white/15 hover:text-mustard"
-          >
-            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.5">
-              <path d="M6 3l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
+      <div
+        ref={wrapperRef}
+        onMouseEnter={() => { isPausedRef.current = true }}
+        onMouseLeave={() => { if (!isDraggingRef.current) isPausedRef.current = false }}
+        className="flex gap-4 overflow-x-scroll px-6 pb-2 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab"
+      >
+        {/* Render twice for seamless infinite loop — RAF resets scrollLeft at the halfway point */}
+        {[...reviews, ...reviews].map((review, i) => (
+          <ReviewCard key={i} review={review} />
+        ))}
       </div>
-      )}
     </div>
   )
 }
 
 export default function ReviewsSection() {
   return (
-    <section id="reviews" className="scroll-mt-28 overflow-clip bg-olive-deep px-6 py-24 md:px-12">
-      <div className="mx-auto max-w-[1400px]">
+    <section id="reviews" className="scroll-mt-28 bg-olive-deep py-24">
 
-        {/* Header */}
+      {/* Constrained header */}
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -219,9 +273,13 @@ export default function ReviewsSection() {
             <span className="font-sans text-xs text-bone/50">/ 5 · 165 κριτικές</span>
           </motion.div>
         </div>
+      </div>
 
-        <ReviewsCarousel />
+      {/* Full-width infinite carousel */}
+      <ReviewsTrack />
 
+      {/* Constrained footer link */}
+      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div className="mt-6">
           <a
             href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
@@ -236,6 +294,7 @@ export default function ReviewsSection() {
           </a>
         </div>
       </div>
+
     </section>
   )
 }

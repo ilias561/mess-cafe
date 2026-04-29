@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, Phone, X } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getOpenStatus } from '@/lib/hours'
@@ -57,20 +58,16 @@ function OpenBadge({
   )
 }
 
-function OliveMark({ light = false }: { light?: boolean }) {
-  const colorClass = light ? 'text-bone' : 'text-olive'
+function BrandLogo() {
   return (
-    <svg viewBox="0 0 32 32" fill="none" className="h-8 w-8 shrink-0" aria-hidden>
-      <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" className={colorClass} />
-      <circle cx="16" cy="14" r="5" fill="currentColor" className={colorClass} />
-      <path
-        d="M10 24c1.5-3 3.5-5 6-5s4.5 2 6 5"
-        stroke="currentColor"
-        strokeWidth="1.25"
-        strokeLinecap="round"
-        className={colorClass}
-      />
-    </svg>
+    <Image
+      src="/images/logo-mess.png"
+      alt="M.E.S.S. logo"
+      width={32}
+      height={32}
+      className="h-8 w-8 shrink-0 rounded-full object-cover"
+      priority
+    />
   )
 }
 
@@ -222,7 +219,7 @@ export default function Navigation() {
       >
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-8">
           <Link href="/" className={`flex shrink-0 items-center gap-3 transition-colors ${navTextColor}`}>
-            <OliveMark light={false} />
+            <BrandLogo />
             <span className="font-serif text-[22px] font-medium tracking-tight">M.E.S.S.</span>
           </Link>
 

@@ -228,11 +228,11 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
-                className="mt-10 grid w-full max-w-[560px] grid-cols-3 gap-4 border-t border-charcoal/20 pt-6 md:gap-6"
+                className="mt-10 grid w-full max-w-[560px] grid-cols-3 gap-2 border-t border-charcoal/20 pt-6 sm:gap-4 md:gap-6"
               >
                 {stats.map((item) => (
-                  <div key={item.key}>
-                    <p className="font-serif text-[30px] leading-none text-charcoal">
+                  <div key={item.key} className="min-w-0">
+                    <p className="font-serif text-[clamp(16px,4.5vw,30px)] leading-none text-charcoal">
                       {item.value}
                     </p>
                     <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.14em] text-charcoal md:text-[11px]">
