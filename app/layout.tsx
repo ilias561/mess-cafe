@@ -76,7 +76,7 @@ const jsonLd = {
     latitude: 39.6624739,
     longitude: 20.8602479,
   },
-  telephone: '+302651000000',
+  telephone: '+306945777808',
   email: 'info@messcafe.gr',
   openingHoursSpecification: [
     {

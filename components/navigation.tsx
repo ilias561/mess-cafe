@@ -59,6 +59,16 @@ function OpenBadge({
 }
 
 function BrandLogo() {
+  const [failed, setFailed] = useState(false)
+  if (failed) {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className="h-8 w-8 shrink-0" aria-hidden>
+        <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" className="text-olive" />
+        <circle cx="16" cy="14" r="5" fill="currentColor" className="text-olive" />
+        <path d="M10 24c1.5-3 3.5-5 6-5s4.5 2 6 5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" className="text-olive" />
+      </svg>
+    )
+  }
   return (
     <Image
       src="/images/logo-mess.png"
@@ -67,6 +77,7 @@ function BrandLogo() {
       height={32}
       className="h-8 w-8 shrink-0 rounded-full object-cover"
       priority
+      onError={() => setFailed(true)}
     />
   )
 }
