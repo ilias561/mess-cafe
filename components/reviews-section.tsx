@@ -56,7 +56,7 @@ function StarRow({ rating }: { rating: number }) {
         <svg
           key={s}
           viewBox="0 0 20 20"
-          className={`h-4 w-4 ${s < rating ? 'fill-[#FBBC05]' : 'fill-charcoal/15'}`}
+          className={`h-[18px] w-[18px] ${s < rating ? 'fill-[#FBBC05]' : 'fill-white/15'}`}
           aria-hidden
         >
           <path d="M10 1l2.47 5.82L18 7.64l-4.35 3.93L15.1 18 10 14.9 4.9 18l1.45-6.43L2 7.64l5.53-.82L10 1z" />
@@ -73,42 +73,40 @@ function ReviewCard({ review }: { review: Review }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Κριτική από ${review.name}`}
-      className="flex w-[min(320px,calc(100vw-3rem))] shrink-0 flex-col gap-5 rounded-2xl bg-cream p-6 ring-1 ring-line/40 transition hover:ring-2 hover:ring-mustard/40 focus-visible:ring-2 focus-visible:ring-mustard"
+      className="flex w-[min(400px,calc(100vw-2.5rem))] shrink-0 flex-col gap-5 rounded-2xl bg-white/[0.07] p-7 transition hover:bg-white/[0.11] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
     >
-      {/* Top row: stars + time */}
-      <div className="flex items-center justify-between">
-        <StarRow rating={review.rating} />
-        <span className="font-sans text-[12px] text-concrete/60">{review.time}</span>
-      </div>
+      {/* Stars */}
+      <StarRow rating={review.rating} />
 
-      {/* Quote */}
-      <p className="flex-1 font-sans text-[14px] leading-[1.65] text-charcoal/75">
+      {/* Quote — large, light */}
+      <p className="flex-1 font-sans text-[17px] leading-[1.7] text-bone/85">
         &ldquo;{review.text}&rdquo;
       </p>
 
+      {/* Divider */}
+      <div className="h-px bg-white/10" />
+
       {/* Author */}
-      <div className="flex items-center gap-3 border-t border-line/40 pt-4">
+      <div className="flex items-center gap-3">
         <div
           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-sans text-[11px] font-semibold ${avatarColor(review.name)}`}
         >
           {initials(review.name)}
         </div>
-        <div className="min-w-0">
-          <p className="truncate font-sans text-[13px] font-medium text-charcoal">{review.name}</p>
-          {review.isLocalGuide && (
-            <p className="font-sans text-[10px] uppercase tracking-[0.12em] text-olive">Local Guide</p>
-          )}
+        <div className="min-w-0 flex-1">
+          <p className="truncate font-sans text-[13px] font-semibold text-bone">{review.name}</p>
+          <p className="font-sans text-[11px] text-bone/40">{review.time}</p>
         </div>
-        <div className="ml-auto shrink-0">
-          <GoogleG className="h-4 w-4 opacity-60" />
+        <div className="shrink-0">
+          <GoogleG className="h-4 w-4 opacity-50" />
         </div>
       </div>
     </a>
   )
 }
 
-/* px/s — with 12 cards at ~340 px each the half-width is ~4 080 px → ~60 s per loop */
-const SCROLL_SPEED = 68
+/* px/s — 12 cards × ~416 px ≈ 4 992 px half-width → ~55 s per loop */
+const SCROLL_SPEED = 90
 
 function ReviewsTrack() {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -216,14 +214,14 @@ function ReviewsTrack() {
   return (
     <div className="relative">
       {/* gradient fade masks */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-olive-deep to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-olive-deep to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-olive-deep to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-olive-deep to-transparent" />
 
       <div
         ref={wrapperRef}
         onMouseEnter={() => { isPausedRef.current = true }}
         onMouseLeave={() => { if (!isDraggingRef.current) isPausedRef.current = false }}
-        className="flex gap-4 overflow-x-scroll px-6 pb-2 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab"
+        className="flex gap-5 overflow-x-scroll px-6 pb-2 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab"
       >
         {/* Render twice for seamless infinite loop — RAF resets scrollLeft at the halfway point */}
         {[...reviews, ...reviews].map((review, i) => (
