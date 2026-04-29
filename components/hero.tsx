@@ -152,7 +152,7 @@ export default function Hero() {
 
         {/* LEFT COLUMN — text */}
         <div className="relative z-20 flex items-end bg-bone">
-          <div className="mx-auto w-full max-w-[520px] px-6 py-16 md:px-10 md:py-20 lg:px-14 lg:py-24">
+          <div className="mx-auto w-full max-w-[520px] px-6 pt-28 pb-16 md:px-10 md:py-20 lg:px-14 lg:py-24">
             <div className="relative">
               <motion.p
                 initial={false}
