@@ -71,7 +71,7 @@ function BrandLogo() {
   }
   return (
     <Image
-      src="/images/logo-mess.png"
+      src="/images/logo-mess.svg"
       alt="M.E.S.S. logo"
       width={32}
       height={32}
