@@ -9,9 +9,81 @@ import { videoSrc } from '@/lib/media'
 
 const TOTAL_FRAMES = 97   // ffmpeg extracted 97 frames from the 4-second video
 
+/* ── Botanical corner decoration (desktop hero) ── */
+function BotanicalCorner() {
+  return (
+    <svg
+      width="180"
+      height="180"
+      viewBox="0 0 180 180"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Main stem: lower-left to upper-right */}
+      <path
+        d="M18 162 C32 138 52 112 72 90 C92 68 118 46 158 20"
+        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.55"
+      />
+      {/* Branch stem */}
+      <path
+        d="M28 142 C40 126 54 116 66 102"
+        stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.38"
+      />
+
+      {/* Large leaf — lower (points outward) */}
+      <path
+        d="M66 102 C48 84 22 76 6 58 C20 65 42 72 62 90 Z"
+        fill="currentColor" opacity="0.52"
+      />
+      <path d="M66 102 C48 86 30 78 12 66" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.26"/>
+
+      {/* Large leaf — upper (points outward) */}
+      <path
+        d="M118 46 C124 24 146 10 168 6 C154 20 136 30 120 48 Z"
+        fill="currentColor" opacity="0.56"
+      />
+      <path d="M118 46 C132 28 148 16 165 8" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.26"/>
+
+      {/* Medium leaf — center-lower */}
+      <path
+        d="M86 70 C72 52 54 42 36 40 C50 46 68 56 84 72 Z"
+        fill="currentColor" opacity="0.44"
+      />
+
+      {/* Medium leaf — center-upper */}
+      <path
+        d="M140 32 C148 16 162 8 174 4 C164 16 152 22 138 34 Z"
+        fill="currentColor" opacity="0.44"
+      />
+
+      {/* Small leaf — low edge */}
+      <path
+        d="M46 120 C30 112 14 96 10 78 C22 88 34 102 48 116 Z"
+        fill="currentColor" opacity="0.36"
+      />
+
+      {/* Tiny accent near tip */}
+      <path
+        d="M150 26 C156 14 166 6 176 2 C168 12 158 18 148 28 Z"
+        fill="currentColor" opacity="0.40"
+      />
+
+      {/* Berry cluster at stem tip */}
+      <circle cx="158" cy="20" r="2.5" fill="currentColor" opacity="0.45"/>
+      <circle cx="150" cy="14" r="1.8" fill="currentColor" opacity="0.38"/>
+      <circle cx="164" cy="14" r="1.5" fill="currentColor" opacity="0.32"/>
+      <circle cx="168" cy="22" r="1.2" fill="currentColor" opacity="0.28"/>
+
+      {/* Accent dots */}
+      <circle cx="90" cy="68" r="1.5" fill="currentColor" opacity="0.28"/>
+      <circle cx="68" cy="100" r="1.2" fill="currentColor" opacity="0.25"/>
+    </svg>
+  )
+}
+
 export default function Hero() {
   const sectionRef    = useRef<HTMLElement>(null)
-  const videoRef      = useRef<HTMLVideoElement>(null)
   const canvasRef     = useRef<HTMLCanvasElement>(null)
   const framesRef     = useRef<HTMLImageElement[]>([])
   const phase1Ref     = useRef<HTMLDivElement>(null)
@@ -162,21 +234,23 @@ export default function Hero() {
   return (
     <>
 
-    {/* ── DESKTOP hero: text left · video right ── */}
-    <section className="hidden md:flex min-h-screen bg-[#1a1a1a] relative overflow-hidden items-center">
+    {/* ── DESKTOP hero: botanical window ── */}
+    <section
+      id="hero"
+      className="hidden md:flex min-h-screen bg-bone flex-col items-center justify-center px-10 lg:px-16 py-20"
+    >
 
-      {/* Left: text */}
-      <div className="relative z-10 flex w-[52%] flex-col justify-center px-16 lg:px-24 py-28">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE }}
-          className="font-sans text-[11px] tracking-[0.2em] text-white/60"
-        >
-          SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING
-        </motion.p>
-
-        <h1 className="hero-headline mt-4 font-serif tracking-tight text-balance text-white">
+      {/* Eyebrow + headline */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: EASE }}
+        className="relative z-10 w-full max-w-[1100px] text-center mb-10"
+      >
+        <p className="font-sans text-[11px] tracking-[0.2em] text-charcoal/40 uppercase">
+          SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
+        </p>
+        <h1 className="hero-headline mt-4 font-serif tracking-tight text-balance text-charcoal">
           {heroWords.map((word, i) => (
             <span key={`d-${word}-${i}`} className="inline-block overflow-hidden align-baseline">
               <motion.span
@@ -185,95 +259,96 @@ export default function Hero() {
                 animate={loaderReady ? { y: 0, opacity: 1 } : {}}
                 transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
               >
-                {word}{i < heroWords.length - 1 ? ' ' : ''}
+                {word}{i < heroWords.length - 1 ? ' ' : ''}
               </motion.span>
             </span>
           ))}
         </h1>
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.75, ease: EASE }}
-          className="mt-8 max-w-[480px]"
-        >
-          <p className="font-sans text-[16px] leading-relaxed text-white/85">
-            Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.
-          </p>
-          <p className="mt-3 font-sans text-[14px] leading-loose text-white/55">
-            Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.
-          </p>
-        </motion.div>
+      {/* ── Botanical video window ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.28, duration: 0.9, ease: EASE }}
+        className="relative w-full max-w-[1100px]"
+      >
+        {/* Thin border frame */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-[2px] border border-charcoal/12">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            src={videoSrc('/videos/main-page-animation.mp4')}
+            poster={videoSrc('/videos/hero-animation-poster.jpg')}
+            className="h-full w-full object-cover"
+            aria-hidden
+          />
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.65, duration: 0.65, ease: EASE }}
-          className="mt-8 flex flex-wrap items-center gap-5"
-        >
+        {/* ── Botanical corner decorations ── */}
+        {/* top-left */}
+        <div className="pointer-events-none absolute -top-16 -left-16 text-olive" aria-hidden>
+          <BotanicalCorner />
+        </div>
+        {/* top-right (mirror X) */}
+        <div className="pointer-events-none absolute -top-16 -right-16 text-olive [transform:scaleX(-1)]" aria-hidden>
+          <BotanicalCorner />
+        </div>
+        {/* bottom-left (mirror Y) */}
+        <div className="pointer-events-none absolute -bottom-16 -left-16 text-olive [transform:scaleY(-1)]" aria-hidden>
+          <BotanicalCorner />
+        </div>
+        {/* bottom-right (mirror both) */}
+        <div className="pointer-events-none absolute -bottom-16 -right-16 text-olive [transform:scale(-1,-1)]" aria-hidden>
+          <BotanicalCorner />
+        </div>
+      </motion.div>
+
+      {/* Body text + CTAs */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.5, duration: 0.75, ease: EASE }}
+        className="relative z-10 mt-16 flex flex-col items-center text-center gap-5"
+      >
+        <p className="max-w-[500px] font-sans text-[16px] leading-relaxed text-charcoal/65">
+          {'Ένας πολυχώρος μπροστά στη λίμνη Ιωαννίνων — για specialty coffee, healthy brunch και ανθρώπινη σύνδεση.'}
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-5">
           <Link
             href="/menu"
             className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
           >
-            Δες το menu
+            {'Δες το menu'}
           </Link>
           <Link
             href="/#map"
-            className="relative inline-block font-sans text-sm font-medium text-white"
+            className="relative inline-block font-sans text-sm font-medium text-charcoal"
           >
             <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
-            Βρες μας
+            {'Βρες μας'}
           </Link>
-        </motion.div>
-      </div>
-
-      {/* Right: autoplay video */}
-      <div className="absolute right-0 top-0 h-full w-[52%]">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          src={videoSrc('/videos/main-page-animation.mp4')}
-          poster={videoSrc('/videos/hero-animation-poster.jpg')}
-          className="h-full w-full object-cover"
-          aria-hidden
-        />
-        {/* blend edge */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-[#1a1a1a] to-transparent" />
-        {/* top/bottom vignette */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" />
-      </div>
+        </div>
+      </motion.div>
 
     </section>
 
     {/* ── MOBILE hero: scroll-scrub canvas animation ── */}
     <section
       ref={sectionRef}
-      id="hero"
       style={{ height: '600vh' }}
       className="relative w-full md:hidden"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-
-        {/* ── Desktop: video element ── */}
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          preload="auto"
-          poster={videoSrc('/videos/hero-animation-poster.jpg')}
-          aria-label="Ο χώρος του M.E.S.S."
-          className="absolute inset-0 h-full w-full object-cover object-center md:block hidden"
-        />
 
         {/* ── Mobile: canvas image sequence ── */}
         <canvas
           ref={canvasRef}
           width={540}
           height={960}
-          className="absolute inset-0 h-full w-full object-cover object-center block md:hidden"
+          className="absolute inset-0 h-full w-full object-cover object-center"
           style={{ background: '#1a1a1a' }}
         />
 
@@ -283,7 +358,7 @@ export default function Hero() {
         {/* ── PHASE 1: overline + headline ── */}
         <div
           ref={phase1Ref}
-          className="absolute inset-x-0 top-0 z-10 px-8 pt-16 md:px-16 lg:px-20"
+          className="absolute inset-x-0 top-0 z-10 px-8 pt-16"
           style={{ willChange: 'opacity' }}
         >
           <motion.p
@@ -292,7 +367,7 @@ export default function Hero() {
             transition={{ duration: 0.5, ease: EASE }}
             className="font-sans text-[11px] tracking-[0.2em] text-white/75"
           >
-            SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING
+            SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
           </motion.p>
 
           <h1 className="hero-headline mt-3 max-w-[700px] font-serif tracking-tight text-balance text-white">
@@ -314,15 +389,15 @@ export default function Hero() {
         {/* ── PHASE 2: Greek text ── */}
         <div
           ref={phase2Ref}
-          className="absolute bottom-6 left-0 right-0 z-10 px-8 md:px-16 lg:px-20"
+          className="absolute bottom-6 left-0 right-0 z-10 px-8"
           style={{ opacity: 0, willChange: 'opacity, transform' }}
         >
           <div className="max-w-[540px]">
-            <p className="font-sans text-[16px] leading-relaxed text-white/90 md:text-[17px] [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
-              Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.
+            <p className="font-sans text-[16px] leading-relaxed text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+              {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
             </p>
             <p className="mt-3 font-sans text-[14px] leading-loose text-white/65 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]">
-              Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.
+              {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
             </p>
             <div
               ref={phase2BtnsRef}
@@ -333,14 +408,14 @@ export default function Hero() {
                 href="/menu"
                 className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
               >
-                Δες το menu
+                {'Δες το menu'}
               </Link>
               <Link
                 href="/#map"
                 className="relative inline-block font-sans text-sm font-medium text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.5)]"
               >
                 <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
-                Βρες μας
+                {'Βρες μας'}
               </Link>
             </div>
           </div>
