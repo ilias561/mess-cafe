@@ -1,0 +1,75 @@
+================================================================================
+M.E.S.S. CAFÉ — SESSION LOG
+================================================================================
+Last updated: 2026-05-05
+Branch: claude/compassionate-sinoussi-f240d5
+Model: claude-sonnet-4-6
+
+--------------------------------------------------------------------------------
+PROJECT SNAPSHOT (as of session start)
+--------------------------------------------------------------------------------
+This is a Next.js 14 (App Router) website for M.E.S.S. Café — a café in
+Ioannina, Greece. The site is ~75% MVP complete per PROJECT_TODO.md.
+
+Stack:
+  - Next.js 14 (App Router, TypeScript)
+  - Tailwind CSS + shadcn/ui components
+  - Decap CMS (git-based, /admin/)
+  - Cloudflare Pages (target deploy)
+  - Forms → email + WhatsApp
+  - Greek-language site (el_GR)
+
+Key pages: / (homepage), /menu, /reservations, /blog, /blog/[slug],
+           /actions (events), /actions/[slug]
+
+Phase progress (from PROJECT_TODO.md §8):
+  ✅ Phase 1: Blog (index + post detail + seed posts)
+  ✅ Phase 2: Events (index + detail + seed events + homepage module)
+  ✅ Phase 3: Reservations + WhatsApp float
+  ✅ Phase 4: CMS wiring (Decap + content migration)
+  ⏳ Phase 5: Deploy (Cloudflare Pages + OAuth worker) ← IN PROGRESS
+  ⬜ Phase 6: Custom domain + email routing
+  ⬜ Phase 7: SEO + a11y + perf pass
+  ⬜ Phase 8: Client walkthrough + handover
+  ⬜ Launch
+
+Recent git commits (before this session):
+  d32727d feat(logo): add new brand logo SVG to navigation
+  e038dc2 redesign(reviews): Google-style white cards with reliable infinite scroll
+  9ca64cd fix(hero): increase mobile top padding to clear fixed nav
+  f63ea75 fix: real phone, delete test post, logo fallback, JSON-LD telephone
+  29ffc5f style(reviews): dark cards, larger text, faster scroll to match reference
+
+--------------------------------------------------------------------------------
+SESSION WORK LOG
+--------------------------------------------------------------------------------
+[Session started 2026-05-05]
+- Claude instance initialized, session log created.
+
+[Work done 2026-05-05]
+HERO — Full rewrite (components/hero.tsx):
+  - New video: public/videos/main-page-animation.mp4 (copied from mess root folder)
+  - Full-screen scroll-scrub video background (300vh section, sticky viewport)
+  - 4-phase scroll sequence driven by direct DOM refs (no React re-renders = smooth):
+      Phase 1 (0-33%): "A quiet kind of chaos" + overline at very top
+      Phase 2 (33-66%): Greek paragraphs + CTA at bottom-left
+      Phase 3 (66-100%): 3 stats (4.8★ / 08—23 / Ιωάννινα) pop in at top
+      After 100%: stats visible, page scrolls naturally to next section
+  - Video: fastSeek() used for smooth frame-by-frame scrubbing
+  - video.pause() on mount — fully scrub-controlled
+
+NAVIGATION — components/navigation.tsx:
+  - Slimmer on hero: h-12 (was h-20), transparent bg, white text
+  - After hero: h-16, bone background (cream)
+  - Nav never hides during hero scroll-scrub (isInHero guard)
+  - hasPastHero threshold updated to 2 * innerHeight (was ~1 * innerHeight)
+  - Phone button, nav links, mobile hamburger all white-aware on hero
+
+WHATSAPP — components/whatsapp-float-client.tsx:
+  - Nearly invisible on hero load (opacity 0.12, scale 0.5)
+  - Grows smoothly to full size as user scrolls out of hero
+  - CSS transition + direct scroll listener for smooth growth
+
+[Add entries below as work is done — include: what changed, which files, why]
+
+================================================================================

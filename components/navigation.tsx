@@ -63,9 +63,9 @@ function BrandLogo() {
   if (failed) {
     return (
       <svg viewBox="0 0 32 32" fill="none" className="h-8 w-8 shrink-0" aria-hidden>
-        <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" className="text-olive" />
-        <circle cx="16" cy="14" r="5" fill="currentColor" className="text-olive" />
-        <path d="M10 24c1.5-3 3.5-5 6-5s4.5 2 6 5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" className="text-olive" />
+        <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="16" cy="14" r="5" fill="currentColor" />
+        <path d="M10 24c1.5-3 3.5-5 6-5s4.5 2 6 5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
       </svg>
     )
   }
@@ -114,10 +114,11 @@ export default function Navigation() {
     return () => observers.forEach((o) => o.disconnect())
   }, [sectionLinks])
 
-  // Header handoff: transparent over hero -> soft cream after hero
+  // Header handoff: transparent slim over hero (300vh section) → cream after
   useEffect(() => {
     const onScroll = () => {
-      const threshold = Math.max(window.innerHeight - 80, 120)
+      // Hero section is 600vh tall; sticky viewport = 100vh → scrollable = 500vh
+      const threshold = window.innerHeight * 5 - 60
       setHasPastHero(window.scrollY > threshold)
     }
     onScroll()
@@ -132,10 +133,12 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      if (currentScrollY < 120) {
+      const inHero = pathname === '/' && currentScrollY < window.innerHeight * 5
+      if (currentScrollY < 120 || inHero) {
+        // Always show nav at top and during hero scroll-scrub
         setIsVisible(true)
       } else if (currentScrollY > lastScrollY && pathname === '/') {
-        // collapse nav on scroll-down only on the homepage; keep it pinned everywhere else
+        // Collapse nav on scroll-down only after hero on homepage
         setIsVisible(false)
       } else {
         setIsVisible(true)
@@ -211,8 +214,12 @@ export default function Navigation() {
     return true
   }
 
-  const navTextColor = 'text-charcoal'
-  const headerClasses = 'bg-[rgba(245,240,230,0.94)] backdrop-blur-[14px] border-b border-black/[0.06]'
+  const isInHero = pathname === '/' && !hasPastHero
+  const navTextColor = isInHero ? 'text-white' : 'text-charcoal'
+  const headerClasses = isInHero
+    ? 'bg-transparent'
+    : 'bg-[rgba(245,240,230,0.94)] backdrop-blur-[14px] border-b border-black/[0.06]'
+  const navHeight = isInHero ? 'h-12' : 'h-16'
 
   return (
     <>
@@ -224,8 +231,8 @@ export default function Navigation() {
       </a>
 
       <motion.header
-        className={`fixed top-0 right-0 left-0 z-50 h-20 transition-all duration-300 ease-in-out ${headerClasses}`}
-        animate={{ y: isVisible ? 0 : -120 }}
+        className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ease-in-out ${navHeight} ${headerClasses}`}
+        animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-8">
@@ -266,7 +273,7 @@ export default function Navigation() {
                         setMenuOpen(false)
                       }
                     }}
-                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] text-charcoal transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${
+                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${isInHero ? 'text-white/90 hover:text-white' : 'text-charcoal'} ${
                       shiftRightCluster ? 'ml-5 xl:ml-7 2xl:ml-9' : ''
                     } ${
                       link.isCta
@@ -302,7 +309,7 @@ export default function Navigation() {
             <a
               href="tel:+306945777808"
               aria-label="Κάλεσέ μας"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-black/20 text-charcoal transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
+              className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
             >
               <Phone className="h-3.5 w-3.5" strokeWidth={1.5} />
             </a>

@@ -1,311 +1,240 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
-import { imagePlaceholder, images } from '@/lib/images'
-const headline = 'A quiet kind of chaos.'
-const fallbackSlides = [
-  images.heroInterior,
-  images.aboutBar,
-  images.gallery1,
-  images.aboutPlants,
-] as const
-const stats: ReadonlyArray<{ key: string; label: string; value: string }> = [
-  { key: 'rating', label: 'Google rating', value: '4.8★' },
-  { key: 'hours', label: 'Ανοιχτά καθημερινά', value: '08—23' },
-  { key: 'location', label: 'ΚΕΠΑΒΙ · Ιωάννινα', value: 'Ιωάννινα' },
-]
-
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const parallaxContainerRef = useRef<HTMLDivElement>(null)
-  const [isMobile, setIsMobile] = useState(false)
+  const sectionRef    = useRef<HTMLElement>(null)
+  const videoRef      = useRef<HTMLVideoElement>(null)
+  const phase1Ref     = useRef<HTMLDivElement>(null) // overline + headline — very top
+  const phase2Ref     = useRef<HTMLDivElement>(null) // Greek text panel — bottom, slides up
+  const phase2BtnsRef = useRef<HTMLDivElement>(null) // buttons inside panel
+  const scrollIndRef  = useRef<HTMLDivElement>(null)
+  const rafRef        = useRef<number>(0)
+
+  const [loaderReady,   setLoaderReady]   = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const [isHeroVisible, setIsHeroVisible] = useState(true)
-  const [loaderReady, setLoaderReady] = useState(false)
-  const [mediaPhase, setMediaPhase] = useState<'poster' | 'video' | 'hold' | 'photos'>('poster')
-  const [slideIndex, setSlideIndex] = useState(0)
+  const [videoReady,    setVideoReady]    = useState(false)
 
   useEffect(() => {
-    const el = parallaxContainerRef.current
-    if (!el) return
-    let rafId = 0
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const sync = () => setReducedMotion(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
+  useEffect(() => {
+    const onDone = () => setLoaderReady(true)
+    window.addEventListener('mess:loader-complete', onDone)
+    const win = window as Window & { __messLoaderComplete?: boolean }
+    if (win.__messLoaderComplete) setLoaderReady(true)
+    const t = window.setTimeout(() => setLoaderReady(true), LOADING_DURATION_MS)
+    return () => { window.removeEventListener('mess:loader-complete', onDone); window.clearTimeout(t) }
+  }, [])
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const video   = videoRef.current
+    if (!section || !video) return
+
+    video.pause()
+
+    const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
+    // ease-in-out quad for smooth motion
+    const eio = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+
     const update = () => {
-      const ratio = isMobile ? 0.02 : 0.04
-      el.style.transform = reducedMotion ? '' : `translateY(${window.scrollY * ratio}px)`
+      const rect      = section.getBoundingClientRect()
+      const scrollable = rect.height - window.innerHeight
+      if (scrollable <= 0) return
+      const p = clamp(-rect.top / scrollable, 0, 1)
+
+      // ── video scrub ──
+      if (!reducedMotion && video.duration) {
+        video.currentTime = p * video.duration
+      }
+
+      // ── Phase 1: headline at top ──
+      // Shows on load → fades out 0.16–0.22 → fades BACK IN 0.68–0.76 → stays
+      const el1 = phase1Ref.current
+      if (el1) {
+        let op1: number
+        if (p < 0.16)                    op1 = 1
+        else if (p < 0.22)               op1 = clamp(1 - (p - 0.16) / 0.06, 0, 1)
+        else if (p < 0.68)               op1 = 0
+        else if (p < 0.76)               op1 = clamp((p - 0.68) / 0.08, 0, 1)
+        else                             op1 = 1
+        el1.style.opacity       = String(op1)
+        el1.style.pointerEvents = op1 < 0.05 ? 'none' : ''
+      }
+
+      // ── Phase 2: Greek text — fades in at bottom, slides up a bit near end ──
+      const el2 = phase2Ref.current
+      if (el2) {
+        let op2 = 0
+        let yIn = 0  // entrance slide from below
+        let yUp = 0  // assembly slide upward
+
+        if (p >= 0.22 && p < 0.30) {
+          op2 = (p - 0.22) / 0.08
+          yIn = (1 - op2) * 24
+        } else if (p >= 0.30 && p < 0.65) {
+          op2 = 1
+        } else if (p >= 0.65) {
+          op2 = 1
+          const sp = eio(clamp((p - 0.65) / 0.12, 0, 1))
+          yUp = -sp * 90   // gentle upward glide (~90 px)
+        }
+
+        el2.style.opacity       = String(clamp(op2, 0, 1))
+        el2.style.transform     = `translateY(${(yIn + yUp).toFixed(2)}px)`
+        el2.style.pointerEvents = op2 < 0.05 ? 'none' : ''
+      }
+
+      // ── Buttons inside Phase 2: appear as panel glides up ──
+      const elBt = phase2BtnsRef.current
+      if (elBt) {
+        const op = clamp((p - 0.68) / 0.08, 0, 1)
+        elBt.style.opacity = String(op)
+      }
+
+      // ── scroll indicator ──
+      const si = scrollIndRef.current
+      if (si) si.style.opacity = String(clamp(1 - p / 0.12, 0, 1))
     }
+
     const onScroll = () => {
-      cancelAnimationFrame(rafId)
-      rafId = requestAnimationFrame(update)
+      cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(update)
     }
+
     window.addEventListener('scroll', onScroll, { passive: true })
+    update()
+
     return () => {
       window.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(rafId)
+      cancelAnimationFrame(rafRef.current)
     }
-  }, [isMobile, reducedMotion])
+  }, [reducedMotion, videoReady])
 
-  useEffect(() => {
-    const mediaMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const mediaMobile = window.matchMedia('(max-width: 767px)')
-    const sync = () => {
-      setReducedMotion(mediaMotion.matches)
-      setIsMobile(mediaMobile.matches)
-    }
-    sync()
-    mediaMotion.addEventListener('change', sync)
-    mediaMobile.addEventListener('change', sync)
-    return () => {
-      mediaMotion.removeEventListener('change', sync)
-      mediaMobile.removeEventListener('change', sync)
-    }
-  }, [])
-
-  useEffect(() => {
-    const onLoaderDone = () => setLoaderReady(true)
-    window.addEventListener('mess:loader-complete', onLoaderDone)
-    const hasLoaderCompleted = (window as Window & { __messLoaderComplete?: boolean }).__messLoaderComplete
-    if (hasLoaderCompleted) {
-      setLoaderReady(true)
-    }
-    const fallback = window.setTimeout(() => setLoaderReady(true), LOADING_DURATION_MS)
-    return () => {
-      window.removeEventListener('mess:loader-complete', onLoaderDone)
-      window.clearTimeout(fallback)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!sectionRef.current) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsHeroVisible(entry.isIntersecting)
-      },
-      { threshold: 0.35 },
-    )
-    observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (reducedMotion) {
-      setMediaPhase('photos')
-      setSlideIndex(0)
-      return
-    }
-    if (!loaderReady) {
-      setMediaPhase('poster')
-      return
-    }
-    setMediaPhase('video')
-  }, [loaderReady, reducedMotion])
-
-  useEffect(() => {
-    if (mediaPhase !== 'video' || reducedMotion || !loaderReady || !videoRef.current) return
-    const video = videoRef.current
-    if (!isHeroVisible) {
-      video.pause()
-      return
-    }
-    video.currentTime = 0
-    video.playbackRate = 1
-    video.play().catch(() => { /* autoplay policy */ })
-    const onEnded = () => {
-      setMediaPhase('hold')
-    }
-    video.addEventListener('ended', onEnded)
-    return () => video.removeEventListener('ended', onEnded)
-  }, [reducedMotion, isHeroVisible, loaderReady, mediaPhase])
-
-  useEffect(() => {
-    if (mediaPhase !== 'hold') return
-    const holdTimeout = window.setTimeout(() => {
-      setMediaPhase('photos')
-      setSlideIndex(0)
-    }, 3000)
-    return () => window.clearTimeout(holdTimeout)
-  }, [mediaPhase])
-
-  useEffect(() => {
-    if (reducedMotion || !loaderReady || mediaPhase !== 'photos') return
-    const id = window.setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % fallbackSlides.length)
-    }, 6000)
-    return () => window.clearInterval(id)
-  }, [loaderReady, mediaPhase, reducedMotion])
-
-  const heroWords = useMemo(() => headline.split(' '), [])
+  const heroWords = 'A quiet kind of chaos.'.split(' ')
 
   return (
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full min-h-screen overflow-hidden [animation:heroFadeIn_0.35s_ease-out_both]"
+      style={{ height: '600vh' }}
+      className="relative w-full"
     >
-      <div className="grid min-h-screen grid-cols-1 md:grid-cols-[42%_58%]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* LEFT COLUMN — text */}
-        <div className="relative z-20 flex items-end bg-bone">
-          <div className="mx-auto w-full max-w-[520px] px-6 pt-28 pb-16 md:px-10 md:py-20 lg:px-14 lg:py-24">
-            <div className="relative">
-              <motion.p
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease: EASE }}
-                className="font-sans text-[11px] tracking-[0.2em] text-charcoal"
-              >
-                SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING
-              </motion.p>
+        {/* ── video ── */}
+        <video
+          ref={videoRef}
+          muted
+          playsInline
+          preload="auto"
+          poster="/videos/hero-transformation-poster.jpg"
+          aria-label="Ο χώρος του M.E.S.S."
+          onLoadedMetadata={() => setVideoReady(true)}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        >
+          <source src="/videos/main-page-animation.mp4" type="video/mp4" />
+        </video>
 
-              <h1 className="hero-headline mt-5 font-serif tracking-tight text-balance text-charcoal [text-shadow:0_3px_14px_rgba(255,255,255,0.35)]">
-                {heroWords.map((word, i) => (
-                  <span
-                    key={`${word}-${i}`}
-                    className="inline-block overflow-hidden align-baseline"
-                  >
-                    <motion.span
-                      className="inline-block"
-                      initial={{ y: '100%', opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: i * 0.06, duration: 0.8, ease: EASE }}
-                    >
-                      {word}
-                      {i < heroWords.length - 1 ? '\u00A0' : ''}
-                    </motion.span>
-                  </span>
-                ))}
-              </h1>
+        {/* gradients — top for headline, bottom for text panel */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/65 via-transparent to-black/50" />
 
-              <motion.p
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, delay: 0.32, ease: EASE }}
-                className="mt-6 max-w-[560px] font-sans text-[17px] leading-relaxed text-charcoal md:text-[18px]"
-              >
-                Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.
-              </motion.p>
+        {/* ── PHASE 1: overline + headline — very top, above the plants ── */}
+        <div
+          ref={phase1Ref}
+          className="absolute inset-x-0 top-0 z-10 px-8 pt-16 md:px-16 lg:px-20"
+          style={{ willChange: 'opacity' }}
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, ease: EASE }}
+            className="font-sans text-[11px] tracking-[0.2em] text-white/75"
+          >
+            SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING
+          </motion.p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.42, ease: EASE }}
-                className="mt-4 max-w-[480px] font-sans text-[15px] leading-loose text-concrete"
-              >
-                Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
-                className="mt-8 flex flex-wrap items-center gap-5"
-              >
-                <Link
-                  href="/menu"
-                  className="inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+          <h1 className="hero-headline mt-3 max-w-[700px] font-serif tracking-tight text-balance text-white">
+            {heroWords.map((word, i) => (
+              <span key={`${word}-${i}`} className="inline-block overflow-hidden align-baseline">
+                <motion.span
+                  className="inline-block"
+                  initial={{ y: '100%', opacity: 0 }}
+                  animate={loaderReady ? { y: 0, opacity: 1 } : {}}
+                  transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
                 >
-                  Δες το menu
-                </Link>
-                <Link
-                  href="/#map"
-                  className="relative inline-block font-sans text-sm font-medium text-charcoal"
-                >
-                  <motion.span
-                    transition={{ duration: 0.45, ease: EASE }}
-                    className="absolute bottom-0 left-0 h-px w-full origin-left bg-mustard"
-                  />
-                  Βρες μας
-                </Link>
-              </motion.div>
+                  {word}{i < heroWords.length - 1 ? ' ' : ''}
+                </motion.span>
+              </span>
+            ))}
+          </h1>
+        </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
-                className="mt-10 grid w-full max-w-[560px] grid-cols-3 gap-2 border-t border-charcoal/20 pt-6 sm:gap-4 md:gap-6"
+        {/* ── PHASE 2: Greek text at bottom — slides up gently near end ── */}
+        <div
+          ref={phase2Ref}
+          className="absolute bottom-6 left-0 right-0 z-10 px-8 md:px-16 lg:px-20"
+          style={{ opacity: 0, willChange: 'opacity, transform' }}
+        >
+          <div className="max-w-[540px]">
+            <p className="font-sans text-[16px] leading-relaxed text-white/90 md:text-[17px] [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+              Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.
+            </p>
+            <p className="mt-3 font-sans text-[14px] leading-loose text-white/65 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]">
+              Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.
+            </p>
+
+            {/* buttons — fade in as panel glides up */}
+            <div
+              ref={phase2BtnsRef}
+              className="mt-7 flex flex-wrap items-center gap-5"
+              style={{ opacity: 0, willChange: 'opacity' }}
+            >
+              <Link
+                href="/menu"
+                className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
               >
-                {stats.map((item) => (
-                  <div key={item.key} className="min-w-0">
-                    <p className="font-serif text-[clamp(16px,4.5vw,30px)] leading-none text-charcoal">
-                      {item.value}
-                    </p>
-                    <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.14em] text-charcoal md:text-[11px]">
-                      {item.label}
-                    </p>
-                  </div>
-                ))}
-              </motion.div>
+                Δες το menu
+              </Link>
+              <Link
+                href="/#map"
+                className="relative inline-block font-sans text-sm font-medium text-white [text-shadow:0_1px_6px_rgba(0,0,0,0.5)]"
+              >
+                <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
+                Βρες μας
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* RIGHT COLUMN — photo/video */}
-        <div className="relative min-h-[60vh] md:min-h-0">
-          <div
-            ref={parallaxContainerRef}
-            style={{ background: imagePlaceholder() }}
-            className="absolute inset-0 will-change-transform"
-          >
-            <AnimatePresence mode="wait">
-              {(mediaPhase === 'video' || mediaPhase === 'hold' || mediaPhase === 'poster') && !reducedMotion ? (
-                <motion.video
-                  key={`hero-video-${mediaPhase}`}
-                  ref={videoRef}
-                  muted
-                  playsInline
-                  preload="metadata"
-                  poster="/videos/hero-transformation-poster.jpg"
-                  aria-label="Ο χώρος του M.E.S.S. παίρνει ζωή"
-                  className="h-full w-full object-cover object-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: EASE }}
-                >
-                  <source src="/videos/hero-transformation.mp4" type="video/mp4" />
-                </motion.video>
-              ) : (
-                <motion.div
-                  key={`hero-photo-${slideIndex}`}
-                  className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5, ease: EASE }}
-                >
-                  <Image
-                    src={fallbackSlides[slideIndex]}
-                    alt="Ο χώρος του M.E.S.S."
-                    fill
-                    priority
-                    sizes="(min-width: 768px) 58vw, 100vw"
-                    className="object-cover object-center"
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+        {/* ── scroll indicator ── */}
+        <div
+          ref={scrollIndRef}
+          className="pointer-events-none absolute bottom-8 left-8 z-30 hidden items-start gap-3 md:flex"
+          style={{ willChange: 'opacity' }}
+        >
+          <span className="pt-1 font-sans text-[11px] uppercase tracking-[0.2em] text-white/50">
+            SCROLL
+          </span>
+          <div className="relative h-[60px] w-px bg-white/20">
+            <motion.div
+              className="absolute left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-mustard"
+              animate={{ y: [0, 48, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: EASE }}
+            />
           </div>
         </div>
 
-      </div>
-
-      <div className="pointer-events-none absolute bottom-8 left-6 z-30 hidden items-start gap-3 md:flex md:left-12">
-        <span className="pt-1 font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal">
-          SCROLL
-        </span>
-        <div className="relative h-[60px] w-px overflow-visible bg-charcoal/20">
-          <motion.div
-            className="absolute left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-mustard"
-            animate={{ y: [0, 48, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: EASE }}
-          />
-        </div>
       </div>
     </section>
   )
