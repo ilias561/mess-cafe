@@ -36,6 +36,12 @@ export default function Hero() {
     return () => { window.removeEventListener('mess:loader-complete', onDone); window.clearTimeout(t) }
   }, [])
 
+  // React's SSR does not always serialise the `muted` prop as an HTML attribute.
+  // Safari reads the attribute at parse time — missing it blocks autoplay entirely.
+  useEffect(() => {
+    videoRef.current?.setAttribute('muted', '')
+  }, [])
+
   useEffect(() => {
     const section = sectionRef.current
     const video   = videoRef.current
@@ -43,94 +49,104 @@ export default function Hero() {
 
     const isMobile = window.innerWidth < 768
 
-    // ── Mobile: plain autoplay loop ──
+    // Force muted via both property and attribute (belt-and-suspenders for Safari)
+    video.muted = true
+    video.setAttribute('muted', '')
+
+    // ── MOBILE: autoplay loop — no scroll-scrub at all ──────────────────────────
     if (isMobile) {
       section.style.height = '100vh'
-
-      video.src   = '/videos/main-page-animation-mobile.mp4'
-      video.loop  = true
-      video.muted = true
+      video.loop = true
+      video.src  = '/videos/main-page-animation-mobile.mp4'
       video.load()
+
+      // Listeners we may need to clean up
+      let gestureHandler: (() => void) | null = null
+      let canPlayHandler: (() => void) | null = null
 
       const tryPlay = () => {
         video.play().catch(() => {
-          // Autoplay blocked — retry on first touch (common on older Android/iOS)
-          const onTouch = () => { video.play().catch(() => {}); }
-          document.addEventListener('touchstart', onTouch, { once: true, passive: true })
+          // Autoplay blocked — queue a one-shot retry on any real user gesture
+          gestureHandler = () => {
+            video.play().catch(() => {})
+            gestureHandler = null
+          }
+          document.addEventListener('touchstart', gestureHandler, { once: true, passive: true })
+          document.addEventListener('click',      gestureHandler, { once: true })
+          document.addEventListener('scroll',     gestureHandler, { once: true, passive: true })
         })
       }
 
-      // Wait until the browser has buffered enough to start playing
       if (video.readyState >= 3) {
         tryPlay()
       } else {
-        video.addEventListener('canplay', tryPlay, { once: true })
+        canPlayHandler = tryPlay
+        video.addEventListener('canplay', canPlayHandler, { once: true })
       }
-    } else {
-      video.src = '/videos/main-page-animation.mp4'
-      video.load()
-      video.pause()
+
+      // Show all text immediately on mobile (no scroll phases)
+      const el1 = phase1Ref.current
+      const el2 = phase2Ref.current
+      const elBt = phase2BtnsRef.current
+      if (el1)  el1.style.opacity = '1'
+      if (el2)  { el2.style.opacity = '1'; el2.style.transform = 'translateY(0)' }
+      if (elBt) elBt.style.opacity = '1'
+
+      return () => {
+        if (canPlayHandler) video.removeEventListener('canplay', canPlayHandler)
+        if (gestureHandler) {
+          document.removeEventListener('touchstart', gestureHandler)
+          document.removeEventListener('click',      gestureHandler)
+          document.removeEventListener('scroll',     gestureHandler)
+        }
+        video.pause()
+      }
     }
 
+    // ── DESKTOP: scroll-scrub ────────────────────────────────────────────────────
+    video.src = '/videos/main-page-animation.mp4'
+    video.load()
+    video.pause()
+
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
-    const eio = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
+    const eio   = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
 
     const update = () => {
-      const rect      = section.getBoundingClientRect()
+      const rect       = section.getBoundingClientRect()
       const scrollable = rect.height - window.innerHeight
       if (scrollable <= 0) return
       const p = clamp(-rect.top / scrollable, 0, 1)
 
-      // ── Desktop only: video scrub ──
-      if (!isMobile && !reducedMotion && video.duration && video.readyState >= 1) {
+      if (!reducedMotion && video.duration && video.readyState >= 1) {
         video.currentTime = p * video.duration
       }
 
-      // ── Phase 1: headline at top ──
-      // Shows on load → fades out 0.16–0.22 → fades BACK IN 0.68–0.76 → stays
       const el1 = phase1Ref.current
       if (el1) {
         let op1: number
-        if (p < 0.16)                    op1 = 1
-        else if (p < 0.22)               op1 = clamp(1 - (p - 0.16) / 0.06, 0, 1)
-        else if (p < 0.68)               op1 = 0
-        else if (p < 0.76)               op1 = clamp((p - 0.68) / 0.08, 0, 1)
-        else                             op1 = 1
+        if      (p < 0.16) op1 = 1
+        else if (p < 0.22) op1 = clamp(1 - (p - 0.16) / 0.06, 0, 1)
+        else if (p < 0.68) op1 = 0
+        else if (p < 0.76) op1 = clamp((p - 0.68) / 0.08, 0, 1)
+        else               op1 = 1
         el1.style.opacity       = String(op1)
         el1.style.pointerEvents = op1 < 0.05 ? 'none' : ''
       }
 
-      // ── Phase 2: Greek text — fades in at bottom, slides up a bit near end ──
       const el2 = phase2Ref.current
       if (el2) {
-        let op2 = 0
-        let yIn = 0  // entrance slide from below
-        let yUp = 0  // assembly slide upward
-
-        if (p >= 0.22 && p < 0.30) {
-          op2 = (p - 0.22) / 0.08
-          yIn = (1 - op2) * 24
-        } else if (p >= 0.30 && p < 0.65) {
-          op2 = 1
-        } else if (p >= 0.65) {
-          op2 = 1
-          const sp = eio(clamp((p - 0.65) / 0.12, 0, 1))
-          yUp = -sp * 90   // gentle upward glide (~90 px)
-        }
-
+        let op2 = 0, yIn = 0, yUp = 0
+        if      (p >= 0.22 && p < 0.30) { op2 = (p - 0.22) / 0.08; yIn = (1 - op2) * 24 }
+        else if (p >= 0.30 && p < 0.65) { op2 = 1 }
+        else if (p >= 0.65)             { op2 = 1; yUp = -eio(clamp((p - 0.65) / 0.12, 0, 1)) * 90 }
         el2.style.opacity       = String(clamp(op2, 0, 1))
         el2.style.transform     = `translateY(${(yIn + yUp).toFixed(2)}px)`
         el2.style.pointerEvents = op2 < 0.05 ? 'none' : ''
       }
 
-      // ── Buttons inside Phase 2: appear as panel glides up ──
       const elBt = phase2BtnsRef.current
-      if (elBt) {
-        const op = clamp((p - 0.68) / 0.08, 0, 1)
-        elBt.style.opacity = String(op)
-      }
+      if (elBt) elBt.style.opacity = String(clamp((p - 0.68) / 0.08, 0, 1))
 
-      // ── scroll indicator ──
       const si = scrollIndRef.current
       if (si) si.style.opacity = String(clamp(1 - p / 0.12, 0, 1))
     }
@@ -142,16 +158,6 @@ export default function Hero() {
 
     window.addEventListener('scroll', onScroll, { passive: true })
     update()
-
-    // On mobile show all content immediately (no scroll phases)
-    if (isMobile) {
-      const el1 = phase1Ref.current
-      const el2 = phase2Ref.current
-      const elBt = phase2BtnsRef.current
-      if (el1) { el1.style.opacity = '1' }
-      if (el2) { el2.style.opacity = '1'; el2.style.transform = 'translateY(0)' }
-      if (elBt) { elBt.style.opacity = '1' }
-    }
 
     return () => {
       window.removeEventListener('scroll', onScroll)
