@@ -330,7 +330,7 @@ export default function GallerySection() {
                 role="button"
                 tabIndex={0}
                 aria-label={`Άνοιγμα φωτογραφίας: ${item.alt}`}
-                className="aspect-[3/2] cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm"
+                className={`${item.id === 'a' ? 'aspect-[3/2.6]' : 'aspect-[3/2]'} cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm`}
                 style={!item.src ? { background: imagePlaceholder() } : undefined}
                 onClick={() => open(i)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i) } }}
