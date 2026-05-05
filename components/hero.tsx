@@ -30,51 +30,43 @@ function BotanicalCorner() {
         d="M28 142 C40 126 54 116 66 102"
         stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.38"
       />
-
       {/* Large leaf — lower (points outward) */}
       <path
         d="M66 102 C48 84 22 76 6 58 C20 65 42 72 62 90 Z"
         fill="currentColor" opacity="0.52"
       />
       <path d="M66 102 C48 86 30 78 12 66" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.26"/>
-
       {/* Large leaf — upper (points outward) */}
       <path
         d="M118 46 C124 24 146 10 168 6 C154 20 136 30 120 48 Z"
         fill="currentColor" opacity="0.56"
       />
       <path d="M118 46 C132 28 148 16 165 8" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.26"/>
-
       {/* Medium leaf — center-lower */}
       <path
         d="M86 70 C72 52 54 42 36 40 C50 46 68 56 84 72 Z"
         fill="currentColor" opacity="0.44"
       />
-
       {/* Medium leaf — center-upper */}
       <path
         d="M140 32 C148 16 162 8 174 4 C164 16 152 22 138 34 Z"
         fill="currentColor" opacity="0.44"
       />
-
       {/* Small leaf — low edge */}
       <path
         d="M46 120 C30 112 14 96 10 78 C22 88 34 102 48 116 Z"
         fill="currentColor" opacity="0.36"
       />
-
       {/* Tiny accent near tip */}
       <path
         d="M150 26 C156 14 166 6 176 2 C168 12 158 18 148 28 Z"
         fill="currentColor" opacity="0.40"
       />
-
       {/* Berry cluster at stem tip */}
       <circle cx="158" cy="20" r="2.5" fill="currentColor" opacity="0.45"/>
       <circle cx="150" cy="14" r="1.8" fill="currentColor" opacity="0.38"/>
       <circle cx="164" cy="14" r="1.5" fill="currentColor" opacity="0.32"/>
       <circle cx="168" cy="22" r="1.2" fill="currentColor" opacity="0.28"/>
-
       {/* Accent dots */}
       <circle cx="90" cy="68" r="1.5" fill="currentColor" opacity="0.28"/>
       <circle cx="68" cy="100" r="1.2" fill="currentColor" opacity="0.25"/>
@@ -139,7 +131,6 @@ export default function Hero() {
       img.src = videoSrc(`/videos/frames/frame-${num}.jpg`)
       img.onload = () => {
         loaded++
-        // Draw frame 1 as soon as it's ready — replaces the poster immediately
         if (i === 1) drawFrame(0)
       }
       imgs.push(img)
@@ -147,9 +138,9 @@ export default function Hero() {
     framesRef.current = imgs
   }, [])
 
-  // Scroll-scrub: mobile canvas only — desktop has its own static layout
+  // Scroll-scrub: mobile canvas only
   useEffect(() => {
-    if (window.innerWidth >= 768) return   // desktop handled separately
+    if (window.innerWidth >= 768) return
 
     const section = sectionRef.current
     if (!section) return
@@ -166,7 +157,6 @@ export default function Hero() {
       if (scrollable <= 0) return
       const p = clamp(-rect.top / scrollable, 0, 1)
 
-      // ── Media scrub ──────────────────────────────────────────────────────────
       if (!reducedMotion) {
         if (isMobile && canvas) {
           const idx = Math.round(p * (TOTAL_FRAMES - 1))
@@ -181,7 +171,6 @@ export default function Hero() {
         }
       }
 
-      // ── Phase 1: headline at top ─────────────────────────────────────────────
       const el1 = phase1Ref.current
       if (el1) {
         let op1: number
@@ -194,7 +183,6 @@ export default function Hero() {
         el1.style.pointerEvents = op1 < 0.05 ? 'none' : ''
       }
 
-      // ── Phase 2: Greek text panel ────────────────────────────────────────────
       const el2 = phase2Ref.current
       if (el2) {
         let op2 = 0, yIn = 0, yUp = 0
@@ -206,11 +194,9 @@ export default function Hero() {
         el2.style.pointerEvents = op2 < 0.05 ? 'none' : ''
       }
 
-      // ── Buttons ──────────────────────────────────────────────────────────────
       const elBt = phase2BtnsRef.current
       if (elBt) elBt.style.opacity = String(clamp((p - 0.68) / 0.08, 0, 1))
 
-      // ── Scroll indicator ─────────────────────────────────────────────────────
       const si = scrollIndRef.current
       if (si) si.style.opacity = String(clamp(1 - p / 0.12, 0, 1))
     }
@@ -234,22 +220,22 @@ export default function Hero() {
   return (
     <>
 
-    {/* ── DESKTOP hero: botanical window ── */}
+    {/* ── DESKTOP hero: text left · botanical video right ── */}
     <section
       id="hero"
-      className="hidden md:flex min-h-screen bg-bone flex-col items-center justify-center px-10 lg:px-16 py-20"
+      className="hidden md:flex min-h-screen bg-bone items-center overflow-hidden"
     >
-
-      {/* Eyebrow + headline */}
+      {/* ── LEFT: text column ── */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease: EASE }}
-        className="relative z-10 w-full max-w-[1100px] text-center mb-10"
+        initial={{ opacity: 0, x: -24 }}
+        animate={loaderReady ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.8, ease: EASE }}
+        className="relative z-10 flex w-[38%] shrink-0 flex-col justify-center px-12 lg:px-16 xl:px-20 py-28"
       >
         <p className="font-sans text-[11px] tracking-[0.2em] text-charcoal/40 uppercase">
           SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
         </p>
+
         <h1 className="hero-headline mt-4 font-serif tracking-tight text-balance text-charcoal">
           {heroWords.map((word, i) => (
             <span key={`d-${word}-${i}`} className="inline-block overflow-hidden align-baseline">
@@ -264,59 +250,24 @@ export default function Hero() {
             </span>
           ))}
         </h1>
-      </motion.div>
 
-      {/* ── Botanical video window ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.28, duration: 0.9, ease: EASE }}
-        className="relative w-full max-w-[1100px]"
-      >
-        {/* Thin border frame */}
-        <div className="relative aspect-video w-full overflow-hidden rounded-[2px] border border-charcoal/12">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src={videoSrc('/videos/main-page-animation.mp4')}
-            poster={videoSrc('/videos/hero-animation-poster.jpg')}
-            className="h-full w-full object-cover"
-            aria-hidden
-          />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.75, ease: EASE }}
+          className="mt-8 max-w-[420px]"
+        >
+          <p className="font-sans text-[16px] leading-relaxed text-charcoal/70">
+            {'Ένας πολυχώρος μπροστά στη λίμνη Ιωαννίνων — για specialty coffee, healthy brunch και ανθρώπινη σύνδεση.'}
+          </p>
+        </motion.div>
 
-        {/* ── Botanical corner decorations ── */}
-        {/* top-left */}
-        <div className="pointer-events-none absolute -top-16 -left-16 text-olive" aria-hidden>
-          <BotanicalCorner />
-        </div>
-        {/* top-right (mirror X) */}
-        <div className="pointer-events-none absolute -top-16 -right-16 text-olive [transform:scaleX(-1)]" aria-hidden>
-          <BotanicalCorner />
-        </div>
-        {/* bottom-left (mirror Y) */}
-        <div className="pointer-events-none absolute -bottom-16 -left-16 text-olive [transform:scaleY(-1)]" aria-hidden>
-          <BotanicalCorner />
-        </div>
-        {/* bottom-right (mirror both) */}
-        <div className="pointer-events-none absolute -bottom-16 -right-16 text-olive [transform:scale(-1,-1)]" aria-hidden>
-          <BotanicalCorner />
-        </div>
-      </motion.div>
-
-      {/* Body text + CTAs */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.5, duration: 0.75, ease: EASE }}
-        className="relative z-10 mt-16 flex flex-col items-center text-center gap-5"
-      >
-        <p className="max-w-[500px] font-sans text-[16px] leading-relaxed text-charcoal/65">
-          {'Ένας πολυχώρος μπροστά στη λίμνη Ιωαννίνων — για specialty coffee, healthy brunch και ανθρώπινη σύνδεση.'}
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-5">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.65, duration: 0.65, ease: EASE }}
+          className="mt-8 flex flex-wrap items-center gap-5"
+        >
           <Link
             href="/menu"
             className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
@@ -330,6 +281,46 @@ export default function Hero() {
             <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
             {'Βρες μας'}
           </Link>
+        </motion.div>
+      </motion.div>
+
+      {/* ── RIGHT: botanical-framed video ── */}
+      <motion.div
+        initial={{ opacity: 0, x: 32 }}
+        animate={loaderReady ? { opacity: 1, x: 0 } : {}}
+        transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
+        className="relative flex-1 self-stretch flex items-center justify-center py-16 pr-10 lg:pr-14"
+      >
+        {/* Video frame */}
+        <div className="relative w-full h-full max-h-[85vh] overflow-hidden rounded-[2px] border border-charcoal/10">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            src={videoSrc('/videos/main-page-animation.mp4')}
+            poster={videoSrc('/videos/hero-animation-poster.jpg')}
+            className="h-full w-full object-cover"
+            aria-hidden
+          />
+        </div>
+
+        {/* ── Botanical corner plants ── */}
+        {/* top-left */}
+        <div className="pointer-events-none absolute top-0 left-0 text-olive" aria-hidden>
+          <BotanicalCorner />
+        </div>
+        {/* top-right (mirror X) */}
+        <div className="pointer-events-none absolute top-0 right-0 text-olive [transform:scaleX(-1)]" aria-hidden>
+          <BotanicalCorner />
+        </div>
+        {/* bottom-left (mirror Y) */}
+        <div className="pointer-events-none absolute bottom-0 left-0 text-olive [transform:scaleY(-1)]" aria-hidden>
+          <BotanicalCorner />
+        </div>
+        {/* bottom-right (mirror both) */}
+        <div className="pointer-events-none absolute bottom-0 right-0 text-olive [transform:scale(-1,-1)]" aria-hidden>
+          <BotanicalCorner />
         </div>
       </motion.div>
 
