@@ -41,28 +41,20 @@ export default function Hero() {
     const video   = videoRef.current
     if (!section || !video) return
 
-    // Pick mobile (720p, 3.5 MB) or desktop (1080p, 13 MB) version
     const isMobile = window.innerWidth < 768
-    video.src = isMobile
-      ? '/videos/main-page-animation-mobile.mp4'
-      : '/videos/main-page-animation.mp4'
 
-    // load() kicks off the download; required before any seek works on mobile
-    video.load()
-
-    // iOS Safari blocks seeking until the video has been "played" inside a real
-    // user-gesture context. Firing on loadedmetadata is too early — the browser
-    // rejects it. We wait for the first scroll/touch instead (guaranteed gesture).
-    let unlocked = false
-    const unlockOnGesture = () => {
-      if (unlocked) return
-      unlocked = true
-      video.play().then(() => { video.pause() }).catch(() => {})
-      document.removeEventListener('scroll',     unlockOnGesture)
-      document.removeEventListener('touchstart', unlockOnGesture)
+    // ── Mobile: plain autoplay loop — universally supported, no seek needed ──
+    if (isMobile) {
+      video.src  = '/videos/main-page-animation-mobile.mp4'
+      video.loop = true
+      video.play().catch(() => {})
+      // On mobile the section is normal height — no sticky scroll-scrub
+      section.style.height = '100vh'
+    } else {
+      video.src = '/videos/main-page-animation.mp4'
+      video.load()
+      video.pause()
     }
-    document.addEventListener('scroll',     unlockOnGesture, { passive: true })
-    document.addEventListener('touchstart', unlockOnGesture, { passive: true })
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
     const eio = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -73,8 +65,8 @@ export default function Hero() {
       if (scrollable <= 0) return
       const p = clamp(-rect.top / scrollable, 0, 1)
 
-      // ── video scrub — only seek once browser has buffered some data (readyState ≥ 2) ──
-      if (!reducedMotion && video.duration && video.readyState >= 1) {
+      // ── Desktop only: video scrub ──
+      if (!isMobile && !reducedMotion && video.duration && video.readyState >= 1) {
         video.currentTime = p * video.duration
       }
 
@@ -135,10 +127,18 @@ export default function Hero() {
     window.addEventListener('scroll', onScroll, { passive: true })
     update()
 
+    // On mobile show all content immediately (no scroll phases)
+    if (isMobile) {
+      const el1 = phase1Ref.current
+      const el2 = phase2Ref.current
+      const elBt = phase2BtnsRef.current
+      if (el1) { el1.style.opacity = '1' }
+      if (el2) { el2.style.opacity = '1'; el2.style.transform = 'translateY(0)' }
+      if (elBt) { elBt.style.opacity = '1' }
+    }
+
     return () => {
       window.removeEventListener('scroll', onScroll)
-      document.removeEventListener('scroll',     unlockOnGesture)
-      document.removeEventListener('touchstart', unlockOnGesture)
       cancelAnimationFrame(rafRef.current)
     }
   }, [reducedMotion, videoReady])
