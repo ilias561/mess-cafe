@@ -8,11 +8,23 @@ import { EASE } from '@/lib/motion'
 import { imagePlaceholder, images } from '@/lib/images'
 import AmbientVideo from '@/components/ambient-video'
 
+type GalleryItem = {
+  id: string
+  src: string
+  videoSrc?: string
+  alt: string
+  label: string
+  caption: string
+  gridArea: string
+  priority: boolean
+}
+
 /* ── Curated editorial selection ── */
-const galleryItems = [
+const galleryItems: GalleryItem[] = [
   {
     id: 'a',
     src: images.gallery1,
+    videoSrc: '/videos/ai/hhook-2.mp4',
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',
@@ -55,9 +67,7 @@ const galleryItems = [
     gridArea: 'e',
     priority: false,
   },
-] as const
-
-type GalleryItem = (typeof galleryItems)[number]
+]
 
 /* ── Single card ── */
 function GalleryCard({
@@ -92,16 +102,25 @@ function GalleryCard({
       }}
     >
       <motion.div className="absolute inset-0">
-        <Image
-          src={item.src}
-          alt={item.alt}
-          fill
-          unoptimized
-          priority={item.priority}
-          loading={item.priority ? 'eager' : 'lazy'}
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-          className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
-        />
+        {item.videoSrc ? (
+          <AmbientVideo
+            src={item.videoSrc}
+            className="h-full w-full object-cover"
+            style={{ objectPosition: '50% 30%' }}
+            ariaHidden
+          />
+        ) : (
+          <Image
+            src={item.src}
+            alt={item.alt}
+            fill
+            unoptimized
+            priority={item.priority}
+            loading={item.priority ? 'eager' : 'lazy'}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
+          />
+        )}
       </motion.div>
 
       {/* Hover overlay — desktop only */}
@@ -322,15 +341,24 @@ export default function GallerySection() {
                   transition={{ duration: 0.65, delay: i * 0.06, ease: EASE }}
                   className="relative h-full w-full"
                 >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    unoptimized
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-cover object-center"
-                  />
+                  {item.videoSrc ? (
+                    <AmbientVideo
+                      src={item.videoSrc}
+                      className="h-full w-full object-cover"
+                      style={{ objectPosition: '50% 30%' }}
+                      ariaHidden
+                    />
+                  ) : (
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      unoptimized
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover object-center"
+                    />
+                  )}
                 </motion.div>
               </div>
             ))}
