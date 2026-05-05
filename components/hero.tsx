@@ -20,7 +20,6 @@ export default function Hero() {
   const scrollIndRef  = useRef<HTMLDivElement>(null)
   const rafRef        = useRef<number>(0)
   const isMobileRef   = useRef(false)
-  const seekingRef    = useRef(false)
   const lastFrameRef  = useRef(-1)
 
   const [loaderReady,   setLoaderReady]   = useState(false)
@@ -76,24 +75,15 @@ export default function Hero() {
     framesRef.current = imgs
   }, [])
 
-  // Scroll-scrub: shared between mobile (canvas) and desktop (video)
+  // Scroll-scrub: mobile canvas only — desktop has its own static layout
   useEffect(() => {
+    if (window.innerWidth >= 768) return   // desktop handled separately
+
     const section = sectionRef.current
     if (!section) return
 
     const isMobile = isMobileRef.current
-    const video    = videoRef.current
     const canvas   = canvasRef.current
-
-    // Desktop video setup
-    if (!isMobile && video) {
-      video.setAttribute('muted', '')
-      video.muted = true
-      video.src   = videoSrc('/videos/main-page-animation.mp4')
-      video.load()
-      video.pause()
-      video.addEventListener('seeked', () => { seekingRef.current = false })
-    }
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
     const eio   = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -116,9 +106,6 @@ export default function Hero() {
               ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
             }
           }
-        } else if (video && video.duration && video.readyState >= 2 && !seekingRef.current) {
-          seekingRef.current = true
-          video.currentTime = p * video.duration
         }
       }
 
@@ -173,11 +160,100 @@ export default function Hero() {
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
   return (
+    <>
+
+    {/* ── DESKTOP hero: text left · video right ── */}
+    <section className="hidden md:flex min-h-screen bg-[#1a1a1a] relative overflow-hidden items-center">
+
+      {/* Left: text */}
+      <div className="relative z-10 flex w-[52%] flex-col justify-center px-16 lg:px-24 py-28">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, ease: EASE }}
+          className="font-sans text-[11px] tracking-[0.2em] text-white/60"
+        >
+          SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING
+        </motion.p>
+
+        <h1 className="hero-headline mt-4 font-serif tracking-tight text-balance text-white">
+          {heroWords.map((word, i) => (
+            <span key={`d-${word}-${i}`} className="inline-block overflow-hidden align-baseline">
+              <motion.span
+                className="inline-block"
+                initial={{ y: '100%', opacity: 0 }}
+                animate={loaderReady ? { y: 0, opacity: 1 } : {}}
+                transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
+              >
+                {word}{i < heroWords.length - 1 ? ' ' : ''}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.75, ease: EASE }}
+          className="mt-8 max-w-[480px]"
+        >
+          <p className="font-sans text-[16px] leading-relaxed text-white/85">
+            Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.
+          </p>
+          <p className="mt-3 font-sans text-[14px] leading-loose text-white/55">
+            Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.65, duration: 0.65, ease: EASE }}
+          className="mt-8 flex flex-wrap items-center gap-5"
+        >
+          <Link
+            href="/menu"
+            className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+          >
+            Δες το menu
+          </Link>
+          <Link
+            href="/#map"
+            className="relative inline-block font-sans text-sm font-medium text-white"
+          >
+            <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
+            Βρες μας
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* Right: autoplay video */}
+      <div className="absolute right-0 top-0 h-full w-[52%]">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          src={videoSrc('/videos/main-page-animation.mp4')}
+          poster={videoSrc('/videos/hero-animation-poster.jpg')}
+          className="h-full w-full object-cover"
+          aria-hidden
+        />
+        {/* blend edge */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-[#1a1a1a] to-transparent" />
+        {/* top/bottom vignette */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" />
+      </div>
+
+    </section>
+
+    {/* ── MOBILE hero: scroll-scrub canvas animation ── */}
     <section
       ref={sectionRef}
       id="hero"
       style={{ height: '600vh' }}
-      className="relative w-full"
+      className="relative w-full md:hidden"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
@@ -290,5 +366,7 @@ export default function Hero() {
 
       </div>
     </section>
+
+    </>
   )
 }
