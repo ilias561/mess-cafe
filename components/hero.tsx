@@ -6,18 +6,22 @@ import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
 
+const TOTAL_FRAMES = 97   // ffmpeg extracted 97 frames from the 4-second video
+
 export default function Hero() {
   const sectionRef    = useRef<HTMLElement>(null)
   const videoRef      = useRef<HTMLVideoElement>(null)
-  const phase1Ref     = useRef<HTMLDivElement>(null) // overline + headline — very top
-  const phase2Ref     = useRef<HTMLDivElement>(null) // Greek text panel — bottom, slides up
-  const phase2BtnsRef = useRef<HTMLDivElement>(null) // buttons inside panel
+  const canvasRef     = useRef<HTMLCanvasElement>(null)
+  const framesRef     = useRef<HTMLImageElement[]>([])
+  const phase1Ref     = useRef<HTMLDivElement>(null)
+  const phase2Ref     = useRef<HTMLDivElement>(null)
+  const phase2BtnsRef = useRef<HTMLDivElement>(null)
   const scrollIndRef  = useRef<HTMLDivElement>(null)
   const rafRef        = useRef<number>(0)
+  const isMobileRef   = useRef(false)
 
   const [loaderReady,   setLoaderReady]   = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const [videoReady,    setVideoReady]    = useState(false)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -36,77 +40,56 @@ export default function Hero() {
     return () => { window.removeEventListener('mess:loader-complete', onDone); window.clearTimeout(t) }
   }, [])
 
-  // React's SSR does not always serialise the `muted` prop as an HTML attribute.
-  // Safari reads the attribute at parse time — missing it blocks autoplay entirely.
+  // Preload image sequence frames for mobile
   useEffect(() => {
-    videoRef.current?.setAttribute('muted', '')
-  }, [])
+    if (window.innerWidth >= 768) return
+    isMobileRef.current = true
 
-  useEffect(() => {
-    const section = sectionRef.current
-    const video   = videoRef.current
-    if (!section || !video) return
+    const canvas = canvasRef.current
+    if (!canvas) return
 
-    const isMobile = window.innerWidth < 768
+    const imgs: HTMLImageElement[] = []
+    let loaded = 0
 
-    // Force muted via both property and attribute (belt-and-suspenders for Safari)
-    video.muted = true
-    video.setAttribute('muted', '')
-
-    // ── MOBILE: autoplay loop — no scroll-scrub at all ──────────────────────────
-    if (isMobile) {
-      section.style.height = '100vh'
-      video.loop = true
-      video.src  = '/videos/main-page-animation-mobile.mp4'
-      video.load()
-
-      // Listeners we may need to clean up
-      let gestureHandler: (() => void) | null = null
-      let canPlayHandler: (() => void) | null = null
-
-      const tryPlay = () => {
-        video.play().catch(() => {
-          // Autoplay blocked — queue a one-shot retry on any real user gesture
-          gestureHandler = () => {
-            video.play().catch(() => {})
-            gestureHandler = null
-          }
-          document.addEventListener('touchstart', gestureHandler, { once: true, passive: true })
-          document.addEventListener('click',      gestureHandler, { once: true })
-          document.addEventListener('scroll',     gestureHandler, { once: true, passive: true })
-        })
-      }
-
-      if (video.readyState >= 3) {
-        tryPlay()
-      } else {
-        canPlayHandler = tryPlay
-        video.addEventListener('canplay', canPlayHandler, { once: true })
-      }
-
-      // Show all text immediately on mobile (no scroll phases)
-      const el1 = phase1Ref.current
-      const el2 = phase2Ref.current
-      const elBt = phase2BtnsRef.current
-      if (el1)  el1.style.opacity = '1'
-      if (el2)  { el2.style.opacity = '1'; el2.style.transform = 'translateY(0)' }
-      if (elBt) elBt.style.opacity = '1'
-
-      return () => {
-        if (canPlayHandler) video.removeEventListener('canplay', canPlayHandler)
-        if (gestureHandler) {
-          document.removeEventListener('touchstart', gestureHandler)
-          document.removeEventListener('click',      gestureHandler)
-          document.removeEventListener('scroll',     gestureHandler)
-        }
-        video.pause()
-      }
+    const drawFrame = (idx: number) => {
+      const img = imgs[idx]
+      if (!img?.complete || !canvas) return
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
     }
 
-    // ── DESKTOP: scroll-scrub ────────────────────────────────────────────────────
-    video.src = '/videos/main-page-animation.mp4'
-    video.load()
-    video.pause()
+    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+      const img = new Image()
+      const num = String(i).padStart(4, '0')
+      img.src = `/videos/frames/frame-${num}.jpg`
+      img.onload = () => {
+        loaded++
+        // Draw frame 1 as soon as it's ready — replaces the poster immediately
+        if (i === 1) drawFrame(0)
+      }
+      imgs.push(img)
+    }
+    framesRef.current = imgs
+  }, [])
+
+  // Scroll-scrub: shared between mobile (canvas) and desktop (video)
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const isMobile = isMobileRef.current
+    const video    = videoRef.current
+    const canvas   = canvasRef.current
+
+    // Desktop video setup
+    if (!isMobile && video) {
+      video.setAttribute('muted', '')
+      video.muted = true
+      video.src   = '/videos/main-page-animation.mp4'
+      video.load()
+      video.pause()
+    }
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
     const eio   = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -117,10 +100,22 @@ export default function Hero() {
       if (scrollable <= 0) return
       const p = clamp(-rect.top / scrollable, 0, 1)
 
-      if (!reducedMotion && video.duration && video.readyState >= 1) {
-        video.currentTime = p * video.duration
+      // ── Media scrub ──────────────────────────────────────────────────────────
+      if (!reducedMotion) {
+        if (isMobile && canvas) {
+          // Draw the frame that corresponds to current scroll position
+          const idx = Math.round(p * (TOTAL_FRAMES - 1))
+          const img = framesRef.current[idx]
+          if (img?.complete) {
+            const ctx = canvas.getContext('2d')
+            ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
+          }
+        } else if (video && video.duration && video.readyState >= 1) {
+          video.currentTime = p * video.duration
+        }
       }
 
+      // ── Phase 1: headline at top ─────────────────────────────────────────────
       const el1 = phase1Ref.current
       if (el1) {
         let op1: number
@@ -133,6 +128,7 @@ export default function Hero() {
         el1.style.pointerEvents = op1 < 0.05 ? 'none' : ''
       }
 
+      // ── Phase 2: Greek text panel ────────────────────────────────────────────
       const el2 = phase2Ref.current
       if (el2) {
         let op2 = 0, yIn = 0, yUp = 0
@@ -144,9 +140,11 @@ export default function Hero() {
         el2.style.pointerEvents = op2 < 0.05 ? 'none' : ''
       }
 
+      // ── Buttons ──────────────────────────────────────────────────────────────
       const elBt = phase2BtnsRef.current
       if (elBt) elBt.style.opacity = String(clamp((p - 0.68) / 0.08, 0, 1))
 
+      // ── Scroll indicator ─────────────────────────────────────────────────────
       const si = scrollIndRef.current
       if (si) si.style.opacity = String(clamp(1 - p / 0.12, 0, 1))
     }
@@ -163,7 +161,7 @@ export default function Hero() {
       window.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(rafRef.current)
     }
-  }, [reducedMotion, videoReady])
+  }, [reducedMotion])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
@@ -176,22 +174,30 @@ export default function Hero() {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* ── video ── */}
+        {/* ── Desktop: video element ── */}
         <video
           ref={videoRef}
           muted
           playsInline
           preload="auto"
-          poster="/videos/hero-transformation-poster.jpg"
+          poster="/videos/hero-animation-poster.jpg"
           aria-label="Ο χώρος του M.E.S.S."
-          onLoadedMetadata={() => setVideoReady(true)}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+          className="absolute inset-0 h-full w-full object-cover object-center md:block hidden"
         />
 
-        {/* gradients — top for headline, bottom for text panel */}
+        {/* ── Mobile: canvas image sequence ── */}
+        <canvas
+          ref={canvasRef}
+          width={540}
+          height={960}
+          className="absolute inset-0 h-full w-full object-cover object-center block md:hidden"
+          style={{ background: '#1a1a1a' }}
+        />
+
+        {/* gradients */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/65 via-transparent to-black/50" />
 
-        {/* ── PHASE 1: overline + headline — very top, above the plants ── */}
+        {/* ── PHASE 1: overline + headline ── */}
         <div
           ref={phase1Ref}
           className="absolute inset-x-0 top-0 z-10 px-8 pt-16 md:px-16 lg:px-20"
@@ -222,7 +228,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* ── PHASE 2: Greek text at bottom — slides up gently near end ── */}
+        {/* ── PHASE 2: Greek text ── */}
         <div
           ref={phase2Ref}
           className="absolute bottom-6 left-0 right-0 z-10 px-8 md:px-16 lg:px-20"
@@ -235,8 +241,6 @@ export default function Hero() {
             <p className="mt-3 font-sans text-[14px] leading-loose text-white/65 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]">
               Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.
             </p>
-
-            {/* buttons — fade in as panel glides up */}
             <div
               ref={phase2BtnsRef}
               className="mt-7 flex flex-wrap items-center gap-5"
@@ -259,7 +263,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── scroll indicator ── */}
+        {/* ── Scroll indicator ── */}
         <div
           ref={scrollIndRef}
           className="pointer-events-none absolute bottom-8 left-8 z-30 hidden items-start gap-3 md:flex"
