@@ -6,6 +6,7 @@ import Link from 'next/link'
 import type { Event } from '@/lib/events/events'
 import { getOpenStatus } from '@/lib/hours'
 import { fadeIn } from '@/lib/motion'
+import AmbientVideo from '@/components/ambient-video'
 
 type TodayModuleProps = {
   events: Event[]
@@ -54,10 +55,19 @@ export default function TodayModule({ events }: TodayModuleProps) {
   return (
     <motion.section
       {...fadeIn}
-      className="border-y border-charcoal/10 bg-bone/95 px-6 py-10 md:px-12 md:py-14"
+      className="relative overflow-hidden border-y border-charcoal/10 bg-bone/95 px-6 py-10 md:px-12 md:py-14"
       aria-label="Σήμερα στο M.E.S.S."
     >
-      <div className="mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
+      {/* Subtle ambient background */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <AmbientVideo
+          src="/videos/ai/hf-1.mp4"
+          className="h-full w-full object-cover opacity-[0.08]"
+        />
+        <div className="absolute inset-0 bg-bone/70" />
+      </div>
+
+      <div className="relative mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
         <div className="space-y-3">
           <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Κατάσταση χώρου</p>
           <p className="font-sans text-sm font-medium tracking-[0.08em] text-charcoal uppercase">

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import type { Event } from '@/lib/events/events'
+import AmbientVideo from '@/components/ambient-video'
 
 const MAX_VISIBLE = 3
 
@@ -33,6 +34,23 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           <p className="mt-4 max-w-3xl font-sans text-[15px] leading-relaxed text-concrete">
             Workshops, πολιτιστικές βραδιές, παρουσιάσεις βιβλίων, live μουσική. Ο χώρος μας γίνεται σκηνή για τις ιστορίες των Ιωαννίνων.
           </p>
+        </motion.div>
+
+        {/* Cinematic video strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
+          className="mb-10 overflow-hidden rounded-[2px]"
+          style={{ aspectRatio: '2/1' }}
+        >
+          <AmbientVideo
+            srcs={['/videos/ai/hf-2.mp4', '/videos/ai/hf-1.mp4']}
+            className="h-full w-full object-cover"
+            style={{ objectPosition: '50% 30%' }}
+            ariaHidden
+          />
         </motion.div>
 
         {visible.length > 0 && (

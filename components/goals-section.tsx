@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import AmbientVideo from '@/components/ambient-video'
 import { EASE } from '@/lib/motion'
 
 const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
@@ -258,6 +259,26 @@ export default function GoalsSection() {
         </div>
 
       </div>
+
+      {/* Full-width cinematic video strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 1.0, ease: EASE }}
+        className="mx-auto mt-24 max-w-[1400px] overflow-hidden rounded-[2px]"
+        style={{ aspectRatio: '2/1' }}
+      >
+        <div className="relative h-full w-full">
+          <div className="absolute inset-0 z-10 bg-olive-deep/30" />
+          <AmbientVideo
+            src="/videos/ai/hhook-2.mp4"
+            className="h-full w-full object-cover"
+            style={{ objectPosition: '50% 30%' }}
+            ariaHidden
+          />
+        </div>
+      </motion.div>
 
       {/* ── #KEEPRISING seal — bottom-right, overlapping boundary ── */}
       <div className="absolute bottom-0 right-6 translate-y-1/2 md:right-12">

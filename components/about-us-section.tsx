@@ -5,6 +5,7 @@ import { motion, useInView, animate } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import MaskReveal from '@/components/mask-reveal'
+import AmbientVideo from '@/components/ambient-video'
 import { EASE } from '@/lib/motion'
 import { images } from '@/lib/images'
 
@@ -267,6 +268,33 @@ export default function AboutUsSection() {
               </motion.p>
             </div>
           ))}
+
+          {/* Ambient video — cinematic moment */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 64, scale: 1.04 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: '-15% 0px -15% 0px' }}
+              transition={{ duration: 1.1, ease: EASE_TUPLE, delay: aboutImages.length * 0.12 }}
+              className="relative w-full overflow-hidden aspect-video"
+            >
+              <AmbientVideo
+                src="/videos/ai/hhook-1.mp4"
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: '50% 30%' }}
+                ariaLabel="Βίντεο από τον χώρο του M.E.S.S."
+              />
+            </motion.div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: '-10% 0px' }}
+              transition={{ duration: 0.6, ease: EASE, delay: aboutImages.length * 0.12 + 0.3 }}
+              className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive"
+            >
+              ΣΤΙΓΜΕΣ
+            </motion.p>
+          </div>
         </div>
 
       </div>
