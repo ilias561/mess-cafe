@@ -43,13 +43,29 @@ export default function Hero() {
 
     const isMobile = window.innerWidth < 768
 
-    // ── Mobile: plain autoplay loop — universally supported, no seek needed ──
+    // ── Mobile: plain autoplay loop ──
     if (isMobile) {
-      video.src  = '/videos/main-page-animation-mobile.mp4'
-      video.loop = true
-      video.play().catch(() => {})
-      // On mobile the section is normal height — no sticky scroll-scrub
       section.style.height = '100vh'
+
+      video.src   = '/videos/main-page-animation-mobile.mp4'
+      video.loop  = true
+      video.muted = true
+      video.load()
+
+      const tryPlay = () => {
+        video.play().catch(() => {
+          // Autoplay blocked — retry on first touch (common on older Android/iOS)
+          const onTouch = () => { video.play().catch(() => {}); }
+          document.addEventListener('touchstart', onTouch, { once: true, passive: true })
+        })
+      }
+
+      // Wait until the browser has buffered enough to start playing
+      if (video.readyState >= 3) {
+        tryPlay()
+      } else {
+        video.addEventListener('canplay', tryPlay, { once: true })
+      }
     } else {
       video.src = '/videos/main-page-animation.mp4'
       video.load()
