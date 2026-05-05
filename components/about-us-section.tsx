@@ -15,13 +15,6 @@ const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
 /* ── Scrolling photos ── */
 const aboutImages = [
   {
-    key: 'aboutInterior',
-    src: images.aboutInterior,
-    alt: 'Café interior with plants and natural light',
-    aspect: 'aspect-[4/5]',
-    caption: 'Ο ΠΡΩΤΟΣ ΟΡΟΦΟΣ',
-  },
-  {
     key: 'aboutBar',
     src: images.aboutBar,
     alt: 'Coffee bar and service area',
@@ -280,7 +273,7 @@ export default function AboutUsSection() {
               className="relative w-full overflow-hidden aspect-video"
             >
               <AmbientVideo
-                src={videoSrc('/videos/ai/hhook-1.mp4')}
+                src={videoSrc('/videos/ai/0501.mp4')}
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: '50% 30%' }}
                 ariaLabel="Βίντεο από τον χώρο του M.E.S.S."

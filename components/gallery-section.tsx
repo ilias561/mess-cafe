@@ -393,7 +393,7 @@ export default function GallerySection() {
             style={{ aspectRatio: '16/9' }}
           >
             <AmbientVideo
-              srcs={[videoSrcUrl('/videos/ai/hhook-1.mp4'), videoSrcUrl('/videos/ai/hhook-2.mp4')]}
+              srcs={[videoSrcUrl('/videos/ai/first.mp4'), videoSrcUrl('/videos/ai/second.mp4')]}
               className="h-full w-full object-cover"
               style={{ objectPosition: '50% 30%' }}
               ariaHidden

@@ -261,26 +261,7 @@ export default function GoalsSection() {
 
       </div>
 
-      {/* Cinematic video strip */}
-      <div className="mt-16 px-6 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.85, ease: EASE }}
-          className="overflow-hidden rounded-[2px]"
-          style={{ aspectRatio: '16/9' }}
-        >
-          <AmbientVideo
-            srcs={[videoSrc('/videos/ai/hf-2.mp4'), videoSrc('/videos/ai/hf-1.mp4')]}
-            className="h-full w-full object-cover"
-            style={{ objectPosition: '50% 30%' }}
-            ariaHidden
-          />
-        </motion.div>
-      </div>
-
-      {/* ── #KEEPRISING seal — bottom-right, overlapping boundary ── */}
+{/* ── #KEEPRISING seal — bottom-right, overlapping boundary ── */}
       <div className="absolute bottom-0 right-6 translate-y-1/2 md:right-12">
         <KeepRisingSeal />
       </div>
