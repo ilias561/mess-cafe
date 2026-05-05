@@ -88,6 +88,7 @@ export default function Navigation() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
   const [hasPastHero, setHasPastHero] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
   const firstFocusableRef = useRef<HTMLButtonElement>(null)
@@ -114,11 +115,21 @@ export default function Navigation() {
     return () => observers.forEach((o) => o.disconnect())
   }, [sectionLinks])
 
-  // Header handoff: transparent slim over hero (300vh section) → cream after
+  // Track desktop vs mobile (affects hero height and nav style)
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // Header handoff: transparent over dark mobile hero → cream after
+  // Desktop hero is bone-colored (min-h-screen), mobile hero is 600vh sticky scroll
   useEffect(() => {
     const onScroll = () => {
-      // Hero section is 600vh tall; sticky viewport = 100vh → scrollable = 500vh
-      const threshold = window.innerHeight * 5 - 60
+      const threshold = window.innerWidth >= 768
+        ? window.innerHeight - 60          // desktop: just past the viewport
+        : window.innerHeight * 5 - 60      // mobile: past the 600vh sticky scroll
       setHasPastHero(window.scrollY > threshold)
     }
     onScroll()
@@ -133,7 +144,8 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      const inHero = pathname === '/' && currentScrollY < window.innerHeight * 5
+      const heroHeight = window.innerWidth >= 768 ? window.innerHeight : window.innerHeight * 5
+      const inHero = pathname === '/' && currentScrollY < heroHeight
       if (currentScrollY < 120 || inHero) {
         // Always show nav at top and during hero scroll-scrub
         setIsVisible(true)
@@ -214,7 +226,9 @@ export default function Navigation() {
     return true
   }
 
-  const isInHero = pathname === '/' && !hasPastHero
+  // Desktop hero is bone/light — never go transparent with white text there.
+  // Only mobile hero is dark (canvas video), so the transparent white-text mode is mobile-only.
+  const isInHero = !isDesktop && pathname === '/' && !hasPastHero
   const navTextColor = isInHero ? 'text-white' : 'text-charcoal'
   const headerClasses = isInHero
     ? 'bg-transparent'

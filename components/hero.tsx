@@ -258,7 +258,10 @@ export default function Hero() {
           className="mt-8 max-w-[420px]"
         >
           <p className="font-sans text-[16px] leading-relaxed text-charcoal/70">
-            {'Ένας πολυχώρος μπροστά στη λίμνη Ιωαννίνων — για specialty coffee, healthy brunch και ανθρώπινη σύνδεση.'}
+            {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
+          </p>
+          <p className="mt-3 font-sans text-[14px] leading-loose text-charcoal/55">
+            {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
           </p>
         </motion.div>
 
