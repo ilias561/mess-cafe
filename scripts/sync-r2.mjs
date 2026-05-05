@@ -67,7 +67,10 @@ function walk(dir, files = []) {
   return files
 }
 
+const FORCE = process.env.FORCE === 'true'
+
 async function alreadyUploaded(key, localSize) {
+  if (FORCE) return false
   try {
     const res = await client.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }))
     return res.ContentLength === localSize
@@ -101,6 +104,7 @@ async function main() {
       Body: body,
       ContentType: CONTENT_TYPES[ext] ?? 'application/octet-stream',
       ContentLength: size,
+      CacheControl: 'public, max-age=31536000, immutable',
     }))
     console.log(`  up    ${rel}  (${(size / 1024).toFixed(0)} KB)`)
     uploaded++

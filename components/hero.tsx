@@ -20,6 +20,8 @@ export default function Hero() {
   const scrollIndRef  = useRef<HTMLDivElement>(null)
   const rafRef        = useRef<number>(0)
   const isMobileRef   = useRef(false)
+  const seekingRef    = useRef(false)
+  const lastFrameRef  = useRef(-1)
 
   const [loaderReady,   setLoaderReady]   = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -90,6 +92,7 @@ export default function Hero() {
       video.src   = videoSrc('/videos/main-page-animation.mp4')
       video.load()
       video.pause()
+      video.addEventListener('seeked', () => { seekingRef.current = false })
     }
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
@@ -104,14 +107,17 @@ export default function Hero() {
       // ── Media scrub ──────────────────────────────────────────────────────────
       if (!reducedMotion) {
         if (isMobile && canvas) {
-          // Draw the frame that corresponds to current scroll position
           const idx = Math.round(p * (TOTAL_FRAMES - 1))
-          const img = framesRef.current[idx]
-          if (img?.complete) {
-            const ctx = canvas.getContext('2d')
-            ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
+          if (idx !== lastFrameRef.current) {
+            lastFrameRef.current = idx
+            const img = framesRef.current[idx]
+            if (img?.complete) {
+              const ctx = canvas.getContext('2d')
+              ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
+            }
           }
-        } else if (video && video.duration && video.readyState >= 1) {
+        } else if (video && video.duration && video.readyState >= 2 && !seekingRef.current) {
+          seekingRef.current = true
           video.currentTime = p * video.duration
         }
       }

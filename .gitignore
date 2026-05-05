@@ -38,6 +38,9 @@ yarn-error.log*
 next-env.d.ts
 .vercel
 
+# Videos — served from Cloudflare R2, not committed to git
+public/videos/
+
 # Working files (not for production)
 BLOG_CURSOR_PROMPT.md
 CURSOR_PROMPT*.md
