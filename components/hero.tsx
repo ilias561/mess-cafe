@@ -41,10 +41,26 @@ export default function Hero() {
     const video   = videoRef.current
     if (!section || !video) return
 
-    video.pause()
+    // Pick mobile (720p, 3.5 MB) or desktop (1080p, 13 MB) version
+    const isMobile = window.innerWidth < 768
+    video.src = isMobile
+      ? '/videos/main-page-animation-mobile.mp4'
+      : '/videos/main-page-animation.mp4'
+
+    // load() kicks off the download; on iOS this is required before any seek works
+    video.load()
+
+    // iOS Safari won't allow seeking until the video has been "played" at least once.
+    // A silent play→pause immediately after load unlocks the seek API.
+    const unlockiOS = () => {
+      video.play().then(() => {
+        video.pause()
+        video.currentTime = 0
+      }).catch(() => { /* autoplay blocked — fine, seek will still work after interaction */ })
+    }
+    video.addEventListener('loadedmetadata', unlockiOS, { once: true })
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
-    // ease-in-out quad for smooth motion
     const eio = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
 
     const update = () => {
@@ -53,8 +69,8 @@ export default function Hero() {
       if (scrollable <= 0) return
       const p = clamp(-rect.top / scrollable, 0, 1)
 
-      // ── video scrub ──
-      if (!reducedMotion && video.duration) {
+      // ── video scrub — only seek once browser has buffered some data (readyState ≥ 2) ──
+      if (!reducedMotion && video.duration && video.readyState >= 2) {
         video.currentTime = p * video.duration
       }
 
@@ -142,9 +158,7 @@ export default function Hero() {
           aria-label="Ο χώρος του M.E.S.S."
           onLoadedMetadata={() => setVideoReady(true)}
           className="absolute inset-0 h-full w-full object-cover object-center"
-        >
-          <source src="/videos/main-page-animation.mp4" type="video/mp4" />
-        </video>
+        />
 
         {/* gradients — top for headline, bottom for text panel */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/65 via-transparent to-black/50" />
