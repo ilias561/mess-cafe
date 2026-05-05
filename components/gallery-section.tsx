@@ -25,7 +25,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'a',
     src: images.gallery1,
-    videoSrc: videoSrcUrl('/videos/ai/hhook-2.mp4'),
+    videoSrc: videoSrcUrl('/videos/ai/0501.mp4'),
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',
@@ -330,7 +330,7 @@ export default function GallerySection() {
                 role="button"
                 tabIndex={0}
                 aria-label={`Άνοιγμα φωτογραφίας: ${item.alt}`}
-                className={`${item.id === 'a' ? 'aspect-[3/4]' : 'aspect-[3/2]'} cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm`}
+                className={`${item.id === 'a' ? 'aspect-[3/4.12]' : 'aspect-[3/2]'} cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm`}
                 style={!item.src ? { background: imagePlaceholder() } : undefined}
                 onClick={() => open(i)}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i) } }}
