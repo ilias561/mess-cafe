@@ -47,18 +47,22 @@ export default function Hero() {
       ? '/videos/main-page-animation-mobile.mp4'
       : '/videos/main-page-animation.mp4'
 
-    // load() kicks off the download; on iOS this is required before any seek works
+    // load() kicks off the download; required before any seek works on mobile
     video.load()
 
-    // iOS Safari won't allow seeking until the video has been "played" at least once.
-    // A silent play→pause immediately after load unlocks the seek API.
-    const unlockiOS = () => {
-      video.play().then(() => {
-        video.pause()
-        video.currentTime = 0
-      }).catch(() => { /* autoplay blocked — fine, seek will still work after interaction */ })
+    // iOS Safari blocks seeking until the video has been "played" inside a real
+    // user-gesture context. Firing on loadedmetadata is too early — the browser
+    // rejects it. We wait for the first scroll/touch instead (guaranteed gesture).
+    let unlocked = false
+    const unlockOnGesture = () => {
+      if (unlocked) return
+      unlocked = true
+      video.play().then(() => { video.pause() }).catch(() => {})
+      document.removeEventListener('scroll',     unlockOnGesture)
+      document.removeEventListener('touchstart', unlockOnGesture)
     }
-    video.addEventListener('loadedmetadata', unlockiOS, { once: true })
+    document.addEventListener('scroll',     unlockOnGesture, { passive: true })
+    document.addEventListener('touchstart', unlockOnGesture, { passive: true })
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
     const eio = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -70,7 +74,7 @@ export default function Hero() {
       const p = clamp(-rect.top / scrollable, 0, 1)
 
       // ── video scrub — only seek once browser has buffered some data (readyState ≥ 2) ──
-      if (!reducedMotion && video.duration && video.readyState >= 2) {
+      if (!reducedMotion && video.duration && video.readyState >= 1) {
         video.currentTime = p * video.duration
       }
 
@@ -133,6 +137,8 @@ export default function Hero() {
 
     return () => {
       window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('scroll',     unlockOnGesture)
+      document.removeEventListener('touchstart', unlockOnGesture)
       cancelAnimationFrame(rafRef.current)
     }
   }, [reducedMotion, videoReady])
