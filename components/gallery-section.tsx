@@ -361,7 +361,7 @@ export default function GallerySection() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.9, ease: EASE }}
             className="mt-4 overflow-hidden rounded-[2px]"
-            style={{ aspectRatio: '2/1' }}
+            style={{ aspectRatio: '16/9' }}
           >
             <AmbientVideo
               srcs={['/videos/ai/hhook-1.mp4', '/videos/ai/hhook-2.mp4']}

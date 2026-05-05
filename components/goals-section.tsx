@@ -267,7 +267,7 @@ export default function GoalsSection() {
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 1.0, ease: EASE }}
         className="mx-auto mt-24 max-w-[1400px] overflow-hidden rounded-[2px]"
-        style={{ aspectRatio: '2/1' }}
+        style={{ aspectRatio: '16/9' }}
       >
         <div className="relative h-full w-full">
           <div className="absolute inset-0 z-10 bg-olive-deep/30" />

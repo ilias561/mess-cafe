@@ -43,7 +43,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
           className="mb-10 overflow-hidden rounded-[2px]"
-          style={{ aspectRatio: '2/1' }}
+          style={{ aspectRatio: '16/9' }}
         >
           <AmbientVideo
             srcs={['/videos/ai/hf-2.mp4', '/videos/ai/hf-1.mp4']}
