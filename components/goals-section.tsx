@@ -3,9 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import AmbientVideo from '@/components/ambient-video'
 import { EASE } from '@/lib/motion'
-import { videoSrc } from '@/lib/media'
 
 const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
 
