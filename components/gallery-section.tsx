@@ -383,22 +383,6 @@ export default function GallerySection() {
             ))}
           </div>
 
-          {/* Cinematic video strip — both HHook videos in sequence */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, ease: EASE }}
-            className="mt-4 overflow-hidden rounded-[2px]"
-            style={{ aspectRatio: '16/9' }}
-          >
-            <AmbientVideo
-              srcs={[videoSrcUrl('/videos/ai/first.mp4'), videoSrcUrl('/videos/ai/second.mp4')]}
-              className="h-full w-full object-cover"
-              style={{ objectPosition: '50% 30%' }}
-              ariaHidden
-            />
-          </motion.div>
 
         </div>
       </section>

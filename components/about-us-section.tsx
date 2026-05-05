@@ -273,7 +273,7 @@ export default function AboutUsSection() {
               className="relative w-full overflow-hidden aspect-video"
             >
               <AmbientVideo
-                src={videoSrc('/videos/ai/0501.mp4')}
+                srcs={[videoSrc('/videos/ai/first.mp4'), videoSrc('/videos/ai/second.mp4')]}
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: '50% 30%' }}
                 ariaLabel="Βίντεο από τον χώρο του M.E.S.S."
