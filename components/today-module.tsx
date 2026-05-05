@@ -7,6 +7,7 @@ import type { Event } from '@/lib/events/events'
 import { getOpenStatus } from '@/lib/hours'
 import { fadeIn } from '@/lib/motion'
 import AmbientVideo from '@/components/ambient-video'
+import { videoSrc } from '@/lib/media'
 
 type TodayModuleProps = {
   events: Event[]
@@ -61,7 +62,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
       {/* Subtle ambient background */}
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <AmbientVideo
-          src="/videos/ai/hf-1.mp4"
+          src={videoSrc('/videos/ai/hf-1.mp4')}
           className="h-full w-full object-cover opacity-[0.08]"
         />
         <div className="absolute inset-0 bg-bone/70" />

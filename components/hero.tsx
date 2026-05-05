@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
+import { videoSrc } from '@/lib/media'
 
 const TOTAL_FRAMES = 97   // ffmpeg extracted 97 frames from the 4-second video
 
@@ -62,7 +63,7 @@ export default function Hero() {
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image()
       const num = String(i).padStart(4, '0')
-      img.src = `/videos/frames/frame-${num}.jpg`
+      img.src = videoSrc(`/videos/frames/frame-${num}.jpg`)
       img.onload = () => {
         loaded++
         // Draw frame 1 as soon as it's ready — replaces the poster immediately
@@ -86,7 +87,7 @@ export default function Hero() {
     if (!isMobile && video) {
       video.setAttribute('muted', '')
       video.muted = true
-      video.src   = '/videos/main-page-animation.mp4'
+      video.src   = videoSrc('/videos/main-page-animation.mp4')
       video.load()
       video.pause()
     }
@@ -180,7 +181,7 @@ export default function Hero() {
           muted
           playsInline
           preload="auto"
-          poster="/videos/hero-animation-poster.jpg"
+          poster={videoSrc('/videos/hero-animation-poster.jpg')}
           aria-label="Ο χώρος του M.E.S.S."
           className="absolute inset-0 h-full w-full object-cover object-center md:block hidden"
         />

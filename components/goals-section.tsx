@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import AmbientVideo from '@/components/ambient-video'
 import { EASE } from '@/lib/motion'
+import { videoSrc } from '@/lib/media'
 
 const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
 
@@ -258,6 +259,25 @@ export default function GoalsSection() {
           </motion.div>
         </div>
 
+      </div>
+
+      {/* Cinematic video strip */}
+      <div className="mt-16 px-6 md:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.85, ease: EASE }}
+          className="overflow-hidden rounded-[2px]"
+          style={{ aspectRatio: '16/9' }}
+        >
+          <AmbientVideo
+            srcs={[videoSrc('/videos/ai/hf-2.mp4'), videoSrc('/videos/ai/hf-1.mp4')]}
+            className="h-full w-full object-cover"
+            style={{ objectPosition: '50% 30%' }}
+            ariaHidden
+          />
+        </motion.div>
       </div>
 
       {/* ── #KEEPRISING seal — bottom-right, overlapping boundary ── */}

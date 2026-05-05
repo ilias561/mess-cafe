@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import MaskReveal from '@/components/mask-reveal'
 import AmbientVideo from '@/components/ambient-video'
+import { videoSrc } from '@/lib/media'
 import { EASE } from '@/lib/motion'
 import { images } from '@/lib/images'
 
@@ -279,7 +280,7 @@ export default function AboutUsSection() {
               className="relative w-full overflow-hidden aspect-video"
             >
               <AmbientVideo
-                src="/videos/ai/hhook-1.mp4"
+                src={videoSrc('/videos/ai/hhook-1.mp4')}
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: '50% 30%' }}
                 ariaLabel="Βίντεο από τον χώρο του M.E.S.S."

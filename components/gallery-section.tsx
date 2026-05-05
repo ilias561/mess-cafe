@@ -7,6 +7,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 import { imagePlaceholder, images } from '@/lib/images'
 import AmbientVideo from '@/components/ambient-video'
+import { videoSrc as videoSrcUrl } from '@/lib/media'
 
 type GalleryItem = {
   id: string
@@ -24,7 +25,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'a',
     src: images.gallery1,
-    videoSrc: '/videos/ai/hhook-2.mp4',
+    videoSrc: videoSrcUrl('/videos/ai/hhook-2.mp4'),
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',
@@ -392,7 +393,7 @@ export default function GallerySection() {
             style={{ aspectRatio: '16/9' }}
           >
             <AmbientVideo
-              srcs={['/videos/ai/hhook-1.mp4', '/videos/ai/hhook-2.mp4']}
+              srcs={[videoSrcUrl('/videos/ai/hhook-1.mp4'), videoSrcUrl('/videos/ai/hhook-2.mp4')]}
               className="h-full w-full object-cover"
               style={{ objectPosition: '50% 30%' }}
               ariaHidden
