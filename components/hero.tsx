@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
@@ -77,11 +77,11 @@ export default function Hero() {
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
   const phase1Ref     = useRef<HTMLDivElement>(null)
   const phase2Ref     = useRef<HTMLDivElement>(null)
-  const phase2BtnsRef = useRef<HTMLDivElement>(null)
   const scrollIndRef  = useRef<HTMLDivElement>(null)
   const rafRef        = useRef<number>(0)
 
   const [loaderReady, setLoaderReady] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
     const onDone = () => setLoaderReady(true)
@@ -151,17 +151,17 @@ export default function Hero() {
 
       const el2 = phase2Ref.current
       if (el2) {
-        let op2 = 0, yIn = 0, yUp = 0
-        if      (p >= 0.22 && p < 0.30) { op2 = (p - 0.22) / 0.08; yIn = (1 - op2) * 24 }
-        else if (p >= 0.30 && p < 0.65) { op2 = 1 }
-        else if (p >= 0.65)             { op2 = 1; yUp = -eio(clamp((p - 0.65) / 0.12, 0, 1)) * 90 }
+        // At rest (no scroll): full hero matches design — copy + CTAs visible; scroll only adds motion later.
+        let op2 = 1
+        let yIn = 0
+        let yUp = 0
+        if (p >= 0.65) {
+          yUp = -eio(clamp((p - 0.65) / 0.12, 0, 1)) * 90
+        }
         el2.style.opacity       = String(clamp(op2, 0, 1))
         el2.style.transform     = `translateY(${(yIn + yUp).toFixed(2)}px)`
         el2.style.pointerEvents = op2 < 0.05 ? 'none' : ''
       }
-
-      const elBt = phase2BtnsRef.current
-      if (elBt) elBt.style.opacity = String(clamp((p - 0.68) / 0.08, 0, 1))
 
       const si = scrollIndRef.current
       if (si) si.style.opacity = String(clamp(1 - p / 0.12, 0, 1))
@@ -305,38 +305,36 @@ export default function Hero() {
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* ── Mobile: canvas image sequence ── */}
-        <img
-          src={frameSrc(0, { mobile: true })}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center"
-          style={{ zIndex: 0 }}
-        />
-        <video
-          ref={mobileVideoRef}
-          src={videoSrc('/videos/hero-mobile.mp4')}
-          // First WebP frame poster avoids a black box during loader/buffering.
-          poster={frameSrc(1, { mobile: true })}
-          // iOS Safari autoplay requires both muted + playsInline.
-          muted
-          playsInline
-          loop
-          // Buffer while loader runs so playback can start immediately after.
-          preload="auto"
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            // Keep visual behavior identical to prior canvas coverage.
-            objectFit: 'cover',
-            transform: 'translateZ(0)',
-            willChange: 'transform',
-            zIndex: 0,
-          }}
-        />
+        {/* ── Mobile: ambient media + subtle reveal after loader ── */}
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={prefersReducedMotion ? false : { scale: 1.05, opacity: 0.92 }}
+          animate={loaderReady ? { scale: 1, opacity: 1 } : prefersReducedMotion ? {} : { scale: 1.05, opacity: 0.92 }}
+          transition={
+            prefersReducedMotion
+              ? { duration: 0.2 }
+              : { duration: 1.1, ease: EASE, delay: 0.05 }
+          }
+        >
+          <img
+            src={frameSrc(0, { mobile: true })}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover object-center"
+          />
+          <video
+            ref={mobileVideoRef}
+            src={videoSrc('/videos/hero-mobile.mp4')}
+            poster={frameSrc(1, { mobile: true })}
+            muted
+            playsInline
+            loop
+            preload="auto"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover [transform:translateZ(0)]"
+            style={{ willChange: 'transform' }}
+          />
+        </motion.div>
 
         {/* gradients */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/65 via-transparent to-black/50" />
@@ -348,9 +346,13 @@ export default function Hero() {
           style={{ willChange: 'opacity' }}
         >
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease: EASE }}
+            transition={
+              prefersReducedMotion
+                ? { duration: 0.25 }
+                : { type: 'spring', damping: 28, stiffness: 320, mass: 0.85 }
+            }
             className="font-sans text-[11px] tracking-[0.2em] text-white/75"
           >
             SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
@@ -364,7 +366,17 @@ export default function Hero() {
                     className="inline-block"
                     initial={{ y: '100%', opacity: 0 }}
                     animate={loaderReady ? { y: 0, opacity: 1 } : {}}
-                    transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
+                    transition={
+                      prefersReducedMotion
+                        ? { delay: i * 0.04, duration: 0.35, ease: EASE }
+                        : {
+                            delay: 0.06 + i * 0.06,
+                            type: 'spring',
+                            damping: 26,
+                            stiffness: 380,
+                            mass: 0.8,
+                          }
+                    }
                   >
                     {word}
                   </motion.span>
@@ -375,23 +387,47 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* ── PHASE 2: Greek text ── */}
+        {/* ── PHASE 2: Greek text + CTAs (visible at rest; entrance after loader) ── */}
         <div
           ref={phase2Ref}
           className="absolute bottom-6 left-0 right-0 z-10 px-8"
-          style={{ opacity: 0, willChange: 'opacity, transform' }}
+          style={{ willChange: 'opacity, transform' }}
         >
           <div className="max-w-[540px]">
-            <p className="font-sans text-[16px] leading-relaxed text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]">
+            <motion.p
+              className="font-sans text-[16px] leading-relaxed text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.7)]"
+              initial={{ opacity: 0, y: 22 }}
+              animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+              transition={
+                prefersReducedMotion
+                  ? { delay: 0.15, duration: 0.35, ease: EASE }
+                  : { delay: 0.38, type: 'spring', damping: 30, stiffness: 280, mass: 0.9 }
+              }
+            >
               {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
-            </p>
-            <p className="mt-3 font-sans text-[14px] leading-loose text-white/65 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]">
+            </motion.p>
+            <motion.p
+              className="mt-3 font-sans text-[14px] leading-loose text-white/65 [text-shadow:0_1px_8px_rgba(0,0,0,0.7)]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+              transition={
+                prefersReducedMotion
+                  ? { delay: 0.22, duration: 0.35, ease: EASE }
+                  : { delay: 0.5, type: 'spring', damping: 30, stiffness: 280, mass: 0.9 }
+              }
+            >
               {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
-            </p>
-            <div
-              ref={phase2BtnsRef}
+            </motion.p>
+            <motion.div
               className="mt-7 flex flex-wrap items-center gap-5"
-              style={{ opacity: 0, willChange: 'opacity' }}
+              style={{ willChange: 'opacity' }}
+              initial={{ opacity: 0, y: 18 }}
+              animate={loaderReady ? { opacity: 1, y: 0 } : {}}
+              transition={
+                prefersReducedMotion
+                  ? { delay: 0.28, duration: 0.35, ease: EASE }
+                  : { delay: 0.62, type: 'spring', damping: 24, stiffness: 340, mass: 0.85 }
+              }
             >
               <Link
                 href="/menu"
@@ -406,7 +442,7 @@ export default function Hero() {
                 <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
                 {'Βρες μας'}
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
 
