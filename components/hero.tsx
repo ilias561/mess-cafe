@@ -130,8 +130,9 @@ export default function Hero() {
 
     async function preloadFrames(urlsToLoad: string[], concurrency = 6): Promise<HTMLImageElement[]> {
       const out: HTMLImageElement[] = new Array(urlsToLoad.length)
+      framesRef.current = out
       let cursor = 0
-      let completed = 0
+      const firstBatchReady = new Set<number>()
       let firstPaintDone = false
 
       async function worker() {
@@ -142,14 +143,14 @@ export default function Hero() {
           img.src = urlsToLoad[i]
           await img.decode().catch(() => {})
           out[i] = img
-          completed++
 
           if (i === 0 && !firstPaintDone) {
             firstPaintDone = true
             drawFrame(img)
           }
 
-          if (completed >= 6 && firstFramesReadyResolve) {
+          if (i < 6) firstBatchReady.add(i)
+          if (firstBatchReady.size >= Math.min(6, urlsToLoad.length) && firstFramesReadyResolve) {
             firstFramesReadyResolve()
             firstFramesReadyResolve = null
           }
