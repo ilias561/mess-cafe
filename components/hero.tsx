@@ -386,6 +386,13 @@ export default function Hero() {
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
         {/* ── Mobile: canvas image sequence ── */}
+        <img
+          src={frameSrc(0, { mobile: true })}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          style={{ zIndex: 0 }}
+        />
         <canvas
           ref={canvasRef}
           width={540}
@@ -395,6 +402,7 @@ export default function Hero() {
             background: '#1a1a1a',
             transform: 'translateZ(0)',
             willChange: 'transform',
+            zIndex: 1,
           }}
         />
 
