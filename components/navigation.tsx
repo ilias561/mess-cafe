@@ -384,7 +384,9 @@ export default function Navigation() {
             <motion.button
               ref={menuButtonRef}
               type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal transition-colors hover:bg-bone-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden"
+              className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden ${
+                isInHero ? 'text-white hover:bg-white/10' : 'text-charcoal hover:bg-bone-warm'
+              }`}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού'}
               aria-controls={MOBILE_MENU_ID}
