@@ -107,6 +107,9 @@ export default function Hero() {
     const video = mobileVideoRef.current
     if (!video) return
 
+    // With preload="metadata", start fetching after critical render path.
+    video.load()
+
     const tryPlay = () => {
       video.play().catch(() => {
         // iOS Safari can occasionally drop muted flag on first attempt.
@@ -129,6 +132,20 @@ export default function Hero() {
       return () => video.removeEventListener('canplay', onCanPlay)
     }
   }, [loaderReady])
+
+  useEffect(() => {
+    const video = mobileVideoRef.current
+    if (!video) return
+    let stallCount = 0
+    const onWaiting = () => {
+      stallCount++
+      if (stallCount >= 2) {
+        video.pause()
+      }
+    }
+    video.addEventListener('waiting', onWaiting)
+    return () => video.removeEventListener('waiting', onWaiting)
+  }, [])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
@@ -268,14 +285,13 @@ export default function Hero() {
         />
         <video
           ref={mobileVideoRef}
-          src={videoSrc('/videos/hero-mobile.mp4')}
           poster={frameSrc(1, { mobile: true })}
           muted
           playsInline
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           className="absolute inset-0 z-0 h-full w-full object-cover [transform:translateZ(0)]"
           style={{ willChange: 'transform' }}
@@ -284,7 +300,10 @@ export default function Hero() {
               console.debug('[hero] mobile video ended')
             }
           }}
-        />
+        >
+          <source src={videoSrc('/videos/hero-mobile.hevc.mp4')} type='video/mp4; codecs="hvc1"' />
+          <source src={videoSrc('/videos/hero-mobile.mp4')} type="video/mp4" />
+        </video>
       </motion.div>
 
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/65 via-transparent to-black/50" />
