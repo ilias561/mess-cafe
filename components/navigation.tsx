@@ -182,12 +182,10 @@ export default function Navigation() {
   }, [])
 
   // Header handoff: transparent over dark mobile hero → cream after
-  // Desktop hero is bone-colored (min-h-screen), mobile hero is 600vh sticky scroll
+  // Desktop hero is one viewport (bone + video). Mobile hero is hero-mobile-svh (~1× viewport), not legacy 600vh scroll.
   useEffect(() => {
     const onScroll = () => {
-      const threshold = window.innerWidth >= 768
-        ? window.innerHeight - 60          // desktop: just past the viewport
-        : window.innerHeight * 5 - 60      // mobile: past the 600vh sticky scroll
+      const threshold = window.innerHeight - 60
       setHasPastHero(window.scrollY > threshold)
     }
     onScroll()
@@ -202,7 +200,7 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      const heroHeight = window.innerWidth >= 768 ? window.innerHeight : window.innerHeight * 5
+      const heroHeight = window.innerHeight
       const inHero = pathname === '/' && currentScrollY < heroHeight
       if (currentScrollY < 120 || inHero) {
         // Always show nav at top and during hero scroll-scrub
