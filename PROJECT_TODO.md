@@ -299,6 +299,7 @@ Once all above are addressed, ship in this order:
 - [ ] Phase 7: SEO + a11y + perf pass
 - [ ] Phase 8: client walkthrough + handover
 - [ ] Launch
+- [x] Mobile hero performance: replaced mobile scroll-scrub canvas with loader-gated autoplay loop video (`hero-mobile.mp4`) while keeping scroll-driven text phases.
 
 After Phase 5-8 done = **MVP launched**. After sections 3.1-3.2 done = **signature site**.
 

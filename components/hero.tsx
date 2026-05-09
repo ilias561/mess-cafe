@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
 import { frameSrc, videoSrc } from '@/lib/media'
-const MOBILE_FRAME_COUNT = 30
 
 /* ── Botanical corner decoration (desktop hero) ── */
 function BotanicalCorner() {
@@ -75,27 +74,14 @@ function BotanicalCorner() {
 
 export default function Hero() {
   const sectionRef    = useRef<HTMLElement>(null)
-  const canvasRef     = useRef<HTMLCanvasElement>(null)
-  const framesRef     = useRef<HTMLImageElement[]>([])
+  const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
   const phase1Ref     = useRef<HTMLDivElement>(null)
   const phase2Ref     = useRef<HTMLDivElement>(null)
   const phase2BtnsRef = useRef<HTMLDivElement>(null)
   const scrollIndRef  = useRef<HTMLDivElement>(null)
   const rafRef        = useRef<number>(0)
-  const isMobileRef   = useRef(false)
-  const lastFrameRef  = useRef(-1)
-  const firstFramesReadyRef = useRef<Promise<void> | null>(null)
 
-  const [loaderReady,   setLoaderReady]   = useState(false)
-  const [reducedMotion, setReducedMotion] = useState(false)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const sync = () => setReducedMotion(mq.matches)
-    sync()
-    mq.addEventListener('change', sync)
-    return () => mq.removeEventListener('change', sync)
-  }, [])
+  const [loaderReady, setLoaderReady] = useState(false)
 
   useEffect(() => {
     const onDone = () => setLoaderReady(true)
@@ -106,86 +92,41 @@ export default function Hero() {
     return () => { window.removeEventListener('mess:loader-complete', onDone); window.clearTimeout(t) }
   }, [])
 
-  // Preload image sequence frames for mobile
   useEffect(() => {
-    if (window.innerWidth >= 768) return
-    isMobileRef.current = true
+    // Gate playback to loader completion so video never starts behind the curtain.
+    if (!loaderReady) return
+    const video = mobileVideoRef.current
+    if (!video) return
 
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    let firstFramesReadyResolve: (() => void) | null = null
-    firstFramesReadyRef.current = new Promise<void>((resolve) => {
-      firstFramesReadyResolve = resolve
-    })
-
-    const drawFrame = (img: HTMLImageElement) => {
-      if (!img?.complete || !canvas) return
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    const tryPlay = () => {
+      video.play().catch(() => {
+        // iOS Safari can occasionally drop muted flag on first attempt.
+        video.muted = true
+        video.play().catch(() => {
+          // Poster remains visible as acceptable degraded state.
+        })
+      })
     }
 
-    const urls = Array.from({ length: MOBILE_FRAME_COUNT }, (_, index) => frameSrc(index, { mobile: true }))
-
-    async function preloadFrames(urlsToLoad: string[], concurrency = 6): Promise<HTMLImageElement[]> {
-      const out: HTMLImageElement[] = new Array(urlsToLoad.length)
-      framesRef.current = out
-      let cursor = 0
-      const firstBatchReady = new Set<number>()
-      let firstPaintDone = false
-
-      async function worker() {
-        while (cursor < urlsToLoad.length) {
-          const i = cursor++
-          const img = new Image()
-          img.decoding = 'async'
-          img.src = urlsToLoad[i]
-          await img.decode().catch(() => {})
-          out[i] = img
-
-          if (i === 0 && !firstPaintDone) {
-            firstPaintDone = true
-            drawFrame(img)
-          }
-
-          if (i < 6) firstBatchReady.add(i)
-          if (firstBatchReady.size >= Math.min(6, urlsToLoad.length) && firstFramesReadyResolve) {
-            firstFramesReadyResolve()
-            firstFramesReadyResolve = null
-          }
-        }
+    // Wait for HAVE_FUTURE_DATA to avoid initial playback stalls.
+    if (video.readyState >= 3) {
+      tryPlay()
+    } else {
+      const onCanPlay = () => {
+        tryPlay()
+        video.removeEventListener('canplay', onCanPlay)
       }
-
-      await Promise.all(Array.from({ length: Math.min(concurrency, urlsToLoad.length) }, worker))
-      return out
+      video.addEventListener('canplay', onCanPlay)
+      return () => video.removeEventListener('canplay', onCanPlay)
     }
+  }, [loaderReady])
 
-    preloadFrames(urls)
-      .then((frames) => {
-        framesRef.current = frames
-        if (firstFramesReadyResolve) {
-          firstFramesReadyResolve()
-          firstFramesReadyResolve = null
-        }
-      })
-      .catch(() => {
-        if (firstFramesReadyResolve) {
-          firstFramesReadyResolve()
-          firstFramesReadyResolve = null
-        }
-      })
-  }, [])
-
-  // Scroll-scrub: mobile canvas only
+  // Mobile text phases remain scroll-driven over ambient autoplay video.
   useEffect(() => {
     if (window.innerWidth >= 768) return
 
     const section = sectionRef.current
     if (!section) return
-
-    const isMobile = isMobileRef.current
-    const canvas   = canvasRef.current
 
     const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
     const eio   = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -195,20 +136,6 @@ export default function Hero() {
       const scrollable = rect.height - window.innerHeight
       if (scrollable <= 0) return
       const p = clamp(-rect.top / scrollable, 0, 1)
-
-      if (!reducedMotion) {
-        if (isMobile && canvas) {
-          const idx = Math.round(p * (MOBILE_FRAME_COUNT - 1))
-          if (idx !== lastFrameRef.current) {
-            lastFrameRef.current = idx
-            const img = framesRef.current[idx]
-            if (img?.complete) {
-              const ctx = canvas.getContext('2d')
-              ctx?.drawImage(img, 0, 0, canvas.width, canvas.height)
-            }
-          }
-        }
-      }
 
       const el1 = phase1Ref.current
       if (el1) {
@@ -245,21 +172,14 @@ export default function Hero() {
       rafRef.current = requestAnimationFrame(update)
     }
 
-    let cancelled = false
-    const start = async () => {
-      await (firstFramesReadyRef.current ?? Promise.resolve())
-      if (cancelled) return
-      window.addEventListener('scroll', onScroll, { passive: true })
-      update()
-    }
-    void start()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    update()
 
     return () => {
-      cancelled = true
       window.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(rafRef.current)
     }
-  }, [reducedMotion])
+  }, [])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
@@ -378,7 +298,7 @@ export default function Hero() {
 
     </section>
 
-    {/* ── MOBILE hero: scroll-scrub canvas animation ── */}
+    {/* ── MOBILE hero: ambient autoplay video + scroll text phases ── */}
     <section
       ref={sectionRef}
       className="relative w-full h-[300vh] md:hidden"
@@ -393,16 +313,28 @@ export default function Hero() {
           className="absolute inset-0 h-full w-full object-cover object-center"
           style={{ zIndex: 0 }}
         />
-        <canvas
-          ref={canvasRef}
-          width={540}
-          height={960}
-          className="absolute inset-0 h-full w-full object-cover object-center"
+        <video
+          ref={mobileVideoRef}
+          src={videoSrc('/videos/hero-mobile.mp4')}
+          // First WebP frame poster avoids a black box during loader/buffering.
+          poster={frameSrc(1, { mobile: true })}
+          // iOS Safari autoplay requires both muted + playsInline.
+          muted
+          playsInline
+          loop
+          // Buffer while loader runs so playback can start immediately after.
+          preload="auto"
+          aria-hidden="true"
           style={{
-            background: '#1a1a1a',
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            // Keep visual behavior identical to prior canvas coverage.
+            objectFit: 'cover',
             transform: 'translateZ(0)',
             willChange: 'transform',
-            zIndex: 1,
+            zIndex: 0,
           }}
         />
 
