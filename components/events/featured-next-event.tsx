@@ -59,7 +59,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
             <motion.div {...fadeUpDelayed(0.22)} className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={`/actions/${event.slug}`}
-                className="rounded-[2px] bg-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-bone transition-all duration-200 hover:-translate-y-px hover:shadow-md"
+                className="ui-interactive rounded-[2px] bg-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-bone hover:shadow-md"
               >
                 ΚΡΑΤΗΣΗ →
               </Link>
@@ -67,7 +67,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
                 href={`https://wa.me/${waPhone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-[2px] border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal transition-all duration-200 hover:-translate-y-px hover:shadow-md"
+                className="ui-interactive rounded-[2px] border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal hover:shadow-md"
               >
                 WHATSAPP
               </a>

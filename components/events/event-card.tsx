@@ -42,10 +42,10 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
           </div>
           <div className="absolute bottom-5 left-5 right-5 text-bone">
             <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-mustard">{event.categoryLabel}</p>
-            <h3 className="mt-2 font-serif text-[clamp(22px,2.6vw,30px)] leading-[1.1] tracking-[-0.01em]">
+            <h3 className="ui-link mt-2 font-serif text-[clamp(22px,2.6vw,30px)] leading-[1.1] tracking-[-0.01em]">
               {event.title}
             </h3>
-            <span className="mt-3 inline-flex items-center gap-1 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/90 underline decoration-terracotta underline-offset-[5px]">
+            <span className="ui-link mt-3 inline-flex items-center gap-1 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/90 underline decoration-terracotta underline-offset-[5px]">
               Μάθε περισσότερα →
             </span>
           </div>

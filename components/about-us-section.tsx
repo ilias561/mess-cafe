@@ -214,7 +214,7 @@ export default function AboutUsSection() {
           {messPillars.map((pillar, idx) => (
             <Reveal.Item
               key={`${pillar.letter}-${pillar.word}-${idx}`}
-              className="flex flex-col gap-4 rounded-[3px] border border-line/40 bg-bone-warm p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-sm"
+              className="flex flex-col gap-4 rounded-[3px] border border-line/40 bg-bone-warm p-6 transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:shadow-sm"
             >
               <p
                 className="font-serif leading-none tracking-tight text-mustard"

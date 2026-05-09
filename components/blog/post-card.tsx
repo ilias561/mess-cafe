@@ -42,7 +42,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
         </div>
         <div className="mt-5">
           <CategoryPill category={post.category} label={post.categoryLabel} />
-          <h3 className="mt-4 font-serif text-[clamp(22px,2.4vw,32px)] leading-[1.15] tracking-[-0.01em] text-charcoal">
+          <h3 className="ui-link mt-4 font-serif text-[clamp(22px,2.4vw,32px)] leading-[1.15] tracking-[-0.01em] text-charcoal">
             {post.title}
           </h3>
           <p className="mt-3 line-clamp-2 font-sans text-[16px] leading-[1.7] text-concrete">

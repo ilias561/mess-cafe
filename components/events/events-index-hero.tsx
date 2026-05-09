@@ -96,7 +96,7 @@ export default function EventsIndexHero({
                 type="button"
                 onClick={() => onCategoryChange(null)}
                 className={cn(
-                  'inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px] transition-colors',
+                  'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
                   activeCategory === null
                     ? 'border-charcoal bg-charcoal text-bone'
                     : 'border-line text-charcoal hover:border-charcoal/40',
@@ -113,7 +113,7 @@ export default function EventsIndexHero({
                   type="button"
                   onClick={() => onCategoryChange(label)}
                   className={cn(
-                    'inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px] transition-colors',
+                    'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
                     activeCategory === label
                       ? 'border-charcoal bg-charcoal text-bone'
                       : 'border-line text-charcoal hover:border-charcoal/40',
@@ -133,7 +133,7 @@ export default function EventsIndexHero({
             {upcomingEvents.length > 0 && (
               <a
                 href="#upcoming"
-                className="inline-block rounded-[2px] bg-charcoal px-[15px] py-[9px] font-sans text-[11px] uppercase tracking-[0.14em] text-bone transition-colors hover:bg-charcoal/90"
+                className="ui-interactive inline-block rounded-[2px] bg-charcoal px-[15px] py-[9px] font-sans text-[11px] uppercase tracking-[0.14em] text-bone hover:bg-charcoal/90"
               >
                 Δες πρόγραμμα ↓
               </a>
@@ -142,7 +142,7 @@ export default function EventsIndexHero({
               ή{' '}
               <a
                 href={proposeHref}
-                className="text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
+                className="ui-link text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
               >
                 πρότεινε δράση
               </a>

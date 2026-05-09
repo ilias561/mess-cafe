@@ -82,7 +82,7 @@ export default function MenuPreview() {
           <div>
             <Link
               href="/menu"
-              className="font-sans text-sm font-medium text-olive underline decoration-line underline-offset-[6px] transition-opacity hover:opacity-70"
+              className="ui-link font-sans text-sm font-medium text-olive underline decoration-line underline-offset-[6px] transition-opacity duration-200 ease-out hover:opacity-70"
             >
               Όλο το menu →
             </Link>

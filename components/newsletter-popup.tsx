@@ -144,7 +144,7 @@ export default function NewsletterPopup() {
               type="button"
               aria-label="Κλείσιμο"
               onClick={dismiss}
-              className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-charcoal/70 transition-colors hover:bg-charcoal/8"
+              className="ui-interactive absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-charcoal/70 hover:bg-charcoal/8"
             >
               <X className="h-4 w-4" />
             </button>
@@ -172,7 +172,7 @@ export default function NewsletterPopup() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="w-full rounded-[2px] border border-line/70 bg-bone px-3 py-2.5 font-sans text-[14px] text-charcoal"
+                  className="ui-field w-full rounded-[2px] border border-line/70 bg-bone px-3 py-2.5 font-sans text-[14px] text-charcoal"
                 />
                 <label className="flex items-start gap-2">
                   <input
@@ -188,7 +188,7 @@ export default function NewsletterPopup() {
                 <button
                   type="submit"
                   disabled={shouldDisable}
-                  className="rounded-full bg-mustard px-6 py-2.5 font-sans text-[13px] font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+                  className="ui-interactive rounded-full bg-mustard px-6 py-2.5 font-sans text-[13px] font-medium text-charcoal hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
                 </button>

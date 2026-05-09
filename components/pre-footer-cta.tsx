@@ -91,14 +91,14 @@ export default function PreFooterCta({
         >
           <Link
             href={primaryHref}
-            className={`rounded-full px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] transition-all duration-200 hover:-translate-y-0.5 ${s.primary}`}
+            className={`ui-interactive rounded-full px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] ${s.primary}`}
           >
             {primaryLabel}
           </Link>
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className={`rounded-full border px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] transition-all duration-200 hover:-translate-y-0.5 ${s.secondary}`}
+              className={`ui-interactive rounded-full border px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] ${s.secondary}`}
             >
               {secondaryLabel}
             </Link>

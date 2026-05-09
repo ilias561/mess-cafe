@@ -34,7 +34,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
               <Reveal.Item key={card.slug}>
                 <Link
                   href={`/actions/${card.slug}`}
-                  className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
+                  className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <FadeImage
@@ -54,13 +54,13 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                       <span className="h-[4px] w-[4px] shrink-0 rounded-full bg-terracotta" aria-hidden />
                       <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">{card.categoryLabel}</p>
                     </div>
-                    <h3 className="font-serif text-[20px] leading-tight tracking-tight text-charcoal">
+                    <h3 className="ui-link font-serif text-[20px] leading-tight tracking-tight text-charcoal">
                       {card.title}
                     </h3>
                     <p className="line-clamp-2 font-sans text-[13px] leading-relaxed text-concrete">
                       {card.description}
                     </p>
-                    <span className="mt-2 inline-block font-sans text-[13px] text-charcoal underline decoration-mustard underline-offset-[4px] transition-colors duration-150 group-hover/card:text-terracotta group-hover/card:decoration-terracotta">
+                    <span className="ui-link mt-2 inline-block font-sans text-[13px] text-charcoal underline decoration-mustard underline-offset-[4px] group-hover/card:text-terracotta group-hover/card:decoration-terracotta">
                       Μάθε περισσότερα →
                     </span>
                   </div>
@@ -74,14 +74,14 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           {hasMore ? (
             <Link
               href="/actions"
-              className="inline-block rounded-[2px] border border-charcoal/20 bg-bone-warm px-6 py-3 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:border-charcoal/40 hover:shadow-[0_4px_16px_rgba(43,43,40,0.08)]"
+              className="ui-interactive inline-block rounded-[2px] border border-charcoal/20 bg-bone-warm px-6 py-3 font-sans text-sm font-medium text-charcoal hover:border-charcoal/40 hover:shadow-[0_4px_16px_rgba(43,43,40,0.08)]"
             >
               Δες όλες τις δράσεις ({actionCards.length}) →
             </Link>
           ) : (
             <Link
               href="/actions"
-              className="inline-block font-sans text-sm font-medium text-charcoal underline decoration-mustard underline-offset-[6px]"
+              className="ui-link inline-block font-sans text-sm font-medium text-charcoal underline decoration-mustard underline-offset-[6px]"
             >
               Δες όλες τις δράσεις →
             </Link>

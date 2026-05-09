@@ -59,7 +59,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
                     setActiveFilter(filter.key)
                     setVisibleCount(9)
                   }}
-                  className={`rounded-full border px-5 py-2 font-sans text-[12px] uppercase tracking-[0.16em] transition-colors duration-300 ${
+                  className={`ui-interactive rounded-full border px-5 py-2 font-sans text-[12px] uppercase tracking-[0.16em] ${
                     isActive
                       ? 'border-mustard bg-mustard text-charcoal'
                       : 'border-line/50 text-charcoal hover:border-mustard hover:text-olive'
@@ -89,7 +89,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
             <button
               type="button"
               onClick={() => setVisibleCount((current) => current + 6)}
-              className="mt-6 rounded-full bg-charcoal px-12 py-5 font-sans text-[13px] uppercase tracking-[0.18em] text-bone transition-all duration-200 hover:-translate-y-0.5 hover:bg-olive hover:shadow-lg"
+              className="ui-interactive mt-6 rounded-full bg-charcoal px-12 py-5 font-sans text-[13px] uppercase tracking-[0.18em] text-bone hover:bg-olive hover:shadow-lg"
             >
               Φόρτωσε περισσότερα
             </button>

@@ -65,7 +65,7 @@ export default function MenuAnchorNav() {
             <button
               key={id}
               onClick={() => scrollTo(id)}
-              className={`shrink-0 border-b pb-1 font-sans text-sm transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${
+              className={`ui-link shrink-0 border-b pb-1 font-sans text-sm focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${
                 active === id
                   ? 'border-mustard text-charcoal'
                   : 'border-transparent text-concrete hover:text-charcoal'

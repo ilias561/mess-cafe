@@ -16,7 +16,7 @@ export default function ShareRow({ url }: ShareRowProps) {
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-olive"
+        className="ui-link inline-flex items-center gap-1.5 hover:text-olive"
         aria-label="Κοινοποίηση στο Facebook"
       >
         <Facebook className="h-3.5 w-3.5" />
@@ -26,7 +26,7 @@ export default function ShareRow({ url }: ShareRowProps) {
         href="https://www.instagram.com/m.e.s.s._ioannina/"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-olive"
+        className="ui-link inline-flex items-center gap-1.5 hover:text-olive"
         aria-label="Instagram M.E.S.S."
       >
         <Instagram className="h-3.5 w-3.5" />
@@ -39,7 +39,7 @@ export default function ShareRow({ url }: ShareRowProps) {
           setCopied(true)
           window.setTimeout(() => setCopied(false), 1400)
         }}
-        className="inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-olive"
+        className="ui-interactive inline-flex items-center gap-1.5 text-concrete hover:text-olive"
         aria-label="Αντιγραφή συνδέσμου άρθρου"
       >
         <Copy className="h-3.5 w-3.5" />

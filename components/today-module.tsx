@@ -98,14 +98,14 @@ export default function TodayModule({ events }: TodayModuleProps) {
                   <div className="space-y-2">
                     <p className="font-serif text-xl leading-tight text-charcoal">{fallbackEvent.title}</p>
                     <div className="flex items-center gap-4">
-                      <Link href={`/actions/${fallbackEvent.slug}`} className="font-sans text-sm font-medium text-olive underline underline-offset-4">
+                      <Link href={`/actions/${fallbackEvent.slug}`} className="ui-link font-sans text-sm font-medium text-olive underline underline-offset-4">
                         Μάθε περισσότερα
                       </Link>
                       {upcomingCurated.length > 1 && (
                         <button
                           type="button"
                           onClick={handleNextRecommendation}
-                          className="font-sans text-xs font-medium tracking-[0.12em] text-charcoal/70 uppercase"
+                          className="ui-link font-sans text-xs font-medium tracking-[0.12em] text-charcoal/70 uppercase hover:text-charcoal"
                         >
                           Επόμενο
                         </button>

@@ -300,13 +300,13 @@ export default function Navigation() {
     <>
       <a
         href="#main-content"
-        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-charcoal transition-transform focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
+        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-charcoal transition-transform duration-200 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
       >
         Μετάβαση στο περιεχόμενο
       </a>
 
       <motion.header
-        className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ease-in-out ${navHeight} ${headerClasses}`}
+        className={`fixed top-0 right-0 left-0 z-50 transition-[height,background-color,border-color] duration-300 ease-in-out ${navHeight} ${headerClasses}`}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
@@ -340,7 +340,7 @@ export default function Navigation() {
                         setMenuOpen(false)
                       }
                     }}
-                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${isInHero ? 'text-white/90 hover:text-white' : 'text-charcoal'} ${
+                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${link.isCta ? 'ui-interactive' : 'ui-link'} ${isInHero ? 'text-white/90 hover:text-white' : 'text-charcoal'} ${
                       shiftRightCluster ? 'ml-5 xl:ml-7 2xl:ml-9' : ''
                     } ${
                       link.isCta
@@ -376,7 +376,7 @@ export default function Navigation() {
             <a
               href={`tel:${SITE_PHONE_E164}`}
               aria-label="Κάλεσέ μας"
-              className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
+              className={`ui-interactive flex h-11 w-11 items-center justify-center rounded-full border hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
             >
               <Phone className="h-3.5 w-3.5" strokeWidth={1.5} />
             </a>
@@ -384,14 +384,13 @@ export default function Navigation() {
             <motion.button
               ref={menuButtonRef}
               type="button"
-              className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden ${
+              className={`ui-interactive flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden ${
                 isInHero ? 'text-white hover:bg-white/10' : 'text-charcoal hover:bg-bone-warm'
               }`}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού'}
               aria-controls={MOBILE_MENU_ID}
               onClick={() => setMenuOpen((o) => !o)}
-              whileTap={{ scale: 0.94 }}
             >
               {menuOpen
                 ? <X className="h-5 w-5" strokeWidth={1.5} />
@@ -449,7 +448,7 @@ export default function Navigation() {
                   <Link
                     href="/"
                     onClick={() => setMenuOpen(false)}
-                    className="flex w-fit max-w-full items-center gap-2.5 text-espresso transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
+                    className="flex w-fit max-w-full items-center gap-2.5 text-espresso transition-opacity duration-200 ease-out hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
                   >
                     <BrandLogo compact />
                     <span className="font-serif text-[20px] font-medium leading-none tracking-tight">M.E.S.S.</span>
@@ -460,7 +459,7 @@ export default function Navigation() {
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Κλείσιμο μενού"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-espresso text-bone transition-colors hover:bg-espresso/90 active:bg-espresso/80"
+                  className="ui-interactive flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-espresso text-bone hover:bg-espresso/90 active:bg-espresso/80"
                 >
                   <X className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden />
                 </button>
@@ -488,7 +487,7 @@ export default function Navigation() {
                             setMenuOpen(false)
                           }}
                           aria-current={isActive ? 'page' : undefined}
-                          className={`relative -mx-6 block py-3.5 pr-6 font-sans text-[22px] font-medium leading-[1.4] tracking-tight text-espresso transition-colors duration-100 ease-out active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
+                          className={`ui-link relative -mx-6 block py-3.5 pr-6 font-sans text-[22px] font-medium leading-[1.4] tracking-tight text-espresso active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
                         >
                           {isActive && (
                             <span
@@ -510,14 +509,14 @@ export default function Navigation() {
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href={`tel:${SITE_PHONE_E164}`}
-                    className="flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-espresso px-3 font-sans text-[15px] font-medium text-espresso transition-colors hover:border-espresso/80 active:border-mustard active:text-mustard"
+                    className="ui-interactive flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-espresso px-3 font-sans text-[15px] font-medium text-espresso hover:border-espresso/80 active:border-mustard active:text-mustard"
                   >
                     <Phone className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden />
                     Κάλεσέ μας
                   </a>
                   <Link
                     href="/reservations"
-                    className="flex h-12 min-h-[48px] items-center justify-center rounded-full bg-mustard px-3 text-center font-sans text-[15px] font-medium text-espresso transition-colors hover:bg-amber active:scale-[0.98]"
+                    className="ui-interactive flex h-12 min-h-[48px] items-center justify-center rounded-full bg-mustard px-3 text-center font-sans text-[15px] font-medium text-espresso hover:bg-amber"
                     onClick={() => setMenuOpen(false)}
                   >
                     {RESERVATIONS_LABEL}
@@ -530,7 +529,7 @@ export default function Navigation() {
                   href="https://www.instagram.com/m.e.s.s._ioannina/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-fit items-center gap-2 font-sans text-[13px] text-espresso/70 transition-colors hover:text-espresso"
+                  className="ui-link inline-flex w-fit items-center gap-2 font-sans text-[13px] text-espresso/70 hover:text-espresso"
                 >
                   <Instagram className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden />
                   @m.e.s.s._ioannina

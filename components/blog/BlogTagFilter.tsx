@@ -52,7 +52,7 @@ export default function BlogTagFilter({ posts }: BlogTagFilterProps) {
                   if (!isEmpty) setActiveFilter(key)
                 }}
                 className={[
-                  'rounded-full border px-5 py-2 font-sans text-[12px] tracking-[0.12em] transition-colors duration-200',
+                  'ui-interactive rounded-full border px-5 py-2 font-sans text-[12px] tracking-[0.12em]',
                   isActive
                     ? 'border-mustard bg-mustard text-charcoal'
                     : isEmpty

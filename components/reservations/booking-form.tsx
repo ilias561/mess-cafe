@@ -12,7 +12,7 @@ type BookingEvent = { slug: string; title: string; date: string }
 type BookingFormProps = { events: BookingEvent[] }
 
 const INPUT_CLASSNAME =
-  'w-full rounded-[2px] border border-line/50 bg-bone px-4 py-3 font-sans text-[15px] text-charcoal transition-colors focus:border-olive focus:outline-2 focus:outline-mustard focus:outline-offset-2'
+  'ui-field w-full rounded-[2px] border border-line/50 bg-bone px-4 py-3 font-sans text-[15px] text-charcoal focus:outline-none'
 
 function todayDateString() {
   return new Date().toISOString().split('T')[0]
@@ -193,7 +193,7 @@ export default function BookingForm({ events }: BookingFormProps) {
                   setStatus('idle')
                   setSubmitError('')
                 }}
-                className="mt-3 font-sans text-[12px] uppercase tracking-[0.14em] text-charcoal underline decoration-mustard underline-offset-[4px]"
+                className="ui-link mt-3 font-sans text-[12px] uppercase tracking-[0.14em] text-charcoal underline decoration-mustard underline-offset-[4px]"
               >
                 Δοκίμασε ξανά
               </button>
@@ -203,7 +203,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="rounded-full bg-mustard px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
+            className="ui-interactive rounded-full bg-mustard px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? 'Αποστολή...' : 'Στείλε κράτηση'}
           </button>

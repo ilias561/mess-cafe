@@ -191,13 +191,13 @@ export default function Hero() {
         >
           <Link
             href="/menu"
-            className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+            className="inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-[background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber active:scale-[0.98]"
           >
             {'Δες το menu'}
           </Link>
           <Link
             href="/#map"
-            className="relative inline-block font-sans text-sm font-medium text-charcoal"
+            className="ui-link relative inline-block font-sans text-sm font-medium text-charcoal"
           >
             <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
             {'Βρες μας'}
@@ -331,7 +331,7 @@ export default function Hero() {
             <motion.div {...reveal(1500, 600)}>
               <Link
                 href="/menu"
-                className="hero-text-shadow inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+                className="hero-text-shadow inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-[background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber active:scale-[0.98]"
               >
                 {'Δες το menu'}
               </Link>
@@ -339,7 +339,7 @@ export default function Hero() {
             <motion.div {...reveal(1600, 600)}>
               <Link
                 href="/#map"
-                className="hero-text-shadow relative inline-block font-sans text-sm font-medium text-white"
+                className="ui-link hero-text-shadow relative inline-block font-sans text-sm font-medium text-white"
               >
                 <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
                 {'Βρες μας'}

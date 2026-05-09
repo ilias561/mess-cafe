@@ -49,7 +49,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           <div className="mt-8">
             <a
               href={`tel:${primaryPhoneHref}`}
-              className="inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+              className="ui-interactive inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber"
             >
               {settings.phone} — Κάλεσέ μας
             </a>
@@ -73,7 +73,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">PHONE</p>
             <a
               href={`tel:${primaryPhoneHref}`}
-              className="font-sans text-sm text-bone underline-offset-4 transition-colors hover:text-mustard hover:underline"
+              className="ui-link font-sans text-sm text-bone underline-offset-4 hover:text-mustard hover:underline"
             >
               {settings.phone}
             </a>
@@ -86,7 +86,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 href={settings.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-sans text-sm text-bone underline-offset-4 transition-colors hover:text-mustard hover:underline"
+                className="ui-link inline-flex items-center gap-1.5 font-sans text-sm text-bone underline-offset-4 hover:text-mustard hover:underline"
               >
                 {settings.instagram.replace('https://', '')}
                 <ExternalLink className="h-3 w-3 shrink-0 opacity-60" strokeWidth={1.5} />
@@ -113,7 +113,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               alt="Street View του M.E.S.S."
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover opacity-80 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+              className="object-cover opacity-80 grayscale transition-[opacity,filter] duration-500 ease-out group-hover:opacity-100 group-hover:grayscale-0"
             />
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-charcoal/30 transition-opacity duration-300 group-hover:bg-charcoal/10" />
@@ -150,7 +150,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 <button
                   type="button"
                   onClick={() => setMapConsent(true)}
-                  className="rounded-full border border-bone/25 px-5 py-2 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/70 transition-colors hover:border-bone/50 hover:text-bone"
+                  className="ui-interactive rounded-full border border-bone/25 px-5 py-2 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/70 hover:border-bone/50 hover:text-bone"
                 >
                   Φόρτωση χάρτη
                 </button>

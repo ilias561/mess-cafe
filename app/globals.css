@@ -29,6 +29,13 @@
   --terracotta: #b54f2a;
   --espresso: #2a1d14;
   --cream: #faf6ed;
+
+  /* Motion durations — keep in sync with lib/motion.ts */
+  --motion-micro: 0.15s;
+  --motion-fast: 0.3s;
+  --motion-base: 0.55s;
+  --motion-slow: 0.8s;
+  --ease-out-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
@@ -138,6 +145,10 @@
   .marquee-track {
     animation: none !important;
   }
+  main p a,
+  main li a {
+    transition: none !important;
+  }
 }
 
 /* CSS-only hero reveal — fires before Framer Motion hydrates so the page
@@ -174,7 +185,9 @@ main li a {
   background-position: 0 100%;
   background-size: 0% 1px;
   background-repeat: no-repeat;
-  transition: background-size 300ms ease;
+  transition:
+    background-size var(--motion-fast) var(--ease-out-premium),
+    color var(--motion-fast) var(--ease-out-premium);
 }
 
 main p a:hover,
@@ -182,9 +195,61 @@ main li a:hover {
   background-size: 100% 1px;
 }
 
-button.bg-mustard:active,
-a.bg-mustard:active {
-  transform: scale(0.98);
+@layer utilities {
+  /* Standard interactive surface — buttons and CTA-like links */
+  .ui-interactive {
+    transition:
+      background-color var(--motion-fast) var(--ease-out-premium),
+      color var(--motion-fast) var(--ease-out-premium),
+      border-color var(--motion-fast) var(--ease-out-premium),
+      transform var(--motion-micro) var(--ease-out-premium),
+      box-shadow var(--motion-fast) var(--ease-out-premium),
+      opacity var(--motion-fast) var(--ease-out-premium);
+    will-change: transform;
+  }
+  .ui-interactive:hover {
+    transform: translateY(-1.5px);
+  }
+  .ui-interactive:active {
+    transform: translateY(0) scale(0.98);
+    transition-duration: var(--motion-micro);
+  }
+  .ui-interactive:focus-visible {
+    outline: 2px solid var(--color-mustard, var(--mustard));
+    outline-offset: 3px;
+  }
+
+  /* Text-link microinteraction — color only */
+  .ui-link {
+    transition: color var(--motion-fast) var(--ease-out-premium);
+  }
+
+  /* Form fields — soft ring */
+  .ui-field {
+    transition:
+      border-color var(--motion-fast) var(--ease-out-premium),
+      box-shadow var(--motion-fast) var(--ease-out-premium);
+  }
+  .ui-field:focus-visible,
+  .ui-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-mustard, var(--mustard)) 25%, transparent);
+    border-color: var(--color-mustard, var(--mustard));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ui-interactive,
+    .ui-interactive:hover,
+    .ui-interactive:active,
+    .ui-link,
+    .ui-field {
+      transition: none !important;
+      transform: none !important;
+    }
+    .ui-interactive {
+      will-change: auto;
+    }
+  }
 }
 
 /* Mobile hero only: legibility over full-bleed video (desktop uses gradient overlay) */

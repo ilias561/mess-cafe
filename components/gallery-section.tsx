@@ -214,7 +214,7 @@ function Lightbox({
         type="button"
         onClick={onClose}
         aria-label="Κλείσιμο"
-        className="absolute top-5 right-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
+        className="ui-interactive absolute top-5 right-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
       >
         <X className="h-5 w-5" strokeWidth={1.5} />
       </button>
@@ -225,7 +225,7 @@ function Lightbox({
         type="button"
         onClick={(e) => { e.stopPropagation(); onPrev() }}
         aria-label="Προηγούμενη φωτογραφία"
-        className="absolute left-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:left-8"
+        className="ui-interactive absolute left-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:left-8"
       >
         <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
       </button>
@@ -237,7 +237,7 @@ function Lightbox({
         type="button"
         onClick={(e) => { e.stopPropagation(); onNext() }}
         aria-label="Επόμενη φωτογραφία"
-        className="absolute right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:right-8"
+        className="ui-interactive absolute right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:right-8"
       >
         <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
       </button>

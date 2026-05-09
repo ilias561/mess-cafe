@@ -38,7 +38,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
         </div>
         <div className="flex flex-col justify-center md:col-span-5">
           <CategoryPill category={post.category} label={post.categoryLabel} light />
-          <h2 className="mt-6 font-serif text-[clamp(36px,4.5vw,56px)] leading-[1.05] tracking-[-0.02em] text-bone">
+          <h2 className="ui-link mt-6 font-serif text-[clamp(36px,4.5vw,56px)] leading-[1.05] tracking-[-0.02em] text-bone">
             {post.title}
           </h2>
           <p className="mt-5 font-sans text-[16px] leading-[1.7] text-bone/75 md:text-[17px]">

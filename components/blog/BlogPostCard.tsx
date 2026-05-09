@@ -11,7 +11,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group block cursor-pointer bg-cream transition-shadow duration-200 hover:shadow-sm"
+      className="group block cursor-pointer bg-cream transition-shadow duration-200 ease-out hover:shadow-sm"
     >
       {/* Cover image — aspect-[4/3], no radius, darken on hover */}
       <div className="aspect-[4/3] overflow-hidden">
@@ -39,7 +39,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
         </div>
 
         {/* Title — 2-line clamp, Fraunces */}
-        <h3 className="mt-3 line-clamp-2 font-serif text-[22px] leading-tight tracking-tight text-charcoal md:text-[26px]">
+        <h3 className="ui-link mt-3 line-clamp-2 font-serif text-[22px] leading-tight tracking-tight text-charcoal md:text-[26px]">
           {post.title}
         </h3>
 
@@ -54,8 +54,8 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
         </p>
 
         {/* Read arrow — bottom-left, slides 4px right on card hover */}
-        <span className="mt-3 inline-flex items-center font-sans text-[14px] font-medium text-mustard">
-          <span className="transition-transform duration-200 group-hover:translate-x-1">
+        <span className="ui-link mt-3 inline-flex items-center font-sans text-[14px] font-medium text-mustard">
+          <span className="transition-transform duration-200 ease-out group-hover:translate-x-1">
             Read →
           </span>
         </span>

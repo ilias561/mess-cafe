@@ -32,7 +32,7 @@ export default function BookingInfo({ settings }: BookingInfoProps) {
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#1EBE5A]"
+          className="ui-interactive inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-white hover:bg-[#1EBE5A]"
         >
           Στείλε μας WhatsApp
         </a>

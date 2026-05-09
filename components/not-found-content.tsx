@@ -52,19 +52,19 @@ export default function NotFoundContent() {
         >
           <Link
             href="/"
-            className="rounded-full bg-charcoal px-6 py-3 font-sans text-[13px] uppercase tracking-[0.18em] text-bone transition-all hover:-translate-y-0.5 hover:bg-olive"
+            className="ui-interactive rounded-full bg-charcoal px-6 py-3 font-sans text-[13px] uppercase tracking-[0.18em] text-bone hover:bg-olive"
           >
             Αρχική
           </Link>
           <Link
             href="/menu"
-            className="rounded-full border border-charcoal/20 px-6 py-3 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-all hover:-translate-y-0.5 hover:border-charcoal/40"
+            className="ui-interactive rounded-full border border-charcoal/20 px-6 py-3 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:border-charcoal/40"
           >
             Το μενού μας
           </Link>
           <Link
             href="/actions"
-            className="rounded-full border border-charcoal/20 px-6 py-3 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-all hover:-translate-y-0.5 hover:border-charcoal/40"
+            className="ui-interactive rounded-full border border-charcoal/20 px-6 py-3 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:border-charcoal/40"
           >
             Οι δράσεις μας
           </Link>
