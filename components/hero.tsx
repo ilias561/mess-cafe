@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
@@ -284,16 +284,19 @@ export default function Hero() {
 
         <h1 className="hero-headline mt-4 font-serif tracking-tight text-balance text-charcoal">
           {heroWords.map((word, i) => (
-            <span key={`d-${word}-${i}`} className="inline-block overflow-hidden align-baseline">
-              <motion.span
-                className="inline-block"
-                initial={{ y: '100%', opacity: 0 }}
-                animate={loaderReady ? { y: 0, opacity: 1 } : {}}
-                transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
-              >
-                {word}{i < heroWords.length - 1 ? ' ' : ''}
-              </motion.span>
-            </span>
+            <Fragment key={`d-${word}-${i}`}>
+              <span className="inline-block overflow-hidden align-baseline">
+                <motion.span
+                  className="inline-block"
+                  initial={{ y: '100%', opacity: 0 }}
+                  animate={loaderReady ? { y: 0, opacity: 1 } : {}}
+                  transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+              {i < heroWords.length - 1 ? ' ' : ''}
+            </Fragment>
           ))}
         </h1>
 
@@ -415,16 +418,19 @@ export default function Hero() {
 
           <h1 className="hero-headline mt-3 max-w-[700px] font-serif tracking-tight text-balance text-white">
             {heroWords.map((word, i) => (
-              <span key={`${word}-${i}`} className="inline-block overflow-hidden align-baseline">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: '100%', opacity: 0 }}
-                  animate={loaderReady ? { y: 0, opacity: 1 } : {}}
-                  transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
-                >
-                  {word}{i < heroWords.length - 1 ? ' ' : ''}
-                </motion.span>
-              </span>
+              <Fragment key={`${word}-${i}`}>
+                <span className="inline-block overflow-hidden align-baseline">
+                  <motion.span
+                    className="inline-block"
+                    initial={{ y: '100%', opacity: 0 }}
+                    animate={loaderReady ? { y: 0, opacity: 1 } : {}}
+                    transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
+                  >
+                    {word}
+                  </motion.span>
+                </span>
+                {i < heroWords.length - 1 ? ' ' : ''}
+              </Fragment>
             ))}
           </h1>
         </div>
