@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import MaskReveal from '@/components/mask-reveal'
 import AmbientVideo from '@/components/ambient-video'
@@ -170,7 +170,7 @@ export default function AboutUsSection() {
           {aboutImages.map((img) => (
             <div key={img.key}>
               <div className={`relative w-full overflow-hidden ${img.aspect}`}>
-                <Image
+                <FadeImage
                   src={img.src}
                   alt={img.alt}
                   fill

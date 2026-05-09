@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 
 type PostBodyProps = {
   markdown: string
@@ -80,7 +80,7 @@ export default function PostBody({ markdown, variant = 'article' }: PostBodyProp
 
       return (
         <figure key={`img-${index}`} className="my-10">
-          <Image
+          <FadeImage
             src={src}
             alt={alt || 'Εικόνα άρθρου'}
             width={1400}

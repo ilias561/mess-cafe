@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import PostBody from '@/components/blog/post-body'
 import { formatGreekDate } from '@/lib/format-date'
@@ -21,7 +21,7 @@ export default function ActionSpotlight({ event }: Props) {
             className="group block"
           >
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] border border-line/50 bg-bone">
-              <Image
+              <FadeImage
                 src={event.coverImage}
                 alt={event.coverAlt}
                 fill

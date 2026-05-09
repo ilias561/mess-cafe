@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { fadeUp, fadeUpDelayed } from '@/lib/motion'
@@ -23,7 +23,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
 
           {/* Left: portrait image */}
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px]">
-            <Image
+            <FadeImage
               src={event.coverImage}
               alt={event.coverAlt}
               fill

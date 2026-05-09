@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
+import { FadeImage } from '@/components/fade-image'
 import { Reveal } from '@/components/reveal'
 import { duration, ease, VIEWPORT_ONCE } from '@/lib/motion'
 import type { Settings } from '@/lib/settings'
@@ -107,11 +108,12 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             aria-label="Δες το M.E.S.S. σε Street View"
           >
             {/* Thumbnail image from Google Maps */}
-            <img
+            <FadeImage
               src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X=w960-h540-k-no"
               alt="Street View του M.E.S.S."
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover opacity-80 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover opacity-80 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
             />
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-charcoal/30 transition-opacity duration-300 group-hover:bg-charcoal/10" />

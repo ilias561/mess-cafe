@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import type { Event } from '@/lib/events/events'
@@ -37,7 +37,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                   className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
+                    <FadeImage
                       src={card.coverImage}
                       alt={card.coverAlt}
                       fill

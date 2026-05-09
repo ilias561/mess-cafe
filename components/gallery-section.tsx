@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { duration, ease } from '@/lib/motion'
@@ -106,7 +106,7 @@ function GalleryCard({
             ariaHidden
           />
         ) : (
-          <Image
+          <FadeImage
             src={item.src}
             alt={item.alt}
             fill
@@ -256,7 +256,7 @@ function Lightbox({
         <motion.div
           className="relative max-h-[80vh] w-auto overflow-hidden rounded-[2px]"
           style={{ aspectRatio: '4/3', maxWidth: 'min(85vw, 1100px)' }}>
-          <Image
+          <FadeImage
             src={item.src}
             alt={item.alt}
             fill
@@ -333,7 +333,7 @@ export default function GallerySection() {
                         ariaHidden
                       />
                     ) : (
-                      <Image
+                      <FadeImage
                         src={item.src}
                         alt={item.alt}
                         fill

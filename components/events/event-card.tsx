@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { formatGreekDate } from '@/lib/format-date'
 import { EASE } from '@/lib/motion'
@@ -27,7 +27,7 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
         className="block focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
         <div className="relative aspect-[4/5] overflow-hidden">
-          <Image
+          <FadeImage
             src={event.coverImage}
             alt={event.coverAlt}
             fill

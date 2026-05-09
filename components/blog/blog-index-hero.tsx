@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import { fadeUp, fadeUpDelayed } from '@/lib/motion'
 
 export default function BlogIndexHero() {
@@ -28,7 +28,7 @@ export default function BlogIndexHero() {
 
         <motion.div {...fadeUpDelayed(0.2)} className="relative mx-auto w-full max-w-[420px] md:mx-0 md:max-w-none">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
-            <Image
+            <FadeImage
               src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=80&auto=format&fit=crop"
               alt="Ατμοσφαιρική γωνία καφέ με χαμηλό φωτισμό"
               fill

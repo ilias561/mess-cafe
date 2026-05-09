@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Reveal } from '@/components/reveal'
@@ -150,7 +150,7 @@ export default function GoalsSection() {
           <Reveal>
             {/* Photo */}
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
-              <Image
+              <FadeImage
                 src="/images/keep-rising-2.jpg"
                 alt="Η ομάδα του M.E.S.S. με τις προσφορές του μπαζάρ Keep Rising για τη μονή Ντουραχάνι"
                 fill

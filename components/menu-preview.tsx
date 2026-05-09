@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import { duration, ease } from '@/lib/motion'
@@ -101,7 +101,7 @@ export default function MenuPreview() {
                   className="group w-full"
                 >
                   <div className="aspect-[4/5] overflow-hidden bg-bone" style={!images[item.img] ? { background: imagePlaceholder() } : undefined}>
-                    <Image
+                    <FadeImage
                       src={images[item.img]}
                       alt={item.name}
                       width={640}

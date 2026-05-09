@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import { formatPostDate } from '@/lib/blog/format-date'
 import type { Post } from '@/lib/blog/posts'
 
@@ -13,7 +13,7 @@ export default function PostMeta({ post, showAvatar = false, className = '', lig
   return (
     <div className={`flex flex-wrap items-center gap-2 font-sans text-[12px] ${light ? 'text-bone/70' : 'text-concrete'} ${className}`}>
       {showAvatar && post.author.avatar ? (
-        <Image
+        <FadeImage
           src={post.author.avatar}
           alt={`Φωτογραφία ${post.author.name}`}
           width={32}

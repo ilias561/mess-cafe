@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+
+import aboutSidePhoto from '../../public/images/about-2.jpg'
 import Link from 'next/link'
 import MaskReveal from '@/components/mask-reveal'
 import { fadeUp, fadeUpDelayed } from '@/lib/motion'
@@ -152,9 +154,10 @@ export default function EventsIndexHero({
         <MaskReveal className="relative mx-auto hidden w-full max-w-[420px] md:mx-0 md:block md:max-w-none" delay={0.2}>
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
             <Image
-              src="/images/about-2.jpg"
+              src={aboutSidePhoto}
               alt="Εσωτερικό του M.E.S.S. — το δωμάτιο όπου στήνονται οι δράσεις."
               fill
+              placeholder="blur"
               sizes="(min-width: 768px) 34vw, 92vw"
               className="object-cover"
             />

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import { ArrowLeft } from 'lucide-react'
 import { formatGreekDate } from '@/lib/format-date'
 import type { Event } from '@/lib/events/events'
@@ -21,7 +21,7 @@ export default function EventHero({ event }: { event: Event }) {
 
           {/* Full photo — natural aspect ratio, no crop */}
           <div className="overflow-hidden rounded-[2px] border border-line/30">
-            <Image
+            <FadeImage
               src={event.coverImage}
               alt={event.coverAlt}
               width={900}

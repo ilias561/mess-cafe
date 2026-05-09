@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { formatPostDate } from '@/lib/blog/format-date'
 import type { Post } from '@/lib/blog/types'
@@ -15,7 +15,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
     >
       {/* Cover image — aspect-[4/3], no radius, darken on hover */}
       <div className="aspect-[4/3] overflow-hidden">
-        <Image
+        <FadeImage
           src={post.cover}
           alt={post.coverAlt}
           width={800}

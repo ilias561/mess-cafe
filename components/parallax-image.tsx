@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import Image, { type ImageProps } from 'next/image'
+import type { ImageProps } from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 
 export default function ParallaxImage(props: Omit<ImageProps, 'ref'>) {
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -29,8 +30,8 @@ export default function ParallaxImage(props: Omit<ImageProps, 'ref'>) {
   }, [])
 
   return (
-    <div ref={wrapRef} className="h-full w-full will-change-transform">
-      <Image {...props} className={`h-full w-full object-cover ${props.className ?? ''}`} />
+    <div ref={wrapRef} className="relative h-full w-full will-change-transform">
+      <FadeImage {...props} className={`h-full w-full object-cover ${props.className ?? ''}`} />
     </div>
   )
 }

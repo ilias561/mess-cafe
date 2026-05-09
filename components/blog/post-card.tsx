@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
+import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import CategoryPill from '@/components/blog/category-pill'
 import PostMeta from '@/components/blog/post-meta'
@@ -32,7 +32,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
         className="block focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
         <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-cream`}>
-          <Image
+          <FadeImage
             src={post.cover}
             alt={post.coverAlt}
             width={760}
