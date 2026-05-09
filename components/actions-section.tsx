@@ -1,9 +1,8 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { EASE } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
 import type { Event } from '@/lib/events/events'
 
 const MAX_VISIBLE = 3
@@ -19,13 +18,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   return (
     <section id="actions" className="scroll-mt-24 bg-bone px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
-<motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.75, ease: EASE }}
-          className="mb-10 max-w-[860px]"
-        >
+        <Reveal className="mb-10 max-w-[860px]">
           <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>
           <h2 className="font-serif text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-tight text-charcoal">
             Περισσότερο από έναν καφέ.
@@ -33,18 +26,12 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           <p className="mt-4 max-w-3xl font-sans text-[15px] leading-relaxed text-concrete">
             Workshops, πολιτιστικές βραδιές, παρουσιάσεις βιβλίων, live μουσική. Ο χώρος μας γίνεται σκηνή για τις ιστορίες των Ιωαννίνων.
           </p>
-        </motion.div>
+        </Reveal>
 
         {visible.length > 0 && (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
-            {visible.map((card, index) => (
-              <motion.div
-                key={card.slug}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.65, ease: EASE, delay: index * 0.1 }}
-              >
+          <Reveal asGroup className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+            {visible.map((card) => (
+              <Reveal.Item key={card.slug}>
                 <Link
                   href={`/actions/${card.slug}`}
                   className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
@@ -78,9 +65,9 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                     </span>
                   </div>
                 </Link>
-              </motion.div>
+              </Reveal.Item>
             ))}
-          </div>
+          </Reveal>
         )}
 
         <div className="mt-10 text-center">

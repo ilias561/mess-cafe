@@ -1,9 +1,8 @@
 'use client'
 
 import { type FormEvent, useState } from 'react'
-import { motion } from 'framer-motion'
 import { submitContact } from '@/lib/contact/submit'
-import { EASE } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
 
 const INPUT_BASE =
   'w-full rounded-[3px] border border-bone/20 bg-white/5 px-4 py-3.5 font-sans text-[15px] text-bone placeholder:text-bone/35 transition-all duration-150 focus:border-blue-400/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50'
@@ -50,50 +49,25 @@ export default function ContactSection() {
       className="scroll-mt-28 bg-olive-deep px-6 py-24 md:px-12 md:py-32"
     >
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
+        <Reveal className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
 
           {/* Left: heading */}
           <div className="lg:col-span-2">
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, ease: EASE }}
-              className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard/80"
-            >
+            <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard/80">
               ΕΠΙΚΟΙΝΩΝΙΑ
-            </motion.p>
+            </p>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-              className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-bone"
-            >
+            <h2 className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-bone">
               Πες μας τι σκέφτεσαι.
-            </motion.h2>
+            </h2>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.65, ease: EASE, delay: 0.18 }}
-              className="mt-5 font-sans text-[15px] leading-relaxed text-bone/60"
-            >
+            <p className="mt-5 font-sans text-[15px] leading-relaxed text-bone/60">
               Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
-            </motion.p>
+            </p>
           </div>
 
           {/* Right: form */}
-          <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.65, ease: EASE, delay: 0.12 }}
-            aria-live="polite"
-          >
+          <div className="lg:col-span-3" aria-live="polite">
             {status === 'success' ? (
               <div className="rounded-2xl border border-bone/15 bg-bone/5 p-8">
                 <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">ΕΥΧΑΡΙΣΤΟΥΜΕ</p>
@@ -164,9 +138,9 @@ export default function ContactSection() {
                 </div>
               </form>
             )}
-          </motion.div>
+          </div>
 
-        </div>
+        </Reveal>
       </div>
     </section>
   )

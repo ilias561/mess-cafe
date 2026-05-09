@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
-import { EASE } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
+import { duration, ease } from '@/lib/motion'
 import { imagePlaceholder, images } from '@/lib/images'
 import AmbientVideo from '@/components/ambient-video'
 import { videoSrc as videoSrcUrl } from '@/lib/media'
@@ -73,19 +74,13 @@ const galleryItems: GalleryItem[] = [
 /* ── Single card ── */
 function GalleryCard({
   item,
-  index,
   onClick,
 }: {
   item: GalleryItem
-  index: number
   onClick: () => void
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, delay: index * 0.08, ease: EASE }}
+    <Reveal.Item
       style={{
         gridArea: item.gridArea,
         background: item.src ? undefined : imagePlaceholder(),
@@ -102,7 +97,7 @@ function GalleryCard({
         }
       }}
     >
-      <motion.div className="absolute inset-0">
+      <div className="absolute inset-0">
         {item.videoSrc ? (
           <AmbientVideo
             src={item.videoSrc}
@@ -122,7 +117,7 @@ function GalleryCard({
             className="object-cover object-center transition-transform duration-[600ms] ease-out group-hover:scale-[1.03]"
           />
         )}
-      </motion.div>
+      </div>
 
       {/* Hover overlay — desktop only */}
       <div className="absolute inset-0 hidden bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block" />
@@ -136,7 +131,7 @@ function GalleryCard({
           {item.caption}
         </p>
       </div>
-    </motion.div>
+    </Reveal.Item>
   )
 }
 
@@ -256,7 +251,7 @@ function Lightbox({
         initial={{ opacity: 0, scale: 0.92 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.96 }}
-        transition={{ duration: 0.3, ease: EASE }}
+        transition={{ duration: duration.fast, ease: ease.out }}
       >
         <motion.div
           className="relative max-h-[80vh] w-auto overflow-hidden rounded-[2px]"
@@ -306,13 +301,7 @@ export default function GallerySection() {
         <div className="mx-auto max-w-[1400px]">
 
           {/* Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.75, ease: EASE }}
-            className="mb-12"
-          >
+          <Reveal className="mb-12">
             <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
               ΧΩΡΟΣ & ΑΤΜΟΣΦΑΙΡΑ
             </p>
@@ -320,53 +309,49 @@ export default function GallerySection() {
               Δύο επίπεδα.{' '}
               <span className="italic text-olive">Άπειρες γωνιές.</span>
             </h2>
-          </motion.div>
+          </Reveal>
 
           {/* Mobile / tablet: single-column stack */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
+          <Reveal asGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:hidden">
             {galleryItems.map((item, i) => (
-              <div
-                key={item.id}
-                role="button"
-                tabIndex={0}
-                aria-label={`Άνοιγμα φωτογραφίας: ${item.alt}`}
-                className={`${item.id === 'a' ? 'aspect-[3/4.12]' : 'aspect-[3/2]'} cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm`}
-                style={!item.src ? { background: imagePlaceholder() } : undefined}
-                onClick={() => open(i)}
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i) } }}
-              >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.65, delay: i * 0.06, ease: EASE }}
-                  className="relative h-full w-full"
+              <Reveal.Item key={item.id}>
+                <div
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Άνοιγμα φωτογραφίας: ${item.alt}`}
+                  className={`${item.id === 'a' ? 'aspect-[3/4.12]' : 'aspect-[3/2]'} cursor-zoom-in overflow-hidden rounded-[2px] bg-bone-warm`}
+                  style={!item.src ? { background: imagePlaceholder() } : undefined}
+                  onClick={() => open(i)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i) } }}
                 >
-                  {item.videoSrc ? (
-                    <AmbientVideo
-                      src={item.videoSrc}
-                      className="h-full w-full object-cover"
-                      style={{ objectPosition: '50% 30%' }}
-                      ariaHidden
-                    />
-                  ) : (
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      unoptimized
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-cover object-center"
-                    />
-                  )}
-                </motion.div>
-              </div>
+                  <div className="relative h-full w-full">
+                    {item.videoSrc ? (
+                      <AmbientVideo
+                        src={item.videoSrc}
+                        className="h-full w-full object-cover"
+                        style={{ objectPosition: '50% 30%' }}
+                        ariaHidden
+                      />
+                    ) : (
+                      <Image
+                        src={item.src}
+                        alt={item.alt}
+                        fill
+                        unoptimized
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="object-cover object-center"
+                      />
+                    )}
+                  </div>
+                </div>
+              </Reveal.Item>
             ))}
-          </div>
+          </Reveal>
 
           {/* Desktop: editorial CSS grid */}
-          <div
+          <Reveal
+            asGroup
             className="hidden h-[960px] gap-3 lg:grid lg:grid-cols-3"
             style={{
               gridTemplateAreas: '"a a b" "a a c" "d e c"',
@@ -377,11 +362,10 @@ export default function GallerySection() {
               <GalleryCard
                 key={item.id}
                 item={item}
-                index={i}
                 onClick={() => open(i)}
               />
             ))}
-          </div>
+          </Reveal>
 
 
         </div>

@@ -1,7 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { EASE } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
 
 const segments = [
   'SPECIALTY COFFEE',
@@ -29,18 +28,16 @@ function Strip({ stripId }: { stripId: string }) {
 
 export default function MarqueeStrip() {
   return (
-    <motion.section
+    <section
       aria-hidden
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, ease: EASE }}
       className="flex h-[80px] items-center overflow-hidden border-y border-olive-deep bg-olive text-bone"
     >
-      <div className="marquee-track flex w-max">
-        <Strip stripId="a" />
-        <Strip stripId="b" />
-      </div>
-    </motion.section>
+      <Reveal className="flex min-h-0 min-w-0 flex-1 items-center overflow-hidden">
+        <div className="marquee-track flex w-max">
+          <Strip stripId="a" />
+          <Strip stripId="b" />
+        </div>
+      </Reveal>
+    </section>
   )
 }

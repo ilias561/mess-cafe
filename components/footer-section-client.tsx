@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
-import { EASE } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
+import { duration, ease, VIEWPORT_ONCE } from '@/lib/motion'
 import type { Settings } from '@/lib/settings'
 
 type FooterSectionClientProps = {
@@ -22,47 +23,37 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
   return (
     <footer id="footer" className="bg-charcoal px-6 pt-24 pb-0 text-bone md:px-12">
       <div className="mx-auto max-w-[1400px]">
-        <motion.p
-          className="mb-6 inline-flex rounded-full border border-bone/15 bg-bone/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.55, ease: EASE }}
-        >
-          OPEN DAILY · {settings.hours.map((slot) => `${slot.day} ${slot.open}—${slot.close}`).join(' · ')}
-        </motion.p>
+        <Reveal>
+          <p className="mb-6 inline-flex rounded-full border border-bone/15 bg-bone/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90">
+            OPEN DAILY · {settings.hours.map((slot) => `${slot.day} ${slot.open}—${slot.close}`).join(' · ')}
+          </p>
 
-        <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(56px,9vw,140px)] text-bone">
-          {footerWords.map((word, i) => (
-            <span key={`${word}-${i}`} className="inline-block overflow-hidden align-baseline">
-              <motion.span
-                className="inline-block"
-                initial={{ y: '100%', opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ delay: i * 0.1, duration: 0.85, ease: EASE }}
-              >
-                {word}
-                {i < footerWords.length - 1 ? '\u00A0' : ''}
-              </motion.span>
-            </span>
-          ))}
-        </h2>
+          <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(56px,9vw,140px)] text-bone">
+            {footerWords.map((word, i) => (
+              <span key={`${word}-${i}`} className="inline-block overflow-hidden align-baseline">
+                <motion.span
+                  className="inline-block"
+                  initial={{ y: '100%', opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={VIEWPORT_ONCE}
+                  transition={{ delay: i * 0.1, duration: duration.slow, ease: ease.out }}
+                >
+                  {word}
+                  {i < footerWords.length - 1 ? '\u00A0' : ''}
+                </motion.span>
+              </span>
+            ))}
+          </h2>
 
-        <motion.div
-          className="mt-8"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.08 }}
-        >
-          <a
-            href={`tel:${primaryPhoneHref}`}
-            className="inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
-          >
-            {settings.phone} — Κάλεσέ μας
-          </a>
-        </motion.div>
+          <div className="mt-8">
+            <a
+              href={`tel:${primaryPhoneHref}`}
+              className="inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+            >
+              {settings.phone} — Κάλεσέ μας
+            </a>
+          </div>
+        </Reveal>
 
         <div className="mt-16 grid grid-cols-1 gap-0 border-t border-bone/10 pt-0 sm:grid-cols-2 lg:grid-cols-4">
           <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
@@ -103,13 +94,9 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           </div>
         </div>
 
-        <motion.div
+        <Reveal
           id="map"
           className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.75, ease: EASE }}
         >
           {/* Street-view video thumbnail — links to Google Maps video */}
           <a
@@ -168,18 +155,12 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               </div>
             )}
           </div>
-        </motion.div>
+        </Reveal>
 
-        <motion.div
-          className="flex flex-col gap-3 border-t border-bone/10 py-8 text-[11px] text-bone/40 sm:flex-row sm:items-center sm:justify-between"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 0.55, ease: EASE }}
-        >
+        <Reveal className="flex flex-col gap-3 border-t border-bone/10 py-8 text-[11px] text-bone/40 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-sans">© 2026 M.E.S.S.</p>
           <p className="font-sans">Designed with ♥ in Ioannina</p>
-        </motion.div>
+        </Reveal>
       </div>
     </footer>
   )

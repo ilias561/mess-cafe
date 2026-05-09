@@ -1,8 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useCallback } from 'react'
-import { motion } from 'framer-motion'
-import { EASE } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
 import { reviews } from '@/lib/reviews-data'
 import type { Review } from '@/lib/reviews-data'
 
@@ -187,16 +186,19 @@ function ReviewsTrack() {
     <div className="relative">
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#f5f5f0] to-transparent" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#f5f5f0] to-transparent" />
-      <div
+      <Reveal
+        asGroup
         ref={wrapperRef}
         onMouseEnter={() => { isPausedRef.current = true }}
         onMouseLeave={() => { if (!isDraggingRef.current) { isPausedRef.current = false } }}
         className="flex gap-4 overflow-x-scroll px-6 py-4 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab select-none"
       >
         {[...reviews, ...reviews].map((review, i) => (
-          <ReviewCard key={i} review={review} />
+          <Reveal.Item key={i} className="shrink-0">
+            <ReviewCard review={review} />
+          </Reveal.Item>
         ))}
-      </div>
+      </Reveal>
     </div>
   )
 }
@@ -206,30 +208,21 @@ export default function ReviewsSection() {
     <section id="reviews" className="scroll-mt-28 bg-[#f5f5f0] py-20">
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: EASE }}
-          >
+          <div>
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#5f6368]">
               Τι λένε οι επισκέπτες μας
             </p>
             <h2 className="mt-2 font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-[#202124]">
               Αξιολογήσεις Google
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.a
+          <a
             href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
             target="_blank"
             rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.08 }}
             className="flex items-center gap-3 rounded-xl bg-white px-5 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.1),0_4px_12px_rgba(0,0,0,0.06)] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] ring-1 ring-black/[0.04]"
           >
             <GoogleLogo className="h-6 w-6" />
@@ -242,25 +235,27 @@ export default function ReviewsSection() {
               </div>
               <p className="font-sans text-[11px] text-[#5f6368]">165 αξιολογήσεις</p>
             </div>
-          </motion.a>
+          </a>
 
-        </div>
+        </Reveal>
       </div>
 
       <ReviewsTrack />
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 mt-5">
-        <a
-          href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-[#5f6368] transition-colors hover:text-[#4285F4]"
-        >
-          Όλες οι αξιολογήσεις στο Google
-          <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5">
-            <path d="M6 3h7m0 0v7m0-7L4 13" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
+        <Reveal>
+          <a
+            href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-[#5f6368] transition-colors hover:text-[#4285F4]"
+          >
+            Όλες οι αξιολογήσεις στο Google
+            <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5">
+              <path d="M6 3h7m0 0v7m0-7L4 13" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </Reveal>
       </div>
 
     </section>

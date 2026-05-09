@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { EASE, fadeUpSoft } from '@/lib/motion'
+import { Reveal } from '@/components/reveal'
+import { duration, ease } from '@/lib/motion'
 import { imagePlaceholder, images } from '@/lib/images'
 
 const items = [
@@ -71,43 +72,32 @@ export default function MenuPreview() {
   return (
     <section id="menu" className="scroll-mt-28 bg-bone-warm px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <div className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <motion.div {...fadeUpSoft}>
+        <Reveal className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
             <p className="eyebrow mb-4 font-sans text-olive">MENU HIGHLIGHTS</p>
             <h2 className="font-serif text-[clamp(40px,5vw,56px)] leading-[1.02] tracking-tight text-charcoal">
               Αγαπημένα μας.
             </h2>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.65, ease: EASE, delay: 0.1 }}
-          >
+          </div>
+          <div>
             <Link
               href="/menu"
               className="font-sans text-sm font-medium text-olive underline decoration-line underline-offset-[6px] transition-opacity hover:opacity-70"
             >
               Όλο το menu →
             </Link>
-          </motion.div>
-        </div>
+          </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((item, index) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: 36 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.75, ease: EASE, delay: index * 0.06 }}
-            >
+        <Reveal asGroup className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+          {items.map((item) => (
+            <Reveal.Item key={item.name}>
               <Link href={`/menu#${item.catId}`} className="block w-full text-inherit no-underline">
                 <motion.article
                   variants={cardVariants}
                   initial="rest"
                   whileHover="hover"
-                  transition={{ duration: 0.35, ease: EASE }}
+                  transition={{ duration: duration.fast, ease: ease.out }}
                   className="group w-full"
                 >
                   <div className="aspect-[4/5] overflow-hidden bg-bone" style={!images[item.img] ? { background: imagePlaceholder() } : undefined}>
@@ -117,7 +107,7 @@ export default function MenuPreview() {
                       width={640}
                       height={800}
                       unoptimized
-                      className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-signature)] group-hover:scale-[1.03]"
                     />
                   </div>
 
@@ -130,7 +120,7 @@ export default function MenuPreview() {
                       <h3 className="font-serif text-[22px] leading-snug tracking-tight text-charcoal">{item.name}</h3>
                       <motion.span
                         variants={lineVariants}
-                        transition={{ duration: 0.45, ease: EASE }}
+                        transition={{ duration: duration.base, ease: ease.out }}
                         className="absolute bottom-0 left-0 h-px w-full origin-left bg-olive"
                       />
                     </div>
@@ -138,9 +128,9 @@ export default function MenuPreview() {
                   </div>
                 </motion.article>
               </Link>
-            </motion.div>
+            </Reveal.Item>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   )

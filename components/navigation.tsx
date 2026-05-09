@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { getOpenStatus } from '@/lib/hours'
-import { EASE } from '@/lib/motion'
+import { EASE, ease } from '@/lib/motion'
 
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
@@ -354,7 +354,7 @@ export default function Navigation() {
                       className="absolute -bottom-1 left-0 right-0 h-px origin-left bg-mustard"
                       initial={{ scaleX: 0 }}
                       whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                      transition={{ duration: 0.2, ease: ease.out }}
                     />
 
                     {isActive && (
@@ -362,7 +362,7 @@ export default function Navigation() {
                         className="absolute -bottom-1 left-0 right-0 h-px bg-mustard"
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        transition={{ duration: 0.2, ease: ease.out }}
                       />
                     )}
                   </Link>

@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
-import { EASE } from '@/lib/motion'
+import { duration, ease, VIEWPORT_ONCE } from '@/lib/motion'
 
 type MaskRevealProps = {
   children: ReactNode
@@ -21,8 +21,8 @@ export default function MaskReveal({ children, className, delay = 0 }: MaskRevea
       className={className}
       initial={{ clipPath: 'inset(0 100% 0 0)' }}
       whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
+      viewport={VIEWPORT_ONCE}
+      transition={{ duration: duration.slow, ease: ease.out, delay }}
     >
       {children}
     </motion.div>

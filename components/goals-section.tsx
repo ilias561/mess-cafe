@@ -3,9 +3,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { EASE } from '@/lib/motion'
-
-const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
+import { Reveal } from '@/components/reveal'
+import { duration, ease } from '@/lib/motion'
 
 const goals = [
   {
@@ -37,7 +36,7 @@ function KeepRisingSeal() {
       initial={{ opacity: 0, rotate: -6, scale: 0.88 }}
       whileInView={{ opacity: 1, rotate: -6, scale: 1 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.65, ease: EASE_TUPLE }}
+      transition={{ duration: duration.base, ease: ease.outStrong }}
       className="relative inline-flex h-[120px] w-[120px] items-center justify-center rounded-full border-2 border-bone/25 md:h-[160px] md:w-[160px]"
       aria-label="#keeprising"
     >
@@ -86,97 +85,54 @@ export default function GoalsSection() {
 
         {/* ── LEFT: 7 cols ── */}
         <div className="md:col-span-7">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard"
-          >
-            ΟΙ ΣΤΟΧΟΙ ΜΑΣ · #KEEPRISING
-          </motion.p>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.75, ease: EASE, delay: 0.08 }}
-            className="mt-6 max-w-[16ch] font-serif text-[clamp(48px,6vw,88px)] leading-[1.02] tracking-tight text-bone"
-          >
-            Δεν είναι καφέ. Είναι ιδέα.
-          </motion.h2>
-
-          {/* Intro */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.65, ease: EASE, delay: 0.2 }}
-            className="mt-6 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80"
-          >
-            Ενότητα, δημιουργικότητα, ευεξία — αρμονικά δεμένα στον ίδιο χώρο.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.65, ease: EASE, delay: 0.28 }}
-            className="mt-4 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80"
-          >
-            Ένας πιο χαλαρός τρόπος ζωής, μέσα στις πιεστικές ανάγκες του σήμερα.
-          </motion.p>
-
-          {/* Pull-quote */}
-          <motion.blockquote
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: EASE, delay: 0.36 }}
-            className="mt-10 border-l-2 border-mustard/70 pl-6"
-          >
-            <p className="font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]">
-              «Τα πάντα ρεί.»
+          <Reveal>
+            <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard">
+              ΟΙ ΣΤΟΧΟΙ ΜΑΣ · #KEEPRISING
             </p>
-            <p className="mt-2 font-sans text-[13px] not-italic text-concrete">
-              — Ηράκλειτος
-            </p>
-          </motion.blockquote>
 
-          {/* Numbered goals */}
-          <div className="mt-12 flex flex-col gap-8">
-            {goals.map((goal, i) => (
-              <motion.div
-                key={goal.num}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6, ease: EASE_TUPLE, delay: i * 0.1 }}
-                className="flex gap-6 border-t border-bone/10 pt-6"
-              >
-                <span className="shrink-0 font-sans text-[13px] font-medium tabular-nums text-mustard/70">
-                  {goal.num}.
-                </span>
-                <div>
-                  <p className="font-serif text-[22px] leading-snug tracking-tight text-bone">
-                    {goal.title}
-                  </p>
-                  <p className="mt-2 font-sans text-[15px] leading-relaxed text-bone/65">
-                    {goal.body}
-                  </p>
+            <h2 className="mt-6 max-w-[16ch] font-serif text-[clamp(48px,6vw,88px)] leading-[1.02] tracking-tight text-bone">
+              Δεν είναι καφέ. Είναι ιδέα.
+            </h2>
+
+            <p className="mt-6 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80">
+              Ενότητα, δημιουργικότητα, ευεξία — αρμονικά δεμένα στον ίδιο χώρο.
+            </p>
+
+            <p className="mt-4 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80">
+              Ένας πιο χαλαρός τρόπος ζωής, μέσα στις πιεστικές ανάγκες του σήμερα.
+            </p>
+
+            <blockquote className="mt-10 border-l-2 border-mustard/70 pl-6">
+              <p className="font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]">
+                «Τα πάντα ρεί.»
+              </p>
+              <p className="mt-2 font-sans text-[13px] not-italic text-concrete">
+                — Ηράκλειτος
+              </p>
+            </blockquote>
+          </Reveal>
+
+          <Reveal asGroup className="mt-12 flex flex-col gap-8">
+            {goals.map((goal) => (
+              <Reveal.Item key={goal.num}>
+                <div className="flex gap-6 border-t border-bone/10 pt-6">
+                  <span className="shrink-0 font-sans text-[13px] font-medium tabular-nums text-mustard/70">
+                    {goal.num}.
+                  </span>
+                  <div>
+                    <p className="font-serif text-[22px] leading-snug tracking-tight text-bone">
+                      {goal.title}
+                    </p>
+                    <p className="mt-2 font-sans text-[15px] leading-relaxed text-bone/65">
+                      {goal.body}
+                    </p>
+                  </div>
                 </div>
-              </motion.div>
+              </Reveal.Item>
             ))}
-          </div>
+          </Reveal>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.36 }}
-            className="mt-10"
-          >
+          <Reveal className="mt-10">
             <Link
               href="/actions"
               className="inline-flex items-center gap-2.5 rounded-full bg-mustard px-10 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:bg-amber hover:shadow-lg"
@@ -186,17 +142,12 @@ export default function GoalsSection() {
                 <path d="M3 8h10M8 3l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
-          </motion.div>
+          </Reveal>
         </div>
 
         {/* ── RIGHT: 5 cols — Keep Rising IG post card ── */}
         <div className="md:col-span-5">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.9, ease: EASE_TUPLE }}
-          >
+          <Reveal>
             {/* Photo */}
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px]">
               <Image
@@ -254,12 +205,12 @@ export default function GoalsSection() {
                 Δες την ανάρτηση στο Instagram →
               </a>
             </div>
-          </motion.div>
+          </Reveal>
         </div>
 
       </div>
 
-{/* ── #KEEPRISING seal — bottom-right, overlapping boundary ── */}
+      {/* ── #KEEPRISING seal — bottom-right, overlapping boundary ── */}
       <div className="absolute bottom-0 right-6 translate-y-1/2 md:right-12">
         <KeepRisingSeal />
       </div>
