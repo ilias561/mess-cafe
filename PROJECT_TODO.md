@@ -301,3 +301,9 @@ Once all above are addressed, ship in this order:
 - [ ] Launch
 
 After Phase 5-8 done = **MVP launched**. After sections 3.1-3.2 done = **signature site**.
+
+---
+
+## 9 · Optional / cleanup
+
+- [ ] Remove `public/videos/frames/frame-NNNN.jpg` once mobile WebP set is verified in production.

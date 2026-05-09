@@ -5,9 +5,8 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
-import { videoSrc } from '@/lib/media'
-
-const TOTAL_FRAMES = 97   // ffmpeg extracted 97 frames from the 4-second video
+import { frameSrc, videoSrc } from '@/lib/media'
+const MOBILE_FRAME_COUNT = 30
 
 /* ── Botanical corner decoration (desktop hero) ── */
 function BotanicalCorner() {
@@ -85,6 +84,7 @@ export default function Hero() {
   const rafRef        = useRef<number>(0)
   const isMobileRef   = useRef(false)
   const lastFrameRef  = useRef(-1)
+  const firstFramesReadyRef = useRef<Promise<void> | null>(null)
 
   const [loaderReady,   setLoaderReady]   = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
@@ -114,28 +114,66 @@ export default function Hero() {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const imgs: HTMLImageElement[] = []
-    let loaded = 0
+    let firstFramesReadyResolve: (() => void) | null = null
+    firstFramesReadyRef.current = new Promise<void>((resolve) => {
+      firstFramesReadyResolve = resolve
+    })
 
-    const drawFrame = (idx: number) => {
-      const img = imgs[idx]
+    const drawFrame = (img: HTMLImageElement) => {
       if (!img?.complete || !canvas) return
       const ctx = canvas.getContext('2d')
       if (!ctx) return
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
     }
 
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
-      const img = new Image()
-      const num = String(i).padStart(4, '0')
-      img.src = videoSrc(`/videos/frames/frame-${num}.jpg`)
-      img.onload = () => {
-        loaded++
-        if (i === 1) drawFrame(0)
+    const urls = Array.from({ length: MOBILE_FRAME_COUNT }, (_, index) => frameSrc(index, { mobile: true }))
+
+    async function preloadFrames(urlsToLoad: string[], concurrency = 6): Promise<HTMLImageElement[]> {
+      const out: HTMLImageElement[] = new Array(urlsToLoad.length)
+      let cursor = 0
+      let completed = 0
+      let firstPaintDone = false
+
+      async function worker() {
+        while (cursor < urlsToLoad.length) {
+          const i = cursor++
+          const img = new Image()
+          img.decoding = 'async'
+          img.src = urlsToLoad[i]
+          await img.decode().catch(() => {})
+          out[i] = img
+          completed++
+
+          if (i === 0 && !firstPaintDone) {
+            firstPaintDone = true
+            drawFrame(img)
+          }
+
+          if (completed >= 6 && firstFramesReadyResolve) {
+            firstFramesReadyResolve()
+            firstFramesReadyResolve = null
+          }
+        }
       }
-      imgs.push(img)
+
+      await Promise.all(Array.from({ length: Math.min(concurrency, urlsToLoad.length) }, worker))
+      return out
     }
-    framesRef.current = imgs
+
+    preloadFrames(urls)
+      .then((frames) => {
+        framesRef.current = frames
+        if (firstFramesReadyResolve) {
+          firstFramesReadyResolve()
+          firstFramesReadyResolve = null
+        }
+      })
+      .catch(() => {
+        if (firstFramesReadyResolve) {
+          firstFramesReadyResolve()
+          firstFramesReadyResolve = null
+        }
+      })
   }, [])
 
   // Scroll-scrub: mobile canvas only
@@ -159,7 +197,7 @@ export default function Hero() {
 
       if (!reducedMotion) {
         if (isMobile && canvas) {
-          const idx = Math.round(p * (TOTAL_FRAMES - 1))
+          const idx = Math.round(p * (MOBILE_FRAME_COUNT - 1))
           if (idx !== lastFrameRef.current) {
             lastFrameRef.current = idx
             const img = framesRef.current[idx]
@@ -206,10 +244,17 @@ export default function Hero() {
       rafRef.current = requestAnimationFrame(update)
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true })
-    update()
+    let cancelled = false
+    const start = async () => {
+      await (firstFramesReadyRef.current ?? Promise.resolve())
+      if (cancelled) return
+      window.addEventListener('scroll', onScroll, { passive: true })
+      update()
+    }
+    void start()
 
     return () => {
+      cancelled = true
       window.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(rafRef.current)
     }
@@ -332,8 +377,7 @@ export default function Hero() {
     {/* ── MOBILE hero: scroll-scrub canvas animation ── */}
     <section
       ref={sectionRef}
-      style={{ height: '600vh' }}
-      className="relative w-full md:hidden"
+      className="relative w-full h-[300vh] md:hidden"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
@@ -343,7 +387,11 @@ export default function Hero() {
           width={540}
           height={960}
           className="absolute inset-0 h-full w-full object-cover object-center"
-          style={{ background: '#1a1a1a' }}
+          style={{
+            background: '#1a1a1a',
+            transform: 'translateZ(0)',
+            willChange: 'transform',
+          }}
         />
 
         {/* gradients */}
