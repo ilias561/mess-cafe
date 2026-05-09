@@ -289,8 +289,8 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/65 via-transparent to-black/50" />
 
-      <div className="relative z-10 flex h-full min-h-0 flex-col justify-end px-8 pb-10 pt-24">
-        <div className="max-w-[540px]">
+      <div className="relative z-10 flex h-full min-h-0 flex-col px-8 pb-10">
+        <div className="max-w-[540px] shrink-0 pt-14">
           <motion.p
             {...reveal(0, 600)}
             className="hero-text-shadow font-sans text-[11px] tracking-[0.2em] text-white/75"
@@ -311,10 +311,12 @@ export default function Hero() {
               </Fragment>
             ))}
           </motion.h1>
+        </div>
 
+        <div className="mt-auto max-w-[540px] min-h-0 pt-6">
           <motion.p
             {...reveal(900, 700)}
-            className="hero-text-shadow mt-6 font-sans text-[16px] leading-relaxed text-white/90"
+            className="hero-text-shadow font-sans text-[16px] leading-relaxed text-white/90"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </motion.p>
