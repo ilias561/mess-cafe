@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, Phone, X } from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { Instagram, Menu, Phone, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -11,24 +11,68 @@ import { EASE } from '@/lib/motion'
 
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
+/** Single source for grep / copy consistency (desktop nav + mobile drawer CTA). */
+const RESERVATIONS_LABEL = 'Κράτηση για event' as const
+const SITE_PHONE_E164 = '+306945777808' as const
+
 const navLinks = [
   { label: 'Αρχική', href: '/', sectionId: null, isCta: false },
   { label: 'Ποιοι είμαστε', href: '/#about-us', sectionId: 'about-us', isCta: false },
   { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
   { label: 'Οι δράσεις μας', href: '/actions', sectionId: null, isCta: false },
   { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
-  { label: 'Κράτηση για event', href: '/reservations', sectionId: null, isCta: true },
+  { label: RESERVATIONS_LABEL, href: '/reservations', sectionId: null, isCta: true },
   { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
 ] as const
 
+type NavLink = (typeof navLinks)[number]
+
+function isNavLinkActive(link: NavLink, pathname: string, activeSection: string | null) {
+  const isHomeAnchor = link.href.startsWith('/#')
+  const isRouteActive =
+    !isHomeAnchor &&
+    (link.href === '/'
+      ? pathname === '/'
+      : pathname === link.href || pathname.startsWith(`${link.href}/`))
+  const isAnchorActive =
+    isHomeAnchor && pathname === '/' && link.sectionId ? activeSection === link.sectionId : false
+  return isRouteActive || isAnchorActive
+}
+
+function MobileDrawerHoursChip({ className = '' }: { className?: string }) {
+  const status = getOpenStatus()
+  return (
+    <span
+      className={`inline-flex max-w-[min(100%,200px)] items-center gap-1.5 ${className}`}
+      title={status.label}
+      aria-live="polite"
+    >
+      <span className="relative flex h-1.5 w-1.5 shrink-0">
+        {status.open && (
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+        )}
+        <span
+          className={`relative inline-flex h-1.5 w-1.5 rounded-full ${status.open ? 'bg-emerald-500' : 'bg-mustard'}`}
+        />
+      </span>
+      <span className="font-sans text-[11px] font-medium tracking-wide text-espresso">
+        {status.open ? 'Ανοιχτά τώρα' : status.label}
+      </span>
+    </span>
+  )
+}
+
 function OpenBadge({
   light = false,
   showText = true,
+  showLabelAlways = false,
   className = '',
 }: {
   light?: boolean
   showText?: boolean
+  /** When true, status label is visible at all breakpoints (e.g. mobile menu drawer). */
+  showLabelAlways?: boolean
   className?: string
 }) {
   const status = getOpenStatus()
@@ -53,16 +97,22 @@ function OpenBadge({
         )}
         <span className={`relative inline-flex h-2 w-2 rounded-full ${dotColor}`} />
       </span>
-      {showText && <span className="hidden xl:inline">{status.label}</span>}
+      {showText && (
+        <span className={showLabelAlways ? 'max-w-[min(100%,220px)] leading-snug' : 'hidden xl:inline'}>
+          {status.label}
+        </span>
+      )}
     </span>
   )
 }
 
-function BrandLogo() {
+function BrandLogo({ compact = false }: { compact?: boolean }) {
   const [failed, setFailed] = useState(false)
+  const px = compact ? 24 : 32
+  const cls = compact ? 'h-6 w-6 shrink-0' : 'h-8 w-8 shrink-0'
   if (failed) {
     return (
-      <svg viewBox="0 0 32 32" fill="none" className="h-8 w-8 shrink-0" aria-hidden>
+      <svg viewBox="0 0 32 32" fill="none" className={`${cls} rounded-full`} aria-hidden>
         <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="16" cy="14" r="5" fill="currentColor" />
         <path d="M10 24c1.5-3 3.5-5 6-5s4.5 2 6 5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
@@ -73,9 +123,9 @@ function BrandLogo() {
     <Image
       src="/images/logo-mess.svg"
       alt="M.E.S.S. logo"
-      width={32}
-      height={32}
-      className="h-8 w-8 shrink-0 rounded-full object-cover"
+      width={px}
+      height={px}
+      className={`${cls} rounded-full object-cover`}
       priority
       onError={() => setFailed(true)}
     />
@@ -84,6 +134,7 @@ function BrandLogo() {
 
 export default function Navigation() {
   const pathname = usePathname()
+  const reduceMotion = useReducedMotion()
   const [menuOpen, setMenuOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
@@ -91,11 +142,13 @@ export default function Navigation() {
   const [isDesktop, setIsDesktop] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const drawerRef = useRef<HTMLDivElement>(null)
-  const firstFocusableRef = useRef<HTMLButtonElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const prevMenuOpenRef = useRef(false)
   const sectionLinks = useMemo(
     () => navLinks.filter((l) => l.sectionId).map((l) => l.sectionId as string),
     [],
   )
+  const mobileDrawerNavLinks = useMemo(() => navLinks.filter((l) => !l.isCta), [])
 
   // Active section via IntersectionObserver
   useEffect(() => {
@@ -188,13 +241,21 @@ export default function Navigation() {
     return () => window.removeEventListener('keydown', onKey)
   }, [menuOpen])
 
+  // Restore focus to menu trigger when drawer closes
+  useEffect(() => {
+    if (prevMenuOpenRef.current && !menuOpen) {
+      menuButtonRef.current?.focus()
+    }
+    prevMenuOpenRef.current = menuOpen
+  }, [menuOpen])
+
   // Focus trap inside mobile drawer
   useEffect(() => {
     if (!menuOpen || !drawerRef.current) return
     const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
     )
-    const first = focusable[0] ?? firstFocusableRef.current
+    const first = focusable[0]
     const last = focusable[focusable.length - 1]
     first?.focus()
 
@@ -261,15 +322,7 @@ export default function Navigation() {
           >
               {navLinks.map((link) => {
                 const isHomeAnchor = link.href.startsWith('/#')
-                const isRouteActive = !isHomeAnchor && (
-                  link.href === '/'
-                    ? pathname === '/'
-                    : pathname === link.href || pathname.startsWith(`${link.href}/`)
-                )
-                const isAnchorActive = isHomeAnchor && pathname === '/' && link.sectionId
-                  ? activeSection === link.sectionId
-                  : false
-                const isActive = isRouteActive || isAnchorActive
+                const isActive = isNavLinkActive(link, pathname, activeSection)
                 const shiftRightCluster = link.isCta
                 return (
                   <Link
@@ -321,7 +374,7 @@ export default function Navigation() {
             <OpenBadge light={false} showText className="hidden min-[1200px]:flex" />
             <OpenBadge light={false} showText={false} className="flex min-[1200px]:hidden" />
             <a
-              href="tel:+306945777808"
+              href={`tel:${SITE_PHONE_E164}`}
               aria-label="Κάλεσέ μας"
               className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
             >
@@ -329,6 +382,7 @@ export default function Navigation() {
             </a>
 
             <motion.button
+              ref={menuButtonRef}
               type="button"
               className="flex h-11 w-11 items-center justify-center rounded-full text-charcoal transition-colors hover:bg-bone-warm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden"
               aria-expanded={menuOpen}
@@ -348,11 +402,18 @@ export default function Navigation() {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div className="fixed inset-0 z-[70] lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div
+            className="fixed inset-0 z-[70] lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE }}
+          >
             <button
               type="button"
+              tabIndex={-1}
               aria-label="Κλείσιμο μενού"
-              className="absolute inset-0 bg-black/20"
+              className="absolute inset-0 bg-black/45 backdrop-blur-md"
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
@@ -360,97 +421,122 @@ export default function Navigation() {
               ref={drawerRef}
               role="dialog"
               aria-modal="true"
-              aria-label="Κινητό μενού"
-              className="absolute right-0 top-0 h-full w-full overflow-y-auto bg-bone px-6 pt-6 pb-8"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              aria-label="Κύριο μενού"
+              className="absolute top-0 right-0 flex h-full w-[88vw] max-w-[360px] flex-col overflow-y-auto bg-bone-warm shadow-[-16px_0_48px_rgba(42,29,20,0.14)]"
+              drag={reduceMotion ? false : 'x'}
+              dragConstraints={{ left: 0, right: 260 }}
+              dragElastic={reduceMotion ? undefined : { left: 0, right: 0.35 }}
+              dragDirectionLock
+              onDragEnd={(_, info) => {
+                if (reduceMotion) return
+                if (info.offset.x > 72 || info.velocity.x > 420) {
+                  setMenuOpen(false)
+                }
+              }}
+              initial={reduceMotion ? { opacity: 1, x: 0 } : { x: '100%', opacity: 1 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={reduceMotion ? { opacity: 0, transition: { duration: 0.15, ease: EASE } } : { x: '100%', opacity: 1 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.35, ease: EASE }
+              }
             >
-              <div className="mb-10 flex items-center justify-between">
-                <OpenBadge showText className="text-charcoal" />
+              <div className="flex shrink-0 items-start justify-between gap-3 px-6 pt-6 pb-4">
+                <div className="flex min-w-0 flex-1 flex-col gap-2">
+                  <Link
+                    href="/"
+                    onClick={() => setMenuOpen(false)}
+                    className="flex w-fit max-w-full items-center gap-2.5 text-espresso transition-opacity hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
+                  >
+                    <BrandLogo compact />
+                    <span className="font-serif text-[20px] font-medium leading-none tracking-tight">M.E.S.S.</span>
+                  </Link>
+                  <MobileDrawerHoursChip />
+                </div>
                 <button
-                  ref={firstFocusableRef}
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Κλείσιμο μενού"
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-black/20 text-charcoal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-espresso text-bone transition-colors hover:bg-espresso/90 active:bg-espresso/80"
                 >
-                  <X className="h-5 w-5" strokeWidth={1.5} />
+                  <X className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden />
                 </button>
               </div>
 
-              <motion.nav
-                className="flex flex-1 flex-col gap-5"
-                aria-label="Σύνδεσμοι πλοήγησης"
-                initial="hidden"
-                animate="visible"
-                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.05, delayChildren: 0.3 } } }}
-              >
-                {navLinks.map((link) => {
-                  const isHomeAnchor = link.href.startsWith('/#')
-                  return (
-                    <motion.div
-                      key={link.href}
-                      variants={{
-                        hidden: { opacity: 0, y: 10 },
-                        visible: { opacity: 1, y: 0 },
-                      }}
-                      transition={{ duration: 0.3, ease: EASE }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={(e) => {
-                          if (isHomeAnchor && link.sectionId) {
-                            const didNavigate = handleAnchorNavigation(link.sectionId)
-                            if (didNavigate) {
-                              e.preventDefault()
-                              return
-                            }
-                          }
-                          setMenuOpen(false)
-                        }}
-                        className={`inline-flex w-fit items-center rounded-full px-2 py-1 font-serif text-[clamp(32px,10vw,40px)] leading-tight tracking-tight text-charcoal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${
-                          link.isCta ? 'bg-[rgba(212,165,80,0.2)] px-4 py-2' : ''
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  )
-                })}
-              </motion.nav>
+              <div className="mx-6 h-px shrink-0 bg-olive/25" aria-hidden />
 
-              <motion.div
-                className="mt-10 border-t border-black/10 pt-6"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.28, ease: EASE }}
-              >
+              <nav className="min-h-0 flex-1 px-6 py-5" aria-label="Σύνδεσμοι πλοήγησης">
+                <ul className="flex flex-col">
+                  {mobileDrawerNavLinks.map((link) => {
+                    const isHomeAnchor = link.href.startsWith('/#')
+                    const isActive = isNavLinkActive(link, pathname, activeSection)
+                    return (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          onClick={(e) => {
+                            if (isHomeAnchor && link.sectionId) {
+                              const didNavigate = handleAnchorNavigation(link.sectionId)
+                              if (didNavigate) {
+                                e.preventDefault()
+                                return
+                              }
+                            }
+                            setMenuOpen(false)
+                          }}
+                          aria-current={isActive ? 'page' : undefined}
+                          className={`relative -mx-6 block py-3.5 pr-6 font-sans text-[22px] font-medium leading-[1.4] tracking-tight text-espresso transition-colors duration-100 ease-out active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
+                        >
+                          {isActive && (
+                            <span
+                              className="pointer-events-none absolute top-1/2 left-6 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-mustard"
+                              aria-hidden
+                            />
+                          )}
+                          {link.label}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </nav>
+
+              <div className="mx-6 h-px shrink-0 bg-olive/25" aria-hidden />
+
+              <div className="shrink-0 px-6 py-5">
                 <div className="grid grid-cols-2 gap-3">
                   <a
-                    href="tel:+306945777808"
-                    className="flex min-h-[44px] items-center justify-center rounded-full border border-charcoal/20 px-5 py-3 font-sans text-sm font-medium text-charcoal"
+                    href={`tel:${SITE_PHONE_E164}`}
+                    className="flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-espresso px-3 font-sans text-[15px] font-medium text-espresso transition-colors hover:border-espresso/80 active:border-mustard active:text-mustard"
                   >
+                    <Phone className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden />
                     Κάλεσέ μας
                   </a>
                   <Link
                     href="/reservations"
-                    className="flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-5 py-3 font-sans text-sm font-medium text-charcoal transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber"
+                    className="flex h-12 min-h-[48px] items-center justify-center rounded-full bg-mustard px-3 text-center font-sans text-[15px] font-medium text-espresso transition-colors hover:bg-amber active:scale-[0.98]"
                     onClick={() => setMenuOpen(false)}
                   >
-                    Κράτηση για event
+                    {RESERVATIONS_LABEL}
                   </Link>
                 </div>
+              </div>
+
+              <div className="mt-auto flex shrink-0 flex-col gap-3 px-6 pb-8">
                 <a
                   href="https://www.instagram.com/m.e.s.s._ioannina/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block font-sans text-sm text-charcoal/70 underline underline-offset-4"
+                  className="inline-flex w-fit items-center gap-2 font-sans text-[13px] text-espresso/70 transition-colors hover:text-espresso"
                 >
+                  <Instagram className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden />
                   @m.e.s.s._ioannina
                 </a>
-              </motion.div>
+                <p className="font-sans text-[11px] tracking-wider text-espresso/50 uppercase">
+                  M.E.S.S. CAFÉ · IOANNINA · #KEEPRISING
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         )}
