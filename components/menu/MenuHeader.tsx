@@ -9,7 +9,7 @@ type MenuHeaderProps = {
 
 export default function MenuHeader({ updatedAt }: MenuHeaderProps) {
   return (
-    <div className="bg-bone px-6 pb-14 pt-20 md:px-12 md:pb-16">
+    <div className="bg-bone px-6 pb-14 pt-36 md:px-12 md:pt-44 md:pb-16">
       <div className="mx-auto max-w-[1400px]">
         <motion.h1
           initial={{ opacity: 0, y: 28 }}

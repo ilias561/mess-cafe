@@ -29,15 +29,20 @@ const navLinks = [
 type NavLink = (typeof navLinks)[number]
 
 function isNavLinkActive(link: NavLink, pathname: string, activeSection: string | null) {
-  const isHomeAnchor = link.href.startsWith('/#')
-  const isRouteActive =
-    !isHomeAnchor &&
-    (link.href === '/'
-      ? pathname === '/'
-      : pathname === link.href || pathname.startsWith(`${link.href}/`))
-  const isAnchorActive =
-    isHomeAnchor && pathname === '/' && link.sectionId ? activeSection === link.sectionId : false
-  return isRouteActive || isAnchorActive
+  // Hash anchors on home (e.g. /#about-us): only that section, when in view
+  if (link.href.startsWith('/#') && link.sectionId) {
+    return pathname === '/' && activeSection === link.sectionId
+  }
+
+  // "Αρχική" — active on home only while no section link is highlighted
+  if (link.href === '/') {
+    if (pathname !== '/') return false
+    const anySectionHighlighted = navLinks.some((l) => Boolean(l.sectionId) && activeSection === l.sectionId)
+    return !anySectionHighlighted
+  }
+
+  // Other routes: exact match or nested path (never treat `/` as prefix of other routes)
+  return pathname === link.href || pathname.startsWith(`${link.href}/`)
 }
 
 function MobileDrawerHoursChip({ className = '' }: { className?: string }) {
@@ -310,10 +315,13 @@ export default function Navigation() {
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
-        <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-4 px-5 lg:px-8">
-          <Link href="/" className={`flex shrink-0 items-center gap-3 transition-colors ${navTextColor}`}>
+        <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-3 px-5 lg:gap-4 lg:px-8">
+          <Link
+            href="/"
+            className={`flex min-w-0 max-w-[min(100%,52vw)] shrink items-center gap-2 transition-colors sm:max-w-none sm:gap-3 ${navTextColor}`}
+          >
             <BrandLogo />
-            <span className="font-serif text-[22px] font-medium tracking-tight">M.E.S.S.</span>
+            <span className="truncate font-serif text-[22px] font-medium tracking-tight">M.E.S.S.</span>
           </Link>
 
           <nav
@@ -467,7 +475,7 @@ export default function Navigation() {
 
               <div className="mx-6 h-px shrink-0 bg-olive/25" aria-hidden />
 
-              <nav className="min-h-0 flex-1 px-6 py-5" aria-label="Σύνδεσμοι πλοήγησης">
+              <nav className="min-h-0 flex-1 px-6 pt-5 pb-8" aria-label="Σύνδεσμοι πλοήγησης">
                 <ul className="flex flex-col">
                   {mobileDrawerNavLinks.map((link) => {
                     const isHomeAnchor = link.href.startsWith('/#')
@@ -487,7 +495,7 @@ export default function Navigation() {
                             setMenuOpen(false)
                           }}
                           aria-current={isActive ? 'page' : undefined}
-                          className={`ui-link relative -mx-6 block py-3.5 pr-6 font-sans text-[22px] font-medium leading-[1.4] tracking-tight text-espresso active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
+                          className={`ui-link relative -mx-6 block py-3.5 pr-6 font-sans text-[22px] font-medium leading-[1.4] tracking-normal text-espresso [font-family:var(--font-inter),ui-sans-serif,system-ui,sans-serif] active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
                         >
                           {isActive && (
                             <span
@@ -503,9 +511,9 @@ export default function Navigation() {
                 </ul>
               </nav>
 
-              <div className="mx-6 h-px shrink-0 bg-olive/25" aria-hidden />
+              <div className="mx-6 mt-1 h-px shrink-0 bg-olive/25" aria-hidden />
 
-              <div className="shrink-0 px-6 py-5">
+              <div className="shrink-0 px-6 pt-5 pb-6">
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href={`tel:${SITE_PHONE_E164}`}
