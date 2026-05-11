@@ -26,6 +26,7 @@
   --ring: #e8b547;
   --radius: 0.625rem;
   --mustard: #e8b547;
+  --forest: #2d5a27;
   --terracotta: #b54f2a;
   --espresso: #2a1d14;
   --cream: #faf6ed;
@@ -52,6 +53,7 @@
   --color-cream: #faf6ed;
   --color-concrete: #6b6b63;
   --color-line: #d9d0be;
+  --color-forest: #2d5a27;
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
@@ -142,7 +144,8 @@
     scroll-behavior: auto;
   }
   #hero,
-  .marquee-track {
+  .marquee-track,
+  .marquee-track-reverse {
     animation: none !important;
   }
   main p a,
@@ -163,6 +166,11 @@
   to { transform: translateX(-50%) }
 }
 
+@keyframes editorialMarqueeReverse {
+  from { transform: translateX(-50%) }
+  to { transform: translateX(0%) }
+}
+
 @keyframes messPulse {
   0% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -180,7 +188,20 @@
   animation: editorialMarquee 35s linear infinite;
 }
 
+.marquee-track-reverse {
+  animation: editorialMarqueeReverse 49s linear infinite;
+}
+
 .marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
+
+.actions-hero-marquee-group:hover .marquee-track,
+.actions-hero-marquee-group:hover .marquee-track-reverse {
   animation-play-state: paused;
 }
 
