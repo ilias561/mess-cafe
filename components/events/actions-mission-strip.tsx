@@ -47,9 +47,9 @@ const pillars: readonly Pillar[] = [
 
 // Tailwind class maps — never interpolate colour names into classNames.
 const cardBg: Record<Accent, string> = {
-  mustard: 'bg-mustard/[0.06]',
-  terracotta: 'bg-terracotta/[0.06]',
-  olive: 'bg-olive/[0.06]',
+  mustard: 'bg-mustard/[0.10]',
+  terracotta: 'bg-terracotta/[0.10]',
+  olive: 'bg-olive/[0.10]',
 }
 const accentBar: Record<Accent, string> = {
   mustard: 'bg-mustard',
@@ -377,6 +377,15 @@ export default function ActionsMissionStrip({
           : 'py-20 md:py-28',
       )}
     >
+      {/* warm radial accent behind pillars (very soft) */}
+      {isLead && (
+        <div
+          className="pointer-events-none absolute inset-x-0 top-24 flex justify-center md:top-32"
+          aria-hidden
+        >
+          <div className="h-64 w-64 rounded-full bg-[radial-gradient(circle_at_center,_rgba(196,164,60,0.10),_transparent_65%)] blur-2xl" />
+        </div>
+      )}
       {/* ─── ambient decorative layer ─── */}
       {/* botanical, top-left */}
       <motion.div
@@ -437,65 +446,59 @@ export default function ActionsMissionStrip({
 
       {/* ─── content ─── */}
       <div className="relative mx-auto max-w-[1400px]">
-        {/* header */}
-        <div className="text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={motionViewport}
-            transition={{ duration: 0.6, ease: EASE_OUT }}
-            className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive"
-          >
-            ΠΩΣ ΒΟΗΘΑΜΕ · <span className="text-mustard">#KEEPRISING</span>
-          </motion.p>
+        {/* header — hidden in lead variant since the hero header covers it */}
+        {!isLead && (
+          <div className="text-center">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={motionViewport}
+              transition={{ duration: 0.6, ease: EASE_OUT }}
+              className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive"
+            >
+              ΠΩΣ ΒΟΗΘΑΜΕ · <span className="text-mustard">#KEEPRISING</span>
+            </motion.p>
 
-          <h2
-            className={cn(
-              'mt-3 font-serif leading-[1.05] tracking-tight text-charcoal md:mt-5',
-              isLead
-                ? 'text-[clamp(22px,3.8vw,44px)]'
-                : 'text-[clamp(32px,4.5vw,52px)]',
-            )}
-          >
-            {headlineWords.map((word, i) => (
-              <Fragment key={`${word}-${i}`}>
-                <span className="inline-block overflow-hidden align-baseline">
-                  <motion.span
-                    className="inline-block"
-                    initial={{ y: '100%' }}
-                    whileInView={{ y: 0 }}
-                    viewport={motionViewport}
-                    transition={{
-                      duration: 0.7,
-                      delay: i * wordStagger,
-                      ease: EASE_OUT,
-                    }}
-                  >
-                    {word}
-                  </motion.span>
-                </span>
-                {i < headlineWords.length - 1 ? ' ' : ''}
-              </Fragment>
-            ))}
-          </h2>
+            <h2
+              className="mt-5 font-serif text-[clamp(32px,4.5vw,52px)] leading-[1.05] tracking-tight text-charcoal"
+            >
+              {headlineWords.map((word, i) => (
+                <Fragment key={`${word}-${i}`}>
+                  <span className="inline-block overflow-hidden align-baseline">
+                    <motion.span
+                      className="inline-block"
+                      initial={{ y: '100%' }}
+                      whileInView={{ y: 0 }}
+                      viewport={motionViewport}
+                      transition={{
+                        duration: 0.7,
+                        delay: i * wordStagger,
+                        ease: EASE_OUT,
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
+                  {i < headlineWords.length - 1 ? ' ' : ''}
+                </Fragment>
+              ))}
+            </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={motionViewport}
-            transition={{
-              duration: 0.7,
-              delay: headlineWords.length * wordStagger + (isLead ? 0.06 : 0.1),
-              ease: EASE_OUT,
-            }}
-            className={cn(
-              'mx-auto max-w-[44ch] font-sans leading-relaxed text-concrete',
-              isLead ? 'mt-3 text-[14px]' : 'mt-5 text-[15px]',
-            )}
-          >
-            Καθαρό φαγητό. Αλληλεγγύη. Κοινότητα. Όχι ως slogans — ως πράξεις.
-          </motion.p>
-        </div>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={motionViewport}
+              transition={{
+                duration: 0.7,
+                delay: headlineWords.length * wordStagger + 0.1,
+                ease: EASE_OUT,
+              }}
+              className="mx-auto mt-5 max-w-[44ch] font-sans text-[15px] leading-relaxed text-concrete"
+            >
+              Καθαρό φαγητό. Αλληλεγγύη. Κοινότητα. Όχι ως slogans — ως πράξεις.
+            </motion.p>
+          </div>
+        )}
 
         {/* pillars */}
         <div
@@ -520,13 +523,26 @@ export default function ActionsMissionStrip({
                 'group relative overflow-hidden rounded-[4px] border border-line/40 transition-shadow duration-300 hover:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.18)]',
                 cardBg[pillar.accent],
                 isLead
-                  ? 'flex flex-row items-start gap-3 p-4 md:flex-col md:gap-5 md:p-7'
+                  ? 'flex flex-row items-start gap-3 border-l-[3px] border-l-transparent p-4 md:flex-col md:gap-5 md:border-l-0 md:p-7'
                   : 'flex flex-col gap-5 p-8',
+                isLead &&
+                  pillar.accent === 'mustard' &&
+                  'border-l-mustard md:hover:shadow-[0_8px_30px_-10px_rgba(196,164,60,0.25)]',
+                isLead &&
+                  pillar.accent === 'terracotta' &&
+                  'border-l-terracotta md:hover:shadow-[0_8px_30px_-10px_rgba(197,101,77,0.25)]',
+                isLead &&
+                  pillar.accent === 'olive' &&
+                  'border-l-olive md:hover:shadow-[0_8px_30px_-10px_rgba(101,118,82,0.25)]',
               )}
             >
-              {/* top accent bar — grows on hover */}
+              {/* accent bar — top on desktop, hinted by left border on mobile */}
               <span
-                className={`absolute left-0 top-0 h-[3px] w-12 ${accentBar[pillar.accent]} transition-all duration-300 group-hover:w-full`}
+                className={cn(
+                  'absolute left-0 top-0 h-[3px] w-12 transition-all duration-300 group-hover:w-full',
+                  accentBar[pillar.accent],
+                  isLead ? 'hidden md:block' : 'block',
+                )}
                 aria-hidden
               />
 
@@ -587,30 +603,60 @@ export default function ActionsMissionStrip({
             aria-hidden
           />
           <div className="grid grid-cols-3 gap-4 text-center md:gap-6">
-            <div className="flex flex-col items-center">
+            <motion.div
+              className="flex flex-col items-center"
+              animate={
+                animateAmbient ? { scale: [1, 1.03, 1] } : { scale: 1 }
+              }
+              transition={
+                animateAmbient
+                  ? { duration: 3, repeat: Infinity, ease: EASE_OUT, delay: 0.4 }
+                  : { duration: 0 }
+              }
+            >
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={2023} />
               </span>
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
-                από
+                από το
               </span>
-            </div>
-            <div className="flex flex-col items-center">
+            </motion.div>
+            <motion.div
+              className="flex flex-col items-center"
+              animate={
+                animateAmbient ? { scale: [1, 1.03, 1] } : { scale: 1 }
+              }
+              transition={
+                animateAmbient
+                  ? { duration: 3, repeat: Infinity, ease: EASE_OUT, delay: 0.7 }
+                  : { duration: 0 }
+              }
+            >
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={12} />
               </span>
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
                 δράσεις
               </span>
-            </div>
-            <div className="flex flex-col items-center">
+            </motion.div>
+            <motion.div
+              className="flex flex-col items-center"
+              animate={
+                animateAmbient ? { scale: [1, 1.03, 1] } : { scale: 1 }
+              }
+              transition={
+                animateAmbient
+                  ? { duration: 3, repeat: Infinity, ease: EASE_OUT, delay: 1 }
+                  : { duration: 0 }
+              }
+            >
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={80} suffix="+" />
               </span>
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
                 παιδιά υποστηρίξαμε
               </span>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
