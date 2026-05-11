@@ -103,33 +103,29 @@ export default function AboutUsSection() {
             </MaskReveal>
 
             {/* Body paragraphs */}
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-6 md:gap-5">
               {[
                 'Το M.E.S.S. γεννήθηκε από την ανάγκη για έναν πιο ήσυχο ρυθμό ζωής — σε μια καθημερινότητα που πιέζει. Ένας χώρος που αγκαλιάζει την πόλη χωρίς να την ακολουθεί βιαστικά.',
-                'Φτιάχνουμε πιάτα και ροφήματα με γνώμονα την υγεία και τη σωστή λειτουργία του οργανισμού. Κάθε επιλογή υπηρετεί το ίδιο αίτημα: ποιότητα με καθαρή πρόθεση.',
                 'Χτίζουμε κοινότητα — κάτι που, στις μέρες μας, φθίνει. Ενότητα, δημιουργικότητα, ευεξία. Αρμονικά δεμένα στον ίδιο χώρο.',
               ].map((text, i) => (
-                <p
-                  key={i}
-                  className="max-w-md font-sans text-[17px] leading-relaxed text-charcoal/80"
-                >
-                  {text}
-                </p>
+                <div key={i}>
+                  <p className="max-w-md font-sans text-[17px] leading-relaxed text-charcoal/80">
+                    {text}
+                  </p>
+                  {i === 0 && (
+                    <div className="relative my-2 aspect-[3/2] w-full overflow-hidden md:hidden">
+                      <FadeImage
+                        src={images.aboutBar}
+                        alt="Coffee bar and service area"
+                        fill
+                        unoptimized
+                        loading="lazy"
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
               ))}
-
-              {/* Pull-quote — Heraclitus */}
-              <div>
-                <p className="max-w-md font-serif text-[clamp(24px,3.5vw,32px)] italic leading-snug tracking-tight text-charcoal">
-                  &ldquo;Τα πάντα ρεί.&rdquo;
-                </p>
-                <p className="mt-1.5 font-sans text-[12px] uppercase tracking-[0.16em] text-concrete">
-                  — Ηράκλειτος, 535–475 π.Χ.
-                </p>
-              </div>
-
-              <p className="max-w-md font-sans text-[17px] leading-relaxed text-charcoal/80">
-                Για εμάς αυτό σημαίνει ότι ο χώρος κινείται μαζί σου. Από καφέ σε workshop, σε σκηνή για events. Από πρωινό brunch σε low beverage cocktails και crafted beers. Το M.E.S.S. αλλάζει σχήμα — εσύ αλλάζεις μαζί του.
-              </p>
             </div>
 
             {/* Stats row */}
@@ -168,7 +164,7 @@ export default function AboutUsSection() {
         {/* ── RIGHT: scrolling photos column ── */}
         <div className="flex flex-col gap-4 md:col-span-7">
           {aboutImages.map((img) => (
-            <div key={img.key}>
+            <div key={img.key} className={img.key === 'aboutBar' ? 'hidden md:block' : ''}>
               <div className={`relative w-full overflow-hidden ${img.aspect}`}>
                 <FadeImage
                   src={img.src}
