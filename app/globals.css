@@ -163,6 +163,12 @@
   to { transform: translateX(-50%) }
 }
 
+@keyframes messPulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
 /* Hero headline fluid sizing */
 .hero-headline {
   font-size: clamp(56px, 9vw, 140px);

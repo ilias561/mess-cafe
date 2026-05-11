@@ -12,6 +12,27 @@ type TodayModuleProps = {
   events: Event[]
 }
 
+type StatusPillProps = {
+  isOpen: boolean
+  label: string
+}
+
+function StatusPill({ isOpen, label }: StatusPillProps) {
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-sans text-sm font-medium tracking-[0.08em] uppercase ${
+        isOpen ? 'bg-olive/10 text-olive-deep' : 'bg-terracotta/10 text-terracotta'
+      }`}
+    >
+      <span
+        className={`h-1.5 w-1.5 rounded-full ${isOpen ? 'bg-olive animate-[messPulse_2s_ease-in-out_infinite]' : 'bg-terracotta'}`}
+        aria-hidden
+      />
+      {label}
+    </span>
+  )
+}
+
 function toLocalDayKey(date: Date) {
   const year = date.getFullYear()
   const month = `${date.getMonth() + 1}`.padStart(2, '0')
@@ -54,7 +75,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
 
   return (
     <section
-      className="relative overflow-hidden border-y border-charcoal/10 bg-bone/95 px-6 py-10 md:px-12 md:py-14"
+      className="relative overflow-hidden border-y border-charcoal/10 bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-10 md:px-12 md:py-14"
       aria-label="Σήμερα στο M.E.S.S."
     >
       <Reveal className="relative">
@@ -62,30 +83,36 @@ export default function TodayModule({ events }: TodayModuleProps) {
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <AmbientVideo
             src={videoSrc('/videos/ai/hf-1.mp4')}
-            className="h-full w-full object-cover opacity-[0.08]"
+            className="h-full w-full object-cover opacity-[0.16] md:opacity-[0.08]"
           />
-          <div className="absolute inset-0 bg-bone/70" />
+          <div className="absolute inset-0 bg-bone/55 md:bg-bone/70" />
         </div>
 
         <div className="relative mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
-          <div className="space-y-3">
-            <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Κατάσταση χώρου</p>
-            <p className="font-sans text-sm font-medium tracking-[0.08em] text-charcoal uppercase">
-              {status.label}
-            </p>
-          </div>
+          <div className="flex items-start justify-between gap-6 md:contents">
+            <div className="space-y-3">
+              <p className="font-sans text-xs font-semibold tracking-[0.16em] text-olive uppercase">Κατάσταση χώρου</p>
+              <StatusPill isOpen={status.isOpen} label={status.label} />
+              {status.nextChangeLabel && (
+                <p className="mt-1 font-sans text-xs text-concrete">
+                  {status.isOpen ? `Ανοιχτά ${status.nextChangeLabel}` : `Ανοίγει ${status.nextChangeLabel}`}
+                </p>
+              )}
+            </div>
 
-          <div className="space-y-3">
-            <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Σήμερα</p>
-            <p className="font-serif text-[clamp(24px,3vw,36px)] leading-tight capitalize text-charcoal">
-              {todayLabel}
-            </p>
+            <div className="space-y-3 text-right md:text-left">
+              <p className="font-sans text-xs font-semibold tracking-[0.16em] text-olive uppercase">Σήμερα</p>
+              <p className="font-serif text-[clamp(24px,3vw,36px)] leading-tight capitalize text-charcoal">
+                {todayLabel}
+              </p>
+              <span className="mt-2 block h-px w-10 bg-mustard md:ml-0 ml-auto" aria-hidden />
+            </div>
           </div>
 
           <div className="space-y-3">
             {todayEvent ? (
               <>
-                <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Σημερινή δράση</p>
+                <p className="font-sans text-xs font-semibold tracking-[0.16em] text-olive uppercase">Σημερινή δράση</p>
                 <p className="font-serif text-xl leading-tight text-charcoal">{todayEvent.title}</p>
                 <Link href={`/actions/${todayEvent.slug}`} className="font-sans text-sm font-medium text-olive underline underline-offset-4">
                   Μάθε περισσότερα
@@ -93,7 +120,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
               </>
             ) : (
               <>
-                <p className="font-sans text-xs font-semibold tracking-[0.16em] text-charcoal/60 uppercase">Προτείνουμε σήμερα:</p>
+                <p className="font-sans text-xs font-semibold tracking-[0.16em] text-olive uppercase">Προτείνουμε σήμερα:</p>
                 {fallbackEvent ? (
                   <div className="space-y-2">
                     <p className="font-serif text-xl leading-tight text-charcoal">{fallbackEvent.title}</p>
@@ -113,7 +140,18 @@ export default function TodayModule({ events }: TodayModuleProps) {
                     </div>
                   </div>
                 ) : (
-                  <p className="font-sans text-sm text-charcoal/70">Δεν υπάρχουν προγραμματισμένες δράσεις για σήμερα.</p>
+                  <div className="space-y-3 rounded-2xl border border-mustard/35 bg-cream/60 p-4">
+                    <p className="font-sans text-sm text-charcoal/80">Πέρασε για καφέ και ησυχία.</p>
+                    <Link
+                      href="/actions"
+                      className="group inline-flex items-center gap-2 rounded-full border border-mustard px-5 py-2.5 font-sans text-sm font-medium text-charcoal transition-[background-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-mustard active:scale-[0.98]"
+                    >
+                      Δες όλες τις δράσεις
+                      <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>
+                        →
+                      </span>
+                    </Link>
+                  </div>
                 )}
               </>
             )}

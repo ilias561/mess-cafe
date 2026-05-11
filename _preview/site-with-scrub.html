@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>M.E.S.S. — preview with scroll-scrub video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#f5f1e8;
+    --bone-warm:#efe8d8;
+    --mustard:#e8b547;
+    --amber:#f4a623;
+    --olive:#3d4a2a;
+    --olive-deep:#2a3418;
+    --charcoal:#2b2b28;
+    --terracotta:#b54f2a;
+    --espresso:#2a1d14;
+    --cream:#faf6ed;
+    --concrete:#6b6b63;
+    --line:#d9d0be;
+
+    --serif: "Fraunces", Georgia, serif;
+    --sans:  "Inter", system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{ background: var(--bone); }
+  body{
+    font-family: var(--sans);
+    color: var(--charcoal);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'ss01', 'ss02';
+    line-height: 1.65;
+  }
+
+  /* ---------- Fixed scroll-scrub video stage ---------- */
+  .stage{
+    position:fixed; inset:0; z-index:0;
+    overflow:hidden; background:#1a1a1a;
+  }
+  .stage video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  /* tint to keep things readable without killing the video */
+  .stage::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(245,241,232,0) 0%, rgba(245,241,232,0) 35%, rgba(245,241,232,.0) 100%);
+    pointer-events:none;
+  }
+
+  /* ---------- Foreground content lives over .stage ---------- */
+  main{ position:relative; z-index:1; }
+
+  /* shared --------------- */
+  .container{ max-width: 1400px; margin: 0 auto; padding: 0 28px; }
+  .eyebrow{
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+  }
+  h1.lede{
+    font-family: var(--serif);
+    font-size: clamp(56px, 9vw, 140px);
+    line-height: 0.95; letter-spacing: -0.03em;
+    margin: 0; color: var(--charcoal);
+    text-shadow: 0 3px 14px rgba(255,255,255,0.35);
+  }
+  h2{
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 56px);
+    line-height: 1.02; letter-spacing: -0.01em;
+    margin: 0 0 18px; color: var(--charcoal);
+  }
+  h3{
+    font-family: var(--serif);
+    font-size: 22px; line-height: 1.25; letter-spacing: -0.01em;
+    margin: 0; color: var(--charcoal);
+  }
+  p{ margin: 0 0 12px; }
+  a{ color: inherit; }
+
+  /* ---------- Top nav ---------- */
+  nav.top{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 28px;
+    color: var(--charcoal);
+    transition: background-color .35s ease, backdrop-filter .35s ease, color .35s ease;
+  }
+  nav.top.scrolled{
+    background: rgba(245,241,232,.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--serif); font-weight: 600; font-size: 18px;
+  }
+  nav.top .brand .logo{
+    width:32px; height:32px; border-radius:50%;
+    background: var(--olive);
+    color:var(--bone); font-size:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:600; letter-spacing:.05em;
+  }
+  nav.top .links{
+    display:flex; gap: 24px; font-size: 13px;
+    color: var(--charcoal); opacity:.92;
+  }
+  nav.top .links a{
+    text-decoration:none; color:inherit; padding:6px 0;
+    border-bottom: 1px solid transparent;
+  }
+  nav.top .links a:hover{ border-bottom-color: var(--mustard); }
+  nav.top .cta{
+    background: var(--mustard); color: var(--charcoal);
+    padding: 8px 16px; border-radius: 999px;
+    font-size: 12px; font-weight: 500; text-decoration:none;
+  }
+  @media (max-width: 900px){
+    nav.top .links{ display:none }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 42% 58%;
+  }
+  @media (max-width: 768px){ .hero{ grid-template-columns: 1fr; } }
+  .hero-left{
+    position: relative; z-index: 2;
+    background: rgba(245,241,232,.94);
+    backdrop-filter: blur(2px);
+    display:flex; align-items: flex-end;
+    padding: 120px 56px 80px;
+  }
+  .hero-left .inner{ max-width: 520px; }
+  .hero-eyebrow{
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.2em;
+    color: var(--charcoal); margin-bottom: 18px;
+  }
+  .hero-body{
+    margin-top: 24px;
+    font-size: 17px; line-height: 1.55;
+    color: var(--charcoal); max-width: 540px;
+  }
+  .hero-body.muted{
+    color: var(--concrete); font-size: 15px; line-height: 1.7;
+  }
+  .hero-cta-row{
+    margin-top: 32px;
+    display:flex; flex-wrap:wrap; gap:20px; align-items:center;
+  }
+  .btn-primary{
+    display:inline-block; background: var(--mustard); color: var(--charcoal);
+    padding: 16px 32px; border-radius: 999px;
+    font-size: 14px; font-weight: 500; text-decoration:none;
+    transition: transform .2s, background-color .2s, box-shadow .2s;
+  }
+  .btn-primary:hover{ transform: translateY(-2px); background: var(--amber);
+    box-shadow: 0 10px 25px rgba(0,0,0,.1);
+  }
+  .btn-link{
+    text-decoration:none; color: var(--charcoal); font-size: 14px; font-weight: 500;
+    border-bottom: 1px solid var(--mustard);
+    padding-bottom: 2px;
+  }
+  .stats-grid{
+    margin-top: 40px;
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    border-top: 1px solid rgba(43,43,40,0.2);
+    padding-top: 24px;
+    max-width: 560px;
+  }
+  .stat .v{
+    font-family: var(--serif);
+    font-size: clamp(16px, 4.5vw, 30px);
+    line-height: 1; color: var(--charcoal);
+  }
+  .stat .l{
+    margin-top: 8px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--charcoal);
+  }
+
+  /* HERO right column — frame the scroll-scrub video, no opaque bg */
+  .hero-right{
+    position: relative;
+    min-height: 60vh;
+    /* let the fixed video stage show through */
+  }
+  /* a subtle vignette so left column "border" feels intentional */
+  .hero-right::before{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(circle at 70% 50%, rgba(0,0,0,0) 30%, rgba(0,0,0,.18) 100%);
+    pointer-events:none;
+  }
+  .scroll-indicator{
+    position: absolute; bottom: 32px; left: 56px;
+    display:flex; gap: 12px; align-items: flex-start;
+    font-size: 11px; letter-spacing: 0.2em; color: var(--charcoal);
+    text-transform: uppercase; z-index: 3;
+  }
+  .scroll-indicator .track{
+    width: 1px; height: 60px;
+    background: rgba(43,43,40,0.2);
+    position: relative;
+  }
+  .scroll-indicator .track::before{
+    content:""; position:absolute; left: 50%; top: 0;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--mustard); transform: translateX(-50%);
+    animation: bob 2s cubic-bezier(0.22,1,0.36,1) infinite;
+  }
+  @keyframes bob {
+    0%, 100% { top: 0; }
+    50%      { top: 48px; }
+  }
+
+  /* ---------- Marquee strip ---------- */
+  .marquee-section{
+    position: relative; z-index: 2;
+    height: 80px;
+    background: var(--olive); color: var(--bone);
+    border-top: 1px solid var(--olive-deep);
+    border-bottom: 1px solid var(--olive-deep);
+    overflow: hidden;
+    display:flex; align-items:center;
+  }
+  .marquee-track{
+    display:flex; width: max-content;
+    animation: editorialMarquee 35s linear infinite;
+  }
+  .marquee-track:hover{ animation-play-state: paused; }
+  @keyframes editorialMarquee {
+    from { transform: translateX(0%); }
+    to   { transform: translateX(-50%); }
+  }
+  .strip{
+    display:flex; align-items:center; gap: 24px;
+    padding: 0 12px; flex-shrink: 0; white-space: nowrap;
+    font-family: var(--serif); font-style: italic;
+    font-size: 28px; color: var(--bone);
+  }
+  .strip .dot{ color: var(--mustard); }
+
+  /* ---------- "Today" / hours block (semi-transparent over video) ---------- */
+  .today{
+    position: relative; z-index: 2;
+    padding: 80px 28px;
+    background: rgba(245,241,232,.86);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .today .row{
+    max-width: 1100px; margin: 0 auto;
+    display:grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px; align-items: start;
+  }
+  .today .row > div{
+    border-left: 1px solid var(--line);
+    padding-left: 24px;
+  }
+  .today .label{ font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--olive); margin-bottom: 8px; }
+  .today .value{ font-family: var(--serif); font-size: 22px; color: var(--charcoal); }
+  .today .sub{ font-size: 13px; color: var(--concrete); margin-top: 4px; }
+  @media (max-width: 800px){ .today .row{ grid-template-columns: 1fr; } }
+
+  /* ---------- About section ---------- */
+  .about{
+    position: relative; z-index: 2;
+    padding: 120px 28px;
+    background: rgba(245,241,232,.95);
+  }
+  .about .head{
+    max-width: 1400px; margin: 0 auto 64px;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  }
+  .about .head h2{ max-width: 14ch; }
+  .about .head .lede-body{
+    font-size: 18px; color: var(--charcoal); max-width: 520px;
+  }
+  .about .head .lede-body small{
+    display:block; margin-top: 14px;
+    font-size: 14px; color: var(--concrete);
+  }
+  .about .image-row{
+    max-width: 1400px; margin: 0 auto;
+    display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .about .image-row .photo{
+    aspect-ratio: 4 / 5;
+    background: var(--bone-warm) center/cover;
+    position: relative; overflow:hidden;
+  }
+  .about .image-row .caption{
+    margin-top: 10px;
+    font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--olive);
+  }
+  @media (max-width: 900px){
+    .about .head{ grid-template-columns: 1fr; }
+    .about .image-row{ grid-template-columns: 1fr 1fr; }
+  }
+
+  /* mess pillars */
+  .pillars{
+    max-width: 1400px; margin: 80px auto 0;
+    display:grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  .pillar{
+    background: var(--bone); border: 1px solid var(--line);
+    padding: 32px 24px; border-radius: 6px;
+  }
+  .pillar .letter{
+    font-family: var(--serif); font-size: 56px; color: var(--mustard);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .pillar h4{
+    font-family: var(--serif); font-size: 22px; color: var(--charcoal);
+    margin: 0 0 12px;
+  }
+  .pillar p{ font-size: 14px; color: var(--concrete); margin:0; }
+  .pillar .footnote{
+    font-size: 11px; color: var(--terracotta); font-style: italic;
+    margin-top: 12px;
+  }
+  @media (max-width: 900px){ .pillars{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px){ .pillars{ grid-template-columns: 1fr; } }
+
+  /* ---------- Menu preview ---------- */
+  .menu-preview{
+    position: relative; z-index: 2;
+    padding: 120px 28px;
+    background: rgba(239,232,216,.88);
+    backdrop-filter: blur(6px);
+  }
+  .menu-preview .head{
+    max-width: 1400px; margin: 0 auto 60px;
+    display:flex; justify-content: space-between; align-items: end;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .menu-preview .head .e{ color: var(--olive); }
+  .menu-grid{
+    max-width: 1400px; margin: 0 auto;
+    display:grid; grid-template-columns: repeat(3, 1fr);
+    gap: 32px 32px;
+  }
+  .menu-item .img{
+    aspect-ratio: 4 / 5; overflow:hidden;
+    background: var(--bone) center/cover;
+  }
+  .menu-item .meta{
+    margin-top: 14px;
+    display:flex; justify-content: space-between; align-items:baseline;
+  }
+  .menu-item .cat{
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--olive);
+  }
+  .menu-item .price{
+    font-family: var(--serif); font-size: 18px; color: var(--mustard);
+  }
+  .menu-item h3{ margin-top: 4px; }
+  .menu-item .desc{
+    margin-top: 8px;
+    font-size: 13px; line-height: 1.6;
+    color: var(--concrete);
+  }
+  @media (max-width: 900px){ .menu-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px){ .menu-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- Goals teaser ---------- */
+  .goals{
+    position: relative; z-index: 2;
+    padding: 120px 28px;
+    background: rgba(61,74,42,.94); /* olive */
+    color: var(--bone);
+  }
+  .goals h2, .goals h3{ color: var(--bone); }
+  .goals .row{
+    max-width: 1400px; margin: 0 auto;
+    display:grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .goals .item p{ color: rgba(245,241,232,.85); font-size: 14px; line-height: 1.6; }
+  .goals .item .num{
+    font-family: var(--serif); font-size: 56px; color: var(--mustard);
+    line-height: 1; margin-bottom: 16px;
+  }
+  @media (max-width: 800px){ .goals .row{ grid-template-columns: 1fr; } }
+
+  /* ---------- Gallery teaser (intentionally TRANSPARENT to show the video!) ---------- */
+  .gallery-band{
+    position: relative; z-index: 2;
+    padding: 80px 28px;
+    background: transparent;
+    color: var(--bone);
+    text-align: center;
+  }
+  .gallery-band h2{
+    color: var(--bone);
+    text-shadow: 0 4px 24px rgba(0,0,0,.4);
+  }
+  .gallery-band p{
+    color: rgba(245,241,232,.92);
+    text-shadow: 0 2px 12px rgba(0,0,0,.4);
+    max-width: 60ch; margin: 16px auto 0;
+  }
+  .gallery-grid{
+    max-width: 1400px; margin: 60px auto 0;
+    display:grid; grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .gallery-grid .tile{
+    aspect-ratio: 1/1;
+    background: var(--bone-warm) center/cover;
+    border: 1px solid rgba(245,241,232,.25);
+  }
+  @media (max-width: 800px){ .gallery-grid{ grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Contact ---------- */
+  .contact{
+    position: relative; z-index: 2;
+    padding: 120px 28px;
+    background: rgba(42,29,20,.95); /* espresso */
+    color: var(--bone);
+  }
+  .contact h2{ color: var(--bone); }
+  .contact .row{
+    max-width: 1200px; margin: 0 auto;
+    display:grid; grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .contact .info p{ color: rgba(245,241,232,.85); font-size: 16px; line-height: 1.7; }
+  .contact .info .item{ margin-top: 24px; }
+  .contact .info .item .l{
+    font-size: 11px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--mustard); margin-bottom: 6px;
+  }
+  .contact .map{
+    aspect-ratio: 4/3;
+    background:
+      linear-gradient(135deg, rgba(232,181,71,.15) 0%, rgba(61,74,42,.4) 100%),
+      url('../public/images/hero-interior.jpg') center/cover;
+    border: 1px solid rgba(245,241,232,.15);
+    border-radius: 4px;
+  }
+  @media (max-width: 800px){ .contact .row{ grid-template-columns: 1fr; } }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    position: relative; z-index: 2;
+    padding: 60px 28px 32px;
+    background: var(--charcoal); color: var(--bone);
+  }
+  .footer .row{
+    max-width: 1400px; margin: 0 auto;
+    display:flex; justify-content: space-between; gap: 32px; flex-wrap: wrap;
+  }
+  .footer .brand{ font-family: var(--serif); font-size: 22px; font-weight: 600; }
+  .footer .meta{ font-size: 13px; color: rgba(245,241,232,.7); }
+  .footer .legal{ margin-top: 32px; font-size: 12px; color: rgba(245,241,232,.55); text-align:center; }
+
+  /* ---------- preview controls ---------- */
+  .controls{
+    position: fixed; right: 14px; bottom: 14px; z-index: 50;
+    display:flex; flex-direction: column; gap: 6px;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    background: rgba(20,20,20,.82);
+    backdrop-filter: blur(6px);
+    color: #eee; padding: 10px 12px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+  .controls label{ display:flex; align-items:center; gap: 8px; cursor: pointer; }
+  .controls input{ accent-color: var(--mustard); }
+
+  body.video-off .stage video{ display: none; }
+  body.video-off .stage{ background: var(--bone); }
+
+  /* progress */
+  .progress{
+    position: fixed; left: 0; top: 0; height: 2px; width: 0;
+    background: var(--mustard); z-index: 40;
+    transition: width .08s linear;
+  }
+
+  /* loading overlay */
+  .loading{
+    position: fixed; inset: 0; z-index: 60;
+    background: var(--bone);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--charcoal); opacity: 1;
+    transition: opacity .5s ease;
+    font-family: var(--serif);
+    font-size: 14px; letter-spacing: 0.32em; text-transform: uppercase;
+  }
+  body.ready .loading{ opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<div class="loading"><span>M.E.S.S.</span></div>
+<div class="progress" id="progress"></div>
+
+<!-- Fixed scroll-scrub video stage -->
+<div class="stage" aria-hidden="true">
+  <video id="bgvideo" src="scroll-bg-scrub.mp4" muted playsinline preload="auto"></video>
+</div>
+
+<!-- ---------- TOP NAV ---------- -->
+<nav class="top" id="topnav">
+  <div class="brand">
+    <span class="logo">M</span>
+    M.E.S.S.
+  </div>
+  <div class="links">
+    <a href="#about-us">Ποιοι είμαστε</a>
+    <a href="#goals">Οι στόχοι μας</a>
+    <a href="#menu">Μενού</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Επικοινωνία</a>
+  </div>
+  <a class="cta" href="#contact">Κράτηση για event</a>
+</nav>
+
+<main>
+
+  <!-- ---------- HERO ---------- -->
+  <section class="hero" id="hero">
+    <div class="hero-left">
+      <div class="inner">
+        <p class="hero-eyebrow">SPECIALTY COFFEE — HEALTHY BRUNCH — IOANNINA · #KEEPRISING</p>
+        <h1 class="lede">A quiet kind of chaos.</h1>
+        <p class="hero-body">Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.</p>
+        <p class="hero-body muted">Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.</p>
+        <div class="hero-cta-row">
+          <a class="btn-primary" href="#menu">Δες το menu</a>
+          <a class="btn-link" href="#contact">Βρες μας</a>
+        </div>
+        <div class="stats-grid">
+          <div class="stat"><div class="v">4.8★</div><div class="l">Google rating</div></div>
+          <div class="stat"><div class="v">08—23</div><div class="l">Ανοιχτά καθημερινά</div></div>
+          <div class="stat"><div class="v">Ιωάννινα</div><div class="l">ΚΕΠΑΒΙ · Ιωάννινα</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="scroll-indicator">
+        <span style="padding-top:4px;">Scroll</span>
+        <div class="track"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- MARQUEE ---------- -->
+  <section class="marquee-section" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="strip">
+        <span>SPECIALTY COFFEE</span><span class="dot">•</span>
+        <span>BRUNCH</span><span class="dot">•</span>
+        <span>VEGAN OPTIONS</span><span class="dot">•</span>
+        <span>ACAI BOWLS</span><span class="dot">•</span>
+        <span>MATCHA</span><span class="dot">•</span>
+        <span>POKE BOWLS</span><span class="dot">•</span>
+        <span>LAKE VIEW</span><span class="dot">•</span>
+        <span>ΚΕΠΑΒΙ 211</span><span class="dot">•</span>
+      </div>
+      <div class="strip">
+        <span>SPECIALTY COFFEE</span><span class="dot">•</span>
+        <span>BRUNCH</span><span class="dot">•</span>
+        <span>VEGAN OPTIONS</span><span class="dot">•</span>
+        <span>ACAI BOWLS</span><span class="dot">•</span>
+        <span>MATCHA</span><span class="dot">•</span>
+        <span>POKE BOWLS</span><span class="dot">•</span>
+        <span>LAKE VIEW</span><span class="dot">•</span>
+        <span>ΚΕΠΑΒΙ 211</span><span class="dot">•</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- TODAY ---------- -->
+  <section class="today">
+    <div class="row">
+      <div>
+        <div class="label">Σήμερα</div>
+        <div class="value">Δευτέρα · 4 Μαΐου</div>
+        <div class="sub">Ανοιχτά 08:00 — 23:00</div>
+      </div>
+      <div>
+        <div class="label">Specialty</div>
+        <div class="value">Single-origin Ethiopia</div>
+        <div class="sub">Filter / Espresso / Batch brew</div>
+      </div>
+      <div>
+        <div class="label">Επόμενο event</div>
+        <div class="value">Keep Rising Bazaar</div>
+        <div class="sub">Παρασκευή · 19:00 — 23:00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- ABOUT ---------- -->
+  <section class="about" id="about-us">
+    <div class="head">
+      <div>
+        <p class="eyebrow" style="color: var(--olive); margin-bottom: 16px;">Ποιοι είμαστε</p>
+        <h2>Ένας πολυχώρος που αναπνέει.</h2>
+      </div>
+      <div>
+        <p class="lede-body">Το M.E.S.S. ξεκίνησε σαν μια ιδέα — ένας χώρος όπου ο καφές, η τέχνη και ο άνθρωπος συνυπάρχουν.</p>
+        <p class="lede-body"><small>Modular · Events · Sustainable · Space — τέσσερις λέξεις, μία διεύθυνση.</small></p>
+      </div>
+    </div>
+
+    <div class="image-row">
+      <div>
+        <div class="photo" style="background-image:url('../public/images/about-1.jpg');"></div>
+        <p class="caption">Ο ΠΡΩΤΟΣ ΟΡΟΦΟΣ</p>
+      </div>
+      <div>
+        <div class="photo" style="background-image:url('../public/images/about-2.jpg');"></div>
+        <p class="caption">ΤΟ BAR</p>
+      </div>
+      <div>
+        <div class="photo" style="background-image:url('../public/images/about-3.jpg');"></div>
+        <p class="caption">ΣΚΑΛΑ ΠΡΟΣ ΜΕΖΟΝΙ</p>
+      </div>
+      <div>
+        <div class="photo" style="background-image:url('../public/images/about-4.jpg');"></div>
+        <p class="caption">ΦΥΤΑ &amp; ΦΩΣ</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="letter">M.</div>
+        <h4>Modular</h4>
+        <p>Τα πάντα κινούνται. Η κίνηση είναι η βασικότερη αρχή της ζωής.</p>
+        <div class="footnote">τα πάντα ρεί — Ηράκλειτος</div>
+      </div>
+      <div class="pillar">
+        <div class="letter">E.</div>
+        <h4>Events</h4>
+        <p>Ο χώρος μετασχηματίζεται. Από καφέ, σε workshop, σε σκηνή για events.</p>
+      </div>
+      <div class="pillar">
+        <div class="letter">S.</div>
+        <h4>Sustainable</h4>
+        <p>Επιλογές που σέβονται το σώμα, τον άνθρωπο, τη λίμνη.</p>
+      </div>
+      <div class="pillar">
+        <div class="letter">S.</div>
+        <h4>Space</h4>
+        <p>1ος όροφος, ΚΕΠΑΒΙ. Ιωάννινα. Μπροστά στη λίμνη.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- MENU PREVIEW ---------- -->
+  <section class="menu-preview" id="menu">
+    <div class="head">
+      <div>
+        <p class="eyebrow e">Menu highlights</p>
+        <h2>Αγαπημένα μας.</h2>
+      </div>
+      <a class="btn-link" href="#" style="border-color: var(--olive); color: var(--olive);">Όλο το menu →</a>
+    </div>
+
+    <div class="menu-grid">
+      <article class="menu-item">
+        <div class="img" style="background-image:url('../public/images/menu-avocado-toast.jpg');"></div>
+        <div class="meta"><span class="cat">Brunch</span><span class="price">9€</span></div>
+        <h3>Avocado Toast</h3>
+        <p class="desc">Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.</p>
+      </article>
+      <article class="menu-item">
+        <div class="img" style="background-image:url('../public/images/menu-acai.jpg');"></div>
+        <div class="meta"><span class="cat">Bowls</span><span class="price">12€</span></div>
+        <h3>Acai Bowl</h3>
+        <p class="desc">100% açaí, πράσινο μήλο, flakes καρύδας, granola, banana.</p>
+      </article>
+      <article class="menu-item">
+        <div class="img" style="background-image:url('../public/images/menu-poke-teriyaki.jpg');"></div>
+        <div class="meta"><span class="cat">Bowls</span><span class="price">14€</span></div>
+        <h3>Poke Teriyaki</h3>
+        <p class="desc">Σολομός, αβοκάντο, edamame, mango, sushi rice, teriyaki.</p>
+      </article>
+      <article class="menu-item">
+        <div class="img" style="background-image:url('../public/images/menu-freddo.jpg');"></div>
+        <div class="meta"><span class="cat">Coffee</span><span class="price">4.3€</span></div>
+        <h3>Freddo Cappuccino</h3>
+        <p class="desc">Freddo espresso με παγωμένο αφρό γάλακτος.</p>
+      </article>
+      <article class="menu-item">
+        <div class="img" style="background-image:url('../public/images/menu-smoothie.jpg');"></div>
+        <div class="meta"><span class="cat">Smoothies</span><span class="price">6€</span></div>
+        <h3>Mango Chilli Smoothie</h3>
+        <p class="desc">Μάνγκο, τσίλι flakes, αγαύη, χειροποίητο γάλα καρυδιών.</p>
+      </article>
+      <article class="menu-item">
+        <div class="img" style="background-image:url('../public/images/menu-vegan-poke.jpg');"></div>
+        <div class="meta"><span class="cat">Bowls</span><span class="price">13€</span></div>
+        <h3>Vegan Poke</h3>
+        <p class="desc">Tofu marinated, edamame, ρεβίθια, mango, λάχανο, κινόα.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- GOALS ---------- -->
+  <section class="goals" id="goals">
+    <div class="row">
+      <div class="item">
+        <div class="num">01</div>
+        <h3>Φαγητό ως φάρμακο</h3>
+        <p>Επιλέγουμε υλικά που τρέφουν, όχι απλώς γεμίζουν. Από local παραγωγούς, χωρίς ζάχαρη όπου είναι δυνατόν.</p>
+      </div>
+      <div class="item">
+        <div class="num">02</div>
+        <h3>Πολιτιστικός χώρος</h3>
+        <p>Workshops, μικρές συναυλίες, εκθέσεις — η αίθουσα μας μετασχηματίζεται. Δημιουργικότητα ως καθημερινή πράξη.</p>
+      </div>
+      <div class="item">
+        <div class="num">03</div>
+        <h3>Σεβασμός στη λίμνη</h3>
+        <p>Compostable σκεύη, ανακύκλωση, μηδενικά πλαστικά μιας χρήσης. Η Παμβώτιδα μας μεγάλωσε — της οφείλουμε.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- GALLERY teaser (transparent — let the video breathe) ---------- -->
+  <section class="gallery-band" id="gallery">
+    <p class="eyebrow" style="color: var(--mustard);">Gallery</p>
+    <h2>Caught in the act.</h2>
+    <p>Late afternoons, full tables, the regulars and the lost-tourists alike. Σταθείτε λίγο. Παρακολουθήστε.</p>
+    <div class="gallery-grid">
+      <div class="tile" style="background-image:url('../public/images/gallery-1.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-2.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-3.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-4.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-5.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-6.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-7.jpg');"></div>
+      <div class="tile" style="background-image:url('../public/images/gallery-8.jpg');"></div>
+    </div>
+  </section>
+
+  <!-- ---------- CONTACT ---------- -->
+  <section class="contact" id="contact">
+    <div class="row">
+      <div class="info">
+        <p class="eyebrow" style="color: var(--mustard); margin-bottom: 16px;">Επικοινωνία</p>
+        <h2>Πέρνα από εδώ.</h2>
+        <p>1ος όροφος, ΚΕΠΑΒΙ — Ναπολέοντος Ζέρβα 12, Ιωάννινα. Μπροστά στη λίμνη Παμβώτιδα. Ο καφές είναι ήδη πάνω.</p>
+        <div class="item">
+          <div class="l">Διεύθυνση</div>
+          <div>Ναπολέοντος Ζέρβα 12, Ιωάννινα 45332</div>
+        </div>
+        <div class="item">
+          <div class="l">Ώρες</div>
+          <div>Δευ–Παρ 08:00–23:00 · Σαβ–Κυρ 09:00–24:00</div>
+        </div>
+        <div class="item">
+          <div class="l">Τηλέφωνο</div>
+          <div>+30 6945 777 808</div>
+        </div>
+      </div>
+      <div class="map" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ---------- FOOTER ---------- -->
+  <footer class="footer">
+    <div class="row">
+      <div>
+        <div class="brand">M.E.S.S.</div>
+        <p class="meta">Specialty coffee &amp; healthy brunch · Ιωάννινα</p>
+      </div>
+      <div class="meta">
+        <div>Ναπολέοντος Ζέρβα 12, ΚΕΠΑΒΙ</div>
+        <div>info@messcafe.gr</div>
+      </div>
+    </div>
+    <div class="legal">© 2025 M.E.S.S. · Preview only — scroll-scrub video sandbox</div>
+  </footer>
+
+</main>
+
+<!-- preview controls -->
+<div class="controls">
+  <label><input type="checkbox" id="toggleVideo" checked /> Video bg</label>
+  <label><input type="checkbox" id="toggleSmooth" checked /> Smooth scrub</label>
+  <label><input type="checkbox" id="toggleRemap" checked /> First half ×2</label>
+</div>
+
+<script>
+(() => {
+  const video    = document.getElementById('bgvideo');
+  const progress = document.getElementById('progress');
+  const tVideo   = document.getElementById('toggleVideo');
+  const tSmooth  = document.getElementById('toggleSmooth');
+  const tRemap   = document.getElementById('toggleRemap');
+  const topnav   = document.getElementById('topnav');
+
+  let duration = 0;
+  let targetTime = 0;
+  let currentTime = 0;
+  let rafId = 0;
+
+  // first-half-counts-as-2 remap
+  const FAST_VIDEO_END  = 0.5;
+  const FAST_SCROLL_END = 0.25;
+  const remap = (p) => {
+    if (!tRemap.checked) return p;
+    if (p < FAST_SCROLL_END) {
+      return (p / FAST_SCROLL_END) * FAST_VIDEO_END;
+    }
+    return FAST_VIDEO_END +
+           ((p - FAST_SCROLL_END) / (1 - FAST_SCROLL_END)) * (1 - FAST_VIDEO_END);
+  };
+
+  const computeProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollable <= 0) return 0;
+    return Math.min(1, Math.max(0, window.scrollY / scrollable));
+  };
+
+  const updateTargets = () => {
+    const p = computeProgress();
+    const v = remap(p);
+    targetTime = v * (duration || 0);
+    progress.style.width = (p * 100).toFixed(2) + '%';
+
+    // top nav handoff after hero
+    if (window.scrollY > Math.max(window.innerHeight - 80, 120)) {
+      topnav.classList.add('scrolled');
+    } else {
+      topnav.classList.remove('scrolled');
+    }
+  };
+
+  const tick = () => {
+    rafId = 0;
+    if (!duration) return;
+
+    if (tSmooth.checked) {
+      currentTime += (targetTime - currentTime) * 0.32;
+      if (Math.abs(targetTime - currentTime) < 0.002) currentTime = targetTime;
+    } else {
+      currentTime = targetTime;
+    }
+
+    try {
+      video.currentTime = Math.min(duration - 0.01, Math.max(0, currentTime));
+    } catch (e) { /* ignore seek-not-ready */ }
+
+    if (Math.abs(targetTime - currentTime) > 0.001) {
+      rafId = requestAnimationFrame(tick);
+    }
+  };
+
+  const schedule = () => {
+    updateTargets();
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  };
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+
+  video.addEventListener('loadedmetadata', () => {
+    duration = video.duration || 0;
+    video.play().then(() => video.pause()).catch(() => {});
+    schedule();
+  });
+
+  video.addEventListener('canplay', () => {
+    document.body.classList.add('ready');
+  });
+
+  // toggles
+  tVideo.addEventListener('change', () => {
+    document.body.classList.toggle('video-off', !tVideo.checked);
+  });
+  tRemap.addEventListener('change', schedule);
+
+  // initial
+  schedule();
+  setTimeout(() => document.body.classList.add('ready'), 4000);
+})();
+</script>
+</body>
+</html>

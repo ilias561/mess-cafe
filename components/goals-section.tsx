@@ -9,23 +9,23 @@ import { duration, ease } from '@/lib/motion'
 const goals = [
   {
     num: '01',
-    title: 'Modular',
-    body: 'Τα πάντα στον χώρο κινούνται. Η κίνηση είναι η βασικότερη αρχή της ζωής.',
+    title: 'Καθαρό φαγητό για όλους',
+    body: 'Φρέσκες, τοπικές ύλες. Όσο λιγότερη επεξεργασία γίνεται — γάλα αμυγδάλου, βρώμης, καρυδιού, iceberg, τοματίνι από τον δικό μας μπαξέ. Καθαρή τιμή.',
   },
   {
     num: '02',
-    title: 'Events',
-    body: 'Ο χώρος αλλάζει σχήμα ανάλογα με την περίσταση. Workshops, live, κοινοτικές συναντήσεις, παρουσιάσεις — ό,τι χωράει η στιγμή.',
+    title: 'Αλληλεγγύη',
+    body: 'Μπαζάρ, συλλογές και δράσεις για παιδιά και οικογένειες που χρειάζονται στήριξη. Όταν έχουμε, μοιραζόμαστε.',
   },
   {
     num: '03',
-    title: 'Sustainable',
-    body: 'Φρέσκες, τοπικές ύλες. Όσο λιγότερη επεξεργασία γίνεται — γάλα αμυγδάλου, βρώμης, καρυδιού, iceberg, τοματίνι από τον δικό μας μπαξέ.',
+    title: 'Κοινότητα',
+    body: 'Workshops, live, κοινοτικές συναντήσεις, παρουσιάσεις. Ο χώρος αλλάζει σχήμα ανάλογα με την περίσταση — ό,τι χωράει η στιγμή.',
   },
   {
     num: '04',
-    title: 'Space',
-    body: 'Ο αγαπημένος μας χώρος. Ελπίζουμε και δικός σας.',
+    title: 'Ευεξία',
+    body: 'Ένας πιο χαλαρός ρυθμός ζωής μέσα στις πιεστικές ανάγκες του σήμερα. Ο αγαπημένος μας χώρος. Ελπίζουμε και δικός σας.',
   },
 ]
 
@@ -95,28 +95,16 @@ export default function GoalsSection() {
             </h2>
 
             <p className="mt-6 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80">
-              Ενότητα, δημιουργικότητα, ευεξία — αρμονικά δεμένα στον ίδιο χώρο.
+              Πιστεύουμε ότι ο καθένας αξίζει καθαρό φαγητό, ζεστό καφέ και μια κοινότητα που τον στηρίζει. Το{' '}
+              <span className="text-mustard">#KEEPRISING</span> είναι ο τρόπος που μετατρέπουμε αυτή την πίστη σε πράξη — μπαζάρ, συλλογές, στήριξη σε όσους έχουν ανάγκη.
             </p>
-
-            <p className="mt-4 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80">
-              Ένας πιο χαλαρός τρόπος ζωής, μέσα στις πιεστικές ανάγκες του σήμερα.
-            </p>
-
-            <blockquote className="mt-10 border-l-2 border-mustard/70 pl-6">
-              <p className="font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]">
-                «Τα πάντα ρεί.»
-              </p>
-              <p className="mt-2 font-sans text-[13px] not-italic text-concrete">
-                — Ηράκλειτος
-              </p>
-            </blockquote>
           </Reveal>
 
           <Reveal asGroup className="mt-12 flex flex-col gap-8">
             {goals.map((goal) => (
               <Reveal.Item key={goal.num}>
                 <div className="flex gap-6 border-t border-bone/10 pt-6">
-                  <span className="shrink-0 font-sans text-[13px] font-medium tabular-nums text-mustard/70">
+                  <span className={`shrink-0 font-sans text-[13px] font-medium tabular-nums ${goal.num === '02' ? 'text-terracotta' : 'text-mustard/70'}`}>
                     {goal.num}.
                   </span>
                   <div>
@@ -130,6 +118,17 @@ export default function GoalsSection() {
                 </div>
               </Reveal.Item>
             ))}
+          </Reveal>
+
+          <Reveal>
+            <blockquote className="mt-10 border-l-2 border-mustard/70 pl-6">
+              <p className="font-serif text-[20px] italic leading-snug text-bone/90 md:text-[22px]">
+                «Τα πάντα ρεί.»
+              </p>
+              <p className="mt-2 font-sans text-[13px] not-italic text-concrete">
+                — Ηράκλειτος
+              </p>
+            </blockquote>
           </Reveal>
 
           <Reveal className="mt-10">

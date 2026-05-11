@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mess · Scroll-scrub video preview</title>
+<style>
+  :root{
+    --bone:#f5f1ea;
+    --charcoal:#1a1a1a;
+    --ink:#0e0e0e;
+    --accent:#c9a86b;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+    color:#fff;
+    background:#000;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ----- Fixed video stage ----- */
+  .stage{
+    position:fixed; inset:0;
+    z-index:0;
+    overflow:hidden;
+    background:#000;
+  }
+  .stage video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    will-change: opacity, transform;
+  }
+  /* dark gradient overlay for legibility */
+  .stage::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% 40%, transparent 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.7) 100%),
+      linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.55));
+    pointer-events:none;
+  }
+
+  /* ----- Foreground content ----- */
+  .content{ position:relative; z-index:1; }
+
+  /* Top nav */
+  nav.top{
+    position:fixed; top:0; left:0; right:0; z-index:5;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px;
+    font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+    mix-blend-mode: difference;
+    color:#fff;
+  }
+  nav.top .links{ display:flex; gap:22px; opacity:.85 }
+  nav.top .brand{ font-weight:700; letter-spacing:.32em }
+
+  /* Sections share a “panel” that holds copy */
+  section{
+    min-height: 100vh;
+    display:flex; align-items:center; justify-content:center;
+    padding: 12vh 6vw;
+  }
+  .panel{
+    max-width: 880px;
+    text-align:center;
+  }
+  .eyebrow{
+    font-size:12px; letter-spacing:.32em; text-transform:uppercase;
+    opacity:.75; margin-bottom:18px;
+  }
+  h1.lede{
+    font-size: clamp(48px, 9vw, 132px);
+    line-height:.95; font-weight:600;
+    letter-spacing:-0.02em;
+    margin:0;
+    text-shadow: 0 2px 30px rgba(0,0,0,.4);
+  }
+  h2{
+    font-size: clamp(34px, 5.5vw, 72px);
+    line-height:1.02; font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0 0 18px;
+  }
+  p.body{
+    font-size: clamp(16px, 1.4vw, 19px);
+    line-height:1.55; opacity:.92; max-width: 60ch;
+    margin: 0 auto;
+  }
+  .stat-row{
+    display:flex; gap:36px; justify-content:center; margin-top:32px;
+    flex-wrap:wrap;
+  }
+  .stat .v{ font-size:22px; font-weight:600 }
+  .stat .l{ font-size:11px; letter-spacing:.22em; opacity:.7; text-transform:uppercase; margin-top:4px }
+
+  /* spacer that gives scroll runway between content beats */
+  .spacer{ height: 80vh; }
+
+  /* small scroll hint */
+  .scroll-hint{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    z-index:6; font-size:11px; letter-spacing:.32em; opacity:.65;
+    text-transform:uppercase;
+    transition: opacity .4s ease;
+  }
+  body.scrolled .scroll-hint{ opacity:0 }
+
+  /* progress bar */
+  .progress{
+    position:fixed; left:0; top:0; height:2px; width:0;
+    background:var(--accent); z-index:7;
+    transition: width .08s linear;
+  }
+
+  /* control panel (toggle effects on/off so you can compare) */
+  .controls{
+    position:fixed; right:14px; bottom:14px; z-index:9;
+    display:flex; flex-direction:column; gap:6px;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    background: rgba(20,20,20,.78);
+    backdrop-filter: blur(6px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;
+    padding:10px 12px;
+    color:#eee;
+  }
+  .controls label{ display:flex; align-items:center; gap:8px; cursor:pointer }
+  .controls input{ accent-color: var(--accent) }
+
+  /* "off" mode — show site without scroll-scrub video */
+  body.video-off .stage video{ display:none }
+  body.video-off .stage{ background:#1a1a1a }
+
+  /* loading state */
+  .loading{
+    position:fixed; inset:0; z-index:50;
+    display:flex; align-items:center; justify-content:center;
+    background:#000; color:#fff;
+    font-size:12px; letter-spacing:.32em; text-transform:uppercase;
+    opacity:1; transition: opacity .5s ease;
+  }
+  body.ready .loading{ opacity:0; pointer-events:none }
+
+  /* ----- closing card (solid bg) ----- */
+  .closer{
+    background: var(--bone);
+    color: var(--charcoal);
+    min-height: 60vh;
+    padding: 14vh 6vw;
+    text-align:center;
+    position:relative; z-index:2;
+  }
+  .closer h2{ color:var(--ink) }
+  .closer p{ color:#444 }
+</style>
+</head>
+<body>
+
+  <div class="loading"><span>Loading preview…</span></div>
+
+  <div class="progress" id="progress"></div>
+
+  <nav class="top">
+    <div class="brand">Mess</div>
+    <div class="links"><span>About</span><span>Menu</span><span>Gallery</span><span>Visit</span></div>
+  </nav>
+
+  <!-- Fixed video stage -->
+  <div class="stage" aria-hidden="true">
+    <video id="bgvideo" src="scroll-bg-scrub.mp4" muted playsinline preload="auto"></video>
+  </div>
+
+  <!-- Foreground -->
+  <div class="content">
+
+    <section>
+      <div class="panel">
+        <div class="eyebrow">ΚΕΠΑΒΙ · Ιωάννινα</div>
+        <h1 class="lede">A quiet kind<br/>of chaos.</h1>
+        <div class="stat-row">
+          <div class="stat"><div class="v">4.8★</div><div class="l">Google rating</div></div>
+          <div class="stat"><div class="v">08—23</div><div class="l">Ανοιχτά καθημερινά</div></div>
+          <div class="stat"><div class="v">Ιωάννινα</div><div class="l">find us</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section>
+      <div class="panel">
+        <div class="eyebrow">About</div>
+        <h2>A small room with loud opinions about coffee.</h2>
+        <p class="body">Specialty espresso, slow brunches, and a soundtrack that takes itself maybe a little too seriously. Stay an hour or stay all afternoon — we don't time you.</p>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section>
+      <div class="panel">
+        <div class="eyebrow">Menu</div>
+        <h2>Brunch all day. Espresso always.</h2>
+        <p class="body">Filter, espresso, batch brew, and a rotating single-origin. Plus the kind of toast you talk about on the way home.</p>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section>
+      <div class="panel">
+        <div class="eyebrow">Gallery</div>
+        <h2>Caught in the act.</h2>
+        <p class="body">Late afternoons, full tables, the regulars and the lost-tourists alike. Scroll a little further — we're almost there.</p>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section class="closer">
+      <div class="panel">
+        <div class="eyebrow" style="color:#888">Visit</div>
+        <h2>Stop by.</h2>
+        <p class="body" style="opacity:1">ΚΕΠΑΒΙ, Ιωάννινα · Open 08—23 every day. The coffee's already on.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="scroll-hint">scroll ↓</div>
+
+  <div class="controls">
+    <label><input type="checkbox" id="toggleVideo" checked /> Video bg</label>
+    <label><input type="checkbox" id="toggleSmooth" checked /> Smooth scrub</label>
+  </div>
+
+<script>
+(() => {
+  const video    = document.getElementById('bgvideo');
+  const progress = document.getElementById('progress');
+  const tVideo   = document.getElementById('toggleVideo');
+  const tSmooth  = document.getElementById('toggleSmooth');
+
+  let duration = 0;
+  let targetTime = 0;     // where we want the video to be
+  let currentTime = 0;    // where the video actually is (lerped)
+  let rafId = 0;
+  let lastSetTime = -1;
+
+  // mark scrolled to fade hint
+  const onScrollHint = () => {
+    if (window.scrollY > 50) document.body.classList.add('scrolled');
+    else document.body.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScrollHint, { passive:true });
+
+  // compute scroll progress (0..1) over the whole page
+  const computeProgress = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollable <= 0) return 0;
+    return Math.min(1, Math.max(0, window.scrollY / scrollable));
+  };
+
+  // Remap: first half of video is "2x" — it passes in the first 25% of scroll.
+  // Second half of the video stretches over the remaining 75% of scroll, so the
+  // interesting part lingers.
+  const FAST_VIDEO_END  = 0.5;   // video portion that plays fast
+  const FAST_SCROLL_END = 0.25;  // scroll portion it consumes
+  const remap = (p) => {
+    if (p < FAST_SCROLL_END) {
+      return (p / FAST_SCROLL_END) * FAST_VIDEO_END;
+    }
+    return FAST_VIDEO_END +
+           ((p - FAST_SCROLL_END) / (1 - FAST_SCROLL_END)) * (1 - FAST_VIDEO_END);
+  };
+
+  const updateTargets = () => {
+    const p = computeProgress();
+    const v = remap(p);
+    targetTime = v * (duration || 0);
+    progress.style.width = (p * 100).toFixed(2) + '%';
+  };
+
+  // lerp + commit currentTime. With all-intra video, seeks are essentially instant,
+  // so we can update every frame without throttling.
+  const tick = () => {
+    rafId = 0;
+    if (!duration) return;
+
+    const smooth = tSmooth.checked;
+    if (smooth) {
+      // ease toward target — fairly snappy
+      currentTime += (targetTime - currentTime) * 0.32;
+      if (Math.abs(targetTime - currentTime) < 0.002) currentTime = targetTime;
+    } else {
+      currentTime = targetTime;
+    }
+
+    try {
+      video.currentTime = Math.min(duration - 0.01, Math.max(0, currentTime));
+      lastSetTime = currentTime;
+    } catch(e) { /* ignore seek-not-ready */ }
+
+    if (Math.abs(targetTime - currentTime) > 0.001) {
+      rafId = requestAnimationFrame(tick);
+    }
+  };
+
+  const schedule = () => {
+    updateTargets();
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  };
+
+  window.addEventListener('scroll', schedule, { passive:true });
+  window.addEventListener('resize', schedule);
+
+  // when video metadata loads, seed duration & first frame
+  video.addEventListener('loadedmetadata', () => {
+    duration = video.duration || 0;
+    // tickle a play/pause to force first frame paint on Safari
+    video.play().then(() => video.pause()).catch(()=>{});
+    schedule();
+  });
+
+  video.addEventListener('canplay', () => {
+    document.body.classList.add('ready');
+  });
+
+  // toggles
+  tVideo.addEventListener('change', () => {
+    document.body.classList.toggle('video-off', !tVideo.checked);
+  });
+
+  // initial
+  schedule();
+  // safety: hide loader after 4s no matter what
+  setTimeout(() => document.body.classList.add('ready'), 4000);
+})();
+</script>
+</body>
+</html>
