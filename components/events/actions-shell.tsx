@@ -10,6 +10,8 @@ type Props = {
   upcomingEvents: Event[]
   restUpcoming: Event[]
   settings: Settings
+  /** Renders before the hero (e.g. pillars + stats) for a content-first fold */
+  aboveHero?: ReactNode
   children: ReactNode
 }
 
@@ -17,6 +19,7 @@ export default function ActionsShell({
   upcomingEvents,
   restUpcoming,
   settings,
+  aboveHero,
   children,
 }: Props) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
@@ -27,6 +30,7 @@ export default function ActionsShell({
 
   return (
     <>
+      {aboveHero}
       <EventsIndexHero
         upcomingEvents={upcomingEvents}
         nextEvent={nextEvent}

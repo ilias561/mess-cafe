@@ -7,7 +7,10 @@ import {
   useInView,
   useMotionValue,
   useReducedMotion,
+  type UseInViewOptions,
 } from 'framer-motion'
+
+import { cn } from '@/lib/utils'
 
 /* ─────────────────────────── data ─────────────────────────── */
 
@@ -152,9 +155,9 @@ function BotanicalCorner({ size = 140 }: { size?: number }) {
 
 /* ───────────────────────── icons (alive) ───────────────────────── */
 
-type IconProps = { animateIcon: boolean }
+type IconProps = { animateIcon: boolean; svgClassName?: string }
 
-function FoodIcon({ animateIcon }: IconProps) {
+function FoodIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
   // 3 curved steam wisps that draw + fade out in sequence; bowl is static.
   const steamPaths = [
     'M11 14 C13 11 9 9 11 6',
@@ -164,7 +167,7 @@ function FoodIcon({ animateIcon }: IconProps) {
   return (
     <svg
       viewBox="0 0 32 32"
-      className="h-7 w-7"
+      className={svgClassName}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
@@ -203,11 +206,11 @@ function FoodIcon({ animateIcon }: IconProps) {
   )
 }
 
-function SolidarityIcon({ animateIcon }: IconProps) {
+function SolidarityIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
   return (
     <svg
       viewBox="0 0 32 32"
-      className="h-7 w-7"
+      className={svgClassName}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
@@ -238,7 +241,7 @@ function SolidarityIcon({ animateIcon }: IconProps) {
   )
 }
 
-function CommunityIcon({ animateIcon }: IconProps) {
+function CommunityIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
   const nodes = [
     { cx: 16, cy: 7 },
     { cx: 7, cy: 24 },
@@ -247,7 +250,7 @@ function CommunityIcon({ animateIcon }: IconProps) {
   return (
     <svg
       viewBox="0 0 32 32"
-      className="h-7 w-7"
+      className={svgClassName}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.6"
@@ -286,10 +289,20 @@ function CommunityIcon({ animateIcon }: IconProps) {
   )
 }
 
-function PillarIcon({ id, animateIcon }: { id: PillarId; animateIcon: boolean }) {
-  if (id === 'food') return <FoodIcon animateIcon={animateIcon} />
-  if (id === 'solidarity') return <SolidarityIcon animateIcon={animateIcon} />
-  return <CommunityIcon animateIcon={animateIcon} />
+function PillarIcon({
+  id,
+  animateIcon,
+  compact,
+}: {
+  id: PillarId
+  animateIcon: boolean
+  compact?: boolean
+}) {
+  const svgClassName = compact ? 'h-5 w-5 md:h-7 md:w-7' : 'h-7 w-7'
+  if (id === 'food') return <FoodIcon animateIcon={animateIcon} svgClassName={svgClassName} />
+  if (id === 'solidarity')
+    return <SolidarityIcon animateIcon={animateIcon} svgClassName={svgClassName} />
+  return <CommunityIcon animateIcon={animateIcon} svgClassName={svgClassName} />
 }
 
 /* ──────────────────────── count-up stat ──────────────────────── */
@@ -305,7 +318,7 @@ function CountUp({
 }) {
   const prefersReducedMotion = useReducedMotion()
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-15% 0px' })
+  const inView = useInView(ref, { once: true, amount: 0.2 })
   const mv = useMotionValue(0)
   const [display, setDisplay] = useState(`0${suffix}`)
 
@@ -335,14 +348,35 @@ function CountUp({
 
 /* ───────────────────────── main component ───────────────────────── */
 
-export default function ActionsMissionStrip() {
+type MissionVariant = 'default' | 'lead'
+
+const viewportDefault: UseInViewOptions = { once: true, margin: '-15% 0px' }
+/** Tighter trigger so above-the-fold content animates on first paint */
+const viewportLead: UseInViewOptions = { once: true, amount: 0.08 }
+
+export default function ActionsMissionStrip({
+  variant = 'default',
+}: {
+  variant?: MissionVariant
+}) {
   const prefersReducedMotion = useReducedMotion()
   const animateAmbient = !prefersReducedMotion
+  const isLead = variant === 'lead'
+  const motionViewport = isLead ? viewportLead : viewportDefault
+  const wordStagger = isLead ? 0.035 : 0.06
+  const pillarStagger = isLead ? 0.07 : 0.14
 
   const headlineWords = 'Τρεις τρόποι που στεκόμαστε δίπλα στην πόλη.'.split(' ')
 
   return (
-    <section className="relative overflow-hidden border-t border-line/50 bg-gradient-to-b from-cream via-bone-warm to-bone px-6 py-20 md:px-12 md:py-28">
+    <section
+      className={cn(
+        'relative overflow-hidden border-t border-line/50 bg-gradient-to-b from-cream via-bone-warm to-bone px-6 md:px-12',
+        isLead
+          ? 'pt-20 pb-6 md:pt-32 md:pb-16'
+          : 'py-20 md:py-28',
+      )}
+    >
       {/* ─── ambient decorative layer ─── */}
       {/* botanical, top-left */}
       <motion.div
@@ -378,7 +412,10 @@ export default function ActionsMissionStrip() {
 
       {/* top-center rule with pulse dot */}
       <div
-        className="pointer-events-none absolute left-1/2 top-8 flex -translate-x-1/2 items-center gap-2"
+        className={cn(
+          'pointer-events-none absolute left-1/2 flex -translate-x-1/2 items-center gap-2',
+          isLead ? 'top-6' : 'top-8',
+        )}
         aria-hidden
       >
         <span className="block h-px w-9 bg-terracotta/55" />
@@ -405,14 +442,21 @@ export default function ActionsMissionStrip() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-15% 0px' }}
+            viewport={motionViewport}
             transition={{ duration: 0.6, ease: EASE_OUT }}
             className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive"
           >
             ΠΩΣ ΒΟΗΘΑΜΕ · <span className="text-mustard">#KEEPRISING</span>
           </motion.p>
 
-          <h2 className="mt-5 font-serif text-[clamp(32px,4.5vw,52px)] leading-[1.05] tracking-tight text-charcoal">
+          <h2
+            className={cn(
+              'mt-3 font-serif leading-[1.05] tracking-tight text-charcoal md:mt-5',
+              isLead
+                ? 'text-[clamp(22px,3.8vw,44px)]'
+                : 'text-[clamp(32px,4.5vw,52px)]',
+            )}
+          >
             {headlineWords.map((word, i) => (
               <Fragment key={`${word}-${i}`}>
                 <span className="inline-block overflow-hidden align-baseline">
@@ -420,10 +464,10 @@ export default function ActionsMissionStrip() {
                     className="inline-block"
                     initial={{ y: '100%' }}
                     whileInView={{ y: 0 }}
-                    viewport={{ once: true, margin: '-15% 0px' }}
+                    viewport={motionViewport}
                     transition={{
                       duration: 0.7,
-                      delay: i * 0.06,
+                      delay: i * wordStagger,
                       ease: EASE_OUT,
                     }}
                   >
@@ -438,33 +482,47 @@ export default function ActionsMissionStrip() {
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-15% 0px' }}
+            viewport={motionViewport}
             transition={{
               duration: 0.7,
-              delay: headlineWords.length * 0.06 + 0.1,
+              delay: headlineWords.length * wordStagger + (isLead ? 0.06 : 0.1),
               ease: EASE_OUT,
             }}
-            className="mx-auto mt-5 max-w-[44ch] font-sans text-[15px] leading-relaxed text-concrete"
+            className={cn(
+              'mx-auto max-w-[44ch] font-sans leading-relaxed text-concrete',
+              isLead ? 'mt-3 text-[14px]' : 'mt-5 text-[15px]',
+            )}
           >
             Καθαρό φαγητό. Αλληλεγγύη. Κοινότητα. Όχι ως slogans — ως πράξεις.
           </motion.p>
         </div>
 
         {/* pillars */}
-        <div className="mt-14 grid gap-6 md:mt-20 md:grid-cols-3 md:gap-8">
+        <div
+          className={cn(
+            'grid md:grid-cols-3',
+            isLead ? 'mt-5 gap-3 md:mt-12 md:gap-6' : 'mt-14 gap-6 md:mt-20 md:gap-8',
+          )}
+        >
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
+              viewport={isLead ? viewportLead : { once: true, margin: '-60px' }}
               transition={{
                 duration: 0.7,
-                delay: index * 0.14,
+                delay: index * pillarStagger,
                 ease: EASE_OUT,
               }}
               whileHover={prefersReducedMotion ? undefined : { y: -6 }}
-              className={`group relative flex flex-col gap-5 overflow-hidden rounded-[4px] border border-line/40 ${cardBg[pillar.accent]} p-8 transition-shadow duration-300 hover:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.18)]`}
+              className={cn(
+                'group relative overflow-hidden rounded-[4px] border border-line/40 transition-shadow duration-300 hover:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.18)]',
+                cardBg[pillar.accent],
+                isLead
+                  ? 'flex flex-row items-start gap-3 p-4 md:flex-col md:gap-5 md:p-7'
+                  : 'flex flex-col gap-5 p-8',
+              )}
             >
               {/* top accent bar — grows on hover */}
               <span
@@ -474,7 +532,11 @@ export default function ActionsMissionStrip() {
 
               {/* icon container — continuous breathing */}
               <motion.div
-                className={`flex h-16 w-16 items-center justify-center rounded-full ${iconRing[pillar.accent]}`}
+                className={cn(
+                  'flex shrink-0 items-center justify-center rounded-full',
+                  isLead ? 'h-10 w-10 md:h-16 md:w-16' : 'h-16 w-16',
+                  iconRing[pillar.accent],
+                )}
                 animate={
                   animateAmbient ? { scale: [1, 1.06, 1] } : { scale: 1 }
                 }
@@ -489,16 +551,25 @@ export default function ActionsMissionStrip() {
                     : { duration: 0 }
                 }
               >
-                <PillarIcon id={pillar.id} animateIcon={animateAmbient} />
+                <PillarIcon id={pillar.id} animateIcon={animateAmbient} compact={isLead} />
               </motion.div>
 
-              <div>
+              <div className="min-w-0">
                 <h3
-                  className={`font-serif text-[26px] leading-snug tracking-tight ${accentText[pillar.accent]}`}
+                  className={cn(
+                    'font-serif leading-snug tracking-tight',
+                    accentText[pillar.accent],
+                    isLead ? 'text-[20px] md:text-[26px]' : 'text-[26px]',
+                  )}
                 >
                   {pillar.title}
                 </h3>
-                <p className="mt-3 font-sans text-[14.5px] leading-relaxed text-charcoal/75">
+                <p
+                  className={cn(
+                    'mt-1.5 font-sans leading-relaxed text-charcoal/75 md:mt-3',
+                    isLead ? 'text-[13px] md:text-[13.5px]' : 'text-[14.5px]',
+                  )}
+                >
                   {pillar.body}
                 </p>
               </div>
@@ -507,12 +578,15 @@ export default function ActionsMissionStrip() {
         </div>
 
         {/* stats */}
-        <div className="mt-16 md:mt-20">
+        <div className={isLead ? 'mt-6 md:mt-12' : 'mt-16 md:mt-20'}>
           <div
-            className="mx-auto mb-12 h-px w-12 bg-terracotta/50"
+            className={cn(
+              'mx-auto h-px w-12 bg-terracotta/50',
+              isLead ? 'mb-5 md:mb-8' : 'mb-12',
+            )}
             aria-hidden
           />
-          <div className="grid grid-cols-1 gap-10 text-center sm:gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-3 gap-4 text-center md:gap-6">
             <div className="flex flex-col items-center">
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={2023} />

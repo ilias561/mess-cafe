@@ -32,12 +32,16 @@ export default function ActionsPage() {
         upcomingEvents={upcomingEvents}
         restUpcoming={restUpcoming}
         settings={settings}
+        aboveHero={
+          <>
+            <ActionsMissionStrip variant="lead" />
+            <ActionsManifesto />
+          </>
+        }
       >
-        <ActionsMissionStrip />
         <UpcomingDatesMarquee events={upcomingEvents} />
         {featured && <FeaturedNextEvent event={featured} settings={settings} />}
       </ActionsShell>
-      <ActionsManifesto />
       {keepRisingSpotlight ? <ActionSpotlight event={keepRisingSpotlight} /> : null}
       {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
       <PreFooterCta

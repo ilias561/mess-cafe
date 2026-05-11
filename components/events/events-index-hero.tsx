@@ -49,8 +49,8 @@ export default function EventsIndexHero({
   }
 
   return (
-    <section className="px-6 pt-36 md:px-12 md:pt-44">
-      <div className="mx-auto grid max-w-[1400px] gap-10 md:grid-cols-[7fr_5fr] md:items-start md:gap-12">
+    <section className="border-t border-line/40 bg-bone px-6 pt-6 pb-10 md:px-12 md:pt-14 md:pb-16">
+      <div className="mx-auto grid max-w-[1400px] gap-8 md:grid-cols-[minmax(0,1.12fr)_min(300px,30vw)] md:items-start md:gap-10 lg:grid-cols-[minmax(0,1.15fr)_min(340px,28vw)]">
 
         <div>
           <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
@@ -59,7 +59,7 @@ export default function EventsIndexHero({
 
           {/* Inline pill — next event */}
           {nextEvent && (
-            <motion.div {...fadeUpDelayed(0.04)} className="mt-3">
+            <motion.div {...fadeUpDelayed(0.02)} className="mt-3">
               <Link
                 href={`/actions/${nextEvent.slug}`}
                 className="inline-flex items-center gap-2 rounded-full border border-line bg-bone-warm px-3 py-[7px] font-sans text-[11px] tracking-[0.02em] transition-colors hover:border-charcoal/40"
@@ -76,22 +76,22 @@ export default function EventsIndexHero({
           )}
 
           <motion.h1
-            {...fadeUpDelayed(0.08)}
-            className="mt-6 max-w-[14ch] font-serif text-[clamp(44px,6.5vw,96px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[16ch]"
+            {...fadeUpDelayed(0.04)}
+            className="mt-4 max-w-[18ch] font-serif text-[clamp(32px,4.8vw,72px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[20ch]"
           >
             Περισσότερο από έναν καφέ.
           </motion.h1>
 
           <motion.p
-            {...fadeUpDelayed(0.14)}
-            className="mt-8 max-w-[72ch] font-sans text-[16px] leading-[1.7] text-concrete md:text-[17px]"
+            {...fadeUpDelayed(0.07)}
+            className="mt-5 max-w-[72ch] font-sans text-[15px] leading-[1.65] text-concrete md:text-[16px]"
           >
             Workshops, μουσικές βραδιές, πολιτιστικά ραντεβού και συνεργασίες που κρατούν τον χώρο μας ανοιχτό στην κοινότητα.
           </motion.p>
 
           {/* Category filter chips — only when >1 event, with counts */}
           {showChips && (
-            <motion.div {...fadeUpDelayed(0.18)} className="mt-6 flex flex-wrap gap-2">
+            <motion.div {...fadeUpDelayed(0.09)} className="mt-5 flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={() => onCategoryChange(null)}
@@ -129,7 +129,7 @@ export default function EventsIndexHero({
           )}
 
           {/* CTA row */}
-          <motion.div {...fadeUpDelayed(0.22)} className="mt-4 flex items-center gap-[14px]">
+          <motion.div {...fadeUpDelayed(0.11)} className="mt-3 flex flex-wrap items-center gap-x-[14px] gap-y-2">
             {upcomingEvents.length > 0 && (
               <a
                 href="#upcoming"
@@ -151,8 +151,8 @@ export default function EventsIndexHero({
         </div>
 
         {/* Right: photo with optional date tag — hidden on mobile to avoid blank clip-path space */}
-        <MaskReveal className="relative mx-auto hidden w-full max-w-[420px] md:mx-0 md:block md:max-w-none" delay={0.2}>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
+        <MaskReveal className="relative mx-auto hidden w-full max-w-[320px] md:mx-0 md:block md:max-w-none" delay={0.1}>
+          <div className="relative aspect-[4/5] max-h-[min(52vh,400px)] overflow-hidden rounded-[2px] bg-bone-warm md:max-h-[min(56vh,440px)]">
             <Image
               src={aboutSidePhoto}
               alt="Εσωτερικό του M.E.S.S. — το δωμάτιο όπου στήνονται οι δράσεις."

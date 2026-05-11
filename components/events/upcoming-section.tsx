@@ -33,8 +33,15 @@ export default function UpcomingSection({ events, activeCategory, proposeHref }:
         {events.length === 0 ? (
           /* 3c empty state — programme is genuinely empty */
           <div className="mx-auto mt-6 max-w-[36em] text-center">
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΣΥΝΤΟΜΑ</p>
-            <h2 className="mt-6 font-serif text-[clamp(28px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
+            <div
+              className="mx-auto mb-6 flex w-max items-center gap-2"
+              aria-hidden
+            >
+              <span className="block h-px w-9 bg-terracotta/55" />
+              <span className="block h-[5px] w-[5px] rounded-full bg-olive" />
+              <span className="block h-px w-9 bg-terracotta/55" />
+            </div>
+            <h2 className="font-serif text-[clamp(24px,3.5vw,36px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
               Δεν έχουμε προγραμματίσει δράση ακόμα.
             </h2>
             <p className="mt-6 font-sans text-[15px] leading-[1.7] text-concrete">
