@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
-import cafeStripPhoto from '../../public/images/gallery-1.jpg'
+import cafeStripPhoto from '../../public/images/mess-logo-interior.jpg.jpg'
 
 export default function ActionsHeroPhotoStrip() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -25,7 +25,7 @@ export default function ActionsHeroPhotoStrip() {
   return (
     <div
       ref={containerRef}
-      className="relative h-[100px] w-full overflow-hidden md:h-[120px]"
+      className="relative h-[150px] w-full overflow-hidden md:h-[180px]"
       aria-hidden
     >
       <motion.div
@@ -38,10 +38,9 @@ export default function ActionsHeroPhotoStrip() {
           fill
           priority={false}
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[center_55%]"
         />
       </motion.div>
-      <div className="pointer-events-none absolute inset-0 bg-bone/40" />
     </div>
   )
 }

@@ -10,7 +10,12 @@ import {
   type UseInViewOptions,
 } from 'framer-motion'
 
+import Image, { type StaticImageData } from 'next/image'
 import { cn } from '@/lib/utils'
+
+import foodPhoto from '../../public/images/hero-bowl.jpg'
+import solidarityPhoto from '../../public/images/keep-rising.jpg'
+import communityPhoto from '../../public/images/keep-rising-team.jpg'
 
 /* ─────────────────────────── data ─────────────────────────── */
 
@@ -70,6 +75,18 @@ const cardBottomBorder: Record<Accent, string> = {
   mustard: 'border-b-2 border-b-mustard/20',
   terracotta: 'border-b-2 border-b-terracotta/20',
   olive: 'border-b-2 border-b-olive/20',
+}
+
+const pillarPhoto: Record<PillarId, StaticImageData> = {
+  food: foodPhoto,
+  solidarity: solidarityPhoto,
+  community: communityPhoto,
+}
+
+const pillarPhotoAlt: Record<PillarId, string> = {
+  food: 'Φρέσκο bowl από το M.E.S.S.',
+  solidarity: 'Φορτηγό γεμάτο τρόφιμα για δωρεά — #KeepRising',
+  community: 'Η ομάδα του M.E.S.S. μαζί στον χώρο',
 }
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const
@@ -394,9 +411,9 @@ export default function ActionsMissionStrip({
       {/* ─── ambient decorative layer ─── */}
       {/* botanical, top-left */}
       <motion.div
-        className="pointer-events-none absolute -left-2 -top-2 text-olive"
+        className="pointer-events-none absolute -left-2 -top-2 text-[#2d5a27]"
         animate={
-          animateAmbient ? { opacity: [0.08, 0.14, 0.08] } : { opacity: 0.1 }
+          animateAmbient ? { opacity: [0.1, 0.18, 0.1] } : { opacity: 0.14 }
         }
         transition={
           animateAmbient
@@ -409,10 +426,10 @@ export default function ActionsMissionStrip({
       </motion.div>
       {/* botanical, bottom-right (mirrored) */}
       <motion.div
-        className="pointer-events-none absolute -bottom-2 -right-2 text-olive"
+        className="pointer-events-none absolute -bottom-2 -right-2 text-[#2d5a27]"
         style={{ transform: 'scale(-1, -1)' }}
         animate={
-          animateAmbient ? { opacity: [0.08, 0.14, 0.08] } : { opacity: 0.1 }
+          animateAmbient ? { opacity: [0.1, 0.18, 0.1] } : { opacity: 0.14 }
         }
         transition={
           animateAmbient
@@ -432,7 +449,7 @@ export default function ActionsMissionStrip({
         )}
         aria-hidden
       >
-        <span className="block h-px w-9 bg-terracotta/55" />
+        <span className="block h-px w-9 bg-[#2d5a27]/40" />
         <motion.span
           className="block h-[5px] w-[5px] rounded-full bg-olive"
           animate={
@@ -446,7 +463,7 @@ export default function ActionsMissionStrip({
               : { duration: 0 }
           }
         />
-        <span className="block h-px w-9 bg-terracotta/55" />
+        <span className="block h-px w-9 bg-[#2d5a27]/40" />
       </div>
 
       {/* ─── content ─── */}
@@ -525,63 +542,111 @@ export default function ActionsMissionStrip({
               }}
               whileHover={prefersReducedMotion ? undefined : { y: -6 }}
               className={cn(
-                'group relative overflow-hidden rounded-[4px] border border-line/40 transition-shadow duration-300 hover:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.18)]',
-                cardBg[pillar.accent],
+                'group relative overflow-hidden rounded-[6px] border border-line/40 transition-shadow duration-300',
                 cardBottomBorder[pillar.accent],
                 isLead
-                  ? 'flex flex-row items-start gap-3 border-l-[3px] border-l-transparent p-4 md:flex-col md:gap-5 md:border-l-0 md:p-7'
-                  : 'flex flex-col gap-5 p-8',
+                  ? 'flex flex-row items-start gap-3 bg-bone-warm p-4 md:flex-col md:gap-0 md:p-0'
+                  : 'flex flex-col gap-5 p-8 ' + cardBg[pillar.accent],
                 isLead &&
                   pillar.accent === 'mustard' &&
-                  'border-l-mustard md:hover:shadow-[0_8px_30px_-10px_rgba(196,164,60,0.25)]',
+                  'md:hover:shadow-[0_8px_30px_-10px_rgba(196,164,60,0.25)]',
                 isLead &&
                   pillar.accent === 'terracotta' &&
-                  'border-l-terracotta md:hover:shadow-[0_8px_30px_-10px_rgba(197,101,77,0.25)]',
+                  'md:hover:shadow-[0_8px_30px_-10px_rgba(197,101,77,0.25)]',
                 isLead &&
                   pillar.accent === 'olive' &&
-                  'border-l-olive md:hover:shadow-[0_8px_30px_-10px_rgba(101,118,82,0.25)]',
+                  'md:hover:shadow-[0_8px_30px_-10px_rgba(101,118,82,0.25)]',
               )}
             >
-              {/* accent bar — top on desktop, hinted by left border on mobile */}
-              <span
-                className={cn(
-                  'absolute left-0 top-0 h-[3px] w-12 transition-all duration-300 group-hover:w-full',
-                  accentBar[pillar.accent],
-                  isLead ? 'hidden md:block' : 'block',
-                )}
-                aria-hidden
-              />
+              {/* ── desktop: photo header with icon overlay ── */}
+              {isLead && (
+                <div className="relative hidden md:block">
+                  <div className="relative h-[140px] w-full overflow-hidden">
+                    <Image
+                      src={pillarPhoto[pillar.id]}
+                      alt={pillarPhotoAlt[pillar.id]}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 0px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                    <div className={cn(
+                      'absolute inset-0',
+                      pillar.accent === 'mustard' && 'bg-gradient-to-t from-mustard/20 to-transparent',
+                      pillar.accent === 'terracotta' && 'bg-gradient-to-t from-terracotta/20 to-transparent',
+                      pillar.accent === 'olive' && 'bg-gradient-to-t from-olive/20 to-transparent',
+                    )} />
+                  </div>
+                  {/* icon overlapping photo bottom edge */}
+                  <motion.div
+                    className={cn(
+                      'absolute -bottom-5 left-6 flex h-14 w-14 items-center justify-center rounded-full border-2 border-bone-warm shadow-sm',
+                      iconRing[pillar.accent],
+                    )}
+                    animate={
+                      animateAmbient ? { scale: [1, 1.06, 1] } : { scale: 1 }
+                    }
+                    transition={
+                      animateAmbient
+                        ? { duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }
+                        : { duration: 0 }
+                    }
+                  >
+                    <PillarIcon id={pillar.id} animateIcon={animateAmbient} compact={false} />
+                  </motion.div>
+                </div>
+              )}
 
-              {/* icon container — continuous breathing */}
-              <motion.div
-                className={cn(
-                  'flex shrink-0 items-center justify-center rounded-full',
-                  isLead ? 'h-10 w-10 md:h-16 md:w-16' : 'h-16 w-16',
-                  iconRing[pillar.accent],
-                )}
-                animate={
-                  animateAmbient ? { scale: [1, 1.06, 1] } : { scale: 1 }
-                }
-                transition={
-                  animateAmbient
-                    ? {
-                        duration: 3.6,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: index * 0.4,
-                      }
-                    : { duration: 0 }
-                }
-              >
-                <PillarIcon id={pillar.id} animateIcon={animateAmbient} compact={isLead} />
-              </motion.div>
+              {/* ── mobile: photo thumbnail ── */}
+              {isLead && (
+                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full md:hidden">
+                  <Image
+                    src={pillarPhoto[pillar.id]}
+                    alt={pillarPhotoAlt[pillar.id]}
+                    fill
+                    sizes="48px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
 
-              <div className="min-w-0">
+              {/* ── default variant: icon only (no photo) ── */}
+              {!isLead && (
+                <>
+                  <span
+                    className={cn(
+                      'absolute left-0 top-0 h-[3px] w-12 transition-all duration-300 group-hover:w-full',
+                      accentBar[pillar.accent],
+                    )}
+                    aria-hidden
+                  />
+                  <motion.div
+                    className={cn(
+                      'flex shrink-0 items-center justify-center rounded-full h-16 w-16',
+                      iconRing[pillar.accent],
+                    )}
+                    animate={
+                      animateAmbient ? { scale: [1, 1.06, 1] } : { scale: 1 }
+                    }
+                    transition={
+                      animateAmbient
+                        ? { duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 }
+                        : { duration: 0 }
+                    }
+                  >
+                    <PillarIcon id={pillar.id} animateIcon={animateAmbient} compact={false} />
+                  </motion.div>
+                </>
+              )}
+
+              <div className={cn(
+                'min-w-0',
+                isLead && 'md:px-6 md:pb-6 md:pt-8',
+              )}>
                 <h3
                   className={cn(
                     'font-serif leading-snug tracking-tight',
                     accentText[pillar.accent],
-                    isLead ? 'text-[20px] md:text-[28px]' : 'text-[28px]',
+                    isLead ? 'text-[20px] md:text-[26px]' : 'text-[28px]',
                   )}
                 >
                   {pillar.title}
@@ -603,7 +668,7 @@ export default function ActionsMissionStrip({
         <div className={isLead ? 'mt-6 md:mt-10' : 'mt-16 md:mt-20'}>
           <div
             className={cn(
-              'mx-auto h-px w-12 bg-terracotta/50',
+              'mx-auto h-px w-12 bg-[#2d5a27]/40',
               isLead ? 'mb-5 md:mb-6' : 'mb-12',
             )}
             aria-hidden
