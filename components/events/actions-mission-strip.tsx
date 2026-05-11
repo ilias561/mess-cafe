@@ -47,9 +47,9 @@ const pillars: readonly Pillar[] = [
 
 // Tailwind class maps — never interpolate colour names into classNames.
 const cardBg: Record<Accent, string> = {
-  mustard: 'bg-mustard/[0.10]',
-  terracotta: 'bg-terracotta/[0.10]',
-  olive: 'bg-olive/[0.10]',
+  mustard: 'bg-mustard/[0.12]',
+  terracotta: 'bg-terracotta/[0.12]',
+  olive: 'bg-olive/[0.12]',
 }
 const accentBar: Record<Accent, string> = {
   mustard: 'bg-mustard',
@@ -65,6 +65,11 @@ const accentText: Record<Accent, string> = {
   mustard: 'text-mustard',
   terracotta: 'text-terracotta',
   olive: 'text-olive',
+}
+const cardBottomBorder: Record<Accent, string> = {
+  mustard: 'border-b-2 border-b-mustard/20',
+  terracotta: 'border-b-2 border-b-terracotta/20',
+  olive: 'border-b-2 border-b-olive/20',
 }
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const
@@ -371,10 +376,10 @@ export default function ActionsMissionStrip({
   return (
     <section
       className={cn(
-        'relative overflow-hidden border-t border-line/50 bg-gradient-to-b from-cream via-bone-warm to-bone px-6 md:px-12',
+        'relative overflow-hidden px-6 md:px-12',
         isLead
-          ? 'pt-20 pb-6 md:pt-32 md:pb-16'
-          : 'py-20 md:py-28',
+          ? 'border-t border-line/50 bg-bone pt-20 pb-6 md:pt-32 md:pb-16'
+          : 'border-t border-line/50 bg-gradient-to-b from-cream via-bone-warm to-bone py-20 md:py-28',
       )}
     >
       {/* warm radial accent behind pillars (very soft) */}
@@ -522,6 +527,7 @@ export default function ActionsMissionStrip({
               className={cn(
                 'group relative overflow-hidden rounded-[4px] border border-line/40 transition-shadow duration-300 hover:shadow-[0_10px_40px_-15px_rgba(0,0,0,0.18)]',
                 cardBg[pillar.accent],
+                cardBottomBorder[pillar.accent],
                 isLead
                   ? 'flex flex-row items-start gap-3 border-l-[3px] border-l-transparent p-4 md:flex-col md:gap-5 md:border-l-0 md:p-7'
                   : 'flex flex-col gap-5 p-8',
@@ -575,7 +581,7 @@ export default function ActionsMissionStrip({
                   className={cn(
                     'font-serif leading-snug tracking-tight',
                     accentText[pillar.accent],
-                    isLead ? 'text-[20px] md:text-[26px]' : 'text-[26px]',
+                    isLead ? 'text-[20px] md:text-[28px]' : 'text-[28px]',
                   )}
                 >
                   {pillar.title}
@@ -594,11 +600,11 @@ export default function ActionsMissionStrip({
         </div>
 
         {/* stats */}
-        <div className={isLead ? 'mt-6 md:mt-12' : 'mt-16 md:mt-20'}>
+        <div className={isLead ? 'mt-6 md:mt-10' : 'mt-16 md:mt-20'}>
           <div
             className={cn(
               'mx-auto h-px w-12 bg-terracotta/50',
-              isLead ? 'mb-5 md:mb-8' : 'mb-12',
+              isLead ? 'mb-5 md:mb-6' : 'mb-12',
             )}
             aria-hidden
           />

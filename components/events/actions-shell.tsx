@@ -43,7 +43,6 @@ export default function ActionsShell({
         <UpcomingSection
           events={restUpcoming}
           activeCategory={activeCategory}
-          proposeHref={proposeHref}
         />
       )}
     </>

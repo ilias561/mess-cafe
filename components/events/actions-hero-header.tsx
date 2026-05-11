@@ -14,11 +14,14 @@ type Props = {
 
 const heroWords = 'Περισσότερο από έναν καφέ.'.split(' ')
 
+const KEEP_RISING_STRIP =
+  'ΚΑΘΑΡΟ ΦΑΓΗΤΟ ΓΙΑ ΟΣΟΥΣ ΤΟ ΧΡΕΙΑΖΟΝΤΑΙ · ΜΠΑΖΑΡ ΑΛΛΗΛΕΓΓΥΗΣ · ΑΝΟΙΧΤΕΣ ΠΟΡΤΕΣ ΓΙΑ ΚΑΘΕ ΗΛΙΚΙΑ · WORKSHOPS & ΠΟΛΙΤΙΣΜΟΣ · #KEEPRISING'
+
 export default function ActionsHeroHeader({ nextEvent }: Props) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section className="bg-bone px-6 pt-24 pb-6 md:px-12 md:pt-40 md:pb-16">
+    <section className="bg-bone px-6 pt-24 pb-6 md:px-12 md:pt-40 md:pb-10">
       <div className="mx-auto max-w-[1200px]">
         <div className="max-w-[40rem] text-center md:text-left">
           <motion.p
@@ -42,7 +45,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                     viewport={fadeUp.viewport}
                     transition={{
                       ...(fadeUp.transition ?? {}),
-                      delay: (fadeUp.transition?.delay ?? 0) + i * 0.05,
+                      delay: i * 0.05,
                     }}
                   >
                     {word}
@@ -53,13 +56,20 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
             ))}
           </motion.h1>
 
-          <motion.p
-            {...fadeUpDelayed(0.08)}
-            className="mt-5 max-w-[46ch] font-sans text-[15px] leading-[1.65] text-concrete md:text-[16px]"
-          >
-            Workshops, μουσικές βραδιές, πολιτιστικά ραντεβού και συνεργασίες που κρατούν τον
-            χώρο μας ανοιχτό στην κοινότητα.
-          </motion.p>
+          <motion.div {...fadeUpDelayed(0.08)} className="mt-5">
+            {prefersReducedMotion ? (
+              <p className="text-center font-sans text-[11px] uppercase tracking-[0.18em] text-olive/70 md:text-left">
+                {KEEP_RISING_STRIP}
+              </p>
+            ) : (
+              <div className="-mx-6 overflow-hidden md:-mx-12">
+                <div className="marquee-track flex w-max font-sans text-[11px] uppercase tracking-[0.18em] text-olive/70">
+                  <span className="inline-flex shrink-0 items-center px-8">{KEEP_RISING_STRIP}</span>
+                  <span className="inline-flex shrink-0 items-center px-8">{KEEP_RISING_STRIP}</span>
+                </div>
+              </div>
+            )}
+          </motion.div>
 
           {nextEvent && (
             <motion.div {...fadeUpDelayed(0.11)} className="mt-5">
@@ -82,4 +92,3 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
     </section>
   )
 }
-
