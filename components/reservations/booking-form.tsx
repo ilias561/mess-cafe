@@ -203,7 +203,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ui-interactive rounded-full bg-mustard px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
+            className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? 'Αποστολή...' : 'Στείλε κράτηση'}
           </button>

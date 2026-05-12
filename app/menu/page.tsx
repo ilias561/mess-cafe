@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   title: 'Menu — M.E.S.S. · Specialty Coffee & Healthy Brunch Ιωάννινα',
   description:
     'Φαγητό ως φάρμακο. Specialty καφές, poke bowls, brunch, smoothies και γλυκά χωρίς ζάχαρη. Όλες οι τιμές.',
+  openGraph: {
+    title: 'Menu — M.E.S.S. · Specialty Coffee & Healthy Brunch Ιωάννινα',
+    description:
+      'Φαγητό ως φάρμακο. Specialty καφές, poke bowls, brunch, smoothies και γλυκά χωρίς ζάχαρη. Όλες οι τιμές.',
+    locale: 'el_GR',
+    type: 'website',
+  },
 }
 
 const PHILOSOPHY_INDEX = 3
@@ -37,9 +44,9 @@ export default function MenuPage() {
       ))}
 
       {/* Philosophy callout between Salads and Coffee */}
-      <section className="bg-olive px-6 py-32 md:px-12">
+      <section className="bg-olive px-6 py-24 md:px-12 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-serif text-[clamp(24px,4vw,40px)] leading-snug tracking-tight text-bone">
+          <p className="font-serif text-[clamp(24px,3.5vw,36px)] leading-snug tracking-tight text-bone">
             &ldquo;Το MESS δημιουργήθηκε για να προάγει ένα πιο υγιές lifestyle — με κεντρικό άξονα την δημιουργικότητα, την πρωτοβουλία και την δικτύωση.&rdquo;
           </p>
           <p className="mt-8 font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
@@ -57,14 +64,14 @@ export default function MenuPage() {
       ))}
 
       {/* CTA */}
-      <section className="border-t border-line/30 bg-bone px-6 py-24 text-center md:px-12">
+      <section className="border-t border-line/30 bg-bone px-6 py-24 text-center md:px-12 md:py-32">
         <p className="font-serif text-[clamp(24px,4vw,40px)] tracking-tight text-charcoal">
           Κάθε μέρα · {settings.hours?.[0]?.open ?? '08:00'} — {settings.hours?.[0]?.close ?? '22:00'}
         </p>
         <div className="mt-8">
           <Link
             href="/#map"
-            className="ui-interactive inline-block rounded-full bg-mustard px-8 py-4 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber"
+            className="ui-interactive inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber"
           >
             Βρες μας
           </Link>

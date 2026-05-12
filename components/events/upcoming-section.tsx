@@ -21,7 +21,7 @@ export default function UpcomingSection({ events, activeCategory }: Props) {
   return (
     <section
       id="upcoming"
-      className="bg-bone px-6 py-20 md:px-12 md:py-28"
+      className="bg-bone px-6 py-24 md:px-12 md:py-32"
     >
       <div className="mx-auto max-w-[1400px]">
 

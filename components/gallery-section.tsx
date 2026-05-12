@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -26,7 +26,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'a',
     src: images.gallery1,
-    videoSrc: videoSrcUrl('/videos/ai/0501.mp4'),
+    videoSrc: videoSrcUrl('/videos/main-page-animation.mp4'),
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',
@@ -142,23 +142,23 @@ function Lightbox({
   onClose,
   onPrev,
   onNext,
+  previouslyFocusedRef,
 }: {
   items: typeof galleryItems
   index: number
   onClose: () => void
   onPrev: () => void
   onNext: () => void
+  previouslyFocusedRef: RefObject<HTMLElement | null>
 }) {
   const item = items[index]
   const containerRef = useRef<HTMLDivElement>(null)
-  const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  // Focus close button on open; restore trigger element on close
   useEffect(() => {
-    const trigger = document.activeElement as HTMLElement | null
-    closeButtonRef.current?.focus()
-    return () => { trigger?.focus() }
-  }, [])
+    return () => {
+      previouslyFocusedRef.current?.focus()
+    }
+  }, [previouslyFocusedRef])
 
   // Keyboard: arrows + escape + tab trap
   useEffect(() => {
@@ -210,8 +210,8 @@ function Lightbox({
     >
       {/* Close */}
       <button
-        ref={closeButtonRef}
         type="button"
+        autoFocus
         onClick={onClose}
         aria-label="Κλείσιμο"
         className="ui-interactive absolute top-5 right-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
@@ -283,8 +283,12 @@ function Lightbox({
 /* ── Section ── */
 export default function GallerySection() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null)
 
-  const open = (i: number) => setLightboxIndex(i)
+  const open = (i: number) => {
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null
+    setLightboxIndex(i)
+  }
   const close = useCallback(() => setLightboxIndex(null), [])
   const prev = useCallback(
     () => setLightboxIndex((i) => (i === null ? null : (i - 1 + galleryItems.length) % galleryItems.length)),
@@ -380,6 +384,7 @@ export default function GallerySection() {
             onClose={close}
             onPrev={prev}
             onNext={next}
+            previouslyFocusedRef={previouslyFocusedRef}
           />
         )}
       </AnimatePresence>

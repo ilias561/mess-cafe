@@ -6,6 +6,7 @@ import { Instagram, Menu, Phone, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { PHONE_NUMBER } from '@/lib/constants'
 import { getOpenStatus } from '@/lib/hours'
 import { EASE, ease } from '@/lib/motion'
 
@@ -13,7 +14,6 @@ const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
 /** Single source for grep / copy consistency (desktop nav + mobile drawer CTA). */
 const RESERVATIONS_LABEL = 'Κράτηση για event' as const
-const SITE_PHONE_E164 = '+306945777808' as const
 
 const navLinks = [
   { label: 'Αρχική', href: '/', sectionId: null, isCta: false },
@@ -380,7 +380,7 @@ export default function Navigation() {
             <OpenBadge light={false} showText className="hidden min-[1200px]:flex" />
             <OpenBadge light={false} showText={false} className="flex min-[1200px]:hidden" />
             <a
-              href={`tel:${SITE_PHONE_E164}`}
+              href={`tel:${PHONE_NUMBER}`}
               aria-label="Κάλεσέ μας"
               className={`ui-interactive flex h-11 w-11 items-center justify-center rounded-full border hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
             >
@@ -514,7 +514,7 @@ export default function Navigation() {
               <div className="shrink-0 px-6 pt-5 pb-6">
                 <div className="grid grid-cols-2 gap-3">
                   <a
-                    href={`tel:${SITE_PHONE_E164}`}
+                    href={`tel:${PHONE_NUMBER}`}
                     className="ui-interactive flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-espresso px-3 font-sans text-[15px] font-medium text-espresso hover:border-espresso/80 active:border-mustard active:text-mustard"
                   >
                     <Phone className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden />
@@ -522,7 +522,7 @@ export default function Navigation() {
                   </a>
                   <Link
                     href="/reservations"
-                    className="ui-interactive flex h-12 min-h-[48px] items-center justify-center rounded-full bg-mustard px-3 text-center font-sans text-[15px] font-medium text-espresso hover:bg-amber"
+                    className="ui-interactive flex min-h-[48px] items-center justify-center rounded-full bg-mustard px-8 py-3.5 text-center font-sans text-sm font-medium text-espresso hover:bg-amber"
                     onClick={() => setMenuOpen(false)}
                   >
                     {RESERVATIONS_LABEL}

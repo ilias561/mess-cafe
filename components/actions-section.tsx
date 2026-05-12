@@ -16,7 +16,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   const hasMore = actionCards.length > MAX_VISIBLE
 
   return (
-    <section id="actions" className="scroll-mt-24 bg-bone px-6 py-16 md:px-12 md:py-24">
+    <section id="actions" className="scroll-mt-24 bg-bone px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <Reveal className="mb-10 max-w-[860px]">
           <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>

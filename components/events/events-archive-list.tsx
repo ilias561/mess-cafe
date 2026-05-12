@@ -14,7 +14,7 @@ export default function EventsArchiveList({ pastEvents }: Props) {
   }, new Date().getFullYear()) || 2023
 
   return (
-    <section className="bg-olive-deep px-6 py-20 text-bone md:px-12 md:py-28">
+    <section className="bg-olive-deep px-6 py-24 text-bone md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
 
         {/* Header row */}
@@ -60,7 +60,7 @@ export default function EventsArchiveList({ pastEvents }: Props) {
         {/* Footer link */}
         <div className="mt-8">
           <a
-            href="#"
+            href="/actions"
             className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard transition-opacity hover:opacity-70"
           >
             ΠΕΡΙΣΣΟΤΕΡΑ →

@@ -185,7 +185,7 @@ export default function AboutUsSection() {
           <div>
             <div className="relative aspect-video w-full overflow-hidden">
               <AmbientVideo
-                srcs={[videoSrc('/videos/ai/first.mp4'), videoSrc('/videos/ai/second.mp4')]}
+                src={videoSrc('/videos/main-page-animation.mp4')}
                 className="absolute inset-0 h-full w-full object-cover"
                 style={{ objectPosition: '50% 30%' }}
                 ariaLabel="Βίντεο από τον χώρο του M.E.S.S."
@@ -210,7 +210,7 @@ export default function AboutUsSection() {
           {messPillars.map((pillar, idx) => (
             <Reveal.Item
               key={`${pillar.letter}-${pillar.word}-${idx}`}
-              className="flex flex-col gap-4 rounded-[3px] border border-line/40 bg-bone-warm p-6 transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:shadow-sm"
+              className="flex flex-col gap-4 rounded-[3px] border border-line/40 bg-bone-warm p-6 shadow-sm transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-[2px] hover:shadow-md"
             >
               <p
                 className="font-serif leading-none tracking-tight text-mustard"

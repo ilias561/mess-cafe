@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
+import { PHONE_NUMBER } from '@/lib/constants'
 import AnchorScroll from '@/components/anchor-scroll'
 import NewsletterPopup from '@/components/newsletter-popup'
 import PageLoader from '@/components/page-loader'
@@ -76,7 +77,7 @@ const jsonLd = {
     latitude: 39.6624739,
     longitude: 20.8602479,
   },
-  telephone: '+306945777808',
+  telephone: PHONE_NUMBER,
   email: 'info@messcafe.gr',
   openingHoursSpecification: [
     {

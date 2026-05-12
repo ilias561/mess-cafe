@@ -7,73 +7,9 @@ import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
 import { frameSrc, videoSrc } from '@/lib/media'
 
-/* ── Botanical corner decoration (desktop hero) ── */
-function BotanicalCorner() {
-  return (
-    <svg
-      width="180"
-      height="180"
-      viewBox="0 0 180 180"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Main stem: lower-left to upper-right */}
-      <path
-        d="M18 162 C32 138 52 112 72 90 C92 68 118 46 158 20"
-        stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.55"
-      />
-      {/* Branch stem */}
-      <path
-        d="M28 142 C40 126 54 116 66 102"
-        stroke="currentColor" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.38"
-      />
-      {/* Large leaf — lower (points outward) */}
-      <path
-        d="M66 102 C48 84 22 76 6 58 C20 65 42 72 62 90 Z"
-        fill="currentColor" opacity="0.52"
-      />
-      <path d="M66 102 C48 86 30 78 12 66" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.26"/>
-      {/* Large leaf — upper (points outward) */}
-      <path
-        d="M118 46 C124 24 146 10 168 6 C154 20 136 30 120 48 Z"
-        fill="currentColor" opacity="0.56"
-      />
-      <path d="M118 46 C132 28 148 16 165 8" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.26"/>
-      {/* Medium leaf — center-lower */}
-      <path
-        d="M86 70 C72 52 54 42 36 40 C50 46 68 56 84 72 Z"
-        fill="currentColor" opacity="0.44"
-      />
-      {/* Medium leaf — center-upper */}
-      <path
-        d="M140 32 C148 16 162 8 174 4 C164 16 152 22 138 34 Z"
-        fill="currentColor" opacity="0.44"
-      />
-      {/* Small leaf — low edge */}
-      <path
-        d="M46 120 C30 112 14 96 10 78 C22 88 34 102 48 116 Z"
-        fill="currentColor" opacity="0.36"
-      />
-      {/* Tiny accent near tip */}
-      <path
-        d="M150 26 C156 14 166 6 176 2 C168 12 158 18 148 28 Z"
-        fill="currentColor" opacity="0.40"
-      />
-      {/* Berry cluster at stem tip */}
-      <circle cx="158" cy="20" r="2.5" fill="currentColor" opacity="0.45"/>
-      <circle cx="150" cy="14" r="1.8" fill="currentColor" opacity="0.38"/>
-      <circle cx="164" cy="14" r="1.5" fill="currentColor" opacity="0.32"/>
-      <circle cx="168" cy="22" r="1.2" fill="currentColor" opacity="0.28"/>
-      {/* Accent dots */}
-      <circle cx="90" cy="68" r="1.5" fill="currentColor" opacity="0.28"/>
-      <circle cx="68" cy="100" r="1.2" fill="currentColor" opacity="0.25"/>
-    </svg>
-  )
-}
-
 export default function Hero() {
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
+  const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
 
   const [loaderReady, setLoaderReady] = useState(false)
   const prefersReducedMotion = useReducedMotion()
@@ -102,12 +38,23 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
+    if (!loaderReady) return
+    const video = desktopVideoRef.current
+    if (!video) return
+    video.playbackRate = 2.5
+    video.play().catch(() => {
+      video.muted = true
+      video.play().catch(() => {})
+    })
+  }, [loaderReady])
+
+  useEffect(() => {
     // Gate playback to loader completion so video never starts behind the curtain.
     if (!loaderReady) return
     const video = mobileVideoRef.current
     if (!video) return
 
-    // With preload="metadata", start fetching after critical render path.
+    video.playbackRate = 2
     video.load()
 
     const tryPlay = () => {
@@ -152,7 +99,7 @@ export default function Hero() {
   return (
     <>
 
-    {/* ── DESKTOP hero: text left · botanical video right ── */}
+    {/* ── DESKTOP hero: text left · decorated video right ── */}
     <section
       id="hero"
       className="hidden md:flex min-h-screen bg-bone items-center overflow-hidden"
@@ -162,7 +109,7 @@ export default function Hero() {
         initial={{ opacity: 0, x: -24 }}
         animate={loaderReady ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.8, ease: EASE }}
-        className="relative z-10 flex w-[38%] shrink-0 flex-col justify-center px-12 lg:px-16 xl:px-20 py-28"
+        className="relative z-10 flex w-[42%] shrink-0 flex-col justify-center px-12 lg:px-16 xl:px-20 py-28"
       >
         <p className="font-sans text-[11px] tracking-[0.2em] text-charcoal/40 uppercase">
           SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
@@ -176,7 +123,7 @@ export default function Hero() {
                   className="inline-block"
                   initial={{ y: '100%', opacity: 0 }}
                   animate={loaderReady ? { y: 0, opacity: 1 } : {}}
-                  transition={{ delay: i * 0.07, duration: 0.85, ease: EASE }}
+                  transition={{ delay: i * 0.12, duration: 1.0, ease: EASE }}
                 >
                   {word}
                 </motion.span>
@@ -189,7 +136,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.75, ease: EASE }}
+          transition={{ delay: 1.0, duration: 0.9, ease: EASE }}
           className="mt-8 max-w-[420px]"
         >
           <p className="font-sans text-[16px] leading-relaxed text-charcoal/70">
@@ -203,7 +150,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.65, duration: 0.65, ease: EASE }}
+          transition={{ delay: 1.8, duration: 0.8, ease: EASE }}
           className="mt-8 flex flex-wrap items-center gap-5"
         >
           <Link
@@ -222,44 +169,56 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* ── RIGHT: botanical-framed video ── */}
+      {/* ── RIGHT: decorated video showcase ── */}
       <motion.div
         initial={{ opacity: 0, x: 32 }}
         animate={loaderReady ? { opacity: 1, x: 0 } : {}}
         transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
-        className="relative flex-1 self-stretch flex items-center justify-center py-16 pr-10 lg:pr-14"
+        className="relative flex-1 self-stretch flex items-center justify-center py-12 pr-10 lg:pr-14"
       >
-        {/* Video frame */}
-        <div className="relative w-full h-full max-h-[85vh] overflow-hidden rounded-[2px] border border-charcoal/10">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src={videoSrc('/videos/main-page-animation.mp4')}
-            poster={videoSrc('/videos/hero-animation-poster.jpg')}
-            className="h-full w-full object-cover"
-            aria-hidden
-          />
+        {/* Decorative accent — mustard corner lines */}
+        <div className="pointer-events-none absolute top-8 right-6 w-24 h-24 border-t-2 border-r-2 border-mustard/30 rounded-tr-sm" aria-hidden="true" />
+        <div className="pointer-events-none absolute bottom-8 left-0 w-24 h-24 border-b-2 border-l-2 border-mustard/30 rounded-bl-sm" aria-hidden="true" />
+
+        {/* Decorative accent — olive dot cluster */}
+        <div className="pointer-events-none absolute top-16 left-4" aria-hidden="true">
+          <div className="w-2 h-2 rounded-full bg-olive/20" />
+          <div className="w-1.5 h-1.5 rounded-full bg-olive/15 mt-2 ml-3" />
+          <div className="w-1 h-1 rounded-full bg-olive/10 mt-1.5 ml-1" />
         </div>
 
-        {/* ── Botanical corner plants ── */}
-        {/* top-left */}
-        <div className="pointer-events-none absolute top-0 left-0 text-olive" aria-hidden>
-          <BotanicalCorner />
+        {/* Decorative accent — thin vertical line */}
+        <div className="pointer-events-none absolute top-20 bottom-20 left-0 w-px bg-gradient-to-b from-transparent via-charcoal/8 to-transparent" aria-hidden="true" />
+
+        {/* Video container with shadow and subtle border */}
+        <div className="relative w-full max-w-[820px] xl:max-w-[920px] rounded-sm overflow-hidden shadow-2xl shadow-charcoal/15 ring-1 ring-charcoal/8">
+          {/* Subtle inner glow overlay */}
+          <div className="pointer-events-none absolute inset-0 z-10 rounded-sm ring-1 ring-inset ring-white/10" />
+
+          <video
+            ref={desktopVideoRef}
+            muted
+            playsInline
+            preload="metadata"
+            poster={videoSrc('/videos/hero-desktop-poster.jpg')}
+            className="w-full h-auto block"
+            aria-hidden="true"
+            title="M.E.S.S. — Ο χώρος μας"
+          >
+            <source src={videoSrc('/videos/main-page-animation.mp4')} type="video/mp4" />
+          </video>
         </div>
-        {/* top-right (mirror X) */}
-        <div className="pointer-events-none absolute top-0 right-0 text-olive [transform:scaleX(-1)]" aria-hidden>
-          <BotanicalCorner />
-        </div>
-        {/* bottom-left (mirror Y) */}
-        <div className="pointer-events-none absolute bottom-0 left-0 text-olive [transform:scaleY(-1)]" aria-hidden>
-          <BotanicalCorner />
-        </div>
-        {/* bottom-right (mirror both) */}
-        <div className="pointer-events-none absolute bottom-0 right-0 text-olive [transform:scale(-1,-1)]" aria-hidden>
-          <BotanicalCorner />
-        </div>
+
+        {/* Decorative label below video */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={loaderReady ? { opacity: 1 } : {}}
+          transition={{ delay: 1.2, duration: 0.8, ease: EASE }}
+          className="absolute bottom-6 right-12 font-sans text-[10px] tracking-[0.25em] text-charcoal/25 uppercase"
+          aria-hidden="true"
+        >
+          Ioannina &middot; est. 2024
+        </motion.p>
       </motion.div>
 
     </section>
@@ -278,14 +237,14 @@ export default function Hero() {
         }
       >
         <img
-          src={frameSrc(0, { mobile: true })}
+          src={videoSrc('/videos/hero-mobile-poster.jpg')}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <video
           ref={mobileVideoRef}
-          poster={frameSrc(1, { mobile: true })}
+          poster={videoSrc('/videos/hero-mobile-poster.jpg')}
           muted
           playsInline
           controls={false}
@@ -293,7 +252,8 @@ export default function Hero() {
           disableRemotePlayback
           preload="metadata"
           aria-hidden="true"
-          className="absolute inset-0 z-0 h-full w-full object-cover [transform:translateZ(0)]"
+          title="M.E.S.S. — Ο χώρος μας"
+          className="absolute inset-0 z-0 h-full w-full object-cover object-center [transform:translateZ(0)]"
           style={{ willChange: 'transform' }}
           onEnded={() => {
             if (process.env.NODE_ENV === 'development') {
@@ -311,14 +271,14 @@ export default function Hero() {
       <div className="relative z-10 flex h-full min-h-0 flex-col px-8 pb-10">
         <div className="max-w-[540px] shrink-0 pt-14">
           <motion.p
-            {...reveal(0, 600)}
+            {...reveal(0, 800)}
             className="hero-text-shadow font-sans text-[11px] tracking-[0.2em] text-white/75"
           >
             SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
           </motion.p>
 
           <motion.h1
-            {...reveal(200, 800)}
+            {...reveal(300, 900)}
             className="hero-headline hero-text-shadow-display mt-3 max-w-[700px] font-serif tracking-tight text-balance text-white"
           >
             {heroWords.map((word, i) => (
@@ -334,20 +294,20 @@ export default function Hero() {
 
         <div className="mt-auto max-w-[540px] min-h-0 pt-6">
           <motion.p
-            {...reveal(900, 700)}
+            {...reveal(1100, 800)}
             className="hero-text-shadow font-sans text-[16px] leading-relaxed text-white/90"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </motion.p>
           <motion.p
-            {...reveal(1050, 700)}
+            {...reveal(1400, 800)}
             className="hero-text-shadow mt-3 font-sans text-[14px] leading-loose text-white/65"
           >
             {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
           </motion.p>
 
           <div className="mt-7 flex flex-wrap items-center gap-5">
-            <motion.div {...reveal(1500, 600)}>
+            <motion.div {...reveal(1800, 700)}>
               <Link
                 href="/menu"
                 className="hero-text-shadow inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-[background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber active:scale-[0.98]"
@@ -355,7 +315,7 @@ export default function Hero() {
                 {'Δες το menu'}
               </Link>
             </motion.div>
-            <motion.div {...reveal(1600, 600)}>
+            <motion.div {...reveal(1900, 700)}>
               <Link
                 href="/#map"
                 className="ui-link hero-text-shadow relative inline-block font-sans text-sm font-medium text-white"

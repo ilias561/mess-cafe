@@ -17,7 +17,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
   const waPhone = settings.whatsapp.replace(/[^\d]/g, '')
 
   return (
-    <section className="bg-bone-warm px-6 py-20 md:px-12 md:py-28">
+    <section className="bg-bone-warm px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-[18px] md:grid-cols-[1fr_1.05fr] md:items-center">
 

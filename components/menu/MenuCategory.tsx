@@ -57,7 +57,7 @@ export default function MenuCategory({
   }
 
   return (
-    <section id={category.id} className={`scroll-mt-28 ${bg} px-6 py-20 md:px-12 md:py-28`}>
+    <section id={category.id} className={`scroll-mt-28 ${bg} px-6 py-24 md:px-12 md:py-32`}>
       <div className="mx-auto max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}
@@ -66,7 +66,7 @@ export default function MenuCategory({
           transition={{ duration: 0.75, ease: EASE }}
           className="mb-12"
         >
-          <p className="mb-2 font-sans text-[11px] uppercase tracking-[0.22em] text-olive">
+          <p className="mb-2 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
             {category.title}
           </p>
           <h2 className="font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-charcoal">

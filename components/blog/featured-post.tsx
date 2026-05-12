@@ -17,7 +17,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
   return (
     <motion.section
       {...fadeUp}
-      className="relative -mx-6 bg-olive-deep px-6 py-20 text-bone md:-mx-12 md:px-12 md:py-28"
+      className="relative -mx-6 bg-olive-deep px-6 py-24 text-bone md:-mx-12 md:px-12 md:py-32"
     >
       <Link
         href={`/blog/${post.slug}`}

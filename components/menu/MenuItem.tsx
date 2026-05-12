@@ -18,7 +18,7 @@ export default function MenuItem({ item, index }: { item: MenuItemType; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.55, ease: EASE, delay: index * 0.04 }}
-      className="group border-b border-charcoal/10 py-5 transition-colors hover:bg-bone-warm/40 md:grid md:grid-cols-[minmax(0,1fr)_240px] md:gap-8"
+      className={`group py-5 transition-colors hover:bg-bone-warm/40 md:grid md:grid-cols-[minmax(0,1fr)_240px] md:gap-8 ${index > 0 ? 'border-t border-charcoal/5' : ''}`}
     >
       <div className="min-w-0">
         <div className="flex items-end">

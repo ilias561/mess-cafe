@@ -84,8 +84,8 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
         </motion.div>
 
         {hasMore ? (
-          <section className="-mx-6 mt-20 bg-mustard px-6 py-20 text-center md:-mx-12 md:px-12 md:py-28">
-            <p className="font-sans text-[12px] uppercase tracking-[0.2em] text-charcoal/70">Ακόμα πιο πολλά</p>
+          <section className="-mx-6 mt-20 bg-mustard px-6 py-24 text-center md:-mx-12 md:px-12 md:py-32">
+            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal/70">Ακόμα πιο πολλά</p>
             <button
               type="button"
               onClick={() => setVisibleCount((current) => current + 6)}

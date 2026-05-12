@@ -11,6 +11,15 @@ import { getSettings } from '@/lib/settings'
 
 export const metadata: Metadata = {
   title: 'Κράτηση για event — M.E.S.S.',
+  description:
+    'Συμπλήρωσε τη φόρμα για να οργανώσουμε μαζί workshop, μουσική βραδιά, ιδιωτικό event ή παρουσίαση.',
+  openGraph: {
+    title: 'Κράτηση για event — M.E.S.S.',
+    description:
+      'Συμπλήρωσε τη φόρμα για να οργανώσουμε μαζί workshop, μουσική βραδιά, ιδιωτικό event ή παρουσίαση.',
+    locale: 'el_GR',
+    type: 'website',
+  },
 }
 
 export default function ReservationsPage() {

@@ -28,12 +28,12 @@ function Strip({ stripId }: { stripId: string }) {
 
 export default function MarqueeStrip() {
   return (
-    <section
-      aria-hidden
-      className="flex h-[80px] items-center overflow-hidden border-y border-olive-deep bg-olive text-bone"
-    >
+    <section className="flex h-[80px] items-center overflow-hidden border-y border-olive-deep bg-olive text-bone">
       <Reveal className="flex min-h-0 min-w-0 flex-1 items-center overflow-hidden">
-        <div className="marquee-track flex w-max">
+        <span className="sr-only">
+          Specialty coffee, healthy brunch, poke bowls, smoothies, και περισσότερα στο M.E.S.S. Ιωάννινα
+        </span>
+        <div className="marquee-track flex w-max" aria-hidden>
           <Strip stripId="a" />
           <Strip stripId="b" />
         </div>

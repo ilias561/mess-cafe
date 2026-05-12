@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
     title: `${event.title} — Δράσεις | M.E.S.S.`,
     description: event.description,
     alternates: {
-      canonical: `/actions/${event.slug}`,
+      canonical: `https://mess-cafe.gr/actions/${event.slug}`,
     },
     openGraph: {
       title: `${event.title} — Δράσεις | M.E.S.S.`,

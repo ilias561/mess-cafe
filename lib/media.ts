@@ -1,7 +1,8 @@
 const BASE = process.env.NEXT_PUBLIC_VIDEO_BASE_URL ?? ''
+const CACHE_BUST = 'v=20260512'
 
 export function videoSrc(path: string): string {
-  return `${BASE}${path}`
+  return `${BASE}${path}?${CACHE_BUST}`
 }
 
 type FrameSrcOptions = {

@@ -89,7 +89,7 @@ export default function MenuPreview() {
           </div>
         </Reveal>
 
-        <Reveal asGroup className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        <Reveal asGroup className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-3">
           {items.map((item) => (
             <Reveal.Item key={item.name}>
               <Link href={`/menu#${item.catId}`} className="block w-full text-inherit no-underline">

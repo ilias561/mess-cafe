@@ -134,7 +134,7 @@ export default function GoalsSection() {
           <Reveal className="mt-10">
             <Link
               href="/actions"
-              className="ui-interactive inline-flex items-center gap-2.5 rounded-full bg-mustard px-10 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:bg-amber hover:shadow-lg"
+              className="ui-interactive inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:bg-amber hover:shadow-lg"
             >
               Δες τις δράσεις μας
               <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.5" aria-hidden>

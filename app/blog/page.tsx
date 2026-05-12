@@ -26,9 +26,9 @@ export default function BlogPage() {
       <Navigation />
 
       {/* Page header */}
-      <section className="px-6 pb-0 pt-36 md:px-12 md:pt-44">
+      <section className="px-6 pb-0 pt-32 md:px-12 md:pt-40">
         <div className="mx-auto max-w-[1400px]">
-          <p className="font-sans text-[12px] font-medium uppercase tracking-wider text-mustard [font-variant-caps:small-caps]">
+          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
             Blog
           </p>
           <h1 className="mt-5 max-w-[20ch] font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
@@ -38,7 +38,7 @@ export default function BlogPage() {
       </section>
 
       {/* Tag filter + grid */}
-      <section className="mt-16 px-6 pb-24 md:px-12 md:pb-32">
+      <section className="mt-8 px-6 pb-24 md:px-12 md:pb-32">
         <BlogTagFilter posts={posts} />
       </section>
 

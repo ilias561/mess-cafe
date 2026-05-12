@@ -396,7 +396,7 @@ export default function ActionsMissionStrip({
         'relative overflow-hidden px-6 md:px-12',
         isLead
           ? 'border-t border-line/50 bg-bone pt-20 pb-6 md:pt-32 md:pb-16'
-          : 'border-t border-line/50 bg-gradient-to-b from-cream via-bone-warm to-bone py-20 md:py-28',
+          : 'border-t border-line/50 bg-gradient-to-b from-cream via-bone-warm to-bone py-24 md:py-32',
       )}
     >
       {/* warm radial accent behind pillars (very soft) */}

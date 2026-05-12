@@ -82,7 +82,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
         {/* Subtle ambient background */}
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <AmbientVideo
-            src={videoSrc('/videos/ai/hf-1.mp4')}
+            src={videoSrc('/videos/main-page-animation.mp4')}
             className="h-full w-full object-cover opacity-[0.16] md:opacity-[0.08]"
           />
           <div className="absolute inset-0 bg-bone/55 md:bg-bone/70" />

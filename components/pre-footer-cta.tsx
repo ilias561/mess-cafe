@@ -58,7 +58,7 @@ export default function PreFooterCta({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5, ease: EASE }}
-          className={`font-sans text-[11px] uppercase tracking-[0.22em] ${s.eyebrow}`}
+          className={`font-sans text-[11px] uppercase tracking-[0.2em] ${s.eyebrow}`}
         >
           {eyebrow}
         </motion.p>
@@ -91,14 +91,14 @@ export default function PreFooterCta({
         >
           <Link
             href={primaryHref}
-            className={`ui-interactive rounded-full px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] ${s.primary}`}
+            className={`ui-interactive rounded-full px-8 py-3.5 font-sans text-sm font-medium ${s.primary}`}
           >
             {primaryLabel}
           </Link>
           {secondaryLabel && secondaryHref && (
             <Link
               href={secondaryHref}
-              className={`ui-interactive rounded-full border px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] ${s.secondary}`}
+              className={`ui-interactive rounded-full border px-8 py-3.5 font-sans text-sm font-medium ${s.secondary}`}
             >
               {secondaryLabel}
             </Link>

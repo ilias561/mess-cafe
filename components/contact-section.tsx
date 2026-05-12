@@ -5,7 +5,7 @@ import { submitContact } from '@/lib/contact/submit'
 import { Reveal } from '@/components/reveal'
 
 const INPUT_BASE =
-  'ui-field w-full rounded-[3px] border border-bone/20 bg-white/5 px-4 py-3.5 font-sans text-[15px] text-bone placeholder:text-bone/35 focus:outline-none'
+  'ui-field w-full rounded-[3px] border border-bone/20 bg-white/5 px-4 py-3.5 font-sans text-[15px] text-bone placeholder:text-charcoal/30 focus:outline-none'
 
 export default function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -131,7 +131,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:bg-amber hover:shadow-lg disabled:opacity-70"
+                    className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:bg-amber hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {sending ? 'Αποστολή...' : 'Στείλε μήνυμα'}
                   </button>

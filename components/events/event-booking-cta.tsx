@@ -17,7 +17,7 @@ export default function EventBookingCta({ event }: EventBookingCtaProps) {
   const whatsappHref = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 
   return (
-    <section className="bg-olive px-6 py-20 md:px-12 md:py-24">
+    <section className="bg-olive px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">ΚΡΑΤΗΣΕΙΣ</p>
         <h2 className="mt-4 max-w-[18ch] font-serif text-[clamp(30px,4.2vw,52px)] leading-[1.05] tracking-[-0.02em] text-bone">
@@ -29,7 +29,7 @@ export default function EventBookingCta({ event }: EventBookingCtaProps) {
         <div className="mt-8 flex flex-wrap gap-4">
           <Link
             href={`/reservations?event=${event.slug}`}
-            className="ui-interactive rounded-full bg-mustard px-8 py-4 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:shadow-lg hover:bg-amber"
+            className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber"
           >
             Κράτησε θέση
           </Link>

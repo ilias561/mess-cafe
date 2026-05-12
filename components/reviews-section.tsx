@@ -184,8 +184,8 @@ function ReviewsTrack() {
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#f5f5f0] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#f5f5f0] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-bone-warm to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-bone-warm to-transparent" />
       <Reveal
         asGroup
         ref={wrapperRef}
@@ -205,7 +205,7 @@ function ReviewsTrack() {
 
 export default function ReviewsSection() {
   return (
-    <section id="reviews" className="scroll-mt-28 bg-[#f5f5f0] py-20">
+    <section id="reviews" className="scroll-mt-28 bg-bone-warm py-24 md:py-32">
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">

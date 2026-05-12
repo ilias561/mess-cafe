@@ -30,7 +30,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
       <div className="px-6 py-6 md:px-8 md:py-8">
         {/* Eyebrow + meta row */}
         <div className="flex items-center justify-between gap-3">
-          <p className="font-sans text-[12px] font-medium uppercase tracking-wider text-mustard [font-variant-caps:small-caps]">
+          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
             {post.categoryLabel}
           </p>
           <p className="shrink-0 font-sans text-[12px] text-concrete">

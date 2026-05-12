@@ -17,6 +17,12 @@ import { getSettings } from '@/lib/settings'
 export const metadata: Metadata = {
   title: 'Δράσεις — M.E.S.S. | Workshops, μουσική και πολιτισμός',
   description: 'Όλες οι επόμενες και προηγούμενες δράσεις του M.E.S.S. σε μία ενιαία σελίδα.',
+  openGraph: {
+    title: 'Δράσεις — M.E.S.S. | Workshops, μουσική και πολιτισμός',
+    description: 'Όλες οι επόμενες και προηγούμενες δράσεις του M.E.S.S. σε μία ενιαία σελίδα.',
+    locale: 'el_GR',
+    type: 'website',
+  },
 }
 
 export default function ActionsPage() {

@@ -188,7 +188,7 @@ export default function NewsletterPopup() {
                 <button
                   type="submit"
                   disabled={shouldDisable}
-                  className="ui-interactive rounded-full bg-mustard px-6 py-2.5 font-sans text-[13px] font-medium text-charcoal hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+                  className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
                 </button>
