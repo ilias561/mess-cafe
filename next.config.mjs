@@ -15,7 +15,7 @@ const nextConfig = {
       },
     ],
   },
-  // rewrites() is incompatible with output:'export' — admin routing handled by netlify.toml/_redirects
+  // rewrites() is incompatible with output:'export' — deploy static `out/` to Cloudflare Pages (see wrangler.toml)
 }
 
 export default nextConfig

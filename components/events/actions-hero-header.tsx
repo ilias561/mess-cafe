@@ -18,7 +18,7 @@ type Props = {
   nextEvent: Event | null
 }
 
-const heroWords = 'Περισσότερο από έναν καφέ.'.split(' ')
+const heroWords = '#KeepRising.'.split(' ')
 
 const KEEP_RISING_STRIP =
   'ΚΑΘΑΡΟ ΦΑΓΗΤΟ ΓΙΑ ΟΣΟΥΣ ΤΟ ΧΡΕΙΑΖΟΝΤΑΙ · ΜΠΑΖΑΡ ΑΛΛΗΛΕΓΓΥΗΣ · ΑΝΟΙΧΤΕΣ ΠΟΡΤΕΣ ΓΙΑ ΚΑΘΕ ΗΛΙΚΙΑ · WORKSHOPS & ΠΟΛΙΤΙΣΜΟΣ · #KEEPRISING'
@@ -150,7 +150,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
             className="font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal/60"
           >
             <span className="inline-block -rotate-[1.5deg] rounded-[2px] border border-dashed border-concrete/40 px-2.5 py-1">
-              SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
+              ΚΟΙΝΟΤΗΤΑ &mdash; ΑΛΛΗΛΕΓΓΥΗ &mdash; ΠΟΛΙΤΙΣΜΟΣ &middot; IOANNINA
             </span>
           </motion.p>
 

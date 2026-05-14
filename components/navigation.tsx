@@ -19,7 +19,7 @@ const navLinks = [
   { label: 'Αρχική', href: '/', sectionId: null, isCta: false },
   { label: 'Ποιοι είμαστε', href: '/#about-us', sectionId: 'about-us', isCta: false },
   { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
-  { label: 'Οι δράσεις μας', href: '/actions', sectionId: null, isCta: false },
+  { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
   { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
   { label: RESERVATIONS_LABEL, href: '/reservations', sectionId: null, isCta: true },
   { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
@@ -429,7 +429,7 @@ export default function Navigation() {
               role="dialog"
               aria-modal="true"
               aria-label="Κύριο μενού"
-              className="absolute top-0 right-0 flex h-full w-[88vw] max-w-[360px] flex-col overflow-y-auto bg-bone-warm shadow-[-16px_0_48px_rgba(42,29,20,0.14)]"
+              className="absolute top-0 right-0 flex h-full w-[min(88vw,360px)] flex-col overflow-y-auto bg-bone-warm shadow-[-16px_0_48px_rgba(42,29,20,0.14)]"
               drag={reduceMotion ? false : 'x'}
               dragConstraints={{ left: 0, right: 260 }}
               dragElastic={reduceMotion ? undefined : { left: 0, right: 0.35 }}
@@ -493,7 +493,7 @@ export default function Navigation() {
                             setMenuOpen(false)
                           }}
                           aria-current={isActive ? 'page' : undefined}
-                          className={`ui-link relative -mx-6 block py-3.5 pr-6 font-sans text-[22px] font-medium leading-[1.4] tracking-normal text-espresso [font-family:var(--font-inter),ui-sans-serif,system-ui,sans-serif] active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
+                          className={`ui-link relative -mx-6 block py-3.5 pr-6 font-sans text-[clamp(18px,5vw,22px)] font-medium leading-[1.4] tracking-normal text-espresso [font-family:var(--font-inter),ui-sans-serif,system-ui,sans-serif] active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
                         >
                           {isActive && (
                             <span

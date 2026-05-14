@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
-import cafeStripPhoto from '../../public/images/mess-logo-interior.jpg.jpg'
+import cafeStripPhoto from '../../public/images/keeprising-hero.jpg'
 
 export default function ActionsHeroPhotoStrip() {
   const containerRef = useRef<HTMLDivElement>(null)

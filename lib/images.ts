@@ -18,6 +18,11 @@ export const images = {
   // No local photo for chocolate cake yet — swap when ready
   menu7: 'https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=800&q=80&auto=format&fit=crop',
 
+  /** Raw exports — used on gallery desktop grid (lg+) and lightbox when wide */
+  galleryDesktopFood35: '/images/raw/gallery-food-35.png',
+  /** Source file was INTERNAL-0028; overwrite `mess-internal-0027-1.png` if you export 0027. */
+  galleryDesktopInterior0027: '/images/raw/mess-internal-0027-1.png',
+
   // Gallery
   gallery1: '/images/gallery-1.jpg',
   gallery2: '/images/gallery-2.jpg',

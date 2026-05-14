@@ -1,0 +1,5 @@
+# Cloudflare Pages — Next.js static export (see next.config.mjs: output: "export")
+# Dashboard: Workers & Pages → Create → Pages → Connect Git, or CLI: npm run cf:deploy
+name = "mess-cafe"
+pages_build_output_dir = "out"
+compatibility_date = "2025-05-01"

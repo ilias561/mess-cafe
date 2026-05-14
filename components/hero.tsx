@@ -41,7 +41,7 @@ export default function Hero() {
     if (!loaderReady) return
     const video = desktopVideoRef.current
     if (!video) return
-    video.playbackRate = 2.5
+    video.playbackRate = 3.5
     video.play().catch(() => {
       video.muted = true
       video.play().catch(() => {})
@@ -54,7 +54,7 @@ export default function Hero() {
     const video = mobileVideoRef.current
     if (!video) return
 
-    video.playbackRate = 2
+    video.playbackRate = 2.5
     video.load()
 
     const tryPlay = () => {
@@ -123,7 +123,7 @@ export default function Hero() {
                   className="inline-block"
                   initial={{ y: '100%', opacity: 0 }}
                   animate={loaderReady ? { y: 0, opacity: 1 } : {}}
-                  transition={{ delay: i * 0.12, duration: 1.0, ease: EASE }}
+                  transition={{ delay: 1.0 + i * 0.06, duration: 0.5, ease: EASE }}
                 >
                   {word}
                 </motion.span>
@@ -136,7 +136,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.0, duration: 0.9, ease: EASE }}
+          transition={{ delay: 1.3, duration: 0.5, ease: EASE }}
           className="mt-8 max-w-[420px]"
         >
           <p className="font-sans text-[16px] leading-relaxed text-charcoal/70">
@@ -150,7 +150,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.8, duration: 0.8, ease: EASE }}
+          transition={{ delay: 1.6, duration: 0.4, ease: EASE }}
           className="mt-8 flex flex-wrap items-center gap-5"
         >
           <Link
@@ -271,14 +271,14 @@ export default function Hero() {
       <div className="relative z-10 flex h-full min-h-0 flex-col px-8 pb-10">
         <div className="max-w-[540px] shrink-0 pt-14">
           <motion.p
-            {...reveal(0, 800)}
+            {...reveal(1000, 500)}
             className="hero-text-shadow font-sans text-[11px] tracking-[0.2em] text-white/75"
           >
             SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
           </motion.p>
 
           <motion.h1
-            {...reveal(300, 900)}
+            {...reveal(1100, 600)}
             className="hero-headline hero-text-shadow-display mt-3 max-w-[700px] font-serif tracking-tight text-balance text-white"
           >
             {heroWords.map((word, i) => (
@@ -294,20 +294,20 @@ export default function Hero() {
 
         <div className="mt-auto max-w-[540px] min-h-0 pt-6">
           <motion.p
-            {...reveal(1100, 800)}
+            {...reveal(1300, 500)}
             className="hero-text-shadow font-sans text-[16px] leading-relaxed text-white/90"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </motion.p>
           <motion.p
-            {...reveal(1400, 800)}
+            {...reveal(1500, 500)}
             className="hero-text-shadow mt-3 font-sans text-[14px] leading-loose text-white/65"
           >
             {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
           </motion.p>
 
           <div className="mt-7 flex flex-wrap items-center gap-5">
-            <motion.div {...reveal(1800, 700)}>
+            <motion.div {...reveal(1700, 400)}>
               <Link
                 href="/menu"
                 className="hero-text-shadow inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal transition-[background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:shadow-lg hover:bg-amber active:scale-[0.98]"

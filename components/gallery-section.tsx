@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore, type RefObject } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -13,12 +13,28 @@ import { videoSrc as videoSrcUrl } from '@/lib/media'
 type GalleryItem = {
   id: string
   src: string
+  /** Full-frame raw — desktop gallery tile (lg+) and wide lightbox */
+  desktopSrc?: string
   videoSrc?: string
   alt: string
   label: string
   caption: string
   gridArea: string
   priority: boolean
+}
+
+function subscribeMinLg(cb: () => void) {
+  const mq = window.matchMedia('(min-width: 1024px)')
+  mq.addEventListener('change', cb)
+  return () => mq.removeEventListener('change', cb)
+}
+
+function useMinLg() {
+  return useSyncExternalStore(
+    subscribeMinLg,
+    () => window.matchMedia('(min-width: 1024px)').matches,
+    () => false,
+  )
 }
 
 /* ── Curated editorial selection ── */
@@ -45,6 +61,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'c',
     src: images.gallery4,
+    desktopSrc: images.galleryDesktopInterior0027,
     alt: 'Εσωτερικός χώρος και τραπεζαρία',
     label: 'ΕΣΩΤΕΡΙΚΟ',
     caption: 'Χώρος για κάθε ώρα της μέρας',
@@ -54,6 +71,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'd',
     src: images.menu3,
+    desktopSrc: images.galleryDesktopFood35,
     alt: 'Specialty coffee και brunch',
     label: 'MENU',
     caption: 'Specialty coffee & brunch table',
@@ -107,7 +125,7 @@ function GalleryCard({
           />
         ) : (
           <FadeImage
-            src={item.src}
+            src={item.desktopSrc ?? item.src}
             alt={item.alt}
             fill
             unoptimized
@@ -119,18 +137,6 @@ function GalleryCard({
         )}
       </div>
 
-      {/* Hover overlay — desktop only */}
-      <div className="absolute inset-0 hidden bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:block" />
-
-      {/* Caption slides up on hover — desktop only */}
-      <div className="absolute bottom-0 left-0 hidden translate-y-2 p-4 transition-transform duration-300 ease-out group-hover:translate-y-0 md:block">
-        <p className="font-sans text-[9px] uppercase tracking-[0.22em] text-white/60">
-          {item.label}
-        </p>
-        <p className="mt-0.5 font-sans text-[13px] font-medium text-white">
-          {item.caption}
-        </p>
-      </div>
     </Reveal.Item>
   )
 }
@@ -153,6 +159,8 @@ function Lightbox({
 }) {
   const item = items[index]
   const containerRef = useRef<HTMLDivElement>(null)
+  const wide = useMinLg()
+  const lightboxSrc = wide && item.desktopSrc ? item.desktopSrc : item.src
 
   useEffect(() => {
     return () => {
@@ -257,7 +265,7 @@ function Lightbox({
           className="relative max-h-[80vh] w-auto overflow-hidden rounded-[2px]"
           style={{ aspectRatio: '4/3', maxWidth: 'min(85vw, 1100px)' }}>
           <FadeImage
-            src={item.src}
+            src={lightboxSrc}
             alt={item.alt}
             fill
             unoptimized
