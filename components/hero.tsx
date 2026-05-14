@@ -7,6 +7,38 @@ import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
 import { videoSrc } from '@/lib/media'
 
+/** After loader (or clip change): reload buffer, seek to 0, apply rate, then play (Safari-friendly). */
+function armHeroVideoAfterLoader(video: HTMLVideoElement | null, playbackRate: number): () => void {
+  if (!video) return () => {}
+
+  video.muted = true
+
+  const playFromStart = () => {
+    video.currentTime = 0
+    video.playbackRate = playbackRate
+    void video.play().catch(() => {
+      video.muted = true
+      void video.play().catch(() => {})
+    })
+  }
+
+  const onCanPlay = () => {
+    video.removeEventListener('canplay', onCanPlay)
+    playFromStart()
+  }
+
+  video.addEventListener('canplay', onCanPlay)
+  video.load()
+
+  if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+    playFromStart()
+    video.removeEventListener('canplay', onCanPlay)
+    return () => {}
+  }
+
+  return () => video.removeEventListener('canplay', onCanPlay)
+}
+
 export default function Hero() {
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
@@ -50,53 +82,14 @@ export default function Hero() {
 
   useEffect(() => {
     if (!loaderReady) return
-    const video = desktopVideoRef.current
-    if (!video) return
-
-    video.muted = true
-    const rate = heroDesktopClipIx === 0 ? 2 : 1
-
-    const onCanPlay = () => {
-      video.removeEventListener('canplay', onCanPlay)
-      video.currentTime = 0
-      video.playbackRate = rate
-      void video.play().catch(() => {
-        video.muted = true
-        void video.play().catch(() => {})
-      })
-    }
-
-    video.addEventListener('canplay', onCanPlay)
-    video.load()
-    return () => video.removeEventListener('canplay', onCanPlay)
-  }, [loaderReady, heroDesktopClipIx])
+    return armHeroVideoAfterLoader(mobileVideoRef.current, 2.5)
+  }, [loaderReady])
 
   useEffect(() => {
     if (!loaderReady) return
-    const video = mobileVideoRef.current
-    if (!video) return
-
-    video.playbackRate = 2.5
-    video.load()
-
-    const tryPlay = () => {
-      video.play().catch(() => {
-        video.muted = true
-        video.play().catch(() => {})
-      })
-    }
-
-    if (video.readyState >= 3) {
-      tryPlay()
-    } else {
-      const onCanPlay = () => {
-        tryPlay()
-        video.removeEventListener('canplay', onCanPlay)
-      }
-      video.addEventListener('canplay', onCanPlay)
-      return () => video.removeEventListener('canplay', onCanPlay)
-    }
-  }, [loaderReady])
+    const rate = heroDesktopClipIx === 0 ? 2 : 1
+    return armHeroVideoAfterLoader(desktopVideoRef.current, rate)
+  }, [loaderReady, heroDesktopClipIx])
 
   useEffect(() => {
     const video = mobileVideoRef.current
