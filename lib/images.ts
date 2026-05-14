@@ -22,6 +22,14 @@ export const images = {
   galleryDesktopFood35: '/images/raw/gallery-food-35.png',
   /** Source file was INTERNAL-0028; overwrite `mess-internal-0027-1.png` if you export 0027. */
   galleryDesktopInterior0027: '/images/raw/mess-internal-0027-1.png',
+  /** Desktop raw — green doors / plants (about ΦΥΤΑ & ΦΩΣ still) */
+  aboutPlantsLight: '/images/raw/about-plants-light.png',
+  /** Alias for editorial still; same file as aboutPlantsLight for now */
+  aboutMomentsStill: '/images/raw/about-plants-light.png',
+  /** Large gallery ΧΩΡΟΣ tile — replaces looping video */
+  galleryHeroStill: '/images/raw/gallery-hero-still.png',
+  /** START NOW / workspace moment (available for future swaps) */
+  aboutSpaceStart: '/images/raw/about-space-start.png',
 
   // Gallery
   gallery1: '/images/gallery-1.jpg',

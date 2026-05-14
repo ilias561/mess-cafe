@@ -41,8 +41,7 @@ function useMinLg() {
 const galleryItems: GalleryItem[] = [
   {
     id: 'a',
-    src: images.gallery1,
-    videoSrc: videoSrcUrl('/videos/main-page-animation.mp4'),
+    src: images.galleryHeroStill,
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',

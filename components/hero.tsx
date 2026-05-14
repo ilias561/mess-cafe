@@ -1,17 +1,13 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
-import { frameSrc, videoSrc } from '@/lib/media'
+import { videoSrc } from '@/lib/media'
 
-export default function Hero() {
-  const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
-  const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
-
-  const [loaderReady, setLoaderReady] = useState(false)
+const HERO_CLIP_COUNT = 3
   const prefersReducedMotion = useReducedMotion()
 
   const reveal = (delayMs: number, durationMs: number) => ({
@@ -39,44 +35,41 @@ export default function Hero() {
 
   useEffect(() => {
     if (!loaderReady) return
-    const video = desktopVideoRef.current
-    if (!video) return
-    video.playbackRate = 3.5
-    video.play().catch(() => {
+
+    const armPlayback = (video: HTMLVideoElement | null, playbackRate: number): (() => void) => {
+      if (!video) return () => {}
+
       video.muted = true
-      video.play().catch(() => {})
-    })
-  }, [loaderReady])
+      video.load()
 
-  useEffect(() => {
-    // Gate playback to loader completion so video never starts behind the curtain.
-    if (!loaderReady) return
-    const video = mobileVideoRef.current
-    if (!video) return
-
-    video.playbackRate = 2.5
-    video.load()
-
-    const tryPlay = () => {
-      video.play().catch(() => {
-        // iOS Safari can occasionally drop muted flag on first attempt.
-        video.muted = true
-        video.play().catch(() => {
-          // Poster remains visible as acceptable degraded state.
+      const playFromStart = () => {
+        video.currentTime = 0
+        video.playbackRate = playbackRate
+        void video.play().catch(() => {
+          video.muted = true
+          void video.play().catch(() => {})
         })
-      })
-    }
+      }
 
-    // Wait for HAVE_FUTURE_DATA to avoid initial playback stalls.
-    if (video.readyState >= 3) {
-      tryPlay()
-    } else {
+      if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+        playFromStart()
+        return () => {}
+      }
+
       const onCanPlay = () => {
-        tryPlay()
         video.removeEventListener('canplay', onCanPlay)
+        playFromStart()
       }
       video.addEventListener('canplay', onCanPlay)
       return () => video.removeEventListener('canplay', onCanPlay)
+    }
+
+    const cleanupDesktop = armPlayback(desktopVideoRef.current, 3.5)
+    const cleanupMobile = armPlayback(mobileVideoRef.current, 2.5)
+
+    return () => {
+      cleanupDesktop()
+      cleanupMobile()
     }
   }, [loaderReady])
 

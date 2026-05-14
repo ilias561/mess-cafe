@@ -4,7 +4,6 @@ import ActionsShell from '@/components/events/actions-shell'
 import UpcomingDatesMarquee from '@/components/events/upcoming-dates-marquee'
 import FeaturedNextEvent from '@/components/events/featured-next-event'
 import ActionsHeroHeader from '@/components/events/actions-hero-header'
-import ActionsHeroPhotoStrip from '@/components/events/actions-hero-photo-strip'
 import ActionsMissionStrip from '@/components/events/actions-mission-strip'
 import ActionsManifesto from '@/components/events/actions-manifesto'
 import EventsArchiveList from '@/components/events/events-archive-list'
@@ -42,7 +41,6 @@ export default function ActionsPage() {
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <ActionsHeroHeader nextEvent={featured} />
-      <ActionsHeroPhotoStrip />
       <ActionsShell
         upcomingEvents={upcomingEvents}
         restUpcoming={restUpcoming}

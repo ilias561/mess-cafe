@@ -16,7 +16,7 @@ function mediaBaseUrl(): string {
 }
 
 const BASE = mediaBaseUrl()
-const CACHE_BUST = 'v=20260514'
+const CACHE_BUST = 'v=20260515'
 
 export function videoSrc(path: string): string {
   return `${BASE}${path}?${CACHE_BUST}`

@@ -3,15 +3,8 @@
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import MaskReveal from '@/components/mask-reveal'
-import AmbientVideo from '@/components/ambient-video'
 import { Reveal } from '@/components/reveal'
-import { videoSrc } from '@/lib/media'
 import { images } from '@/lib/images'
-
-const aboutEditorialVideos = [
-  videoSrc('/videos/about-editorial-1.mp4'),
-  videoSrc('/videos/about-editorial-2.mp4'),
-] as const
 
 /* ── Scrolling photos ── */
 const aboutImages = [
@@ -179,18 +172,19 @@ export default function AboutUsSection() {
             </div>
           ))}
 
-          {/* ΦΥΤΑ & ΦΩΣ / ΣΤΙΓΜΕΣ — two editorial clips in sequence */}
+          {/* ΦΥΤΑ & ΦΩΣ / ΣΤΙΓΜΕΣ — static still */}
           <div>
             <p className="mb-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
               ΦΥΤΑ & ΦΩΣ
             </p>
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] bg-bone-warm">
-              <AmbientVideo
-                srcs={[...aboutEditorialVideos]}
-                poster={images.aboutPlants}
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: '50% 30%' }}
-                ariaLabel="Βίντεο από τον χώρο του M.E.S.S. — πλάνα διαδόχως"
+              <FadeImage
+                src={images.aboutPlantsLight}
+                alt="Φυτά και φως στον χώρο του M.E.S.S."
+                fill
+                unoptimized
+                loading="lazy"
+                className="object-cover object-[50%_30%]"
               />
             </div>
             <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
