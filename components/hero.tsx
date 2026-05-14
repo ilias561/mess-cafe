@@ -7,8 +7,23 @@ import { EASE } from '@/lib/motion'
 import { LOADING_DURATION_MS } from '@/lib/timing'
 import { videoSrc } from '@/lib/media'
 
-const HERO_CLIP_COUNT = 3
+export default function Hero() {
+  const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
+  const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
+
+  const [loaderReady, setLoaderReady] = useState(false)
+  const [heroDesktopClipIx, setHeroDesktopClipIx] = useState(0)
   const prefersReducedMotion = useReducedMotion()
+
+  const desktopClips = useMemo(
+    () =>
+      [
+        videoSrc('/videos/main-page-animation.mp4'),
+        videoSrc('/videos/about-editorial-1.mp4'),
+        videoSrc('/videos/about-editorial-2.mp4'),
+      ] as const,
+    [],
+  )
 
   const reveal = (delayMs: number, durationMs: number) => ({
     initial: prefersReducedMotion ? { opacity: 0, y: 0 } : { opacity: 0, y: 16 },
@@ -35,41 +50,51 @@ const HERO_CLIP_COUNT = 3
 
   useEffect(() => {
     if (!loaderReady) return
+    const video = desktopVideoRef.current
+    if (!video) return
 
-    const armPlayback = (video: HTMLVideoElement | null, playbackRate: number): (() => void) => {
-      if (!video) return () => {}
+    video.muted = true
+    const rate = heroDesktopClipIx === 0 ? 2 : 1
 
-      video.muted = true
-      video.load()
+    const onCanPlay = () => {
+      video.removeEventListener('canplay', onCanPlay)
+      video.currentTime = 0
+      video.playbackRate = rate
+      void video.play().catch(() => {
+        video.muted = true
+        void video.play().catch(() => {})
+      })
+    }
 
-      const playFromStart = () => {
-        video.currentTime = 0
-        video.playbackRate = playbackRate
-        void video.play().catch(() => {
-          video.muted = true
-          void video.play().catch(() => {})
-        })
-      }
+    video.addEventListener('canplay', onCanPlay)
+    video.load()
+    return () => video.removeEventListener('canplay', onCanPlay)
+  }, [loaderReady, heroDesktopClipIx])
 
-      if (video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
-        playFromStart()
-        return () => {}
-      }
+  useEffect(() => {
+    if (!loaderReady) return
+    const video = mobileVideoRef.current
+    if (!video) return
 
+    video.playbackRate = 2.5
+    video.load()
+
+    const tryPlay = () => {
+      video.play().catch(() => {
+        video.muted = true
+        video.play().catch(() => {})
+      })
+    }
+
+    if (video.readyState >= 3) {
+      tryPlay()
+    } else {
       const onCanPlay = () => {
+        tryPlay()
         video.removeEventListener('canplay', onCanPlay)
-        playFromStart()
       }
       video.addEventListener('canplay', onCanPlay)
       return () => video.removeEventListener('canplay', onCanPlay)
-    }
-
-    const cleanupDesktop = armPlayback(desktopVideoRef.current, 3.5)
-    const cleanupMobile = armPlayback(mobileVideoRef.current, 2.5)
-
-    return () => {
-      cleanupDesktop()
-      cleanupMobile()
     }
   }, [loaderReady])
 
@@ -102,7 +127,7 @@ const HERO_CLIP_COUNT = 3
         initial={{ opacity: 0, x: -24 }}
         animate={loaderReady ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.8, ease: EASE }}
-        className="relative z-10 flex w-[42%] shrink-0 flex-col justify-center px-12 lg:px-16 xl:px-20 py-28"
+        className="relative z-10 flex w-[36%] min-w-[280px] shrink-0 flex-col justify-center px-10 lg:px-14 xl:px-16 py-28"
       >
         <p className="font-sans text-[11px] tracking-[0.2em] text-charcoal/40 uppercase">
           SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
@@ -167,7 +192,7 @@ const HERO_CLIP_COUNT = 3
         initial={{ opacity: 0, x: 32 }}
         animate={loaderReady ? { opacity: 1, x: 0 } : {}}
         transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
-        className="relative flex-1 self-stretch flex items-center justify-center py-12 pr-10 lg:pr-14"
+        className="relative flex min-h-0 min-w-0 flex-1 self-stretch items-center justify-center py-10 pl-4 pr-6 lg:py-12 lg:pl-6 lg:pr-10"
       >
         {/* Decorative accent — mustard corner lines */}
         <div className="pointer-events-none absolute top-8 right-6 w-24 h-24 border-t-2 border-r-2 border-mustard/30 rounded-tr-sm" aria-hidden="true" />
@@ -183,23 +208,25 @@ const HERO_CLIP_COUNT = 3
         {/* Decorative accent — thin vertical line */}
         <div className="pointer-events-none absolute top-20 bottom-20 left-0 w-px bg-gradient-to-b from-transparent via-charcoal/8 to-transparent" aria-hidden="true" />
 
-        {/* Video container with shadow and subtle border */}
-        <div className="relative w-full max-w-[820px] xl:max-w-[920px] rounded-sm overflow-hidden shadow-2xl shadow-charcoal/15 ring-1 ring-charcoal/8">
+        {/* Video container — tall cover, no max-width cap */}
+        <div className="relative h-[min(88vh,960px)] min-h-[min(72vh,620px)] w-full max-w-[min(1240px,calc(100vw-320px))] overflow-hidden rounded-sm shadow-2xl shadow-charcoal/15 ring-1 ring-charcoal/8">
           {/* Subtle inner glow overlay */}
           <div className="pointer-events-none absolute inset-0 z-10 rounded-sm ring-1 ring-inset ring-white/10" />
 
           <video
             ref={desktopVideoRef}
+            src={desktopClips[heroDesktopClipIx]}
             muted
             playsInline
             preload="metadata"
-            poster={videoSrc('/videos/hero-desktop-poster.jpg')}
-            className="w-full h-auto block"
+            poster={heroDesktopClipIx === 0 ? videoSrc('/videos/hero-desktop-poster.jpg') : undefined}
+            className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
             aria-hidden="true"
             title="M.E.S.S. — Ο χώρος μας"
-          >
-            <source src={videoSrc('/videos/main-page-animation.mp4')} type="video/mp4" />
-          </video>
+            onEnded={() => {
+              setHeroDesktopClipIx((i) => (i + 1) % desktopClips.length)
+            }}
+          />
         </div>
 
         {/* Decorative label below video */}
