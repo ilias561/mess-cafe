@@ -109,10 +109,10 @@ export default function Hero() {
 
   return (
     <>
-
+    {/* `#hero` must wrap both breakpoints: desktop section is `hidden` on mobile, so a lone id on it made offsetHeight 0 and broke nav / scroll logic. */}
+    <div id="hero" className="scroll-mt-20">
     {/* ── DESKTOP hero: text left · decorated video right ── */}
     <section
-      id="hero"
       className="hidden md:flex min-h-screen bg-bone items-center overflow-hidden"
     >
       {/* ── LEFT: text column ── */}
@@ -237,7 +237,7 @@ export default function Hero() {
     </section>
 
     {/* ── MOBILE hero: full-viewport video + timed text (no scroll-driven phases) ── */}
-    <section className="relative w-full overflow-hidden md:hidden hero-mobile-svh">
+    <section className="relative w-full overflow-hidden md:hidden hero-mobile-svh min-h-0">
       {/* ── Mobile: ambient media + subtle reveal after loader ── */}
       <motion.div
         className="absolute inset-0 z-0"
@@ -341,6 +341,7 @@ export default function Hero() {
         </div>
       </div>
     </section>
+    </div>
 
     </>
   )

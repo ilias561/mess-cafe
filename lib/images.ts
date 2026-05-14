@@ -26,9 +26,7 @@ export const images = {
   aboutPlantsLight: '/images/raw/about-plants-light.png',
   /** Alias for editorial still; same file as aboutPlantsLight for now */
   aboutMomentsStill: '/images/raw/about-plants-light.png',
-  /** Large gallery ΧΩΡΟΣ tile — replaces looping video */
-  galleryHeroStill: '/images/raw/gallery-hero-still.png',
-  /** START NOW / workspace moment (available for future swaps) */
+  /** START NOW / workspace moment (optional swaps) */
   aboutSpaceStart: '/images/raw/about-space-start.png',
 
   // Gallery

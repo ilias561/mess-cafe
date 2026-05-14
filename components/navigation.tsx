@@ -181,12 +181,17 @@ export default function Navigation() {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  // Header handoff: transparent over dark mobile hero → cream after
-  // Desktop hero is one viewport (bone + video). Mobile hero is hero-mobile-svh (~1× viewport), not legacy 600vh scroll.
+  // Header handoff: transparent over dark mobile hero → cream after hero bottom.
+  // `#hero` wraps both mobile + desktop hero regions (see `components/hero.tsx`).
   useEffect(() => {
     const onScroll = () => {
-      const threshold = window.innerHeight - 60
-      setHasPastHero(window.scrollY > threshold)
+      const hero = document.getElementById('hero')
+      if (!hero || hero.offsetHeight < 1) {
+        setHasPastHero(window.scrollY > window.innerHeight - 60)
+        return
+      }
+      const past = window.scrollY > hero.offsetTop + hero.offsetHeight - 72
+      setHasPastHero(past)
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -200,7 +205,9 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      const heroHeight = window.innerHeight
+      const hero = document.getElementById('hero')
+      const heroHeight =
+        hero && hero.offsetHeight > 0 ? hero.offsetHeight : window.innerHeight
       const inHero = pathname === '/' && currentScrollY < heroHeight
       if (currentScrollY < 120 || inHero) {
         // Always show nav at top and during hero scroll-scrub
