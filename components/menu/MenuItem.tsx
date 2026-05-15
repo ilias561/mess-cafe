@@ -9,7 +9,23 @@ const BADGE_LABELS: Record<string, string> = {
   vegan: 'vegan',
   vegetarian: 'vegetarian',
   gf: 'gluten-free',
-  signature: 'signature',
+}
+
+function itemMotionProps(index: number) {
+  return {
+    initial: { opacity: 0, y: 16 } as const,
+    whileInView: { opacity: 1, y: 0 } as const,
+    viewport: { once: true, margin: '-40px' } as const,
+    transition: { duration: 0.55, ease: EASE, delay: index * 0.04 },
+  }
+}
+
+function SignatureEyebrow() {
+  return (
+    <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">
+      ✦ Signature
+    </p>
+  )
 }
 
 function MenuItemMedia({ item }: { item: MenuItemType }) {
@@ -37,10 +53,12 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
   }, [item.video])
 
   if (item.video) {
+    const poster = item.video.replace(/\.mp4$/, '-poster.jpg')
     return (
       <video
         ref={videoRef}
         src={item.video}
+        poster={poster}
         muted
         playsInline
         preload="metadata"
@@ -82,64 +100,66 @@ function BadgeRow({ badges }: { badges: string[] }) {
   )
 }
 
-export default function MenuItem({ item, index }: { item: MenuItemType; index: number }) {
-  const chips = item.badges?.filter((badge) => badge in BADGE_LABELS) ?? []
+function getItemBadges(item: MenuItemType) {
+  const isSignature = item.badges?.includes('signature') ?? false
+  const chips =
+    item.badges?.filter((badge) => badge !== 'signature' && badge in BADGE_LABELS) ?? []
+  return { isSignature, chips }
+}
+
+export function MenuItemVisual({ item, index }: { item: MenuItemType; index: number }) {
+  const { isSignature, chips } = getItemBadges(item)
   const hasMedia = Boolean(item.image || item.video)
 
-  if (!hasMedia) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.55, ease: EASE, delay: index * 0.04 }}
-        className={`group py-5 transition-colors hover:bg-bone-warm/40 md:grid md:grid-cols-[minmax(0,1fr)_240px] md:gap-8 ${index > 0 ? 'border-t border-charcoal/5' : ''}`}
-      >
-        <div className="min-w-0">
-          <div className="flex items-end">
-            <h3 className="font-serif text-[23px] leading-snug tracking-tight italic text-charcoal">
-              {item.name}
-            </h3>
-            <span className="mx-2 mb-[5px] hidden flex-1 border-b border-dotted border-charcoal/20 md:block" />
-          </div>
-          <p className="mt-1.5 max-w-prose font-sans text-[14px] leading-relaxed text-concrete">
-            {item.desc}
-          </p>
-          <BadgeRow badges={chips} />
-        </div>
-        <div className="mt-2 flex items-end md:mt-0 md:justify-end">
-          <span className="mr-2 mb-[5px] flex-1 border-b border-dotted border-charcoal/20 md:hidden" />
-          <p className="shrink-0 font-serif text-[22px] text-charcoal">{item.price}</p>
-        </div>
-      </motion.div>
-    )
-  }
-
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.55, ease: EASE, delay: index * 0.04 }}
-      className={`group py-4 transition-colors hover:bg-bone-warm/40 ${index > 0 ? 'border-t border-charcoal/5' : ''}`}
+    <motion.article
+      {...itemMotionProps(index)}
+      className="group flex flex-col transition-colors hover:bg-bone-warm/30 md:rounded-sm md:p-2 md:-m-2"
     >
-      <div className="flex gap-3 sm:gap-4">
-        <div className="aspect-square h-20 w-20 shrink-0 overflow-hidden rounded-[4px] bg-bone-warm md:h-[100px] md:w-[100px]">
+      {hasMedia && (
+        <div className="aspect-square w-full overflow-hidden rounded-[4px] bg-bone-warm">
           <MenuItemMedia item={item} />
         </div>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-start justify-between gap-3">
-            <h3 className="font-serif text-[20px] leading-snug tracking-tight italic text-charcoal sm:text-[23px]">
-              {item.name}
-            </h3>
-            <p className="shrink-0 font-serif text-[20px] text-charcoal sm:text-[22px]">{item.price}</p>
-          </div>
-          <p className="mt-1 font-sans text-[13px] leading-relaxed text-concrete sm:text-[14px]">
-            {item.desc}
-          </p>
-          <BadgeRow badges={chips} />
+      )}
+
+      <div className={hasMedia ? 'mt-4' : ''}>
+        {isSignature && <SignatureEyebrow />}
+        <div className="flex items-baseline justify-between gap-3">
+          <h3 className="min-w-0 font-serif text-[22px] leading-snug tracking-tight italic text-charcoal">
+            {item.name}
+          </h3>
+          <p className="shrink-0 font-serif text-[22px] text-charcoal">{item.price}</p>
         </div>
+        <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
+        <BadgeRow badges={chips} />
       </div>
-    </motion.div>
+    </motion.article>
+  )
+}
+
+export function MenuItemList({ item, index }: { item: MenuItemType; index: number }) {
+  const { isSignature, chips } = getItemBadges(item)
+
+  return (
+    <motion.article
+      {...itemMotionProps(index)}
+      className="group py-2 transition-colors hover:bg-bone-warm/30 md:rounded-sm md:px-3 md:-mx-3"
+    >
+      {isSignature && <SignatureEyebrow />}
+      <div className="flex items-baseline gap-2">
+        <h3 className="shrink-0 font-serif text-[22px] leading-snug tracking-tight italic text-charcoal">
+          {item.name}
+        </h3>
+        <span
+          className="mb-[0.35em] min-w-[1rem] flex-1 border-b border-dotted border-charcoal/20"
+          aria-hidden
+        />
+        <p className="shrink-0 font-serif text-[22px] tabular-nums text-charcoal">{item.price}</p>
+      </div>
+      <p className="mt-1.5 font-sans text-[13px] leading-relaxed text-concrete md:text-[14px]">
+        {item.desc}
+      </p>
+      <BadgeRow badges={chips} />
+    </motion.article>
   )
 }

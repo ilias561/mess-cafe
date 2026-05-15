@@ -14,6 +14,11 @@ export type MenuCategory = {
   items: MenuItem[]
 }
 
+export function getCategoryLayout(category: MenuCategory): 'visual' | 'list' {
+  const withMedia = category.items.filter((i) => i.image || i.video).length
+  return withMedia >= Math.ceil(category.items.length / 2) ? 'visual' : 'list'
+}
+
 export const menuData: MenuCategory[] = [
   {
     id: 'brunch',

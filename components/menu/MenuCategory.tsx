@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuCategory as MenuCategoryType } from '@/lib/menu-data'
-import { extras } from '@/lib/menu-data'
-import MenuItem from './MenuItem'
+import { extras, getCategoryLayout } from '@/lib/menu-data'
+import { MenuItemList, MenuItemVisual } from './MenuItem'
 
 function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'brunch') {
@@ -47,6 +47,7 @@ export default function MenuCategory({
 }) {
   const backgrounds = ['bg-bone', 'bg-bone-warm', 'bg-bone'] as const
   const bg = backgrounds[index % backgrounds.length]
+  const layout = getCategoryLayout(category)
   const editorialIntro: Partial<Record<string, string>> = {
     brunch: 'Άνετο πρωινό με πιάτα που στηρίζουν την ημέρα χωρίς περιττή ένταση.',
     bowls: 'Πλήρη bowls με ισορροπία υφών, θερμοκρασιών και καθαρών πρωτεϊνών.',
@@ -79,11 +80,21 @@ export default function MenuCategory({
           )}
         </motion.div>
 
-        <div>
-          {category.items.map((item, i) => (
-            <MenuItem key={item.name} item={item} index={i} />
-          ))}
-        </div>
+        {layout === 'visual' ? (
+          <motion.div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-12 lg:gap-x-14 lg:gap-y-14">
+            {category.items.map((item, i) => (
+              <MenuItemVisual key={item.name} item={item} index={i} />
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div className="mx-auto max-w-[720px]">
+            <div className="flex flex-col gap-7 md:gap-8">
+              {category.items.map((item, i) => (
+                <MenuItemList key={item.name} item={item} index={i} />
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         <ExtrasBox categoryId={category.id} />
       </div>
