@@ -90,16 +90,71 @@ export default function Hero() {
     video.muted = true
     video.currentTime = 0
     video.playbackRate = 2.5
-    void video.play().catch(() => {
-      video.muted = true
-      void video.play().catch(() => {})
-    })
+
+    const tryPlay = () => {
+      if (!video.paused) return
+      video.currentTime = 0
+      video.playbackRate = 2.5
+      void video.play().catch(() => {
+        video.muted = true
+        void video.play().catch(() => {})
+      })
+    }
+
+    tryPlay()
+
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') tryPlay()
+    }
+    document.addEventListener('visibilitychange', onVisibility)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) tryPlay()
+      },
+      { threshold: 0.3 },
+    )
+    observer.observe(video)
+
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility)
+      observer.disconnect()
+    }
   }, [loaderReady])
 
   useEffect(() => {
     if (!loaderReady) return
+    const video = desktopVideoRef.current
+    if (!video) return
     const rate = heroDesktopClipIx === 0 ? 2 : 1
-    return armHeroVideoAfterLoader(desktopVideoRef.current, rate)
+
+    const cleanup = armHeroVideoAfterLoader(video, rate)
+
+    const tryPlay = () => {
+      if (!video.paused) return
+      video.currentTime = 0
+      video.playbackRate = rate
+      void video.play().catch(() => {})
+    }
+
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') tryPlay()
+    }
+    document.addEventListener('visibilitychange', onVisibility)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) tryPlay()
+      },
+      { threshold: 0.3 },
+    )
+    observer.observe(video)
+
+    return () => {
+      cleanup()
+      document.removeEventListener('visibilitychange', onVisibility)
+      observer.disconnect()
+    }
   }, [loaderReady, heroDesktopClipIx])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')

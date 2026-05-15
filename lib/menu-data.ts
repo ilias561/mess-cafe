@@ -75,11 +75,6 @@ export const menuData: MenuCategory[] = [
         image: '/images/menu/piata-0028.jpg',
       },
       {
-        name: 'Noodles with Shrimps Poke Bowl',
-        desc: 'Noodles, γαρίδες, λαχανικά, σως πικάντικη.',
-        price: '9€',
-      },
-      {
         name: 'Breakfast Bowl',
         desc: 'Αυγό ποσέ, μπέικον, αβοκάντο, μανιτάρια, ντοματίνια, ρόκα, προζυμένιο ψωμί με μυρωδικά.',
         price: '9€',
@@ -98,6 +93,11 @@ export const menuData: MenuCategory[] = [
         desc: 'Κοτόπουλο, ανανάς, ρύζι, λαχανικά, σως τροπική.',
         price: '12€',
         image: '/images/menu/piata-0031.jpg',
+      },
+      {
+        name: 'Noodles with Shrimps Poke Bowl',
+        desc: 'Noodles, γαρίδες, λαχανικά, σως πικάντικη.',
+        price: '9€',
       },
     ],
   },

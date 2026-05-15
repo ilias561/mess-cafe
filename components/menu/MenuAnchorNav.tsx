@@ -44,7 +44,7 @@ export default function MenuAnchorNav() {
       className="sticky top-20 z-40 border-y border-charcoal/10 bg-bone/80 backdrop-blur-md"
       aria-label="Menu sections"
     >
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-3 px-6 py-3 md:px-12 lg:flex-row lg:items-center lg:justify-between">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-2 px-6 py-2 md:px-12 lg:flex-row lg:items-center lg:justify-between">
         {/* Back to home */}
         <Link
           href="/"
