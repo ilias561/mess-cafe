@@ -7,6 +7,7 @@ import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Reveal } from '@/components/reveal'
 import { duration, ease } from '@/lib/motion'
 import { imagePlaceholder, images } from '@/lib/images'
+import { videoSrc } from '@/lib/media'
 import AmbientVideo from '@/components/ambient-video'
 type GalleryItem = {
   id: string
@@ -40,7 +41,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'a',
     src: images.gallery1,
-    videoSrc: '/images/111/1.mp4',
+    videoSrc: videoSrc('/videos/1.mp4'),
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',
