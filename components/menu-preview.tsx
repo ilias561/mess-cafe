@@ -1,62 +1,112 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import { duration, ease } from '@/lib/motion'
-import { imagePlaceholder, images } from '@/lib/images'
 
-const items = [
+type PreviewItem = {
+  cat: string
+  catId: string
+  name: string
+  desc: string
+  price: string
+  image?: string
+  video?: string
+}
+
+const items: PreviewItem[] = [
   {
     cat: 'BRUNCH',
     catId: 'brunch',
     name: 'Avocado Toast',
     desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
     price: '9€',
-    img: 'menu3' as const,
+    image: '/images/menu/piata-0009.jpg',
   },
   {
     cat: 'BOWLS',
     catId: 'bowls',
-    name: 'Acai Bowl',
-    desc: '100% açaí, πράσινο μήλο, flakes καρύδας, granola, banana.',
-    price: '12€',
-    img: 'menu2' as const,
-  },
-  {
-    cat: 'SALADS',
-    catId: 'salads',
-    name: 'Superfood Salad',
-    desc: 'Τρίχρωμη κινόα, παντζάρι, φακές, cranberry, dressing εσπεριδοειδών.',
+    name: 'Teriyaki Chicken Poke Bowl',
+    desc: 'Άγριο ρύζι, κοτόπουλο τεριγιάκι, λαχανικά, αυγό ποσέ, σουσάμι.',
     price: '11€',
-    img: 'menu4' as const,
+    image: '/images/menu/piata-0025.jpg',
   },
   {
-    cat: 'COFFEE',
-    catId: 'coffee',
-    name: 'Freddo Cappuccino',
-    desc: 'Freddo espresso με παγωμένο αφρό γάλακτος.',
-    price: '4.3€',
-    img: 'menu5' as const,
-  },
-  {
-    cat: 'SMOOTHIES',
-    catId: 'smoothies',
-    name: 'Mango Chilli Smoothie',
-    desc: 'Μάνγκο, τσίλι flakes, αγαύη, χειροποίητο γάλα καρυδιών.',
-    price: '6€',
-    img: 'menu6' as const,
+    cat: 'TREATS',
+    catId: 'treats',
+    name: 'Chia Pudding',
+    desc: 'Σπόροι chia, φυτικό γάλα, εποχιακά φρούτα.',
+    price: '4€',
+    image: '/images/menu/glyka-0002.jpg',
   },
   {
     cat: 'TREATS',
     catId: 'treats',
     name: 'Chocolate Cake',
-    desc: 'Με γλυκοπατάτα, χουρμάδες — χωρίς ζάχαρη.',
+    desc: 'Με γλυκοπατάτα, χουρμάδες, χωρίς ζάχαρη.',
     price: '3.5€',
-    img: 'menu7' as const,
+    image: '/images/menu/glyka-0004.jpg',
   },
 ]
+
+function PreviewCardMedia({ item }: { item: PreviewItem }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video || !item.video) return
+
+    let hasPlayed = false
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPlayed) {
+            hasPlayed = true
+            void video.play().catch(() => {})
+          }
+        })
+      },
+      { threshold: 0.5 },
+    )
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [item.video])
+
+  if (item.video) {
+    return (
+      <video
+        ref={videoRef}
+        src={item.video}
+        muted
+        playsInline
+        preload="metadata"
+        className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-signature)] group-hover:scale-[1.03]"
+        onEnded={(e) => {
+          e.currentTarget.pause()
+        }}
+      />
+    )
+  }
+
+  if (item.image) {
+    return (
+      <FadeImage
+        src={item.image}
+        alt={item.name}
+        width={640}
+        height={800}
+        unoptimized
+        className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-signature)] group-hover:scale-[1.03]"
+      />
+    )
+  }
+
+  return null
+}
 
 const cardVariants = {
   rest: { y: 0 },
@@ -89,7 +139,7 @@ export default function MenuPreview() {
           </div>
         </Reveal>
 
-        <Reveal asGroup className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-3">
+        <Reveal asGroup className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
           {items.map((item) => (
             <Reveal.Item key={item.name}>
               <Link href={`/menu#${item.catId}`} className="block w-full text-inherit no-underline">
@@ -100,15 +150,8 @@ export default function MenuPreview() {
                   transition={{ duration: duration.fast, ease: ease.out }}
                   className="group w-full"
                 >
-                  <div className="aspect-[4/5] overflow-hidden bg-bone" style={!images[item.img] ? { background: imagePlaceholder() } : undefined}>
-                    <FadeImage
-                      src={images[item.img]}
-                      alt={item.name}
-                      width={640}
-                      height={800}
-                      unoptimized
-                      className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-signature)] group-hover:scale-[1.03]"
-                    />
+                  <div className="aspect-[4/5] overflow-hidden bg-bone">
+                    <PreviewCardMedia item={item} />
                   </div>
 
                   <div className="mt-4">

@@ -94,7 +94,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
       ref={sectionRef}
       onMouseMove={onSectionPointerMove}
       onMouseLeave={onSectionPointerLeave}
-      className="relative overflow-hidden bg-bone px-6 pt-24 pb-6 md:px-12 md:pt-40 md:pb-10"
+      className="relative scroll-mt-20 overflow-hidden bg-bone px-6 pt-36 pb-10 md:px-12 md:pt-44 md:pb-14"
     >
       <div
         className="pointer-events-none absolute inset-0 mix-blend-multiply opacity-[0.06]"
@@ -166,7 +166,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                     : undefined
                 }
               >
-                <h1 className="font-serif text-[clamp(32px,4.8vw,64px)] leading-[0.98] tracking-[-0.02em] text-charcoal">
+                <h1 className="font-serif text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.02em] text-charcoal">
                   {heroWords.map((word, i) => {
                     const isLast = i === heroWords.length - 1
                     if (isLast) {

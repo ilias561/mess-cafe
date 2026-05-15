@@ -104,7 +104,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             href="https://www.google.com/maps/place/M.E.S.S./@39.6624739,20.8602479,3a,75y,90t/data=!3m8!1e5!3m6!1sCIHM0ogKEICAgMDohajpTw!2e10!3e10!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X%3Dw203-h114-k-no!7i960!8i540!4m11!1m2!2m1!1zzpnPic6szr3Ovc65zr3OsSBtZXNz!3m7!1s0x135be9a182aaef6f:0x8faae1439da23f07!8m2!3d39.6624739!4d20.8602479!10e5!15sChXOmc-JzqzOvc69zrnOvc6xIG1lc3NaFyIVzrnPic6szr3Ovc65zr3OsSBtZXNzkgELY29mZmVlX3Nob3DgAQA!16s%2Fg%2F11wvls4by2?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative h-[360px] overflow-hidden rounded-2xl border border-bone/10 block"
+            className="group relative h-[360px] overflow-hidden rounded-2xl border border-mustard/20 block"
             aria-label="Δες το M.E.S.S. σε Street View"
           >
             {/* Thumbnail image from Google Maps */}
@@ -113,10 +113,10 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               alt="Street View του M.E.S.S."
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover opacity-80 grayscale transition-[opacity,filter] duration-500 ease-out group-hover:opacity-100 group-hover:grayscale-0"
+              className="object-cover opacity-90 transition-opacity duration-500 ease-out group-hover:opacity-100"
             />
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-charcoal/30 transition-opacity duration-300 group-hover:bg-charcoal/10" />
+            <div className="absolute inset-0 bg-charcoal/20 transition-opacity duration-300 group-hover:bg-charcoal/5" />
             {/* Play button */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-bone/20 backdrop-blur-sm ring-2 ring-bone/40 transition-transform duration-300 group-hover:scale-110">
@@ -125,32 +125,33 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 </svg>
               </div>
               <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-bone/80">Street View</p>
+              <p className="mt-1 font-sans text-[10px] text-bone/50">Δες πώς θα μας βρεις</p>
             </div>
           </a>
 
           {/* Map — consent gate (GDPR: Google Maps sets cookies on load) */}
-          <div className="relative h-[360px] overflow-hidden rounded-2xl border border-bone/10">
+          <div className="relative h-[360px] overflow-hidden rounded-2xl border border-mustard/20">
             {mapConsent ? (
               <iframe
                 title="M.E.S.S. — χάρτης τοποθεσίας"
                 src={mapEmbedSrc}
-                className="absolute inset-0 h-full w-full border-0 opacity-80 grayscale"
+                className="absolute inset-0 h-full w-full border-0 opacity-90"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
             ) : (
-              <div className="flex h-full flex-col items-center justify-center gap-4 bg-charcoal/60 px-6 text-center">
-                <svg className="h-8 w-8 text-bone/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <div className="flex h-full flex-col items-center justify-center gap-4 bg-olive-deep/80 px-6 text-center">
+                <svg className="h-8 w-8 text-mustard/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                 </svg>
-                <p className="max-w-[28ch] font-sans text-[13px] leading-relaxed text-bone/60">
+                <p className="max-w-[28ch] font-sans text-[13px] leading-relaxed text-bone/70">
                   Ο χάρτης χρησιμοποιεί cookies τρίτων (Google Maps). Κάνε κλικ για φόρτωση.
                 </p>
                 <button
                   type="button"
                   onClick={() => setMapConsent(true)}
-                  className="ui-interactive rounded-full border border-bone/25 px-5 py-2 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/70 hover:border-bone/50 hover:text-bone"
+                  className="ui-interactive rounded-full border border-mustard/40 bg-mustard/10 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/80 hover:border-mustard hover:bg-mustard/20 hover:text-bone"
                 >
                   Φόρτωση χάρτη
                 </button>

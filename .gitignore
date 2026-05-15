@@ -49,3 +49,7 @@ CURSOR_PROMPT*.md
 # Cowork session handoff (cross-session baton, not for git)
 HANDOFF.md
 KICKOFF-FOR-C2.md
+
+# Source media copies at project root (served from public/images/)
+/111/
+/menu/

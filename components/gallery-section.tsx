@@ -8,8 +8,6 @@ import { Reveal } from '@/components/reveal'
 import { duration, ease } from '@/lib/motion'
 import { imagePlaceholder, images } from '@/lib/images'
 import AmbientVideo from '@/components/ambient-video'
-import { videoSrc as videoSrcUrl } from '@/lib/media'
-
 type GalleryItem = {
   id: string
   src: string
@@ -42,7 +40,7 @@ const galleryItems: GalleryItem[] = [
   {
     id: 'a',
     src: images.gallery1,
-    videoSrc: videoSrcUrl('/videos/main-page-animation.mp4'),
+    videoSrc: '/images/111/1.mp4',
     alt: 'Κεντρικό σαλόνι του M.E.S.S. café',
     label: 'ΧΩΡΟΣ',
     caption: 'Κεντρικό σαλόνι, 1ος όροφος ΚΕΠΑΒΙ',
@@ -70,7 +68,7 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 'd',
-    src: images.menu3,
+    src: images.menuNew1,
     desktopSrc: images.galleryDesktopFood35,
     alt: 'Specialty coffee και brunch',
     label: 'MENU',
@@ -80,7 +78,7 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: 'e',
-    src: images.gallery5,
+    src: images.menuNew2,
     alt: 'Brunch spread από ψηλά',
     label: 'FOOD',
     caption: 'Φρέσκα υλικά, κάθε μέρα',

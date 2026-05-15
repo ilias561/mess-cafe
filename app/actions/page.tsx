@@ -41,6 +41,13 @@ export default function ActionsPage() {
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <ActionsHeroHeader nextEvent={featured} />
+      <div className="relative w-full overflow-hidden" style={{ height: 'clamp(250px, 40vw, 500px)' }}>
+        <img
+          src="/images/111/mess-internal-0034.jpg"
+          alt="Keep Rising — η πινακίδα του M.E.S.S."
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+      </div>
       <ActionsShell
         upcomingEvents={upcomingEvents}
         restUpcoming={restUpcoming}

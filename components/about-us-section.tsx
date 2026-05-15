@@ -36,6 +36,20 @@ const aboutImages = [
     aspect: 'aspect-[4/5]',
     caption: 'ΦΥΤΑ & ΦΩΣ',
   },
+  {
+    key: 'new1',
+    src: images.new1,
+    alt: 'Νέα φωτογραφία χώρου 1',
+    aspect: 'aspect-[3/2]',
+    caption: 'Ο ΧΩΡΟΣ ΜΑΣ',
+  },
+  {
+    key: 'new2',
+    src: images.new2,
+    alt: 'Νέα φωτογραφία χώρου 2',
+    aspect: 'aspect-[4/5]',
+    caption: 'ΛΕΠΤΟΜΕΡΕΙΕΣ',
+  },
 ] as const
 
 /* ── Stats ── */

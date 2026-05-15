@@ -1,12 +1,10 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { Event } from '@/lib/events/events'
 import { getOpenStatus } from '@/lib/hours'
-import AmbientVideo from '@/components/ambient-video'
 import { Reveal } from '@/components/reveal'
-import { videoSrc } from '@/lib/media'
 
 type TodayModuleProps = {
   events: Event[]
@@ -41,6 +39,22 @@ function toLocalDayKey(date: Date) {
 }
 
 export default function TodayModule({ events }: TodayModuleProps) {
+  const suggestions = [
+    'Πέρασε για καφέ και ησυχία.',
+    'Δοκίμασε το freddo cappuccino μας.',
+    'Σήμερα είναι ιδανική μέρα για acai bowl.',
+    'Κάτσε στον 1ο όροφο με θέα τη λίμνη.',
+    'Ένα smoothie για να ξεκινήσεις τη μέρα σου.',
+  ]
+  const [suggestionIndex, setSuggestionIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSuggestionIndex((prev) => (prev + 1) % suggestions.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
   const status = getOpenStatus()
   const [cardIndex, setCardIndex] = useState(0)
   const today = useMemo(() => new Date(), [])
@@ -79,15 +93,6 @@ export default function TodayModule({ events }: TodayModuleProps) {
       aria-label="Σήμερα στο M.E.S.S."
     >
       <Reveal className="relative">
-        {/* Subtle ambient background */}
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <AmbientVideo
-            src={videoSrc('/videos/main-page-animation.mp4')}
-            className="h-full w-full object-cover opacity-[0.16] md:opacity-[0.08]"
-          />
-          <div className="absolute inset-0 bg-bone/55 md:bg-bone/70" />
-        </div>
-
         <div className="relative mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
           <div className="flex items-start justify-between gap-6 md:contents">
             <div className="space-y-3">
@@ -141,7 +146,9 @@ export default function TodayModule({ events }: TodayModuleProps) {
                   </div>
                 ) : (
                   <div className="space-y-3 rounded-2xl border border-mustard/35 bg-cream/60 p-4">
-                    <p className="font-sans text-sm text-charcoal/80">Πέρασε για καφέ και ησυχία.</p>
+                    <p className="font-sans text-sm text-charcoal/80 transition-opacity duration-500" key={suggestionIndex}>
+                      {suggestions[suggestionIndex]}
+                    </p>
                     <Link
                       href="/actions"
                       className="group inline-flex items-center gap-2 rounded-full border border-mustard px-5 py-2.5 font-sans text-sm font-medium text-charcoal transition-[background-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-mustard active:scale-[0.98]"

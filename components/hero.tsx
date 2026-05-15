@@ -13,7 +13,10 @@ function armHeroVideoAfterLoader(video: HTMLVideoElement | null, playbackRate: n
 
   video.muted = true
 
+  let hasStarted = false
   const playFromStart = () => {
+    if (hasStarted) return
+    hasStarted = true
     video.currentTime = 0
     video.playbackRate = playbackRate
     void video.play().catch(() => {
@@ -82,7 +85,15 @@ export default function Hero() {
 
   useEffect(() => {
     if (!loaderReady) return
-    return armHeroVideoAfterLoader(mobileVideoRef.current, 2.5)
+    const video = mobileVideoRef.current
+    if (!video) return
+    video.muted = true
+    video.currentTime = 0
+    video.playbackRate = 2.5
+    void video.play().catch(() => {
+      video.muted = true
+      void video.play().catch(() => {})
+    })
   }, [loaderReady])
 
   useEffect(() => {
@@ -90,20 +101,6 @@ export default function Hero() {
     const rate = heroDesktopClipIx === 0 ? 2 : 1
     return armHeroVideoAfterLoader(desktopVideoRef.current, rate)
   }, [loaderReady, heroDesktopClipIx])
-
-  useEffect(() => {
-    const video = mobileVideoRef.current
-    if (!video) return
-    let stallCount = 0
-    const onWaiting = () => {
-      stallCount++
-      if (stallCount >= 2) {
-        video.pause()
-      }
-    }
-    video.addEventListener('waiting', onWaiting)
-    return () => video.removeEventListener('waiting', onWaiting)
-  }, [])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
@@ -120,7 +117,7 @@ export default function Hero() {
         initial={{ opacity: 0, x: -24 }}
         animate={loaderReady ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.8, ease: EASE }}
-        className="relative z-10 flex w-[36%] min-w-[280px] shrink-0 flex-col justify-center px-10 lg:px-14 xl:px-16 py-28"
+        className="relative z-10 flex w-[30%] min-w-[280px] shrink-0 flex-col justify-center px-10 lg:px-14 xl:px-16 py-28"
       >
         <p className="font-sans text-[11px] tracking-[0.2em] text-charcoal/40 uppercase">
           SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
@@ -202,7 +199,7 @@ export default function Hero() {
         <div className="pointer-events-none absolute top-20 bottom-20 left-0 w-px bg-gradient-to-b from-transparent via-charcoal/8 to-transparent" aria-hidden="true" />
 
         {/* Video container — tall cover, no max-width cap */}
-        <div className="relative h-[min(88vh,960px)] min-h-[min(72vh,620px)] w-full max-w-[min(1240px,calc(100vw-320px))] overflow-hidden rounded-sm shadow-2xl shadow-charcoal/15 ring-1 ring-charcoal/8">
+        <div className="relative h-[min(92vh,1080px)] min-h-[min(78vh,700px)] w-full max-w-[min(1400px,calc(100vw-280px))] overflow-hidden rounded-sm shadow-2xl shadow-charcoal/15 ring-1 ring-charcoal/8">
           {/* Subtle inner glow overlay */}
           <div className="pointer-events-none absolute inset-0 z-10 rounded-sm ring-1 ring-inset ring-white/10" />
 
@@ -216,9 +213,6 @@ export default function Hero() {
             className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
             aria-hidden="true"
             title="M.E.S.S. — Ο χώρος μας"
-            onEnded={() => {
-              setHeroDesktopClipIx((i) => (i + 1) % desktopClips.length)
-            }}
           />
         </div>
 

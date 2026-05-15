@@ -16,11 +16,12 @@ import { cn } from '@/lib/utils'
 import foodPhoto from '../../public/images/hero-bowl.jpg'
 import solidarityPhoto from '../../public/images/keep-rising.jpg'
 import communityPhoto from '../../public/images/keep-rising-team.jpg'
+import wellnessPhoto from '../../public/images/111/mess-internal-0030.jpg'
 
 /* ─────────────────────────── data ─────────────────────────── */
 
 type Accent = 'mustard' | 'terracotta' | 'olive'
-type PillarId = 'food' | 'solidarity' | 'community'
+type PillarId = 'food' | 'solidarity' | 'community' | 'wellness'
 
 type Pillar = {
   id: PillarId
@@ -46,6 +47,12 @@ const pillars: readonly Pillar[] = [
     id: 'community',
     title: 'Κοινότητα',
     body: 'Workshops, ανοιχτές βραδιές και συναντήσεις που φέρνουν κόσμο σε επαφή. Ο χώρος αλλάζει σχήμα ανάλογα με τη στιγμή.',
+    accent: 'olive',
+  },
+  {
+    id: 'wellness',
+    title: 'Ευεξία',
+    body: 'Ένας πιο χαλαρός ρυθμός ζωής μέσα στις πιεστικές ανάγκες του σήμερα. Ο αγαπημένος μας χώρος. Ελπίζουμε και δικός σας.',
     accent: 'olive',
   },
 ] as const
@@ -81,12 +88,14 @@ const pillarPhoto: Record<PillarId, StaticImageData> = {
   food: foodPhoto,
   solidarity: solidarityPhoto,
   community: communityPhoto,
+  wellness: wellnessPhoto,
 }
 
 const pillarPhotoAlt: Record<PillarId, string> = {
   food: 'Φρέσκο bowl από το M.E.S.S.',
   solidarity: 'Φορτηγό γεμάτο τρόφιμα για δωρεά — #KeepRising',
   community: 'Η ομάδα του M.E.S.S. μαζί στον χώρο',
+  wellness: 'Ήρεμη στιγμή στον χώρο του M.E.S.S. — ευεξία',
 }
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const
@@ -263,6 +272,36 @@ function SolidarityIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
   )
 }
 
+function WellnessIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      className={svgClassName}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <motion.path
+        d="M16 24 C16 24 8 18 8 12 C8 9 10 7 13 7 C14.5 7 16 8 16 10 C16 8 17.5 7 19 7 C22 7 24 9 24 12 C24 18 16 24 16 24 Z"
+        fill="currentColor"
+        stroke="none"
+        style={{ transformBox: 'fill-box', transformOrigin: 'center' }}
+        animate={animateIcon ? { scale: [1, 1.08, 1] } : { scale: 1 }}
+        transition={
+          animateIcon
+            ? { duration: 2.4, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 0 }
+        }
+      />
+      <path d="M16 10 V6" opacity="0.7" />
+      <path d="M13 7 L16 4 L19 7" opacity="0.7" />
+    </svg>
+  )
+}
+
 function CommunityIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
   const nodes = [
     { cx: 16, cy: 7 },
@@ -324,6 +363,7 @@ function PillarIcon({
   if (id === 'food') return <FoodIcon animateIcon={animateIcon} svgClassName={svgClassName} />
   if (id === 'solidarity')
     return <SolidarityIcon animateIcon={animateIcon} svgClassName={svgClassName} />
+  if (id === 'wellness') return <WellnessIcon animateIcon={animateIcon} svgClassName={svgClassName} />
   return <CommunityIcon animateIcon={animateIcon} svgClassName={svgClassName} />
 }
 
@@ -388,7 +428,7 @@ export default function ActionsMissionStrip({
   const wordStagger = isLead ? 0.035 : 0.06
   const pillarStagger = isLead ? 0.07 : 0.14
 
-  const headlineWords = 'Τρεις τρόποι που στεκόμαστε δίπλα στην πόλη.'.split(' ')
+  const headlineWords = 'Τέσσερις τρόποι που στεκόμαστε δίπλα στην πόλη.'.split(' ')
 
   return (
     <section
@@ -517,7 +557,7 @@ export default function ActionsMissionStrip({
               }}
               className="mx-auto mt-5 max-w-[44ch] font-sans text-[15px] leading-relaxed text-concrete"
             >
-              Καθαρό φαγητό. Αλληλεγγύη. Κοινότητα. Όχι ως slogans — ως πράξεις.
+              Καθαρό φαγητό. Αλληλεγγύη. Κοινότητα. Ευεξία. Όχι ως slogans — ως πράξεις.
             </motion.p>
           </div>
         )}
@@ -525,7 +565,7 @@ export default function ActionsMissionStrip({
         {/* pillars */}
         <div
           className={cn(
-            'grid md:grid-cols-3',
+            'grid md:grid-cols-2 lg:grid-cols-4',
             isLead ? 'mt-5 gap-3 md:mt-12 md:gap-6' : 'mt-14 gap-6 md:mt-20 md:gap-8',
           )}
         >
@@ -566,7 +606,7 @@ export default function ActionsMissionStrip({
                       src={pillarPhoto[pillar.id]}
                       alt={pillarPhotoAlt[pillar.id]}
                       fill
-                      sizes="(min-width: 768px) 33vw, 0px"
+                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 0px"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                     <div className={cn(
