@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 const anchors = [
@@ -12,8 +12,13 @@ const anchors = [
   { id: 'treats', label: 'Treats' },
 ]
 
+// Matches Navigation's `h-16` (64px) on non-hero pages. The anchor nav sits flush
+// against the bottom of the main nav.
+const NAV_HEIGHT = 64
+
 export default function MenuAnchorNav() {
   const [active, setActive] = useState('brunch')
+  const navRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -35,13 +40,17 @@ export default function MenuAnchorNav() {
   function scrollTo(id: string) {
     const el = document.getElementById(id)
     if (!el) return
-    const top = el.getBoundingClientRect().top + window.scrollY - 52
+    // Measure the actual anchor-nav height so the section heading clears the
+    // sticky stack on every viewport (mobile is 2 rows tall, desktop is 1).
+    const anchorH = navRef.current?.offsetHeight ?? 52
+    const top = el.getBoundingClientRect().top + window.scrollY - (NAV_HEIGHT + anchorH)
     window.scrollTo({ top, behavior: 'smooth' })
   }
 
   return (
     <nav
-      className="sticky top-20 z-40 border-y border-charcoal/10 bg-bone"
+      ref={navRef}
+      className="sticky top-16 z-40 border-b border-charcoal/10 bg-bone/95 backdrop-blur-[10px]"
       aria-label="Menu sections"
     >
       <div className="mx-auto flex max-w-[1400px] flex-col gap-2 px-6 py-2 md:px-12 lg:flex-row lg:items-center lg:justify-between">

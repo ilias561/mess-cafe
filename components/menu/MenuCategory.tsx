@@ -58,7 +58,7 @@ export default function MenuCategory({
   }
 
   return (
-    <section id={category.id} className={`scroll-mt-28 ${bg} px-6 py-16 md:px-12 md:py-32`}>
+    <section id={category.id} className={`scroll-mt-[140px] ${bg} px-6 py-16 md:scroll-mt-[120px] md:px-12 md:py-32`}>
       <div className="mx-auto max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 28 }}

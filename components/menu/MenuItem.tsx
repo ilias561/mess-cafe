@@ -36,20 +36,44 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
     if (!video || !item.video) return
 
     let hasPlayed = false
-    const observer = new IntersectionObserver(
+    // Two-stage observer: prebuffer well before view, play when in view.
+    const prefetchObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && video.preload !== 'auto') {
+            video.preload = 'auto'
+            // Nudge the browser to actually fetch frames, not just metadata.
+            try {
+              video.load()
+            } catch {
+              /* noop */
+            }
+          }
+        })
+      },
+      { rootMargin: '600px 0px' },
+    )
+
+    const playObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasPlayed) {
             hasPlayed = true
-            void video.play().catch(() => {})
+            void video.play().catch(() => {
+              // Autoplay can fail on some mobile browsers; poster still shows.
+            })
           }
         })
       },
-      { threshold: 0.5 },
+      { threshold: 0.25, rootMargin: '0px 0px -10% 0px' },
     )
 
-    observer.observe(video)
-    return () => observer.disconnect()
+    prefetchObserver.observe(video)
+    playObserver.observe(video)
+    return () => {
+      prefetchObserver.disconnect()
+      playObserver.disconnect()
+    }
   }, [item.video])
 
   if (item.video) {
@@ -62,7 +86,10 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
         muted
         playsInline
         preload="metadata"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        {...({ 'webkit-playsinline': 'true', 'x5-playsinline': 'true' } as any)}
         className="h-full w-full object-cover"
+        aria-label={item.name}
         onEnded={(e) => {
           e.currentTarget.pause()
         }}
@@ -77,6 +104,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
         alt={item.name}
         className="h-full w-full object-cover"
         loading="lazy"
+        decoding="async"
       />
     )
   }
