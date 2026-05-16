@@ -55,6 +55,8 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
                 <button
                   key={filter.key}
                   type="button"
+                  aria-label={`Φίλτρο κατηγορίας: ${filter.label}`}
+                  aria-pressed={isActive}
                   onClick={() => {
                     setActiveFilter(filter.key)
                     setVisibleCount(9)

@@ -10,19 +10,25 @@ import EventsArchiveList from '@/components/events/events-archive-list'
 import ActionSpotlight from '@/components/events/action-spotlight'
 import PreFooterCta from '@/components/pre-footer-cta'
 import FooterSection from '@/components/footer-section'
-import { getEventBySlug, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
+import { getAllEvents, getEventBySlug, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
+import { buildPageMetadata } from '@/lib/metadata'
 import { getSettings } from '@/lib/settings'
 
-export const metadata: Metadata = {
+const firstEventCover = getAllEvents()[0]
+
+export const metadata: Metadata = buildPageMetadata({
   title: '#KeepRising — M.E.S.S. | Κοινότητα, αλληλεγγύη και πολιτισμός',
   description: '#KeepRising — οι δράσεις του M.E.S.S. για καθαρό φαγητό, αλληλεγγύη και κοινότητα στα Ιωάννινα.',
-  openGraph: {
-    title: '#KeepRising — M.E.S.S. | Κοινότητα, αλληλεγγύη και πολιτισμός',
-    description: '#KeepRising — οι δράσεις του M.E.S.S. για καθαρό φαγητό, αλληλεγγύη και κοινότητα στα Ιωάννινα.',
-    locale: 'el_GR',
-    type: 'website',
-  },
-}
+  path: '/actions',
+  ...(firstEventCover
+    ? {
+        image: {
+          url: firstEventCover.coverImage,
+          alt: firstEventCover.coverAlt,
+        },
+      }
+    : {}),
+})
 
 export default function ActionsPage() {
   const settings = getSettings()
@@ -44,7 +50,9 @@ export default function ActionsPage() {
       <div className="relative w-full overflow-hidden" style={{ height: 'clamp(250px, 40vw, 500px)' }}>
         <img
           src="/images/111/mess-internal-0034.jpg"
-          alt="Keep Rising — η πινακίδα του M.E.S.S."
+          alt="Ο εσωτερικός χώρος M.E.S.S. με πινακίδα #Keep Rising"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </div>

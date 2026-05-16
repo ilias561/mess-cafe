@@ -607,6 +607,8 @@ export default function ActionsMissionStrip({
                       alt={pillarPhotoAlt[pillar.id]}
                       fill
                       sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 0px"
+                      loading="lazy"
+                      decoding="async"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                     <div className={cn(
@@ -644,6 +646,8 @@ export default function ActionsMissionStrip({
                     alt={pillarPhotoAlt[pillar.id]}
                     fill
                     sizes="48px"
+                    loading="lazy"
+                    decoding="async"
                     className="object-cover"
                   />
                 </div>

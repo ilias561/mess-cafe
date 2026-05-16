@@ -5,21 +5,21 @@ import MenuAnchorNav from '@/components/menu/MenuAnchorNav'
 import MenuCategory from '@/components/menu/MenuCategory'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
+import { buildMenuJsonLd } from '@/lib/menu-schema'
 import { menuData } from '@/lib/menu-data'
+import { buildPageMetadata } from '@/lib/metadata'
 import { getSettings } from '@/lib/settings'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Menu — M.E.S.S. · Specialty Coffee & Healthy Brunch Ιωάννινα',
   description:
     'Φαγητό ως φάρμακο. Specialty καφές, poke bowls, brunch, smoothies και γλυκά χωρίς ζάχαρη. Όλες οι τιμές.',
-  openGraph: {
-    title: 'Menu — M.E.S.S. · Specialty Coffee & Healthy Brunch Ιωάννινα',
-    description:
-      'Φαγητό ως φάρμακο. Specialty καφές, poke bowls, brunch, smoothies και γλυκά χωρίς ζάχαρη. Όλες οι τιμές.',
-    locale: 'el_GR',
-    type: 'website',
+  path: '/menu',
+  image: {
+    url: '/images/menu/piata-0028.jpg',
+    alt: 'Poke bowl με φρέσκα λαχανικά και σολομό — επιλογή από το μενού M.E.S.S.',
   },
-}
+})
 
 const PHILOSOPHY_INDEX = 3
 
@@ -32,9 +32,14 @@ export default function MenuPage() {
   const settings = getSettings()
   const beforePhilosophy = menuData.slice(0, PHILOSOPHY_INDEX)
   const afterPhilosophy = menuData.slice(PHILOSOPHY_INDEX)
+  const menuJsonLd = buildMenuJsonLd()
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(menuJsonLd) }}
+      />
       <Navigation />
       <MenuHeader updatedAt={updatedAt} />
       <MenuAnchorNav />

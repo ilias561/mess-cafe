@@ -34,7 +34,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
         <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-cream`}>
           <FadeImage
             src={post.cover}
-            alt={post.coverAlt}
+            alt={post.coverAlt || `Άρθρο: ${post.title}`}
             width={760}
             height={950}
             className="h-full w-full object-cover transition-[transform,filter] duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] group-hover:[filter:sepia(0.15)_saturate(1.1)]"

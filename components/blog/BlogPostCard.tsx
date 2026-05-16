@@ -17,7 +17,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
       <div className="aspect-[4/3] overflow-hidden">
         <FadeImage
           src={post.cover}
-          alt={post.coverAlt}
+          alt={post.coverAlt || `Άρθρο: ${post.title}`}
           width={800}
           height={600}
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"

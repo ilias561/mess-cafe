@@ -71,7 +71,7 @@ const galleryItems: GalleryItem[] = [
     id: 'd',
     src: images.menuNew1,
     desktopSrc: images.galleryDesktopFood35,
-    alt: 'Specialty coffee και brunch',
+    alt: 'Τραπέζι με specialty coffee και brunch',
     label: 'MENU',
     caption: 'Specialty coffee & brunch table',
     gridArea: 'd',
@@ -223,7 +223,7 @@ function Lightbox({
         aria-label="Κλείσιμο"
         className="ui-interactive absolute top-5 right-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
       >
-        <X className="h-5 w-5" strokeWidth={1.5} />
+        <X className="h-5 w-5" strokeWidth={1.5} aria-hidden />
       </button>
 
       {/* Prev */}
@@ -234,7 +234,7 @@ function Lightbox({
         aria-label="Προηγούμενη φωτογραφία"
         className="ui-interactive absolute left-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:left-8"
       >
-        <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
+        <ChevronLeft className="h-5 w-5" strokeWidth={1.5} aria-hidden />
       </button>
       )}
 
@@ -246,7 +246,7 @@ function Lightbox({
         aria-label="Επόμενη φωτογραφία"
         className="ui-interactive absolute right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-bone/20 text-bone/70 hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:right-8"
       >
-        <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
+        <ChevronRight className="h-5 w-5" strokeWidth={1.5} aria-hidden />
       </button>
       )}
 

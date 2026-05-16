@@ -136,6 +136,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
                       {upcomingCurated.length > 1 && (
                         <button
                           type="button"
+                          aria-label="Επόμενη πρόταση εκδήλωσης"
                           onClick={handleNextRecommendation}
                           className="ui-link font-sans text-xs font-medium tracking-[0.12em] text-charcoal/70 uppercase hover:text-charcoal"
                         >

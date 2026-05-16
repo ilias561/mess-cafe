@@ -25,7 +25,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px]">
             <FadeImage
               src={event.coverImage}
-              alt={event.coverAlt}
+              alt={event.coverAlt || `Εκδήλωση: ${event.title}`}
               fill
               sizes="(min-width: 768px) 46vw, 92vw"
               className="object-cover"

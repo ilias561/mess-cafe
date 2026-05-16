@@ -22,11 +22,12 @@ function getWeb3FormsErrorMessage(payload: Web3FormsPayload | null) {
   return payload.message
 }
 
-function buildCallmebotMessage(formData: BookingFormValues) {
+function buildCallmebotMessage(formData: Omit<BookingFormValues, 'consent'>) {
   return `🎉 Νέα κράτηση event!\n\n👤 ${formData.name}\n📞 ${formData.phone}\n📧 ${formData.email}\n🎯 ${formData.eventType}\n📅 ${formData.date}\n👥 ${formData.guests} άτομα\n\n${formData.message || ''}`
 }
 
 export async function submitBooking(formData: BookingFormValues): Promise<SubmitBookingResult> {
+  const { consent: _consent, ...booking } = formData
   const web3formsKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
   if (!web3formsKey) {
     return {
@@ -40,16 +41,16 @@ export async function submitBooking(formData: BookingFormValues): Promise<Submit
 
   const web3formsPayload = new URLSearchParams({
     access_key: web3formsKey,
-    subject: `Νέα κράτηση event: ${formData.eventType}`,
+    subject: `Νέα κράτηση event: ${booking.eventType}`,
     from_name: 'M.E.S.S. Website',
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    eventType: formData.eventType,
-    date: formData.date,
-    guests: String(formData.guests),
-    message: formData.message || '',
-    eventSlug: formData.eventSlug || '',
+    name: booking.name,
+    email: booking.email,
+    phone: booking.phone,
+    eventType: booking.eventType,
+    date: booking.date,
+    guests: String(booking.guests),
+    message: booking.message || '',
+    eventSlug: booking.eventSlug || '',
   })
 
   const web3formsRequest = fetch('https://api.web3forms.com/submit', {
@@ -61,7 +62,7 @@ export async function submitBooking(formData: BookingFormValues): Promise<Submit
     body: web3formsPayload.toString(),
   })
 
-  const callmebotMessage = buildCallmebotMessage(formData)
+  const callmebotMessage = buildCallmebotMessage(booking)
   const callmebotRequest = callmebotPhone && callmebotKey
     ? fetch(
         `https://api.callmebot.com/whatsapp.php?phone=${callmebotPhone}&text=${encodeURIComponent(callmebotMessage)}&apikey=${callmebotKey}`,

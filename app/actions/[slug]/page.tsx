@@ -6,6 +6,8 @@ import PostBody from '@/components/blog/post-body'
 import EventHero from '@/components/events/event-hero'
 import EventBookingCta from '@/components/events/event-booking-cta'
 import RelatedEvents from '@/components/events/related-events'
+import { buildOgImage, buildPageMetadata } from '@/lib/metadata'
+import { absoluteUrl } from '@/lib/site-url'
 import { getAllEvents, getEventBySlug } from '@/lib/events/events'
 
 type EventPageProps = {
@@ -27,18 +29,18 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
     return { title: 'Δράση — M.E.S.S.' }
   }
 
-  return {
+  const base = buildPageMetadata({
     title: `${event.title} — Δράσεις | M.E.S.S.`,
     description: event.description,
-    alternates: {
-      canonical: `https://mess-cafe.gr/actions/${event.slug}`,
-    },
+    path: `/actions/${event.slug}`,
+    type: 'article',
+  })
+
+  return {
+    ...base,
     openGraph: {
-      title: `${event.title} — Δράσεις | M.E.S.S.`,
-      description: event.description,
-      type: 'article',
-      locale: 'el_GR',
-      images: [{ url: event.coverImage, alt: event.coverAlt }],
+      ...base.openGraph,
+      images: [buildOgImage({ url: event.coverImage, alt: event.coverAlt })],
     },
     twitter: {
       card: 'summary_large_image',
@@ -61,7 +63,7 @@ export default async function EventPage({ params }: EventPageProps) {
     name: event.title,
     description: event.description,
     image: event.coverImage,
-    url: `https://mess-cafe.gr/actions/${event.slug}`,
+    url: absoluteUrl(`/actions/${event.slug}`),
     startDate: event.date,
     location: {
       '@type': 'Place',
@@ -77,7 +79,7 @@ export default async function EventPage({ params }: EventPageProps) {
     organizer: {
       '@type': 'Organization',
       name: 'M.E.S.S.',
-      url: 'https://mess-cafe.gr',
+      url: absoluteUrl('/'),
     },
     inLanguage: 'el',
   }

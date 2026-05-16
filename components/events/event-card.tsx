@@ -29,7 +29,7 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
         <div className="relative aspect-[4/5] overflow-hidden">
           <FadeImage
             src={event.coverImage}
-            alt={event.coverAlt}
+            alt={event.coverAlt || `Εκδήλωση: ${event.title}`}
             fill
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 420px"

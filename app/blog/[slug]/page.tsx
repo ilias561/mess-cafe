@@ -8,6 +8,8 @@ import RelatedPosts from '@/components/blog/related-posts'
 import ShareRow from '@/components/blog/share-row'
 import PreFooterCta from '@/components/pre-footer-cta'
 import { formatPostDate } from '@/lib/blog/format-date'
+import { buildOgImage, buildPageMetadata } from '@/lib/metadata'
+import { absoluteUrl, getSiteUrl } from '@/lib/site-url'
 import { getAllPosts, getPostBySlug } from '@/lib/blog/posts'
 
 type BlogPostPageProps = {
@@ -28,20 +30,24 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   }
 
-  return {
+  const base = buildPageMetadata({
     title: `${post.title} — Blog | M.E.S.S.`,
     description: post.excerpt,
-    alternates: {
-      canonical: `/blog/${post.slug}`,
-    },
+    path: `/blog/${post.slug}`,
+    type: 'article',
+  })
+
+  return {
+    ...base,
     openGraph: {
       title: `${post.title} — Blog | M.E.S.S.`,
       description: post.excerpt,
       type: 'article',
+      locale: 'el_GR',
+      url: absoluteUrl(`/blog/${post.slug}`),
       publishedTime: post.publishedAt,
       authors: [post.author.name],
-      images: [{ url: post.cover, alt: post.coverAlt }],
-      locale: 'el_GR',
+      images: [buildOgImage({ url: post.cover, alt: post.coverAlt })],
     },
     twitter: {
       card: 'summary_large_image',
@@ -60,7 +66,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  const canonicalUrl = `https://mess-cafe.gr/blog/${post.slug}`
+  const canonicalUrl = absoluteUrl(`/blog/${post.slug}`)
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -77,7 +83,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     publisher: {
       '@type': 'Organization',
       name: 'M.E.S.S.',
-      url: 'https://mess-cafe.gr',
+      url: getSiteUrl(),
     },
     inLanguage: 'el',
   }

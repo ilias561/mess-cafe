@@ -15,7 +15,7 @@ export default function PostMeta({ post, showAvatar = false, className = '', lig
       {showAvatar && post.author.avatar ? (
         <FadeImage
           src={post.author.avatar}
-          alt={`Φωτογραφία ${post.author.name}`}
+          alt={`Πορτρέτο του ${post.author.name}`}
           width={32}
           height={32}
           className="h-8 w-8 rounded-full object-cover"

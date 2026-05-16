@@ -251,7 +251,7 @@ export default function ReviewsSection() {
             className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-[#5f6368] transition-colors hover:text-[#4285F4]"
           >
             Όλες οι αξιολογήσεις στο Google
-            <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5">
+            <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5" aria-hidden>
               <path d="M6 3h7m0 0v7m0-7L4 13" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>

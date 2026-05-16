@@ -14,7 +14,7 @@ export default function PostHero({ post }: PostHeroProps) {
     <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
       <ParallaxImage
         src={post.cover}
-        alt={post.coverAlt}
+        alt={post.coverAlt || `Άρθρο: ${post.title}`}
         fill
         priority
         sizes="100vw"

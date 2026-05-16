@@ -18,35 +18,35 @@ const aboutImages = [
   {
     key: 'aboutBar',
     src: images.aboutBar,
-    alt: 'Coffee bar and service area',
+    alt: 'Μπαρ specialty coffee και περιοχή σερβιρίσματος',
     aspect: 'aspect-[3/2]',
     caption: 'ΤΟ BAR',
   },
   {
     key: 'aboutStairs',
     src: images.aboutStairs,
-    alt: 'Stairs and workspace seating',
+    alt: 'Σκάλα προς τον μεζονέτα με καθίσματα εργασίας',
     aspect: 'aspect-square',
     caption: 'ΣΚΑΛΑ ΠΡΟΣ ΜΕΖΟΝΙ',
   },
   {
     key: 'aboutPlants',
     src: images.aboutPlants,
-    alt: 'Dense plants against concrete',
+    alt: 'Πυκνή βλάστηση σε μπετόνινο τοίχο',
     aspect: 'aspect-[4/5]',
     caption: 'ΦΥΤΑ & ΦΩΣ',
   },
   {
     key: 'new1',
     src: images.new1,
-    alt: 'Νέα φωτογραφία χώρου 1',
+    alt: 'Εσωτερικός χώρος του καφέ με φυσικό φως',
     aspect: 'aspect-[3/2]',
     caption: 'Ο ΧΩΡΟΣ ΜΑΣ',
   },
   {
     key: 'new2',
     src: images.new2,
-    alt: 'Νέα φωτογραφία χώρου 2',
+    alt: 'Λεπτομέρεια διακόσμησης και υλικών στον χώρο',
     aspect: 'aspect-[4/5]',
     caption: 'ΛΕΠΤΟΜΕΡΕΙΕΣ',
   },
@@ -135,7 +135,7 @@ export default function AboutUsSection() {
                     <div className="relative my-2 aspect-[3/2] w-full overflow-hidden md:hidden">
                       <FadeImage
                         src={images.aboutBar}
-                        alt="Coffee bar and service area"
+                        alt="Μπαρ specialty coffee και περιοχή σερβιρίσματος"
                         fill
                         unoptimized
                         loading="lazy"

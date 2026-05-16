@@ -28,7 +28,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
             <div className="aspect-[16/11] overflow-hidden rounded-[2px] bg-bone-warm">
               <ParallaxImage
                 src={post.cover}
-                alt={post.coverAlt}
+                alt={post.coverAlt || `Άρθρο: ${post.title}`}
                 width={980}
                 height={1200}
                 className="h-full w-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"

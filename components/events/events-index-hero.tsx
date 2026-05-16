@@ -93,6 +93,8 @@ export default function EventsIndexHero({
                 fill
                 placeholder="blur"
                 sizes="(min-width: 768px) 34vw, 92vw"
+                loading="lazy"
+                decoding="async"
                 className="object-cover"
               />
             </div>
@@ -146,6 +148,8 @@ export default function EventsIndexHero({
             <motion.div {...fadeUpDelayed(0.09)} className="mt-5 flex flex-wrap gap-2">
               <button
                 type="button"
+                aria-label="Εμφάνιση όλων των κατηγοριών δράσεων"
+                aria-pressed={activeCategory === null}
                 onClick={() => onCategoryChange(null)}
                 className={cn(
                   'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
@@ -163,6 +167,8 @@ export default function EventsIndexHero({
                 <button
                   key={label}
                   type="button"
+                  aria-label={`Φίλτρο κατηγορίας: ${label}`}
+                  aria-pressed={activeCategory === label}
                   onClick={() => onCategoryChange(label)}
                   className={cn(
                     'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
@@ -198,6 +204,8 @@ export default function EventsIndexHero({
               fill
               placeholder="blur"
               sizes="(min-width: 768px) 34vw, 92vw"
+              loading="lazy"
+              decoding="async"
               className="object-cover"
             />
             {nextEvent && day && monthAbbrev && (

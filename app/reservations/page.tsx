@@ -7,20 +7,20 @@ import FooterSection from '@/components/footer-section'
 import PreFooterCta from '@/components/pre-footer-cta'
 import SectionReveal from '@/components/section-reveal'
 import { getAllEvents } from '@/lib/events/events'
+import { buildPageMetadata } from '@/lib/metadata'
+import { images } from '@/lib/images'
 import { getSettings } from '@/lib/settings'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'Κράτηση για event — M.E.S.S.',
   description:
     'Συμπλήρωσε τη φόρμα για να οργανώσουμε μαζί workshop, μουσική βραδιά, ιδιωτικό event ή παρουσίαση.',
-  openGraph: {
-    title: 'Κράτηση για event — M.E.S.S.',
-    description:
-      'Συμπλήρωσε τη φόρμα για να οργανώσουμε μαζί workshop, μουσική βραδιά, ιδιωτικό event ή παρουσίαση.',
-    locale: 'el_GR',
-    type: 'website',
+  path: '/reservations',
+  image: {
+    url: images.heroInterior,
+    alt: 'Εσωτερικός χώρος M.E.S.S. — ζεστό φως και τραπέζια για κράτηση event',
   },
-}
+})
 
 export default function ReservationsPage() {
   const settings = getSettings()
@@ -31,7 +31,7 @@ export default function ReservationsPage() {
       <Navigation />
       <section className="px-6 pt-36 md:px-12 md:pt-44">
         <SectionReveal className="mx-auto max-w-[1400px]">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">EVENT BOOKING</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal">EVENT BOOKING</p>
           <h1 className="mt-5 max-w-[14ch] font-serif text-[clamp(44px,6.5vw,96px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[16ch]">
             Κλείσε την εκδήλωσή σου.
           </h1>

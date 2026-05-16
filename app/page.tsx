@@ -1,4 +1,6 @@
+import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
+import { buildPageMetadata } from '@/lib/metadata'
 import Hero from '@/components/hero'
 import MarqueeStrip from '@/components/marquee-strip'
 import TodayModule from '@/components/today-module'
@@ -11,6 +13,13 @@ import ReviewsSection from '@/components/reviews-section'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
 import { getAllEvents, getEventBySlug, type Event } from '@/lib/events/events'
+
+export const metadata: Metadata = buildPageMetadata({
+  title: 'M.E.S.S. — Specialty Coffee & Brunch · Ιωάννινα',
+  description:
+    'Specialty coffee, healthy brunch και θέα στη λίμνη στο ΚΕΠΑΒΙ, Ιωάννινα. Φαγητό ως φάρμακο — poke bowls, acai, smoothies, γλυκά χωρίς ζάχαρη.',
+  path: '/',
+})
 
 export default function Home() {
   const keepRisingBazaar = getEventBySlug('keep-rising-bazaar')

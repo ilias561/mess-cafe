@@ -302,6 +302,9 @@ export default function Hero() {
           src={videoSrc('/videos/hero-mobile-poster.jpg')}
           alt=""
           aria-hidden="true"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
         <video

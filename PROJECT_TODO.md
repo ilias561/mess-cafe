@@ -20,14 +20,14 @@ This is the full checklist to take the project from "running on localhost" → "
 - [ ] `www.` → root redirect configured
 
 ### 1.2 SEO foundation
-- [ ] `app/sitemap.ts` generates sitemap.xml at build
-- [ ] `app/robots.ts` generates robots.txt
-- [ ] JSON-LD schema on homepage: `LocalBusiness` + `Restaurant`
+- [x] `app/sitemap.ts` generates sitemap.xml at build
+- [x] `app/robots.ts` generates robots.txt
+- [x] JSON-LD schema on homepage: `LocalBusiness` + `Restaurant`
 - [ ] JSON-LD schema on each event page: `Event`
 - [ ] JSON-LD schema on each blog post: `Article`
 - [ ] OpenGraph images (dynamic via @vercel/og OR static per post)
-- [ ] Canonical URLs on every page
-- [ ] `og:locale` = `el_GR` everywhere (already partially done)
+- [x] Canonical URLs on every page
+- [x] `og:locale` = `el_GR` everywhere (already partially done)
 - [ ] Google Search Console + Bing Webmaster verified
 - [ ] Google Business Profile claim / update
 
@@ -37,13 +37,13 @@ This is the full checklist to take the project from "running on localhost" → "
 - [ ] Focus rings visible on every interactive element
 - [ ] Color contrast check (olive text on bone may be borderline)
 - [ ] Keyboard navigation works (tab through every page)
-- [ ] Skip-to-content link in nav
-- [ ] aria-labels on icon-only buttons (WhatsApp float, share icons)
-- [ ] Forms have proper labels + error messages
+- [x] Skip-to-content link in nav
+- [x] aria-labels on icon-only buttons (WhatsApp float, share icons)
+- [x] Forms have proper labels + error messages
 - [ ] Greek screen-reader test (with NVDA or Mac VoiceOver)
 
 ### 1.4 Analytics + monitoring
-- [ ] Cloudflare Web Analytics enabled (free, no cookie banner needed)
+- [x] Cloudflare Web Analytics enabled (free, no cookie banner needed)
 - [ ] Error tracking: Sentry free tier OR Cloudflare Logpush
 - [ ] Uptime monitor: UptimeRobot free tier → alerts if site down
 
@@ -55,10 +55,10 @@ This is the full checklist to take the project from "running on localhost" → "
 - [ ] Test WhatsApp float button opens chat correctly
 
 ### 1.6 Legal / compliance
-- [ ] Privacy policy page (Greek, simple, cover form data + analytics)
-- [ ] Cookie policy if using any tracking cookies (Cloudflare Analytics cookieless → may skip)
-- [ ] GDPR consent checkbox on contact/reservations forms
-- [ ] "Πολιτική Απορρήτου" link in footer
+- [x] Privacy policy page (Greek, simple, cover form data + analytics)
+- [x] Cookie policy if using any tracking cookies (Cloudflare Analytics cookieless → may skip)
+- [x] GDPR consent checkbox on contact/reservations forms
+- [x] "Πολιτική Απορρήτου" link in footer
 
 ---
 

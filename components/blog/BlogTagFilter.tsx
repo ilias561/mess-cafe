@@ -48,6 +48,8 @@ export default function BlogTagFilter({ posts }: BlogTagFilterProps) {
               <button
                 key={key}
                 type="button"
+                aria-label={`Φίλτρο: ${label}`}
+                aria-pressed={isActive}
                 onClick={() => {
                   if (!isEmpty) setActiveFilter(key)
                 }}

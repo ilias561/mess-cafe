@@ -84,6 +84,7 @@ function PreviewCardMedia({ item }: { item: PreviewItem }) {
         muted
         playsInline
         preload="metadata"
+        aria-label={item.name}
         className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-signature)] group-hover:scale-[1.03]"
         onEnded={(e) => {
           e.currentTarget.pause()

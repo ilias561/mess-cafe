@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import type { ImageProps } from 'next/image'
 import { FadeImage } from '@/components/fade-image'
 
+/** Passes `alt` through to FadeImage — caller must supply descriptive or decorative alt. */
 export default function ParallaxImage(props: Omit<ImageProps, 'ref'>) {
   const wrapRef = useRef<HTMLDivElement>(null)
 

@@ -23,7 +23,7 @@ export default function ActionSpotlight({ event }: Props) {
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] border border-line/50 bg-bone">
               <FadeImage
                 src={event.coverImage}
-                alt={event.coverAlt}
+                alt={event.coverAlt || `Εκδήλωση: ${event.title}`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, 42vw"

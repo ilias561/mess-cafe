@@ -117,7 +117,8 @@ function BrandLogo({ compact = false }: { compact?: boolean }) {
   const cls = compact ? 'h-6 w-6 shrink-0' : 'h-8 w-8 shrink-0'
   if (failed) {
     return (
-      <svg viewBox="0 0 32 32" fill="none" className={`${cls} rounded-full`} aria-hidden>
+      <svg viewBox="0 0 32 32" fill="none" className={`${cls} rounded-full`} role="img" aria-label="Λογότυπο M.E.S.S.">
+        <title>M.E.S.S.</title>
         <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="16" cy="14" r="5" fill="currentColor" />
         <path d="M10 24c1.5-3 3.5-5 6-5s4.5 2 6 5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
@@ -127,7 +128,7 @@ function BrandLogo({ compact = false }: { compact?: boolean }) {
   return (
     <Image
       src="/images/logo-mess.svg"
-      alt="M.E.S.S. logo"
+      alt="Λογότυπο M.E.S.S."
       width={px}
       height={px}
       className={`${cls} rounded-full object-cover`}
@@ -391,7 +392,7 @@ export default function Navigation() {
               aria-label="Κάλεσέ μας"
               className={`ui-interactive flex h-11 w-11 items-center justify-center rounded-full border hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
             >
-              <Phone className="h-3.5 w-3.5" strokeWidth={1.5} />
+              <Phone className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
             </a>
 
             <motion.button
@@ -406,8 +407,8 @@ export default function Navigation() {
               onClick={() => setMenuOpen((o) => !o)}
             >
               {menuOpen
-                ? <X className="h-5 w-5" strokeWidth={1.5} />
-                : <Menu className="h-5 w-5" strokeWidth={1.5} />
+                ? <X className="h-5 w-5" strokeWidth={1.5} aria-hidden />
+                : <Menu className="h-5 w-5" strokeWidth={1.5} aria-hidden />
               }
             </motion.button>
           </div>

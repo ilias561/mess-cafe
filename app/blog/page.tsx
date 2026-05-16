@@ -3,20 +3,25 @@ import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
 import PreFooterCta from '@/components/pre-footer-cta'
 import BlogTagFilter from '@/components/blog/BlogTagFilter'
+import { buildPageMetadata } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/blog/posts'
 
-export const metadata: Metadata = {
+const firstPost = getAllPosts()[0]
+
+export const metadata: Metadata = buildPageMetadata({
   title: 'Blog — M.E.S.S. | Ιστορίες για καφέ και κοινότητα',
   description:
     'Ιστορίες, συνταγές και στιγμές από το M.E.S.S. στα Ιωάννινα — από τους μπαρίστα στους πελάτες μας.',
-  openGraph: {
-    title: 'Blog — M.E.S.S. | Ιστορίες για καφέ και κοινότητα',
-    description:
-      'Ιστορίες, συνταγές και στιγμές από το M.E.S.S. στα Ιωάννινα — από τους μπαρίστα στους πελάτες μας.',
-    type: 'website',
-    locale: 'el_GR',
-  },
-}
+  path: '/blog',
+  ...(firstPost
+    ? {
+        image: {
+          url: firstPost.cover,
+          alt: firstPost.coverAlt,
+        },
+      }
+    : {}),
+})
 
 export default function BlogPage() {
   const posts = getAllPosts()

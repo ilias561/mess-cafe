@@ -146,7 +146,7 @@ export default function NewsletterPopup() {
               onClick={dismiss}
               className="ui-interactive absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-charcoal/70 hover:bg-charcoal/8"
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4" aria-hidden />
             </button>
 
             <p className="font-sans text-[10px] font-medium uppercase tracking-[0.24em] text-terracotta">NEWSLETTER</p>

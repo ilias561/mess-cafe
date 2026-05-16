@@ -82,7 +82,7 @@ export default function PostBody({ markdown, variant = 'article' }: PostBodyProp
         <figure key={`img-${index}`} className="my-10">
           <FadeImage
             src={src}
-            alt={alt || 'Εικόνα άρθρου'}
+            alt={alt.trim() ? alt : 'Εικόνα στο άρθρο'}
             width={1400}
             height={900}
             className="h-auto w-full rounded-[2px]"

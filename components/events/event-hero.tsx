@@ -23,7 +23,7 @@ export default function EventHero({ event }: { event: Event }) {
           <div className="overflow-hidden rounded-[2px] border border-line/30">
             <FadeImage
               src={event.coverImage}
-              alt={event.coverAlt}
+              alt={event.coverAlt || `Εκδήλωση: ${event.title}`}
               width={900}
               height={1100}
               className="h-auto w-full"

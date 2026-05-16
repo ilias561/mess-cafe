@@ -73,7 +73,9 @@ export default function MenuAnchorNav() {
           {anchors.map(({ id, label }) => (
             <button
               key={id}
+              type="button"
               onClick={() => scrollTo(id)}
+              aria-label={`Μετάβαση στην ενότητα ${label}`}
               className={`ui-link shrink-0 border-b pb-1 font-sans text-sm focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${
                 active === id
                   ? 'border-mustard text-charcoal'

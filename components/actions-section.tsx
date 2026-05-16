@@ -39,7 +39,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <FadeImage
                       src={card.coverImage}
-                      alt={card.coverAlt}
+                      alt={card.coverAlt || `Εκδήλωση: ${card.title}`}
                       fill
                       loading="lazy"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

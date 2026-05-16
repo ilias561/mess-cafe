@@ -19,7 +19,7 @@ export default function ShareRow({ url }: ShareRowProps) {
         className="ui-link inline-flex items-center gap-1.5 hover:text-olive"
         aria-label="Κοινοποίηση στο Facebook"
       >
-        <Facebook className="h-3.5 w-3.5" />
+        <Facebook className="h-3.5 w-3.5" aria-hidden />
         Facebook
       </a>
       <a
@@ -29,7 +29,7 @@ export default function ShareRow({ url }: ShareRowProps) {
         className="ui-link inline-flex items-center gap-1.5 hover:text-olive"
         aria-label="Instagram M.E.S.S."
       >
-        <Instagram className="h-3.5 w-3.5" />
+        <Instagram className="h-3.5 w-3.5" aria-hidden />
         Instagram
       </a>
       <button
@@ -42,7 +42,7 @@ export default function ShareRow({ url }: ShareRowProps) {
         className="ui-interactive inline-flex items-center gap-1.5 text-concrete hover:text-olive"
         aria-label="Αντιγραφή συνδέσμου άρθρου"
       >
-        <Copy className="h-3.5 w-3.5" />
+        <Copy className="h-3.5 w-3.5" aria-hidden />
         {copied ? 'Αντιγράφηκε' : 'Αντιγραφή συνδέσμου'}
       </button>
     </div>

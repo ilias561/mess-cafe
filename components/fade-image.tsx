@@ -10,13 +10,26 @@ const DEFAULT_SKELETON = 'color-mix(in srgb, var(--color-espresso) 8%, transpare
 export type FadeImageProps = Omit<ImageProps, 'onLoadingComplete'> & {
   /** Background while loading — warm neutral aligned with brand tokens */
   skeleton?: string
+  /** Descriptive Greek alt from the caller, or alt="" when decorative. */
+  alt: string
 }
 
 export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImageProps) {
   const reduceMotion = useReducedMotion()
   const [loaded, setLoaded] = useState(false)
-  const { style: imageStyle, className, onLoad, fill, ...imgRest } = props
+  const {
+    style: imageStyle,
+    className,
+    onLoad,
+    fill,
+    priority,
+    loading,
+    decoding,
+    ...imgRest
+  } = props
   const isFill = Boolean(fill)
+  const resolvedLoading = priority ? 'eager' : (loading ?? 'lazy')
+  const resolvedDecoding = decoding ?? 'async'
 
   useEffect(() => {
     if (reduceMotion) setLoaded(true)
@@ -49,6 +62,9 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
       <Image
         {...imgRest}
         fill={fill}
+        priority={priority}
+        loading={resolvedLoading}
+        decoding={resolvedDecoding}
         className={className}
         style={mergedImageStyle}
         onLoad={handleLoad}

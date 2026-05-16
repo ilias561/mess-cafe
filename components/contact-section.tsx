@@ -1,6 +1,7 @@
 'use client'
 
 import { type FormEvent, useState } from 'react'
+import Link from 'next/link'
 import { submitContact } from '@/lib/contact/submit'
 import { Reveal } from '@/components/reveal'
 
@@ -11,11 +12,18 @@ export default function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [sending, setSending] = useState(false)
+  const [consent, setConsent] = useState(false)
+  const [consentError, setConsentError] = useState('')
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setStatus('idle')
     setErrorMsg('')
+    setConsentError('')
+    if (!consent) {
+      setConsentError('Απαιτείται η συγκατάθεσή σας.')
+      return
+    }
     setSending(true)
     const form = event.currentTarget
     const fd = new FormData(form)
@@ -127,6 +135,34 @@ export default function ContactSection() {
                     {errorMsg}
                   </p>
                 )}
+                <div className="md:col-span-2">
+                  <label className="flex cursor-pointer items-start gap-3">
+                    <input
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(e) => {
+                        setConsent(e.target.checked)
+                        if (e.target.checked) setConsentError('')
+                      }}
+                      className="mt-1 h-4 w-4 shrink-0 rounded border-bone/30 text-mustard focus:ring-mustard"
+                    />
+                    <span className="font-sans text-[13px] leading-relaxed text-bone/70">
+                      Έχω διαβάσει την{' '}
+                      <Link
+                        href="/privacy"
+                        className="ui-link text-bone underline decoration-mustard underline-offset-4"
+                      >
+                        Πολιτική Απορρήτου
+                      </Link>{' '}
+                      και συμφωνώ με την επεξεργασία των στοιχείων μου για την επικοινωνία μαζί μου.
+                    </span>
+                  </label>
+                  {consentError ? (
+                    <p role="alert" className="mt-2 font-sans text-[12px] text-amber-600">
+                      {consentError}
+                    </p>
+                  ) : null}
+                </div>
                 <div className="md:col-span-2">
                   <button
                     type="submit"

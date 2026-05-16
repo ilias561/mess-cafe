@@ -17,6 +17,9 @@ export const bookingFormSchema = z.object({
   guests: z.coerce.number().int().min(1, 'Ελάχιστο 1 άτομο.').max(200, 'Μέγιστο 200 άτομα.'),
   message: z.string().trim().optional(),
   eventSlug: z.string().trim().optional(),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: 'Απαιτείται η συγκατάθεσή σας.' }),
+  }),
 })
 
-export type BookingFormValues = z.infer<typeof bookingFormSchema>
+export type BookingFormValues = z.input<typeof bookingFormSchema>

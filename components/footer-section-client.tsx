@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { FadeImage } from '@/components/fade-image'
@@ -89,7 +90,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 className="ui-link inline-flex items-center gap-1.5 font-sans text-sm text-bone underline-offset-4 hover:text-mustard hover:underline"
               >
                 {settings.instagram.replace('https://', '')}
-                <ExternalLink className="h-3 w-3 shrink-0 opacity-60" strokeWidth={1.5} />
+                <ExternalLink className="h-3 w-3 shrink-0 opacity-60" strokeWidth={1.5} aria-hidden />
               </a>
             ) : null}
           </div>
@@ -110,7 +111,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             {/* Thumbnail image from Google Maps */}
             <FadeImage
               src="https://lh3.googleusercontent.com/gps-cs-s/APNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X=w960-h540-k-no"
-              alt="Street View του M.E.S.S."
+              alt="Άποψη Street View της εισόδου του M.E.S.S."
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover opacity-90 transition-opacity duration-500 ease-out group-hover:opacity-100"
@@ -120,7 +121,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             {/* Play button */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-bone/20 backdrop-blur-sm ring-2 ring-bone/40 transition-transform duration-300 group-hover:scale-110">
-                <svg className="ml-1 h-6 w-6 text-bone" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-1 h-6 w-6 text-bone" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </div>
@@ -141,7 +142,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               />
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-4 bg-olive-deep/80 px-6 text-center">
-                <svg className="h-8 w-8 text-mustard/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="h-8 w-8 text-mustard/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                 </svg>
@@ -158,6 +159,29 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               </div>
             )}
           </div>
+        </Reveal>
+
+        <Reveal className="border-t border-bone/10 py-6">
+          <nav
+            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-sans text-[12px] text-concrete"
+            aria-label="Νομικές πληροφορίες"
+          >
+            <Link href="/privacy" className="ui-link hover:text-bone">
+              Πολιτική Απορρήτου
+            </Link>
+            <span aria-hidden className="text-bone/30">
+              ·
+            </span>
+            <Link href="/cookies" className="ui-link hover:text-bone">
+              Πολιτική Cookies
+            </Link>
+            <span aria-hidden className="text-bone/30">
+              ·
+            </span>
+            <Link href="/terms" className="ui-link hover:text-bone">
+              Όροι Χρήσης
+            </Link>
+          </nav>
         </Reveal>
 
         <Reveal className="flex flex-col gap-3 border-t border-bone/10 py-8 text-[11px] text-bone/40 sm:flex-row sm:items-center sm:justify-between">

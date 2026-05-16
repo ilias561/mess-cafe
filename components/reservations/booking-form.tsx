@@ -2,7 +2,8 @@
 
 import { type BaseSyntheticEvent, useEffect, useMemo, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { bookingFormSchema, type BookingFormValues } from '@/lib/reservations/schema'
 import { submitBooking } from '@/lib/reservations/submit'
@@ -19,6 +20,7 @@ function todayDateString() {
 }
 
 export default function BookingForm({ events }: BookingFormProps) {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<FormStatus>('idle')
   const [submitError, setSubmitError] = useState<string>('')
@@ -49,6 +51,7 @@ export default function BookingForm({ events }: BookingFormProps) {
       guests: 1,
       message: '',
       eventSlug: defaultEventSlug || '',
+      consent: undefined,
     },
   })
 
@@ -62,6 +65,7 @@ export default function BookingForm({ events }: BookingFormProps) {
       guests: 1,
       message: '',
       eventSlug: defaultEventSlug || '',
+      consent: undefined,
     })
   }, [defaultDate, defaultEventSlug, defaultEventTitle, reset])
 
@@ -92,7 +96,14 @@ export default function BookingForm({ events }: BookingFormProps) {
       guests: 1,
       message: '',
       eventSlug: defaultEventSlug || '',
+      consent: undefined,
     })
+
+    try {
+      router.push('/thank-you')
+    } catch {
+      // Inline success UI remains visible if client navigation is unavailable.
+    }
   }
 
   return (
@@ -107,7 +118,7 @@ export default function BookingForm({ events }: BookingFormProps) {
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label htmlFor="name" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
+            <label htmlFor="name" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
               Ονοματεπώνυμο
             </label>
             <input id="name" type="text" autoComplete="name" aria-describedby={errors.name ? 'name-error' : undefined} {...register('name')} className={INPUT_CLASSNAME} />
@@ -115,7 +126,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
+            <label htmlFor="email" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
               Email
             </label>
             <input id="email" type="email" autoComplete="email" aria-describedby={errors.email ? 'email-error' : undefined} {...register('email')} className={INPUT_CLASSNAME} />
@@ -123,7 +134,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           </div>
 
           <div>
-            <label htmlFor="phone" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
+            <label htmlFor="phone" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
               Τηλέφωνο
             </label>
             <input id="phone" type="tel" autoComplete="tel" aria-describedby={errors.phone ? 'phone-error' : undefined} {...register('phone')} className={INPUT_CLASSNAME} />
@@ -133,7 +144,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           <div>
             <label
               htmlFor="eventType"
-              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive"
+              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal"
             >
               Είδος εκδήλωσης
             </label>
@@ -150,7 +161,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           </div>
 
           <div>
-            <label htmlFor="date" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
+            <label htmlFor="date" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
               Ημερομηνία
             </label>
             <input id="date" type="date" min={minDate} {...register('date')} className={INPUT_CLASSNAME} />
@@ -158,7 +169,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           </div>
 
           <div>
-            <label htmlFor="guests" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
+            <label htmlFor="guests" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
               Αριθμός ατόμων
             </label>
             <input id="guests" type="number" min={1} max={200} {...register('guests')} className={INPUT_CLASSNAME} />
@@ -168,7 +179,7 @@ export default function BookingForm({ events }: BookingFormProps) {
           <div>
             <label
               htmlFor="message"
-              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-olive"
+              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal"
             >
               Μήνυμα
             </label>
@@ -183,6 +194,28 @@ export default function BookingForm({ events }: BookingFormProps) {
 
           <input type="hidden" {...register('eventSlug')} />
           <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
+
+          <div>
+            <label className="flex cursor-pointer items-start gap-3">
+              <input
+                type="checkbox"
+                {...register('consent')}
+                className="mt-1 h-4 w-4 shrink-0 rounded border-line/50 text-mustard focus:ring-mustard"
+              />
+              <span className="font-sans text-[13px] leading-relaxed text-concrete">
+                Έχω διαβάσει την{' '}
+                <Link href="/privacy" className="ui-link text-charcoal underline decoration-mustard underline-offset-4">
+                  Πολιτική Απορρήτου
+                </Link>{' '}
+                και συμφωνώ με την επεξεργασία των στοιχείων μου για τη διαχείριση της κράτησης.
+              </span>
+            </label>
+            {errors.consent ? (
+              <p role="alert" className="mt-2 font-sans text-[12px] text-amber-600">
+                {errors.consent.message}
+              </p>
+            ) : null}
+          </div>
 
           {status === 'error' ? (
             <div className="rounded-[2px] border border-line/40 bg-bone-warm p-4">

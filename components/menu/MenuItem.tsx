@@ -86,8 +86,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
         muted
         playsInline
         preload="metadata"
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        {...({ 'webkit-playsinline': 'true', 'x5-playsinline': 'true' } as any)}
+        {...({ 'webkit-playsinline': 'true', 'x5-playsinline': 'true' } as Record<string, string>)}
         className="h-full w-full object-cover"
         aria-label={item.name}
         onEnded={(e) => {
