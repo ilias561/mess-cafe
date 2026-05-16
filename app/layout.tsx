@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
+import CloudflareAnalytics from '@/components/analytics/CloudflareAnalytics'
 import { PHONE_NUMBER } from '@/lib/constants'
+import { absoluteUrl, getSiteUrl } from '@/lib/site-url'
 import AnchorScroll from '@/components/anchor-scroll'
 import NewsletterPopup from '@/components/newsletter-popup'
 import PageLoader from '@/components/page-loader'
+import ReviewOverlay from '@/components/review-overlay'
 import RouteScrollTop from '@/components/route-scroll-top'
 import WhatsAppFloat from '@/components/whatsapp-float'
 import './globals.css'
@@ -21,8 +24,10 @@ const fraunces = Fraunces({
   display: 'swap',
 })
 
+const siteUrl = getSiteUrl()
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mess-cafe.gr'),
+  metadataBase: new URL(siteUrl),
   title: 'M.E.S.S. — Specialty Coffee & Brunch · Ιωάννινα',
   description:
     'Specialty coffee, healthy brunch και θέα στη λίμνη στο ΚΕΠΑΒΙ, Ιωάννινα. Φαγητό ως φάρμακο — poke bowls, acai, smoothies, γλυκά χωρίς ζάχαρη. Ανοιχτά 08:00–23:00, 7 μέρες.',
@@ -61,9 +66,15 @@ const jsonLd = {
   '@type': 'CafeOrCoffeeShop',
   name: 'M.E.S.S.',
   alternateName: 'M.E.S.S. Specialty Coffee & Brunch',
-  url: 'https://mess-cafe.gr',
-  logo: 'https://mess-cafe.gr/icon.svg',
-  image: 'https://mess-cafe.gr/images/hero-interior.jpg',
+  url: siteUrl,
+  logo: absoluteUrl('/icon.svg'),
+  image: [
+    absoluteUrl('/images/hero-interior.jpg'),
+    absoluteUrl('/images/menu/piata-0009.jpg'),
+    absoluteUrl('/images/menu/piata-0022.jpg'),
+  ],
+  hasMenu: absoluteUrl('/menu'),
+  acceptsReservations: true,
   description: 'Specialty coffee, healthy brunch και πολιτιστικές δράσεις στο ΚΕΠΑΒΙ, Ιωάννινα. Poke bowls, acai, smoothies, γλυκά χωρίς ζάχαρη.',
   address: {
     '@type': 'PostalAddress',
@@ -93,13 +104,13 @@ const jsonLd = {
       closes: '24:00',
     },
   ],
-  servesCuisine: ['Specialty Coffee', 'Healthy Brunch', 'Vegan', 'Acai Bowl', 'Poke Bowl'],
+  servesCuisine: ['Greek', 'Brunch', 'Mediterranean'],
   priceRange: '€€',
   currenciesAccepted: 'EUR',
   paymentAccepted: 'Cash, Credit Card',
   sameAs: [
-    'https://www.instagram.com/m.e.s.s._ioannina/',
-    'https://www.facebook.com/messcafe',
+    '[ΣΥΜΠΛΗΡΩΣΕ: Instagram URL]',
+    '[ΣΥΜΠΛΗΡΩΣΕ: Facebook URL]',
     'https://www.google.com/maps/place/M.E.S.S./@39.6624739,20.8602479',
   ],
 }
@@ -124,6 +135,8 @@ export default function RootLayout({
         <WhatsAppFloat />
         <NewsletterPopup />
         {children}
+        <ReviewOverlay />
+        <CloudflareAnalytics />
       </body>
     </html>
   )

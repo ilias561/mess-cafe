@@ -263,7 +263,7 @@ export default function Hero() {
             src={desktopClips[heroDesktopClipIx]}
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={heroDesktopClipIx === 0 ? videoSrc('/videos/hero-desktop-poster.jpg') : undefined}
             className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
             aria-hidden="true"
@@ -312,7 +312,7 @@ export default function Hero() {
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
           title="M.E.S.S. — Ο χώρος μας"
           className="absolute inset-0 z-0 h-full w-full object-cover object-center [transform:translateZ(0)]"
