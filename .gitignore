@@ -56,3 +56,6 @@ KICKOFF-FOR-C2.md
 # Source media copies at project root (served from public/images/)
 /111/
 /menu/
+
+# Wrangler local state
+.wrangler/
