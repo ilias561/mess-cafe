@@ -38,8 +38,10 @@ yarn-error.log*
 next-env.d.ts
 .vercel
 
-# Videos — served from Cloudflare R2, not committed to git
-public/videos/
+# Videos — committed to git for same-origin Pages serving (free-tier, no R2 throttling).
+# Keep individual files under Cloudflare Pages' 25 MB/file limit.
+# Originals/backups stay ignored.
+public/videos/_orig/
 public/images/111/1.mp4
 
 # Working files (not for production)
