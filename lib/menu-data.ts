@@ -5,6 +5,8 @@ export type MenuItem = {
   badges?: ('vegan' | 'vegetarian' | 'gf' | 'signature')[]
   image?: string
   video?: string
+  /** Optional 64×64 ingredient thumbnail beside list-layout descriptions */
+  ingredientsImage?: string
 }
 
 export type MenuCategory = {

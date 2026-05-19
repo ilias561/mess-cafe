@@ -12,6 +12,15 @@ import { EASE, ease } from '@/lib/motion'
 
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
+/** Desktop hero overlay pill — subset of main nav */
+const heroFloatingLinks = [
+  { label: 'Μενού', href: '/menu' },
+  { label: 'Δράσεις', href: '/actions' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Κράτηση', href: '/reservations' },
+  { label: 'Επικοινωνία', href: '/#contact' },
+] as const
+
 /** Single source for grep / copy consistency (desktop nav + mobile drawer CTA). */
 const RESERVATIONS_LABEL = 'Κράτηση για event' as const
 
@@ -21,6 +30,7 @@ const navLinks = [
   { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
   { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
   { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
+  { label: 'Workshops', href: '/workshops', sectionId: null, isCta: false },
   { label: RESERVATIONS_LABEL, href: '/reservations', sectionId: null, isCta: true },
   { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
@@ -298,14 +308,14 @@ export default function Navigation() {
     return true
   }
 
-  // Desktop hero is bone/light — never go transparent with white text there.
-  // Only mobile hero is dark (canvas video), so the transparent white-text mode is mobile-only.
+  // Mobile hero is dark (full-bleed video); desktop hero is bone with floating pill nav.
   const isInHero = !isDesktop && pathname === '/' && !hasPastHero
+  const isDesktopHero = isDesktop && pathname === '/' && !hasPastHero
   const navTextColor = isInHero ? 'text-white' : 'text-charcoal'
-  const headerClasses = isInHero
-    ? 'bg-transparent'
+  const headerClasses = isInHero || isDesktopHero
+    ? 'bg-transparent border-transparent'
     : 'bg-[rgba(245,240,230,0.94)] backdrop-blur-[14px] border-b border-black/[0.06]'
-  const navHeight = isInHero ? 'h-12' : 'h-16'
+  const navHeight = isInHero ? 'h-12' : isDesktopHero ? 'h-auto min-h-[88px] py-4' : 'h-16'
 
   return (
     <>
@@ -321,17 +331,54 @@ export default function Navigation() {
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
-        <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-3 px-5 lg:gap-4 lg:px-8">
+        <div
+          className={`relative mx-auto flex h-full max-w-[1440px] gap-3 px-5 lg:gap-4 lg:px-8 ${
+            isDesktopHero ? 'flex-col items-center justify-center py-2' : 'items-center justify-between'
+          }`}
+        >
           <Link
             href="/"
-            className={`flex min-w-0 max-w-[min(100%,52vw)] shrink items-center gap-2 transition-colors sm:max-w-none sm:gap-3 ${navTextColor}`}
+            className={`flex min-w-0 shrink transition-colors ${
+              isDesktopHero
+                ? 'flex-col items-center gap-2 text-charcoal'
+                : `max-w-[min(100%,52vw)] items-center gap-2 sm:max-w-none sm:gap-3 ${navTextColor}`
+            }`}
           >
             <BrandLogo />
-            <span className="truncate font-serif text-[22px] font-medium tracking-tight">M.E.S.S.</span>
+            <span
+              className={`font-serif font-medium tracking-tight ${
+                isDesktopHero ? 'text-[26px]' : 'truncate text-[22px]'
+              }`}
+            >
+              M.E.S.S.
+            </span>
           </Link>
 
+          {isDesktopHero ? (
+            <nav
+              className="mt-2 flex flex-wrap items-center justify-center gap-1 rounded-full border border-charcoal/10 bg-bone/60 px-4 py-2 shadow-sm backdrop-blur-md"
+              aria-label="Κύρια πλοήγηση"
+            >
+              {heroFloatingLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    if (link.href === '/#contact') {
+                      const didNavigate = handleAnchorNavigation('contact')
+                      if (didNavigate) e.preventDefault()
+                    }
+                  }}
+                  className="rounded-full px-3 py-1.5 font-sans text-[13px] font-medium text-charcoal/85 transition-colors hover:bg-bone-warm"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          ) : null}
+
           <nav
-            className={`hidden items-center lg:flex ${navTextColor}`}
+            className={`hidden items-center lg:flex ${isDesktopHero ? 'sr-only' : navTextColor}`}
             aria-label="Κύρια πλοήγηση"
           >
               {navLinks.map((link) => {
@@ -384,9 +431,9 @@ export default function Navigation() {
               })}
           </nav>
 
-          <div className="ml-auto flex shrink-0 items-center gap-2">
-            <OpenBadge light={false} showText className="hidden min-[1200px]:flex" />
-            <OpenBadge light={false} showText={false} className="flex min-[1200px]:hidden" />
+          <div
+            className={`flex shrink-0 items-center gap-2 ${isDesktopHero ? 'absolute top-3 right-5 lg:right-8' : 'ml-auto'}`}
+          >
             <a
               href={`tel:${PHONE_NUMBER}`}
               aria-label="Κάλεσέ μας"
@@ -467,7 +514,6 @@ export default function Navigation() {
                     <BrandLogo compact />
                     <span className="font-serif text-[20px] font-medium leading-none tracking-tight">M.E.S.S.</span>
                   </Link>
-                  <MobileDrawerHoursChip />
                 </div>
                 <button
                   type="button"

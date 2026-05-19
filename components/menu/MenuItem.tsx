@@ -183,9 +183,22 @@ export function MenuItemList({ item, index }: { item: MenuItemType; index: numbe
         />
         <p className="shrink-0 font-serif text-[22px] tabular-nums text-charcoal">{item.price}</p>
       </div>
-      <p className="mt-1.5 font-sans text-[13px] leading-relaxed text-concrete md:text-[14px]">
-        {item.desc}
-      </p>
+      <div className="mt-1.5 flex items-start justify-between gap-4">
+        <p className="min-w-0 flex-1 font-sans text-[13px] leading-relaxed text-concrete md:text-[14px]">
+          {item.desc}
+        </p>
+        {item.ingredientsImage ? (
+          <img
+            src={item.ingredientsImage}
+            alt=""
+            width={64}
+            height={64}
+            className="h-16 w-16 shrink-0 rounded-md object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : null}
+      </div>
       <BadgeRow badges={chips} />
     </motion.article>
   )

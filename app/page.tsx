@@ -2,13 +2,16 @@ import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
 import { buildPageMetadata } from '@/lib/metadata'
 import Hero from '@/components/hero'
+import HeroCaption from '@/components/hero-caption'
 import MarqueeStrip from '@/components/marquee-strip'
 import TodayModule from '@/components/today-module'
+import WelcomeSection from '@/components/welcome-section'
+import PhilosophySection from '@/components/philosophy-section'
 import AboutUsSection from '@/components/about-us-section'
-import MenuPreview from '@/components/menu-preview'
 import GoalsSection from '@/components/goals-section'
 import ActionsSection from '@/components/actions-section'
 import GallerySection from '@/components/gallery-section'
+import GalleryMenuPreview from '@/components/gallery-menu-preview'
 import ReviewsSection from '@/components/reviews-section'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
@@ -31,13 +34,16 @@ export default function Home() {
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
       <Hero />
+      <HeroCaption />
       <MarqueeStrip />
       <TodayModule events={events} />
+      <WelcomeSection />
+      <PhilosophySection />
       <AboutUsSection />
-      <MenuPreview />
       <GoalsSection />
       <ActionsSection actionCards={actionCards} />
       <GallerySection />
+      <GalleryMenuPreview />
       <ReviewsSection />
       <ContactSection />
       <FooterSection />

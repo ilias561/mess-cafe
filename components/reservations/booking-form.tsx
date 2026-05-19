@@ -10,7 +10,19 @@ import { submitBooking } from '@/lib/reservations/submit'
 
 type FormStatus = 'idle' | 'success' | 'error'
 type BookingEvent = { slug: string; title: string; date: string }
-type BookingFormProps = { events: BookingEvent[] }
+type BookingFormProps = {
+  events: BookingEvent[]
+  /** Workshops page: fixed select options for event kind */
+  showEventKindSelect?: boolean
+}
+
+const EVENT_KIND_OPTIONS = [
+  'Workshop',
+  'Παρουσίαση',
+  'Live μουσική',
+  'Ιδιωτικό event',
+  'Άλλο',
+] as const
 
 const INPUT_CLASSNAME =
   'ui-field w-full rounded-[2px] border border-line/50 bg-bone px-4 py-3 font-sans text-[15px] text-charcoal focus:outline-none'
@@ -19,7 +31,7 @@ function todayDateString() {
   return new Date().toISOString().split('T')[0]
 }
 
-export default function BookingForm({ events }: BookingFormProps) {
+export default function BookingForm({ events, showEventKindSelect = false }: BookingFormProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [status, setStatus] = useState<FormStatus>('idle')
@@ -148,14 +160,26 @@ export default function BookingForm({ events }: BookingFormProps) {
             >
               Είδος εκδήλωσης
             </label>
-            <select id="eventType" {...register('eventType')} disabled={eventLocked} aria-describedby={errors.eventType ? 'eventType-error' : undefined} className={`${INPUT_CLASSNAME} appearance-none`}>
-              {!eventLocked ? <option value="">Επίλεξε είδος</option> : null}
-              <option value="Workshop">Workshop</option>
-              <option value="Live μουσική">Live μουσική</option>
-              <option value="Ιδιωτικό event">Ιδιωτικό event</option>
-              <option value="Παρουσίαση βιβλίου">Παρουσίαση βιβλίου</option>
-              <option value="Άλλο">Άλλο</option>
-              {eventLocked && defaultEventTitle ? <option value={defaultEventTitle}>{defaultEventTitle}</option> : null}
+            <select id="eventType" {...register('eventType')} disabled={eventLocked && !showEventKindSelect} aria-describedby={errors.eventType ? 'eventType-error' : undefined} className={`${INPUT_CLASSNAME} appearance-none`}>
+              {!eventLocked || showEventKindSelect ? <option value="">Επίλεξε είδος εκδήλωσης</option> : null}
+              {showEventKindSelect
+                ? EVENT_KIND_OPTIONS.map((opt) => (
+                    <option key={opt} value={opt}>
+                      {opt}
+                    </option>
+                  ))
+                : (
+                  <>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Live μουσική">Live μουσική</option>
+                    <option value="Ιδιωτικό event">Ιδιωτικό event</option>
+                    <option value="Παρουσίαση βιβλίου">Παρουσίαση βιβλίου</option>
+                    <option value="Άλλο">Άλλο</option>
+                  </>
+                )}
+              {eventLocked && defaultEventTitle && !showEventKindSelect ? (
+                <option value={defaultEventTitle}>{defaultEventTitle}</option>
+              ) : null}
             </select>
             {errors.eventType ? <p id="eventType-error" role="alert" className="mt-2 font-sans text-[12px] text-concrete">{errors.eventType.message}</p> : null}
           </div>

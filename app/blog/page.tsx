@@ -3,15 +3,16 @@ import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
 import PreFooterCta from '@/components/pre-footer-cta'
 import BlogTagFilter from '@/components/blog/BlogTagFilter'
+import TipsGrid from '@/components/blog/tips-grid'
 import { buildPageMetadata } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/blog/posts'
+import { getAllTips } from '@/lib/blog/tips'
 
 const firstPost = getAllPosts()[0]
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Blog — M.E.S.S. | Ιστορίες για καφέ και κοινότητα',
-  description:
-    'Ιστορίες, συνταγές και στιγμές από το M.E.S.S. στα Ιωάννινα — από τους μπαρίστα στους πελάτες μας.',
+  title: 'Food for Medicine — M.E.S.S.',
+  description: 'Hints & tips από την κουζίνα μας — άρθρα, συνταγές και στιγμές από το M.E.S.S.',
   path: '/blog',
   ...(firstPost
     ? {
@@ -25,26 +26,41 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function BlogPage() {
   const posts = getAllPosts()
+  const tips = getAllTips()
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <Navigation />
 
-      {/* Page header */}
       <section className="px-6 pb-0 pt-32 md:px-12 md:pt-40">
         <div className="mx-auto max-w-[1400px]">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
-            Blog
-          </p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">Blog</p>
           <h1 className="mt-5 max-w-[20ch] font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
-            Καφές, γεύσεις και ό,τι συμβαίνει στην κοινότητα.
+            Food for Medicine
           </h1>
+          <p className="mt-6 max-w-[48ch] font-serif text-[18px] italic text-charcoal/75">
+            Hints &amp; tips από την κουζίνα μας
+          </p>
         </div>
       </section>
 
-      {/* Tag filter + grid */}
-      <section className="mt-8 px-6 pb-24 md:px-12 md:pb-32">
-        <BlogTagFilter posts={posts} />
+      <section className="mt-12 border-t border-line/30 px-6 py-16 md:px-12 md:py-20">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] tracking-tight text-charcoal">Άρθρα</h2>
+          <div className="mt-8">
+            <BlogTagFilter posts={posts} />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line/30 px-6 py-16 md:px-12 md:py-24">
+        <div className="mx-auto max-w-[1400px]">
+          <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] tracking-tight text-charcoal">Hints &amp; tips</h2>
+          <p className="mt-3 font-sans text-[14px] text-concrete">Στιγμές και ιδέες από την κουζίνα μας — ακολούθησέ μας στο Instagram.</p>
+          <div className="mt-10">
+            <TipsGrid tips={tips} />
+          </div>
+        </div>
       </section>
 
       <PreFooterCta

@@ -10,7 +10,7 @@ type EventsGridProps = {
 export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridProps) {
   return (
     <>
-      <section className="bg-bone-warm px-6 py-24 md:px-12 md:py-32">
+      <section className="bg-bone px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[1400px]">
           <SectionReveal>
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΕΠΟΜΕΝΕΣ ΕΚΔΗΛΩΣΕΙΣ</p>

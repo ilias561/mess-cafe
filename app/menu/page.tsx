@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import MenuHeader from '@/components/menu/MenuHeader'
 import MenuAnchorNav from '@/components/menu/MenuAnchorNav'
+import MenuSpecialsSection from '@/components/menu/MenuSpecialsSection'
 import MenuCategory from '@/components/menu/MenuCategory'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
@@ -42,6 +43,7 @@ export default function MenuPage() {
       />
       <Navigation />
       <MenuHeader updatedAt={updatedAt} />
+      <MenuSpecialsSection />
       <MenuAnchorNav />
 
       {beforePhilosophy.map((category, i) => (
@@ -49,7 +51,7 @@ export default function MenuPage() {
       ))}
 
       {/* Philosophy callout between Salads and Coffee */}
-      <section className="bg-olive px-6 py-24 md:px-12 md:py-28">
+      <section className="border-y border-line/30 bg-bone-warm px-6 py-24 md:px-12 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
           <p className="font-serif text-[clamp(24px,3.5vw,36px)] leading-snug tracking-tight text-bone">
             &ldquo;Το MESS δημιουργήθηκε για να προάγει ένα πιο υγιές lifestyle — με κεντρικό άξονα την δημιουργικότητα, την πρωτοβουλία και την δικτύωση.&rdquo;

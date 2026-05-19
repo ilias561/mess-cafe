@@ -140,7 +140,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
           }
         >
           <span className="inline-flex -rotate-[8deg] items-center rounded-full bg-mustard px-2.5 py-1 font-sans text-[10px] font-medium uppercase tracking-wider text-charcoal">
-            ΑΠΟ 2024
+            ΑΠΟ 2025
           </span>
         </motion.span>
 

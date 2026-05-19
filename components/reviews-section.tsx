@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useCallback } from 'react'
+import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import { reviews } from '@/lib/reviews-data'
 import type { Review } from '@/lib/reviews-data'
@@ -184,8 +185,8 @@ function ReviewsTrack() {
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-bone-warm to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-bone-warm to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-bone to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-bone to-transparent" />
       <Reveal
         asGroup
         ref={wrapperRef}
@@ -205,17 +206,17 @@ function ReviewsTrack() {
 
 export default function ReviewsSection() {
   return (
-    <section id="reviews" className="scroll-mt-28 bg-bone-warm py-24 md:py-32">
+    <section id="reviews" className="scroll-mt-28 bg-bone py-24 md:py-32">
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
 
           <div>
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#5f6368]">
-              Τι λένε οι επισκέπτες μας
+              Τι λένε όσοι μας γνώρισαν
             </p>
             <h2 className="mt-2 font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-[#202124]">
-              Αξιολογήσεις Google
+              Αξιολογήσεις από την κοινότητά μας
             </h2>
           </div>
 
@@ -244,17 +245,15 @@ export default function ReviewsSection() {
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-12 mt-5">
         <Reveal>
-          <a
-            href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-[#5f6368] transition-colors hover:text-[#4285F4]"
+          <Link
+            href="/reviews"
+            className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-[#5f6368] transition-colors hover:text-charcoal"
           >
-            Όλες οι αξιολογήσεις στο Google
+            Όλες οι αξιολογήσεις
             <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5" aria-hidden>
               <path d="M6 3h7m0 0v7m0-7L4 13" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </a>
+          </Link>
         </Reveal>
       </div>
 

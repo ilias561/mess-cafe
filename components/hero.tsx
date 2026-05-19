@@ -1,5 +1,7 @@
 'use client'
 
+// TODO(user): supply extended desktop cut + 4 mobile frames at public/videos/hero-mobile-frame-{1..4}.jpg
+
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
@@ -47,16 +49,13 @@ export default function Hero() {
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
 
   const [loaderReady, setLoaderReady] = useState(false)
-  const [heroDesktopClipIx, setHeroDesktopClipIx] = useState(0)
   const prefersReducedMotion = useReducedMotion()
+  const [mobileFrameIx, setMobileFrameIx] = useState(0)
 
-  const desktopClips = useMemo(
+  const desktopClip = useMemo(() => videoSrc('/videos/main-page-animation.mp4'), [])
+  const mobileFramePaths = useMemo(
     () =>
-      [
-        videoSrc('/videos/main-page-animation.mp4'),
-        videoSrc('/videos/about-editorial-1.mp4'),
-        videoSrc('/videos/about-editorial-2.mp4'),
-      ] as const,
+      [1, 2, 3, 4].map((n) => `/videos/hero-mobile-frame-${n}.jpg`),
     [],
   )
 
@@ -126,14 +125,21 @@ export default function Hero() {
     if (!loaderReady) return
     const video = desktopVideoRef.current
     if (!video) return
-    const rate = heroDesktopClipIx === 0 ? 2 : 1
+    const rate = 1
 
     const cleanup = armHeroVideoAfterLoader(video, rate)
+
+    const loopSeamlessly = () => {
+      video.currentTime = 0
+      void video.play().catch(() => {})
+    }
+    video.addEventListener('ended', loopSeamlessly)
 
     const tryPlay = () => {
       if (!video.paused) return
       video.currentTime = 0
       video.playbackRate = rate
+      video.loop = true
       void video.play().catch(() => {})
     }
 
@@ -152,10 +158,19 @@ export default function Hero() {
 
     return () => {
       cleanup()
+      video.removeEventListener('ended', loopSeamlessly)
       document.removeEventListener('visibilitychange', onVisibility)
       observer.disconnect()
     }
-  }, [loaderReady, heroDesktopClipIx])
+  }, [loaderReady])
+
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    const interval = window.setInterval(() => {
+      setMobileFrameIx((i) => (i + 1) % mobileFramePaths.length)
+    }, 2500)
+    return () => window.clearInterval(interval)
+  }, [prefersReducedMotion, mobileFramePaths.length])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
@@ -183,7 +198,7 @@ export default function Hero() {
             <Fragment key={`d-${word}-${i}`}>
               <span className="inline-block overflow-hidden align-baseline">
                 <motion.span
-                  className="inline-block"
+                  className={`inline-block ${word === 'kind' ? 'font-serif italic text-mustard' : ''}`}
                   initial={{ y: '100%', opacity: 0 }}
                   animate={loaderReady ? { y: 0, opacity: 1 } : {}}
                   transition={{ delay: 1.0 + i * 0.06, duration: 0.5, ease: EASE }}
@@ -204,9 +219,6 @@ export default function Hero() {
         >
           <p className="font-sans text-[16px] leading-relaxed text-charcoal/70">
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
-          </p>
-          <p className="mt-3 font-sans text-[14px] leading-loose text-charcoal/55">
-            {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
           </p>
         </motion.div>
 
@@ -260,11 +272,12 @@ export default function Hero() {
 
           <video
             ref={desktopVideoRef}
-            src={desktopClips[heroDesktopClipIx]}
+            src={desktopClip}
             muted
             playsInline
+            loop
             preload="auto"
-            poster={heroDesktopClipIx === 0 ? videoSrc('/videos/hero-desktop-poster.jpg') : undefined}
+            poster={videoSrc('/videos/hero-desktop-poster.jpg')}
             className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
             aria-hidden="true"
             title="M.E.S.S. — Ο χώρος μας"
@@ -299,7 +312,7 @@ export default function Hero() {
         }
       >
         <img
-          src={videoSrc('/videos/hero-mobile-poster.jpg')}
+          src={videoSrc(mobileFramePaths[mobileFrameIx] ?? '/videos/hero-mobile-poster.jpg')}
           alt=""
           aria-hidden="true"
           loading="eager"
@@ -364,13 +377,6 @@ export default function Hero() {
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </motion.p>
-          <motion.p
-            {...reveal(1500, 500)}
-            className="hero-text-shadow mt-3 font-sans text-[14px] leading-loose text-white/65"
-          >
-            {'Το M.E.S.S. δεν είναι ένα καφέ. Είναι μια ιδέα περί ενότητας, δημιουργικότητας και ευεξίας — αρμονικά δεμένα στον ίδιο χώρο.'}
-          </motion.p>
-
           <div className="mt-7 flex flex-wrap items-center gap-5">
             <motion.div {...reveal(1700, 400)}>
               <Link

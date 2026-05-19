@@ -63,7 +63,7 @@ export default function PageLoader() {
       {visible ? (
         <motion.div
           key="page-loader"
-          className="fixed inset-0 z-[200] overflow-hidden bg-espresso"
+          className="fixed inset-0 z-[200] overflow-hidden bg-olive-deep"
           initial={{ y: 0 }}
           animate={{ y: '-100%' }}
           transition={{ duration: CURTAIN_SLIDE_MS / 1000, delay: skipAnimation ? 0 : 1.48, ease: EASE }}
@@ -88,7 +88,7 @@ export default function PageLoader() {
               ))}
             </span>
             <motion.span
-              className="mt-2 block h-px w-full origin-left bg-terracotta"
+              className="mt-2 block h-px w-full origin-left bg-cream"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{

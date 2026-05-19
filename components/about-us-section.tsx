@@ -9,8 +9,8 @@ import { videoSrc } from '@/lib/media'
 import { images } from '@/lib/images'
 
 const aboutEditorialVideos = [
-  videoSrc('/videos/about-editorial-1.mp4'),
   videoSrc('/videos/about-editorial-2.mp4'),
+  videoSrc('/videos/about-editorial-1.mp4'),
 ] as const
 
 /* ── Scrolling photos ── */
@@ -103,7 +103,7 @@ export default function AboutUsSection() {
   return (
     <section
       id="about-us"
-      className="scroll-mt-28 border-t border-line/30 bg-cream px-6 py-24 md:px-12 md:py-32"
+      className="scroll-mt-28 border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32"
     >
       <Reveal className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 md:grid-cols-12">
 
@@ -117,7 +117,7 @@ export default function AboutUsSection() {
 
             <MaskReveal className="mb-8" delay={0.06}>
               <h2 className="font-serif text-[clamp(44px,5vw,72px)] leading-[1.02] tracking-tight text-balance text-charcoal">
-                Δεν είναι καφέ. Είναι μια ιδέα.
+                Στιγμές από τον χώρο μας.
               </h2>
             </MaskReveal>
 

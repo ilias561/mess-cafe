@@ -97,6 +97,7 @@
   }
 
   body {
+    background: var(--color-bone);
     color: color-mix(in srgb, var(--color-charcoal) 85%, transparent);
     font-family: var(--font-sans);
     font-feature-settings: 'ss01' on, 'ss02' on;

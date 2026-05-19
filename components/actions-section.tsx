@@ -1,6 +1,7 @@
 'use client'
 
 import { FadeImage } from '@/components/fade-image'
+import KeepRisingWordmark from '@/components/keep-rising-wordmark'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import type { Event } from '@/lib/events/events'
@@ -18,13 +19,13 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   return (
     <section id="actions" className="scroll-mt-24 bg-bone px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal className="mb-10 max-w-[860px]">
+        <Reveal className="mb-10">
           <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>
-          <h2 className="font-serif text-[clamp(28px,4vw,48px)] leading-[1.04] tracking-tight text-charcoal">
-            Περισσότερο από έναν καφέ.
-          </h2>
-          <p className="mt-4 max-w-3xl font-sans text-[15px] leading-relaxed text-concrete">
-            Workshops, πολιτιστικές βραδιές, παρουσιάσεις βιβλίων, live μουσική. Ο χώρος μας γίνεται σκηνή για τις ιστορίες των Ιωαννίνων.
+          <KeepRisingWordmark className="text-left" />
+          <p className="mt-6 max-w-3xl font-serif text-[18px] italic leading-relaxed text-charcoal/80 md:text-[20px]">
+            Το KeepRising είναι το moto μας — μια συλλογικότητα δράσεων που αποσκοπούν στην κοινωνική ενημέρωση,
+            στις κοινωνικές δράσεις, και στο να φέρει τον κόσμο πιο κοντά μέσω της βοήθειας και της υποστήριξης
+            μεταξύ μας.
           </p>
         </Reveal>
 

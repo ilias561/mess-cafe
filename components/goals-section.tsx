@@ -91,7 +91,7 @@ export default function GoalsSection() {
             </p>
 
             <h2 className="mt-6 max-w-[16ch] font-serif text-[clamp(48px,6vw,88px)] leading-[1.02] tracking-tight text-bone">
-              Δεν είναι καφέ. Είναι ιδέα.
+              Οι στόχοι που μας κινούν.
             </h2>
 
             <p className="mt-6 max-w-[560px] font-sans text-[17px] leading-[1.75] text-bone/80">
