@@ -17,7 +17,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
   return (
     <motion.section
       {...fadeUp}
-      className="relative -mx-6 bg-olive-deep px-6 py-24 text-bone md:-mx-12 md:px-12 md:py-32"
+      className="relative -mx-6 bg-forest px-6 py-24 text-charcoal md:-mx-12 md:px-12 md:py-32"
     >
       <Link
         href={`/blog/${post.slug}`}
@@ -38,10 +38,10 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
         </div>
         <div className="flex flex-col justify-center md:col-span-5">
           <CategoryPill category={post.category} label={post.categoryLabel} light />
-          <h2 className="ui-link mt-6 font-serif text-[clamp(36px,4.5vw,56px)] leading-[1.05] tracking-[-0.02em] text-bone">
+          <h2 className="ui-link mt-6 font-serif text-[clamp(36px,4.5vw,56px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
             {post.title}
           </h2>
-          <p className="mt-5 font-sans text-[16px] leading-[1.7] text-bone/75 md:text-[17px]">
+          <p className="mt-5 font-sans text-[16px] leading-[1.7] text-charcoal/75 md:text-[17px]">
             {post.excerpt}
           </p>
           <PostMeta post={post} className="mt-6" light />

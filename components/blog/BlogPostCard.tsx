@@ -44,7 +44,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
         </h3>
 
         {/* Excerpt — 3-line clamp */}
-        <p className="mt-3 line-clamp-3 font-sans text-[15px] leading-relaxed text-espresso">
+        <p className="mt-3 line-clamp-3 font-sans text-[15px] leading-relaxed text-concrete">
           {post.excerpt}
         </p>
 

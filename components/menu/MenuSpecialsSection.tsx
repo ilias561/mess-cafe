@@ -6,7 +6,7 @@ import { todaysSpecials } from '@/lib/menu-featured'
 
 export default function MenuSpecialsSection() {
   return (
-    <section id="specials" className="scroll-mt-[140px] border-b border-line/30 bg-bone px-6 py-16 md:px-12 md:py-24">
+    <section id="specials" className="scroll-mt-[140px] border-b border-line/30 bg-bone px-6 py-20 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <Reveal className="mb-10">
           <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΣΗΜΕΡΑ</p>
@@ -27,6 +27,7 @@ export default function MenuSpecialsSection() {
                       fill
                       unoptimized
                       loading="lazy"
+                      sizes="(min-width: 640px) 140px, 100vw"
                       className="object-cover"
                     />
                   </div>

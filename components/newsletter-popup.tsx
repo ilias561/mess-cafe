@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { X } from 'lucide-react'
@@ -33,6 +33,12 @@ export default function NewsletterPopup() {
     () => status === 'loading' || !acceptedGdpr || email.trim().length === 0,
     [acceptedGdpr, email, status],
   )
+
+  const dismiss = useCallback(() => {
+    setOpen(false)
+    sessionStorage.setItem(SESSION_DISMISSED_KEY, '1')
+    localStorage.setItem(LOCAL_DISMISSED_UNTIL_KEY, `${Date.now() + THIRTY_DAYS_MS}`)
+  }, [])
 
   useEffect(() => {
     setOpen(false)
@@ -99,13 +105,7 @@ export default function NewsletterPopup() {
 
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [open])
-
-  const dismiss = () => {
-    setOpen(false)
-    sessionStorage.setItem(SESSION_DISMISSED_KEY, '1')
-    localStorage.setItem(LOCAL_DISMISSED_UNTIL_KEY, `${Date.now() + THIRTY_DAYS_MS}`)
-  }
+  }, [open, dismiss])
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -158,7 +158,7 @@ export default function NewsletterPopup() {
             </p>
 
             {status === 'success' ? (
-              <p className="mt-4 rounded-[2px] bg-bone px-3 py-2 font-sans text-[13px] text-charcoal">
+              <p className="mt-4 rounded-[2px] bg-olive-deep px-3 py-2 font-sans text-[13px] text-charcoal">
                 Ευχαριστούμε! Έλεγξε το email σου.
               </p>
             ) : (
@@ -172,7 +172,7 @@ export default function NewsletterPopup() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="ui-field w-full rounded-[2px] border border-line/70 bg-bone px-3 py-2.5 font-sans text-[14px] text-charcoal"
+                  className="ui-field w-full rounded-[2px] border border-line/70 bg-charcoal/10 px-3 py-2.5 font-sans text-[14px] text-charcoal"
                 />
                 <label className="flex items-start gap-2">
                   <input
@@ -188,7 +188,7 @@ export default function NewsletterPopup() {
                 <button
                   type="submit"
                   disabled={shouldDisable}
-                  className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+                  className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
                 </button>

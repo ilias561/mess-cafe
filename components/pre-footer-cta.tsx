@@ -17,25 +17,25 @@ type PreFooterCtaProps = {
 
 const variantStyles = {
   olive: {
-    bg: 'bg-olive-deep',
-    text: 'text-bone',
+    bg: 'bg-forest',
+    text: 'text-charcoal',
     eyebrow: 'text-mustard',
-    primary: 'bg-mustard text-charcoal hover:bg-amber',
-    secondary: 'border-bone/30 text-bone hover:border-bone/60',
+    primary: 'bg-mustard text-ink-dark hover:bg-amber',
+    secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
   },
   mustard: {
     bg: 'bg-mustard',
     text: 'text-charcoal',
     eyebrow: 'text-charcoal/70',
-    primary: 'bg-charcoal text-bone hover:bg-olive',
+    primary: 'bg-forest text-charcoal hover:bg-olive',
     secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
   },
   charcoal: {
-    bg: 'bg-charcoal',
-    text: 'text-bone',
+    bg: 'bg-forest',
+    text: 'text-charcoal',
     eyebrow: 'text-mustard/80',
-    primary: 'bg-mustard text-charcoal hover:bg-amber',
-    secondary: 'border-bone/30 text-bone hover:border-bone/60',
+    primary: 'bg-mustard text-ink-dark hover:bg-amber',
+    secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
   },
 }
 

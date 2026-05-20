@@ -6,7 +6,7 @@ import { submitContact } from '@/lib/contact/submit'
 import { Reveal } from '@/components/reveal'
 
 const INPUT_BASE =
-  'ui-field w-full rounded-[3px] border border-bone/20 bg-white/5 px-4 py-3.5 font-sans text-[15px] text-bone placeholder:text-charcoal/30 focus:outline-none'
+  'ui-field w-full rounded-[3px] border border-charcoal/20 bg-charcoal/5 px-4 py-3.5 font-sans text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none'
 
 export default function ContactSection() {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -54,7 +54,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 bg-olive-deep px-6 py-24 md:px-12 md:py-32"
+      className="scroll-mt-28 bg-forest px-6 py-24 md:px-12 md:py-32"
     >
       <div className="mx-auto max-w-[1400px]">
         <Reveal className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
@@ -65,11 +65,11 @@ export default function ContactSection() {
               ΕΠΙΚΟΙΝΩΝΙΑ
             </p>
 
-            <h2 className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-bone">
+            <h2 className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-charcoal">
               Πες μας τι σκέφτεσαι.
             </h2>
 
-            <p className="mt-5 font-sans text-[15px] leading-relaxed text-bone/60">
+            <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/60">
               Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
             </p>
           </div>
@@ -77,19 +77,19 @@ export default function ContactSection() {
           {/* Right: form */}
           <div className="lg:col-span-3" aria-live="polite">
             {status === 'success' ? (
-              <div className="rounded-2xl border border-bone/15 bg-bone/5 p-8">
+              <div className="rounded-2xl border border-charcoal/15 bg-charcoal/5 p-8">
                 <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">ΕΥΧΑΡΙΣΤΟΥΜΕ</p>
-                <h3 className="mt-3 font-serif text-[clamp(24px,3vw,34px)] leading-[1.1] text-bone">
+                <h3 className="mt-3 font-serif text-[clamp(24px,3vw,34px)] leading-[1.1] text-charcoal">
                   Λάβαμε το μήνυμά σου!
                 </h3>
-                <p className="mt-2 font-sans text-[14px] leading-relaxed text-bone/60">
+                <p className="mt-2 font-sans text-[14px] leading-relaxed text-charcoal/60">
                   Θα επικοινωνήσουμε μαζί σου σύντομα.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-bone/50">Όνομα</label>
+                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">Όνομα</label>
                   <input
                     id="contact-name"
                     name="name"
@@ -101,7 +101,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-bone/50">Email</label>
+                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">Email</label>
                   <input
                     id="contact-email"
                     name="email"
@@ -113,7 +113,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5 md:col-span-2">
-                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-bone/50">Μήνυμα</label>
+                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">Μήνυμα</label>
                   <textarea
                     id="contact-message"
                     name="message"
@@ -144,13 +144,13 @@ export default function ContactSection() {
                         setConsent(e.target.checked)
                         if (e.target.checked) setConsentError('')
                       }}
-                      className="mt-1 h-4 w-4 shrink-0 rounded border-bone/30 text-mustard focus:ring-mustard"
+                      className="mt-1 h-4 w-4 shrink-0 rounded border-charcoal/30 text-mustard focus:ring-mustard"
                     />
-                    <span className="font-sans text-[13px] leading-relaxed text-bone/70">
+                    <span className="font-sans text-[13px] leading-relaxed text-charcoal/70">
                       Έχω διαβάσει την{' '}
                       <Link
                         href="/privacy"
-                        className="ui-link text-bone underline decoration-mustard underline-offset-4"
+                        className="ui-link text-charcoal underline decoration-mustard underline-offset-4"
                       >
                         Πολιτική Απορρήτου
                       </Link>{' '}
@@ -167,7 +167,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:bg-amber hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+                    className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {sending ? 'Αποστολή...' : 'Στείλε μήνυμα'}
                   </button>

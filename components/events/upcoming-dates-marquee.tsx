@@ -9,12 +9,12 @@ export default function UpcomingDatesMarquee({ events }: Props) {
   if (events.length === 0) return null
 
   return (
-    <div className="overflow-hidden bg-charcoal py-3.5" aria-hidden>
+    <div className="overflow-hidden bg-olive-deep py-3.5" aria-hidden>
       <div className="marquee-track flex whitespace-nowrap">
         {[...events, ...events].map((event, i) => (
           <Fragment key={`${event.slug}-${i}`}>
             <span className="mx-[14px] text-mustard">·</span>
-            <span className="font-sans text-[13px] uppercase tracking-[0.22em] text-bone">
+            <span className="font-sans text-[13px] uppercase tracking-[0.22em] text-charcoal">
               {formatGreekDate(event.date)} · {event.categoryLabel}
             </span>
           </Fragment>

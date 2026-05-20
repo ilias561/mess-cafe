@@ -220,9 +220,12 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
           <div>
-            <label className="flex cursor-pointer items-start gap-3">
+            <label htmlFor="consent" className="flex cursor-pointer items-start gap-3">
               <input
+                id="consent"
                 type="checkbox"
+                aria-describedby={errors.consent ? 'consent-error' : undefined}
+                aria-invalid={errors.consent ? true : undefined}
                 {...register('consent')}
                 className="mt-1 h-4 w-4 shrink-0 rounded border-line/50 text-mustard focus:ring-mustard"
               />
@@ -235,7 +238,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
               </span>
             </label>
             {errors.consent ? (
-              <p role="alert" className="mt-2 font-sans text-[12px] text-amber-600">
+              <p id="consent-error" role="alert" className="mt-2 font-sans text-[12px] text-amber-600">
                 {errors.consent.message}
               </p>
             ) : null}
@@ -260,7 +263,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
+            className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isSubmitting ? 'Αποστολή...' : 'Στείλε κράτηση'}
           </button>

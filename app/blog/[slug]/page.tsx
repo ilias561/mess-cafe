@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       card: 'summary_large_image',
       title: `${post.title} — Blog | M.E.S.S.`,
       description: post.excerpt,
-      images: [post.cover],
+      images: [buildOgImage({ url: post.cover, alt: post.coverAlt }).url],
     },
   }
 }
@@ -70,20 +70,26 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
-    image: post.cover,
+    image: absoluteUrl(post.cover),
     url: canonicalUrl,
     datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
     author: {
-      '@type': 'Person',
-      name: post.author.name,
+      '@type': 'Organization',
+      name: 'M.E.S.S.',
+      url: getSiteUrl(),
     },
     publisher: {
       '@type': 'Organization',
       name: 'M.E.S.S.',
       url: getSiteUrl(),
+      logo: {
+        '@type': 'ImageObject',
+        url: absoluteUrl('/icon.svg'),
+      },
     },
     inLanguage: 'el',
   }

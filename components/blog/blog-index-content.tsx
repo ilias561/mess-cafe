@@ -47,7 +47,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
           <FeaturedPost post={featured} />
         </SectionReveal>
 
-        <div className="sticky top-20 z-20 -mx-6 mt-14 border-y border-line/30 bg-bone/90 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
+        <div className="sticky top-20 z-20 -mx-6 mt-14 border-y border-line/30 bg-olive-deep/95 px-6 py-4 backdrop-blur-md md:-mx-12 md:px-12">
           <div className="mx-auto flex max-w-[1400px] flex-wrap gap-3 md:gap-4">
             {filters.map((filter) => {
               const isActive = activeFilter === filter.key
@@ -63,7 +63,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
                   }}
                   className={`ui-interactive rounded-full border px-5 py-2 font-sans text-[12px] uppercase tracking-[0.16em] ${
                     isActive
-                      ? 'border-mustard bg-mustard text-charcoal'
+                      ? 'border-mustard bg-mustard text-ink-dark'
                       : 'border-line/50 text-charcoal hover:border-mustard hover:text-olive'
                   }`}
                 >
@@ -91,7 +91,7 @@ export default function BlogIndexContent({ posts }: BlogIndexContentProps) {
             <button
               type="button"
               onClick={() => setVisibleCount((current) => current + 6)}
-              className="ui-interactive mt-6 rounded-full bg-charcoal px-12 py-5 font-sans text-[13px] uppercase tracking-[0.18em] text-bone hover:bg-olive hover:shadow-lg"
+              className="ui-interactive mt-6 rounded-full bg-forest px-12 py-5 font-sans text-[13px] uppercase tracking-[0.18em] text-charcoal hover:bg-olive hover:shadow-lg"
             >
               Φόρτωσε περισσότερα
             </button>

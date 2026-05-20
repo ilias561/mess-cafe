@@ -36,16 +36,16 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
             className={`object-cover transition-[transform,filter] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.05] group-hover/card:[filter:sepia(0.15)_saturate(1.1)] ${dimmed ? 'opacity-70' : ''}`}
             style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/20 to-transparent" />
-          <div className="absolute left-4 top-4 rounded-full bg-bone/95 px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.16em] text-charcoal">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+          <div className="absolute left-4 top-4 rounded-full bg-charcoal/95 px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.16em] text-ink-dark">
             {formatGreekDate(event.date)}
           </div>
-          <div className="absolute bottom-5 left-5 right-5 text-bone">
+          <div className="absolute bottom-5 left-5 right-5 text-charcoal">
             <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-mustard">{event.categoryLabel}</p>
             <h3 className="ui-link mt-2 font-serif text-[clamp(22px,2.6vw,30px)] leading-[1.1] tracking-[-0.01em]">
               {event.title}
             </h3>
-            <span className="ui-link mt-3 inline-flex items-center gap-1 font-sans text-[12px] uppercase tracking-[0.18em] text-bone/90 underline decoration-terracotta underline-offset-[5px]">
+            <span className="ui-link mt-3 inline-flex items-center gap-1 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal/90 underline decoration-terracotta underline-offset-[5px]">
               Μάθε περισσότερα →
             </span>
           </div>

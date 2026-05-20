@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: EventPageProps): Promise<Meta
       card: 'summary_large_image',
       title: `${event.title} — Δράσεις | M.E.S.S.`,
       description: event.description,
-      images: [event.coverImage],
+      images: [buildOgImage({ url: event.coverImage, alt: event.coverAlt }).url],
     },
   }
 }
@@ -62,9 +62,10 @@ export default async function EventPage({ params }: EventPageProps) {
     '@type': 'Event',
     name: event.title,
     description: event.description,
-    image: event.coverImage,
+    image: absoluteUrl(event.coverImage),
     url: absoluteUrl(`/actions/${event.slug}`),
     startDate: event.date,
+    eventStatus: 'https://schema.org/EventScheduled',
     location: {
       '@type': 'Place',
       name: event.location || 'M.E.S.S.',

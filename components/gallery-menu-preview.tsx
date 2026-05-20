@@ -5,31 +5,51 @@ import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import { featuredMenuItems } from '@/lib/menu-featured'
 
-const PHILOSOPHY_COPY =
-  'Μέσα από χρόνια μελέτης για την κατανόηση του ανθρώπινου σώματος, καταλήξαμε σε μια φιλοσοφία μαγειρέματος όπου το φαγητό κατέχει θέση φαρμάκου για τον ανθρώπινο οργανισμό. Δουλεύουμε αποκλειστικά με φρέσκα υλικά, τοπικά προϊόντα, και χρησιμοποιούμε μόνο ελαιόλαδο, βούτυρο και λάδι καρύδας. Το ψωμί μας είναι προζυμένιο αργής ωρίμανσης και ψήνεται σε παραδοσιακό ξυλόφουρνο.'
+const PHILOSOPHY_LEAD =
+  'Μέσα από χρόνια μελέτης για την κατανόηση του ανθρώπινου σώματος, καταλήξαμε σε μια φιλοσοφία μαγειρέματος όπου το φαγητό κατέχει θέση φαρμάκου για τον ανθρώπινο οργανισμό.'
+const PHILOSOPHY_BODY =
+  'Δουλεύουμε αποκλειστικά με φρέσκα υλικά, τοπικά προϊόντα, και χρησιμοποιούμε μόνο ελαιόλαδο, βούτυρο και λάδι καρύδας. Το ψωμί μας είναι προζυμένιο αργής ωρίμανσης και ψήνεται σε παραδοσιακό ξυλόφουρνο.'
 
 export default function GalleryMenuPreview() {
   return (
     <section id="menu-preview" className="scroll-mt-28 border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal className="max-w-[68ch]">
-          <p className="font-serif text-[clamp(22px,3vw,32px)] leading-snug tracking-tight text-charcoal/90">
-            {PHILOSOPHY_COPY}
-          </p>
-          <Link
-            href="/menu"
-            className="ui-interactive mt-8 inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:bg-amber hover:shadow-lg"
-          >
-            Δείτε το menu μας
-          </Link>
+        <Reveal className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
+          {/* LEFT: eyebrow + heading */}
+          <div className="md:col-span-5">
+            <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive">
+              ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ
+            </p>
+            <h2 className="mt-3 font-serif text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight text-charcoal">
+              Η φιλοσοφία του μενού μας.
+            </h2>
+          </div>
+
+          {/* RIGHT: lead + body + CTA */}
+          <div className="md:col-span-7 md:pt-1.5">
+            <p className="font-serif text-[clamp(17px,1.5vw,20px)] leading-relaxed tracking-tight text-charcoal">
+              {PHILOSOPHY_LEAD}
+            </p>
+            <p className="mt-4 font-sans text-[clamp(16px,1.3vw,19px)] leading-relaxed text-charcoal/80">
+              {PHILOSOPHY_BODY}
+            </p>
+            <Link
+              href="/menu"
+              className="ui-interactive mt-8 inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg"
+            >
+              Δείτε το menu μας
+            </Link>
+          </div>
         </Reveal>
 
-        <Reveal asGroup className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
-          {featuredMenuItems.map((item) => (
+        <div className="mt-14 h-px w-full max-w-[120px] bg-terracotta/40" aria-hidden />
+
+        <Reveal asGroup className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
+          {featuredMenuItems.map((item, index) => (
             <Reveal.Item key={item.name}>
-              <article className="group">
+              <article className={`group ${index === 1 ? 'md:mt-12' : ''}`}>
                 {item.image ? (
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-bone-warm">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-bone-warm sm:aspect-[3/2] md:aspect-[4/5]">
                     <FadeImage
                       src={item.image}
                       alt={item.name}
@@ -41,10 +61,14 @@ export default function GalleryMenuPreview() {
                     />
                   </div>
                 ) : null}
-                <p className="mt-4 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{item.cat}</p>
-                <h3 className="mt-1 font-serif text-[26px] leading-snug tracking-tight text-charcoal">{item.name}</h3>
-                <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
-                <p className="mt-2 font-serif text-[20px] text-mustard">{item.price}</p>
+                <p className="mt-5 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{item.cat}</p>
+                <div className="mt-2 flex items-baseline justify-between gap-4 border-t border-line pt-3">
+                  <h3 className="font-serif text-[clamp(22px,2.2vw,26px)] leading-snug tracking-tight text-charcoal">
+                    {item.name}
+                  </h3>
+                  <p className="shrink-0 font-serif text-[18px] text-mustard">{item.price}</p>
+                </div>
+                <p className="mt-3 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
               </article>
             </Reveal.Item>
           ))}

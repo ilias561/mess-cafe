@@ -53,7 +53,7 @@ export default function MenuPage() {
       {/* Philosophy callout between Salads and Coffee */}
       <section className="border-y border-line/30 bg-bone-warm px-6 py-24 md:px-12 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="font-serif text-[clamp(24px,3.5vw,36px)] leading-snug tracking-tight text-bone">
+          <p className="font-serif text-[clamp(24px,3.5vw,36px)] leading-snug tracking-tight text-charcoal">
             &ldquo;Το MESS δημιουργήθηκε για να προάγει ένα πιο υγιές lifestyle — με κεντρικό άξονα την δημιουργικότητα, την πρωτοβουλία και την δικτύωση.&rdquo;
           </p>
           <p className="mt-8 font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
@@ -78,7 +78,7 @@ export default function MenuPage() {
         <div className="mt-8">
           <Link
             href="/#map"
-            className="ui-interactive inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:shadow-lg hover:bg-amber"
+            className="ui-interactive inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-lg hover:bg-amber"
           >
             Βρες μας
           </Link>

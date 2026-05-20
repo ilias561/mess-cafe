@@ -18,7 +18,7 @@ export default function CategoryPill({ category, label, className = '', light = 
   return (
     <span
       className={`inline-flex rounded-full border px-4 py-1.5 font-sans text-[11px] uppercase tracking-[0.16em] ${
-        light ? 'border-bone/30 bg-bone/10 text-bone' : categoryStyles[category]
+        light ? 'border-white/25 bg-black/25 text-charcoal' : categoryStyles[category]
       } ${className}`}
     >
       {label}

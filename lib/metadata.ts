@@ -16,8 +16,21 @@ type PageMetadataInput = {
   image?: OgImageInput
 }
 
-function resolveOgImageUrl(url: string): string {
-  return url.startsWith('http') ? url : absoluteUrl(url)
+const DEFAULT_OG_IMAGE = '/images/hero-interior.jpg'
+
+/** Always returns an absolute https:// URL for Open Graph images. */
+export function resolveOgImageUrl(url: string): string {
+  const trimmed = url?.trim() || DEFAULT_OG_IMAGE
+  if (trimmed.startsWith('https://')) return trimmed
+  if (trimmed.startsWith('http://')) {
+    return `https://${trimmed.slice('http://'.length)}`
+  }
+  const path = trimmed.startsWith('/') ? trimmed : `/${trimmed}`
+  const resolved = absoluteUrl(path)
+  if (!resolved.startsWith('https://')) {
+    return absoluteUrl(DEFAULT_OG_IMAGE)
+  }
+  return resolved
 }
 
 export function buildOgImage({ url, alt, width, height }: OgImageInput) {

@@ -56,7 +56,7 @@ export default function BlogTagFilter({ posts }: BlogTagFilterProps) {
                 className={[
                   'ui-interactive rounded-full border px-5 py-2 font-sans text-[12px] tracking-[0.12em]',
                   isActive
-                    ? 'border-mustard bg-mustard text-charcoal'
+                    ? 'border-mustard bg-mustard text-ink-dark'
                     : isEmpty
                       ? 'cursor-default border-line/50 text-charcoal opacity-50'
                       : 'cursor-pointer border-line/50 text-charcoal hover:bg-bone-warm',

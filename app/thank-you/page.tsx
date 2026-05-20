@@ -23,13 +23,13 @@ export default function ThankYouPage() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:justify-start">
             <Link
               href="/"
-              className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:bg-amber hover:shadow-lg"
+              className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg"
             >
               Επιστροφή στην αρχική
             </Link>
             <Link
               href="/menu"
-              className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:bg-amber hover:shadow-lg"
+              className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg"
             >
               Δες το μενού
             </Link>

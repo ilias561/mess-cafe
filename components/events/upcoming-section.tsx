@@ -32,7 +32,7 @@ export default function UpcomingSection({ events, activeCategory }: Props) {
         </SectionReveal>
 
         {filtered.length > 0 ? (
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-8">
             <AnimatePresence mode="popLayout">
               {filtered.map((event) => (
                 <motion.div

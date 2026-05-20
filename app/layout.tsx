@@ -63,7 +63,7 @@ export const viewport: Viewport = {
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'CafeOrCoffeeShop',
+  '@type': 'LocalBusiness',
   name: 'M.E.S.S.',
   alternateName: 'M.E.S.S. Specialty Coffee & Brunch',
   url: siteUrl,
@@ -122,13 +122,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="el" className={`${fraunces.variable} ${inter.variable}`}>
-      <head>
+      <body className="bg-forest font-sans antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="bg-bone font-sans antialiased" suppressHydrationWarning>
         <PageLoader />
         <RouteScrollTop />
         <AnchorScroll />

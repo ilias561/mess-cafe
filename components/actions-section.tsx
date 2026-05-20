@@ -47,7 +47,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                       className="object-cover transition-transform duration-500 ease-out group-hover/card:scale-[1.04]"
                       style={{ objectPosition: card.coverObjectPosition ?? 'center' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                   </div>
 
                   <div className="flex flex-col gap-1.5 p-4">
@@ -75,7 +75,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           {hasMore ? (
             <Link
               href="/actions"
-              className="ui-interactive inline-block rounded-[2px] border border-charcoal/20 bg-bone-warm px-6 py-3 font-sans text-sm font-medium text-charcoal hover:border-charcoal/40 hover:shadow-[0_4px_16px_rgba(43,43,40,0.08)]"
+              className="ui-interactive inline-block rounded-full border border-charcoal/20 bg-bone-warm px-6 py-3 font-sans text-sm font-medium text-charcoal hover:border-charcoal/40 hover:shadow-[0_4px_16px_rgba(43,43,40,0.08)]"
             >
               Δες όλες τις δράσεις ({actionCards.length}) →
             </Link>

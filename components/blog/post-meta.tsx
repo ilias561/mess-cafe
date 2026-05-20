@@ -11,7 +11,7 @@ type PostMetaProps = {
 
 export default function PostMeta({ post, showAvatar = false, className = '', light = false }: PostMetaProps) {
   return (
-    <div className={`flex flex-wrap items-center gap-2 font-sans text-[12px] ${light ? 'text-bone/70' : 'text-concrete'} ${className}`}>
+    <div className={`flex flex-wrap items-center gap-2 font-sans text-[12px] ${light ? 'text-charcoal/70' : 'text-concrete'} ${className}`}>
       {showAvatar && post.author.avatar ? (
         <FadeImage
           src={post.author.avatar}

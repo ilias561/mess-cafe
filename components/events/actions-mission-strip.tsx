@@ -451,7 +451,7 @@ export default function ActionsMissionStrip({
       {/* ─── ambient decorative layer ─── */}
       {/* botanical, top-left */}
       <motion.div
-        className="pointer-events-none absolute -left-2 -top-2 text-[#2d5a27]"
+        className="pointer-events-none absolute -left-2 -top-2 text-forest"
         animate={
           animateAmbient ? { opacity: [0.1, 0.18, 0.1] } : { opacity: 0.14 }
         }
@@ -466,7 +466,7 @@ export default function ActionsMissionStrip({
       </motion.div>
       {/* botanical, bottom-right (mirrored) */}
       <motion.div
-        className="pointer-events-none absolute -bottom-2 -right-2 text-[#2d5a27]"
+        className="pointer-events-none absolute -bottom-2 -right-2 text-forest"
         style={{ transform: 'scale(-1, -1)' }}
         animate={
           animateAmbient ? { opacity: [0.1, 0.18, 0.1] } : { opacity: 0.14 }
@@ -489,7 +489,7 @@ export default function ActionsMissionStrip({
         )}
         aria-hidden
       >
-        <span className="block h-px w-9 bg-[#2d5a27]/40" />
+        <span className="block h-px w-9 bg-forest/40" />
         <motion.span
           className="block h-[5px] w-[5px] rounded-full bg-olive"
           animate={
@@ -503,7 +503,7 @@ export default function ActionsMissionStrip({
               : { duration: 0 }
           }
         />
-        <span className="block h-px w-9 bg-[#2d5a27]/40" />
+        <span className="block h-px w-9 bg-forest/40" />
       </div>
 
       {/* ─── content ─── */}
@@ -712,7 +712,7 @@ export default function ActionsMissionStrip({
         <div className={isLead ? 'mt-6 md:mt-10' : 'mt-16 md:mt-20'}>
           <div
             className={cn(
-              'mx-auto h-px w-12 bg-[#2d5a27]/40',
+              'mx-auto h-px w-12 bg-forest/40',
               isLead ? 'mb-5 md:mb-6' : 'mb-12',
             )}
             aria-hidden

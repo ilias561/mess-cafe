@@ -39,6 +39,7 @@ export default function TipsGrid({ tips }: { tips: Tip[] }) {
                 fill
                 unoptimized
                 loading="lazy"
+                sizes="(min-width: 768px) 33vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
             ) : null}

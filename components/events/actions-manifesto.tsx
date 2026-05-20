@@ -2,7 +2,7 @@ import SectionReveal from '@/components/section-reveal'
 
 export default function ActionsManifesto() {
   return (
-    <section className="bg-charcoal px-6 py-6 md:px-8 md:py-8">
+    <section className="bg-forest px-6 py-6 md:px-8 md:py-8">
       <SectionReveal>
         <div className="mx-auto max-w-[30em] text-center">
           <div
@@ -10,10 +10,10 @@ export default function ActionsManifesto() {
             aria-hidden
           >
             <span className="block h-px w-9 bg-mustard/50" />
-            <span className="block h-[5px] w-[5px] rounded-full bg-bone/40" />
+            <span className="block h-[5px] w-[5px] rounded-full bg-charcoal/40" />
             <span className="block h-px w-9 bg-mustard/50" />
           </div>
-          <blockquote className="font-serif italic text-[clamp(17px,2.6vw,26px)] leading-[1.35] text-bone">
+          <blockquote className="font-serif italic text-[clamp(17px,2.6vw,26px)] leading-[1.35] text-charcoal">
             &ldquo;Οι δράσεις μας δεν είναι event marketing. Είναι ο τρόπος που το M.E.S.S. στέκεται δίπλα στην πόλη — με καθαρό φαγητό, με μπαζάρ για όσους έχουν ανάγκη, με ανοιχτές πόρτες για κάθε ηλικία.&rdquo;
           </blockquote>
           <p className="mt-4 font-sans text-[11px] uppercase tracking-[0.2em] text-mustard md:mt-6">

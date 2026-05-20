@@ -2,7 +2,7 @@
 
 import Image, { type ImageProps } from 'next/image'
 import { useReducedMotion } from 'framer-motion'
-import { useEffect, useState, type CSSProperties, type SyntheticEvent } from 'react'
+import { useState, type CSSProperties, type SyntheticEvent } from 'react'
 import { duration as d, ease } from '@/lib/motion'
 
 const DEFAULT_SKELETON = 'color-mix(in srgb, var(--color-espresso) 8%, transparent)'
@@ -16,7 +16,8 @@ export type FadeImageProps = Omit<ImageProps, 'onLoadingComplete'> & {
 
 export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImageProps) {
   const reduceMotion = useReducedMotion()
-  const [loaded, setLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const loaded = reduceMotion === true || imageLoaded
   const {
     style: imageStyle,
     className,
@@ -31,12 +32,8 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
   const resolvedLoading = priority ? 'eager' : (loading ?? 'lazy')
   const resolvedDecoding = decoding ?? 'async'
 
-  useEffect(() => {
-    if (reduceMotion) setLoaded(true)
-  }, [reduceMotion])
-
   const handleLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    setLoaded(true)
+    setImageLoaded(true)
     onLoad?.(e)
   }
 

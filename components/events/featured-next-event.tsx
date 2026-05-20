@@ -19,7 +19,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
   return (
     <section className="bg-bone-warm px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid gap-[18px] md:grid-cols-[1fr_1.05fr] md:items-center">
+        <div className="grid grid-cols-1 gap-8">
 
           {/* Left: portrait image */}
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2px]">
@@ -34,7 +34,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
           </div>
 
           {/* Right: text block */}
-          <div className="md:pl-8 lg:pl-14">
+          <div>
             <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
               ΕΠΟΜΕΝΗ ΔΡΑΣΗ · {formatGreekDate(event.date)}
             </motion.p>
@@ -59,7 +59,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
             <motion.div {...fadeUpDelayed(0.22)} className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={`/actions/${event.slug}`}
-                className="ui-interactive rounded-[2px] bg-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-bone hover:shadow-md"
+                className="ui-interactive rounded-full bg-mustard px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-ink-dark hover:bg-amber hover:shadow-md"
               >
                 ΚΡΑΤΗΣΗ →
               </Link>
@@ -67,7 +67,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
                 href={`https://wa.me/${waPhone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ui-interactive rounded-[2px] border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal hover:shadow-md"
+                className="ui-interactive rounded-full border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal hover:shadow-md"
               >
                 WHATSAPP
               </a>

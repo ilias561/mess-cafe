@@ -6,7 +6,6 @@ import { Suspense } from 'react'
 import EventsGrid from '@/components/events/events-grid'
 import { buildPageMetadata } from '@/lib/metadata'
 import { getPastEvents, getUpcomingEvents } from '@/lib/events/events'
-import { getSettings } from '@/lib/settings'
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Workshops & Events — M.E.S.S.',
@@ -18,7 +17,6 @@ export const metadata: Metadata = buildPageMetadata({
 export default function WorkshopsPage() {
   const upcomingEvents = getUpcomingEvents()
   const pastEvents = getPastEvents()
-  const settings = getSettings()
   const bookingEvents = [...upcomingEvents, ...pastEvents].map((event) => ({
     slug: event.slug,
     title: event.title,

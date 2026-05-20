@@ -12,15 +12,6 @@ import { EASE, ease } from '@/lib/motion'
 
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
 
-/** Desktop hero overlay pill — subset of main nav */
-const heroFloatingLinks = [
-  { label: 'Μενού', href: '/menu' },
-  { label: 'Δράσεις', href: '/actions' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Κράτηση', href: '/reservations' },
-  { label: 'Επικοινωνία', href: '/#contact' },
-] as const
-
 /** Single source for grep / copy consistency (desktop nav + mobile drawer CTA). */
 const RESERVATIONS_LABEL = 'Κράτηση για event' as const
 
@@ -95,7 +86,7 @@ function OpenBadge({
     ? 'bg-green-600'
     : 'bg-mustard'
   const textColor = light
-    ? 'text-bone/90'
+    ? 'text-white/90'
     : 'text-charcoal/80'
   const pulseColor = status.open ? 'bg-green-400' : 'bg-mustard'
   const titleText = status.label
@@ -314,14 +305,14 @@ export default function Navigation() {
   const navTextColor = isInHero ? 'text-white' : 'text-charcoal'
   const headerClasses = isInHero || isDesktopHero
     ? 'bg-transparent border-transparent'
-    : 'bg-[rgba(245,240,230,0.94)] backdrop-blur-[14px] border-b border-black/[0.06]'
-  const navHeight = isInHero ? 'h-12' : isDesktopHero ? 'h-auto min-h-[88px] py-4' : 'h-16'
+    : 'bg-[rgba(37,73,30,0.94)] backdrop-blur-[14px] border-b border-white/[0.08]'
+  const navHeight = isInHero ? 'h-12' : 'h-16'
 
   return (
     <>
       <a
         href="#main-content"
-        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-charcoal transition-transform duration-200 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
+        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-ink-dark transition-transform duration-200 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
       >
         Μετάβαση στο περιεχόμενο
       </a>
@@ -331,54 +322,23 @@ export default function Navigation() {
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
-        <div
-          className={`relative mx-auto flex h-full max-w-[1440px] gap-3 px-5 lg:gap-4 lg:px-8 ${
-            isDesktopHero ? 'flex-col items-center justify-center py-2' : 'items-center justify-between'
-          }`}
-        >
+        <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-3 px-5 lg:gap-4 lg:px-8">
           <Link
             href="/"
-            className={`flex min-w-0 shrink transition-colors ${
-              isDesktopHero
-                ? 'flex-col items-center gap-2 text-charcoal'
-                : `max-w-[min(100%,52vw)] items-center gap-2 sm:max-w-none sm:gap-3 ${navTextColor}`
+            className={`flex min-w-0 shrink max-w-[min(100%,52vw)] items-center gap-2 transition-[color,opacity] duration-300 sm:max-w-none sm:gap-3 ${navTextColor} ${
+              isDesktopHero ? 'pointer-events-none opacity-0' : 'opacity-100'
             }`}
+            aria-hidden={isDesktopHero}
+            tabIndex={isDesktopHero ? -1 : undefined}
           >
             <BrandLogo />
-            <span
-              className={`font-serif font-medium tracking-tight ${
-                isDesktopHero ? 'text-[26px]' : 'truncate text-[22px]'
-              }`}
-            >
+            <span className="truncate font-serif text-[22px] font-medium tracking-tight">
               M.E.S.S.
             </span>
           </Link>
 
-          {isDesktopHero ? (
-            <nav
-              className="mt-2 flex flex-wrap items-center justify-center gap-1 rounded-full border border-charcoal/10 bg-bone/60 px-4 py-2 shadow-sm backdrop-blur-md"
-              aria-label="Κύρια πλοήγηση"
-            >
-              {heroFloatingLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    if (link.href === '/#contact') {
-                      const didNavigate = handleAnchorNavigation('contact')
-                      if (didNavigate) e.preventDefault()
-                    }
-                  }}
-                  className="rounded-full px-3 py-1.5 font-sans text-[13px] font-medium text-charcoal/85 transition-colors hover:bg-bone-warm"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          ) : null}
-
           <nav
-            className={`hidden items-center lg:flex ${isDesktopHero ? 'sr-only' : navTextColor}`}
+            className={`hidden items-center lg:flex ${navTextColor}`}
             aria-label="Κύρια πλοήγηση"
           >
               {navLinks.map((link) => {
@@ -405,7 +365,7 @@ export default function Navigation() {
                       shiftRightCluster ? 'ml-5 xl:ml-7 2xl:ml-9' : ''
                     } ${
                       link.isCta
-                        ? 'rounded-full bg-[rgba(212,165,80,0.12)] px-[14px] py-[6px] hover:bg-mustard hover:text-charcoal'
+                        ? 'rounded-full bg-[rgba(212,165,80,0.12)] px-[14px] py-[6px] hover:bg-mustard hover:text-ink-dark'
                         : 'px-0'
                     }`}
                   >
@@ -431,12 +391,10 @@ export default function Navigation() {
               })}
           </nav>
 
-          <div
-            className={`flex shrink-0 items-center gap-2 ${isDesktopHero ? 'absolute top-3 right-5 lg:right-8' : 'ml-auto'}`}
-          >
+          <div className="ml-auto flex shrink-0 items-center gap-2">
             <a
               href={`tel:${PHONE_NUMBER}`}
-              aria-label="Κάλεσέ μας"
+              aria-label="Τηλεφωνήστε μας"
               className={`ui-interactive flex h-11 w-11 items-center justify-center rounded-full border hover:border-mustard hover:text-mustard focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${isInHero ? 'border-white/30 text-white' : 'border-black/20 text-charcoal'}`}
             >
               <Phone className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
@@ -519,7 +477,7 @@ export default function Navigation() {
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Κλείσιμο μενού"
-                  className="ui-interactive flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-espresso text-bone hover:bg-espresso/90 active:bg-espresso/80"
+                  className="ui-interactive flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-olive-deep text-charcoal hover:bg-olive-deep/90 active:bg-olive-deep/80"
                 >
                   <X className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden />
                 </button>
@@ -569,14 +527,14 @@ export default function Navigation() {
                 <div className="grid grid-cols-2 gap-3">
                   <a
                     href={`tel:${PHONE_NUMBER}`}
-                    className="ui-interactive flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-espresso px-3 font-sans text-[15px] font-medium text-espresso hover:border-espresso/80 active:border-mustard active:text-mustard"
+                    className="ui-interactive flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-charcoal/30 px-3 font-sans text-[15px] font-medium text-charcoal hover:border-charcoal/50 active:border-mustard active:text-mustard"
                   >
                     <Phone className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden />
                     Κάλεσέ μας
                   </a>
                   <Link
                     href="/reservations"
-                    className="ui-interactive flex min-h-[48px] items-center justify-center rounded-full bg-mustard px-8 py-3.5 text-center font-sans text-sm font-medium text-espresso hover:bg-amber"
+                    className="ui-interactive flex min-h-[48px] items-center justify-center rounded-full bg-mustard px-8 py-3.5 text-center font-sans text-sm font-medium text-ink-dark hover:bg-amber"
                     onClick={() => setMenuOpen(false)}
                   >
                     {RESERVATIONS_LABEL}

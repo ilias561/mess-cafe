@@ -14,26 +14,26 @@ export default function ActionSpotlight({ event }: Props) {
       className="border-t border-line/50 bg-bone-warm/40 px-6 py-16 md:px-12 md:py-24"
       aria-labelledby={`action-spotlight-${event.slug}`}
     >
-      <div className="mx-auto grid max-w-[1400px] gap-12 md:grid-cols-12 md:gap-14 md:items-start">
-        <div className="md:col-span-5">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+        <div>
           <Link
             href={`/actions/${event.slug}`}
             className="group block"
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2px] border border-line/50 bg-bone">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[2px] border border-line/50 bg-bone md:max-w-none">
               <FadeImage
                 src={event.coverImage}
                 alt={event.coverAlt || `Εκδήλωση: ${event.title}`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                sizes="(max-width: 768px) 100vw, 42vw"
+                sizes="(max-width: 768px) 420px, 42vw"
                 style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
               />
             </div>
           </Link>
         </div>
 
-        <div className="md:col-span-7">
+        <div>
           <div className="mb-5 flex items-center gap-3">
             <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-terracotta" aria-hidden />
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">

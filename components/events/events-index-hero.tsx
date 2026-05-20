@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-import aboutSidePhoto from '../../public/images/about-2.jpg'
+import aboutSidePhoto from '../../public/images/about-3.jpg'
 import Link from 'next/link'
 import MaskReveal from '@/components/mask-reveal'
 import { fadeUp, fadeUpDelayed } from '@/lib/motion'
@@ -51,7 +51,7 @@ export default function EventsIndexHero({
   if (upcomingEvents.length === 0) {
     return (
       <section className="border-t border-line/40 bg-bone px-6 py-12 md:px-12 md:py-16">
-        <div className="mx-auto grid max-w-[1400px] gap-8 md:grid-cols-[minmax(0,1.12fr)_min(300px,30vw)] md:items-center md:gap-10 lg:grid-cols-[minmax(0,1.15fr)_min(340px,28vw)]">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8">
           <div>
             <motion.h2
               {...fadeUp}
@@ -76,17 +76,17 @@ export default function EventsIndexHero({
               >
                 Πρότεινε δράση →
               </a>
-              <a
+              <Link
                 href="/#map"
                 className="font-sans text-[14px] text-charcoal underline decoration-mustard underline-offset-[5px] hover:decoration-2"
               >
                 Δες πού είμαστε →
-              </a>
+              </Link>
             </motion.div>
           </div>
 
-          <MaskReveal className="relative mx-auto hidden w-full max-w-[320px] md:mx-0 md:block md:max-w-none" delay={0.08}>
-            <div className="relative aspect-[4/5] max-h-[min(48vh,360px)] overflow-hidden rounded-[2px] bg-bone-warm md:max-h-[min(52vh,420px)]">
+          <MaskReveal className="relative mx-auto w-full max-w-[320px]" delay={0.08}>
+            <div className="relative aspect-[4/5] max-h-[min(52vh,420px)] overflow-hidden rounded-[2px] bg-bone-warm">
               <Image
                 src={aboutSidePhoto}
                 alt="Εσωτερικό του M.E.S.S. — ο χώρος όπου στήνονται οι δράσεις."
@@ -106,7 +106,7 @@ export default function EventsIndexHero({
 
   return (
     <section className="border-t border-line/40 bg-bone px-6 pt-8 pb-8 md:px-12 md:pt-12 md:pb-12">
-      <div className="mx-auto grid max-w-[1400px] gap-8 md:grid-cols-[minmax(0,1.12fr)_min(300px,30vw)] md:items-start md:gap-10 lg:grid-cols-[minmax(0,1.15fr)_min(340px,28vw)]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8">
 
         <div>
           <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
@@ -154,7 +154,7 @@ export default function EventsIndexHero({
                 className={cn(
                   'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
                   activeCategory === null
-                    ? 'border-charcoal bg-charcoal text-bone'
+                    ? 'border-charcoal/40 bg-olive-deep text-charcoal'
                     : 'border-line text-charcoal hover:border-charcoal/40',
                 )}
               >
@@ -173,7 +173,7 @@ export default function EventsIndexHero({
                   className={cn(
                     'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
                     activeCategory === label
-                      ? 'border-charcoal bg-charcoal text-bone'
+                      ? 'border-charcoal/40 bg-olive-deep text-charcoal'
                       : 'border-line text-charcoal hover:border-charcoal/40',
                   )}
                 >
@@ -189,15 +189,15 @@ export default function EventsIndexHero({
           <motion.div {...fadeUpDelayed(0.11)} className="mt-3">
             <a
               href="#upcoming"
-              className="ui-interactive inline-block rounded-[2px] bg-charcoal px-[15px] py-[9px] font-sans text-[11px] uppercase tracking-[0.14em] text-bone hover:bg-charcoal/90"
+              className="ui-interactive inline-block rounded-full bg-mustard px-[15px] py-[9px] font-sans text-[11px] uppercase tracking-[0.14em] text-ink-dark hover:bg-amber"
             >
               Δες πρόγραμμα ↓
             </a>
           </motion.div>
         </div>
 
-        <MaskReveal className="relative mx-auto hidden w-full max-w-[320px] md:mx-0 md:block md:max-w-none" delay={0.1}>
-          <div className="relative aspect-[4/5] max-h-[min(52vh,400px)] overflow-hidden rounded-[2px] bg-bone-warm md:max-h-[min(56vh,440px)]">
+        <MaskReveal className="relative mx-auto w-full max-w-[320px]" delay={0.1}>
+          <div className="relative aspect-[4/5] max-h-[min(56vh,440px)] overflow-hidden rounded-[2px] bg-bone-warm">
             <Image
               src={aboutSidePhoto}
               alt="Εσωτερικό του M.E.S.S. — το δωμάτιο όπου στήνονται οι δράσεις."

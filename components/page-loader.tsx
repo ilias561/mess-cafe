@@ -63,13 +63,13 @@ export default function PageLoader() {
       {visible ? (
         <motion.div
           key="page-loader"
-          className="fixed inset-0 z-[200] overflow-hidden bg-olive-deep"
+          className="fixed inset-0 z-[200] overflow-hidden bg-forest"
           initial={{ y: 0 }}
           animate={{ y: '-100%' }}
           transition={{ duration: CURTAIN_SLIDE_MS / 1000, delay: skipAnimation ? 0 : 1.48, ease: EASE }}
         >
           <div className="absolute left-1/2 top-1/2 w-fit -translate-x-1/2 -translate-y-1/2">
-            <span className="inline-flex overflow-hidden font-serif text-[clamp(30px,5vw,44px)] tracking-tight text-cream">
+            <span className="inline-flex overflow-hidden font-serif text-[clamp(30px,5vw,44px)] tracking-tight text-charcoal">
               {letters.map((letter, index) => (
                 <span key={`${letter}-${index}`} className="inline-block overflow-hidden">
                   <motion.span
@@ -88,7 +88,7 @@ export default function PageLoader() {
               ))}
             </span>
             <motion.span
-              className="mt-2 block h-px w-full origin-left bg-cream"
+              className="mt-2 block h-px w-full origin-left bg-charcoal"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{

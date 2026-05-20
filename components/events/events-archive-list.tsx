@@ -14,7 +14,7 @@ export default function EventsArchiveList({ pastEvents }: Props) {
   }, new Date().getFullYear()) || 2023
 
   return (
-    <section className="bg-olive-deep px-6 py-24 text-bone md:px-12 md:py-32">
+    <section className="bg-forest px-6 py-24 text-charcoal md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
 
         {/* Header row */}
@@ -23,7 +23,7 @@ export default function EventsArchiveList({ pastEvents }: Props) {
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
               ΑΡΧΕΙΟ · ΠΑΛΑΙΟΤΕΡΕΣ
             </p>
-            <p className="font-sans text-[11px] text-bone/50">
+            <p className="font-sans text-[11px] text-charcoal/50">
               {pastEvents.length} δράσεις από {oldestYear}
             </p>
           </div>
@@ -35,22 +35,22 @@ export default function EventsArchiveList({ pastEvents }: Props) {
             <Link
               key={event.slug}
               href={`/actions/${event.slug}`}
-              className={`grid grid-cols-[60px_110px_1fr_28px] items-center py-3 transition-colors duration-150 hover:bg-bone/[0.04] ${
+              className={`grid grid-cols-[60px_110px_1fr_28px] items-center py-3 transition-colors duration-150 hover:bg-charcoal/[0.04] ${
                 i < pastEvents.length - 1
-                  ? 'border-b border-bone/[0.13]'
+                  ? 'border-b border-line'
                   : ''
               }`}
             >
-              <span className="font-sans text-[13px] text-bone/50">
+              <span className="font-sans text-[13px] text-charcoal/50">
                 {formatShortDate(event.date)}
               </span>
               <span className="font-sans text-[11px] uppercase tracking-[0.14em] text-mustard">
                 {event.categoryLabel.toUpperCase()}
               </span>
-              <span className="font-serif text-[16px] text-bone">
+              <span className="font-serif text-[16px] text-charcoal">
                 {event.title}
               </span>
-              <span className="text-right font-sans text-[13px] text-bone/50">
+              <span className="text-right font-sans text-[13px] text-charcoal/50">
                 →
               </span>
             </Link>
@@ -59,12 +59,12 @@ export default function EventsArchiveList({ pastEvents }: Props) {
 
         {/* Footer link */}
         <div className="mt-8">
-          <a
+          <Link
             href="/actions"
             className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard transition-opacity hover:opacity-70"
           >
             ΠΕΡΙΣΣΟΤΕΡΑ →
-          </a>
+          </Link>
         </div>
 
       </div>

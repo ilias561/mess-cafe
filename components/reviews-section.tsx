@@ -55,7 +55,7 @@ function ReviewCard({ review }: { review: Review }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Κριτική από ${review.name}`}
-      className="flex w-[min(360px,calc(100vw-3rem))] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4285F4]"
+      className="flex w-[min(360px,calc(100vw-3rem))] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-colors transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
     >
       {/* Header: avatar + name + google logo */}
       <div className="flex items-start justify-between gap-2">
@@ -212,10 +212,10 @@ export default function ReviewsSection() {
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
 
           <div>
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#5f6368]">
+            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
               Τι λένε όσοι μας γνώρισαν
             </p>
-            <h2 className="mt-2 font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-[#202124]">
+            <h2 className="mt-2 font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-charcoal">
               Αξιολογήσεις από την κοινότητά μας
             </h2>
           </div>
@@ -247,7 +247,7 @@ export default function ReviewsSection() {
         <Reveal>
           <Link
             href="/reviews"
-            className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-[#5f6368] transition-colors hover:text-charcoal"
+            className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-concrete transition-colors hover:text-charcoal"
           >
             Όλες οι αξιολογήσεις
             <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5" aria-hidden>

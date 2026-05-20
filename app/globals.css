@@ -5,24 +5,24 @@
 
 /* shadcn primitives — M.E.S.S. palette (keeps components/ui usable if imported later) */
 :root {
-  --background: #f5f1e8;
-  --foreground: #2b2b28;
-  --card: #f5f1e8;
-  --card-foreground: #2b2b28;
-  --popover: #f5f1e8;
-  --popover-foreground: #2b2b28;
-  --primary: #2b2b28;
-  --primary-foreground: #f5f1e8;
-  --secondary: #efe8d8;
-  --secondary-foreground: #2b2b28;
-  --muted: #efe8d8;
-  --muted-foreground: #6b6b63;
+  --background: #2d5a27;
+  --foreground: #f3efe3;
+  --card: #25491e;
+  --card-foreground: #f3efe3;
+  --popover: #25491e;
+  --popover-foreground: #f3efe3;
+  --primary: #e8b547;
+  --primary-foreground: #15300f;
+  --secondary: #336b2c;
+  --secondary-foreground: #f3efe3;
+  --muted: #336b2c;
+  --muted-foreground: #d0dfc8;
   --accent: #e8b547;
-  --accent-foreground: #2b2b28;
+  --accent-foreground: #15300f;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: #d9d0be;
-  --input: #d9d0be;
+  --border: rgba(243, 239, 227, 0.16);
+  --input: rgba(243, 239, 227, 0.16);
   --ring: #e8b547;
   --radius: 0.625rem;
   --mustard: #e8b547;
@@ -40,20 +40,21 @@
 }
 
 @theme inline {
-  /* M.E.S.S. design tokens */
-  --color-bone: #f5f1e8;
-  --color-bone-warm: #efe8d8;
+  /* M.E.S.S. design tokens — green dark theme (surfaces green, ink light) */
+  --color-bone: #2d5a27;        /* primary surface (was cream) → forest */
+  --color-bone-warm: #25491e;   /* alt surface / cards → deeper green */
   --color-mustard: #e8b547;
   --color-amber: #f4a623;
-  --color-olive: #3d4a2a;
-  --color-olive-deep: #2a3418;
-  --color-charcoal: #2b2b28;
-  --color-terracotta: #b54f2a;
-  --color-espresso: #2a1d14;
-  --color-cream: #faf6ed;
-  --color-concrete: #6b6b63;
-  --color-line: #d9d0be;
+  --color-olive: #d8e8cc;       /* eyebrow / accent text → light sage */
+  --color-olive-deep: #1d3a16;  /* dark green surface */
+  --color-charcoal: #f3efe3;    /* primary ink (was near-black) → light */
+  --color-terracotta: #d98a5f;  /* warmer so it reads on green */
+  --color-espresso: #f3efe3;    /* ink on surfaces → light */
+  --color-cream: #336b2c;       /* light-ish green surface */
+  --color-concrete: #d0dfc8;    /* muted ink → muted light green */
+  --color-line: rgba(243, 239, 227, 0.16); /* hairlines → light */
   --color-forest: #2d5a27;
+  --color-ink-dark: #15300f;    /* dark ink for use on mustard/amber */
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;
@@ -93,12 +94,12 @@
 
   html {
     scroll-behavior: smooth;
-    background: var(--color-bone);
+    background: var(--color-forest);
   }
 
   body {
-    background: var(--color-bone);
-    color: color-mix(in srgb, var(--color-charcoal) 85%, transparent);
+    background: var(--color-forest);
+    color: var(--color-charcoal);
     font-family: var(--font-sans);
     font-feature-settings: 'ss01' on, 'ss02' on;
     font-size: 16px;
@@ -118,7 +119,7 @@
 
   ::selection {
     background: var(--color-mustard);
-    color: var(--color-charcoal);
+    color: var(--color-ink-dark);
   }
 
   *:focus-visible {
@@ -280,26 +281,24 @@ main li a:hover {
   }
 }
 
-/* Mobile hero only: legibility over full-bleed video (desktop uses gradient overlay) */
-@media (max-width: 767px) {
-  .hero-mobile-svh {
-    height: 100vh; /* fallback where svh is unsupported */
-    height: 100svh;
-  }
+/* Full-bleed cinematic hero — viewport height + legibility shadows */
+.hero-mobile-svh {
+  height: 100vh; /* fallback where svh is unsupported */
+  height: 100svh;
+}
 
-  .hero-text-shadow {
-    text-shadow:
-      0 0 1px rgba(0, 0, 0, 0.85),
-      0 1px 3px rgba(0, 0, 0, 0.65),
-      0 2px 12px rgba(0, 0, 0, 0.45),
-      0 4px 24px rgba(0, 0, 0, 0.3);
-  }
+.hero-text-shadow {
+  text-shadow:
+    0 0 1px rgba(0, 0, 0, 0.85),
+    0 1px 3px rgba(0, 0, 0, 0.65),
+    0 2px 12px rgba(0, 0, 0, 0.45),
+    0 4px 24px rgba(0, 0, 0, 0.3);
+}
 
-  .hero-text-shadow-display {
-    text-shadow:
-      0 0 2px rgba(0, 0, 0, 0.9),
-      0 2px 6px rgba(0, 0, 0, 0.75),
-      0 6px 28px rgba(0, 0, 0, 0.55),
-      0 12px 40px rgba(0, 0, 0, 0.35);
-  }
+.hero-text-shadow-display {
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.75),
+    0 6px 28px rgba(0, 0, 0, 0.55),
+    0 12px 40px rgba(0, 0, 0, 0.35);
 }

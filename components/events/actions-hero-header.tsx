@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useId, useRef, useState } from 'react'
+import { Fragment, useEffect, useId, useRef, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import {
   motion,
@@ -46,11 +46,27 @@ function CounterStripSegment() {
   )
 }
 
+function usePointerLeanEnabled(prefersReducedMotion: boolean | null) {
+  return useSyncExternalStore(
+    (onStoreChange) => {
+      if (prefersReducedMotion) return () => {}
+      const mq = window.matchMedia('(hover: hover) and (min-width: 768px)')
+      mq.addEventListener('change', onStoreChange)
+      return () => mq.removeEventListener('change', onStoreChange)
+    },
+    () => {
+      if (prefersReducedMotion) return false
+      return window.matchMedia('(hover: hover) and (min-width: 768px)').matches
+    },
+    () => false,
+  )
+}
+
 export default function ActionsHeroHeader({ nextEvent }: Props) {
   const prefersReducedMotion = useReducedMotion()
   const grainFilterId = useId().replace(/:/g, '')
   const sectionRef = useRef<HTMLElement>(null)
-  const [pointerLeanEnabled, setPointerLeanEnabled] = useState(false)
+  const pointerLeanEnabled = usePointerLeanEnabled(prefersReducedMotion)
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -58,18 +74,6 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
   const springY = useSpring(mouseY, { stiffness: 50, damping: 20, mass: 1 })
   const rotateY = useTransform(springX, [-0.5, 0.5], [-2, 2])
   const rotateX = useTransform(springY, [-0.5, 0.5], [1, -1])
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setPointerLeanEnabled(false)
-      return
-    }
-    const mq = window.matchMedia('(hover: hover) and (min-width: 768px)')
-    const sync = () => setPointerLeanEnabled(mq.matches)
-    sync()
-    mq.addEventListener('change', sync)
-    return () => mq.removeEventListener('change', sync)
-  }, [prefersReducedMotion])
 
   const scribbleDelay = heroWords.length * 0.05 + 0.25
 
@@ -139,7 +143,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
               : { duration: 4, repeat: Infinity, ease: ease.inOut }
           }
         >
-          <span className="inline-flex -rotate-[8deg] items-center rounded-full bg-mustard px-2.5 py-1 font-sans text-[10px] font-medium uppercase tracking-wider text-charcoal">
+          <span className="inline-flex -rotate-[8deg] items-center rounded-full bg-mustard px-2.5 py-1 font-sans text-[10px] font-medium uppercase tracking-wider text-ink-dark">
             ΑΠΟ 2025
           </span>
         </motion.span>
@@ -147,6 +151,12 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
         <div className="max-w-[40rem] text-center md:text-left">
           <motion.p
             {...fadeUp}
+            className="mb-3 font-sans text-[11px] uppercase tracking-[0.22em] text-olive"
+          >
+            2025
+          </motion.p>
+          <motion.p
+            {...fadeUpDelayed(0.02)}
             className="font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal/60"
           >
             <span className="inline-block -rotate-[1.5deg] rounded-[2px] border border-dashed border-concrete/40 px-2.5 py-1">
