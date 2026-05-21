@@ -14,7 +14,7 @@ export default function ActionsManifesto() {
             <span className="block h-px w-9 bg-mustard/50" />
           </div>
           <blockquote className="font-serif italic text-[clamp(17px,2.6vw,26px)] leading-[1.35] text-charcoal">
-            &ldquo;Οι δράσεις μας δεν είναι event marketing. Είναι ο τρόπος που το M.E.S.S. στέκεται δίπλα στην πόλη — με καθαρό φαγητό, με μπαζάρ για όσους έχουν ανάγκη, με ανοιχτές πόρτες για κάθε ηλικία.&rdquo;
+            Το KeepRising είναι το moto μας, το οποίο εξελίσσεται σε μια συλλογικότητα δράσεων που αποσκοπούν στην κοινωνική ενημέρωση, τις κοινωνικές δράσεις, και στο να φέρει τον κόσμο πιο κοντά, μέσω της βοήθειας και υποστήριξης προς αλλήλους.
           </blockquote>
           <p className="mt-4 font-sans text-[11px] uppercase tracking-[0.2em] text-mustard md:mt-6">
             #KEEPRISING · Η ΟΜΑΔΑ ΤΟΥ M.E.S.S.

@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { PHONE_NUMBER } from '@/lib/constants'
 import { getOpenStatus } from '@/lib/hours'
+import { scrollToId } from '@/lib/lenis'
 import { EASE, ease } from '@/lib/motion'
 
 const MOBILE_MENU_ID = 'mobile-menu-drawer'
@@ -17,14 +18,14 @@ const RESERVATIONS_LABEL = 'Κράτηση για event' as const
 
 const navLinks = [
   { label: 'Αρχική', href: '/', sectionId: null, isCta: false },
-  { label: 'Ποιοι είμαστε', href: '/#about-us', sectionId: 'about-us', isCta: false },
+  { label: 'Ποιοι είμαστε / Η φιλοσοφία μας', href: '/#philosophy', sectionId: 'philosophy', isCta: false },
   { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
   { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
   { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
-  { label: 'Workshops', href: '/workshops', sectionId: null, isCta: false },
-  { label: RESERVATIONS_LABEL, href: '/reservations', sectionId: null, isCta: true },
   { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
+  { label: 'Workshops', href: '/workshops', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
+  { label: RESERVATIONS_LABEL, href: '/reservations', sectionId: null, isCta: true },
 ] as const
 
 type NavLink = (typeof navLinks)[number]
@@ -291,10 +292,7 @@ export default function Navigation() {
 
   const handleAnchorNavigation = (sectionId: string) => {
     if (pathname !== '/') return false
-    const id = sectionId
-    const target = document.getElementById(id)
-    if (!target) return false
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (!scrollToId(sectionId)) return false
     setMenuOpen(false)
     return true
   }

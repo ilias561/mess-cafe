@@ -4,6 +4,7 @@ import { type FormEvent, useState } from 'react'
 import Link from 'next/link'
 import { submitContact } from '@/lib/contact/submit'
 import { Reveal } from '@/components/reveal'
+import ScrollDrift from '@/components/scroll-drift'
 
 const INPUT_BASE =
   'ui-field w-full rounded-[3px] border border-charcoal/20 bg-charcoal/5 px-4 py-3.5 font-sans text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none'
@@ -54,28 +55,30 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 bg-forest px-6 py-24 md:px-12 md:py-32"
+      className="scroll-mt-28 overflow-x-clip bg-forest px-6 py-24 md:px-12 md:py-32"
     >
       <div className="mx-auto max-w-[1400px]">
-        <Reveal className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
 
           {/* Left: heading */}
-          <div className="lg:col-span-2">
+          <Reveal direction="left" className="lg:col-span-2">
             <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard/80">
               ΕΠΙΚΟΙΝΩΝΙΑ
             </p>
 
-            <h2 className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-charcoal">
-              Πες μας τι σκέφτεσαι.
-            </h2>
+            <ScrollDrift distance={24}>
+              <h2 className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-charcoal">
+                Πες μας τι σκέφτεσαι.
+              </h2>
+            </ScrollDrift>
 
             <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/60">
               Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
             </p>
-          </div>
+          </Reveal>
 
           {/* Right: form */}
-          <div className="lg:col-span-3" aria-live="polite">
+          <Reveal direction="right" className="lg:col-span-3" aria-live="polite">
             {status === 'success' ? (
               <div className="rounded-2xl border border-charcoal/15 bg-charcoal/5 p-8">
                 <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">ΕΥΧΑΡΙΣΤΟΥΜΕ</p>
@@ -174,9 +177,9 @@ export default function ContactSection() {
                 </div>
               </form>
             )}
-          </div>
+          </Reveal>
 
-        </Reveal>
+        </div>
       </div>
     </section>
   )

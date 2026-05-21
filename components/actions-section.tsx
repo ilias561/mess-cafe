@@ -23,9 +23,17 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
           <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>
           <KeepRisingWordmark className="text-left" />
           <p className="mt-6 max-w-3xl font-serif text-[18px] italic leading-relaxed text-charcoal/80 md:text-[20px]">
-            Το KeepRising είναι το moto μας — μια συλλογικότητα δράσεων που αποσκοπούν στην κοινωνική ενημέρωση,
-            στις κοινωνικές δράσεις, και στο να φέρει τον κόσμο πιο κοντά μέσω της βοήθειας και της υποστήριξης
-            μεταξύ μας.
+            Δεν είμαστε απλώς ένα καφέ, είμαστε μια ιδέα. Σκοπός του M.E.S.S. είναι να βοηθήσει στη δημιουργία
+            μιας κοινότητας μέσω της αλληλοϋποστήριξης, της κοινωνικής βοήθειας και του ευ ζην. Το KeepRising
+            είναι ο τρόπος που μετατρέπουμε την ιδεολογία σε πράξη μέσω διάφορων κοινωνικών δράσεων, τις οποίες
+            θα βρείτε{' '}
+            <Link
+              href="/actions"
+              className="ui-link font-medium text-charcoal underline decoration-mustard underline-offset-4"
+            >
+              παρακάτω
+            </Link>
+            .
           </p>
         </Reveal>
 

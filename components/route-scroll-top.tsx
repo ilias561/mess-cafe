@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { getLenis } from '@/lib/lenis'
 
 export default function RouteScrollTop() {
   const pathname = usePathname()
@@ -12,7 +13,12 @@ export default function RouteScrollTop() {
     // Do not override scroll restoration on browser back/forward
     const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
     if (nav?.type === 'back_forward') return
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    const lenis = getLenis()
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
   }, [pathname])
 
   return null

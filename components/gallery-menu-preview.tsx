@@ -3,6 +3,7 @@
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
+import ScrollDrift from '@/components/scroll-drift'
 import { featuredMenuItems } from '@/lib/menu-featured'
 
 const PHILOSOPHY_LEAD =
@@ -12,21 +13,23 @@ const PHILOSOPHY_BODY =
 
 export default function GalleryMenuPreview() {
   return (
-    <section id="menu-preview" className="scroll-mt-28 border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32">
+    <section id="menu-preview" className="scroll-mt-28 overflow-x-clip border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <Reveal className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
           {/* LEFT: eyebrow + heading */}
-          <div className="md:col-span-5">
+          <Reveal direction="left" className="md:col-span-5">
             <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive">
               ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ
             </p>
-            <h2 className="mt-3 font-serif text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight text-charcoal">
-              Η φιλοσοφία του μενού μας.
-            </h2>
-          </div>
+            <ScrollDrift distance={26}>
+              <h2 className="mt-3 font-serif text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight text-charcoal">
+                Η φιλοσοφία του μενού μας.
+              </h2>
+            </ScrollDrift>
+          </Reveal>
 
           {/* RIGHT: lead + body + CTA */}
-          <div className="md:col-span-7 md:pt-1.5">
+          <Reveal direction="right" className="md:col-span-7 md:pt-1.5">
             <p className="font-serif text-[clamp(17px,1.5vw,20px)] leading-relaxed tracking-tight text-charcoal">
               {PHILOSOPHY_LEAD}
             </p>
@@ -39,8 +42,8 @@ export default function GalleryMenuPreview() {
             >
               Δείτε το menu μας
             </Link>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <div className="mt-14 h-px w-full max-w-[120px] bg-terracotta/40" aria-hidden />
 

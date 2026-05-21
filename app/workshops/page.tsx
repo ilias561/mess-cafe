@@ -39,7 +39,8 @@ export default function WorkshopsPage() {
         </div>
       </section>
 
-      <EventsGrid upcomingEvents={upcomingEvents} pastEvents={pastEvents} />
+      {/* Workshops page intentionally hides the past-events archive */}
+      <EventsGrid upcomingEvents={upcomingEvents} pastEvents={[]} />
 
       <section className="border-t border-line/30 px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[720px]">

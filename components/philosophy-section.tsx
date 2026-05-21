@@ -60,7 +60,7 @@ export default function PhilosophySection() {
   return (
     <section
       id="philosophy"
-      className="scroll-mt-28 border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32"
+      className="scroll-mt-28 overflow-x-clip border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32"
     >
       <Reveal className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 md:grid-cols-12">
 
@@ -75,9 +75,9 @@ export default function PhilosophySection() {
               έχει:
             </p>
 
-            <Reveal asGroup className="mt-12 flex flex-col gap-0">
+            <Reveal asGroup id="goals" className="mt-12 flex scroll-mt-28 flex-col gap-0">
               {philosophyGoals.map((goal, index) => (
-                <Reveal.Item key={goal}>
+                <Reveal.Item key={goal} direction="left">
                   <div className="flex gap-6 border-t border-charcoal/10 py-6 first:border-t-0 first:pt-0">
                     <span className="shrink-0 font-serif text-[clamp(28px,4vw,40px)] leading-none tracking-tight text-mustard/80">
                       {String(index + 1).padStart(2, '0')}.
@@ -94,8 +94,8 @@ export default function PhilosophySection() {
 
         {/* ── RIGHT: scrolling photos column ── */}
         <div className="flex flex-col gap-4 md:col-span-7">
-          {aboutImages.map((img) => (
-            <div key={img.key}>
+          {aboutImages.map((img, i) => (
+            <Reveal key={img.key} direction={i % 2 === 0 ? 'right' : 'left'}>
               <div className={`relative w-full overflow-hidden ${img.aspect}`}>
                 <FadeImage
                   src={img.src}
@@ -110,7 +110,7 @@ export default function PhilosophySection() {
               <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
                 {img.caption}
               </p>
-            </div>
+            </Reveal>
           ))}
 
           <div>

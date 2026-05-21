@@ -171,7 +171,21 @@ export default function Hero() {
   }, [])
 
   useHeroVideoAutoplay(mobileVideoRef, loaderReady && !prefersReducedMotion && !isDesktop, 2.5, false, false)
-  useHeroVideoAutoplay(desktopVideoRef, loaderReady && !prefersReducedMotion && isDesktop, 1, true, false)
+  useHeroVideoAutoplay(desktopVideoRef, loaderReady && !prefersReducedMotion && isDesktop, 1.75, true, false)
+
+  // Desktop hero: play the first 59% at 1.75x, then resume normal speed.
+  useEffect(() => {
+    if (prefersReducedMotion || !isDesktop) return
+    const video = desktopVideoRef.current
+    if (!video) return
+    const onTime = () => {
+      if (!video.duration) return
+      const rate = video.currentTime < video.duration * 0.59 ? 1.75 : 1
+      if (video.playbackRate !== rate) video.playbackRate = rate
+    }
+    video.addEventListener('timeupdate', onTime)
+    return () => video.removeEventListener('timeupdate', onTime)
+  }, [prefersReducedMotion, isDesktop, loaderReady])
 
   useEffect(() => {
     if (prefersReducedMotion) return
@@ -252,9 +266,17 @@ export default function Hero() {
         </motion.div>
 
         {/* ── Legibility scrims (centered composition) ── */}
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-black/40" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 z-[1] bg-black/45" aria-hidden />
         <div
           className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-transparent to-black/50"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[1]"
+          style={{
+            background:
+              'radial-gradient(ellipse 70% 55% at 50% 42%, rgba(0,0,0,0.5), rgba(0,0,0,0) 72%)',
+          }}
           aria-hidden
         />
 
@@ -268,29 +290,36 @@ export default function Hero() {
           aria-hidden
         />
 
-        {/* ── Overlaid content — centered ── */}
-        <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 py-24 text-center md:px-12">
+        {/* ── Overlaid content — brand near top, headline centered below ── */}
+        <div className="relative z-10 flex min-h-screen flex-col items-center px-6 pt-[13vh] pb-[8vh] text-center md:px-12 md:pt-[11vh]">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={loaderReady ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.85, duration: 0.5, ease: EASE }}
-            className="mb-7 flex items-center gap-4"
+            initial={{ opacity: 0, y: 16, scale: 0.96 }}
+            animate={loaderReady ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ delay: 0.5, duration: 1.2, ease: EASE }}
+            className="flex items-center gap-5"
           >
-            <Image
-              src="/images/logo-mess.svg"
-              alt="Λογότυπο M.E.S.S."
-              width={88}
-              height={88}
-              priority
-              className="hero-text-shadow h-16 w-16 shrink-0 rounded-full object-cover md:h-[88px] md:w-[88px]"
-            />
-            <span className="hero-text-shadow font-serif text-[44px] font-medium leading-none tracking-tight text-white md:text-[68px]">
+            <motion.div
+              animate={prefersReducedMotion ? {} : { y: [0, -8, 0] }}
+              transition={prefersReducedMotion ? {} : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="shrink-0"
+            >
+              <Image
+                src="/images/logo-mess.svg"
+                alt="Λογότυπο M.E.S.S."
+                width={88}
+                height={88}
+                priority
+                className="hero-text-shadow h-28 w-28 rounded-full object-cover md:h-[172px] md:w-[172px]"
+              />
+            </motion.div>
+            <span className="hero-text-shadow font-serif text-[76px] font-medium leading-none tracking-tight text-white md:text-[132px]">
               M.E.S.S.
             </span>
           </motion.div>
 
+          <div className="flex w-full flex-1 flex-col items-center justify-end pb-[5vh]">
           <motion.p
-            {...reveal(950, 500)}
+            {...reveal(700, 1000)}
             className="hero-text-shadow font-sans text-[11px] tracking-[0.2em] text-white/75 uppercase"
           >
             SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
@@ -299,21 +328,21 @@ export default function Hero() {
           <h1 className="hero-headline hero-text-shadow-display mt-4 font-serif tracking-tight text-balance text-white">
             {heroWords.map((word, i) => (
               <Fragment key={`hero-${word}-${i}`}>
-                <span className="inline-block overflow-hidden align-baseline">
+                <span className="inline-block overflow-hidden px-[0.08em] -mx-[0.08em] py-[0.14em] -my-[0.14em] align-baseline">
                   <motion.span
-                    className={`inline-block ${word === 'kind' ? 'font-serif italic text-mustard' : ''}`}
-                    initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%', opacity: 0 }}
+                    className={`inline-block ${word === 'kind' ? 'font-serif italic text-mustard pr-[0.16em]' : ''}`}
+                    initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%', opacity: 0, filter: 'blur(10px)' }}
                     animate={
                       loaderReady
-                        ? { y: 0, opacity: 1 }
+                        ? { y: 0, opacity: 1, filter: 'blur(0px)' }
                         : prefersReducedMotion
                           ? { opacity: 0 }
-                          : { y: '100%', opacity: 0 }
+                          : { y: '100%', opacity: 0, filter: 'blur(10px)' }
                     }
                     transition={
                       prefersReducedMotion
                         ? { duration: 0.2, delay: 0 }
-                        : { delay: 1.0 + i * 0.06, duration: 0.5, ease: EASE }
+                        : { delay: 1.1 + i * 0.1, duration: 0.9, ease: EASE }
                     }
                   >
                     {word}
@@ -325,13 +354,13 @@ export default function Hero() {
           </h1>
 
           <motion.p
-            {...reveal(1250, 500)}
-            className="hero-text-shadow mx-auto mt-6 max-w-[560px] font-sans text-[15px] leading-relaxed text-white/90 md:text-[17px]"
+            {...reveal(1900, 1100)}
+            className="hero-text-shadow mx-auto mt-10 max-w-[560px] font-sans text-[15px] leading-relaxed text-white/90 md:text-[17px]"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </motion.p>
 
-          <motion.div {...reveal(1550, 400)} className="mt-8">
+          <motion.div {...reveal(2500, 900)} className="mt-8">
             <Link
               href="/#map"
               className="ui-link hero-text-shadow relative inline-block font-sans text-sm font-medium text-white"
@@ -340,17 +369,33 @@ export default function Hero() {
               Βρες μας
             </Link>
           </motion.div>
+          </div>
 
           {/* Corner label */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={loaderReady ? { opacity: 1 } : {}}
-            transition={{ delay: 1.15, duration: 0.8, ease: EASE }}
+            transition={{ delay: 2.8, duration: 0.8, ease: EASE }}
             className="hero-text-shadow pointer-events-none absolute right-6 bottom-8 font-sans text-[10px] tracking-[0.25em] text-white/40 uppercase md:right-12 md:bottom-10"
             aria-hidden
           >
             Ioannina &middot; est. 2024
           </motion.p>
+
+          {/* Scroll cue */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={loaderReady ? { opacity: 1 } : {}}
+            transition={{ delay: 3.2, duration: 1, ease: EASE }}
+            className="pointer-events-none absolute bottom-8 left-1/2 z-[3] -translate-x-1/2 md:bottom-10"
+            aria-hidden
+          >
+            <motion.span
+              className="block h-9 w-px bg-gradient-to-b from-white/0 via-white/60 to-white/0"
+              animate={prefersReducedMotion ? {} : { y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
+              transition={prefersReducedMotion ? {} : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </motion.div>
         </div>
       </section>
     </div>

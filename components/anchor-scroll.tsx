@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { scrollToId } from '@/lib/lenis'
 
 /**
  * Mounts once in layout. After any client-side navigation that includes a
@@ -18,9 +19,7 @@ export default function AnchorScroll() {
     const id = hash.slice(1)
     // Wait for DOM to settle after navigation before scrolling
     const timer = window.setTimeout(() => {
-      const el = document.getElementById(id)
-      if (!el) return
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      scrollToId(id)
     }, 150)
     return () => window.clearTimeout(timer)
   }, [pathname])

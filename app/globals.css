@@ -141,6 +141,24 @@
   text-transform: uppercase;
 }
 
+/* Lenis smooth scroll — disable native smooth so Lenis owns the scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -181,9 +199,9 @@
 
 /* Hero headline fluid sizing */
 .hero-headline {
-  font-size: clamp(56px, 9vw, 140px);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(46px, 7vw, 112px);
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .marquee-track {

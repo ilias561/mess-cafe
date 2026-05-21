@@ -18,6 +18,21 @@ export const reveal: Variants = {
   visible: { opacity: 1, y: 0 },
 }
 
+export type RevealDirection = 'up' | 'left' | 'right'
+
+/** Refined directional reveals — short travel + opacity fade. Reduced-motion handled by callers. */
+export const directionalReveal: Record<RevealDirection, Variants> = {
+  up: reveal,
+  left: {
+    hidden: { opacity: 0, x: -48 },
+    visible: { opacity: 1, x: 0 },
+  },
+  right: {
+    hidden: { opacity: 0, x: 48 },
+    visible: { opacity: 1, x: 0 },
+  },
+}
+
 export const revealTransition: Transition = {
   duration: duration.base,
   ease: ease.out,
