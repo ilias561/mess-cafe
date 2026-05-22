@@ -69,7 +69,7 @@ export default function MenuAnchorNav() {
           Αρχική
         </Link>
 
-        <div className="flex w-full flex-nowrap gap-5 overflow-x-auto lg:flex-wrap lg:justify-end">
+        <div className="no-scrollbar flex w-full flex-nowrap gap-5 overflow-x-auto lg:flex-wrap lg:justify-end">
           {anchors.map(({ id, label }) => (
             <button
               key={id}

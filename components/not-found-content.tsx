@@ -12,7 +12,7 @@ export default function NotFoundContent() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="font-serif text-[clamp(64px,12vw,128px)] leading-[0.95] tracking-[-0.03em] text-charcoal"
+          className="break-words font-serif text-[clamp(36px,12vw,128px)] leading-[0.95] tracking-[-0.03em] text-charcoal"
         >
           Λάθος διεύθυνση
         </motion.h1>

@@ -92,41 +92,88 @@ export default function PhilosophySection() {
           </div>
         </div>
 
-        {/* ── RIGHT: scrolling photos column ── */}
-        <div className="flex flex-col gap-4 md:col-span-7">
-          {aboutImages.map((img, i) => (
-            <Reveal key={img.key} direction={i % 2 === 0 ? 'right' : 'left'}>
-              <div className={`relative w-full overflow-hidden ${img.aspect}`}>
-                <FadeImage
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  unoptimized
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, 58vw"
-                  className="object-cover"
+        {/* ── RIGHT: photo carousel (mobile) / compact grid (desktop) ── */}
+        <div className="md:col-span-7">
+
+          {/* ── MOBILE: photos stacked one below the other (hidden on md+) ── */}
+          <div className="flex flex-col gap-8 md:hidden">
+            {aboutImages.map((img) => (
+              <Reveal key={img.key} direction="up">
+                <div className={`relative ${img.aspect} w-full overflow-hidden`}>
+                  <FadeImage
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    unoptimized
+                    loading="lazy"
+                    sizes="100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
+                  {img.caption}
+                </p>
+              </Reveal>
+            ))}
+
+            {/* Video closes the sequence */}
+            <Reveal direction="up">
+              <div className="relative aspect-video w-full overflow-hidden rounded-[2px] bg-bone-warm">
+                <AmbientVideo
+                  srcs={[...aboutEditorialVideos]}
+                  poster={images.aboutInterior}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: '50% 30%' }}
+                  ariaLabel="Βίντεο από τον χώρο του M.E.S.S. — πλάνα διαδόχως"
                 />
               </div>
               <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
-                {img.caption}
+                ΣΤΙΓΜΕΣ
               </p>
             </Reveal>
-          ))}
-
-          <div>
-            <div className="relative aspect-video w-full overflow-hidden rounded-[2px] bg-bone-warm">
-              <AmbientVideo
-                srcs={[...aboutEditorialVideos]}
-                poster={images.aboutPlants}
-                className="absolute inset-0 h-full w-full object-cover"
-                style={{ objectPosition: '50% 30%' }}
-                ariaLabel="Βίντεο από τον χώρο του M.E.S.S. — πλάνα διαδόχως"
-              />
-            </div>
-            <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
-              ΣΤΙΓΜΕΣ
-            </p>
           </div>
+
+          {/* ── DESKTOP: compact 2-column grid + full-width video (shown on md+) ── */}
+          <div className="hidden md:flex md:flex-col md:gap-4">
+            {/* 2-column grid for the 5 photos */}
+            <div className="grid grid-cols-2 gap-4">
+              {aboutImages.map((img, i) => (
+                <Reveal key={img.key} direction={i % 2 === 0 ? 'right' : 'left'}>
+                  <div className="relative aspect-[3/4] w-full overflow-hidden">
+                    <FadeImage
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      unoptimized
+                      loading="lazy"
+                      sizes="(max-width: 1400px) 29vw, 400px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
+                    {img.caption}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+
+            {/* Video spans full width below the grid */}
+            <Reveal direction="right">
+              <div className="relative aspect-video w-full overflow-hidden rounded-[2px] bg-bone-warm">
+                <AmbientVideo
+                  srcs={[...aboutEditorialVideos]}
+                  poster={images.aboutInterior}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: '50% 30%' }}
+                  ariaLabel="Βίντεο από τον χώρο του M.E.S.S. — πλάνα διαδόχως"
+                />
+              </div>
+              <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
+                ΣΤΙΓΜΕΣ
+              </p>
+            </Reveal>
+          </div>
+
         </div>
 
       </Reveal>

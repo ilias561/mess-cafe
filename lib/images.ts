@@ -24,8 +24,8 @@ export const images = {
   galleryDesktopInterior0027: '/images/raw/mess-internal-0027-1.png',
   /** Desktop raw — green doors / plants (about ΦΥΤΑ & ΦΩΣ still) */
   aboutPlantsLight: '/images/raw/about-plants-light.png',
-  /** Alias for editorial still; same file as aboutPlantsLight for now */
-  aboutMomentsStill: '/images/raw/about-plants-light.png',
+  /** Editorial still — distinct stock photo so it doesn't duplicate aboutPlantsLight */
+  aboutMomentsStill: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1400&q=80&auto=format&fit=crop',
   /** START NOW / workspace moment (optional swaps) */
   aboutSpaceStart: '/images/raw/about-space-start.png',
 

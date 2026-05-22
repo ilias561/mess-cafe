@@ -14,7 +14,7 @@ export default function BookingInfo({ settings }: BookingInfoProps) {
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
 
   return (
-    <aside className="border border-line/30 bg-bone-warm p-8">
+    <aside className="mt-8 border border-line/30 bg-bone-warm p-5 md:mt-0 md:p-8">
       <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΠΛΗΡΟΦΟΡΙΕΣ</p>
       <p className="mt-5 font-sans text-[16px] leading-[1.7] text-concrete">
         Αναλαμβάνουμε workshops, ιδιωτικά events, live μουσικές βραδιές και παρουσιάσεις βιβλίων στον χώρο του

@@ -730,7 +730,7 @@ export default function ActionsMissionStrip({
               }
             >
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
-                <CountUp to={2023} />
+                <CountUp to={2025} />
               </span>
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
                 από το

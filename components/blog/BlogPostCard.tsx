@@ -10,7 +10,7 @@ type BlogPostCardProps = {
 export default function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/food-for-medicine/${post.slug}`}
       className="group block cursor-pointer bg-cream transition-shadow duration-200 ease-out hover:shadow-sm"
     >
       {/* Cover image — aspect-[4/3], no radius, darken on hover */}
@@ -29,7 +29,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
       {/* Text block */}
       <div className="px-6 py-6 md:px-8 md:py-8">
         {/* Eyebrow + meta row */}
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
             {post.categoryLabel}
           </p>

@@ -31,27 +31,27 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const base = buildPageMetadata({
-    title: `${post.title} — Blog | M.E.S.S.`,
+    title: `${post.title} — Φαγητό ως Φάρμακο | M.E.S.S.`,
     description: post.excerpt,
-    path: `/blog/${post.slug}`,
+    path: `/food-for-medicine/${post.slug}`,
     type: 'article',
   })
 
   return {
     ...base,
     openGraph: {
-      title: `${post.title} — Blog | M.E.S.S.`,
+      title: `${post.title} — Φαγητό ως Φάρμακο | M.E.S.S.`,
       description: post.excerpt,
       type: 'article',
       locale: 'el_GR',
-      url: absoluteUrl(`/blog/${post.slug}`),
+      url: absoluteUrl(`/food-for-medicine/${post.slug}`),
       publishedTime: post.publishedAt,
       authors: [post.author.name],
       images: [buildOgImage({ url: post.cover, alt: post.coverAlt })],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.title} — Blog | M.E.S.S.`,
+      title: `${post.title} — Φαγητό ως Φάρμακο | M.E.S.S.`,
       description: post.excerpt,
       images: [buildOgImage({ url: post.cover, alt: post.coverAlt }).url],
     },
@@ -66,7 +66,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  const canonicalUrl = absoluteUrl(`/blog/${post.slug}`)
+  const canonicalUrl = absoluteUrl(`/food-for-medicine/${post.slug}`)
 
   const jsonLd = {
     '@context': 'https://schema.org',

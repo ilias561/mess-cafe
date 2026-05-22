@@ -20,7 +20,7 @@ export default function MenuSpecialsSection() {
             <Reveal.Item key={item.name}>
               <article className="flex flex-col gap-4 sm:flex-row sm:items-start">
                 {item.image ? (
-                  <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-[2px] bg-bone-warm sm:w-[140px]">
+                  <div className="relative aspect-square w-full max-h-[200px] shrink-0 overflow-hidden rounded-[2px] bg-bone-warm sm:max-h-none sm:w-[140px]">
                     <FadeImage
                       src={item.image}
                       alt={item.name}
@@ -33,7 +33,7 @@ export default function MenuSpecialsSection() {
                   </div>
                 ) : (
                   <div
-                    className="flex aspect-square w-full shrink-0 items-center justify-center rounded-[2px] bg-bone-warm sm:w-[140px]"
+                    className="flex aspect-square w-full max-h-[200px] shrink-0 items-center justify-center rounded-[2px] bg-bone-warm sm:max-h-none sm:w-[140px]"
                     aria-hidden
                   />
                 )}

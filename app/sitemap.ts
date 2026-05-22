@@ -20,14 +20,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     { url: absoluteUrl('/actions'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
-    { url: absoluteUrl('/blog'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
+    { url: absoluteUrl('/food-for-medicine'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.7 },
     { url: absoluteUrl('/privacy'), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
     { url: absoluteUrl('/cookies'), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
     { url: absoluteUrl('/terms'), lastModified: new Date(), changeFrequency: 'monthly', priority: 0.3 },
   ]
 
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: absoluteUrl(`/blog/${post.slug}`),
+    url: absoluteUrl(`/food-for-medicine/${post.slug}`),
     lastModified: new Date(post.publishedAt),
     changeFrequency: 'monthly',
     priority: 0.5,

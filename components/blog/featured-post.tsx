@@ -20,7 +20,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
       className="relative -mx-6 bg-forest px-6 py-24 text-charcoal md:-mx-12 md:px-12 md:py-32"
     >
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/food-for-medicine/${post.slug}`}
         className="group grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12 focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
         <div className="md:col-span-7">

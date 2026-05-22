@@ -59,3 +59,8 @@ KICKOFF-FOR-C2.md
 
 # Wrangler local state
 .wrangler/
+
+# Dev screenshot artifacts (regenerate via Playwright; not for git)
+mobile-screens/
+scripts/mobile-shots.mjs
+scripts/video-check.mjs

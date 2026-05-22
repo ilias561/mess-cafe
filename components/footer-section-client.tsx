@@ -26,11 +26,11 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
     <footer id="footer" className="bg-forest px-6 pt-24 pb-0 text-charcoal md:px-12">
       <div className="mx-auto max-w-[1400px]">
         <Reveal>
-          <p className="mb-6 inline-flex rounded-full border border-line bg-charcoal/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90">
+          <p className="mb-6 inline-flex max-w-full flex-wrap rounded-full border border-line bg-charcoal/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90">
             OPEN DAILY · {settings.hours.map((slot) => `${slot.day} ${slot.open}—${slot.close}`).join(' · ')}
           </p>
 
-          <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(56px,9vw,140px)] text-charcoal">
+          <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(36px,9vw,140px)] text-charcoal">
             {footerWords.map((word, i) => (
               <span key={`${word}-${i}`} className="inline-block overflow-hidden align-baseline">
                 <motion.span

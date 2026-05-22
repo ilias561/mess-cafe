@@ -263,7 +263,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70"
+            className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
           >
             {isSubmitting ? 'Αποστολή...' : 'Στείλε κράτηση'}
           </button>

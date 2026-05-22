@@ -94,7 +94,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
     >
       <Reveal className="relative">
         <div className="relative mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
-          <div className="flex items-start justify-between gap-6 md:contents">
+          <div className="flex items-start justify-between gap-6 md:contents [&>*]:min-w-0">
             <div className="space-y-3">
               <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Κατάσταση χώρου</p>
               <StatusPill isOpen={status.isOpen} label={status.label} />
@@ -107,7 +107,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
 
             <div className="space-y-3 text-right md:text-left">
               <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Σήμερα</p>
-              <p className="font-serif text-[clamp(24px,3vw,36px)] leading-tight capitalize text-charcoal">
+              <p className="font-serif text-[clamp(20px,3vw,36px)] leading-tight capitalize text-charcoal">
                 {todayLabel}
               </p>
               <span className="mt-2 block h-px w-10 bg-mustard md:ml-0 ml-auto" aria-hidden />

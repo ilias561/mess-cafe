@@ -66,7 +66,7 @@ export default function PostBody({ markdown, variant = 'article' }: PostBodyProp
       return (
         <blockquote
           key={`quote-${index}`}
-          className="my-10 border-l-2 border-mustard pl-6 font-serif text-[22px] md:text-[26px] italic leading-[1.4] text-charcoal"
+          className="my-10 border-l-2 border-mustard pl-6 font-serif text-[18px] md:text-[22px] italic leading-[1.4] text-charcoal"
         >
           {renderInline(block.replace(/^>\s*/, ''))}
         </blockquote>

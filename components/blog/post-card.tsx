@@ -28,7 +28,7 @@ export default function PostCard({ post, variant = 'square' }: PostCardProps) {
       className="group rounded-[2px] transition-shadow duration-200 hover:shadow-[0_14px_28px_rgba(43,43,40,0.10)]"
     >
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/food-for-medicine/${post.slug}`}
         className="block focus-visible:outline-2 focus-visible:outline-mustard focus-visible:outline-offset-4"
       >
         <div className={`${ratioClassByVariant[variant]} overflow-hidden rounded-[2px] bg-cream`}>

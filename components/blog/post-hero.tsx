@@ -23,7 +23,7 @@ export default function PostHero({ post }: PostHeroProps) {
       <div className="absolute inset-x-0 bottom-0 px-6 pb-16 md:px-12 md:pb-20">
         <div className="mx-auto max-w-[1400px]">
           <CategoryPill category={post.category} label={post.categoryLabel} light />
-          <h1 className="mt-5 max-w-[22ch] font-serif text-[clamp(36px,6vw,78px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
+          <h1 className="mt-5 max-w-[22ch] break-words font-serif text-[clamp(28px,6vw,78px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
             {post.title}
           </h1>
           <p className="mt-5 max-w-[62ch] font-sans text-[16px] leading-[1.7] text-charcoal/75 md:text-[18px]">

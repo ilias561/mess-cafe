@@ -133,7 +133,7 @@ export default function NewsletterPopup() {
           animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="fixed bottom-[88px] right-4 z-[120] w-[calc(100%-32px)] max-w-[380px] md:bottom-6 md:right-6"
+          className="fixed bottom-[88px] right-6 z-[120] w-[calc(100%-48px)] max-w-[380px] md:bottom-6 md:right-6"
           role="dialog"
           aria-labelledby="newsletter-title"
           aria-describedby="newsletter-description"
@@ -188,7 +188,7 @@ export default function NewsletterPopup() {
                 <button
                   type="submit"
                   disabled={shouldDisable}
-                  className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+                  className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
                 </button>

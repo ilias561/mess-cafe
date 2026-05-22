@@ -13,7 +13,7 @@ const firstPost = getAllPosts()[0]
 export const metadata: Metadata = buildPageMetadata({
   title: 'Food for Medicine — M.E.S.S.',
   description: 'Hints & tips από την κουζίνα μας — άρθρα, συνταγές και στιγμές από το M.E.S.S.',
-  path: '/blog',
+  path: '/food-for-medicine',
   ...(firstPost
     ? {
         image: {
@@ -34,12 +34,12 @@ export default function BlogPage() {
 
       <section className="px-6 pb-0 pt-32 md:px-12 md:pt-40">
         <div className="mx-auto max-w-[1400px]">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">Blog</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">Φαγητό ως Φάρμακο</p>
           <h1 className="mt-5 max-w-[20ch] font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
-            Food for Medicine
+            Φαγητό ως Φάρμακο
           </h1>
           <p className="mt-6 max-w-[48ch] font-serif text-[18px] italic text-charcoal/75">
-            Hints &amp; tips από την κουζίνα μας
+            Συνταγές &amp; φαγητό ως φάρμακο — με τα υλικά του menu μας
           </p>
         </div>
       </section>

@@ -170,7 +170,7 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60"
+                    className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
                   >
                     {sending ? 'Αποστολή...' : 'Στείλε μήνυμα'}
                   </button>

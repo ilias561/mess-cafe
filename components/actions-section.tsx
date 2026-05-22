@@ -20,7 +20,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
     <section id="actions" className="scroll-mt-24 bg-bone px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
         <Reveal className="mb-10">
-          <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΔΡΑΣΕΙΣ · COMMUNITY</p>
+          <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΟΙ ΣΤΟΧΟΙ ΜΑΣ · COMMUNITY</p>
           <KeepRisingWordmark className="text-left" />
           <p className="mt-6 max-w-3xl font-serif text-[18px] italic leading-relaxed text-charcoal/80 md:text-[20px]">
             Δεν είμαστε απλώς ένα καφέ, είμαστε μια ιδέα. Σκοπός του M.E.S.S. είναι να βοηθήσει στη δημιουργία

@@ -35,23 +35,24 @@ export default function EventsArchiveList({ pastEvents }: Props) {
             <Link
               key={event.slug}
               href={`/actions/${event.slug}`}
-              className={`grid grid-cols-[60px_110px_1fr_28px] items-center py-3 transition-colors duration-150 hover:bg-charcoal/[0.04] ${
+              className={`grid grid-cols-[1fr_auto] items-center py-4 transition-colors duration-150 hover:bg-charcoal/[0.04] sm:grid-cols-[60px_110px_1fr_28px] ${
                 i < pastEvents.length - 1
                   ? 'border-b border-line'
                   : ''
               }`}
             >
-              <span className="font-sans text-[13px] text-charcoal/50">
-                {formatShortDate(event.date)}
-              </span>
-              <span className="font-sans text-[11px] uppercase tracking-[0.14em] text-mustard">
-                {event.categoryLabel.toUpperCase()}
-              </span>
-              <span className="font-serif text-[16px] text-charcoal">
+              {/* Mobile: title + arrow in top row; date + category in second row */}
+              <span className="font-serif text-[16px] text-charcoal sm:col-start-3 sm:row-start-1">
                 {event.title}
               </span>
-              <span className="text-right font-sans text-[13px] text-charcoal/50">
+              <span className="text-right font-sans text-[13px] text-charcoal/50 sm:col-start-4 sm:row-start-1">
                 →
+              </span>
+              <span className="mt-1 font-sans text-[11px] text-charcoal/50 sm:col-start-1 sm:row-start-1 sm:mt-0">
+                {formatShortDate(event.date)}
+              </span>
+              <span className="mt-1 font-sans text-[11px] uppercase tracking-[0.14em] text-mustard sm:col-start-2 sm:row-start-1 sm:mt-0">
+                {event.categoryLabel.toUpperCase()}
               </span>
             </Link>
           ))}

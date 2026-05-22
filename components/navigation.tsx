@@ -22,7 +22,7 @@ const navLinks = [
   { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
   { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
   { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
-  { label: 'Blog', href: '/blog', sectionId: null, isCta: false },
+  { label: 'Φαγητό ως Φάρμακο', href: '/food-for-medicine', sectionId: null, isCta: false },
   { label: 'Workshops', href: '/workshops', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
   { label: RESERVATIONS_LABEL, href: '/reservations', sectionId: null, isCta: true },
@@ -300,6 +300,9 @@ export default function Navigation() {
   // Mobile hero is dark (full-bleed video); desktop hero is bone with floating pill nav.
   const isInHero = !isDesktop && pathname === '/' && !hasPastHero
   const isDesktopHero = isDesktop && pathname === '/' && !hasPastHero
+  // While the hero is in view it already shows the big centered M.E.S.S. wordmark,
+  // so hide the header brand (both mobile + desktop) to avoid a duplicate logo/title.
+  const hideHeaderBrand = isInHero || isDesktopHero
   const navTextColor = isInHero ? 'text-white' : 'text-charcoal'
   const headerClasses = isInHero || isDesktopHero
     ? 'bg-transparent border-transparent'
@@ -324,10 +327,10 @@ export default function Navigation() {
           <Link
             href="/"
             className={`flex min-w-0 shrink max-w-[min(100%,52vw)] items-center gap-2 transition-[color,opacity] duration-300 sm:max-w-none sm:gap-3 ${navTextColor} ${
-              isDesktopHero ? 'pointer-events-none opacity-0' : 'opacity-100'
+              hideHeaderBrand ? 'pointer-events-none opacity-0' : 'opacity-100'
             }`}
-            aria-hidden={isDesktopHero}
-            tabIndex={isDesktopHero ? -1 : undefined}
+            aria-hidden={hideHeaderBrand}
+            tabIndex={hideHeaderBrand ? -1 : undefined}
           >
             <BrandLogo />
             <span className="truncate font-serif text-[22px] font-medium tracking-tight">
@@ -522,7 +525,7 @@ export default function Navigation() {
               <div className="mx-6 mt-1 h-px shrink-0 bg-olive/25" aria-hidden />
 
               <div className="shrink-0 px-6 pt-5 pb-6">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3">
                   <a
                     href={`tel:${PHONE_NUMBER}`}
                     className="ui-interactive flex h-12 min-h-[48px] items-center justify-center gap-2 rounded-full border border-charcoal/30 px-3 font-sans text-[15px] font-medium text-charcoal hover:border-charcoal/50 active:border-mustard active:text-mustard"

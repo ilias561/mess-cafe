@@ -10,19 +10,19 @@ export default function BlogIndexHero() {
       <div className="mx-auto grid max-w-[1400px] gap-10 md:grid-cols-[7fr_5fr] md:items-end md:gap-12">
         <div>
           <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
-            ΙΣΤΟΡΙΕΣ ΑΠΟ ΤΟ M.E.S.S.
+            ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ
           </motion.p>
           <motion.h1
             {...fadeUpDelayed(0.08)}
             className="mt-6 max-w-[14ch] font-serif text-[clamp(44px,6.5vw,96px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[16ch]"
           >
-            Καφές, γεύσεις και ό,τι συμβαίνει στην κοινότητα.
+            Φαγητό ως Φάρμακο
           </motion.h1>
           <motion.p
             {...fadeUpDelayed(0.14)}
             className="mt-8 max-w-[70ch] font-sans text-[16px] leading-[1.7] text-concrete md:text-[17px]"
           >
-            Σημειώσεις από την κουζίνα, τους μπαρίστα και τους ανθρώπους που γεμίζουν τον χώρο.
+            Συνταγές &amp; φαγητό ως φάρμακο — με τα υλικά του menu μας.
           </motion.p>
         </div>
 

@@ -6,7 +6,7 @@ import { scrollToId } from '@/lib/lenis'
 
 /**
  * Mounts once in layout. After any client-side navigation that includes a
- * hash (e.g. /blog → /#about), smooth-scrolls to the target element.
+ * hash (e.g. /food-for-medicine → /#about), smooth-scrolls to the target element.
  * Works in tandem with RouteScrollTop which now skips scroll-to-top when a
  * hash is present.
  */

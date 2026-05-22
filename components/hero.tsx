@@ -309,10 +309,10 @@ export default function Hero() {
                 width={88}
                 height={88}
                 priority
-                className="hero-text-shadow h-28 w-28 rounded-full object-cover md:h-[172px] md:w-[172px]"
+                className="hero-text-shadow h-20 w-20 rounded-full object-cover md:h-28 md:w-28 lg:h-[172px] lg:w-[172px]"
               />
             </motion.div>
-            <span className="hero-text-shadow font-serif text-[76px] font-medium leading-none tracking-tight text-white md:text-[132px]">
+            <span className="hero-text-shadow font-serif text-[52px] font-medium leading-none tracking-tight text-white md:text-[76px] lg:text-[132px]">
               M.E.S.S.
             </span>
           </motion.div>
@@ -379,7 +379,7 @@ export default function Hero() {
             className="hero-text-shadow pointer-events-none absolute right-6 bottom-8 font-sans text-[10px] tracking-[0.25em] text-white/40 uppercase md:right-12 md:bottom-10"
             aria-hidden
           >
-            Ioannina &middot; est. 2024
+            Ioannina &middot; est. 2025
           </motion.p>
 
           {/* Scroll cue */}

@@ -294,6 +294,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                 </p>
               </div>
             ) : (
+              <div className="max-w-[100vw] overflow-x-hidden">
               <div className="actions-hero-marquee-group -mx-6 md:-mx-12">
                 <div className="overflow-hidden">
                   <div className="marquee-track flex w-max font-sans text-[11px] uppercase tracking-[0.18em] text-olive/70">
@@ -311,6 +312,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                     </span>
                   </div>
                 </div>
+              </div>
               </div>
             )}
           </motion.div>

@@ -9,7 +9,7 @@ export default function TipsGrid({ tips }: { tips: Tip[] }) {
   if (tips.length === 0) {
     // TODO(user): add markdown tips in content/tips/ (title, image, instagramUrl frontmatter)
     return (
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-6">
         {Array.from({ length: PLACEHOLDER_COUNT }).map((_, i) => (
           <div
             key={i}

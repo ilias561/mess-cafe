@@ -11,7 +11,7 @@ export default function ShareRow({ url }: ShareRowProps) {
   const [copied, setCopied] = useState(false)
 
   return (
-    <div className="mx-auto mt-12 flex max-w-[72ch] justify-end gap-5 border-t border-line/30 pt-6 font-sans text-[12px] text-concrete">
+    <div className="mx-auto mt-12 flex max-w-[72ch] flex-wrap justify-end gap-5 border-t border-line/30 px-6 pt-6 font-sans text-[12px] text-concrete md:px-0">
       <a
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
         target="_blank"
