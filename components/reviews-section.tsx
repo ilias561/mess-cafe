@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import { reviews } from '@/lib/reviews-data'
@@ -55,7 +54,7 @@ function ReviewCard({ review }: { review: Review }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Κριτική από ${review.name}`}
-      className="flex w-[min(360px,calc(100vw-3rem))] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-colors transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
+      className="flex h-full w-[min(360px,calc(100vw-3rem))] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
     >
       {/* Header: avatar + name + google logo */}
       <div className="flex items-start justify-between gap-2">
@@ -90,116 +89,34 @@ function ReviewCard({ review }: { review: Review }) {
   )
 }
 
-const SCROLL_SPEED = 60 // px/s
+function ReviewRow({ items, reverse = false }: { items: Review[]; reverse?: boolean }) {
+  return (
+    <div className="overflow-hidden">
+      {/* Duplicated set + translateX(-50%) keyframe = seamless loop (see globals.css) */}
+      <div className={`flex w-max ${reverse ? 'marquee-track-reverse' : 'marquee-track'}`}>
+        {[...items, ...items].map((review, i) => (
+          <div key={i} className="mx-2 flex shrink-0">
+            <ReviewCard review={review} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function ReviewsTrack() {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const isPausedRef = useRef(false)
-  const isDraggingRef = useRef(false)
-  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const rafRef = useRef<number | null>(null)
-  const dragStartXRef = useRef(0)
-  const scrollStartRef = useRef(0)
-
-  const scheduleResume = useCallback(() => {
-    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    resumeTimerRef.current = setTimeout(() => { isPausedRef.current = false }, 1500)
-  }, [])
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current
-    if (!wrapper) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    let lastTime = 0
-
-    function tick(time: number) {
-      if (lastTime === 0) lastTime = time
-      const dt = Math.min(time - lastTime, 50)
-      lastTime = time
-
-      if (!isPausedRef.current && !isDraggingRef.current) {
-        const el = wrapperRef.current
-        if (el) {
-          const half = el.scrollWidth / 2
-          el.scrollLeft += SCROLL_SPEED * dt / 1000
-          if (el.scrollLeft >= half) {
-            el.scrollLeft -= half
-          }
-        }
-      }
-
-      rafRef.current = requestAnimationFrame(tick)
-    }
-
-    rafRef.current = requestAnimationFrame(tick)
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current) }
-  }, [])
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current
-    if (!wrapper) return
-
-    function onMouseDown(e: MouseEvent) {
-      isDraggingRef.current = true
-      dragStartXRef.current = e.pageX
-      scrollStartRef.current = wrapper!.scrollLeft
-      wrapper!.style.cursor = 'grabbing'
-      wrapper!.style.userSelect = 'none'
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    }
-    function onMouseMove(e: MouseEvent) {
-      if (!isDraggingRef.current) return
-      wrapper!.scrollLeft = scrollStartRef.current - (e.pageX - dragStartXRef.current)
-    }
-    function onMouseUp() {
-      if (!isDraggingRef.current) return
-      isDraggingRef.current = false
-      wrapper!.style.cursor = ''
-      wrapper!.style.userSelect = ''
-      scheduleResume()
-    }
-    function onTouchStart() {
-      isPausedRef.current = true
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
-    }
-    function onTouchEnd() { scheduleResume() }
-    function onWheel() { isPausedRef.current = true; scheduleResume() }
-
-    wrapper.addEventListener('mousedown', onMouseDown)
-    window.addEventListener('mousemove', onMouseMove)
-    window.addEventListener('mouseup', onMouseUp)
-    wrapper.addEventListener('touchstart', onTouchStart, { passive: true })
-    wrapper.addEventListener('touchend', onTouchEnd, { passive: true })
-    wrapper.addEventListener('wheel', onWheel, { passive: true })
-
-    return () => {
-      wrapper.removeEventListener('mousedown', onMouseDown)
-      window.removeEventListener('mousemove', onMouseMove)
-      window.removeEventListener('mouseup', onMouseUp)
-      wrapper.removeEventListener('touchstart', onTouchStart)
-      wrapper.removeEventListener('touchend', onTouchEnd)
-      wrapper.removeEventListener('wheel', onWheel)
-    }
-  }, [scheduleResume])
+  const mid = Math.ceil(reviews.length / 2)
+  const topRow = reviews.slice(0, mid)
+  const bottomRow = reviews.slice(mid)
 
   return (
-    <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-bone to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-bone to-transparent" />
-      <Reveal
-        asGroup
-        ref={wrapperRef}
-        onMouseEnter={() => { isPausedRef.current = true }}
-        onMouseLeave={() => { if (!isDraggingRef.current) { isPausedRef.current = false } }}
-        className="flex gap-4 overflow-x-scroll px-6 py-4 md:px-12 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden cursor-grab select-none"
-      >
-        {[...reviews, ...reviews].map((review, i) => (
-          <Reveal.Item key={i} className="shrink-0">
-            <ReviewCard review={review} />
-          </Reveal.Item>
-        ))}
-      </Reveal>
+    <div className="relative py-2">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-bone to-transparent md:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-bone to-transparent md:w-24" />
+      <div className="flex flex-col gap-4">
+        <ReviewRow items={topRow} />
+        <ReviewRow items={bottomRow} reverse />
+      </div>
     </div>
   )
 }

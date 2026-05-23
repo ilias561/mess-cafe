@@ -362,7 +362,7 @@ export default function Navigation() {
                         setMenuOpen(false)
                       }
                     }}
-                    className={`group relative py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${link.isCta ? 'ui-interactive' : 'ui-link'} ${isInHero ? 'text-white/90 hover:text-white' : 'text-charcoal'} ${
+                    className={`group relative whitespace-nowrap py-1.5 font-sans text-[13px] font-medium tracking-[0.04em] focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 xl:mx-[10px] 2xl:mx-[14px] ${link.isCta ? 'ui-interactive' : 'ui-link'} ${isInHero ? 'text-white/90 hover:text-white' : 'text-charcoal'} ${
                       shiftRightCluster ? 'ml-5 xl:ml-7 2xl:ml-9' : ''
                     } ${
                       link.isCta
