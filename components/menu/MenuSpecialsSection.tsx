@@ -40,7 +40,6 @@ export default function MenuSpecialsSection() {
                 <div className="min-w-0">
                   <h3 className="font-serif text-[22px] leading-snug tracking-tight text-charcoal">{item.name}</h3>
                   <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
-                  <p className="mt-2 font-serif text-[20px] text-mustard">{item.price}</p>
                 </div>
               </article>
             </Reveal.Item>

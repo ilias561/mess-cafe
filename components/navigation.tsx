@@ -326,14 +326,14 @@ export default function Navigation() {
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-3 px-5 lg:gap-4 lg:px-8">
           <Link
             href="/"
-            className={`flex min-w-0 shrink max-w-[min(100%,52vw)] items-center gap-2 transition-[color,opacity] duration-300 sm:max-w-none sm:gap-3 ${navTextColor} ${
+            className={`flex shrink-0 items-center gap-2 transition-[color,opacity] duration-300 sm:gap-3 ${navTextColor} ${
               hideHeaderBrand ? 'pointer-events-none opacity-0' : 'opacity-100'
             }`}
             aria-hidden={hideHeaderBrand}
             tabIndex={hideHeaderBrand ? -1 : undefined}
           >
             <BrandLogo />
-            <span className="truncate font-serif text-[22px] font-medium tracking-tight">
+            <span className="whitespace-nowrap font-serif text-[22px] font-medium tracking-tight">
               M.E.S.S.
             </span>
           </Link>
@@ -486,7 +486,7 @@ export default function Navigation() {
 
               <div className="mx-6 h-px shrink-0 bg-olive/25" aria-hidden />
 
-              <nav className="min-h-0 flex-1 px-6 pt-5 pb-8" aria-label="Σύνδεσμοι πλοήγησης">
+              <nav className="shrink-0 grow px-6 pt-5 pb-8" aria-label="Σύνδεσμοι πλοήγησης">
                 <ul className="flex flex-col">
                   {mobileDrawerNavLinks.map((link) => {
                     const isHomeAnchor = link.href.startsWith('/#')
@@ -506,7 +506,7 @@ export default function Navigation() {
                             setMenuOpen(false)
                           }}
                           aria-current={isActive ? 'page' : undefined}
-                          className={`ui-link relative -mx-6 block py-3.5 pr-6 font-sans text-[clamp(18px,5vw,22px)] font-medium leading-[1.4] tracking-normal text-espresso [font-family:var(--font-inter),ui-sans-serif,system-ui,sans-serif] active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
+                          className={`ui-link relative -mx-6 block break-words py-3.5 pr-6 font-sans text-[clamp(18px,5vw,22px)] font-medium leading-[1.4] tracking-normal text-espresso [font-family:var(--font-inter),ui-sans-serif,system-ui,sans-serif] active:text-mustard ${isActive ? 'pl-[42px]' : 'pl-6'}`}
                         >
                           {isActive && (
                             <span

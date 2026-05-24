@@ -65,11 +65,10 @@ export default function GalleryMenuPreview() {
                   </div>
                 ) : null}
                 <p className="mt-5 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{item.cat}</p>
-                <div className="mt-2 flex items-baseline justify-between gap-4 border-t border-line pt-3">
+                <div className="mt-2 border-t border-line pt-3">
                   <h3 className="font-serif text-[clamp(22px,2.2vw,26px)] leading-snug tracking-tight text-charcoal">
                     {item.name}
                   </h3>
-                  <p className="shrink-0 font-serif text-[18px] text-mustard">{item.price}</p>
                 </div>
                 <p className="mt-3 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
               </article>

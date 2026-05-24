@@ -151,12 +151,9 @@ export function MenuItemVisual({ item, index }: { item: MenuItemType; index: num
 
       <div className={hasMedia ? 'mt-4' : ''}>
         {isSignature && <SignatureEyebrow />}
-        <div className="flex items-baseline justify-between gap-3">
-          <h3 className="min-w-0 font-serif text-[22px] leading-snug tracking-tight italic text-charcoal">
-            {item.name}
-          </h3>
-          <p className="shrink-0 font-serif text-[22px] text-charcoal">{item.price}</p>
-        </div>
+        <h3 className="font-serif text-[22px] leading-snug tracking-tight italic text-charcoal">
+          {item.name}
+        </h3>
         <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
         <BadgeRow badges={chips} />
       </div>
@@ -173,16 +170,9 @@ export function MenuItemList({ item, index }: { item: MenuItemType; index: numbe
       className="group py-2 transition-colors hover:bg-bone-warm/30 md:rounded-sm md:px-3 md:-mx-3"
     >
       {isSignature && <SignatureEyebrow />}
-      <div className="flex items-baseline gap-2">
-        <h3 className="shrink-0 font-serif text-[22px] leading-snug tracking-tight italic text-charcoal">
-          {item.name}
-        </h3>
-        <span
-          className="mb-[0.35em] min-w-[1rem] flex-1 border-b border-dotted border-charcoal/20"
-          aria-hidden
-        />
-        <p className="shrink-0 font-serif text-[22px] tabular-nums text-charcoal">{item.price}</p>
-      </div>
+      <h3 className="font-serif text-[22px] leading-snug tracking-tight italic text-charcoal">
+        {item.name}
+      </h3>
       <div className="mt-1.5 flex items-start justify-between gap-4">
         <p className="min-w-0 flex-1 font-sans text-[13px] leading-relaxed text-concrete md:text-[14px]">
           {item.desc}

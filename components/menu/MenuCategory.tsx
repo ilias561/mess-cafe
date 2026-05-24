@@ -12,13 +12,13 @@ function ExtrasBox({ categoryId }: { categoryId: string }) {
       <div className="mt-8 grid gap-4 rounded-sm border border-line/40 p-6 sm:grid-cols-2">
         <div>
           <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
-            {extras.vegExtras.label} <span className="text-mustard">{extras.vegExtras.price}</span>
+            {extras.vegExtras.label}
           </p>
           <p className="font-sans text-[13px] leading-relaxed text-concrete">{extras.vegExtras.items}</p>
         </div>
         <div>
           <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
-            {extras.proteinExtras.label} <span className="text-mustard">{extras.proteinExtras.price}</span>
+            {extras.proteinExtras.label}
           </p>
           <p className="font-sans text-[13px] leading-relaxed text-concrete">{extras.proteinExtras.items}</p>
         </div>
@@ -29,7 +29,7 @@ function ExtrasBox({ categoryId }: { categoryId: string }) {
     return (
       <div className="mt-8 rounded-sm border border-line/40 p-6">
         <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
-          {extras.fruitExtras.label} <span className="text-mustard">{extras.fruitExtras.price}</span>
+          {extras.fruitExtras.label}
         </p>
         <p className="font-sans text-[13px] leading-relaxed text-concrete">{extras.fruitExtras.items}</p>
       </div>

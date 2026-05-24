@@ -24,35 +24,30 @@ const aboutImages = [
     src: images.aboutBar,
     alt: 'Μπαρ specialty coffee και περιοχή σερβιρίσματος',
     aspect: 'aspect-[3/2]',
-    caption: 'ΤΟ BAR',
   },
   {
     key: 'aboutStairs',
     src: images.aboutStairs,
     alt: 'Σκάλα προς τον μεζονέτα με καθίσματα εργασίας',
     aspect: 'aspect-square',
-    caption: 'ΣΚΑΛΑ ΠΡΟΣ ΜΕΖΟΝΙ',
   },
   {
     key: 'aboutPlants',
     src: images.aboutPlants,
     alt: 'Πυκνή βλάστηση σε μπετόνινο τοίχο',
     aspect: 'aspect-[4/5]',
-    caption: 'ΦΥΤΑ & ΦΩΣ',
   },
   {
     key: 'new1',
     src: images.new1,
     alt: 'Εσωτερικός χώρος του καφέ με φυσικό φως',
     aspect: 'aspect-[3/2]',
-    caption: 'Ο ΧΩΡΟΣ ΜΑΣ',
   },
   {
     key: 'new2',
     src: images.new2,
     alt: 'Λεπτομέρεια διακόσμησης και υλικών στον χώρο',
     aspect: 'aspect-[4/5]',
-    caption: 'ΛΕΠΤΟΜΕΡΕΙΕΣ',
   },
 ] as const
 
@@ -110,9 +105,6 @@ export default function PhilosophySection() {
                     className="object-cover"
                   />
                 </div>
-                <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
-                  {img.caption}
-                </p>
               </Reveal>
             ))}
 
@@ -127,9 +119,6 @@ export default function PhilosophySection() {
                   ariaLabel="Βίντεο από τον χώρο του M.E.S.S. — πλάνα διαδόχως"
                 />
               </div>
-              <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
-                ΣΤΙΓΜΕΣ
-              </p>
             </Reveal>
           </div>
 
@@ -150,9 +139,6 @@ export default function PhilosophySection() {
                       className="object-cover"
                     />
                   </div>
-                  <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
-                    {img.caption}
-                  </p>
                 </Reveal>
               ))}
             </div>
@@ -168,9 +154,6 @@ export default function PhilosophySection() {
                   ariaLabel="Βίντεο από τον χώρο του M.E.S.S. — πλάνα διαδόχως"
                 />
               </div>
-              <p className="mt-2 font-sans text-[10px] uppercase tracking-[0.2em] text-olive">
-                ΣΤΙΓΜΕΣ
-              </p>
             </Reveal>
           </div>
 
