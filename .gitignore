@@ -46,8 +46,9 @@ public/images/111/1.mp4
 
 # Working files (not for production)
 BLOG_CURSOR_PROMPT.md
-CURSOR_PROMPT*.md
+CURSOR_*.md
 123.mp4
+Mess Demo.mp4
 
 # Cowork session handoff (cross-session baton, not for git)
 HANDOFF.md
