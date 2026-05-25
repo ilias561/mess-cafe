@@ -1,4 +1,4 @@
-import PostCard from '@/components/blog/post-card'
+import BlogPostCard from '@/components/blog/BlogPostCard'
 import { getRelatedPosts } from '@/lib/blog/posts'
 import type { PostCategory } from '@/lib/blog/posts'
 
@@ -21,7 +21,7 @@ export default function RelatedPosts({ currentSlug, category }: RelatedPostsProp
         </h2>
         <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
           {relatedPosts.map((post) => (
-            <PostCard key={post.slug} post={post} />
+            <BlogPostCard key={post.slug} post={post} />
           ))}
         </div>
       </div>

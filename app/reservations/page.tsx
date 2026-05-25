@@ -42,7 +42,7 @@ export default function ReservationsPage() {
       </section>
 
       <section className="px-6 pb-24 pt-14 md:px-12 md:pb-32 md:pt-16">
-        <div className="mx-auto max-w-[1400px] md:grid md:grid-cols-[1fr_1fr] md:gap-16">
+        <div className="mx-auto max-w-[1400px] md:grid md:grid-cols-[1.35fr_1fr] md:items-start md:gap-16">
           <Suspense fallback={<div className="h-[420px] border border-line/30 bg-bone-warm p-8" />}>
             <BookingForm events={events} />
           </Suspense>

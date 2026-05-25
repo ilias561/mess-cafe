@@ -17,6 +17,8 @@ const aboutEditorialVideos = [
   videoSrc('/videos/about-editorial-2.mp4'),
 ] as const
 
+const philosophyVideo = videoSrc('/videos/mess-philosophy.mp4')
+
 /* ── Scrolling photos ── */
 const aboutImages = [
   {
@@ -43,12 +45,6 @@ const aboutImages = [
     alt: 'Εσωτερικός χώρος του καφέ με φυσικό φως',
     aspect: 'aspect-[3/2]',
   },
-  {
-    key: 'new2',
-    src: images.new2,
-    alt: 'Λεπτομέρεια διακόσμησης και υλικών στον χώρο',
-    aspect: 'aspect-[4/5]',
-  },
 ] as const
 
 export default function PhilosophySection() {
@@ -70,7 +66,7 @@ export default function PhilosophySection() {
               έχει:
             </p>
 
-            <Reveal asGroup id="goals" className="mt-12 flex scroll-mt-28 flex-col gap-0">
+            <Reveal asGroup className="mt-12 flex flex-col gap-0">
               {philosophyGoals.map((goal, index) => (
                 <Reveal.Item key={goal} direction="left">
                   <div className="flex gap-6 border-t border-charcoal/10 py-6 first:border-t-0 first:pt-0">
@@ -108,6 +104,18 @@ export default function PhilosophySection() {
               </Reveal>
             ))}
 
+            {/* Portrait space video — shown in full (9:16), centered and capped so it stays modest */}
+            <Reveal direction="up">
+              <div className="relative mx-auto aspect-[9/16] w-full max-w-[300px] overflow-hidden rounded-[2px] bg-bone-warm">
+                <AmbientVideo
+                  src={philosophyVideo}
+                  poster={images.messPhilosophyPoster}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  ariaLabel="Βίντεο από τον χώρο του M.E.S.S."
+                />
+              </div>
+            </Reveal>
+
             {/* Video closes the sequence */}
             <Reveal direction="up">
               <div className="relative aspect-video w-full overflow-hidden rounded-[2px] bg-bone-warm">
@@ -122,25 +130,39 @@ export default function PhilosophySection() {
             </Reveal>
           </div>
 
-          {/* ── DESKTOP: compact 2-column grid + full-width video (shown on md+) ── */}
+          {/* ── DESKTOP: portrait video beside a 2×2 photo grid (shown on md+) ── */}
           <div className="hidden md:flex md:flex-col md:gap-4">
-            {/* 2-column grid for the 5 photos */}
-            <div className="grid grid-cols-2 gap-4">
-              {aboutImages.map((img, i) => (
-                <Reveal key={img.key} direction={i % 2 === 0 ? 'right' : 'left'}>
-                  <div className="relative aspect-[3/4] w-full overflow-hidden">
-                    <FadeImage
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      unoptimized
-                      loading="lazy"
-                      sizes="(max-width: 1400px) 29vw, 400px"
-                      className="object-cover"
-                    />
-                  </div>
-                </Reveal>
-              ))}
+            <div className="grid grid-cols-12 gap-4">
+              {/* Portrait space video — full 9:16, no crop */}
+              <Reveal direction="right" className="col-span-5">
+                <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[2px] bg-bone-warm">
+                  <AmbientVideo
+                    src={philosophyVideo}
+                    poster={images.messPhilosophyPoster}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    ariaLabel="Βίντεο από τον χώρο του M.E.S.S."
+                  />
+                </div>
+              </Reveal>
+
+              {/* 2×2 photo grid */}
+              <div className="col-span-7 grid grid-cols-2 content-start gap-4">
+                {aboutImages.map((img, i) => (
+                  <Reveal key={img.key} direction={i % 2 === 0 ? 'up' : 'left'}>
+                    <div className="relative aspect-[3/4] w-full overflow-hidden">
+                      <FadeImage
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        unoptimized
+                        loading="lazy"
+                        sizes="(max-width: 1400px) 17vw, 240px"
+                        className="object-cover"
+                      />
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
 
             {/* Video spans full width below the grid */}

@@ -19,7 +19,7 @@ const RESERVATIONS_LABEL = 'Κράτηση για event' as const
 const navLinks = [
   { label: 'Αρχική', href: '/', sectionId: null, isCta: false },
   { label: 'Ποιοι είμαστε / Η φιλοσοφία μας', href: '/#philosophy', sectionId: 'philosophy', isCta: false },
-  { label: 'Οι στόχοι μας', href: '/#goals', sectionId: 'goals', isCta: false },
+  { label: 'Οι στόχοι μας', href: '/#actions', sectionId: 'actions', isCta: false },
   { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
   { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
   { label: 'Φαγητό ως Φάρμακο', href: '/food-for-medicine', sectionId: null, isCta: false },
@@ -31,7 +31,7 @@ const navLinks = [
 type NavLink = (typeof navLinks)[number]
 
 function isNavLinkActive(link: NavLink, pathname: string, activeSection: string | null) {
-  // Hash anchors on home (e.g. /#about-us): only that section, when in view
+  // Hash anchors on home (e.g. /#philosophy): only that section, when in view
   if (link.href.startsWith('/#') && link.sectionId) {
     return pathname === '/' && activeSection === link.sectionId
   }

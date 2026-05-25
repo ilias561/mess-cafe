@@ -29,7 +29,7 @@ export default function ThankYouPage() {
             </Link>
             <Link
               href="/menu"
-              className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg"
+              className="ui-interactive rounded-full border border-charcoal/30 px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:border-charcoal/60"
             >
               Δες το μενού
             </Link>

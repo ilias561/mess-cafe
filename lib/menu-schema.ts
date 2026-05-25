@@ -33,11 +33,15 @@ export function buildMenuJsonLd() {
           '@type': 'MenuItem',
           name: item.name,
           description: item.desc,
-          offers: {
-            '@type': 'Offer',
-            price: item.price.replace(/€/g, '').trim(),
-            priceCurrency: 'EUR',
-          },
+          ...(item.price
+            ? {
+                offers: {
+                  '@type': 'Offer',
+                  price: item.price.replace(/€/g, '').trim(),
+                  priceCurrency: 'EUR',
+                },
+              }
+            : {}),
           ...(diets ? { suitableForDiet: diets } : {}),
         }
       }),

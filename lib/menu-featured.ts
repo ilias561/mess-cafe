@@ -24,25 +24,3 @@ export const featuredMenuItems: (MenuItem & { cat: string })[] = [
     image: '/images/menu/glyka-0002.jpg',
   },
 ]
-
-/** Today's specials — extend with images as assets arrive. */
-export const todaysSpecials: MenuItem[] = [
-  {
-    name: 'Avocado Toast',
-    desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
-    price: '9€',
-    image: '/images/menu/piata-0009.jpg',
-  },
-  {
-    name: 'Teriyaki Chicken Poke Bowl',
-    desc: 'Άγριο ρύζι, κοτόπουλο τεριγιάκι, λαχανικά, αυγό ποσέ.',
-    price: '11€',
-    image: '/images/menu/piata-0025.jpg',
-  },
-  {
-    name: 'Vegan Poke Bowl',
-    desc: 'Άγριο ρύζι, γλυκοπατάτα, αράκας, ρόκα, φασόλια κόκκινα.',
-    price: '8€',
-    image: '/images/menu/piata-0028.jpg',
-  },
-]

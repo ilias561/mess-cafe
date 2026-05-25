@@ -54,7 +54,7 @@ function ReviewCard({ review }: { review: Review }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Κριτική από ${review.name}`}
-      className="flex h-full w-[min(360px,calc(100vw-3rem))] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
+      className="flex h-full w-[min(320px,80vw)] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
     >
       {/* Header: avatar + name + google logo */}
       <div className="flex items-start justify-between gap-2">
@@ -105,18 +105,11 @@ function ReviewRow({ items, reverse = false }: { items: Review[]; reverse?: bool
 }
 
 function ReviewsTrack() {
-  const mid = Math.ceil(reviews.length / 2)
-  const topRow = reviews.slice(0, mid)
-  const bottomRow = reviews.slice(mid)
-
   return (
     <div className="relative py-2">
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-bone to-transparent md:w-24" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-bone to-transparent md:w-24" />
-      <div className="flex flex-col gap-4">
-        <ReviewRow items={topRow} />
-        <ReviewRow items={bottomRow} reverse />
-      </div>
+      <ReviewRow items={reviews} />
     </div>
   )
 }

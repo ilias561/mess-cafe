@@ -3,7 +3,7 @@ title: "Avocado Toast με αυγό ποσέ"
 slug: "avocado-toast-me-avgo-pose"
 excerpt: "Το signature μας toast ξαναγεννιέται στο σπίτι σου: προζυμένιο ψωμί, guacamole από το μηδέν, φέτα, ντοματίνια και ένα τέλεια ποσέ αυγό από πάνω."
 category: "kouzina"
-cover: "https://images.unsplash.com/photo-1541519227354-08fa5d50c820?w=1800&q=80&auto=format&fit=crop"
+cover: "/images/menu/piata-0009.jpg"
 coverAlt: "Avocado toast σε προζυμένιο ψωμί με αυγό ποσέ και ντοματίνια"
 author:
   name: "Μαρία · Kitchen Team"
@@ -42,6 +42,6 @@ tags: ["brunch", "αυγό-ποσέ", "αβοκάντο", "προζυμένιο"
 
 > **Tip:** Για το τέλειο αυγό ποσέ, χρησιμοποίησε πάντα αυγά που βγήκαν μόλις από το ψυγείο — το κρύο ασπράδι συγκεντρώνεται γρηγορότερα γύρω από τον κρόκο και κρατά το σχήμα. Η δίνη στο νερό κάνει το υπόλοιπο.
 
-![Φέτες sourdough ψωμί με αβοκάντο και φρέσκα λαχανικά](https://images.unsplash.com/photo-1484723091739-30990fd9d3a6?w=1400&q=80&auto=format&fit=crop)
+![Φέτες sourdough ψωμί με αβοκάντο και φρέσκα λαχανικά](https://images.unsplash.com/photo-1525351484163-7529414344d8?w=1400&q=80&auto=format&fit=crop)
 
 Ένα πιάτο που σε στέλνει στη μέρα με ενέργεια σταθερή, όχι εκρηκτική. Χωρίς επεξεργασμένη ζάχαρη, χωρίς περιττά — ακριβώς το πνεύμα του M.E.S.S.

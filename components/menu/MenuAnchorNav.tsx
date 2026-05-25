@@ -7,6 +7,7 @@ const anchors = [
   { id: 'brunch', label: 'Brunch' },
   { id: 'bowls', label: 'Bowls' },
   { id: 'salads', label: 'Salads' },
+  { id: 'wraps', label: 'Wraps' },
   { id: 'coffee', label: 'Coffee' },
   { id: 'smoothies', label: 'Smoothies' },
   { id: 'treats', label: 'Treats' },
@@ -76,10 +77,10 @@ export default function MenuAnchorNav() {
               type="button"
               onClick={() => scrollTo(id)}
               aria-label={`Μετάβαση στην ενότητα ${label}`}
-              className={`ui-link shrink-0 border-b pb-1 font-sans text-sm focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 ${
+              className={`ui-link shrink-0 rounded-full px-3.5 py-1.5 font-sans text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:rounded-none lg:border-b lg:px-0 lg:py-1 lg:pb-1 ${
                 active === id
-                  ? 'border-mustard text-charcoal'
-                  : 'border-transparent text-concrete hover:text-charcoal'
+                  ? 'bg-mustard text-ink-dark lg:bg-transparent lg:border-mustard lg:text-charcoal'
+                  : 'bg-bone-warm/60 text-concrete hover:text-charcoal lg:bg-transparent lg:border-transparent'
               }`}
             >
               {label}

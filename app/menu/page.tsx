@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import MenuHeader from '@/components/menu/MenuHeader'
 import MenuAnchorNav from '@/components/menu/MenuAnchorNav'
-import MenuSpecialsSection from '@/components/menu/MenuSpecialsSection'
+import IngredientStandards from '@/components/menu/IngredientStandards'
 import MenuCategory from '@/components/menu/MenuCategory'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
@@ -25,11 +25,6 @@ export const metadata: Metadata = buildPageMetadata({
 const PHILOSOPHY_INDEX = 3
 
 export default function MenuPage() {
-  const updatedAt = new Date().toLocaleDateString('el-GR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
   const settings = getSettings()
   const beforePhilosophy = menuData.slice(0, PHILOSOPHY_INDEX)
   const afterPhilosophy = menuData.slice(PHILOSOPHY_INDEX)
@@ -42,8 +37,8 @@ export default function MenuPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(menuJsonLd) }}
       />
       <Navigation />
-      <MenuHeader updatedAt={updatedAt} />
-      <MenuSpecialsSection />
+      <MenuHeader />
+      <IngredientStandards />
       <MenuAnchorNav />
 
       {beforePhilosophy.map((category, i) => (
@@ -67,6 +62,7 @@ export default function MenuPage() {
           key={category.id}
           category={category}
           index={PHILOSOPHY_INDEX + i}
+          showFooterBeat={i < afterPhilosophy.length - 1}
         />
       ))}
 
