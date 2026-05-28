@@ -123,7 +123,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         heading="Επίσκεψέ μας."
         body="Η καλύτερη έκδοση του blog γράφεται ζωντανά στην καφετέρια. Σε περιμένουμε."
         primaryLabel="Δες το μενού"
-        primaryHref="/menu"
+        primaryHref="/food-for-medicine#menu"
         secondaryLabel="Δες τις δράσεις"
         secondaryHref="/actions"
       />

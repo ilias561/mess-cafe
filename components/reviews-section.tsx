@@ -1,7 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import { motion, useReducedMotion } from 'framer-motion'
+import DrawHeading from '@/components/draw-heading'
 import { Reveal } from '@/components/reveal'
+import { VIEWPORT_ONCE, blurIn, slowReveal } from '@/lib/motion'
 import { reviews } from '@/lib/reviews-data'
 import type { Review } from '@/lib/reviews-data'
 
@@ -115,19 +118,34 @@ function ReviewsTrack() {
 }
 
 export default function ReviewsSection() {
+  const reduce = useReducedMotion()
+
   return (
-    <section id="reviews" className="scroll-mt-28 bg-bone py-24 md:py-32">
+    <section id="reviews" className="scroll-mt-28 bg-bone py-16 md:py-24">
 
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
 
           <div>
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
-              Τι λένε όσοι μας γνώρισαν
-            </p>
-            <h2 className="mt-2 font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-charcoal">
-              Αξιολογήσεις από την κοινότητά μας
-            </h2>
+            {reduce ? (
+              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Τι λένε όσοι μας γνώρισαν</p>
+            ) : (
+              <motion.p
+                className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive"
+                initial="hidden"
+                whileInView="visible"
+                viewport={VIEWPORT_ONCE}
+                variants={blurIn}
+                transition={slowReveal}
+              >
+                Τι λένε όσοι μας γνώρισαν
+              </motion.p>
+            )}
+            <DrawHeading className="mt-2">
+              <h2 className="font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-charcoal">
+                Αξιολογήσεις από την κοινότητά μας
+              </h2>
+            </DrawHeading>
           </div>
 
           <a

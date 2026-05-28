@@ -17,11 +17,9 @@ const MOBILE_MENU_ID = 'mobile-menu-drawer'
 const RESERVATIONS_LABEL = 'Κράτηση για event' as const
 
 const navLinks = [
-  { label: 'Αρχική', href: '/', sectionId: null, isCta: false },
   { label: 'Ποιοι είμαστε / Η φιλοσοφία μας', href: '/#philosophy', sectionId: 'philosophy', isCta: false },
   { label: 'Οι στόχοι μας', href: '/#actions', sectionId: 'actions', isCta: false },
   { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
-  { label: 'Μενού', href: '/menu', sectionId: null, isCta: false },
   { label: 'Φαγητό ως Φάρμακο', href: '/food-for-medicine', sectionId: null, isCta: false },
   { label: 'Workshops', href: '/workshops', sectionId: null, isCta: false },
   { label: 'Επικοινωνία', href: '/#contact', sectionId: 'contact', isCta: false },
@@ -34,13 +32,6 @@ function isNavLinkActive(link: NavLink, pathname: string, activeSection: string 
   // Hash anchors on home (e.g. /#philosophy): only that section, when in view
   if (link.href.startsWith('/#') && link.sectionId) {
     return pathname === '/' && activeSection === link.sectionId
-  }
-
-  // "Αρχική" — active on home only while no section link is highlighted
-  if (link.href === '/') {
-    if (pathname !== '/') return false
-    const anySectionHighlighted = navLinks.some((l) => Boolean(l.sectionId) && activeSection === l.sectionId)
-    return !anySectionHighlighted
   }
 
   // Other routes: exact match or nested path (never treat `/` as prefix of other routes)

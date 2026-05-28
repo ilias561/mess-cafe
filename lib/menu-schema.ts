@@ -22,7 +22,7 @@ export function buildMenuJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'Menu',
     name: 'Μενού M.E.S.S.',
-    url: absoluteUrl('/menu'),
+    url: absoluteUrl('/food-for-medicine#menu'),
     hasMenuSection: menuData.map((category) => ({
       '@type': 'MenuSection',
       name: category.titleGr,

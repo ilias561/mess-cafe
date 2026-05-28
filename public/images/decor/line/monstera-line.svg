@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Monstera deliciosa: heart-shaped outline with fenestrations -->
+  <!-- Outline starts at base, goes up the LEFT side with cuts, around the tip, down RIGHT side with cuts -->
+  <path d="M 100 295
+           C 78 295 50 290 28 260
+           Q 18 220 38 195
+           C 56 192 72 188 78 175
+           Q 60 158 25 152
+           C 50 142 70 142 82 128
+           Q 60 110 30 92
+           C 52 82 72 82 86 70
+           Q 76 50 100 18
+           Q 124 50 114 70
+           C 128 82 148 82 170 92
+           Q 140 110 118 128
+           C 130 142 150 142 175 152
+           Q 140 158 122 175
+           C 128 188 144 192 162 195
+           Q 182 220 172 260
+           C 150 290 122 295 100 295 Z"/>
+  <!-- Petiole stub -->
+  <path d="M 100 295 L 100 312"/>
+  <!-- 2 small interior holes (characteristic monstera fenestrations) -->
+  <path d="M 60 218 Q 56 205 72 205 Q 78 220 60 218 Z"/>
+  <path d="M 140 218 Q 144 205 128 205 Q 122 220 140 218 Z"/>
+  <!-- Center vein -->
+  <path d="M 100 295 Q 100 160 100 20"/>
+  <!-- 4 pairs of side veins, branching from center to leaf edge -->
+  <path d="M 100 230 Q 75 230 32 200"/>
+  <path d="M 100 230 Q 125 230 168 200"/>
+  <path d="M 100 165 Q 75 165 30 130"/>
+  <path d="M 100 165 Q 125 165 170 130"/>
+  <path d="M 100 105 Q 78 105 40 85"/>
+  <path d="M 100 105 Q 122 105 160 85"/>
+  <path d="M 100 55 Q 85 55 70 42"/>
+  <path d="M 100 55 Q 115 55 130 42"/>
+</svg>

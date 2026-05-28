@@ -4,7 +4,9 @@ import { type FormEvent, useState } from 'react'
 import Link from 'next/link'
 import { submitContact } from '@/lib/contact/submit'
 import { Reveal } from '@/components/reveal'
+import MaskRevealBlock from '@/components/mask-reveal-block'
 import ScrollDrift from '@/components/scroll-drift'
+import SplitText from '@/components/split-text'
 
 const INPUT_BASE =
   'ui-field w-full rounded-[3px] border border-charcoal/20 bg-charcoal/5 px-4 py-3.5 font-sans text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none'
@@ -55,7 +57,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 overflow-x-clip bg-forest px-6 py-24 md:px-12 md:py-32"
+      className="scroll-mt-28 overflow-x-clip bg-forest px-6 py-16 md:px-12 md:py-24"
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
@@ -67,14 +69,18 @@ export default function ContactSection() {
             </p>
 
             <ScrollDrift distance={24}>
-              <h2 className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-charcoal">
-                Πες μας τι σκέφτεσαι.
-              </h2>
+              <SplitText
+                as="h2"
+                text="Πες μας τι σκέφτεσαι."
+                className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-charcoal"
+              />
             </ScrollDrift>
 
-            <p className="mt-5 font-sans text-[15px] leading-relaxed text-charcoal/60">
-              Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
-            </p>
+            <MaskRevealBlock direction="left" className="mt-5">
+              <p className="font-sans text-[15px] leading-relaxed text-charcoal/60">
+                Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
+              </p>
+            </MaskRevealBlock>
           </Reveal>
 
           {/* Right: form */}

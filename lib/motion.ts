@@ -93,3 +93,29 @@ export function fadeUpDelayed(delay: number) {
     transition: { duration: duration.base, ease: ease.out, delay },
   }
 }
+
+// Slow, deep upward drift — for hero-adjacent sections
+export const driftUp: Variants = {
+  hidden: { opacity: 0, y: 64 },
+  visible: { opacity: 1, y: 0 },
+}
+
+// Mask wipe from bottom — for image/video panels
+export const maskWipe: Variants = {
+  hidden: { clipPath: 'inset(100% 0% 0% 0%)' },
+  visible: { clipPath: 'inset(0% 0% 0% 0%)' },
+}
+
+// Mask wipe from left — for editorial blocks
+export const maskWipeLeft: Variants = {
+  hidden: { clipPath: 'inset(0% 100% 0% 0%)' },
+  visible: { clipPath: 'inset(0% 0% 0% 0%)' },
+}
+
+// Blur-in — for headings
+export const blurIn: Variants = {
+  hidden: { opacity: 0, filter: 'blur(12px)', y: 16 },
+  visible: { opacity: 1, filter: 'blur(0px)', y: 0 },
+}
+
+export const slowReveal: Transition = { duration: duration.slow, ease: ease.outStrong }

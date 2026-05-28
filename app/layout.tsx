@@ -74,7 +74,7 @@ const jsonLd = {
     absoluteUrl('/images/menu/piata-0009.jpg'),
     absoluteUrl('/images/menu/piata-0022.jpg'),
   ],
-  hasMenu: absoluteUrl('/menu'),
+  hasMenu: absoluteUrl('/food-for-medicine#menu'),
   acceptsReservations: true,
   description: 'Specialty coffee, healthy brunch και πολιτιστικές δράσεις στο ΚΕΠΑΒΙ, Ιωάννινα. Poke bowls, acai, smoothies, γλυκά χωρίς ζάχαρη.',
   address: {

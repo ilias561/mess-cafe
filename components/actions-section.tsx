@@ -3,8 +3,10 @@
 import { FadeImage } from '@/components/fade-image'
 import KeepRisingWordmark from '@/components/keep-rising-wordmark'
 import Link from 'next/link'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '@/components/reveal'
 import type { Event } from '@/lib/events/events'
+import { VIEWPORT_ONCE, driftUp, slowReveal } from '@/lib/motion'
 
 const MAX_VISIBLE = 3
 
@@ -15,9 +17,10 @@ type ActionsSectionProps = {
 export default function ActionsSection({ actionCards }: ActionsSectionProps) {
   const visible = actionCards.slice(0, MAX_VISIBLE)
   const hasMore = actionCards.length > MAX_VISIBLE
+  const reduce = useReducedMotion()
 
   return (
-    <section id="actions" className="scroll-mt-24 overflow-x-clip bg-bone px-6 py-24 md:px-12 md:py-32">
+    <section id="actions" className="scroll-mt-24 overflow-x-clip bg-bone px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
         <Reveal className="mb-10">
           <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΟΙ ΣΤΟΧΟΙ ΜΑΣ · COMMUNITY</p>
@@ -38,12 +41,19 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
         </Reveal>
 
         {visible.length > 0 && (
-          <Reveal asGroup className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+          <Reveal asGroup gap={0.1} className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
             {visible.map((card) => (
-              <Reveal.Item key={card.slug}>
+              <motion.div
+                key={card.slug}
+                initial={reduce ? false : 'hidden'}
+                whileInView={reduce ? undefined : 'visible'}
+                viewport={VIEWPORT_ONCE}
+                variants={reduce ? undefined : driftUp}
+                transition={reduce ? undefined : slowReveal}
+              >
                 <Link
                   href={`/actions/${card.slug}`}
-                  className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
+                  className="group/card flex flex-col overflow-hidden rounded-[2px] bg-bone-warm shadow-[0_2px_10px_rgba(43,43,40,0.06)] transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_12px_32px_rgba(43,43,40,0.11)]"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <FadeImage
@@ -59,10 +69,14 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                   </div>
 
                   <div className="flex flex-col gap-1.5 p-4">
-                    <div className="flex items-center gap-2">
+                    <motion.div
+                      className="flex items-center gap-2"
+                      whileHover={reduce ? undefined : { rotate: 6 }}
+                      transition={{ duration: 0.25, ease: 'easeOut' }}
+                    >
                       <span className="h-[4px] w-[4px] shrink-0 rounded-full bg-terracotta" aria-hidden />
                       <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">{card.categoryLabel}</p>
-                    </div>
+                    </motion.div>
                     <h3 className="ui-link font-serif text-[20px] leading-tight tracking-tight text-charcoal">
                       {card.title}
                     </h3>
@@ -74,7 +88,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                     </span>
                   </div>
                 </Link>
-              </Reveal.Item>
+              </motion.div>
             ))}
           </Reveal>
         )}

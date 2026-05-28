@@ -24,7 +24,8 @@ const nextConfig = {
       },
     ],
   },
-  // rewrites() is incompatible with output:'export' — deploy static `out/` to Cloudflare Pages (see wrangler.toml)
+  // redirects()/rewrites() are incompatible with output:'export'.
+  // /menu → /food-for-medicine#menu is handled by public/_redirects (Cloudflare Pages).
 }
 
 export default nextConfig

@@ -4,6 +4,7 @@ import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { Reveal } from '@/components/reveal'
 import ScrollDrift from '@/components/scroll-drift'
+import MaskRevealBlock from '@/components/mask-reveal-block'
 import { featuredMenuItems } from '@/lib/menu-featured'
 
 const PHILOSOPHY_LEAD =
@@ -13,7 +14,7 @@ const PHILOSOPHY_BODY =
 
 export default function GalleryMenuPreview() {
   return (
-    <section id="menu-preview" className="scroll-mt-28 overflow-x-clip border-t border-line/30 bg-bone px-6 py-24 md:px-12 md:py-32">
+    <section id="menu-preview" className="scroll-mt-28 overflow-x-clip border-t border-line/30 bg-bone px-6 py-16 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
           {/* LEFT: eyebrow + heading */}
@@ -37,7 +38,7 @@ export default function GalleryMenuPreview() {
               {PHILOSOPHY_BODY}
             </p>
             <Link
-              href="/menu"
+              href="/food-for-medicine#menu"
               className="ui-interactive mt-8 inline-block rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg"
             >
               Δείτε το menu μας
@@ -47,12 +48,12 @@ export default function GalleryMenuPreview() {
 
         <div className="mt-14 h-px w-full max-w-[120px] bg-terracotta/40" aria-hidden />
 
-        <Reveal asGroup className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
+        <Reveal asGroup gap={0.06} className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
           {featuredMenuItems.map((item, index) => (
-            <Reveal.Item key={item.name}>
+            <Reveal.Item key={item.name} direction="left">
               <article className={`group ${index === 1 ? 'md:mt-12' : ''}`}>
                 {item.image ? (
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-bone-warm sm:aspect-[3/2] md:aspect-[4/5]">
+                  <MaskRevealBlock direction="left" className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-bone-warm sm:aspect-[3/2] md:aspect-[4/5]">
                     <FadeImage
                       src={item.image}
                       alt={item.name}
@@ -62,7 +63,7 @@ export default function GalleryMenuPreview() {
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     />
-                  </div>
+                  </MaskRevealBlock>
                 ) : null}
                 <p className="mt-5 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">{item.cat}</p>
                 <div className="mt-2 border-t border-line pt-3">

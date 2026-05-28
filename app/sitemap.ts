@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'weekly', priority: 1 },
-    { url: absoluteUrl('/menu'), lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     {
       url: absoluteUrl('/reservations'),
       lastModified: new Date(),

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Central rachis: arching stem with slight S-curve, base bottom to tip top -->
+  <path d="M 100 310 C 100 250 96 180 96 120 C 96 70 98 30 100 12"/>
+  <!-- Right leaflets (8) — closed almond shapes, all angled toward the frond tip -->
+  <path d="M 100 35  Q 116 18 128 10  Q 110 22 100 35 Z"/>
+  <path d="M 100 65  Q 130 45 148 32  Q 122 55 100 65 Z"/>
+  <path d="M 100 100 Q 138 78 162 60  Q 132 92 100 100 Z"/>
+  <path d="M 100 135 Q 148 110 172 90  Q 142 128 100 135 Z"/>
+  <path d="M 100 170 Q 152 145 174 125 Q 144 168 100 170 Z"/>
+  <path d="M 100 210 Q 148 188 168 168 Q 140 212 100 210 Z"/>
+  <path d="M 100 250 Q 135 230 152 215 Q 128 252 100 250 Z"/>
+  <path d="M 100 285 Q 122 268 134 256 Q 118 285 100 285 Z"/>
+  <!-- Left leaflets (8) — mirrored -->
+  <path d="M 100 35  Q 84 18 72 10   Q 90 22 100 35 Z"/>
+  <path d="M 100 65  Q 70 45 52 32   Q 78 55 100 65 Z"/>
+  <path d="M 100 100 Q 62 78 38 60   Q 68 92 100 100 Z"/>
+  <path d="M 100 135 Q 52 110 28 90  Q 58 128 100 135 Z"/>
+  <path d="M 100 170 Q 48 145 26 125 Q 56 168 100 170 Z"/>
+  <path d="M 100 210 Q 52 188 32 168 Q 60 212 100 210 Z"/>
+  <path d="M 100 250 Q 65 230 48 215 Q 72 252 100 250 Z"/>
+  <path d="M 100 285 Q 78 268 66 256 Q 82 285 100 285 Z"/>
+</svg>

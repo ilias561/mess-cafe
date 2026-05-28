@@ -55,6 +55,7 @@
   --color-line: rgba(243, 239, 227, 0.16); /* hairlines → light */
   --color-forest: #2d5a27;
   --color-ink-dark: #15300f;    /* dark ink for use on mustard/amber */
+  --color-canopy-night: #0e2208; /* deepest forest, climate peak */
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-fraunces), Georgia, serif;

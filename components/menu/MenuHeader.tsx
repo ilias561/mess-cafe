@@ -8,7 +8,7 @@ const HERO_IMAGE = '/images/menu/piata-0022.jpg'
 
 export default function MenuHeader() {
   return (
-    <header className="bg-bone px-6 pb-16 pt-32 md:px-12 md:pb-20 md:pt-44">
+    <header className="border-t border-line/30 bg-bone px-6 pb-16 pt-32 md:px-12 md:pb-20 md:pt-44">
       <div className="mx-auto grid max-w-[1400px] items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14 lg:gap-20">
         <div className="max-w-[640px]">
           <motion.p
@@ -53,9 +53,9 @@ export default function MenuHeader() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
-          className="overflow-hidden rounded-[8px] bg-bone-warm"
+          className="mx-auto overflow-hidden rounded-full bg-bone-warm size-[260px] md:size-[320px] lg:size-[380px]"
         >
-          <div className="aspect-[16/11] w-full md:aspect-[4/5]">
+          <div className="h-full w-full">
             <img
               src={HERO_IMAGE}
               alt="Poke bowl από το μενού του M.E.S.S."

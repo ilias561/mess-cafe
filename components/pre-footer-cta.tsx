@@ -51,7 +51,7 @@ export default function PreFooterCta({
 }: PreFooterCtaProps) {
   const s = variantStyles[variant]
   return (
-    <section className={`${s.bg} ${s.text} px-6 py-24 md:px-12 md:py-32`}>
+    <section className={`${s.bg} ${s.text} px-6 py-16 md:px-12 md:py-24`}>
       <div className="mx-auto max-w-[1400px]">
         <motion.p
           initial={{ opacity: 0, y: 12 }}

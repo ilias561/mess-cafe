@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 320" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Central rachis with slight S-curve -->
+  <path d="M 100 310 C 100 240 96 170 96 100 C 96 50 98 22 100 6"/>
+  <!-- Right pinnae (8) — thin elongated, taper dramatically toward tip -->
+  <path d="M 100 25  Q 108 14 116 6   Q 106 14 100 25 Z"/>
+  <path d="M 100 55  Q 116 38 128 22  Q 112 40 100 55 Z"/>
+  <path d="M 100 85  Q 126 60 140 42  Q 118 64 100 85 Z"/>
+  <path d="M 100 115 Q 132 88 148 70  Q 122 92 100 115 Z"/>
+  <path d="M 100 145 Q 134 118 150 100 Q 120 122 100 145 Z"/>
+  <path d="M 100 180 Q 130 158 144 142 Q 118 162 100 180 Z"/>
+  <path d="M 100 220 Q 122 202 132 188 Q 112 204 100 220 Z"/>
+  <path d="M 100 265 Q 114 252 120 244 Q 106 254 100 265 Z"/>
+  <!-- Left pinnae (8) — mirrored -->
+  <path d="M 100 25  Q 92 14 84 6    Q 94 14 100 25 Z"/>
+  <path d="M 100 55  Q 84 38 72 22   Q 88 40 100 55 Z"/>
+  <path d="M 100 85  Q 74 60 60 42   Q 82 64 100 85 Z"/>
+  <path d="M 100 115 Q 68 88 52 70   Q 78 92 100 115 Z"/>
+  <path d="M 100 145 Q 66 118 50 100  Q 80 122 100 145 Z"/>
+  <path d="M 100 180 Q 70 158 56 142  Q 82 162 100 180 Z"/>
+  <path d="M 100 220 Q 78 202 68 188  Q 88 204 100 220 Z"/>
+  <path d="M 100 265 Q 86 252 80 244  Q 94 254 100 265 Z"/>
+  <!-- Subtle sub-leaflet ticks along the longest pinnae for that lacy fern feel -->
+  <path d="M 116 70 L 121 65"/>
+  <path d="M 124 60 L 130 56"/>
+  <path d="M 132 50 L 137 47"/>
+  <path d="M 84 70 L 79 65"/>
+  <path d="M 76 60 L 70 56"/>
+  <path d="M 68 50 L 63 47"/>
+  <path d="M 118 100 L 124 94"/>
+  <path d="M 128 90 L 135 85"/>
+  <path d="M 82 100 L 76 94"/>
+  <path d="M 72 90 L 65 85"/>
+  <path d="M 116 132 L 122 126"/>
+  <path d="M 84 132 L 78 126"/>
+</svg>
