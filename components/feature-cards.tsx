@@ -66,7 +66,7 @@ export default function FeatureCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.6, ease: EASE_TUPLE, delay: i * 0.08 }}
-              className="flex flex-col gap-4 rounded-2xl border border-line/40 bg-bone-warm/60 p-6"
+              className="ui-card-elevated flex flex-col gap-4 rounded-2xl border border-line/40 bg-bone-warm/60 p-6"
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-olive/8">
                 {card.icon}

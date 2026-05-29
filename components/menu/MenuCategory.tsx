@@ -9,7 +9,7 @@ import { MenuFeatureRow, MenuGridItem, MenuListRow } from './MenuItem'
 function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'brunch') {
     return (
-      <div className="mt-8 grid gap-4 rounded-sm border border-line/40 p-6 sm:grid-cols-2">
+      <div className="ui-card-elevated mt-8 grid gap-4 rounded-sm border border-line/40 p-6 sm:grid-cols-2">
         <div>
           <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
             {extras.vegExtras.label}
@@ -27,7 +27,7 @@ function ExtrasBox({ categoryId }: { categoryId: string }) {
   }
   if (categoryId === 'bowls' || categoryId === 'salads') {
     return (
-      <div className="mt-8 rounded-sm border border-line/40 p-6">
+      <div className="ui-card-elevated mt-8 rounded-sm border border-line/40 p-6">
         <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
           {extras.fruitExtras.label}
         </p>

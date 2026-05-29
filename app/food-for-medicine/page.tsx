@@ -116,7 +116,7 @@ export default function BlogPage() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="ui-interactive group mt-10 flex flex-col items-start gap-5 rounded-[2px] border border-line/40 bg-bone-warm p-8 transition-colors duration-150 hover:border-mustard md:flex-row md:items-center md:justify-between md:p-10"
+              className="ui-card-elevated ui-interactive group mt-10 flex flex-col items-start gap-5 rounded-[2px] border border-line/40 bg-bone-warm p-8 transition-colors duration-150 hover:border-mustard md:flex-row md:items-center md:justify-between md:p-10"
             >
               <div className="flex items-center gap-4">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-mustard text-ink-dark">

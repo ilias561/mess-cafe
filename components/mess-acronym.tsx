@@ -79,7 +79,7 @@ export default function MessAcronym() {
           {messPillars.map((pillar, idx) => (
             <motion.article
               key={`${pillar.letter}-${pillar.word}-${idx}`}
-              className="group/col flex flex-col gap-3 rounded-[3px] border border-line/40 bg-bone-warm p-6 shadow-sm transition-opacity duration-250 focus-within:opacity-100 md:p-5"
+              className="ui-card-elevated group/col flex flex-col gap-3 rounded-[3px] border border-line/40 bg-bone-warm p-6 transition-opacity duration-250 focus-within:opacity-100 md:p-5"
               tabIndex={0}
               onHoverStart={() => setHoveredIndex(idx)}
               onHoverEnd={() => setHoveredIndex(null)}

@@ -22,7 +22,7 @@ export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridPro
               ))}
             </div>
           ) : (
-            <div className="mt-10 rounded-[2px] border border-line/40 bg-bone-warm px-8 py-14 text-center md:py-20">
+            <div className="ui-card-elevated mt-10 rounded-[2px] border border-line/40 bg-bone-warm px-8 py-14 text-center md:py-20">
               <p className="mx-auto max-w-[44ch] font-serif text-[clamp(22px,3vw,30px)] leading-snug tracking-tight text-charcoal">
                 Δεν υπάρχουν προγραμματισμένες εκδηλώσεις αυτή τη στιγμή.
               </p>
