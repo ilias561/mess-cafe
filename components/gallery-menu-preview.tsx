@@ -45,6 +45,7 @@ export default function GalleryMenuPreview() {
       particleCount={10}
       ringClassName="ring-ink-dark/20"
       vignetteAlpha={0.35}
+      contentClipping={false}
     >
       <div ref={scrollRef} className="relative mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:items-start md:gap-16">
@@ -82,23 +83,22 @@ export default function GalleryMenuPreview() {
           {hero ? (
             <div className="md:col-span-6 md:col-start-7">
               <MenuHeroDish item={hero} />
+              {railItems.length > 0 ? (
+                <Reveal asGroup gap={0.1} className="mt-20 text-ink-dark md:mt-28">
+                  {railItems.map((item, idx) => (
+                    <TastingRailRow
+                      key={item.name}
+                      item={item}
+                      index={String(11 + idx).padStart(2, '0')}
+                      zigzag={idx % 2 === 1}
+                      showRuleAbove={idx > 0}
+                    />
+                  ))}
+                </Reveal>
+              ) : null}
             </div>
           ) : null}
         </div>
-
-        {railItems.length > 0 ? (
-          <Reveal asGroup gap={0.1} className="mt-20 text-ink-dark md:mt-28">
-            {railItems.map((item, idx) => (
-              <TastingRailRow
-                key={item.name}
-                item={item}
-                index={String(11 + idx).padStart(2, '0')}
-                zigzag={idx % 2 === 1}
-                showRuleAbove={idx > 0}
-              />
-            ))}
-          </Reveal>
-        ) : null}
       </div>
     </ClimateShell>
   )

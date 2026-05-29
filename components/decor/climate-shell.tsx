@@ -17,6 +17,8 @@ export type ClimateShellProps = {
   particleCount?: number
   ringClassName?: string
   vignetteAlpha?: number
+  /** When false, inner chrome omits overflow-hidden so position:sticky works in children. */
+  contentClipping?: boolean
   children: ReactNode
 }
 
@@ -32,6 +34,7 @@ export function ClimateShell({
   particleCount = 8,
   ringClassName = 'ring-mustard/35',
   vignetteAlpha = 0.55,
+  contentClipping = true,
   children,
 }: ClimateShellProps) {
   const ref = useRef<HTMLElement>(null)
@@ -95,7 +98,7 @@ export function ClimateShell({
       style={reduce ? staticBg : { background: bg }}
     >
       <motion.div
-        className="relative isolate overflow-hidden border-t border-line/30"
+        className={`relative isolate border-t border-line/30${contentClipping ? ' overflow-hidden' : ''}`}
         style={chrome ? chromeStyle : reduce ? staticBg : { background: bg }}
       >
         {chrome && (
