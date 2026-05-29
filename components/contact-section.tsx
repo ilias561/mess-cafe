@@ -4,19 +4,46 @@ import { type FormEvent, useState } from 'react'
 import Link from 'next/link'
 import { submitContact } from '@/lib/contact/submit'
 import { Reveal } from '@/components/reveal'
-import MaskRevealBlock from '@/components/mask-reveal-block'
 import ScrollDrift from '@/components/scroll-drift'
 import SplitText from '@/components/split-text'
+import {
+  AnaglyphHeading,
+  Eyebrow,
+  HairlineRule,
+  MicroEyebrow,
+  NumberedCaption,
+} from '@/components/decor/ornaments'
+import type { Settings } from '@/lib/settings'
 
 const INPUT_BASE =
-  'ui-field w-full rounded-[3px] border border-charcoal/20 bg-charcoal/5 px-4 py-3.5 font-sans text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none'
+  'ui-field w-full rounded-[3px] border border-charcoal/20 bg-white/[0.04] backdrop-blur-[2px] px-4 py-3.5 font-sans text-[15px] text-charcoal placeholder:text-charcoal/45 focus:outline-none'
 
-export default function ContactSection() {
+type ContactSectionProps = {
+  settings?: Settings
+}
+
+function formatHours(settings: Settings): string {
+  const first = settings.hours[0]
+  const last = settings.hours[settings.hours.length - 1]
+  if (!first) return 'Δευτ–Κυρ · 08:00–22:00'
+  if (settings.hours.length === 1) {
+    return `${first.day} · ${first.open}–${first.close}`
+  }
+  return `${first.day}–${last?.day ?? first.day} · ${first.open}–${last?.close ?? first.close}`
+}
+
+export default function ContactSection({ settings }: ContactSectionProps) {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [sending, setSending] = useState(false)
   const [consent, setConsent] = useState(false)
   const [consentError, setConsentError] = useState('')
+
+  const addressLine = settings
+    ? `${settings.addressLine1} · ${settings.addressLine2}`
+    : 'ΚΕΠΑΒΙ · Ιωάννινα' // TODO: source from settings when prop omitted
+  const hoursLine = settings ? formatHours(settings) : 'Δευτ–Κυρ · 08:00–22:00' // TODO: source from settings
+  const phoneLine = settings?.phone ?? '+30 6945 777808' // TODO: source from settings
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -57,48 +84,57 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 overflow-x-clip bg-forest px-6 py-16 md:px-12 md:py-24"
+      className="relative bg-forest px-6 py-20 md:px-12 md:py-24"
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
-
-          {/* Left: heading */}
-          <Reveal direction="left" className="lg:col-span-2">
-            <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard/80">
-              ΕΠΙΚΟΙΝΩΝΙΑ
-            </p>
-
-            <ScrollDrift distance={24}>
-              <SplitText
-                as="h2"
-                text="Πες μας τι σκέφτεσαι."
-                className="mt-4 font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight text-charcoal"
-              />
+          <Reveal direction="up" className="lg:col-span-2">
+            <Eyebrow tone="light">ΕΠΙΚΟΙΝΩΝΙΑ</Eyebrow>
+            <ScrollDrift distance={12}>
+              <AnaglyphHeading as="h2" tone="dark" className="mt-4">
+                <SplitText
+                  as="span"
+                  text="Πες μας τι σκέφτεσαι."
+                  className="block font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight"
+                />
+              </AnaglyphHeading>
             </ScrollDrift>
-
-            <MaskRevealBlock direction="left" className="mt-5">
-              <p className="font-sans text-[15px] leading-relaxed text-charcoal/60">
-                Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
-              </p>
-            </MaskRevealBlock>
+            <p className="mt-5 font-serif text-[15px] italic leading-relaxed text-charcoal/75">
+              Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
+            </p>
           </Reveal>
 
-          {/* Right: form */}
-          <Reveal direction="right" className="lg:col-span-3" aria-live="polite">
+          <Reveal direction="up" className="lg:col-span-1">
+            <NumberedCaption index="15" label="Πληροφορίες" className="mt-0" />
+            <MicroEyebrow className="mt-6 text-mustard/80">Διεύθυνση</MicroEyebrow>
+            <p className="mt-2 font-serif text-[15px] italic text-charcoal">{addressLine}</p>
+            <HairlineRule origin="left" className="my-4 w-12" />
+            <MicroEyebrow className="text-mustard/80">Ώρες</MicroEyebrow>
+            <p className="mt-2 font-serif text-[15px] italic text-charcoal">{hoursLine}</p>
+            <HairlineRule origin="left" className="my-4 w-12" />
+            <MicroEyebrow className="text-mustard/80">Τηλέφωνο</MicroEyebrow>
+            <p className="mt-2 font-sans text-[14px] text-charcoal">{phoneLine}</p>
+          </Reveal>
+
+          <Reveal direction="up" className="lg:col-span-2" aria-live="polite">
             {status === 'success' ? (
-              <div className="rounded-2xl border border-charcoal/15 bg-charcoal/5 p-8">
-                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">ΕΥΧΑΡΙΣΤΟΥΜΕ</p>
+              <div className="rounded-2xl bg-mustard/8 p-8 ring-1 ring-mustard/40">
+                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">
+                  ΕΥΧΑΡΙΣΤΟΥΜΕ
+                </p>
                 <h3 className="mt-3 font-serif text-[clamp(24px,3vw,34px)] leading-[1.1] text-charcoal">
                   Λάβαμε το μήνυμά σου!
                 </h3>
-                <p className="mt-2 font-sans text-[14px] leading-relaxed text-charcoal/60">
+                <p className="mt-2 font-sans text-[14px] leading-relaxed text-charcoal/70">
                   Θα επικοινωνήσουμε μαζί σου σύντομα.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">Όνομα</label>
+                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">
+                    Όνομα
+                  </label>
                   <input
                     id="contact-name"
                     name="name"
@@ -110,7 +146,9 @@ export default function ContactSection() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">Email</label>
+                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">
+                    Email
+                  </label>
                   <input
                     id="contact-email"
                     name="email"
@@ -122,7 +160,9 @@ export default function ContactSection() {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5 md:col-span-2">
-                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">Μήνυμα</label>
+                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">
+                    Μήνυμα
+                  </label>
                   <textarea
                     id="contact-message"
                     name="message"
@@ -140,9 +180,7 @@ export default function ContactSection() {
                   autoComplete="off"
                 />
                 {status === 'error' && (
-                  <p className="font-sans text-[12px] text-red-300 md:col-span-2">
-                    {errorMsg}
-                  </p>
+                  <p className="font-sans text-[12px] text-red-300 md:col-span-2">{errorMsg}</p>
                 )}
                 <div className="md:col-span-2">
                   <label className="flex cursor-pointer items-start gap-3">
@@ -159,7 +197,7 @@ export default function ContactSection() {
                       Έχω διαβάσει την{' '}
                       <Link
                         href="/privacy"
-                        className="ui-link text-charcoal underline decoration-mustard underline-offset-4"
+                        className="ui-link underline decoration-mustard underline-offset-4"
                       >
                         Πολιτική Απορρήτου
                       </Link>{' '}
@@ -167,7 +205,7 @@ export default function ContactSection() {
                     </span>
                   </label>
                   {consentError ? (
-                    <p role="alert" className="mt-2 font-sans text-[12px] text-amber-600">
+                    <p role="alert" className="mt-2 font-sans text-[12px] text-amber-400">
                       {consentError}
                     </p>
                   ) : null}
@@ -184,7 +222,6 @@ export default function ContactSection() {
               </form>
             )}
           </Reveal>
-
         </div>
       </div>
     </section>

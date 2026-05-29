@@ -1,11 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, useReducedMotion } from 'framer-motion'
 import DrawHeading from '@/components/draw-heading'
 import { Reveal } from '@/components/reveal'
-import { VIEWPORT_ONCE, blurIn, slowReveal } from '@/lib/motion'
-import { reviews } from '@/lib/reviews-data'
+import {
+  AnaglyphHeading,
+  Eyebrow,
+  HairlineRule,
+  MicroEyebrow,
+  NumberedCaption,
+} from '@/components/decor/ornaments'
+import { featuredQuote, reviews } from '@/lib/reviews-data'
 import type { Review } from '@/lib/reviews-data'
 
 function GoogleLogo({ className = 'h-5 w-5' }: { className?: string }) {
@@ -59,9 +64,8 @@ function ReviewCard({ review }: { review: Review }) {
       aria-label={`Κριτική από ${review.name}`}
       className="flex h-full w-[min(320px,80vw)] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
     >
-      {/* Header: avatar + name + google logo */}
       <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-3 min-w-0">
+        <div className="flex min-w-0 items-center gap-3">
           <div
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full font-sans text-[13px] font-medium"
             style={{ backgroundColor: av.bg, color: av.text }}
@@ -70,7 +74,7 @@ function ReviewCard({ review }: { review: Review }) {
           </div>
           <div className="min-w-0">
             <p className="truncate font-sans text-[14px] font-medium text-[#202124]">{review.name}</p>
-            <div className="flex items-center gap-1.5 flex-wrap">
+            <div className="flex flex-wrap items-center gap-1.5">
               {review.isLocalGuide && (
                 <span className="font-sans text-[11px] text-[#5f6368]">Local Guide ·</span>
               )}
@@ -78,14 +82,12 @@ function ReviewCard({ review }: { review: Review }) {
             </div>
           </div>
         </div>
-        <GoogleLogo className="h-5 w-5 shrink-0 mt-0.5" />
+        <GoogleLogo className="mt-0.5 h-5 w-5 shrink-0" />
       </div>
 
-      {/* Stars */}
       <Stars rating={review.rating} />
 
-      {/* Review text */}
-      <p className="font-sans text-[13px] leading-[1.65] text-[#3c4043] line-clamp-5">
+      <p className="line-clamp-5 font-sans text-[13px] leading-[1.65] text-[#3c4043]">
         {review.text}
       </p>
     </a>
@@ -95,7 +97,6 @@ function ReviewCard({ review }: { review: Review }) {
 function ReviewRow({ items, reverse = false }: { items: Review[]; reverse?: boolean }) {
   return (
     <div className="overflow-hidden">
-      {/* Duplicated set + translateX(-50%) keyframe = seamless loop (see globals.css) */}
       <div className={`flex w-max ${reverse ? 'marquee-track-reverse' : 'marquee-track'}`}>
         {[...items, ...items].map((review, i) => (
           <div key={i} className="mx-2 flex shrink-0">
@@ -110,81 +111,90 @@ function ReviewRow({ items, reverse = false }: { items: Review[]; reverse?: bool
 function ReviewsTrack() {
   return (
     <div className="relative py-2">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-bone to-transparent md:w-24" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-bone to-transparent md:w-24" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-forest to-transparent md:w-24"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-forest to-transparent md:w-24"
+      />
       <ReviewRow items={reviews} />
     </div>
   )
 }
 
 export default function ReviewsSection() {
-  const reduce = useReducedMotion()
-
   return (
-    <section id="reviews" className="scroll-mt-28 bg-bone py-16 md:py-24">
-
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
-        <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
-
-          <div>
-            {reduce ? (
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Τι λένε όσοι μας γνώρισαν</p>
-            ) : (
-              <motion.p
-                className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive"
-                initial="hidden"
-                whileInView="visible"
-                viewport={VIEWPORT_ONCE}
-                variants={blurIn}
-                transition={slowReveal}
-              >
-                Τι λένε όσοι μας γνώρισαν
-              </motion.p>
-            )}
-            <DrawHeading className="mt-2">
-              <h2 className="font-serif text-[clamp(28px,3.5vw,44px)] leading-[1.05] tracking-tight text-charcoal">
+    <section
+      id="reviews"
+      className="relative bg-forest px-6 py-20 md:px-12 md:py-24"
+    >
+      <div className="mx-auto max-w-[1400px]">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-5 md:sticky md:top-28">
+            <Eyebrow tone="light">Τι λένε όσοι μας γνώρισαν</Eyebrow>
+            <DrawHeading className="mt-4">
+              <AnaglyphHeading as="h2" tone="dark">
                 Αξιολογήσεις από την κοινότητά μας
-              </h2>
+              </AnaglyphHeading>
             </DrawHeading>
+
+            <a
+              href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-3 rounded-xl bg-white/95 px-4 py-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.1),0_4px_12px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.04] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
+            >
+              <GoogleLogo className="h-5 w-5" />
+              <div>
+                <div className="flex items-center gap-1">
+                  <span className="font-serif text-[20px] leading-none text-[#202124]">4.8</span>
+                  <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-[#FBBC04]" aria-hidden>
+                    <path d="M10 1l2.47 5.82L18 7.64l-4.35 3.93L15.1 18 10 14.9 4.9 18l1.45-6.43L2 7.64l5.53-.82L10 1z" />
+                  </svg>
+                </div>
+                <p className="font-sans text-[10px] text-[#5f6368]">165 αξιολογήσεις</p>
+              </div>
+            </a>
           </div>
 
-          <a
-            href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-xl bg-white px-5 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.1),0_4px_12px_rgba(0,0,0,0.06)] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)] ring-1 ring-black/[0.04]"
-          >
-            <GoogleLogo className="h-6 w-6" />
-            <div>
-              <div className="flex items-center gap-1">
-                <span className="font-serif text-[22px] leading-none text-[#202124]">4.8</span>
-                <svg viewBox="0 0 20 20" className="h-4 w-4 fill-[#FBBC04]" aria-hidden>
-                  <path d="M10 1l2.47 5.82L18 7.64l-4.35 3.93L15.1 18 10 14.9 4.9 18l1.45-6.43L2 7.64l5.53-.82L10 1z" />
-                </svg>
-              </div>
-              <p className="font-sans text-[11px] text-[#5f6368]">165 αξιολογήσεις</p>
+          <div className="md:col-span-7">
+            <NumberedCaption index="14" label="Από την κοινότητα" className="mt-0" />
+            <AnaglyphHeading
+              as="h3"
+              tone="dark"
+              className="mt-6 font-serif italic text-[clamp(26px,3.2vw,44px)] leading-[1.25] tracking-[-0.005em]"
+            >
+              «{featuredQuote.text}»
+            </AnaglyphHeading>
+            <div className="mt-8 flex items-center gap-3">
+              <span aria-hidden className="block h-px w-8 bg-mustard/60" />
+              <MicroEyebrow className="text-charcoal/55">
+                {featuredQuote.name} · {featuredQuote.time}
+              </MicroEyebrow>
             </div>
-          </a>
-
-        </Reveal>
+          </div>
+        </div>
       </div>
 
-      <ReviewsTrack />
+      <div className="mt-10 md:mt-12">
+        <ReviewsTrack />
+      </div>
 
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12 mt-5">
+      <div className="mx-auto mt-4 max-w-[1400px]">
         <Reveal>
-          <Link
-            href="/reviews"
-            className="inline-flex items-center gap-1.5 font-sans text-[11px] uppercase tracking-[0.14em] text-concrete transition-colors hover:text-charcoal"
-          >
-            Όλες οι αξιολογήσεις
-            <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.5" aria-hidden>
-              <path d="M6 3h7m0 0v7m0-7L4 13" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+          <div className="flex items-center gap-5">
+            <HairlineRule origin="left" className="w-12" />
+            <Link
+              href="/reviews"
+              className="ui-link font-sans text-[12px] uppercase tracking-[0.28em] text-charcoal/75 hover:text-mustard"
+            >
+              Όλες οι αξιολογήσεις →
+            </Link>
+          </div>
         </Reveal>
       </div>
-
     </section>
   )
 }

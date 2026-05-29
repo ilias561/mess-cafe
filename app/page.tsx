@@ -11,6 +11,7 @@ import ReviewsSection from '@/components/reviews-section'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
 import { getEventBySlug, type Event } from '@/lib/events/events'
+import { getSettings } from '@/lib/settings'
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'M.E.S.S. — Specialty Coffee & Brunch · Ιωάννινα',
@@ -23,6 +24,7 @@ export default function Home() {
   const keepRisingBazaar = getEventBySlug('keep-rising-bazaar')
   const keepRisingDelivery = getEventBySlug('keep-rising-ceramics')
   const actionCards = [keepRisingBazaar, keepRisingDelivery].filter((e): e is Event => !!e)
+  const settings = getSettings()
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
@@ -34,7 +36,7 @@ export default function Home() {
       <ActionsSection actionCards={actionCards} />
       <GalleryMenuPreview />
       <ReviewsSection />
-      <ContactSection />
+      <ContactSection settings={settings} />
       <FooterSection />
     </main>
   )

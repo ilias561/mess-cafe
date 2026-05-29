@@ -7,6 +7,15 @@ export type Review = {
   language?: 'el' | 'en' | 'translated'
 }
 
+/** Hand-picked quote for the homepage reviews centerpiece. */
+export const featuredQuote: Review = {
+  name: 'Nasis Xristos',
+  rating: 5,
+  text: 'Ένα διαμαντάκι που βρίσκεται σε εξαιρετική τοποθεσία δίπλα στη λίμνη Ιωαννίνων, προσφέροντας όμορφη θέα και χαλαρή ατμόσφαιρα. Ο χώρος είναι προσεγμένος, καθαρός και φωτεινός, ιδανικός για καφέ ή brunch όλες τις ώρες της ημέρας.',
+  time: 'πριν από 3 μήνες',
+  isLocalGuide: true,
+}
+
 export const reviews: Review[] = [
   {
     name: 'Nasis Xristos',

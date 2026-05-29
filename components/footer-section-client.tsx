@@ -2,11 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { FadeImage } from '@/components/fade-image'
 import { Reveal } from '@/components/reveal'
-import { duration, ease, VIEWPORT_ONCE } from '@/lib/motion'
+import { HairlineRule, MicroEyebrow } from '@/components/decor/ornaments'
 import type { Settings } from '@/lib/settings'
 
 type FooterSectionClientProps = {
@@ -14,8 +13,6 @@ type FooterSectionClientProps = {
   variant?: 'full' | 'minimal'
 }
 
-const footerHeading = 'Σε περιμένουμε.'
-const footerWords = footerHeading.split(' ')
 const mapEmbedSrc = 'https://www.google.com/maps?q=Archbishop+Makariou+11+45221+Ioannina+Greece&output=embed'
 
 export default function FooterSectionClient({ settings }: FooterSectionClientProps) {
@@ -23,28 +20,26 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
   const [mapConsent, setMapConsent] = useState(false)
 
   return (
-    <footer id="footer" className="bg-forest px-6 pt-24 pb-0 text-charcoal md:px-12">
+    <footer id="footer" className="bg-forest px-6 pt-12 pb-0 text-charcoal md:px-12 md:pt-16">
       <div className="mx-auto max-w-[1400px]">
+        <div className="mb-12 flex flex-col items-center gap-4">
+          <HairlineRule origin="center" className="w-full max-w-none" />
+          <div className="flex items-center gap-3">
+            <span aria-hidden className="block h-px w-8 bg-mustard/60" />
+            <MicroEyebrow className="text-mustard/80">
+              M.E.S.S. · ΚΕΠΑΒΙ · Ιωάννινα · 2025
+            </MicroEyebrow>
+            <span aria-hidden className="block h-px w-8 bg-mustard/60" />
+          </div>
+        </div>
+
         <Reveal>
-          <p className="mb-6 inline-flex max-w-full flex-wrap rounded-full border border-line bg-charcoal/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90">
+          <p className="mb-6 inline-flex max-w-full flex-wrap rounded-full border border-mustard/25 bg-charcoal/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90">
             OPEN DAILY · {settings.hours.map((slot) => `${slot.day} ${slot.open}—${slot.close}`).join(' · ')}
           </p>
 
           <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(36px,9vw,140px)] text-charcoal">
-            {footerWords.map((word, i) => (
-              <span key={`${word}-${i}`} className="inline-block overflow-hidden align-baseline">
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: '100%', opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={VIEWPORT_ONCE}
-                  transition={{ delay: i * 0.1, duration: duration.slow, ease: ease.out }}
-                >
-                  {word}
-                  {i < footerWords.length - 1 ? '\u00A0' : ''}
-                </motion.span>
-              </span>
-            ))}
+            Σε περιμένουμε.
           </h2>
 
           <div className="mt-8">
@@ -57,7 +52,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           </div>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-0 border-t border-line pt-0 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-0 border-t border-mustard/25 pt-0 sm:grid-cols-2 lg:grid-cols-4">
           <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
             <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">ADDRESS</p>
             <p className="font-sans text-sm leading-relaxed text-charcoal">{settings.addressLine1}<br />{settings.addressLine2}</p>
@@ -162,9 +157,9 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           </div>
         </Reveal>
 
-        <Reveal className="border-t border-bone/10 py-6">
+        <Reveal className="border-t border-mustard/20 py-6">
           <nav
-            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-sans text-[12px] text-concrete"
+            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-sans text-[12px] text-charcoal/55"
             aria-label="Νομικές πληροφορίες"
           >
             <Link href="/privacy" className="ui-link hover:text-charcoal">
