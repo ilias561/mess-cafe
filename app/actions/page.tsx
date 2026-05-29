@@ -33,7 +33,7 @@ export default function ActionsPage() {
   const settings = getSettings()
   const upcomingEvents = getUpcomingEvents()
   const pastEvents = getPastEvents()
-  const keepRisingSpotlight = getEventBySlug('keep-rising-ceramics') ?? getEventBySlug('keep-rising-bazaar')
+  const keepRisingSpotlight = getEventBySlug('keep-rising')
   const featured = upcomingEvents[0] ?? null
   const restUpcoming = upcomingEvents.slice(1)
   const noUpcoming = upcomingEvents.length === 0
