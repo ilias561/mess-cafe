@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 
 const EASE_TUPLE = [0.22, 1, 0.36, 1] as const
@@ -60,7 +60,7 @@ export default function FeatureCards() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((card, i) => (
-            <motion.div
+            <m.div
               key={card.title}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export default function FeatureCards() {
                   {card.body}
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

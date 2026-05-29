@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import EventCard from '@/components/events/event-card'
 import SectionReveal from '@/components/section-reveal'
 import { EASE } from '@/lib/motion'
@@ -35,7 +35,7 @@ export default function UpcomingSection({ events, activeCategory }: Props) {
           <div className="mt-10 grid grid-cols-1 gap-8">
             <AnimatePresence mode="popLayout">
               {filtered.map((event) => (
-                <motion.div
+                <m.div
                   key={event.slug}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -43,7 +43,7 @@ export default function UpcomingSection({ events, activeCategory }: Props) {
                   transition={{ duration: 0.2, ease: EASE }}
                 >
                   <EventCard event={event} />
-                </motion.div>
+                </m.div>
               ))}
             </AnimatePresence>
           </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, type ReactNode } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
 type ScrollDriftProps = {
   children: ReactNode
@@ -23,8 +23,8 @@ export default function ScrollDrift({ children, className, distance = 40 }: Scro
   if (reduceMotion) return <div className={className}>{children}</div>
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className}>
+    <m.div ref={ref} style={{ y }} className={className}>
       {children}
-    </motion.div>
+    </m.div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { ease } from '@/lib/motion'
 
@@ -63,7 +63,7 @@ export default function MessAcronym() {
   }, [])
 
   return (
-    <motion.section
+    <m.section
       ref={sectionRef}
       aria-label="M.E.S.S. — Modular, Events, Sustainable, Space"
       className="border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-14 md:min-h-[75vh] md:px-12 md:py-20"
@@ -72,12 +72,12 @@ export default function MessAcronym() {
       <div className="mx-auto max-w-[1400px]">
         <p className="text-center font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Τι σημαίνει M.E.S.S.</p>
 
-        <motion.div
+        <m.div
           className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6"
           style={reduce || !isDesktop ? undefined : { scale: rowScale }}
         >
           {messPillars.map((pillar, idx) => (
-            <motion.article
+            <m.article
               key={`${pillar.letter}-${pillar.word}-${idx}`}
               className="ui-card-elevated group/col flex flex-col gap-3 rounded-[3px] border border-line/40 bg-bone-warm p-6 transition-opacity duration-250 focus-within:opacity-100 md:p-5"
               tabIndex={0}
@@ -90,7 +90,7 @@ export default function MessAcronym() {
               }}
               transition={{ duration: 0.25 }}
             >
-              <motion.p
+              <m.p
                 className="font-serif leading-none tracking-tight text-charcoal"
                 style={{ fontSize: 'clamp(120px,18vw,240px)' }}
                 aria-hidden
@@ -110,9 +110,9 @@ export default function MessAcronym() {
               >
                 {pillar.letter.replace('.', '')}
                 <span className="text-mustard">.</span>
-              </motion.p>
+              </m.p>
               <div>
-                <motion.p
+                <m.p
                   className="inline-block border-b border-transparent font-serif text-[32px] leading-snug tracking-tight text-charcoal transition-all duration-250 group-hover/col:-translate-y-1 group-hover/col:border-mustard group-focus-within/col:-translate-y-1 group-focus-within/col:border-mustard"
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -120,7 +120,7 @@ export default function MessAcronym() {
                   transition={{ duration: 0.6, ease: ease.outStrong, delay: idx * 0.08 + 0.3 }}
                 >
                   {pillar.word}
-                </motion.p>
+                </m.p>
                 <p className="mt-2 max-w-[22ch] font-sans text-[13px] leading-relaxed text-concrete opacity-60 transition-opacity duration-250 group-hover/col:opacity-100 group-focus-within/col:opacity-100">
                   {pillar.body}
                 </p>
@@ -130,10 +130,10 @@ export default function MessAcronym() {
                   </p>
                 )}
               </div>
-            </motion.article>
+            </m.article>
           ))}
-        </motion.div>
+        </m.div>
       </div>
-    </motion.section>
+    </m.section>
   )
 }

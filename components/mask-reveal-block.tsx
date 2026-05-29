@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { VIEWPORT_ONCE, ease, maskWipe, maskWipeLeft } from '@/lib/motion'
 
@@ -20,7 +20,7 @@ export default function MaskRevealBlock({ children, direction = 'up', delay = 0,
   }
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -29,6 +29,6 @@ export default function MaskRevealBlock({ children, direction = 'up', delay = 0,
       transition={{ duration: 0.8, ease: ease.outStrong, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }

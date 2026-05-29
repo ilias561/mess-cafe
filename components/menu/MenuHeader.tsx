@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import { MenuLegendInline } from './MenuItem'
 
@@ -11,25 +11,25 @@ export default function MenuHeader() {
     <header className="border-t border-line/30 bg-bone px-6 pb-16 pt-32 md:px-12 md:pb-20 md:pt-44">
       <div className="mx-auto grid max-w-[1400px] items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-14 lg:gap-20">
         <div className="max-w-[640px]">
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE }}
             className="font-sans text-[11px] uppercase tracking-[0.17em] text-olive"
           >
             M.E.S.S. · Ο κατάλογος
-          </motion.p>
+          </m.p>
 
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
             className="type-menu-title u-balance mt-4 font-serif tracking-tight text-charcoal"
           >
             Το μενού μας.
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
@@ -37,19 +37,19 @@ export default function MenuHeader() {
           >
             Αγνές πρώτες ύλες, ακατέργαστα υλικά και μικρές εποχικές παρεμβάσεις. Το μενού μας διαβάζεται σαν ημερολόγιο της κουζίνας: καφές, brunch και
             πιάτα που υπηρετούν την ενέργεια της ημέρας.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE, delay: 0.32 }}
             className="mt-8"
           >
             <MenuLegendInline />
-          </motion.div>
+          </m.div>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE, delay: 0.15 }}
@@ -64,7 +64,7 @@ export default function MenuHeader() {
               decoding="async"
             />
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </header>
   )

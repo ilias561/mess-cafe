@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
@@ -201,7 +201,7 @@ export default function Hero() {
     <div id="hero" className="scroll-mt-20">
       <section className="hero-mobile-svh relative min-h-screen w-full overflow-hidden">
         {/* ── Full-bleed background video ── */}
-        <motion.div
+        <m.div
           className="absolute inset-0 z-0"
           initial={prefersReducedMotion ? false : { scale: 1.04, opacity: 0.92 }}
           animate={
@@ -263,7 +263,7 @@ export default function Hero() {
               title="M.E.S.S. — Ο χώρος μας"
             />
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ── Legibility scrims (centered composition) ── */}
         <div className="pointer-events-none absolute inset-0 z-[1] bg-black/45" aria-hidden />
@@ -292,13 +292,13 @@ export default function Hero() {
 
         {/* ── Overlaid content — brand near top, headline centered below ── */}
         <div className="relative z-10 flex min-h-screen flex-col items-center px-6 pt-[13vh] pb-[8vh] text-center md:px-12 md:pt-[11vh]">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={loaderReady ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ delay: 0.5, duration: 1.2, ease: EASE }}
             className="flex items-center gap-5"
           >
-            <motion.div
+            <m.div
               animate={prefersReducedMotion ? {} : { y: [0, -8, 0] }}
               transition={prefersReducedMotion ? {} : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
               className="shrink-0"
@@ -311,25 +311,25 @@ export default function Hero() {
                 priority
                 className="hero-text-shadow h-20 w-20 rounded-full object-cover md:h-28 md:w-28 lg:h-[172px] lg:w-[172px]"
               />
-            </motion.div>
+            </m.div>
             <span className="hero-text-shadow font-serif text-[52px] font-medium leading-none tracking-tight text-white md:text-[76px] lg:text-[132px]">
               M.E.S.S.
             </span>
-          </motion.div>
+          </m.div>
 
           <div className="flex w-full flex-1 flex-col items-center justify-end pb-[5vh]">
-          <motion.p
+          <m.p
             {...reveal(700, 1000)}
             className="hero-text-shadow font-sans text-[11px] tracking-[0.2em] text-white/75 uppercase"
           >
             SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
-          </motion.p>
+          </m.p>
 
           <h1 className="hero-headline hero-text-shadow-display mt-4 font-serif tracking-tight text-balance text-white">
             {heroWords.map((word, i) => (
               <Fragment key={`hero-${word}-${i}`}>
                 <span className="inline-block overflow-hidden px-[0.08em] -mx-[0.08em] py-[0.14em] -my-[0.14em] align-baseline">
-                  <motion.span
+                  <m.span
                     className={`inline-block ${word === 'kind' ? 'font-serif italic text-mustard pr-[0.16em]' : ''}`}
                     initial={prefersReducedMotion ? { opacity: 0 } : { y: '100%', opacity: 0, filter: 'blur(10px)' }}
                     animate={
@@ -346,21 +346,21 @@ export default function Hero() {
                     }
                   >
                     {word}
-                  </motion.span>
+                  </m.span>
                 </span>
                 {i < heroWords.length - 1 ? ' ' : ''}
               </Fragment>
             ))}
           </h1>
 
-          <motion.p
+          <m.p
             {...reveal(1900, 1100)}
             className="hero-text-shadow mx-auto mt-10 max-w-[560px] font-sans text-[15px] leading-relaxed text-white/90 md:text-[17px]"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
-          </motion.p>
+          </m.p>
 
-          <motion.div {...reveal(2500, 900)} className="mt-8">
+          <m.div {...reveal(2500, 900)} className="mt-8">
             <Link
               href="/#map"
               className="ui-link hero-text-shadow relative inline-block font-sans text-sm font-medium text-white"
@@ -368,11 +368,11 @@ export default function Hero() {
               <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
               Βρες μας
             </Link>
-          </motion.div>
+          </m.div>
           </div>
 
           {/* Corner label */}
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }}
             animate={loaderReady ? { opacity: 1 } : {}}
             transition={{ delay: 2.8, duration: 0.8, ease: EASE }}
@@ -380,22 +380,22 @@ export default function Hero() {
             aria-hidden
           >
             Ioannina &middot; est. 2025
-          </motion.p>
+          </m.p>
 
           {/* Scroll cue */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={loaderReady ? { opacity: 1 } : {}}
             transition={{ delay: 3.2, duration: 1, ease: EASE }}
             className="pointer-events-none absolute bottom-8 left-1/2 z-[3] -translate-x-1/2 md:bottom-10"
             aria-hidden
           >
-            <motion.span
+            <m.span
               className="block h-9 w-px bg-gradient-to-b from-white/0 via-white/60 to-white/0"
               animate={prefersReducedMotion ? {} : { y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
               transition={prefersReducedMotion ? {} : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
             />
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </div>

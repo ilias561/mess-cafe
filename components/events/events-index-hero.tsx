@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Image from 'next/image'
 
 import aboutSidePhoto from '../../public/images/about-3.jpg'
@@ -53,20 +53,20 @@ export default function EventsIndexHero({
       <section className="border-t border-line/40 bg-bone px-6 py-12 md:px-12 md:py-16">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8">
           <div>
-            <motion.h2
+            <m.h2
               {...fadeUp}
               className="font-serif text-[clamp(26px,3.5vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal"
             >
               Σύντομα κοντά σας.
-            </motion.h2>
-            <motion.p
+            </m.h2>
+            <m.p
               {...fadeUpDelayed(0.06)}
               className="mt-5 max-w-[42ch] font-sans text-[15px] leading-[1.7] text-concrete md:text-[16px]"
             >
               Στήνουμε σιγά σιγά τα επόμενα — workshops, μουσικές βραδιές, παρουσιάσεις, συνεργασίες. Όταν
               κλειδώσουν, θα εμφανιστούν εδώ αυτόματα.
-            </motion.p>
-            <motion.div
+            </m.p>
+            <m.div
               {...fadeUpDelayed(0.1)}
               className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
             >
@@ -82,7 +82,7 @@ export default function EventsIndexHero({
               >
                 Δες πού είμαστε →
               </Link>
-            </motion.div>
+            </m.div>
           </div>
 
           <MaskReveal className="relative mx-auto w-full max-w-[320px]" delay={0.08}>
@@ -109,12 +109,12 @@ export default function EventsIndexHero({
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8">
 
         <div>
-          <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
+          <m.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
             ΠΡΟΓΡΑΜΜΑ
-          </motion.p>
+          </m.p>
 
           {nextEvent && (
-            <motion.div {...fadeUpDelayed(0.02)} className="mt-3">
+            <m.div {...fadeUpDelayed(0.02)} className="mt-3">
               <Link
                 href={`/actions/${nextEvent.slug}`}
                 className="inline-flex items-center gap-2 rounded-full border border-line bg-bone-warm px-3 py-[7px] font-sans text-[11px] tracking-[0.02em] transition-colors hover:border-charcoal/40"
@@ -127,25 +127,25 @@ export default function EventsIndexHero({
                 <span className="text-charcoal">{formatGreekDate(nextEvent.date)}</span>
                 <span className="text-terracotta">→</span>
               </Link>
-            </motion.div>
+            </m.div>
           )}
 
-          <motion.h2
+          <m.h2
             {...fadeUpDelayed(0.04)}
             className="mt-4 max-w-[18ch] font-serif text-[clamp(28px,3.5vw,52px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[20ch]"
           >
             Πρόγραμμα δράσεων.
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             {...fadeUpDelayed(0.07)}
             className="mt-5 max-w-[72ch] font-sans text-[15px] leading-[1.65] text-concrete md:text-[16px]"
           >
             Workshops, βραδιές, συνεργασίες — όσα ετοιμάζουμε και όσα έχουν γίνει.
-          </motion.p>
+          </m.p>
 
           {showChips && (
-            <motion.div {...fadeUpDelayed(0.09)} className="mt-5 flex flex-wrap gap-2">
+            <m.div {...fadeUpDelayed(0.09)} className="mt-5 flex flex-wrap gap-2">
               <button
                 type="button"
                 aria-label="Εμφάνιση όλων των κατηγοριών δράσεων"
@@ -183,17 +183,17 @@ export default function EventsIndexHero({
                   </span>
                 </button>
               ))}
-            </motion.div>
+            </m.div>
           )}
 
-          <motion.div {...fadeUpDelayed(0.11)} className="mt-3">
+          <m.div {...fadeUpDelayed(0.11)} className="mt-3">
             <a
               href="#upcoming"
               className="ui-interactive inline-block rounded-full bg-mustard px-[15px] py-[9px] font-sans text-[11px] uppercase tracking-[0.14em] text-ink-dark hover:bg-amber"
             >
               Δες πρόγραμμα ↓
             </a>
-          </motion.div>
+          </m.div>
         </div>
 
         <MaskReveal className="relative mx-auto w-full max-w-[320px]" delay={0.1}>

@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuItem as MenuItemType, Nutrition } from '@/lib/menu-data'
 
@@ -245,7 +245,7 @@ function NameChip({ name }: { name: string }) {
 
 function CutoutMedia({ item, reduce }: { item: MenuItemType; reduce: boolean | null }) {
   return (
-    <motion.div
+    <m.div
       className="relative flex aspect-square w-full items-center justify-center"
       initial={false}
       whileHover={reduce ? undefined : { y: -6 }}
@@ -263,7 +263,7 @@ function CutoutMedia({ item, reduce }: { item: MenuItemType; reduce: boolean | n
         loading="lazy"
         decoding="async"
       />
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -305,7 +305,7 @@ export function MenuFeatureRow({
   )
 
   return (
-    <motion.article
+    <m.article
       {...itemMotionProps(index)}
       className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-12 lg:gap-16"
     >
@@ -332,7 +332,7 @@ export function MenuFeatureRow({
         )}
       </div>
       {content}
-    </motion.article>
+    </m.article>
   )
 }
 
@@ -351,7 +351,7 @@ export function MenuGridItem({
   const hasMedia = Boolean(item.image || item.video)
 
   return (
-    <motion.article {...itemMotionProps(index)} className="flex flex-col">
+    <m.article {...itemMotionProps(index)} className="flex flex-col">
       {hasCutout ? (
         <div className="relative">
           <CutoutMedia item={item} reduce={reduce} />
@@ -393,7 +393,7 @@ export function MenuGridItem({
           </div>
         )}
       </div>
-    </motion.article>
+    </m.article>
   )
 }
 
@@ -408,7 +408,7 @@ export function MenuListRow({
 }) {
   const { isSignature } = getItemBadges(item)
   return (
-    <motion.article
+    <m.article
       {...itemMotionProps(index)}
       className="relative border-b border-line/40 pb-5 transition-colors hover:bg-bone-warm/60 md:rounded-sm md:px-3 md:-mx-3 md:pb-5 before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-mustard before:opacity-0 before:transition-opacity hover:before:opacity-100"
     >
@@ -426,6 +426,6 @@ export function MenuListRow({
         {item.desc}
       </p>
       {item.benefit && <BenefitNote text={item.benefit} className="mt-2 text-[13px]" />}
-    </motion.article>
+    </m.article>
   )
 }

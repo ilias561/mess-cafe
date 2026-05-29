@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 
 type PreFooterCtaProps = {
@@ -53,7 +53,7 @@ export default function PreFooterCta({
   return (
     <section className={`${s.bg} ${s.text} px-6 py-20 md:px-12 md:py-24`}>
       <div className="mx-auto max-w-[1400px]">
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -61,8 +61,8 @@ export default function PreFooterCta({
           className={`font-sans text-[11px] uppercase tracking-[0.16em] ${s.eyebrow}`}
         >
           {eyebrow}
-        </motion.p>
-        <motion.h2
+        </m.p>
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -70,9 +70,9 @@ export default function PreFooterCta({
           className="type-display u-balance mt-6 max-w-[18ch] font-serif"
         >
           {heading}
-        </motion.h2>
+        </m.h2>
         {body && (
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: '-80px' }}
@@ -80,9 +80,9 @@ export default function PreFooterCta({
             className="mt-6 max-w-[60ch] font-sans text-[16px] leading-[1.7] opacity-80 md:text-[17px]"
           >
             {body}
-          </motion.p>
+          </m.p>
         )}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -103,7 +103,7 @@ export default function PreFooterCta({
               {secondaryLabel}
             </Link>
           )}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

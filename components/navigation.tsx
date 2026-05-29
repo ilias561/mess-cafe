@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { Instagram, Menu, Phone, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -309,7 +309,7 @@ export default function Navigation() {
         Μετάβαση στο περιεχόμενο
       </a>
 
-      <motion.header
+      <m.header
         className={`fixed top-0 right-0 left-0 z-50 transition-[height,background-color,border-color] duration-250 ease-in-out ${navHeight} ${headerClasses}`}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
@@ -363,7 +363,7 @@ export default function Navigation() {
                   >
                     {link.label}
 
-                    <motion.span
+                    <m.span
                       className="absolute -bottom-1 left-0 right-0 h-px origin-left bg-mustard"
                       initial={{ scaleX: 0 }}
                       whileHover={{ scaleX: 1 }}
@@ -371,7 +371,7 @@ export default function Navigation() {
                     />
 
                     {isActive && (
-                      <motion.span
+                      <m.span
                         className="absolute -bottom-1 left-0 right-0 h-px bg-mustard"
                         initial={{ scaleX: 0 }}
                         animate={{ scaleX: 1 }}
@@ -392,7 +392,7 @@ export default function Navigation() {
               <Phone className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
             </a>
 
-            <motion.button
+            <m.button
               ref={menuButtonRef}
               type="button"
               className={`ui-interactive flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:hidden ${
@@ -407,14 +407,14 @@ export default function Navigation() {
                 ? <X className="h-5 w-5" strokeWidth={1.5} aria-hidden />
                 : <Menu className="h-5 w-5" strokeWidth={1.5} aria-hidden />
               }
-            </motion.button>
+            </m.button>
           </div>
         </div>
-      </motion.header>
+      </m.header>
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <m.div
             className="fixed inset-0 z-[70] lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -428,7 +428,7 @@ export default function Navigation() {
               className="absolute inset-0 bg-black/45 backdrop-blur-md"
               onClick={() => setMenuOpen(false)}
             />
-            <motion.div
+            <m.div
               id={MOBILE_MENU_ID}
               ref={drawerRef}
               role="dialog"
@@ -548,8 +548,8 @@ export default function Navigation() {
                   M.E.S.S. CAFÉ · IOANNINA · #KEEPRISING
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

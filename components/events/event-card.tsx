@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
 import { formatGreekDate } from '@/lib/format-date'
@@ -14,7 +14,7 @@ type EventCardProps = {
 
 export default function EventCard({ event, dimmed = false }: EventCardProps) {
   return (
-    <motion.article
+    <m.article
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -51,6 +51,6 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
           </div>
         </div>
       </Link>
-    </motion.article>
+    </m.article>
   )
 }

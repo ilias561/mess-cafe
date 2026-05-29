@@ -1,7 +1,7 @@
 'use client'
 
 import { type ReactNode } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { duration, ease, VIEWPORT_ONCE } from '@/lib/motion'
 
 type MaskRevealProps = {
@@ -17,7 +17,7 @@ export default function MaskReveal({ children, className, delay = 0 }: MaskRevea
   }
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ clipPath: 'inset(0 100% 0 0)' }}
       whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
@@ -25,6 +25,6 @@ export default function MaskReveal({ children, className, delay = 0 }: MaskRevea
       transition={{ duration: duration.slow, ease: ease.out, delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }

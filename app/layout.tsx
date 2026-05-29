@@ -4,12 +4,12 @@ import CloudflareAnalytics from '@/components/analytics/CloudflareAnalytics'
 import { PHONE_NUMBER } from '@/lib/constants'
 import { absoluteUrl, getSiteUrl } from '@/lib/site-url'
 import AnchorScroll from '@/components/anchor-scroll'
-import NewsletterPopup from '@/components/newsletter-popup'
 import PageLoader from '@/components/page-loader'
-import ReviewOverlay from '@/components/review-overlay'
+import DeferredOverlays from '@/components/deferred-overlays'
 import RouteScrollTop from '@/components/route-scroll-top'
 import SmoothScroll from '@/components/smooth-scroll'
 import WhatsAppFloat from '@/components/whatsapp-float'
+import MotionProvider from '@/components/motion-provider'
 import './globals.css'
 
 /** Fraunces has no Google Fonts Greek subset — Greek serif falls back via adjustFontFallback. */
@@ -128,19 +128,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="el" className={`${fraunces.variable} ${inter.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://static.cloudflareinsights.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+      </head>
       <body className="bg-forest font-sans antialiased" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <PageLoader />
-        <SmoothScroll />
-        <RouteScrollTop />
-        <AnchorScroll />
-        <WhatsAppFloat />
-        <NewsletterPopup />
-        {children}
-        <ReviewOverlay />
+        <MotionProvider>
+          <PageLoader />
+          <SmoothScroll />
+          <RouteScrollTop />
+          <AnchorScroll />
+          <WhatsAppFloat />
+          {children}
+          <DeferredOverlays />
+        </MotionProvider>
         <CloudflareAnalytics />
       </body>
     </html>

@@ -1,7 +1,7 @@
 'use client'
 
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'
-import { motion, useReducedMotion, type HTMLMotionProps } from 'framer-motion'
+import { m, useReducedMotion, type HTMLMotionProps } from 'framer-motion'
 import {
   directionalReveal,
   revealTransition,
@@ -30,9 +30,9 @@ function RevealItem({ children, direction = 'up', ...rest }: RevealItemProps) {
   const reduce = useReducedMotion()
   if (reduce) return <div {...(rest as ComponentPropsWithoutRef<'div'>)}>{children as ReactNode}</div>
   return (
-    <motion.div variants={directionalReveal[direction]} transition={revealTransition} {...rest}>
+    <m.div variants={directionalReveal[direction]} transition={revealTransition} {...rest}>
       {children as ReactNode}
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -45,7 +45,7 @@ const RevealRoot = forwardRef<HTMLDivElement, RevealProps>(function Reveal(
   const parentVariants = asGroup ? revealGroupVariants(gap, delay) : directionalReveal[direction]
   const transition = asGroup ? undefined : { ...revealTransition, delay }
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial="hidden"
       whileInView="visible"
@@ -55,7 +55,7 @@ const RevealRoot = forwardRef<HTMLDivElement, RevealProps>(function Reveal(
       {...rest}
     >
       {children as ReactNode}
-    </motion.div>
+    </m.div>
   )
 })
 

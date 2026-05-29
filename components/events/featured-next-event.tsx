@@ -2,7 +2,7 @@
 
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { fadeUp, fadeUpDelayed } from '@/lib/motion'
 import { formatGreekDate } from '@/lib/format-date'
 import type { Event } from '@/lib/events/events'
@@ -35,28 +35,28 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
 
           {/* Right: text block */}
           <div>
-            <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
+            <m.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
               ΕΠΟΜΕΝΗ ΔΡΑΣΗ · {formatGreekDate(event.date)}
-            </motion.p>
-            <motion.p
+            </m.p>
+            <m.p
               {...fadeUpDelayed(0.06)}
               className="mt-2 font-sans text-[11px] uppercase tracking-[0.16em] text-terracotta"
             >
               {event.categoryLabel.toUpperCase()}
-            </motion.p>
-            <motion.h2
+            </m.p>
+            <m.h2
               {...fadeUpDelayed(0.1)}
               className="mt-5 font-serif text-[clamp(28px,4vw,40px)] leading-[1.05] tracking-[-0.02em] text-charcoal"
             >
               {event.title}
-            </motion.h2>
-            <motion.p
+            </m.h2>
+            <m.p
               {...fadeUpDelayed(0.16)}
               className="mt-5 max-w-[54ch] font-sans text-[13px] leading-[1.65] text-concrete md:text-[14px]"
             >
               {event.description}
-            </motion.p>
-            <motion.div {...fadeUpDelayed(0.22)} className="mt-8 flex flex-wrap gap-3">
+            </m.p>
+            <m.div {...fadeUpDelayed(0.22)} className="mt-8 flex flex-wrap gap-3">
               <Link
                 href={`/actions/${event.slug}`}
                 className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-ink-dark hover:bg-amber hover:shadow-md"
@@ -71,7 +71,7 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
               >
                 WHATSAPP
               </a>
-            </motion.div>
+            </m.div>
           </div>
 
         </div>

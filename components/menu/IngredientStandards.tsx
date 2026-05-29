@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import { ingredientStandards } from '@/lib/ingredient-standards'
 
@@ -8,7 +8,7 @@ export default function IngredientStandards() {
   return (
     <section className="bg-bone px-6 py-20 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
@@ -23,11 +23,11 @@ export default function IngredientStandards() {
             Κάθε πιάτο ξεκινά από αυτό που βάζουμε μέσα. Επιλέγουμε συστατικά και μεθόδους που είναι καλύτερα από τις
             συνηθισμένες εναλλακτικές.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-9 sm:grid-cols-3 md:mt-14 lg:grid-cols-6">
           {ingredientStandards.map((it, i) => (
-            <motion.article
+            <m.article
               key={it.slug}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -51,7 +51,7 @@ export default function IngredientStandards() {
                 {it.name}
               </h3>
               <p className="mt-1 font-sans text-[12px] leading-relaxed text-concrete">{it.better}</p>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>

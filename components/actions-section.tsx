@@ -5,7 +5,7 @@ import { FadeImage } from '@/components/fade-image'
 import KeepRisingWordmark from '@/components/keep-rising-wordmark'
 import Link from 'next/link'
 import {
-  motion,
+  m,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -42,7 +42,7 @@ function CanopyLight({ scrollYProgress }: { scrollYProgress: MotionValue<number>
 
   if (reduce) return null
   return (
-    <motion.div
+    <m.div
       aria-hidden
       className="pointer-events-none absolute inset-0 mix-blend-screen"
       style={{ x: tx, y: ty, opacity }}
@@ -55,7 +55,7 @@ function CanopyLight({ scrollYProgress }: { scrollYProgress: MotionValue<number>
           filter: 'blur(48px)',
         }}
       />
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -245,7 +245,7 @@ function ActionImage({
   return (
     <figure ref={ref} className="group/image relative">
       <div className="relative aspect-[3/2] w-full overflow-hidden">
-        <motion.div
+        <m.div
           className="absolute inset-0 will-change-transform transition-[transform,filter] duration-500 ease-out group-hover/spread:scale-[1.04] group-hover/spread:brightness-[1.06] group-hover/spread:saturate-[1.08]"
           style={reduce ? undefined : { scale, y }}
         >
@@ -258,7 +258,7 @@ function ActionImage({
             className="object-cover"
             style={{ objectPosition }}
           />
-        </motion.div>
+        </m.div>
         <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover/spread:opacity-100">
           <CornerTicks />
         </div>

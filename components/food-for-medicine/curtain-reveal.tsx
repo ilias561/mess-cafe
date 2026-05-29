@@ -1,7 +1,7 @@
 'use client'
 
 import { startTransition, useEffect, useState } from 'react'
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
+import { m, useReducedMotion, AnimatePresence } from 'framer-motion'
 
 const SESSION_KEY = 'ffm-curtain-shown'
 
@@ -21,7 +21,7 @@ export default function CurtainReveal() {
   return (
     <AnimatePresence>
       {show ? (
-        <motion.div
+        <m.div
           key="curtain"
           aria-hidden
           className="pointer-events-none fixed inset-0 z-[100]"
@@ -29,7 +29,7 @@ export default function CurtainReveal() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
         >
-          <motion.div
+          <m.div
             className="absolute inset-y-0 left-0 w-1/2"
             style={{
               background:
@@ -41,7 +41,7 @@ export default function CurtainReveal() {
             transition={{ delay: 0.35, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             onAnimationComplete={() => setShow(false)}
           />
-          <motion.div
+          <m.div
             className="absolute inset-y-0 right-0 w-1/2"
             style={{
               background:
@@ -52,15 +52,15 @@ export default function CurtainReveal() {
             animate={{ x: '100%' }}
             transition={{ delay: 0.35, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
           />
-          <motion.div
+          <m.div
             className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: [0, 1, 1, 0], scale: [0.6, 1, 1, 0.8] }}
             transition={{ duration: 0.6, times: [0, 0.3, 0.7, 1], ease: 'easeOut' }}
           >
             <span className="block h-2 w-2 rounded-full bg-mustard shadow-[0_0_24px_rgba(232,181,71,0.8)]" />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       ) : null}
     </AnimatePresence>
   )

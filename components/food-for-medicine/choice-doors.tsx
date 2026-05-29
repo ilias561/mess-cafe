@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { scrollToId } from '@/lib/lenis'
 import {
   AnaglyphHeading,
@@ -78,7 +78,7 @@ export default function ChoiceDoors() {
                 className="ui-focus-ring ui-press group relative block aspect-[3/4] md:aspect-[4/5]"
                 style={{ perspective: '1200px' }}
               >
-                <motion.div
+                <m.div
                   className="relative h-full w-full overflow-hidden"
                   style={{
                     background:
@@ -120,7 +120,7 @@ export default function ChoiceDoors() {
                       {door.cta}
                     </span>
                   </div>
-                </motion.div>
+                </m.div>
               </a>
             )
           })}

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import type { ElementType } from 'react'
 import { VIEWPORT_ONCE, ease } from '@/lib/motion'
 
@@ -39,7 +39,7 @@ export default function SplitText({
 
   return (
     <Tag className={className}>
-      <motion.span
+      <m.span
         initial="hidden"
         whileInView="visible"
         viewport={VIEWPORT_ONCE}
@@ -49,17 +49,17 @@ export default function SplitText({
       >
         {words.map((word, index) => (
           <span key={`${word}-${index}`} className="inline-block overflow-hidden align-bottom">
-            <motion.span
+            <m.span
               variants={wordVariants}
               transition={{ duration: 0.7, ease: ease.outStrong }}
               className="inline-block"
             >
               {word}
               {index < words.length - 1 ? '\u00A0' : ''}
-            </motion.span>
+            </m.span>
           </span>
         ))}
-      </motion.span>
+      </m.span>
     </Tag>
   )
 }

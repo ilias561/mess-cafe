@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, type ReactNode } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
 export type ClimateParticleVariant = 'mustard' | 'dust' | 'shimmer' | 'none'
 
@@ -91,18 +91,18 @@ export function ClimateShell({
       }
 
   return (
-    <motion.section
+    <m.section
       ref={ref}
       id={id}
       className={`scroll-mt-28 relative ${className ?? ''}`}
       style={reduce ? staticBg : { background: bg }}
     >
-      <motion.div
+      <m.div
         className={`relative isolate border-t border-line/30${contentClipping ? ' overflow-hidden' : ''}`}
         style={chrome ? chromeStyle : reduce ? staticBg : { background: bg }}
       >
         {chrome && (
-          <motion.div
+          <m.div
             aria-hidden
             className={`pointer-events-none absolute inset-0 z-30 rounded-[inherit] ring-1 ${ringClassName}`}
             style={reduce ? { opacity: 0 } : { opacity: ringOpacity }}
@@ -110,7 +110,7 @@ export function ClimateShell({
         )}
 
         {vignette && (
-          <motion.div
+          <m.div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-[5] rounded-[inherit]"
             style={
@@ -125,7 +125,7 @@ export function ClimateShell({
         )}
 
         {!reduce && particles !== 'none' && (
-          <motion.div
+          <m.div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-[6]"
             style={{ opacity: particleOpacity }}
@@ -133,12 +133,12 @@ export function ClimateShell({
             {Array.from({ length: particleCount }).map((_, i) => (
               <FloatingParticle key={i} index={i} variant={particles} />
             ))}
-          </motion.div>
+          </m.div>
         )}
 
         <div className="relative z-20 px-6 py-20 md:px-12 md:py-24">{children}</div>
-      </motion.div>
-    </motion.section>
+      </m.div>
+    </m.section>
   )
 }
 
@@ -157,7 +157,7 @@ function FloatingParticle({
   if (variant === 'dust') {
     const duration = 14 + (index % 6)
     return (
-      <motion.span
+      <m.span
         className="absolute block rounded-full bg-bone/40"
         style={{ left, top: startTop, width: size, height: size }}
         animate={{
@@ -178,7 +178,7 @@ function FloatingParticle({
   if (variant === 'shimmer') {
     const duration = 10 + (index % 6)
     return (
-      <motion.span
+      <m.span
         className="absolute block rounded-full bg-white/30"
         style={{ left, top: startTop, width: size, height: size }}
         animate={{
@@ -198,7 +198,7 @@ function FloatingParticle({
 
   const duration = 10 + (index % 6)
   return (
-    <motion.span
+    <m.span
       className="absolute block rounded-full bg-mustard/60"
       style={{ left, top: startTop, width: size, height: size }}
       animate={{

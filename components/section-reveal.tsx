@@ -1,7 +1,7 @@
 'use client'
 
 import { type ReactNode } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { reveal, revealTransition, VIEWPORT_ONCE } from '@/lib/motion'
 
 type SectionRevealProps = {
@@ -14,7 +14,7 @@ export default function SectionReveal({ children, className, delay = 0 }: Sectio
   const prefersReducedMotion = useReducedMotion()
   if (prefersReducedMotion) return <div className={className}>{children}</div>
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="visible"
       viewport={VIEWPORT_ONCE}
@@ -23,6 +23,6 @@ export default function SectionReveal({ children, className, delay = 0 }: Sectio
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }

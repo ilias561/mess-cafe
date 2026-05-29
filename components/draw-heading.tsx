@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { ease } from '@/lib/motion'
 
@@ -16,7 +16,7 @@ export default function DrawHeading({ children, className }: DrawHeadingProps) {
     <div className={className}>
       {children}
       <svg className="mt-2 h-3 w-full overflow-visible" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden>
-        <motion.path
+        <m.path
           d="M1 5.5 H99"
           stroke="rgb(226 160 46 / 0.7)"
           strokeWidth="1.5"

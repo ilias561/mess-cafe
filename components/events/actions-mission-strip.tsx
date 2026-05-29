@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import {
   animate,
-  motion,
+  m,
   useInView,
   useMotionValue,
   useReducedMotion,
@@ -208,7 +208,7 @@ function FoodIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
     >
       {/* steam */}
       {steamPaths.map((d, i) => (
-        <motion.path
+        <m.path
           key={d}
           d={d}
           initial={{ pathLength: 0, opacity: 0 }}
@@ -256,7 +256,7 @@ function SolidarityIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
       {/* connecting line at meeting point */}
       <path d="M13 14 L19 14" opacity="0.6" />
       {/* heart at meeting point — heartbeat */}
-      <motion.path
+      <m.path
         d="M16 12 C14.7 10 12 10.8 12 13 C12 15 14 16.4 16 18 C18 16.4 20 15 20 13 C20 10.8 17.3 10 16 12 Z"
         fill="currentColor"
         stroke="none"
@@ -284,7 +284,7 @@ function WellnessIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
       strokeLinejoin="round"
       aria-hidden
     >
-      <motion.path
+      <m.path
         d="M16 24 C16 24 8 18 8 12 C8 9 10 7 13 7 C14.5 7 16 8 16 10 C16 8 17.5 7 19 7 C22 7 24 9 24 12 C24 18 16 24 16 24 Z"
         fill="currentColor"
         stroke="none"
@@ -325,7 +325,7 @@ function CommunityIcon({ animateIcon, svgClassName = 'h-7 w-7' }: IconProps) {
       <path d="M9 24 L23 24" opacity="0.45" strokeWidth="1.2" />
       {/* nodes — pulse in sequence */}
       {nodes.map((n, i) => (
-        <motion.circle
+        <m.circle
           key={`${n.cx}-${n.cy}`}
           cx={n.cx}
           cy={n.cy}
@@ -450,7 +450,7 @@ export default function ActionsMissionStrip({
       )}
       {/* ─── ambient decorative layer ─── */}
       {/* botanical, top-left */}
-      <motion.div
+      <m.div
         className="pointer-events-none absolute -left-2 -top-2 text-forest"
         animate={
           animateAmbient ? { opacity: [0.1, 0.18, 0.1] } : { opacity: 0.14 }
@@ -463,9 +463,9 @@ export default function ActionsMissionStrip({
         aria-hidden
       >
         <BotanicalCorner />
-      </motion.div>
+      </m.div>
       {/* botanical, bottom-right (mirrored) */}
-      <motion.div
+      <m.div
         className="pointer-events-none absolute -bottom-2 -right-2 text-forest"
         style={{ transform: 'scale(-1, -1)' }}
         animate={
@@ -479,7 +479,7 @@ export default function ActionsMissionStrip({
         aria-hidden
       >
         <BotanicalCorner />
-      </motion.div>
+      </m.div>
 
       {/* top-center rule with pulse dot */}
       <div
@@ -490,7 +490,7 @@ export default function ActionsMissionStrip({
         aria-hidden
       >
         <span className="block h-px w-9 bg-forest/40" />
-        <motion.span
+        <m.span
           className="block h-[5px] w-[5px] rounded-full bg-olive"
           animate={
             animateAmbient
@@ -511,7 +511,7 @@ export default function ActionsMissionStrip({
         {/* header — hidden in lead variant since the hero header covers it */}
         {!isLead && (
           <div className="text-center">
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={motionViewport}
@@ -519,7 +519,7 @@ export default function ActionsMissionStrip({
               className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive"
             >
               ΠΩΣ ΒΟΗΘΑΜΕ · <span className="text-mustard">#KEEPRISING</span>
-            </motion.p>
+            </m.p>
 
             <h2
               className="mt-5 font-serif text-[clamp(32px,4.5vw,52px)] leading-[1.05] tracking-tight text-charcoal"
@@ -527,7 +527,7 @@ export default function ActionsMissionStrip({
               {headlineWords.map((word, i) => (
                 <Fragment key={`${word}-${i}`}>
                   <span className="inline-block overflow-hidden align-baseline">
-                    <motion.span
+                    <m.span
                       className="inline-block"
                       initial={{ y: '100%' }}
                       whileInView={{ y: 0 }}
@@ -539,14 +539,14 @@ export default function ActionsMissionStrip({
                       }}
                     >
                       {word}
-                    </motion.span>
+                    </m.span>
                   </span>
                   {i < headlineWords.length - 1 ? ' ' : ''}
                 </Fragment>
               ))}
             </h2>
 
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={motionViewport}
@@ -558,7 +558,7 @@ export default function ActionsMissionStrip({
               className="mx-auto mt-5 max-w-[44ch] font-sans text-[15px] leading-relaxed text-concrete"
             >
               Καθαρό φαγητό. Αλληλεγγύη. Κοινότητα. Ευεξία. Όχι ως slogans — ως πράξεις.
-            </motion.p>
+            </m.p>
           </div>
         )}
 
@@ -570,7 +570,7 @@ export default function ActionsMissionStrip({
           )}
         >
           {pillars.map((pillar, index) => (
-            <motion.div
+            <m.div
               key={pillar.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -619,7 +619,7 @@ export default function ActionsMissionStrip({
                     )} />
                   </div>
                   {/* icon overlapping photo bottom edge */}
-                  <motion.div
+                  <m.div
                     className={cn(
                       'absolute -bottom-5 left-6 flex h-14 w-14 items-center justify-center rounded-full border-2 border-bone-warm shadow-sm',
                       iconRing[pillar.accent],
@@ -634,7 +634,7 @@ export default function ActionsMissionStrip({
                     }
                   >
                     <PillarIcon id={pillar.id} animateIcon={animateAmbient} compact={false} />
-                  </motion.div>
+                  </m.div>
                 </div>
               )}
 
@@ -663,7 +663,7 @@ export default function ActionsMissionStrip({
                     )}
                     aria-hidden
                   />
-                  <motion.div
+                  <m.div
                     className={cn(
                       'flex shrink-0 items-center justify-center rounded-full h-16 w-16',
                       iconRing[pillar.accent],
@@ -678,7 +678,7 @@ export default function ActionsMissionStrip({
                     }
                   >
                     <PillarIcon id={pillar.id} animateIcon={animateAmbient} compact={false} />
-                  </motion.div>
+                  </m.div>
                 </>
               )}
 
@@ -704,7 +704,7 @@ export default function ActionsMissionStrip({
                   {pillar.body}
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
@@ -718,7 +718,7 @@ export default function ActionsMissionStrip({
             aria-hidden
           />
           <div className="grid grid-cols-3 gap-4 text-center md:gap-6">
-            <motion.div
+            <m.div
               className="flex flex-col items-center"
               animate={
                 animateAmbient ? { scale: [1, 1.03, 1] } : { scale: 1 }
@@ -735,8 +735,8 @@ export default function ActionsMissionStrip({
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
                 από το
               </span>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               className="flex flex-col items-center"
               animate={
                 animateAmbient ? { scale: [1, 1.03, 1] } : { scale: 1 }
@@ -753,8 +753,8 @@ export default function ActionsMissionStrip({
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
                 δράσεις
               </span>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               className="flex flex-col items-center"
               animate={
                 animateAmbient ? { scale: [1, 1.03, 1] } : { scale: 1 }
@@ -771,7 +771,7 @@ export default function ActionsMissionStrip({
               <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
                 παιδιά υποστηρίξαμε
               </span>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

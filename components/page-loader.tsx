@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import {
   CURTAIN_SLIDE_MS,
@@ -61,7 +61,7 @@ export default function PageLoader() {
   return (
     <AnimatePresence>
       {visible ? (
-        <motion.div
+        <m.div
           key="page-loader"
           className="fixed inset-0 z-[200] overflow-hidden bg-forest"
           initial={{ y: 0 }}
@@ -72,7 +72,7 @@ export default function PageLoader() {
             <span className="inline-flex overflow-hidden font-serif text-[clamp(30px,5vw,44px)] tracking-tight text-charcoal">
               {letters.map((letter, index) => (
                 <span key={`${letter}-${index}`} className="inline-block overflow-hidden">
-                  <motion.span
+                  <m.span
                     className="inline-block"
                     initial={{ y: '100%' }}
                     animate={{ y: 0 }}
@@ -83,11 +83,11 @@ export default function PageLoader() {
                     }}
                   >
                     {letter}
-                  </motion.span>
+                  </m.span>
                 </span>
               ))}
             </span>
-            <motion.span
+            <m.span
               className="mt-2 block h-px w-full origin-left bg-charcoal"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -97,7 +97,7 @@ export default function PageLoader() {
                 delay: (((letters.length - 1) * WORDMARK_STAGGER_MS) + WORDMARK_LETTER_DURATION_MS) / 1000,
               }}
             />
-            <motion.span
+            <m.span
               className="pointer-events-none absolute inset-0"
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
@@ -108,7 +108,7 @@ export default function PageLoader() {
               }}
             />
           </div>
-        </motion.div>
+        </m.div>
       ) : null}
     </AnimatePresence>
   )

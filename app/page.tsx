@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 import Navigation from '@/components/navigation'
 import { buildPageMetadata } from '@/lib/metadata'
 import Hero from '@/components/hero'
@@ -6,10 +7,11 @@ import HeroCaption from '@/components/hero-caption'
 import MessAcronym from '@/components/mess-acronym'
 import PhilosophySection from '@/components/philosophy-section'
 import ActionsSection from '@/components/actions-section'
-import GalleryMenuPreview from '@/components/gallery-menu-preview'
-import ReviewsSection from '@/components/reviews-section'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
+
+const GalleryMenuPreview = dynamic(() => import('@/components/gallery-menu-preview'))
+const ReviewsSection = dynamic(() => import('@/components/reviews-section'))
 import { getEventBySlug, type Event } from '@/lib/events/events'
 import { getSettings } from '@/lib/settings'
 

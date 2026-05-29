@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { Reveal } from '@/components/reveal'
 import ScrollDrift from '@/components/scroll-drift'
 import MaskRevealBlock from '@/components/mask-reveal-block'
@@ -110,7 +110,7 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
   return (
     <figure className="relative">
       <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden border border-ink-dark/30">
-        <motion.div
+        <m.div
           className="absolute inset-0"
           animate={reduce ? undefined : { scale: [1, 1.04, 1] }}
           transition={
@@ -128,7 +128,7 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
               className="object-cover"
             />
           ) : null}
-        </motion.div>
+        </m.div>
         <CornerTicks />
         <div
           aria-hidden

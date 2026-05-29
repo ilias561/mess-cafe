@@ -1,7 +1,7 @@
 'use client'
 
 import type { ElementType, ReactNode } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { VIEWPORT_ONCE, ease } from '@/lib/motion'
 
 function cn(...parts: (string | false | undefined)[]) {
@@ -91,7 +91,7 @@ export function HairlineRule({
         : 'origin-left'
 
   return (
-    <motion.span
+    <m.span
       aria-hidden
       className={cn('block h-px bg-mustard/70', originClass, className)}
       initial={reduce ? false : { scaleX: 0 }}
@@ -155,7 +155,7 @@ export function ReleaseDivider({ label }: { label: string }) {
   return (
     <div className="relative mt-20 mb-10 md:mt-28 md:mb-14" aria-hidden>
       <div className="flex items-center gap-6">
-        <motion.span
+        <m.span
           className="block h-px origin-left bg-mustard/70"
           style={{ flex: 1 }}
           initial={reduce ? false : { scaleX: 0 }}
@@ -163,7 +163,7 @@ export function ReleaseDivider({ label }: { label: string }) {
           viewport={VIEWPORT_ONCE}
           transition={reduce ? undefined : { duration: 1.2, ease: ease.outStrong }}
         />
-        <motion.span
+        <m.span
           className="font-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/55"
           initial={reduce ? false : { opacity: 0, y: 8 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -173,8 +173,8 @@ export function ReleaseDivider({ label }: { label: string }) {
           }
         >
           {label}
-        </motion.span>
-        <motion.span
+        </m.span>
+        <m.span
           className="block h-px origin-right bg-mustard/70"
           style={{ flex: 1 }}
           initial={reduce ? false : { scaleX: 0 }}

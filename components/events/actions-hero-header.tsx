@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useId, useRef, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import {
-  motion,
+  m,
   useMotionValue,
   useReducedMotion,
   useSpring,
@@ -129,7 +129,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
       />
 
       <div className="relative mx-auto max-w-[1200px]">
-        <motion.span
+        <m.span
           className="pointer-events-none absolute top-1 right-4 z-10 hidden origin-top-right select-none md:inline-flex"
           aria-hidden
           animate={
@@ -146,30 +146,30 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
           <span className="inline-flex -rotate-[8deg] items-center rounded-full bg-mustard px-2.5 py-1 font-sans text-[10px] font-medium uppercase tracking-wider text-ink-dark">
             ΑΠΟ 2025
           </span>
-        </motion.span>
+        </m.span>
 
         <div className="max-w-[40rem] text-center md:text-left">
-          <motion.p
+          <m.p
             {...fadeUp}
             className="mb-3 font-sans text-[11px] uppercase tracking-[0.16em] text-olive"
           >
             2025
-          </motion.p>
-          <motion.p
+          </m.p>
+          <m.p
             {...fadeUpDelayed(0.02)}
             className="font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal/50"
           >
             <span className="inline-block -rotate-[1.5deg] rounded-[2px] border border-dashed border-concrete/40 px-2.5 py-1">
               ΚΟΙΝΟΤΗΤΑ &mdash; ΑΛΛΗΛΕΓΓΥΗ &mdash; ΠΟΛΙΤΙΣΜΟΣ &middot; IOANNINA
             </span>
-          </motion.p>
+          </m.p>
 
-          <motion.div {...fadeUpDelayed(0.04)} className="mt-4">
-            <motion.div
+          <m.div {...fadeUpDelayed(0.04)} className="mt-4">
+            <m.div
               className="will-change-transform"
               style={{ perspective: '800px', transformStyle: 'preserve-3d' }}
             >
-              <motion.div
+              <m.div
                 style={
                   pointerLeanEnabled
                     ? { rotateX, rotateY, transformStyle: 'preserve-3d' }
@@ -185,7 +185,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                         <Fragment key={`${word}-${i}`}>
                           <span className="inline-block overflow-hidden align-baseline">
                             <span className="relative inline-block">
-                              <motion.span
+                              <m.span
                                 className="inline-block"
                                 initial={
                                   prefersReducedMotion
@@ -200,14 +200,14 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                                 }}
                               >
                                 {body}
-                              </motion.span>
+                              </m.span>
                               <svg
                                 className="pointer-events-none absolute -bottom-1.5 left-0 h-[18px] w-full overflow-visible"
                                 viewBox="0 0 130 18"
                                 preserveAspectRatio="none"
                                 aria-hidden
                               >
-                                <motion.path
+                                <m.path
                                   d={SCRIBBLE_PATH}
                                   fill="none"
                                   stroke="var(--color-forest)"
@@ -233,7 +233,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                             </span>
                           </span>
                           <span className="inline-block overflow-hidden align-baseline">
-                            <motion.span
+                            <m.span
                               className="inline-block"
                               initial={
                                 prefersReducedMotion
@@ -248,7 +248,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                               }}
                             >
                               .
-                            </motion.span>
+                            </m.span>
                           </span>
                         </Fragment>
                       )
@@ -257,7 +257,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                     return (
                       <Fragment key={`${word}-${i}`}>
                         <span className="inline-block overflow-hidden align-baseline">
-                          <motion.span
+                          <m.span
                             className="inline-block"
                             initial={
                               prefersReducedMotion
@@ -272,18 +272,18 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                             }}
                           >
                             {word}
-                          </motion.span>
+                          </m.span>
                         </span>
                         {i < heroWords.length - 1 ? ' ' : ''}
                       </Fragment>
                     )
                   })}
                 </h1>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+              </m.div>
+            </m.div>
+          </m.div>
 
-          <motion.div {...fadeUpDelayed(0.08)} className="mt-5">
+          <m.div {...fadeUpDelayed(0.08)} className="mt-5">
             {prefersReducedMotion ? (
               <div className="space-y-2 text-center md:text-left">
                 <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-olive/70">
@@ -315,11 +315,11 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
               </div>
               </div>
             )}
-          </motion.div>
+          </m.div>
 
           {nextEvent && (
-            <motion.div {...fadeUpDelayed(0.11)} className="mt-5">
-              <motion.div
+            <m.div {...fadeUpDelayed(0.11)} className="mt-5">
+              <m.div
                 animate={
                   prefersReducedMotion
                     ? undefined
@@ -343,8 +343,8 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                   <span className="text-charcoal">{formatGreekDate(nextEvent.date)}</span>
                   <span className="text-terracotta">→</span>
                 </Link>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
         </div>
       </div>

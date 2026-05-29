@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import SplitText from '@/components/split-text'
 import { VIEWPORT_ONCE, blurIn, slowReveal } from '@/lib/motion'
 
@@ -20,7 +20,7 @@ export default function HeroCaption() {
             υγιεινό lifestyle, κοινότητα, ευεξία.
           </p>
         ) : (
-          <motion.p
+          <m.p
             className="mt-1 font-serif text-[14px] italic leading-relaxed text-charcoal/70"
             initial="hidden"
             whileInView="visible"
@@ -29,7 +29,7 @@ export default function HeroCaption() {
             transition={slowReveal}
           >
             υγιεινό lifestyle, κοινότητα, ευεξία.
-          </motion.p>
+          </m.p>
         )}
       </div>
     </div>

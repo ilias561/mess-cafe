@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuCategory as MenuCategoryType, MenuItem as MenuItemType, MenuLayout } from '@/lib/menu-data'
 import { extras, getCategoryLayout } from '@/lib/menu-data'
@@ -53,7 +53,7 @@ function resolveLayout(category: MenuCategoryType): MenuLayout {
 
 function CategoryHeader({ category, index }: { category: MenuCategoryType; index: number }) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
@@ -77,7 +77,7 @@ function CategoryHeader({ category, index }: { category: MenuCategoryType; index
           {editorialIntro[category.id]}
         </p>
       )}
-    </motion.div>
+    </m.div>
   )
 }
 

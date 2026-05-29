@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, type ReactNode } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import AmbientVideo from '@/components/ambient-video'
 import { Reveal } from '@/components/reveal'
@@ -117,7 +117,7 @@ function Centerpiece() {
     <div ref={ref} className="relative isolate overflow-x-clip py-6 md:py-12">
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12">
 
-        <motion.div
+        <m.div
           className="md:col-start-2 md:col-span-5"
           style={reduce ? undefined : { y: videoY }}
           initial={reduce ? false : { opacity: 0, x: -60, scale: 0.96 }}
@@ -127,7 +127,7 @@ function Centerpiece() {
         >
           <figure className="relative">
             <div className="relative aspect-[9/16] w-full max-w-[380px] overflow-hidden">
-              <motion.div
+              <m.div
                 className="absolute inset-0"
                 animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
                 transition={
@@ -142,15 +142,15 @@ function Centerpiece() {
                   className="absolute inset-0 h-full w-full object-cover"
                   ariaLabel="Βίντεο από τον χώρο του M.E.S.S."
                 />
-              </motion.div>
+              </m.div>
 
               <span aria-hidden className="pointer-events-none absolute inset-0 border border-mustard/40" />
               <CornerTicks />
             </div>
           </figure>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           className="md:col-start-8 md:col-span-4"
           style={reduce ? undefined : { y: textY }}
           initial={reduce ? false : { opacity: 0, x: 40 }}
@@ -174,7 +174,7 @@ function Centerpiece() {
             Μικρές στιγμές από την καθημερινότητα στο M.E.S.S. — φως, υλικά, άνθρωποι.
           </p>
 
-          <motion.div
+          <m.div
             className="mt-10 flex items-center gap-3"
             animate={reduce ? undefined : { x: [0, 6, 0] }}
             transition={
@@ -185,8 +185,8 @@ function Centerpiece() {
           >
             <span aria-hidden className="block h-px w-8 bg-mustard/60" />
             <MicroEyebrow>M.E.S.S. · Ιωάννινα</MicroEyebrow>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </div>
   )
@@ -308,7 +308,7 @@ function KenBurnsTile({
   return (
     <figure ref={ref} className="group">
       <div className={`relative w-full overflow-hidden ${aspect}`}>
-        <motion.div
+        <m.div
           className="absolute inset-0 will-change-transform"
           style={reduce ? undefined : { scale, y }}
         >
@@ -321,7 +321,7 @@ function KenBurnsTile({
             sizes={sizes}
             className="ui-img-hover"
           />
-        </motion.div>
+        </m.div>
       </div>
     </figure>
   )

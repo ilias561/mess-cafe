@@ -1,7 +1,7 @@
 'use client'
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
@@ -128,7 +128,7 @@ export default function NewsletterPopup() {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
           animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
@@ -198,7 +198,7 @@ export default function NewsletterPopup() {
               </form>
             )}
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

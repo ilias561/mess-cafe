@@ -1,6 +1,6 @@
 'use client'
 
-import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
+import { animate, m, useInView, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 
 type CountUpProps = {
@@ -32,5 +32,5 @@ export default function CountUp({ to, suffix = '', duration = 1.2, className }: 
     )
   }
 
-  return <motion.span ref={ref} className={className}>{rounded}</motion.span>
+  return <m.span ref={ref} className={className}>{rounded}</m.span>
 }
