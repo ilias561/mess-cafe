@@ -93,7 +93,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
       aria-label="Σήμερα στο M.E.S.S."
     >
       <Reveal className="relative">
-        <div className="relative mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
+        <div className="relative mx-auto grid w-full max-w-[1400px] gap-6 md:grid-cols-3 md:gap-10">
           <div className="flex items-start justify-between gap-6 md:contents [&>*]:min-w-0">
             <div className="space-y-3">
               <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Κατάσταση χώρου</p>

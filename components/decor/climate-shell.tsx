@@ -136,7 +136,7 @@ export function ClimateShell({
           </motion.div>
         )}
 
-        <div className="relative z-20 px-6 py-20 md:px-12 md:py-28">{children}</div>
+        <div className="relative z-20 px-6 py-20 md:px-12 md:py-24">{children}</div>
       </motion.div>
     </motion.section>
   )

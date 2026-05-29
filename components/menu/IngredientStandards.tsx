@@ -6,7 +6,7 @@ import { ingredientStandards } from '@/lib/ingredient-standards'
 
 export default function IngredientStandards() {
   return (
-    <section className="bg-bone px-6 py-16 md:px-12 md:py-24">
+    <section className="bg-bone px-6 py-20 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

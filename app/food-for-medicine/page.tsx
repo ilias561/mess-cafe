@@ -63,7 +63,7 @@ export default function BlogPage() {
         {beforePhilosophy.map((category, i) => (
           <MenuCategory key={category.id} category={category} index={i} />
         ))}
-        <section className="border-y border-mustard/25 bg-canopy-night px-6 py-24 md:px-12 md:py-28">
+        <section className="border-y border-mustard/25 bg-canopy-night px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-serif text-[clamp(24px,3.5vw,36px)] leading-snug tracking-tight text-charcoal">
               &ldquo;Το MESS δημιουργήθηκε για να προάγει ένα πιο υγιές lifestyle — με κεντρικό άξονα την δημιουργικότητα, την πρωτοβουλία και την δικτύωση.&rdquo;
@@ -85,7 +85,7 @@ export default function BlogPage() {
 
       <ReleaseDivider label="Από την κουζίνα μας" />
 
-      <section id="recipes" className="scroll-mt-28 mt-14 border-t border-line/30 px-6 py-16 md:px-12 md:py-20">
+      <section id="recipes" className="scroll-mt-28 mt-14 border-t border-line/30 px-6 py-20 md:px-12 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="type-section-md u-balance font-serif tracking-tight text-charcoal">
             Συνταγές &amp; κόλπα κουζίνας με M.E.S.S.
@@ -99,7 +99,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="border-t border-line/30 px-6 py-16 md:px-12 md:py-24">
+      <section className="border-t border-line/30 px-6 py-20 md:px-12 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="type-section-md u-balance font-serif tracking-tight text-charcoal">
             Καθημερινά tips στο Instagram

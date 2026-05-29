@@ -162,7 +162,7 @@ export default function MenuCategory({
   const showNutrition = !category.hideNutrition
 
   return (
-    <section id={category.id} className={`scroll-mt-[140px] ${bg} px-6 py-16 md:scroll-mt-[120px] md:px-12 md:py-32`}>
+    <section id={category.id} className={`scroll-mt-[140px] ${bg} px-6 py-20 md:scroll-mt-[120px] md:px-12 md:py-32`}>
       <div className="mx-auto max-w-[1400px]">
         <CategoryHeader category={category} index={index} />
         <CategoryBody category={category} layout={layout} showNutrition={showNutrition} />

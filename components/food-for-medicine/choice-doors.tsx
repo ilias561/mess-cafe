@@ -46,9 +46,9 @@ export default function ChoiceDoors() {
   return (
     <section
       aria-label="Επιλογές πλοήγησης"
-      className="relative bg-forest px-6 py-20 md:px-12 md:py-28"
+      className="relative bg-forest px-6 py-20 md:px-12 md:py-24"
     >
-      <div className="mx-auto max-w-[1280px]">
+      <div className="mx-auto max-w-[1400px]">
         <div className="mb-12 text-center md:mb-16">
           <h1 className="sr-only">Φαγητό ως Φάρμακο — M.E.S.S.</h1>
           <Eyebrow tone="light">ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ</Eyebrow>

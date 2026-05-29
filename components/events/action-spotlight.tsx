@@ -11,7 +11,7 @@ type Props = {
 export default function ActionSpotlight({ event }: Props) {
   return (
     <section
-      className="border-t border-line/50 bg-bone-warm/40 px-6 py-16 md:px-12 md:py-24"
+      className="border-t border-line/50 bg-bone-warm/40 px-6 py-20 md:px-12 md:py-24"
       aria-labelledby={`action-spotlight-${event.slug}`}
     >
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
