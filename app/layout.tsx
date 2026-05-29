@@ -12,17 +12,22 @@ import SmoothScroll from '@/components/smooth-scroll'
 import WhatsAppFloat from '@/components/whatsapp-float'
 import './globals.css'
 
-const inter = Inter({
-  subsets: ['latin', 'greek'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
+/** Fraunces has no Google Fonts Greek subset — Greek serif falls back via adjustFontFallback. */
 const fraunces = Fraunces({
   subsets: ['latin', 'latin-ext'],
   variable: '--font-fraunces',
   axes: ['opsz', 'SOFT'],
   display: 'swap',
+  adjustFontFallback: true,
+  preload: true,
+})
+
+const inter = Inter({
+  subsets: ['latin', 'greek'],
+  variable: '--font-inter',
+  display: 'swap',
+  adjustFontFallback: true,
+  preload: false,
 })
 
 const siteUrl = getSiteUrl()
