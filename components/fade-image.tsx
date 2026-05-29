@@ -4,6 +4,7 @@ import Image, { type ImageProps } from 'next/image'
 import { useReducedMotion } from 'framer-motion'
 import { useState, type CSSProperties, type SyntheticEvent } from 'react'
 import { duration as d, ease } from '@/lib/motion'
+import { getImageManifestEntry } from '@/lib/image-manifest'
 
 const DEFAULT_SKELETON = 'color-mix(in srgb, var(--color-espresso) 8%, transparent)'
 
@@ -26,11 +27,19 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
     priority,
     loading,
     decoding,
+    sizes,
+    src,
+    width,
+    height,
+    unoptimized: _unoptimized,
     ...imgRest
   } = props
   const isFill = Boolean(fill)
   const resolvedLoading = priority ? 'eager' : (loading ?? 'lazy')
   const resolvedDecoding = decoding ?? 'async'
+  const srcKey = typeof src === 'string' ? src : undefined
+  const manifest = srcKey ? getImageManifestEntry(srcKey) : undefined
+  const resolvedSizes = sizes ?? (isFill ? '100vw' : undefined)
 
   const handleLoad = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     setImageLoaded(true)
@@ -44,6 +53,9 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
     height: isFill ? '100%' : undefined,
     display: 'block',
     backgroundColor: skeleton,
+    backgroundImage: !loaded && manifest?.blurDataURL ? `url(${manifest.blurDataURL})` : undefined,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     overflow: 'hidden',
     minHeight: 0,
   }
@@ -51,17 +63,63 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
   const mergedImageStyle: CSSProperties = {
     ...(imageStyle && typeof imageStyle === 'object' ? imageStyle : {}),
     opacity: loaded ? 1 : 0,
-    transition: `opacity ${d.slow}s cubic-bezier(${ease.out.join(',')})`,
+    transition:
+      reduceMotion === true
+        ? undefined
+        : `opacity ${d.slow}s cubic-bezier(${ease.out.join(',')})`,
+  }
+
+  const imgClassName = [
+    className,
+    isFill ? 'h-full w-full object-cover' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  if (manifest && srcKey) {
+    return (
+      <span style={spanStyle} className={isFill ? 'min-h-0' : 'h-full w-full'}>
+        <picture className={isFill ? 'absolute inset-0 block h-full w-full' : 'block h-full w-full'}>
+          {manifest.avifSrcSet ? (
+            <source type="image/avif" srcSet={manifest.avifSrcSet} sizes={resolvedSizes} />
+          ) : null}
+          {manifest.webpSrcSet ? (
+            <source type="image/webp" srcSet={manifest.webpSrcSet} sizes={resolvedSizes} />
+          ) : null}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={srcKey}
+            alt={props.alt}
+            width={isFill ? undefined : (width ?? manifest.width)}
+            height={isFill ? undefined : (height ?? manifest.height)}
+            loading={resolvedLoading}
+            decoding={resolvedDecoding}
+            fetchPriority={priority ? 'high' : undefined}
+            className={
+              isFill
+                ? `${imgClassName} absolute inset-0 h-full w-full object-cover`
+                : imgClassName
+            }
+            style={mergedImageStyle}
+            onLoad={handleLoad}
+          />
+        </picture>
+      </span>
+    )
   }
 
   return (
     <span style={spanStyle} className={isFill ? 'min-h-0' : 'h-full w-full'}>
       <Image
         {...imgRest}
+        src={src}
+        width={width}
+        height={height}
         fill={fill}
         priority={priority}
         loading={resolvedLoading}
         decoding={resolvedDecoding}
+        sizes={sizes}
         className={className}
         style={mergedImageStyle}
         onLoad={handleLoad}
