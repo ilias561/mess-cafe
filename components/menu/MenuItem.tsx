@@ -74,13 +74,34 @@ export function BenefitNote({ text, className = '' }: { text: string; className?
   )
 }
 
+export function NutritionDisclosure({
+  nutrition,
+  compact = false,
+}: {
+  nutrition: Nutrition
+  compact?: boolean
+}) {
+  return (
+    <details className="group mt-4 border-t border-line/60 pt-3">
+      <summary className="flex cursor-pointer list-none items-center gap-2 font-sans text-[12px] font-medium tabular-nums tracking-wide text-olive/80 marker:hidden">
+        <span>{nutrition.calories} kcal</span>
+        <span className="text-olive/45">· Διατροφικά</span>
+        <svg
+          viewBox="0 0 16 16"
+          aria-hidden
+          className="ml-auto h-3.5 w-3.5 fill-none stroke-current transition-transform group-open:rotate-180"
+        >
+          <path d="M4 6l4 4 4-4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </summary>
+      <MacroStrip nutrition={nutrition} compact={compact} />
+    </details>
+  )
+}
+
 export function MacroStrip({ nutrition, compact = false }: { nutrition: Nutrition; compact?: boolean }) {
   return (
-    <dl
-      className={`mt-5 grid grid-cols-3 gap-x-4 gap-y-3 border-t border-line/60 pt-4 ${
-        compact ? '' : 'sm:grid-cols-6'
-      }`}
-    >
+    <dl className={`grid grid-cols-3 gap-x-4 gap-y-3 ${compact ? '' : 'sm:grid-cols-6'}`}>
       {MACRO_FIELDS.map(({ key, label, unit }) => (
         <div key={key} className="flex min-w-0 flex-col gap-0.5">
           <dt className="truncate font-sans text-[9px] font-medium uppercase tracking-[0.14em] text-olive/70">
@@ -279,7 +300,7 @@ export function MenuFeatureRow({
       )}
       <p className="mt-3 font-sans text-[15px] leading-relaxed text-concrete">{item.desc}</p>
       {item.benefit && <BenefitNote text={item.benefit} className="mt-3" />}
-      {showNutrition && item.nutrition && <MacroStrip nutrition={item.nutrition} />}
+      {showNutrition && item.nutrition && <NutritionDisclosure nutrition={item.nutrition} />}
     </div>
   )
 
@@ -368,7 +389,7 @@ export function MenuGridItem({
         )}
         {showNutrition && item.nutrition && (
           <div className="hidden sm:block">
-            <MacroStrip nutrition={item.nutrition} compact />
+            <NutritionDisclosure nutrition={item.nutrition} compact />
           </div>
         )}
       </div>
