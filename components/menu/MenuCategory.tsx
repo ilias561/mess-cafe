@@ -4,12 +4,7 @@ import { motion } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuCategory as MenuCategoryType, MenuItem as MenuItemType, MenuLayout } from '@/lib/menu-data'
 import { extras, getCategoryLayout } from '@/lib/menu-data'
-import {
-  DietaryLegendEcho,
-  MenuFeatureRow,
-  MenuGridItem,
-  MenuListRow,
-} from './MenuItem'
+import { MenuFeatureRow, MenuGridItem, MenuListRow } from './MenuItem'
 
 function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'brunch') {
@@ -56,7 +51,7 @@ function resolveLayout(category: MenuCategoryType): MenuLayout {
   return category.layout ?? (getCategoryLayout(category) === 'visual' ? 'feature' : 'list')
 }
 
-function CategoryHeader({ category }: { category: MenuCategoryType }) {
+function CategoryHeader({ category, index }: { category: MenuCategoryType; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -67,12 +62,15 @@ function CategoryHeader({ category }: { category: MenuCategoryType }) {
     >
       <div className="md:flex md:items-end md:justify-between md:gap-8">
         <div className="min-w-0">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">{category.title}</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+            <span className="tabular-nums text-olive/50">{String(index + 1).padStart(2, '0')}</span>
+            <span className="mx-2 text-olive/40">·</span>
+            {category.title}
+          </p>
           <h2 className="mt-2 font-serif text-[clamp(32px,4.5vw,56px)] italic leading-[1.05] tracking-tight text-charcoal">
             {category.titleGr}
           </h2>
         </div>
-        <DietaryLegendEcho />
       </div>
       {editorialIntro[category.id] && (
         <p className="mt-4 max-w-[60ch] font-sans text-[15px] leading-relaxed text-concrete">
@@ -166,7 +164,7 @@ export default function MenuCategory({
   return (
     <section id={category.id} className={`scroll-mt-[140px] ${bg} px-6 py-16 md:scroll-mt-[120px] md:px-12 md:py-32`}>
       <div className="mx-auto max-w-[1400px]">
-        <CategoryHeader category={category} />
+        <CategoryHeader category={category} index={index} />
         <CategoryBody category={category} layout={layout} showNutrition={showNutrition} />
         <ExtrasBox categoryId={category.id} />
 
