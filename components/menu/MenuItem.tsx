@@ -410,7 +410,7 @@ export function MenuListRow({
   return (
     <motion.article
       {...itemMotionProps(index)}
-      className="border-b border-line/40 pb-5 transition-colors hover:bg-bone-warm/20 md:rounded-sm md:px-3 md:-mx-3 md:pb-5"
+      className="relative border-b border-line/40 pb-5 transition-colors hover:bg-bone-warm/60 md:rounded-sm md:px-3 md:-mx-3 md:pb-5 before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-mustard before:opacity-0 before:transition-opacity hover:before:opacity-100"
     >
       {isSignature && <SignatureEyebrow />}
       <div className="flex items-baseline justify-between gap-4">
