@@ -124,21 +124,6 @@ export function MenuLegendInline() {
   )
 }
 
-export function DietaryLegendEcho() {
-  return (
-    <div className="hidden shrink-0 flex-wrap items-center justify-end gap-x-4 gap-y-2 md:flex">
-      {DIET_ORDER.map((b) => (
-        <span key={b} className="inline-flex items-center gap-1.5">
-          <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full border border-olive/50 px-1 font-sans text-[10px] font-semibold text-olive">
-            {DIET_TAG[b].short}
-          </span>
-          <span className="font-sans text-[11px] text-concrete/80">{DIET_TAG[b].label}</span>
-        </span>
-      ))}
-    </div>
-  )
-}
-
 function MenuItemMedia({ item }: { item: MenuItemType }) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
