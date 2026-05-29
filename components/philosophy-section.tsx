@@ -13,8 +13,6 @@ import {
   Eyebrow,
   HairlineRule,
   MicroEyebrow,
-  NumberedCaption,
-  ReleaseDivider,
 } from '@/components/decor/ornaments'
 import { VIEWPORT_ONCE, ease } from '@/lib/motion'
 import { videoSrc } from '@/lib/media'
@@ -86,7 +84,7 @@ export default function PhilosophySection() {
 
           <div className="md:col-span-7">
             <MaskRevealBlock direction="up">
-              <Tile aspect="aspect-video" caption="ΣΤΙΓΜΕΣ · σε επανάληψη">
+              <Tile aspect="aspect-video">
                 <AmbientVideo
                   srcs={[...aboutEditorialVideos]}
                   poster={images.aboutInterior}
@@ -98,8 +96,6 @@ export default function PhilosophySection() {
             </MaskRevealBlock>
           </div>
         </div>
-
-        <ReleaseDivider label="Ο χώρος σε κίνηση" />
 
         <Centerpiece />
 
@@ -212,8 +208,6 @@ function SplitSpread() {
               src={images.new1}
               alt="Εσωτερικός χώρος του καφέ με φυσικό φως"
               aspect="aspect-[3/2]"
-              caption="ΧΩΡΟΣ · Φυσικό φως"
-              index="02"
               sizes="(max-width: 768px) 100vw, 40vw"
             />
           </MaskRevealBlock>
@@ -224,8 +218,6 @@ function SplitSpread() {
               src={images.aboutInterior}
               alt="Εσωτερικός χώρος, γενικό πλάνο"
               aspect="aspect-[4/5]"
-              caption="ΛΕΠΤΟΜΕΡΕΙΕΣ · Υλικά & υφές"
-              index="03"
               sizes="(max-width: 768px) 100vw, 30vw"
             />
           </MaskRevealBlock>
@@ -239,8 +231,6 @@ function SplitSpread() {
               src={images.aboutPlants}
               alt="Πυκνή βλάστηση σε μπετόνινο τοίχο"
               aspect="aspect-[4/5]"
-              caption="ΦΥΤΑ · Πράσινο & φως"
-              index="04"
               sizes="(max-width: 768px) 100vw, 30vw"
             />
           </MaskRevealBlock>
@@ -251,8 +241,6 @@ function SplitSpread() {
               src={images.new2}
               alt="Λεπτομέρεια διακόσμησης και υλικών στον χώρο"
               aspect="aspect-[3/2]"
-              caption="ΥΛΙΚΑ · Φυσικά & ταπεινά"
-              index="05"
               sizes="(max-width: 768px) 100vw, 45vw"
             />
           </MaskRevealBlock>
@@ -266,8 +254,6 @@ function SplitSpread() {
               src={images.aboutBar}
               alt="Μπαρ specialty coffee και περιοχή σερβιρίσματος"
               aspect="aspect-[16/9]"
-              caption="ΤΟ BAR · Καθημερινό τελετουργικό"
-              index="06"
               sizes="(max-width: 768px) 100vw, 70vw"
             />
           </MaskRevealBlock>
@@ -306,15 +292,11 @@ function KenBurnsTile({
   src,
   alt,
   aspect,
-  caption,
-  index,
   sizes,
 }: {
   src: string
   alt: string
   aspect: string
-  caption: string
-  index: string
   sizes: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -341,7 +323,6 @@ function KenBurnsTile({
           />
         </motion.div>
       </div>
-      <NumberedCaption index={index} label={caption} />
     </figure>
   )
 }
@@ -349,20 +330,15 @@ function KenBurnsTile({
 function Tile({
   children,
   aspect,
-  caption,
 }: {
   children: ReactNode
   aspect: string
-  caption: string
 }) {
   return (
     <figure>
       <div className={`relative w-full overflow-hidden ${aspect}`}>
         {children}
       </div>
-      <figcaption className="mt-2 font-sans text-[10px] uppercase tracking-[0.22em] text-olive/80">
-        {caption}
-      </figcaption>
     </figure>
   )
 }
