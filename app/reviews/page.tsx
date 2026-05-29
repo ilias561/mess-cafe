@@ -17,7 +17,7 @@ export default function ReviewsPage() {
       <Navigation />
       <section className="px-6 pt-36 pb-16 md:px-12 md:pt-44 md:pb-20">
         <div className="mx-auto max-w-[1400px]">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΚΟΙΝΟΤΗΤΑ</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">ΚΟΙΝΟΤΗΤΑ</p>
           <h1 className="mt-5 font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
             Όσοι μας γνώρισαν
           </h1>

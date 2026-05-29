@@ -149,7 +149,7 @@ export default function NewsletterPopup() {
               <X className="h-4 w-4" aria-hidden />
             </button>
 
-            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.24em] text-terracotta">NEWSLETTER</p>
+            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.17em] text-terracotta">NEWSLETTER</p>
             <h3 id="newsletter-title" className="mt-2 font-serif text-[22px] leading-tight text-charcoal">
               Ιστορίες, menu, events.
             </h3>

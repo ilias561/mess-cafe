@@ -151,13 +151,13 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
         <div className="max-w-[40rem] text-center md:text-left">
           <motion.p
             {...fadeUp}
-            className="mb-3 font-sans text-[11px] uppercase tracking-[0.22em] text-olive"
+            className="mb-3 font-sans text-[11px] uppercase tracking-[0.16em] text-olive"
           >
             2025
           </motion.p>
           <motion.p
             {...fadeUpDelayed(0.02)}
-            className="font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal/60"
+            className="font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal/60"
           >
             <span className="inline-block -rotate-[1.5deg] rounded-[2px] border border-dashed border-concrete/40 px-2.5 py-1">
               ΚΟΙΝΟΤΗΤΑ &mdash; ΑΛΛΗΛΕΓΓΥΗ &mdash; ΠΟΛΙΤΙΣΜΟΣ &middot; IOANNINA

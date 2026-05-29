@@ -13,7 +13,7 @@ export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridPro
       <section className="bg-bone px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[1400px]">
           <SectionReveal>
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΕΠΟΜΕΝΕΣ ΕΚΔΗΛΩΣΕΙΣ</p>
+            <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">ΕΠΟΜΕΝΕΣ ΕΚΔΗΛΩΣΕΙΣ</p>
           </SectionReveal>
           {upcomingEvents.length > 0 ? (
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
@@ -47,7 +47,7 @@ export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridPro
         <section className="bg-forest px-6 py-24 text-charcoal md:px-12 md:py-32">
           <div className="mx-auto max-w-[1400px]">
             <SectionReveal>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">ΑΡΧΕΙΟ · ΠΑΛΑΙΟΤΕΡΕΣ</p>
+              <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard">ΑΡΧΕΙΟ · ΠΑΛΑΙΟΤΕΡΕΣ</p>
             </SectionReveal>
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
               {pastEvents.map((event) => (

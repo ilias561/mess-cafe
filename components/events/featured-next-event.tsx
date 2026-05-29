@@ -35,12 +35,12 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
 
           {/* Right: text block */}
           <div>
-            <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+            <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
               ΕΠΟΜΕΝΗ ΔΡΑΣΗ · {formatGreekDate(event.date)}
             </motion.p>
             <motion.p
               {...fadeUpDelayed(0.06)}
-              className="mt-2 font-sans text-[11px] uppercase tracking-[0.2em] text-terracotta"
+              className="mt-2 font-sans text-[11px] uppercase tracking-[0.16em] text-terracotta"
             >
               {event.categoryLabel.toUpperCase()}
             </motion.p>

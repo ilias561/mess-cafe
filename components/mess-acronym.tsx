@@ -70,7 +70,7 @@ export default function MessAcronym() {
       style={reduce || !isDesktop ? undefined : { backgroundPositionY: bgShift }}
     >
       <div className="mx-auto max-w-[1400px]">
-        <p className="text-center font-sans text-[11px] uppercase tracking-[0.22em] text-olive">Τι σημαίνει M.E.S.S.</p>
+        <p className="text-center font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Τι σημαίνει M.E.S.S.</p>
 
         <motion.div
           className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6"

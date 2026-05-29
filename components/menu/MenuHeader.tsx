@@ -15,7 +15,7 @@ export default function MenuHeader() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: EASE }}
-            className="font-sans text-[11px] uppercase tracking-[0.24em] text-olive"
+            className="font-sans text-[11px] uppercase tracking-[0.17em] text-olive"
           >
             M.E.S.S. · Ο κατάλογος
           </motion.p>
@@ -24,7 +24,7 @@ export default function MenuHeader() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
-            className="mt-4 font-serif text-[clamp(44px,6.5vw,92px)] leading-[0.95] tracking-tight text-charcoal"
+            className="type-menu-title u-balance mt-4 font-serif tracking-tight text-charcoal"
           >
             Το μενού μας.
           </motion.h1>

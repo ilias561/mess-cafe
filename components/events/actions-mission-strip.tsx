@@ -516,7 +516,7 @@ export default function ActionsMissionStrip({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={motionViewport}
               transition={{ duration: 0.6, ease: EASE_OUT }}
-              className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive"
+              className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive"
             >
               ΠΩΣ ΒΟΗΘΑΜΕ · <span className="text-mustard">#KEEPRISING</span>
             </motion.p>

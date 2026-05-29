@@ -62,12 +62,12 @@ function CategoryHeader({ category, index }: { category: MenuCategoryType; index
     >
       <div className="md:flex md:items-end md:justify-between md:gap-8">
         <div className="min-w-0">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+          <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
             <span className="tabular-nums text-olive/50">{String(index + 1).padStart(2, '0')}</span>
             <span className="mx-2 text-olive/40">·</span>
             {category.title}
           </p>
-          <h2 className="mt-2 font-serif text-[clamp(32px,4.5vw,56px)] italic leading-[1.05] tracking-tight text-charcoal">
+          <h2 className="type-category u-balance mt-2 font-serif italic tracking-tight text-charcoal">
             {category.titleGr}
           </h2>
         </div>

@@ -48,7 +48,7 @@ export default function PhilosophySection() {
               <Reveal>
                 <Eyebrow tone="dark">Η φιλοσοφία μας</Eyebrow>
 
-                <h2 className="mt-7 font-serif text-[clamp(34px,4.6vw,52px)] leading-[1.02] tracking-[-0.012em] text-charcoal">
+                <h2 className="type-section u-balance mt-7 font-serif text-charcoal">
                   Ποιοι είμαστε{' '}
                   <span className="italic text-mustard">&amp;</span>
                   <br className="hidden sm:block" />{' '}
@@ -64,7 +64,7 @@ export default function PhilosophySection() {
                 {philosophyGoals.map((goal, index) => (
                   <Reveal.Item key={goal}>
                     <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-charcoal/10 py-6 first:border-t-0 first:pt-0">
-                      <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard">
+                      <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard tabular-nums">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <p className="font-serif text-[clamp(19px,1.55vw,22px)] leading-snug tracking-[-0.005em] text-charcoal">
@@ -160,7 +160,7 @@ function Centerpiece() {
         >
           <div className="flex items-center gap-3">
             <HairlineRule origin="left" className="w-12" delay={0.5} />
-            <span className="font-sans text-[11px] uppercase tracking-[0.36em] text-olive">
+            <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
               Η σκηνή μας
             </span>
           </div>

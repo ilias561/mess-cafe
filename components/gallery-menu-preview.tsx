@@ -73,7 +73,7 @@ export default function GalleryMenuPreview() {
             </p>
             <Link
               href="/food-for-medicine#menu"
-              className="ui-link mt-10 inline-flex items-center gap-4 font-sans text-[12px] uppercase tracking-[0.28em] text-ink-dark hover:text-ink-dark/70"
+              className="ui-link mt-10 inline-flex items-center gap-4 font-sans text-[12px] uppercase tracking-[0.17em] text-ink-dark hover:text-ink-dark/70"
             >
               <span aria-hidden className="block h-px w-10 bg-ink-dark/40" />
               Δείτε το μενού μας →
@@ -171,7 +171,7 @@ function TastingRailRow({
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start md:gap-8">
           <div className="md:col-span-1 md:col-start-1 md:pt-1">
-            <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-ink-dark/70">
+            <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-ink-dark/70">
               {index}
             </span>
           </div>

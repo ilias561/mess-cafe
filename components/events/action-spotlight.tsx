@@ -36,7 +36,7 @@ export default function ActionSpotlight({ event }: Props) {
         <div>
           <div className="mb-5 flex items-center gap-3">
             <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-terracotta" aria-hidden />
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+            <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
               {formatGreekDate(event.date)} · #KEEPRISING
             </p>
           </div>

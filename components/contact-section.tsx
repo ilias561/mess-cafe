@@ -119,7 +119,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
           <Reveal direction="up" className="lg:col-span-2" aria-live="polite">
             {status === 'success' ? (
               <div className="rounded-2xl bg-mustard/8 p-8 ring-1 ring-mustard/40">
-                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/80">
+                <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-mustard/80">
                   ΕΥΧΑΡΙΣΤΟΥΜΕ
                 </p>
                 <h3 className="mt-3 font-serif text-[clamp(24px,3vw,34px)] leading-[1.1] text-charcoal">

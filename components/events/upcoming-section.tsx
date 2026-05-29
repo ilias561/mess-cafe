@@ -26,7 +26,7 @@ export default function UpcomingSection({ events, activeCategory }: Props) {
       <div className="mx-auto max-w-[1400px]">
 
         <SectionReveal>
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+          <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
             ΕΠΟΜΕΝΕΣ ΕΚΔΗΛΩΣΕΙΣ
           </p>
         </SectionReveal>
@@ -54,7 +54,7 @@ export default function UpcomingSection({ events, activeCategory }: Props) {
         )}
 
         {activeCategory !== null && (
-          <p className="mt-10 font-sans text-[11px] uppercase tracking-[0.2em] text-concrete">
+          <p className="mt-10 font-sans text-[11px] uppercase tracking-[0.16em] text-concrete">
             {`ΦΙΛΤΡΟ · ${activeCategory.toUpperCase()}`}
           </p>
         )}

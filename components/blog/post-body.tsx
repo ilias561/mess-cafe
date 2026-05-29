@@ -88,7 +88,7 @@ export default function PostBody({ markdown, variant = 'article' }: PostBodyProp
             className="h-auto w-full rounded-[2px]"
           />
           {alt ? (
-            <figcaption className="mt-3 font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+            <figcaption className="mt-3 font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
               {alt}
             </figcaption>
           ) : null}

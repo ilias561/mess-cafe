@@ -188,7 +188,7 @@ export default function ReviewsSection() {
             <HairlineRule origin="left" className="w-12" />
             <Link
               href="/reviews"
-              className="ui-link font-sans text-[12px] uppercase tracking-[0.28em] text-charcoal/75 hover:text-mustard"
+              className="ui-link font-sans text-[12px] uppercase tracking-[0.17em] text-charcoal/75 hover:text-mustard"
             >
               Όλες οι αξιολογήσεις →
             </Link>

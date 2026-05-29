@@ -14,7 +14,7 @@ export default function UpcomingDatesMarquee({ events }: Props) {
         {[...events, ...events].map((event, i) => (
           <Fragment key={`${event.slug}-${i}`}>
             <span className="mx-[14px] text-mustard">·</span>
-            <span className="font-sans text-[13px] uppercase tracking-[0.22em] text-charcoal">
+            <span className="font-sans text-[13px] uppercase tracking-[0.16em] text-charcoal">
               {formatGreekDate(event.date)} · {event.categoryLabel}
             </span>
           </Fragment>

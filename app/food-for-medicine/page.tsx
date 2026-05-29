@@ -68,7 +68,7 @@ export default function BlogPage() {
             <p className="font-serif text-[clamp(24px,3.5vw,36px)] leading-snug tracking-tight text-charcoal">
               &ldquo;Το MESS δημιουργήθηκε για να προάγει ένα πιο υγιές lifestyle — με κεντρικό άξονα την δημιουργικότητα, την πρωτοβουλία και την δικτύωση.&rdquo;
             </p>
-            <p className="mt-8 font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
+            <p className="mt-8 font-sans text-[11px] uppercase tracking-[0.16em] text-mustard">
               — Απόστολος, ιδιοκτήτης
             </p>
           </div>
@@ -87,7 +87,7 @@ export default function BlogPage() {
 
       <section id="recipes" className="scroll-mt-28 mt-14 border-t border-line/30 px-6 py-16 md:px-12 md:py-20">
         <div className="mx-auto max-w-[1400px]">
-          <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] tracking-tight text-charcoal">
+          <h2 className="type-section-md u-balance font-serif tracking-tight text-charcoal">
             Συνταγές &amp; κόλπα κουζίνας με M.E.S.S.
           </h2>
           <p className="mt-3 max-w-[56ch] font-sans text-[15px] leading-relaxed text-concrete">
@@ -101,7 +101,7 @@ export default function BlogPage() {
 
       <section className="border-t border-line/30 px-6 py-16 md:px-12 md:py-24">
         <div className="mx-auto max-w-[1400px]">
-          <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] tracking-tight text-charcoal">
+          <h2 className="type-section-md u-balance font-serif tracking-tight text-charcoal">
             Καθημερινά tips στο Instagram
           </h2>
           <p className="mt-3 max-w-[56ch] font-sans text-[15px] leading-relaxed text-concrete">

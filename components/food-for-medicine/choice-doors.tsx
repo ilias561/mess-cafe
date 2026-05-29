@@ -116,7 +116,7 @@ export default function ChoiceDoors() {
                       </p>
                     </div>
 
-                    <span className="font-sans text-[12px] uppercase tracking-[0.28em] text-mustard transition-colors duration-300 group-hover:text-charcoal">
+                    <span className="font-sans text-[12px] uppercase tracking-[0.17em] text-mustard transition-colors duration-300 group-hover:text-charcoal">
                       {door.cta}
                     </span>
                   </div>

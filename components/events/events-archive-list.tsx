@@ -20,7 +20,7 @@ export default function EventsArchiveList({ pastEvents }: Props) {
         {/* Header row */}
         <SectionReveal>
           <div className="mb-10 flex items-baseline justify-between gap-4">
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">
+            <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard">
               ΑΡΧΕΙΟ · ΠΑΛΑΙΟΤΕΡΕΣ
             </p>
             <p className="font-sans text-[11px] text-charcoal/50">
@@ -62,7 +62,7 @@ export default function EventsArchiveList({ pastEvents }: Props) {
         <div className="mt-8">
           <Link
             href="/actions"
-            className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard transition-opacity hover:opacity-70"
+            className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard transition-opacity hover:opacity-70"
           >
             ΠΕΡΙΣΣΟΤΕΡΑ →
           </Link>

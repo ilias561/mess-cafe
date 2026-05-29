@@ -34,7 +34,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
         </div>
 
         <Reveal>
-          <p className="mb-6 inline-flex max-w-full flex-wrap rounded-full border border-mustard/25 bg-charcoal/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard/90">
+          <p className="mb-6 inline-flex max-w-full flex-wrap rounded-full border border-mustard/25 bg-charcoal/5 px-4 py-2 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard/90">
             OPEN DAILY · {settings.hours.map((slot) => `${slot.day} ${slot.open}—${slot.close}`).join(' · ')}
           </p>
 
@@ -54,11 +54,11 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
 
         <div className="mt-16 grid grid-cols-1 gap-0 border-t border-mustard/25 pt-0 sm:grid-cols-2 lg:grid-cols-4">
           <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">ADDRESS</p>
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">ADDRESS</p>
             <p className="font-sans text-sm leading-relaxed text-charcoal">{settings.addressLine1}<br />{settings.addressLine2}</p>
           </div>
           <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">HOURS</p>
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">HOURS</p>
             <p className="font-sans text-sm leading-relaxed text-charcoal">
               {settings.hours.map((slot) => (
                 <span key={slot.day}>{slot.day}: {slot.open} — {slot.close}<br /></span>
@@ -66,7 +66,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             </p>
           </div>
           <div className="border-t border-mustard/25 pt-6 px-0 pr-6">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">PHONE</p>
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">PHONE</p>
             <a
               href={`tel:${primaryPhoneHref}`}
               className="ui-link font-sans text-sm text-charcoal underline-offset-4 hover:text-mustard hover:underline"
@@ -76,7 +76,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             <p className="mt-2 font-sans text-sm text-charcoal">{settings.email}</p>
           </div>
           <div className="border-t border-mustard/25 pt-6 px-0">
-            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">INSTAGRAM</p>
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">INSTAGRAM</p>
             {settings.instagram ? (
               <a
                 href={settings.instagram}
@@ -121,7 +121,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </div>
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-white/80">Street View</p>
+              <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-white/80">Street View</p>
               <p className="mt-1 font-sans text-[10px] text-white/50">Δες πώς θα μας βρεις</p>
             </div>
           </a>

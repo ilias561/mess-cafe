@@ -19,7 +19,7 @@ export default function EventBookingCta({ event }: EventBookingCtaProps) {
   return (
     <section className="bg-forest px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-mustard">ΚΡΑΤΗΣΕΙΣ</p>
+        <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard">ΚΡΑΤΗΣΕΙΣ</p>
         <h2 className="mt-4 max-w-[18ch] font-serif text-[clamp(30px,4.2vw,52px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
           Κλείσε τη θέση σου εγκαίρως.
         </h2>

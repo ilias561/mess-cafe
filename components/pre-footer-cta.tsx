@@ -58,7 +58,7 @@ export default function PreFooterCta({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.5, ease: EASE }}
-          className={`font-sans text-[11px] uppercase tracking-[0.2em] ${s.eyebrow}`}
+          className={`font-sans text-[11px] uppercase tracking-[0.16em] ${s.eyebrow}`}
         >
           {eyebrow}
         </motion.p>
@@ -67,7 +67,7 @@ export default function PreFooterCta({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
-          className="mt-6 max-w-[18ch] font-serif text-[clamp(40px,6vw,76px)] leading-[1.02] tracking-[-0.02em]"
+          className="type-display u-balance mt-6 max-w-[18ch] font-serif"
         >
           {heading}
         </motion.h2>

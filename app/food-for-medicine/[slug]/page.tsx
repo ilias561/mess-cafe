@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {post.author.bio ? (
         <section className="px-6 py-14 md:px-12">
           <div className="mx-auto max-w-[72ch] border border-line/30 bg-bone-warm p-8">
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">ΣΧΕΤΙΚΑ ΜΕ ΤΟΝ ΣΥΓΓΡΑΦΕΑ</p>
+            <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">ΣΧΕΤΙΚΑ ΜΕ ΤΟΝ ΣΥΓΓΡΑΦΕΑ</p>
             <p className="mt-4 font-serif text-[26px] leading-[1.2] text-charcoal">{post.author.name}</p>
             <p className="mt-3 font-sans text-[16px] leading-[1.7] text-concrete">{post.author.bio}</p>
             <p className="mt-4 font-sans text-[12px] text-concrete">

@@ -38,7 +38,7 @@ function getItemBadges(item: MenuItemType) {
 
 function SignatureEyebrow() {
   return (
-    <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.2em] text-mustard">
+    <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">
       ✦ Signature
     </p>
   )
@@ -292,7 +292,7 @@ export function MenuFeatureRow({
       )}
       {!hasCutout && (
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h3 className="font-serif text-[clamp(24px,3vw,32px)] italic leading-tight tracking-tight text-charcoal">
+          <h3 className="type-card u-balance font-serif italic tracking-tight text-charcoal">
             {item.name}
           </h3>
           <DietaryTags badges={item.badges} />

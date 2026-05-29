@@ -15,7 +15,7 @@ export default function IngredientStandards() {
           transition={{ duration: 0.7, ease: EASE }}
           className="max-w-[60ch]"
         >
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Τα πρότυπά μας</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Τα πρότυπά μας</p>
           <h2 className="mt-2 font-serif text-[clamp(26px,3.5vw,40px)] italic leading-tight tracking-tight text-charcoal">
             Καθαρά υλικά, χωρίς συμβιβασμούς.
           </h2>

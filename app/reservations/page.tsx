@@ -31,7 +31,7 @@ export default function ReservationsPage() {
       <Navigation />
       <section className="px-6 pt-36 md:px-12 md:pt-44">
         <SectionReveal className="mx-auto max-w-[1400px]">
-          <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-charcoal">EVENT BOOKING</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal">EVENT BOOKING</p>
           <h1 className="mt-5 max-w-[14ch] font-serif text-[clamp(44px,6.5vw,96px)] leading-[0.98] tracking-[-0.02em] text-charcoal md:max-w-[16ch]">
             Κλείσε την εκδήλωσή σου.
           </h1>

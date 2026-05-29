@@ -151,7 +151,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
               <HairlineRule origin="left" className="w-16" />
               <Link
                 href="/actions"
-                className="ui-link font-sans text-[12px] uppercase tracking-[0.28em] text-charcoal hover:text-mustard"
+                className="ui-link font-sans text-[12px] uppercase tracking-[0.17em] text-charcoal hover:text-mustard"
               >
                 {hasMore
                   ? `Δες όλες τις δράσεις (${actionCards.length}) →`
@@ -211,7 +211,7 @@ function ActionSpread({
           <AnaglyphHeading
             as="h3"
             tone="dark"
-            className={`${dateLabel ? 'mt-3' : 'mt-4'} text-[clamp(26px,2.6vw,34px)] transition-colors duration-700 group-hover/spread:text-mustard`}
+            className={`type-card u-balance ${dateLabel ? 'mt-3' : 'mt-4'} transition-colors duration-700 group-hover/spread:text-mustard`}
           >
             {card.title}
           </AnaglyphHeading>

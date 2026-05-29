@@ -48,18 +48,18 @@ export default function EventHero({ event }: { event: Event }) {
 
             <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-7 border-t border-line/40 pt-8">
               <div>
-                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">Ημερομηνία</p>
+                <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-olive">Ημερομηνία</p>
                 <p className="mt-2 font-serif text-[22px] leading-tight text-charcoal">
                   {formatGreekDate(event.date)}
                 </p>
               </div>
               <div>
-                <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">Τοποθεσία</p>
+                <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-olive">Τοποθεσία</p>
                 <p className="mt-2 font-sans text-[15px] leading-snug text-charcoal">{event.location}</p>
               </div>
               {event.price && (
                 <div>
-                  <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-olive">Τιμή</p>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-olive">Τιμή</p>
                   <p className="mt-2 font-sans text-[15px] text-charcoal">{event.price}</p>
                 </div>
               )}

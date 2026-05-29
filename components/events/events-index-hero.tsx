@@ -109,7 +109,7 @@ export default function EventsIndexHero({
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8">
 
         <div>
-          <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">
+          <motion.p {...fadeUp} className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
             ΠΡΟΓΡΑΜΜΑ
           </motion.p>
 

@@ -96,7 +96,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
         <div className="relative mx-auto grid w-full max-w-[1280px] gap-8 md:grid-cols-3 md:gap-10">
           <div className="flex items-start justify-between gap-6 md:contents [&>*]:min-w-0">
             <div className="space-y-3">
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Κατάσταση χώρου</p>
+              <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Κατάσταση χώρου</p>
               <StatusPill isOpen={status.isOpen} label={status.label} />
               {status.nextChangeLabel && (
                 <p className="mt-1 font-sans text-xs text-concrete">
@@ -106,8 +106,8 @@ export default function TodayModule({ events }: TodayModuleProps) {
             </div>
 
             <div className="space-y-3 text-right md:text-left">
-              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Σήμερα</p>
-              <p className="font-serif text-[clamp(20px,3vw,36px)] leading-tight capitalize text-charcoal">
+              <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Σήμερα</p>
+              <p className="font-serif text-[clamp(20px,3vw,36px)] leading-tight capitalize text-charcoal tabular-nums">
                 {todayLabel}
               </p>
               <span className="mt-2 block h-px w-10 bg-mustard md:ml-0 ml-auto" aria-hidden />
@@ -117,7 +117,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
           <div className="space-y-3">
             {todayEvent ? (
               <>
-                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Σημερινή δράση</p>
+                <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Σημερινή δράση</p>
                 <p className="font-serif text-xl leading-tight text-charcoal">{todayEvent.title}</p>
                 <Link href={`/actions/${todayEvent.slug}`} className="font-sans text-sm font-medium text-olive underline underline-offset-4">
                   Μάθε περισσότερα
@@ -125,7 +125,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
               </>
             ) : (
               <>
-                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-olive">Προτείνουμε σήμερα:</p>
+                <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Προτείνουμε σήμερα:</p>
                 {fallbackEvent ? (
                   <div className="space-y-2">
                     <p className="font-serif text-xl leading-tight text-charcoal">{fallbackEvent.title}</p>

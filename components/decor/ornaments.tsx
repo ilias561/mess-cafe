@@ -22,7 +22,7 @@ export function Eyebrow({
       <span aria-hidden className="block h-px w-10 bg-mustard" />
       <span
         className={cn(
-          'font-sans text-[11px] uppercase tracking-[0.26em]',
+          'font-sans text-[11px] uppercase tracking-[0.18em]',
           tone === 'dark' ? 'text-olive' : 'text-mustard/80',
         )}
       >
@@ -42,7 +42,7 @@ export function MicroEyebrow({
   return (
     <span
       className={cn(
-        'font-sans text-[10px] uppercase tracking-[0.32em] text-charcoal/55',
+        'font-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/55',
         className,
       )}
     >
@@ -62,11 +62,11 @@ export function NumberedCaption({
 }) {
   return (
     <figcaption className={cn('mt-3 flex items-baseline gap-3', className)}>
-      <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard">
+      <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard tabular-nums">
         {index}
       </span>
       <span aria-hidden className="block h-px w-6 bg-mustard/50" />
-      <span className="font-sans text-[10px] uppercase tracking-[0.22em] text-olive/80">
+      <span className="font-sans text-[10px] uppercase tracking-[0.16em] text-olive/80">
         {label}
       </span>
     </figcaption>
@@ -164,7 +164,7 @@ export function ReleaseDivider({ label }: { label: string }) {
           transition={reduce ? undefined : { duration: 1.2, ease: ease.outStrong }}
         />
         <motion.span
-          className="font-sans text-[10px] uppercase tracking-[0.32em] text-charcoal/55"
+          className="font-sans text-[10px] uppercase tracking-[0.18em] text-charcoal/55"
           initial={reduce ? false : { opacity: 0, y: 8 }}
           whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
@@ -204,15 +204,12 @@ export function AnaglyphHeading({
   children: ReactNode
 }) {
   const Component = Tag as ElementType
-  const sizeClass =
-    Tag === 'h2'
-      ? 'text-[clamp(34px,4.6vw,52px)]'
-      : 'text-[clamp(32px,3.4vw,46px)]'
+  const sizeClass = Tag === 'h2' ? 'type-section u-balance' : 'type-section-sm u-balance'
 
   return (
     <Component
       className={cn(
-        'font-serif leading-[1.02] tracking-[-0.012em] text-charcoal',
+        'font-serif text-charcoal',
         sizeClass,
         tone === 'dark' ? ANAGLYPH_DARK : ANAGLYPH_LIGHT,
         className,
