@@ -16,6 +16,7 @@ export type MenuItem = {
   benefit?: string
   image?: string
   video?: string
+  cutout?: string // transparent-bg PNG; when set, item renders as a floating product card
   ingredientsImage?: string
 }
 
