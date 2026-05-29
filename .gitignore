@@ -48,7 +48,14 @@ public/images/111/1.mp4
 BLOG_CURSOR_PROMPT.md
 CURSOR_*.md
 123.mp4
+12345.mp4
 Mess Demo.mp4
+main page animation.mp4
+
+# Stray sandbox/AI experiments at repo root — never commit again
+/ai video/
+/_preview/
+/*.mp4
 
 # Cowork session handoff (cross-session baton, not for git)
 HANDOFF.md
