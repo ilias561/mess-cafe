@@ -23,7 +23,7 @@ export default function PostBody({ markdown, variant = 'article' }: PostBodyProp
           <a
             key={`${label}-${index}`}
             href={href}
-            className="ui-link underline decoration-mustard decoration-[1.5px] underline-offset-[6px] hover:text-olive"
+            className="ui-link hover:text-olive"
           >
             {label}
           </a>

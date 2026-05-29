@@ -75,7 +75,7 @@ export default function ChoiceDoors() {
                   e.preventDefault()
                   scrollToId(door.target)
                 }}
-                className="group relative block aspect-[3/4] md:aspect-[4/5]"
+                className="ui-focus-ring ui-press group relative block aspect-[3/4] md:aspect-[4/5]"
                 style={{ perspective: '1200px' }}
               >
                 <motion.div

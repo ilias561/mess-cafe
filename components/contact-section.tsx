@@ -197,7 +197,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                       Έχω διαβάσει την{' '}
                       <Link
                         href="/privacy"
-                        className="ui-link underline decoration-mustard underline-offset-4"
+                        className="ui-link"
                       >
                         Πολιτική Απορρήτου
                       </Link>{' '}

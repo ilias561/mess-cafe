@@ -319,7 +319,7 @@ function KenBurnsTile({
             unoptimized
             loading="lazy"
             sizes={sizes}
-            className="object-cover transition-[filter] duration-500 group-hover:brightness-110"
+            className="ui-img-hover"
           />
         </motion.div>
       </div>

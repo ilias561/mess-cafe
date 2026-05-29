@@ -25,7 +25,7 @@ export default function ActionSpotlight({ event }: Props) {
                 src={event.coverImage}
                 alt={event.coverAlt || `Εκδήλωση: ${event.title}`}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                className="ui-img-hover"
                 sizes="(max-width: 768px) 420px, 42vw"
                 style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
               />

@@ -231,7 +231,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
               />
               <span className="font-sans text-[13px] leading-relaxed text-concrete">
                 Έχω διαβάσει την{' '}
-                <Link href="/privacy" className="ui-link text-charcoal underline decoration-mustard underline-offset-4">
+                <Link href="/privacy" className="ui-link text-charcoal">
                   Πολιτική Απορρήτου
                 </Link>{' '}
                 και συμφωνώ με την επεξεργασία των στοιχείων μου για τη διαχείριση της κράτησης.
@@ -253,7 +253,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
                   setStatus('idle')
                   setSubmitError('')
                 }}
-                className="ui-link mt-3 font-sans text-[12px] uppercase tracking-[0.14em] text-charcoal underline decoration-mustard underline-offset-[4px]"
+                className="ui-link mt-3 font-sans text-[12px] uppercase tracking-[0.14em] text-charcoal"
               >
                 Δοκίμασε ξανά
               </button>

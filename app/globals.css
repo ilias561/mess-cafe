@@ -354,14 +354,42 @@ main li a:hover {
     transform: translateY(0) scale(0.98);
     transition-duration: var(--motion-micro);
   }
+
+  .ui-press {
+    @apply motion-safe:active:scale-[0.98];
+  }
+
   .ui-interactive:focus-visible {
     outline: 2px solid var(--color-mustard, var(--mustard));
     outline-offset: 3px;
   }
 
-  /* Text-link microinteraction — color only */
+  /* Text-link — mustard underline grows left→right on hover */
   .ui-link {
-    transition: color var(--motion-fast) var(--ease-out-premium);
+    text-decoration: none;
+    background-image: linear-gradient(var(--color-mustard), var(--color-mustard));
+    background-position: 0 100%;
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    transition:
+      color var(--motion-fast) var(--ease-out-premium),
+      background-size var(--motion-base) var(--ease-out-premium);
+  }
+
+  .ui-link:hover {
+    background-size: 100% 1.5px;
+  }
+
+  /* Clickable imagery — subtle lift + brightness */
+  .ui-img-hover {
+    @apply object-cover transition-[transform,filter] duration-500 ease-out motion-safe:group-hover:scale-[1.03] motion-safe:group-hover:brightness-110;
+  }
+
+  /* Focus ring for custom interactive surfaces (cards, tiles) */
+  .ui-focus-ring:focus-visible {
+    outline: 2px solid var(--color-mustard);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   /* Form fields — soft ring */
@@ -382,9 +410,14 @@ main li a:hover {
     .ui-interactive:hover,
     .ui-interactive:active,
     .ui-link,
-    .ui-field {
+    .ui-link:hover,
+    .ui-field,
+    .ui-img-hover,
+    .ui-press,
+    .ui-press:active {
       transition: none !important;
       transform: none !important;
+      background-size: 0% 1.5px !important;
     }
     .ui-interactive {
       will-change: auto;

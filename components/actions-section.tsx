@@ -108,7 +108,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                 κοινωνικών δράσεων, τις οποίες θα βρείτε{' '}
                 <Link
                   href="/actions"
-                  className="ui-link font-medium text-charcoal underline decoration-mustard decoration-2 underline-offset-4"
+                  className="ui-link font-medium text-charcoal"
                 >
                   παρακάτω
                 </Link>
@@ -218,7 +218,7 @@ function ActionSpread({
           <p className="mt-4 max-w-[36ch] font-serif text-[clamp(15px,1.2vw,17px)] italic leading-[1.55] text-charcoal/70">
             {card.description}
           </p>
-          <span className="ui-link mt-6 inline-block font-sans text-[13px] text-charcoal underline decoration-mustard decoration-2 underline-offset-[4px] group-hover/spread:text-mustard">
+          <span className="ui-link mt-6 inline-block font-sans text-[13px] text-charcoal group-hover/spread:text-mustard">
             Συνέχεια →
           </span>
         </div>
