@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from '@/components/reveal'
 import ScrollDrift from '@/components/scroll-drift'
 import MaskRevealBlock from '@/components/mask-reveal-block'
@@ -23,23 +23,14 @@ const PHILOSOPHY_LEAD =
 const PHILOSOPHY_BODY =
   'Δουλεύουμε αποκλειστικά με φρέσκα υλικά, τοπικά προϊόντα, και χρησιμοποιούμε μόνο ελαιόλαδο, βούτυρο και λάδι καρύδας. Το ψωμί μας είναι προζυμένιο αργής ωρίμανσης και ψήνεται σε παραδοσιακό ξυλόφουρνο.'
 
-const BONE = '#f5f1e8'
 const FOREST = '#2d5a27'
-const PANTRY_DEEP = '#3a2418'
-const INK_CHARCOAL = '#2b2b28'
+const MUSTARD_FIELD = '#e8b547'
+
+const MENU_ANAGLYPH_SHADOW =
+  'motion-safe:md:[text-shadow:1.5px_0_0_rgba(217,138,95,0.35),-1.5px_0_0_rgba(45,90,39,0.30)]'
 
 export default function GalleryMenuPreview() {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({
-    target: scrollRef,
-    offset: ['start end', 'end start'],
-  })
-  const textColor = useTransform(
-    scrollYProgress,
-    [0, 0.12, 0.5, 0.86, 1],
-    [INK_CHARCOAL, BONE, BONE, INK_CHARCOAL, INK_CHARCOAL],
-  )
 
   const hero = featuredMenuItems[0]
   const railItems = featuredMenuItems.slice(1)
@@ -47,36 +38,43 @@ export default function GalleryMenuPreview() {
   return (
     <ClimateShell
       id="menu-preview"
-      bgEnter={BONE}
-      bgPeak={PANTRY_DEEP}
+      bgEnter={FOREST}
+      bgPeak={MUSTARD_FIELD}
       bgExit={FOREST}
       particles="shimmer"
       particleCount={10}
-      ringClassName="ring-mustard/35"
-      vignetteAlpha={0.55}
+      ringClassName="ring-ink-dark/20"
+      vignetteAlpha={0.35}
     >
-      <div ref={scrollRef} className="mx-auto max-w-[1400px]">
+      <div ref={scrollRef} className="relative mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:items-start md:gap-16">
-          <div className="md:col-span-5 md:sticky md:top-28">
-            <motion.div style={reduce ? undefined : { color: textColor }}>
-              <Eyebrow tone="dark">ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ</Eyebrow>
-              <ScrollDrift distance={26}>
-                <AnaglyphHeading as="h2" tone="light" className="mt-3">
-                  Η φιλοσοφία του μενού μας.
-                </AnaglyphHeading>
-              </ScrollDrift>
-              <p className="mt-6 font-serif text-[clamp(17px,1.5vw,20px)] leading-relaxed tracking-tight">
-                {PHILOSOPHY_LEAD}
-              </p>
-            </motion.div>
-            <p className="mt-4 font-sans text-[clamp(16px,1.3vw,19px)] leading-relaxed text-charcoal/80">
+          <div className="text-ink-dark md:col-span-5 md:sticky md:top-28">
+            <Eyebrow
+              tone="light"
+              className="[&_span:first-child]:bg-ink-dark/40 [&_span:last-child]:text-ink-dark"
+            >
+              ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ
+            </Eyebrow>
+            <ScrollDrift distance={26}>
+              <AnaglyphHeading
+                as="h2"
+                tone="dark"
+                className={`mt-3 text-ink-dark ${MENU_ANAGLYPH_SHADOW}`}
+              >
+                Η φιλοσοφία του μενού μας.
+              </AnaglyphHeading>
+            </ScrollDrift>
+            <p className="mt-6 font-serif text-[clamp(17px,1.5vw,20px)] leading-relaxed tracking-tight text-ink-dark/85">
+              {PHILOSOPHY_LEAD}
+            </p>
+            <p className="mt-4 font-sans text-[clamp(16px,1.3vw,19px)] leading-relaxed text-ink-dark/65">
               {PHILOSOPHY_BODY}
             </p>
             <Link
               href="/food-for-medicine#menu"
-              className="ui-link mt-10 inline-flex items-center gap-4 font-sans text-[12px] uppercase tracking-[0.28em] text-charcoal hover:text-mustard"
+              className="ui-link mt-10 inline-flex items-center gap-4 font-sans text-[12px] uppercase tracking-[0.28em] text-ink-dark hover:text-ink-dark/70"
             >
-              <span aria-hidden className="block h-px w-10 bg-mustard" />
+              <span aria-hidden className="block h-px w-10 bg-ink-dark/40" />
               Δείτε το μενού μας →
             </Link>
           </div>
@@ -89,7 +87,7 @@ export default function GalleryMenuPreview() {
         </div>
 
         {railItems.length > 0 ? (
-          <Reveal asGroup gap={0.1} className="mt-20 md:mt-28">
+          <Reveal asGroup gap={0.1} className="mt-20 text-ink-dark md:mt-28">
             {railItems.map((item, idx) => (
               <TastingRailRow
                 key={item.name}
@@ -111,7 +109,7 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
 
   return (
     <figure className="relative">
-      <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden border border-mustard/40">
+      <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden border border-ink-dark/30">
         <motion.div
           className="absolute inset-0"
           animate={reduce ? undefined : { scale: [1, 1.04, 1] }}
@@ -134,10 +132,10 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
         <CornerTicks />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/50 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent"
         />
         <div className="absolute bottom-0 left-0 p-4">
-          <NumberedCaption index="10" label={item.cat} className="mt-0 [&_span]:text-bone/90" />
+          <NumberedCaption index="10" label={item.cat} className="mt-0 [&_span]:text-bone" />
         </div>
       </div>
     </figure>
@@ -163,26 +161,31 @@ function TastingRailRow({
     <Reveal.Item>
       <div className="mt-12 md:mt-20">
         {showRuleAbove ? (
-          <div className="mb-12 grid grid-cols-1 md:grid-cols-12 md:mb-20">
-            <HairlineRule origin="left" className="md:col-span-10 md:col-start-2" />
+          <div className="mb-12 grid grid-cols-1 md:mb-20 md:grid-cols-12">
+            <HairlineRule
+              origin="left"
+              className="bg-ink-dark/25 md:col-span-10 md:col-start-2"
+            />
           </div>
         ) : null}
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start md:gap-8">
           <div className="md:col-span-1 md:col-start-1 md:pt-1">
-            <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard">
+            <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-ink-dark/70">
               {index}
             </span>
           </div>
 
           <Reveal direction="left" className="md:col-span-6 md:col-start-2">
-            <MicroEyebrow className="text-olive">{item.cat}</MicroEyebrow>
-            <div className="mt-2 border-t border-mustard/30 pt-3">
-              <h3 className="font-serif text-[clamp(22px,2vw,28px)] tracking-tight text-charcoal">
+            <MicroEyebrow className="text-ink-dark/65">{item.cat}</MicroEyebrow>
+            <div className="mt-2 border-t border-ink-dark/30 pt-3">
+              <h3 className="font-serif text-[clamp(22px,2vw,28px)] tracking-tight text-ink-dark">
                 {item.name}
               </h3>
             </div>
-            <p className="mt-3 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
+            <p className="mt-3 font-sans text-[14px] leading-relaxed text-ink-dark/65">
+              {item.desc}
+            </p>
           </Reveal>
 
           {item.image ? (
