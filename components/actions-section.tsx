@@ -101,7 +101,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
               <ScrollDrift distance={20}>
                 <KeepRisingWordmark className="mt-5 text-left" />
               </ScrollDrift>
-              <p className="mt-7 max-w-[55ch] font-serif text-[clamp(17px,1.4vw,20px)] italic leading-[1.55] text-charcoal/80">
+              <p className="mt-7 max-w-[55ch] font-serif text-[clamp(17px,1.4vw,20px)] italic leading-[1.55] text-charcoal/70">
                 Δεν είμαστε απλώς ένα καφέ, είμαστε μια ιδέα. Σκοπός του M.E.S.S. είναι να βοηθήσει στη
                 δημιουργία μιας κοινότητας μέσω της αλληλοϋποστήριξης, της κοινωνικής βοήθειας και του ευ
                 ζην. Το KeepRising είναι ο τρόπος που μετατρέπουμε την ιδεολογία σε πράξη μέσω διάφορων
@@ -211,11 +211,11 @@ function ActionSpread({
           <AnaglyphHeading
             as="h3"
             tone="dark"
-            className={`type-card u-balance ${dateLabel ? 'mt-3' : 'mt-4'} transition-colors duration-700 group-hover/spread:text-mustard`}
+            className={`type-card u-balance ${dateLabel ? 'mt-3' : 'mt-4'} transition-colors duration-500 group-hover/spread:text-mustard`}
           >
             {card.title}
           </AnaglyphHeading>
-          <p className="mt-4 max-w-[36ch] font-serif text-[clamp(15px,1.2vw,17px)] italic leading-[1.55] text-charcoal/80">
+          <p className="mt-4 max-w-[36ch] font-serif text-[clamp(15px,1.2vw,17px)] italic leading-[1.55] text-charcoal/70">
             {card.description}
           </p>
           <span className="ui-link mt-6 inline-block font-sans text-[13px] text-charcoal underline decoration-mustard decoration-2 underline-offset-[4px] group-hover/spread:text-mustard">
@@ -246,7 +246,7 @@ function ActionImage({
     <figure ref={ref} className="group/image relative">
       <div className="relative aspect-[3/2] w-full overflow-hidden">
         <motion.div
-          className="absolute inset-0 will-change-transform transition-[transform,filter] duration-700 ease-out group-hover/spread:scale-[1.04] group-hover/spread:brightness-[1.06] group-hover/spread:saturate-[1.08]"
+          className="absolute inset-0 will-change-transform transition-[transform,filter] duration-500 ease-out group-hover/spread:scale-[1.04] group-hover/spread:brightness-[1.06] group-hover/spread:saturate-[1.08]"
           style={reduce ? undefined : { scale, y }}
         >
           <FadeImage
@@ -259,7 +259,7 @@ function ActionImage({
             style={{ objectPosition }}
           />
         </motion.div>
-        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/spread:opacity-100">
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-250 group-hover/spread:opacity-100">
           <CornerTicks />
         </div>
       </div>

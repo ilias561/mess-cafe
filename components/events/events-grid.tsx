@@ -34,7 +34,7 @@ export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridPro
                 href="https://www.instagram.com/m.e.s.s._ioannina/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ui-interactive mt-8 inline-flex items-center rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark transition-colors duration-200 hover:bg-amber"
+                className="ui-interactive mt-8 inline-flex items-center rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark transition-colors duration-150 hover:bg-amber"
               >
                 Ακολούθησέ μας →
               </a>

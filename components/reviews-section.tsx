@@ -62,7 +62,7 @@ function ReviewCard({ review }: { review: Review }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Κριτική από ${review.name}`}
-      className="flex h-full w-[min(320px,80vw)] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-200 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
+      className="flex h-full w-[min(320px,80vw)] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-3">
@@ -188,7 +188,7 @@ export default function ReviewsSection() {
             <HairlineRule origin="left" className="w-12" />
             <Link
               href="/reviews"
-              className="ui-link font-sans text-[12px] uppercase tracking-[0.17em] text-charcoal/75 hover:text-mustard"
+              className="ui-link font-sans text-[12px] uppercase tracking-[0.17em] text-charcoal/70 hover:text-mustard"
             >
               Όλες οι αξιολογήσεις →
             </Link>

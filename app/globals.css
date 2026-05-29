@@ -31,11 +31,11 @@
   --espresso: #2a1d14;
   --cream: #faf6ed;
 
-  /* Motion durations — keep in sync with lib/motion.ts */
+  /* Motion durations — 3-step scale; keep in sync with lib/motion.ts */
   --motion-micro: 0.15s;
-  --motion-fast: 0.3s;
-  --motion-base: 0.55s;
-  --motion-slow: 0.8s;
+  --motion-fast: 0.15s;
+  --motion-base: 0.25s;
+  --motion-slow: 0.5s;
   --ease-out-premium: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -321,6 +321,19 @@ main li a:hover {
   .type-card {
     font-size: var(--type-card);
     line-height: 1.1;
+  }
+
+  /* Semantic ink opacity — primary / secondary / muted */
+  .text-ink-primary {
+    color: color-mix(in srgb, var(--color-charcoal) 90%, transparent);
+  }
+
+  .text-ink-secondary {
+    color: color-mix(in srgb, var(--color-charcoal) 70%, transparent);
+  }
+
+  .text-ink-muted {
+    color: color-mix(in srgb, var(--color-charcoal) 50%, transparent);
   }
 
   /* Standard interactive surface — buttons and CTA-like links */

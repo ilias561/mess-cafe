@@ -582,7 +582,7 @@ export default function ActionsMissionStrip({
               }}
               whileHover={prefersReducedMotion ? undefined : { y: -6 }}
               className={cn(
-                'group relative overflow-hidden rounded-[6px] border border-line/40 transition-shadow duration-300',
+                'group relative overflow-hidden rounded-[6px] border border-line/40 transition-shadow duration-250',
                 cardBottomBorder[pillar.accent],
                 isLead
                   ? 'flex flex-row items-start gap-3 bg-bone-warm p-4 md:flex-col md:gap-0 md:p-0'
@@ -658,7 +658,7 @@ export default function ActionsMissionStrip({
                 <>
                   <span
                     className={cn(
-                      'absolute left-0 top-0 h-[3px] w-12 transition-all duration-300 group-hover:w-full',
+                      'absolute left-0 top-0 h-[3px] w-12 transition-all duration-250 group-hover:w-full',
                       accentBar[pillar.accent],
                     )}
                     aria-hidden
@@ -697,7 +697,7 @@ export default function ActionsMissionStrip({
                 </h3>
                 <p
                   className={cn(
-                    'mt-1.5 font-sans leading-relaxed text-charcoal/75 md:mt-3',
+                    'mt-1.5 font-sans leading-relaxed text-charcoal/70 md:mt-3',
                     isLead ? 'text-[13px] md:text-[13.5px]' : 'text-[14.5px]',
                   )}
                 >

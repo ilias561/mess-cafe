@@ -79,7 +79,7 @@ function OpenBadge({
     : 'bg-mustard'
   const textColor = light
     ? 'text-white/90'
-    : 'text-charcoal/80'
+    : 'text-charcoal/70'
   const pulseColor = status.open ? 'bg-green-400' : 'bg-mustard'
   const titleText = status.label
 
@@ -304,20 +304,20 @@ export default function Navigation() {
     <>
       <a
         href="#main-content"
-        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-ink-dark transition-transform duration-200 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
+        className="fixed top-3 left-3 z-[80] -translate-y-20 rounded-md bg-mustard px-4 py-2 font-sans text-sm font-medium text-ink-dark transition-transform duration-150 ease-out focus:translate-y-0 focus-visible:ring-2 focus-visible:ring-charcoal focus-visible:ring-offset-2"
       >
         Μετάβαση στο περιεχόμενο
       </a>
 
       <motion.header
-        className={`fixed top-0 right-0 left-0 z-50 transition-[height,background-color,border-color] duration-300 ease-in-out ${navHeight} ${headerClasses}`}
+        className={`fixed top-0 right-0 left-0 z-50 transition-[height,background-color,border-color] duration-250 ease-in-out ${navHeight} ${headerClasses}`}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: EASE }}
       >
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-3 px-5 lg:gap-4 lg:px-8">
           <Link
             href="/"
-            className={`flex shrink-0 items-center gap-2 transition-[color,opacity] duration-300 sm:gap-3 ${navTextColor} ${
+            className={`flex shrink-0 items-center gap-2 transition-[color,opacity] duration-250 sm:gap-3 ${navTextColor} ${
               hideHeaderBrand ? 'pointer-events-none opacity-0' : 'opacity-100'
             }`}
             aria-hidden={hideHeaderBrand}
@@ -459,7 +459,7 @@ export default function Navigation() {
                   <Link
                     href="/"
                     onClick={() => setMenuOpen(false)}
-                    className="flex w-fit max-w-full items-center gap-2.5 text-espresso transition-opacity duration-200 ease-out hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
+                    className="flex w-fit max-w-full items-center gap-2.5 text-espresso transition-opacity duration-150 ease-out hover:opacity-80 focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2"
                   >
                     <BrandLogo compact />
                     <span className="font-serif text-[20px] font-medium leading-none tracking-tight">M.E.S.S.</span>

@@ -66,7 +66,7 @@ export default function MessAcronym() {
     <motion.section
       ref={sectionRef}
       aria-label="M.E.S.S. — Modular, Events, Sustainable, Space"
-      className="border-y border-charcoal/10 bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-14 md:min-h-[75vh] md:px-12 md:py-20"
+      className="border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-14 md:min-h-[75vh] md:px-12 md:py-20"
       style={reduce || !isDesktop ? undefined : { backgroundPositionY: bgShift }}
     >
       <div className="mx-auto max-w-[1400px]">
@@ -79,7 +79,7 @@ export default function MessAcronym() {
           {messPillars.map((pillar, idx) => (
             <motion.article
               key={`${pillar.letter}-${pillar.word}-${idx}`}
-              className="group/col flex flex-col gap-3 rounded-[3px] border border-line/40 bg-bone-warm p-6 shadow-sm transition-opacity duration-300 focus-within:opacity-100 md:p-5"
+              className="group/col flex flex-col gap-3 rounded-[3px] border border-line/40 bg-bone-warm p-6 shadow-sm transition-opacity duration-250 focus-within:opacity-100 md:p-5"
               tabIndex={0}
               onHoverStart={() => setHoveredIndex(idx)}
               onHoverEnd={() => setHoveredIndex(null)}
@@ -113,7 +113,7 @@ export default function MessAcronym() {
               </motion.p>
               <div>
                 <motion.p
-                  className="inline-block border-b border-transparent font-serif text-[32px] leading-snug tracking-tight text-charcoal transition-all duration-300 group-hover/col:-translate-y-1 group-hover/col:border-mustard group-focus-within/col:-translate-y-1 group-focus-within/col:border-mustard"
+                  className="inline-block border-b border-transparent font-serif text-[32px] leading-snug tracking-tight text-charcoal transition-all duration-250 group-hover/col:-translate-y-1 group-hover/col:border-mustard group-focus-within/col:-translate-y-1 group-focus-within/col:border-mustard"
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-10% 0px' }}
@@ -121,11 +121,11 @@ export default function MessAcronym() {
                 >
                   {pillar.word}
                 </motion.p>
-                <p className="mt-2 max-w-[22ch] font-sans text-[13px] leading-relaxed text-concrete opacity-60 transition-opacity duration-300 group-hover/col:opacity-100 group-focus-within/col:opacity-100">
+                <p className="mt-2 max-w-[22ch] font-sans text-[13px] leading-relaxed text-concrete opacity-60 transition-opacity duration-250 group-hover/col:opacity-100 group-focus-within/col:opacity-100">
                   {pillar.body}
                 </p>
                 {pillar.footnote && (
-                  <p className="mt-3 max-w-[22ch] font-serif text-[12px] italic text-concrete opacity-60 transition-opacity duration-300 group-hover/col:opacity-100 group-focus-within/col:opacity-100">
+                  <p className="mt-3 max-w-[22ch] font-serif text-[12px] italic text-concrete opacity-60 transition-opacity duration-250 group-hover/col:opacity-100 group-focus-within/col:opacity-100">
                     {pillar.footnote}
                   </p>
                 )}

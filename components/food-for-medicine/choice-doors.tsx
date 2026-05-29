@@ -59,7 +59,7 @@ export default function ChoiceDoors() {
           >
             Τι θέλεις να δεις;
           </AnaglyphHeading>
-          <p className="mx-auto mt-5 max-w-[52ch] font-serif text-[clamp(15px,1.3vw,18px)] italic leading-relaxed text-charcoal/75">
+          <p className="mx-auto mt-5 max-w-[52ch] font-serif text-[clamp(15px,1.3vw,18px)] italic leading-relaxed text-charcoal/70">
             Διάλεξε μία από τις δύο πόρτες. Μπορείς πάντα να γυρίσεις πίσω.
           </p>
         </div>
@@ -111,12 +111,12 @@ export default function ChoiceDoors() {
                       >
                         {door.title}
                       </AnaglyphHeading>
-                      <p className="max-w-[28ch] font-serif text-[clamp(14px,1.1vw,16px)] italic leading-relaxed text-charcoal/80">
+                      <p className="max-w-[28ch] font-serif text-[clamp(14px,1.1vw,16px)] italic leading-relaxed text-charcoal/70">
                         {door.blurb}
                       </p>
                     </div>
 
-                    <span className="font-sans text-[12px] uppercase tracking-[0.17em] text-mustard transition-colors duration-300 group-hover:text-charcoal">
+                    <span className="font-sans text-[12px] uppercase tracking-[0.17em] text-mustard transition-colors duration-250 group-hover:text-charcoal">
                       {door.cta}
                     </span>
                   </div>

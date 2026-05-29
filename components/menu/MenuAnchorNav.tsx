@@ -51,7 +51,7 @@ export default function MenuAnchorNav() {
   return (
     <nav
       ref={navRef}
-      className="sticky top-16 z-40 border-b border-charcoal/10 bg-bone/95 backdrop-blur-[10px]"
+      className="sticky top-16 z-40 border-b border-line bg-bone/95 backdrop-blur-[10px]"
       aria-label="Menu sections"
     >
       <div className="mx-auto flex max-w-[1400px] flex-col gap-2 px-6 py-2 md:px-12 lg:flex-row lg:items-center lg:justify-between">

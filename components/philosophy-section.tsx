@@ -55,7 +55,7 @@ export default function PhilosophySection() {
                   η φιλοσοφία μας
                 </h2>
 
-                <p className="mt-7 max-w-[44ch] font-serif text-[clamp(17px,1.4vw,20px)] italic leading-[1.55] text-charcoal/75">
+                <p className="mt-7 max-w-[44ch] font-serif text-[clamp(17px,1.4vw,20px)] italic leading-[1.55] text-charcoal/70">
                   Φύση, ευεξία, χαλάρωση. Στις εγκαταστάσεις του ΚΕΠΑΒΙ δημιουργήσαμε μια μικρή όαση, που σκοπό έχει:
                 </p>
               </Reveal>
@@ -63,7 +63,7 @@ export default function PhilosophySection() {
               <Reveal asGroup gap={0.1} delay={0.15} className="mt-12 flex flex-col">
                 {philosophyGoals.map((goal, index) => (
                   <Reveal.Item key={goal}>
-                    <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-charcoal/10 py-6 first:border-t-0 first:pt-0">
+                    <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-line py-6 first:border-t-0 first:pt-0">
                       <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard tabular-nums">
                         {String(index + 1).padStart(2, '0')}
                       </span>
@@ -170,7 +170,7 @@ function Centerpiece() {
             <span className="italic text-mustard">σε κίνηση</span>
           </AnaglyphHeading>
 
-          <p className="mt-6 max-w-[34ch] font-serif text-[clamp(15px,1.3vw,18px)] italic leading-[1.55] text-charcoal/75">
+          <p className="mt-6 max-w-[34ch] font-serif text-[clamp(15px,1.3vw,18px)] italic leading-[1.55] text-charcoal/70">
             Μικρές στιγμές από την καθημερινότητα στο M.E.S.S. — φως, υλικά, άνθρωποι.
           </p>
 
@@ -265,7 +265,7 @@ function SplitSpread() {
             <br />
             6 σκηνών
           </MicroEyebrow>
-          <p className="font-serif text-[13px] italic leading-snug text-charcoal/60">
+          <p className="font-serif text-[13px] italic leading-snug text-charcoal/50">
             από τον χώρο
           </p>
         </div>
@@ -274,7 +274,7 @@ function SplitSpread() {
       <Reveal delay={0.4} className="mt-24 md:mt-32">
         <div className="grid grid-cols-1 md:grid-cols-12">
           <div className="md:col-start-2 md:col-span-7">
-            <p className="font-serif text-[clamp(20px,2.2vw,28px)] italic leading-[1.4] text-charcoal/80">
+            <p className="font-serif text-[clamp(20px,2.2vw,28px)] italic leading-[1.4] text-charcoal/70">
               «Ένας χώρος μπροστά στη λίμνη — υγιεινό lifestyle, κοινότητα, ευεξία.»
             </p>
             <p className="mt-5 inline-flex items-center gap-3">
@@ -319,7 +319,7 @@ function KenBurnsTile({
             unoptimized
             loading="lazy"
             sizes={sizes}
-            className="object-cover transition-[filter] duration-700 group-hover:brightness-110"
+            className="object-cover transition-[filter] duration-500 group-hover:brightness-110"
           />
         </motion.div>
       </div>

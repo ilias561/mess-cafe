@@ -89,7 +89,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
 
   return (
     <section
-      className="relative overflow-hidden border-y border-charcoal/10 bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-10 md:px-12 md:py-14"
+      className="relative overflow-hidden border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-10 md:px-12 md:py-14"
       aria-label="Σήμερα στο M.E.S.S."
     >
       <Reveal className="relative">
@@ -147,12 +147,12 @@ export default function TodayModule({ events }: TodayModuleProps) {
                   </div>
                 ) : (
                   <div className="space-y-3 rounded-2xl border border-mustard/35 bg-cream/60 p-4">
-                    <p className="font-sans text-sm text-charcoal/80 transition-opacity duration-500" key={suggestionIndex}>
+                    <p className="font-sans text-sm text-charcoal/70 transition-opacity duration-500" key={suggestionIndex}>
                       {suggestions[suggestionIndex]}
                     </p>
                     <Link
                       href="/actions"
-                      className="group inline-flex items-center gap-2 rounded-full border border-mustard px-5 py-2.5 font-sans text-sm font-medium text-charcoal transition-[background-color,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-mustard active:scale-[0.98]"
+                      className="group inline-flex items-center gap-2 rounded-full border border-mustard px-5 py-2.5 font-sans text-sm font-medium text-charcoal transition-[background-color,transform] duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-mustard active:scale-[0.98]"
                     >
                       Δες όλες τις δράσεις
                       <span className="transition-transform group-hover:translate-x-0.5" aria-hidden>

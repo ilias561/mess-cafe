@@ -113,10 +113,10 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               className="object-cover opacity-90 transition-opacity duration-500 ease-out group-hover:opacity-100"
             />
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/10" />
+            <div className="absolute inset-0 bg-black/20 transition-opacity duration-250 group-hover:bg-black/10" />
             {/* Play button */}
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm ring-2 ring-white/40 transition-transform duration-300 group-hover:scale-110">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm ring-2 ring-white/40 transition-transform duration-250 group-hover:scale-110">
                 <svg className="ml-1 h-6 w-6 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                   <path d="M8 5v14l11-7z" />
                 </svg>
@@ -148,7 +148,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 <button
                   type="button"
                   onClick={() => setMapConsent(true)}
-                  className="ui-interactive rounded-full border border-mustard/40 bg-mustard/10 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal/80 hover:border-mustard hover:bg-mustard/20 hover:text-charcoal"
+                  className="ui-interactive rounded-full border border-mustard/40 bg-mustard/10 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal/70 hover:border-mustard hover:bg-mustard/20 hover:text-charcoal"
                 >
                   Φόρτωση χάρτη
                 </button>

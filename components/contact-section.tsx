@@ -99,7 +99,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                 />
               </AnaglyphHeading>
             </ScrollDrift>
-            <p className="mt-5 font-serif text-[15px] italic leading-relaxed text-charcoal/75">
+            <p className="mt-5 font-serif text-[15px] italic leading-relaxed text-charcoal/70">
               Ερωτήσεις, συνεργασίες, παρατηρήσεις — όλα καλοδεχούμενα. Απαντάμε μέσα σε 24 ώρες.
             </p>
           </Reveal>
@@ -132,7 +132,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">
+                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/70">
                     Όνομα
                   </label>
                   <input
@@ -146,7 +146,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">
+                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/70">
                     Email
                   </label>
                   <input
@@ -160,7 +160,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5 md:col-span-2">
-                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/80">
+                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/70">
                     Μήνυμα
                   </label>
                   <textarea

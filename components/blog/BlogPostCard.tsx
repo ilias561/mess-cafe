@@ -11,7 +11,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link
       href={`/food-for-medicine/${post.slug}`}
-      className="group block cursor-pointer bg-cream transition-shadow duration-200 ease-out hover:shadow-sm"
+      className="group block cursor-pointer bg-cream transition-shadow duration-150 ease-out hover:shadow-sm"
     >
       {/* Cover image — aspect-[4/3], no radius, darken on hover */}
       <div className="aspect-[4/3] overflow-hidden">
@@ -22,7 +22,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
           height={600}
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           priority={false}
-          className="h-full w-full object-cover transition-[filter] duration-200 group-hover:brightness-95"
+          className="h-full w-full object-cover transition-[filter] duration-150 group-hover:brightness-95"
         />
       </div>
 
@@ -55,7 +55,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
 
         {/* Read arrow — bottom-left, slides 4px right on card hover */}
         <span className="ui-link mt-3 inline-flex items-center font-sans text-[14px] font-medium text-mustard">
-          <span className="transition-transform duration-200 ease-out group-hover:translate-x-1">
+          <span className="transition-transform duration-150 ease-out group-hover:translate-x-1">
             Read →
           </span>
         </span>

@@ -31,7 +31,7 @@ export default function WorkshopsPage() {
           <h1 className="font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
             Workshops &amp; Events
           </h1>
-          <p className="mt-8 max-w-[72ch] font-serif text-[18px] italic leading-relaxed text-charcoal/80 md:text-[20px]">
+          <p className="mt-8 max-w-[72ch] font-serif text-[18px] italic leading-relaxed text-charcoal/70 md:text-[20px]">
             Έχοντας 2 ξεχωριστές αίθουσες και ένα πατάρι, δημιουργείται η δυνατότητα να γίνονται διάφορα workshops
             και events, τα οποία ενημερώνονται μέσα από τη σελίδα μας στο Instagram. Μπορείτε επίσης να κλείσετε τον
             δικό σας χώρο για τα events σας.

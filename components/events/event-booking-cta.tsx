@@ -23,7 +23,7 @@ export default function EventBookingCta({ event }: EventBookingCtaProps) {
         <h2 className="mt-4 max-w-[18ch] font-serif text-[clamp(30px,4.2vw,52px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
           Κλείσε τη θέση σου εγκαίρως.
         </h2>
-        <p className="mt-4 max-w-[62ch] font-sans text-[16px] leading-[1.7] text-charcoal/75 md:text-[17px]">
+        <p className="mt-4 max-w-[62ch] font-sans text-[16px] leading-[1.7] text-charcoal/70 md:text-[17px]">
           Συμπλήρωσε τη φόρμα κράτησης για να σε εξυπηρετήσουμε γρήγορα ή στείλε μας απευθείας μήνυμα στο WhatsApp.
         </p>
         <div className="mt-8 flex flex-wrap gap-4">

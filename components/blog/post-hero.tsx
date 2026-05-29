@@ -26,7 +26,7 @@ export default function PostHero({ post }: PostHeroProps) {
           <h1 className="mt-5 max-w-[22ch] break-words font-serif text-[clamp(28px,6vw,78px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
             {post.title}
           </h1>
-          <p className="mt-5 max-w-[62ch] font-sans text-[16px] leading-[1.7] text-charcoal/75 md:text-[18px]">
+          <p className="mt-5 max-w-[62ch] font-sans text-[16px] leading-[1.7] text-charcoal/70 md:text-[18px]">
             {post.excerpt}
           </p>
           <PostMeta post={post} className="mt-6" light />

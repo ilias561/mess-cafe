@@ -6,11 +6,12 @@ export const ease = {
   inOut: [0.65, 0, 0.35, 1] as const,
 } as const
 
+/** CSS transition scale: 150ms / 250ms / 500ms — aligned with Tailwind duration-150/250/500 */
 export const duration = {
   micro: 0.15,
-  fast: 0.3,
-  base: 0.55,
-  slow: 0.8,
+  fast: 0.15,
+  base: 0.25,
+  slow: 0.5,
 } as const
 
 export const reveal: Variants = {
