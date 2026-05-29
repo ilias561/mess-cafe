@@ -19,10 +19,10 @@ export default function FeaturedNextEvent({ event, settings }: Props) {
   return (
     <section className="bg-bone-warm px-6 py-24 md:px-12 md:py-32">
       <div className="mx-auto max-w-[1400px]">
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
 
           {/* Left: portrait image */}
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[2px]">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[360px] overflow-hidden rounded-[2px] md:mx-0 md:max-w-[440px]">
             <FadeImage
               src={event.coverImage}
               alt={event.coverAlt || `Εκδήλωση: ${event.title}`}

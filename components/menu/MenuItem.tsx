@@ -224,7 +224,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
       <img
         src={item.image}
         alt={item.name}
-        className="h-full w-full object-cover"
+        className="block h-auto w-full rounded-[6px]"
         loading="lazy"
         decoding="async"
       />
@@ -321,13 +321,17 @@ export function MenuFeatureRow({
           </div>
         ) : (
           <div
-            className={`w-full overflow-hidden rounded-[6px] bg-bone-warm sm:mx-auto sm:max-w-[300px] md:max-w-[380px] ${
-              flip ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'
-            }`}
+            className={`w-full overflow-hidden rounded-[6px] sm:mx-auto sm:max-w-[300px] md:max-w-[380px] ${
+              item.video ? 'bg-bone-warm' : ''
+            } ${flip ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'}`}
           >
-            <div className="aspect-[3/2] w-full sm:aspect-[4/5]">
+            {item.video ? (
+              <div className="aspect-[3/2] w-full sm:aspect-[4/5]">
+                <MenuItemMedia item={item} />
+              </div>
+            ) : (
               <MenuItemMedia item={item} />
-            </div>
+            )}
           </div>
         )}
       </div>
@@ -359,8 +363,14 @@ export function MenuGridItem({
         </div>
       ) : (
         hasMedia && (
-          <div className="aspect-square w-full overflow-hidden rounded-[6px] bg-bone-warm sm:aspect-[4/5]">
-            <MenuItemMedia item={item} />
+          <div className={`w-full overflow-hidden rounded-[6px] ${item.video ? 'bg-bone-warm' : ''}`}>
+            {item.video ? (
+              <div className="aspect-square w-full sm:aspect-[4/5]">
+                <MenuItemMedia item={item} />
+              </div>
+            ) : (
+              <MenuItemMedia item={item} />
+            )}
           </div>
         )
       )}

@@ -302,8 +302,8 @@ function KenBurnsTile({
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const scale = useTransform(scrollYProgress, [0, 1], [1.0, 1.12])
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '-4%'])
+  const scale = useTransform(scrollYProgress, [0, 1], [1.0, 1.24])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '-7%'])
 
   return (
     <figure ref={ref} className="group">

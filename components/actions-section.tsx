@@ -176,12 +176,12 @@ function ActionSpread({
 }) {
   const imageCol =
     side === 'left'
-      ? 'md:col-start-1 md:col-span-6 md:-translate-y-2'
-      : 'md:col-start-7 md:col-span-6 md:translate-y-4'
+      ? 'md:col-start-1 md:col-span-5 md:row-start-1'
+      : 'md:col-start-8 md:col-span-5 md:row-start-1'
   const typeCol =
     side === 'left'
-      ? 'md:col-start-8 md:col-span-4'
-      : 'md:col-start-2 md:col-span-4'
+      ? 'md:col-start-8 md:col-span-4 md:row-start-1'
+      : 'md:col-start-2 md:col-span-4 md:row-start-1'
 
   const dateLabel = formatEventDate(card.date)
 
@@ -201,7 +201,7 @@ function ActionSpread({
           </MaskRevealBlock>
         </div>
 
-        <div className={`order-2 flex flex-col justify-center ${typeCol}`}>
+        <div className={`order-2 flex flex-col justify-start ${typeCol}`}>
           <NumberedCaption index={index} label={card.categoryLabel} className="mt-0" />
           {dateLabel ? (
             <p className="mt-4 font-serif text-[clamp(28px,3vw,40px)] italic leading-none text-mustard">

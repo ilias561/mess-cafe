@@ -118,7 +118,7 @@ export function ClimateShell({
                 ? { opacity: 0 }
                 : {
                     opacity: vignetteOpacity,
-                    background: `radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,${vignetteAlpha}) 100%)`,
+                    background: `radial-gradient(ellipse 90% 80% at center, transparent 60%, rgba(0,0,0,${vignetteAlpha}) 100%)`,
                   }
             }
           />
