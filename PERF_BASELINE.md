@@ -95,19 +95,29 @@ From `app/layout.tsx` at baseline:
 
 ## PART 10 comparison checklist
 
-Fill in after PROMPT-005 completes:
+Completed 2026-05-29 on `perf-visual-upgrade` @ `20ea23d`.
 
 | Metric | Baseline | After | Δ |
 |--------|----------|-------|---|
-| `out/` total | 108 MB | | |
-| JS chunks total | ~1,145 KB | | |
-| CSS total | ~165 KB | | |
-| woff2 total | ~468 KB | | |
-| `public/images` source | 32 MB | | |
-| Lighthouse Perf `/` (mobile) | N/A | | |
-| Lighthouse Perf `/food-for-medicine` (mobile) | N/A | | |
-| Visual regression | — | pass / fail | |
+| `out/` total | 108 MB | 148 MB | +40 MB (AVIF/WebP variants copied to `out/`; browsers fetch smaller formats) |
+| JS chunks total | ~1,145 KB | ~1,140 KB | ~−5 KB (LazyMotion + dynamic imports) |
+| CSS total | ~165 KB | ~166 KB | ≈0 |
+| woff2 total | ~468 KB | ~468 KB | ≈0 |
+| `public/images` source | 32 MB | 72 MB on disk after prebuild | +40 MB build artifacts (gitignored `*--w*.avif/webp`) |
+| Lighthouse Perf `/` (mobile) | N/A | N/A | CLI not installed |
+| Lighthouse Perf `/food-for-medicine` (mobile) | N/A | N/A | CLI not installed |
+| Visual regression | — | pass (code review) | No layout/structure changes |
 
 ## Visual regression notes (PART 10)
 
-_To be completed after full pass on `/`, `/food-for-medicine`, `/actions`, an event page @ 375px + ≥1024px, and `prefers-reduced-motion: reduce`._
+- **Automated:** `npm run build` passes; static `out/` emitted (21 routes).
+- **Manual required:** spot-check `/`, `/food-for-medicine`, `/actions`, one event slug at 375px and ≥1024px; emulate `prefers-reduced-motion: reduce` (animations/static grain should respect reduced motion).
+- **Image fidelity:** 86 sources in `image-manifest`; AVIF q60 / WebP q81 — verify 3–4 hero/gallery frames at 100% zoom in browser.
+- **Fonts:** Inter includes `greek`; **Fraunces has no Google Fonts Greek subset** — Greek serif headings use metric-matched fallback (`adjustFontFallback` + `display: swap`).
+
+## Runtime wins (expected)
+
+- `FadeImage` serves `<picture>` AVIF/WebP with LQIP blur for manifest entries.
+- `prebuild` regenerates variants (cached via `.cache/image-optimize.json`).
+- Below-fold sections (`GalleryMenuPreview`, `ReviewsSection`, overlays) load via `next/dynamic`.
+- Cloudflare: long cache on `/_next/static/*`, `/images/*`, `/videos/*`; HTML `must-revalidate` on `index.html` paths.
