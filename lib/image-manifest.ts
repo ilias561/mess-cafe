@@ -93,6 +93,13 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/decor/photo/banana-leaf--w480.avif 480w, /images/decor/photo/banana-leaf--w768.avif 768w, /images/decor/photo/banana-leaf--w1200.avif 1200w, /images/decor/photo/banana-leaf--w1280.avif 1280w",
     "webpSrcSet": "/images/decor/photo/banana-leaf--w480.webp 480w, /images/decor/photo/banana-leaf--w768.webp 768w, /images/decor/photo/banana-leaf--w1200.webp 1200w, /images/decor/photo/banana-leaf--w1280.webp 1280w"
   },
+  "/images/decor/photo/fan-palm.png": {
+    "width": 1063,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRqYBAABXRUJQVlA4WAoAAAAQAAAADwAAEgAAQUxQSP8AAAAFgGVb2/HmeT/8SWrbtm23V7pvJ9gR2LZt29YXJ1OIiAkAyOijBfy/0PvbNxkBuLDM6zjxceN6oh0DxFjhb7gu+H+Fvb5vurwYE69Soz2MKT/zf6IrZvWHWPtok8E7gi18b30d01uk4a5jpZlHeEzeHDwaxcBRXdhuqXuZCllavfq+6eW+jxn1v9H5EXQwezq+V75DCV+iKis252dvbFB5D+3fwT/Ct7ItGaudD9fb39cU4u7i691Y+ni7u3JBFztGIsgwrxd5E+2lpt4J4K5efxc+YStMCaMyAlL/ZoRf2JL4g32m/MIXmXKAjM55xc6T0QFAy5xXcJSMBWsfNgAAVlA4IIAAAAAQBACdASoQABMAPu1iqU2ppaOiMAgBMB2JbACdDiAByezqbHKRfPX3BAD+2YJyn5dXaBMitYP5DPZ3HUWRLK/OknA7R73jIxeMMTUSa7jCZX5MGhfGzaREuEvyqJoFh6W2Dbn0wvRrpW/266o8FKb8CwZRQT5LVvFpzYx8YxrgAA==",
+    "avifSrcSet": "/images/decor/photo/fan-palm--w480.avif 480w, /images/decor/photo/fan-palm--w768.avif 768w, /images/decor/photo/fan-palm--w1063.avif 1063w",
+    "webpSrcSet": "/images/decor/photo/fan-palm--w480.webp 480w, /images/decor/photo/fan-palm--w768.webp 768w, /images/decor/photo/fan-palm--w1063.webp 1063w"
+  },
   "/images/decor/photo/fern.png": {
     "width": 868,
     "height": 1280,
@@ -128,6 +135,20 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/decor/photo/monstera-3--w480.avif 480w, /images/decor/photo/monstera-3--w768.avif 768w, /images/decor/photo/monstera-3--w1000.avif 1000w",
     "webpSrcSet": "/images/decor/photo/monstera-3--w480.webp 480w, /images/decor/photo/monstera-3--w768.webp 768w, /images/decor/photo/monstera-3--w1000.webp 1000w"
   },
+  "/images/decor/photo/monstera-upright.png": {
+    "width": 815,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRhICAABXRUJQVlA4WAoAAAAQAAAADwAAGAAAQUxQSCwBAAABkHNru2m78t+19kVnVTZidza7VHZSpbLtpHdp204627atfddaT5yImABJ1qjuxuNDU2SNJEWqu/07not1FBkpUpt3eOe+s6K8WMYqe05wARwje52yUvru3o8JEGg6ii7Schosx+G5l3eWnmoZM74+ITg2duNBjtrD85w5uMC1M8QtNYIvnCjahydw6NtKbXi1He5dJXhWteCkzrJ4DQ48xzSEHXrI5xHbcHg2TIjv9WlyEz5NvYQHz7HUJatXEofvX4DADE3i5FBc8BAcH+afgotlnwj8HoBvbNROHI71W3Eu5lm52nofU1tTXhu+86aNrObjWJer/nCjjiIpeej8Ds1KZYZta65IkpFRdV0lSMbqt4RElTWTjSKrPxtVtVWkfzSq7vg/pV1k/wRWUDggwAAAABAFAJ0BKhAAGQA+7WKpTamlo6IwCAEwHYlsAJ0vXUAA3iKuQqC4XdzXNf6EHb1srpgA/qKsZBF7+R043s0petQ+DapEE+DZ0GewciUSUHe8UCom+vlqHhEQ6vkYJ7e9Vgg2/EetYgF8CdXo/Av073n3AxKooOFwGXZpHjVc4zXT7iSixjutXJP7ceuP9ueVPtOqDzOQgWR29P3R5btcMwG9LZ8+JOmsgp9pI+LFw1v2JQ5TuH+R8GeQ7X5GT90AAA==",
+    "avifSrcSet": "/images/decor/photo/monstera-upright--w480.avif 480w, /images/decor/photo/monstera-upright--w768.avif 768w, /images/decor/photo/monstera-upright--w815.avif 815w",
+    "webpSrcSet": "/images/decor/photo/monstera-upright--w480.webp 480w, /images/decor/photo/monstera-upright--w768.webp 768w, /images/decor/photo/monstera-upright--w815.webp 815w"
+  },
+  "/images/decor/photo/monstera-vine.png": {
+    "width": 1273,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRnQBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSOMAAAABkGvb1rFn+0VwA7ZZ2eqSLqVR2qlso3JKqzMrJ5Vt207e73ve8/MeImIC8G8Oxg3JEHn8m0cAI5Yjgv+fl1KhpGkdADwHDlHqhaSQ3/o0wHHg1NA5pN9L7yk3ixCN1CEg8vRoSn5cv3+G3e1+X3N65mT5FCkZPWutESMiSf6WaMN76rOCJKZUSIzGqmv9YHW+TTIRMYlqIAjwe38iRiQziYpgZYxciiYm0UvGFdnn0Zn/xDvC3ojO1JwD0UiPGfKDANeO+Vjw4CyaPxY+HyHgb0FEUMsh7ScBPA8eAMTk1dc8DgBWUDggagAAADACAJ0BKhAAEAADgFolsAJ0BiyNrfZvs3sAAP7xSd7f0ZYi9QGyANXcdQROfCWF6Qe5lA4jE9qvY2IbvqIL0W36WXowGfIERirIEmtslp/t18L3IBPtFlylj0gta7ZvtcMf7MM3HXWgAAA=",
+    "avifSrcSet": "/images/decor/photo/monstera-vine--w480.avif 480w, /images/decor/photo/monstera-vine--w768.avif 768w, /images/decor/photo/monstera-vine--w1200.avif 1200w, /images/decor/photo/monstera-vine--w1273.avif 1273w",
+    "webpSrcSet": "/images/decor/photo/monstera-vine--w480.webp 480w, /images/decor/photo/monstera-vine--w768.webp 768w, /images/decor/photo/monstera-vine--w1200.webp 1200w, /images/decor/photo/monstera-vine--w1273.webp 1273w"
+  },
   "/images/decor/photo/palm-cluster.png": {
     "width": 1280,
     "height": 641,
@@ -141,6 +162,20 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRvYAAABXRUJQVlA4WAoAAAAQAAAADwAACgAAQUxQSJQAAAABgJpt27Ll/q1p/PdQksMEMAAHCWawCTTy07S6pb/h7s2Tu8P7Phe6Q0RMgBQIKtx3ekPvzEahNqWAkkONs3ieHcZ+QPEiz9cY5t0Hi0GVPJvj708KShc38PbPS716+OBv84xGw8u4f3BMqeIAM8CMhzNq1M6H/ca5z7a6iJbg7hX87ofRrJAGly9HunmhqWG4VGEJVlA4IDwAAACwAQCdASoQAAsAA4BaJbAAAp2fuvloAP7zMGUJKxfQGf3CRJdpJsLKwq5Vw/tp6EF//taU93Z50hQkAAA=",
     "avifSrcSet": "/images/decor/photo/palm-frond--w480.avif 480w, /images/decor/photo/palm-frond--w768.avif 768w, /images/decor/photo/palm-frond--w1200.avif 1200w, /images/decor/photo/palm-frond--w1280.avif 1280w",
     "webpSrcSet": "/images/decor/photo/palm-frond--w480.webp 480w, /images/decor/photo/palm-frond--w768.webp 768w, /images/decor/photo/palm-frond--w1200.webp 1200w, /images/decor/photo/palm-frond--w1280.webp 1280w"
+  },
+  "/images/decor/photo/split-leaf-1.png": {
+    "width": 1280,
+    "height": 1186,
+    "blurDataURL": "data:image/webp;base64,UklGRlABAABXRUJQVlA4WAoAAAAQAAAADwAADgAAQUxQSNUAAAABgLNt2/lV/vPPrpGTNv2a2mxMNdr21n/LrtmuSd/Atm3b7vd73nv6R0SSSofMGypJ8vD2syAVqbTJ6wpSOBRGFGkTmajP8GVcDpmxaEwq2+WvKfxZFOFfyCglrVnc9wEekVAg8OlEv/gvuEFbMADIqKcfRnILvk8AKP+opn2gW1IgwCzQb2CcCfHr2AgZwGwIOTRbDgHdhZAxK5Fd0ePzlPseFIAxpV5g4BczDWABDa7/wJ/CzCxfr0+0xruFVEEAYOylRIQl1q5NDh9o7OxePt3/5AEAVlA4IFQAAABQAgCdASoQAA8AA4BaJbACdLoAAzqVjtnrUIAA88z0Po83jfz5YnZO5jRz6ndJz7p62982X3RKM2xJ8VXh7K3jyXU5g8DRr8yOLRpfN1OQKrJaAAA=",
+    "avifSrcSet": "/images/decor/photo/split-leaf-1--w480.avif 480w, /images/decor/photo/split-leaf-1--w768.avif 768w, /images/decor/photo/split-leaf-1--w1200.avif 1200w, /images/decor/photo/split-leaf-1--w1280.avif 1280w",
+    "webpSrcSet": "/images/decor/photo/split-leaf-1--w480.webp 480w, /images/decor/photo/split-leaf-1--w768.webp 768w, /images/decor/photo/split-leaf-1--w1200.webp 1200w, /images/decor/photo/split-leaf-1--w1280.webp 1280w"
+  },
+  "/images/decor/photo/split-leaf-2.png": {
+    "width": 1179,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRowBAABXRUJQVlA4WAoAAAAQAAAADwAAEAAAQUxQSO4AAAABkKNt27FHb2xtIJV62046Ox0rGwuwbY9t29PZtq3ve59rsImImAALaytl6VMabrHM57KC0RBloUL2/ORHpMdzXkS9epfUuvUH8ptrqhMK537kobUJBjlhMFf5q4xfApgc9HjE9YxHPfwGEUF7zfAr/dw8vwxTQLN2HEo21pki/C+C5uBBH+eotHjfNrQ2BOHlsYkk//iOWxgAwosqTADh7llEeOl2A41wOV9VYgovVcyubSutcW5+G7T8Z6H690yNrdwFQ35/56WligMB8ycfGq7wTFmqYQwQzoQvwktloew3/v74+WGD504+fL8LVlA4IHgAAAAwBACdASoQABEAPu1iqU2ppaOiMAgBMB2JagCdLwABZzQEGU63cXDbeIAA/r3BoQzr88R8ZoTk5gmcjFf1mZsuhjMOe0q6ICythZ9Lykj5sfUonGW3Uoj7hnhDfdhMK0eZWMm2vl9f/oIvFfL6//QRoX8e4coAAAA=",
+    "avifSrcSet": "/images/decor/photo/split-leaf-2--w480.avif 480w, /images/decor/photo/split-leaf-2--w768.avif 768w, /images/decor/photo/split-leaf-2--w1179.avif 1179w",
+    "webpSrcSet": "/images/decor/photo/split-leaf-2--w480.webp 480w, /images/decor/photo/split-leaf-2--w768.webp 768w, /images/decor/photo/split-leaf-2--w1179.webp 1179w"
   },
   "/images/decor/tropical-leaves.png": {
     "width": 74,
