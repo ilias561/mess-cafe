@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
 import ActionsShell from '@/components/events/actions-shell'
-import UpcomingDatesMarquee from '@/components/events/upcoming-dates-marquee'
 import FeaturedNextEvent from '@/components/events/featured-next-event'
 import ActionsHeroHeader from '@/components/events/actions-hero-header'
 import ActionsManifesto from '@/components/events/actions-manifesto'
@@ -66,7 +65,6 @@ export default function ActionsPage() {
           </>
         }
       >
-        <UpcomingDatesMarquee events={upcomingEvents} />
         {featured && <FeaturedNextEvent event={featured} settings={settings} />}
       </ActionsShell>
       {!noUpcoming && spotlight}

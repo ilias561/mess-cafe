@@ -20,8 +20,6 @@ import {
   CornerTicks,
   Eyebrow,
   HairlineRule,
-  MicroEyebrow,
-  NumberedCaption,
   ReleaseDivider,
 } from '@/components/decor/ornaments'
 import type { Event } from '@/lib/events/events'
@@ -116,17 +114,6 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
               </p>
             </div>
 
-            <aside className="hidden md:col-span-3 md:col-start-10 md:flex md:flex-col md:gap-3 md:pt-4">
-              <HairlineRule origin="left" />
-              <MicroEyebrow>
-                Σειρά
-                <br />
-                {visible.length} δράσεων
-              </MicroEyebrow>
-              <p className="font-serif text-[13px] italic leading-snug text-charcoal/65">
-                ζωντανές & επερχόμενες
-              </p>
-            </aside>
           </div>
 
           {visible.length > 0 && (
@@ -138,7 +125,6 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                   <ActionSpread
                     key={card.slug}
                     card={card}
-                    index={String(7 + idx).padStart(2, '0')}
                     side={idx % 2 === 0 ? 'left' : 'right'}
                   />
                 ))}
@@ -167,11 +153,9 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
 
 function ActionSpread({
   card,
-  index,
   side,
 }: {
   card: Event
-  index: string
   side: 'left' | 'right'
 }) {
   const imageCol =
@@ -202,7 +186,6 @@ function ActionSpread({
         </div>
 
         <div className={`order-2 flex flex-col justify-start ${typeCol}`}>
-          <NumberedCaption index={index} label={card.categoryLabel} className="mt-0" />
           {dateLabel ? (
             <p className="mt-4 font-serif text-[clamp(28px,3vw,40px)] italic leading-none text-mustard">
               {dateLabel}

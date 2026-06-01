@@ -196,11 +196,6 @@ function SplitSpread() {
   return (
     <div className="relative mt-16 md:mt-24">
 
-      <div className="mb-8 flex items-center gap-3 md:mb-12">
-        <span aria-hidden className="block h-px w-10 bg-mustard/70" />
-        <MicroEyebrow>Λεπτομέρειες · ο χώρος μας</MicroEyebrow>
-      </div>
-
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start md:gap-8">
         <div className="md:col-start-1 md:col-span-5 md:-translate-y-4">
           <MaskRevealBlock direction="left">
@@ -257,17 +252,6 @@ function SplitSpread() {
               sizes="(max-width: 768px) 100vw, 70vw"
             />
           </MaskRevealBlock>
-        </div>
-        <div className="hidden md:col-start-11 md:col-span-2 md:flex md:translate-y-2 md:flex-col md:items-start md:gap-4">
-          <span aria-hidden className="block h-12 w-px bg-mustard/70" />
-          <MicroEyebrow className="text-olive/80">
-            Σειρά
-            <br />
-            6 σκηνών
-          </MicroEyebrow>
-          <p className="font-serif text-[13px] italic leading-snug text-charcoal/50">
-            από τον χώρο
-          </p>
         </div>
       </div>
 
