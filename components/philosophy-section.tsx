@@ -7,6 +7,7 @@ import AmbientVideo from '@/components/ambient-video'
 import { Reveal } from '@/components/reveal'
 import MaskRevealBlock from '@/components/mask-reveal-block'
 import { ClimateShell } from '@/components/decor/climate-shell'
+import { ScrollLeaves } from '@/components/decor/scroll-leaves'
 import {
   AnaglyphHeading,
   CornerTicks,
@@ -40,7 +41,9 @@ export default function PhilosophySection() {
       particles="mustard"
       particleCount={8}
     >
-      <div className="mx-auto max-w-[1400px]">
+      <ScrollLeaves />
+
+      <div className="relative z-10 mx-auto max-w-[1400px]">
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
           <div className="md:col-span-5">

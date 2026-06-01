@@ -204,7 +204,8 @@ html.lenis body {
   }
   #hero,
   .marquee-track,
-  .marquee-track-reverse {
+  .marquee-track-reverse,
+  .leaf-sway {
     animation: none !important;
   }
   main p a,
@@ -234,6 +235,17 @@ html.lenis body {
   0% { opacity: 1; }
   50% { opacity: 0.5; }
   100% { opacity: 1; }
+}
+
+/* Idle breeze for the philosophy-section leaf border. Cheap GPU keyframe so it
+   can run on ~150 leaves at once; per-leaf duration/delay set inline. */
+@keyframes leafSway {
+  0%, 100% { transform: rotate(-2deg) translateY(0); }
+  50% { transform: rotate(2.6deg) translateY(-5px); }
+}
+.leaf-sway {
+  animation: leafSway 7s ease-in-out infinite;
+  transform-origin: 50% 10%;
 }
 
 /* Hero headline fluid sizing */
