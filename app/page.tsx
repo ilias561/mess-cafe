@@ -7,6 +7,8 @@ import HeroCaption from '@/components/hero-caption'
 import MessAcronym from '@/components/mess-acronym'
 import PhilosophySection from '@/components/philosophy-section'
 import ActionsSection from '@/components/actions-section'
+import ExpandCoverReveal from '@/components/expand-cover-reveal'
+import { images } from '@/lib/images'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
 
@@ -35,7 +37,12 @@ export default function Home() {
       <HeroCaption />
       <MessAcronym />
       <PhilosophySection />
-      <ActionsSection actionCards={actionCards} />
+      <ExpandCoverReveal
+        src={images.aboutBar}
+        alt="Μπαρ specialty coffee και περιοχή σερβιρίσματος"
+      >
+        <ActionsSection actionCards={actionCards} />
+      </ExpandCoverReveal>
       <GalleryMenuPreview />
       <ReviewsSection />
       <ContactSection settings={settings} />
