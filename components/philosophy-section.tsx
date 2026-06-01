@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, type ReactNode } from 'react'
-import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import AmbientVideo from '@/components/ambient-video'
 import { Reveal } from '@/components/reveal'
@@ -112,6 +112,9 @@ export default function PhilosophySection() {
 function Centerpiece() {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  // Gate the two infinite keyframe loops below to on-screen — repeat:Infinity
+  // otherwise ticks on the main thread for the whole session even scrolled away.
+  const inView = useInView(ref, { margin: '200px' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const videoY = useTransform(scrollYProgress, [0, 1], ['8%', '-8%'])
   const textY = useTransform(scrollYProgress, [0, 1], ['-4%', '4%'])
@@ -132,7 +135,7 @@ function Centerpiece() {
             <div className="relative aspect-[9/16] w-full max-w-[380px] overflow-hidden">
               <m.div
                 className="absolute inset-0"
-                animate={reduce ? undefined : { scale: [1, 1.06, 1] }}
+                animate={!reduce && inView ? { scale: [1, 1.06, 1] } : undefined}
                 transition={
                   reduce
                     ? undefined
@@ -179,7 +182,7 @@ function Centerpiece() {
 
           <m.div
             className="mt-10 flex items-center gap-3"
-            animate={reduce ? undefined : { x: [0, 6, 0] }}
+            animate={!reduce && inView ? { x: [0, 6, 0] } : undefined}
             transition={
               reduce
                 ? undefined
@@ -245,19 +248,6 @@ function SplitSpread() {
         </div>
       </div>
 
-      <div className="mt-24 grid grid-cols-1 gap-6 md:mt-36 md:grid-cols-12 md:items-end md:gap-8">
-        <div className="md:col-start-1 md:col-span-9">
-          <MaskRevealBlock direction="up">
-            <KenBurnsTile
-              src={images.aboutBar}
-              alt="Μπαρ specialty coffee και περιοχή σερβιρίσματος"
-              aspect="aspect-[16/9]"
-              sizes="(max-width: 768px) 100vw, 70vw"
-            />
-          </MaskRevealBlock>
-        </div>
-      </div>
-
     </div>
   )
 }
@@ -275,6 +265,9 @@ function KenBurnsTile({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  // will-change only while near the viewport — an unconditional one keeps each of
+  // the 4 tiles GPU-promoted (in VRAM) even when scrolled far away.
+  const inView = useInView(ref, { margin: '200px' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const scale = useTransform(scrollYProgress, [0, 1], [1.0, 1.24])
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '-7%'])
@@ -284,8 +277,8 @@ function KenBurnsTile({
       <div className="relative bg-espresso p-[6px] shadow-[0_2px_10px_rgba(8,20,6,0.35),0_30px_64px_-20px_rgba(6,16,5,0.78)] ring-1 ring-ink-dark/10 transition-shadow duration-500 sm:p-2 md:p-2.5">
         <div className={`relative w-full overflow-hidden ring-1 ring-ink-dark/15 ${aspect}`}>
           <m.div
-            className="absolute inset-0 will-change-transform"
-            style={reduce ? undefined : { scale, y }}
+            className="absolute inset-0"
+            style={reduce ? undefined : { scale, y, willChange: inView ? 'transform' : 'auto' }}
           >
             <FadeImage
               src={src}

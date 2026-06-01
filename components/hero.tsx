@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
-import { m, useReducedMotion } from 'framer-motion'
+import { m, useInView, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EASE } from '@/lib/motion'
@@ -122,6 +122,10 @@ function useHeroVideoAutoplay(
 export default function Hero() {
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
+  // Stop the hero's infinite loops (logo bob, scroll-cue pulse, mobile-frame
+  // cycle) once it's scrolled out of view — no idle main-thread churn down-page.
+  const heroInView = useInView(sectionRef)
 
   const [loaderReady, setLoaderReady] = useState(false)
   const prefersReducedMotion = useReducedMotion()
@@ -188,18 +192,18 @@ export default function Hero() {
   }, [prefersReducedMotion, isDesktop, loaderReady])
 
   useEffect(() => {
-    if (prefersReducedMotion) return
+    if (prefersReducedMotion || !heroInView) return
     const interval = window.setInterval(() => {
       setMobileFrameIx((i) => (i + 1) % mobileFramePaths.length)
     }, 2500)
     return () => window.clearInterval(interval)
-  }, [prefersReducedMotion, mobileFramePaths.length])
+  }, [prefersReducedMotion, heroInView, mobileFramePaths.length])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
   return (
     <div id="hero" className="scroll-mt-20">
-      <section className="hero-mobile-svh relative min-h-screen w-full overflow-hidden">
+      <section ref={sectionRef} className="hero-mobile-svh relative min-h-screen w-full overflow-hidden">
         {/* ── Full-bleed background video ── */}
         <m.div
           className="absolute inset-0 z-0"
@@ -299,7 +303,7 @@ export default function Hero() {
             className="flex items-center gap-5"
           >
             <m.div
-              animate={prefersReducedMotion ? {} : { y: [0, -8, 0] }}
+              animate={prefersReducedMotion || !heroInView ? {} : { y: [0, -8, 0] }}
               transition={prefersReducedMotion ? {} : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
               className="shrink-0"
             >
@@ -392,7 +396,7 @@ export default function Hero() {
           >
             <m.span
               className="block h-9 w-px bg-gradient-to-b from-white/0 via-white/60 to-white/0"
-              animate={prefersReducedMotion ? {} : { y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
+              animate={prefersReducedMotion || !heroInView ? {} : { y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
               transition={prefersReducedMotion ? {} : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
             />
           </m.div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, type ReactNode } from 'react'
-import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
 export type ClimateParticleVariant = 'mustard' | 'dust' | 'shimmer' | 'none'
 
@@ -39,6 +39,10 @@ export function ClimateShell({
 }: ClimateShellProps) {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
+  // Only run the infinite particle loops while this shell is on-screen. With 3
+  // shells × `particleCount` particles, the framer keyframe loops otherwise tick
+  // on the main thread for the whole page regardless of scroll position.
+  const inView = useInView(ref, { margin: '0px 0px -5% 0px' })
   const exit = bgExit ?? bgEnter
 
   const { scrollYProgress } = useScroll({
@@ -46,11 +50,18 @@ export function ClimateShell({
     offset: ['start end', 'end start'],
   })
 
-  const bg = useTransform(
-    scrollYProgress,
-    [0, 0.02, 0.12, 0.86, 0.96, 1],
-    [bgEnter, bgEnter, bgPeak, bgPeak, exit, exit],
-  )
+  // Color crossfade as COMPOSITED opacity, not an animated background-color.
+  // Animating `background` repaints the whole section every scroll frame — and
+  // because the 168-leaf border is a painted (un-promoted) layer it repaints
+  // WITH the section, which is the lag felt on ENTERING and LEAVING philosophy
+  // (the color only moves in those zones; the middle is constant → smooth).
+  // Two solid color layers fading by opacity over the static peak color give the
+  // identical ramp for free: opacity-blend of A over B == linear interp A↔B.
+  const enterOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12], [1, 1, 0])
+  const exitOpacity = useTransform(scrollYProgress, [0.86, 0.96, 1], [0, 1, 1])
+  // Promote a fading layer only while it is actually mid-crossfade.
+  const enterWillChange = useTransform(scrollYProgress, (v) => (v < 0.16 ? 'opacity' : 'auto'))
+  const exitWillChange = useTransform(scrollYProgress, (v) => (v > 0.82 ? 'opacity' : 'auto'))
 
   const ringOpacity = useTransform(
     scrollYProgress,
@@ -69,14 +80,12 @@ export function ClimateShell({
   )
 
   const staticBg = { background: bgPeak }
-  // The card inset + radius used to animate (0→14px→0) on scroll, but margin is
-  // a layout property — animating it reflowed the whole section subtree (incl.
-  // the 168-leaf border) every frame. Pin it static: same card look at peak,
-  // zero per-frame layout. Only the (composited) background color crossfades.
+  // The card inset + radius are static (animating margin = per-frame layout of
+  // the whole leaf subtree). The card itself is transparent — the section's
+  // (static) peak color + the two crossfade layers show through it.
   const chromeStyle = reduce
     ? staticBg
     : {
-        background: bg,
         margin: '14px',
         borderRadius: '28px',
       }
@@ -86,11 +95,25 @@ export function ClimateShell({
       ref={ref}
       id={id}
       className={`scroll-mt-28 relative ${className ?? ''}`}
-      style={reduce ? staticBg : { background: bg }}
+      style={staticBg}
     >
+      {!reduce && (
+        <>
+          <m.div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0"
+            style={{ background: bgEnter, opacity: enterOpacity, willChange: enterWillChange }}
+          />
+          <m.div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0"
+            style={{ background: exit, opacity: exitOpacity, willChange: exitWillChange }}
+          />
+        </>
+      )}
       <m.div
-        className={`relative isolate border-t border-line/30${contentClipping ? ' overflow-hidden' : ''}`}
-        style={chrome ? chromeStyle : reduce ? staticBg : { background: bg }}
+        className={`relative z-10 isolate border-t border-line/30${contentClipping ? ' overflow-hidden' : ''}`}
+        style={chrome ? chromeStyle : reduce ? staticBg : undefined}
       >
         {chrome && (
           <m.div
@@ -115,7 +138,7 @@ export function ClimateShell({
           />
         )}
 
-        {!reduce && particles !== 'none' && (
+        {!reduce && particles !== 'none' && inView && (
           <m.div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-[6]"

@@ -25,9 +25,23 @@ export default function WhatsAppFloatClient({ whatsappNumber }: Props) {
       btn.style.transform = `scale(${scale.toFixed(3)})`
     }
 
-    window.addEventListener('scroll', update, { passive: true })
+    // RAF-gate the scroll write: Lenis fires many scroll events per frame, and a
+    // synchronous style mutation on each one forces repeated style/layout work on
+    // the main thread during the exact gesture the user feels. Coalesce to ≤1/frame.
+    let rafId = 0
+    const onScroll = () => {
+      if (rafId) return
+      rafId = requestAnimationFrame(() => {
+        rafId = 0
+        update()
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
     update()
-    return () => window.removeEventListener('scroll', update)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafId) cancelAnimationFrame(rafId)
+    }
   }, [pathname])
 
   if (pathname === '/admin' || pathname.startsWith('/admin/')) return null

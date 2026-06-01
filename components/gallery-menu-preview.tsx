@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { FadeImage } from '@/components/fade-image'
 import Link from 'next/link'
-import { m, useReducedMotion } from 'framer-motion'
+import { m, useInView, useReducedMotion } from 'framer-motion'
 import { Reveal } from '@/components/reveal'
 import ScrollDrift from '@/components/scroll-drift'
 import MaskRevealBlock from '@/components/mask-reveal-block'
@@ -106,13 +106,16 @@ export default function GalleryMenuPreview() {
 
 function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
   const reduce = useReducedMotion()
+  const ref = useRef<HTMLElement>(null)
+  // Only run the slow scale loop while the dish is on-screen.
+  const inView = useInView(ref, { margin: '200px' })
 
   return (
-    <figure className="relative">
+    <figure ref={ref} className="relative">
       <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden border border-ink-dark/30">
         <m.div
           className="absolute inset-0"
-          animate={reduce ? undefined : { scale: [1, 1.04, 1] }}
+          animate={!reduce && inView ? { scale: [1, 1.04, 1] } : undefined}
           transition={
             reduce ? undefined : { duration: 14, repeat: Infinity, ease: 'easeInOut' }
           }

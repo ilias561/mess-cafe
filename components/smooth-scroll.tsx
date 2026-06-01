@@ -11,9 +11,12 @@ export default function SmoothScroll() {
   useEffect(() => {
     if (reduceMotion) return
 
+    // lerp (frame-rate-independent catch-up) instead of a fixed 1.1s duration:
+    // duration-based smoothing replays every wheel tick over 1.1s, which reads
+    // as whole-page input lag on every machine even while FPS stays at 60.
+    // lerp 0.1 keeps the parallax buttery but makes the wheel feel direct.
     const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.1,
       smoothWheel: true,
       touchMultiplier: 1.6,
     })

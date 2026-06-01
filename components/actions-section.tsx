@@ -6,6 +6,7 @@ import KeepRisingWordmark from '@/components/keep-rising-wordmark'
 import Link from 'next/link'
 import {
   m,
+  useInView,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -227,6 +228,9 @@ function ActionImage({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  // will-change only while near the viewport — keeps each card image from staying
+  // GPU-promoted when scrolled away (these stack right at the actions boundary).
+  const inView = useInView(ref, { margin: '200px' })
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const scale = useTransform(scrollYProgress, [0, 1], [1.0, 1.08])
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '-3%'])
@@ -235,8 +239,8 @@ function ActionImage({
     <figure ref={ref} className="group/image relative">
       <div className="relative aspect-[3/2] w-full overflow-hidden">
         <m.div
-          className="absolute inset-0 will-change-transform transition-[transform,filter] duration-500 ease-out group-hover/spread:scale-[1.04] group-hover/spread:brightness-[1.06] group-hover/spread:saturate-[1.08]"
-          style={reduce ? undefined : { scale, y }}
+          className="absolute inset-0 transition-[transform,filter] duration-500 ease-out group-hover/spread:scale-[1.04] group-hover/spread:brightness-[1.06] group-hover/spread:saturate-[1.08]"
+          style={reduce ? { willChange: 'auto' } : { scale, y, willChange: inView ? 'transform' : 'auto' }}
         >
           <FadeImage
             src={src}

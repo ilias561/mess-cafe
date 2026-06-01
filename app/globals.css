@@ -370,6 +370,13 @@ main li a:hover {
       transform var(--motion-micro) var(--ease-out-premium),
       box-shadow var(--motion-fast) var(--ease-out-premium),
       opacity var(--motion-fast) var(--ease-out-premium);
+  }
+  /* Promote only while interacting — an unconditional will-change here pre-promotes
+     every button/CTA/nav-item into its own compositor layer for the whole session,
+     bloating the steady-state layer tree. The micro hover-lift composites fine on
+     first hover. */
+  .ui-interactive:hover,
+  .ui-interactive:focus-visible {
     will-change: transform;
   }
   .ui-interactive:hover {
