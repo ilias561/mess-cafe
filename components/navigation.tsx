@@ -297,7 +297,7 @@ export default function Navigation() {
   const navTextColor = isInHero ? 'text-white' : 'text-charcoal'
   const headerClasses = isInHero || isDesktopHero
     ? 'bg-transparent border-transparent'
-    : 'bg-[rgba(37,73,30,0.94)] backdrop-blur-[14px] border-b border-white/[0.08]'
+    : 'bg-[rgb(35,69,29)] border-b border-white/[0.08]'
   const navHeight = isInHero ? 'h-12' : 'h-16'
 
   return (

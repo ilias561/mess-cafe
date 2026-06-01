@@ -258,19 +258,6 @@ function SplitSpread() {
         </div>
       </div>
 
-      <Reveal delay={0.4} className="mt-24 md:mt-32">
-        <div className="grid grid-cols-1 md:grid-cols-12">
-          <div className="md:col-start-2 md:col-span-7">
-            <p className="font-serif text-[clamp(20px,2.2vw,28px)] italic leading-[1.4] text-charcoal/70">
-              «Ένας χώρος μπροστά στη λίμνη — υγιεινό lifestyle, κοινότητα, ευεξία.»
-            </p>
-            <p className="mt-5 inline-flex items-center gap-3">
-              <span aria-hidden className="block h-px w-8 bg-mustard/60" />
-              <MicroEyebrow className="text-olive/80">M.E.S.S. · 2025</MicroEyebrow>
-            </p>
-          </div>
-        </div>
-      </Reveal>
     </div>
   )
 }
@@ -294,21 +281,23 @@ function KenBurnsTile({
 
   return (
     <figure ref={ref} className="group">
-      <div className={`relative w-full overflow-hidden ${aspect}`}>
-        <m.div
-          className="absolute inset-0 will-change-transform"
-          style={reduce ? undefined : { scale, y }}
-        >
-          <FadeImage
-            src={src}
-            alt={alt}
-            fill
-            unoptimized
-            loading="lazy"
-            sizes={sizes}
-            className="ui-img-hover"
-          />
-        </m.div>
+      <div className="relative bg-espresso p-[6px] shadow-[0_2px_10px_rgba(8,20,6,0.35),0_30px_64px_-20px_rgba(6,16,5,0.78)] ring-1 ring-ink-dark/10 transition-shadow duration-500 sm:p-2 md:p-2.5">
+        <div className={`relative w-full overflow-hidden ring-1 ring-ink-dark/15 ${aspect}`}>
+          <m.div
+            className="absolute inset-0 will-change-transform"
+            style={reduce ? undefined : { scale, y }}
+          >
+            <FadeImage
+              src={src}
+              alt={alt}
+              fill
+              unoptimized
+              loading="lazy"
+              sizes={sizes}
+              className="ui-img-hover"
+            />
+          </m.div>
+        </div>
       </div>
     </figure>
   )

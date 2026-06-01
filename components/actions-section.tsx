@@ -42,15 +42,21 @@ function CanopyLight({ scrollYProgress }: { scrollYProgress: MotionValue<number>
   return (
     <m.div
       aria-hidden
-      className="pointer-events-none absolute inset-0 mix-blend-screen"
+      // No mix-blend-screen: a blended layer forces the GPU to re-read + re-blend
+      // the backdrop every scroll frame (the backdrop is scrolling), and it turns
+      // visible exactly at the philosophy→actions hand-off. The warm gradient
+      // alpha already reads as a soft glow on its own.
+      className="pointer-events-none absolute inset-0"
       style={{ x: tx, y: ty, opacity }}
     >
       <div
         className="absolute left-1/2 top-1/2 h-[140%] w-[140%] -translate-x-1/2 -translate-y-1/2"
         style={{
+          // No filter:blur — radial gradients are already soft, and a 48px blur
+          // on a moving + mix-blended element re-rasterized every scroll frame
+          // right as the Actions section enters. Softer gradient stops instead.
           background:
-            'radial-gradient(ellipse 55% 40% at 30% 25%, rgba(232,181,71,0.18), transparent 65%), radial-gradient(ellipse 45% 35% at 70% 70%, rgba(216,232,204,0.14), transparent 60%)',
-          filter: 'blur(48px)',
+            'radial-gradient(ellipse 60% 45% at 30% 25%, rgba(232,181,71,0.16), transparent 70%), radial-gradient(ellipse 50% 40% at 70% 70%, rgba(216,232,204,0.12), transparent 66%)',
         }}
       />
     </m.div>

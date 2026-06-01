@@ -1,14 +1,7 @@
 'use client'
 
-import { useRef, type CSSProperties } from 'react'
-import {
-  m,
-  useMotionTemplate,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from 'framer-motion'
+import { type CSSProperties } from 'react'
+import { m, useReducedMotion } from 'framer-motion'
 
 type Leaf = {
   key: string
@@ -32,16 +25,27 @@ type Leaf = {
   animated: boolean
 }
 
-// Dark-green, solid leaves only — the colourful teal vine (monstera-1) and the
-// pale wispy line-art frond (palm-cluster) are dropped.
-// SWAP-IN POINT: when the real dark leaf PNGs land, replace these names.
+// Bushy `fern` stays dominant (~45%) — it's the multi-leaf cluster that builds
+// the continuous wall of foliage and keeps the frame dense. The four new hi-res
+// single leaves (split-leaf-1/2, monstera-vine, monstera-upright) are sprinkled
+// in as accents for variety; the wispy `fan-palm` is kept out of the border (it
+// punches gaps) and lives only as a faint watermark. All share LEAF_FILTER, so
+// the bright cutouts get crushed to the same dark forest green and read cohesive.
 const POOL = [
-  'monstera-3',
+  'fern',
+  'split-leaf-1',
   'fern',
   'monstera-3',
   'fern',
   'leaf-cluster-border',
   'fern',
+  'monstera-vine',
+  'fern',
+  'monstera-3',
+  'split-leaf-2',
+  'fern',
+  'monstera-upright',
+  'leaf-cluster-border',
 ]
 
 // Crush to a dark forest green and steer any stray warm/cool casts toward green.
@@ -57,10 +61,10 @@ const WATERMARK_FILTER =
 // A few large, well-placed ghosts that sit furthest back and blend into the
 // green. Positioned in the section's open bg gaps (not behind the photos).
 const WATERMARKS = [
-  { key: 'wm0', name: 'monstera-3', w: 768, rot: -12, flip: false, opacity: 0.14, pos: { top: '11%', left: '34%', width: '440px' } },
-  { key: 'wm1', name: 'fern', w: 768, rot: 9, flip: true, opacity: 0.13, pos: { top: '37%', left: '40%', width: '360px' } },
+  { key: 'wm0', name: 'monstera-upright', w: 768, rot: -12, flip: false, opacity: 0.14, pos: { top: '11%', left: '34%', width: '440px' } },
+  { key: 'wm1', name: 'fan-palm', w: 768, rot: 9, flip: true, opacity: 0.12, pos: { top: '37%', left: '40%', width: '380px' } },
   { key: 'wm2', name: 'leaf-cluster-border', w: 768, rot: 0, flip: false, opacity: 0.12, pos: { top: '62%', left: '30%', width: '520px' } },
-  { key: 'wm3', name: 'monstera-3', w: 768, rot: 14, flip: true, opacity: 0.13, pos: { top: '88%', left: '44%', width: '420px' } },
+  { key: 'wm3', name: 'split-leaf-2', w: 768, rot: 14, flip: true, opacity: 0.13, pos: { top: '88%', left: '44%', width: '420px' } },
 ] as const
 
 // Deterministic pseudo-random in [0,1) from an integer hash. Integer ops are
@@ -87,7 +91,7 @@ function buildLeaves(): Leaf[] {
     leaves.push({
       ...l,
       key: `k${i}`,
-      animated: i % 4 === 0,
+      animated: i % 12 === 0,
       swayDur: round(5.5 + rand(i, 9) * 4),
       swayDelay: round(-rand(i, 10) * 6),
     })
@@ -161,7 +165,10 @@ function LeafImg({
   filter?: string
 }) {
   const base = `/images/decor/photo/${name}`
-  const v = w <= 230 ? 'w480' : 'w768'
+  // Border leaves render at 130–340px of dark, filtered decorative foliage —
+  // w480 is plenty even on retina and ~halves decoded texture memory vs w768
+  // (168 leaves at w768 was exhausting GPU memory → pixelation + jank).
+  const v = 'w480'
   return (
     <picture>
       <source type="image/avif" srcSet={`${base}--${v}.avif`} />
@@ -196,18 +203,6 @@ function WatermarkLeaf({ leaf }: { leaf: (typeof WATERMARKS)[number] }) {
   )
 }
 
-// Inner breeze layer — CSS keyframe so it stays cheap across ~150 leaves.
-function Sway({ leaf }: { leaf: Leaf }) {
-  return (
-    <div
-      className="leaf-sway"
-      style={{ animationDuration: `${leaf.swayDur}s`, animationDelay: `${leaf.swayDelay}s` }}
-    >
-      <LeafImg name={leaf.name} w={leaf.w} />
-    </div>
-  )
-}
-
 // Truly static — no animation, no compositor layer. The bulk of the border.
 function StaticLeaf({ leaf }: { leaf: Leaf }) {
   return (
@@ -223,94 +218,46 @@ function StaticLeaf({ leaf }: { leaf: Leaf }) {
   )
 }
 
-function AnimatedLeaf({
-  leaf,
-  progress,
-}: {
-  leaf: Leaf
-  progress: MotionValue<number>
-}) {
-  const y = useTransform(progress, [0, 1], [leaf.par, -leaf.par])
-  const rotate = useTransform(progress, [0, 1], [leaf.rot - 4, leaf.rot + 4])
-
-  return (
-    <div className="absolute" style={leaf.pos}>
-      <m.div style={{ y, rotate, scaleX: leaf.flip ? -1 : 1 }}>
-        <Sway leaf={leaf} />
-      </m.div>
-    </div>
-  )
-}
-
 /**
  * Dense forest-leaf border framing the host section. Leaves are packed two
- * layers deep around all four edges (overlapping like the beverage-menu cover),
- * scroll with the page, and sit *behind* the section content. Each leaf has an
- * idle CSS sway; a subset additionally parallax-drift for depth. Reduced motion
- * stops both.
+ * layers deep around all four edges and sit *behind* the section content.
+ *
+ * Perf: every leaf is STATIC (no scroll-linked parallax, no infinite sway). The
+ * reveal is a single fire-once fade/settle when the border enters view — after
+ * it finishes, Framer drops will-change and the whole leaf layer de-promotes to
+ * an ordinary painted layer that scrolls for free. The old version kept the big
+ * image-dense layer GPU-promoted and churning every frame, which tanked the
+ * scroll right at the philosophy→actions hand-off.
  *
  * Render as the first child inside a `position: relative` section, and give the
  * content wrapper a higher stacking order (e.g. `relative z-10`).
  */
 export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }) {
-  const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion() ?? false
-
-  // Parallax progress (whole time the section is on screen).
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  })
-
-  // Reveal progress tracks the section *entering* the viewport: 0 when its top is
-  // at the bottom of the screen, 1 when its top reaches the top. The bloom is
-  // mapped to a short window centred on the section top crossing mid-screen — so
-  // the section first appears as plain green, then the foliage snaps into focus
-  // as you cross the previous→this boundary.
-  const { scrollYProgress: reveal } = useScroll({
-    target: ref,
-    offset: ['start end', 'start start'],
-  })
-  const W: [number, number] = [0.42, 0.72]
-  const revOpacity = useTransform(reveal, W, [0, 1])
-  const revScale = useTransform(reveal, W, [1.08, 1])
-  const revY = useTransform(reveal, W, [22, 0])
-  const revBlurPx = useTransform(reveal, W, [10, 0])
-  const revFilter = useMotionTemplate`blur(${revBlurPx}px)`
 
   const content = (
     <>
       {WATERMARKS.map((wm) => (
         <WatermarkLeaf key={wm.key} leaf={wm} />
       ))}
-      {leaves.map((leaf) =>
-        reduce || !leaf.animated ? (
-          <StaticLeaf key={leaf.key} leaf={leaf} />
-        ) : (
-          <AnimatedLeaf key={leaf.key} leaf={leaf} progress={scrollYProgress} />
-        ),
-      )}
+      {leaves.map((leaf) => (
+        <StaticLeaf key={leaf.key} leaf={leaf} />
+      ))}
     </>
   )
 
   return (
-    <div
-      ref={ref}
-      aria-hidden
-      className="pointer-events-none absolute inset-0 z-0"
-    >
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
       {reduce ? (
         <div className="absolute inset-0">{content}</div>
       ) : (
         <m.div
           className="absolute inset-0"
-          style={{
-            opacity: revOpacity,
-            scale: revScale,
-            y: revY,
-            filter: revFilter,
-            transformOrigin: 'center',
-          }}
+          style={{ transformOrigin: 'center' }}
+          initial={{ opacity: 0, scale: 1.06, y: 18 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: '0px 0px -25% 0px' }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           {content}
         </m.div>

@@ -52,16 +52,6 @@ export function ClimateShell({
     [bgEnter, bgEnter, bgPeak, bgPeak, exit, exit],
   )
 
-  const cardInset = useTransform(
-    scrollYProgress,
-    [0, 0.02, 0.12, 0.86, 0.96, 1],
-    ['0px', '0px', '14px', '14px', '0px', '0px'],
-  )
-  const cardRadius = useTransform(
-    scrollYProgress,
-    [0, 0.02, 0.12, 0.86, 0.96, 1],
-    ['0px', '0px', '28px', '28px', '0px', '0px'],
-  )
   const ringOpacity = useTransform(
     scrollYProgress,
     [0, 0.04, 0.14, 0.84, 0.94, 1],
@@ -79,15 +69,16 @@ export function ClimateShell({
   )
 
   const staticBg = { background: bgPeak }
+  // The card inset + radius used to animate (0→14px→0) on scroll, but margin is
+  // a layout property — animating it reflowed the whole section subtree (incl.
+  // the 168-leaf border) every frame. Pin it static: same card look at peak,
+  // zero per-frame layout. Only the (composited) background color crossfades.
   const chromeStyle = reduce
     ? staticBg
     : {
         background: bg,
-        marginLeft: cardInset,
-        marginRight: cardInset,
-        marginTop: cardInset,
-        marginBottom: cardInset,
-        borderRadius: cardRadius,
+        margin: '14px',
+        borderRadius: '28px',
       }
 
   return (
