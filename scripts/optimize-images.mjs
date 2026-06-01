@@ -21,6 +21,7 @@ const ROOT = join(__dirname, '..')
 const IMAGES_ROOT = join(ROOT, 'public', 'images')
 const MANIFEST_PATH = join(ROOT, 'lib', 'image-manifest.ts')
 const WIDTHS = [480, 768, 1200, 1600]
+const MAX_WIDTH = 2048
 const AVIF_QUALITY = 60
 const WEBP_QUALITY = 81
 const RASTER_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp'])
@@ -68,8 +69,17 @@ async function processImage(absSource) {
   const srcH = meta.height ?? 0
   if (!srcW || !srcH) return null
 
-  const targetWidths = WIDTHS.filter((w) => w <= srcW)
-  if (targetWidths.length === 0) targetWidths.push(srcW)
+  // Standard tiers strictly below the source, PLUS the source's own native
+  // width (clamped to MAX_WIDTH). Without the native entry, a source that falls
+  // between tiers (e.g. 1080px) would be capped at the next tier down (768px)
+  // and render soft/pixelated on retina. Including native width means the
+  // browser can always fetch the full source resolution.
+  const targetWidths = [
+    ...new Set([
+      ...WIDTHS.filter((w) => w < srcW),
+      Math.min(srcW, MAX_WIDTH),
+    ]),
+  ].sort((a, b) => a - b)
 
   const avifMap = {}
   const webpMap = {}

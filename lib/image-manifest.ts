@@ -55,8 +55,8 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1199,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAABwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoMYAEI8xjh+12jxK56cAAD88Z6uEjs+8Rwg+YRPbsAmY74LVjUk1zwFLnXvlUS2xls4soFXwr7VrgBydNGIKrL1adCO4KbvwRJNoflojg/6US//m2ZB6y4C2dF7MM7FGz+ahLewhBaZ9FNVA33ERIxs0mlhsh2uNMAAAA==",
-    "avifSrcSet": "/images/about-1--w480.avif 480w, /images/about-1--w768.avif 768w",
-    "webpSrcSet": "/images/about-1--w480.webp 480w, /images/about-1--w768.webp 768w"
+    "avifSrcSet": "/images/about-1--w480.avif 480w, /images/about-1--w768.avif 768w, /images/about-1--w1199.avif 1199w",
+    "webpSrcSet": "/images/about-1--w480.webp 480w, /images/about-1--w768.webp 768w, /images/about-1--w1199.webp 1199w"
   },
   "/images/about-2.jpg": {
     "width": 1600,
@@ -69,8 +69,8 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1066,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRvAAAABXRUJQVlA4IOQAAABwBACdASoQABgAPu1iqU2ppaQiMAgBMB2JbACdMoAlrxG+rmEEBDc5DMCXmAD+uEDhC7xS8iuqMjDYpBek5kjne6Kr+tmHytwGNs6GIgrq13hMatb4xi58I5bBCFR5V9LCdrr5VKeMIyfl1iTblTR/NZZd0dbQVSGfHQxvMCS4/GdFdtEMTpE/Pj0APX6HKwZB0YlraBmOgj2tVrywq6fWemT9pfAnmjrwC41r25nAt6Tt1OWDmhlcnMiwkfOb43f4nc+f67A8sxqICL/8pZqvkPkbldrYmz2UMZw634gw7DmAAAA=",
-    "avifSrcSet": "/images/about-3--w480.avif 480w, /images/about-3--w768.avif 768w",
-    "webpSrcSet": "/images/about-3--w480.webp 480w, /images/about-3--w768.webp 768w"
+    "avifSrcSet": "/images/about-3--w480.avif 480w, /images/about-3--w768.avif 768w, /images/about-3--w1066.avif 1066w",
+    "webpSrcSet": "/images/about-3--w480.webp 480w, /images/about-3--w768.webp 768w, /images/about-3--w1066.webp 1066w"
   },
   "/images/about-4.jpg": {
     "width": 1600,
@@ -90,57 +90,57 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1280,
     "height": 785,
     "blurDataURL": "data:image/webp;base64,UklGRkgBAABXRUJQVlA4WAoAAAAQAAAADwAACQAAQUxQSJAAAAABgGJt27LoeT9ckrtr+xNOJxOpHJpHmjsbYAGsQGeWYKuY6u7yju4hIiYA/ws5pLs2SPwhZITiGc8BEiTkguBe8geXEIyBQAhML/mV10HZ4tSlj1dWD/z5wgdpLcpvj1cfzJ8vb3yc0xFg6H3w6/PHJ+9LagKEITq64k8+aZkEAYDaL+WrzYINhH+VcgAg/AlWUDggkgAAAHACAJ0BKhAACgADgFolsAJ0MEdIiQlDCWLZneAA/uhPDYhv1i/MW9r3zrIvu6jzmZ5TejB3pmx+lx+XhDOeST0O0qFH2ExY39/ej1gtz8i3aMXXQ6SjDixFC/v/24rYPIxc3KLhTpDAlHMkL7f0j/7z5lO+1TSew09/2PV+1Gkx+d2svj/+CEyUcw8TOBhwAAAA",
-    "avifSrcSet": "/images/decor/photo/banana-leaf--w480.avif 480w, /images/decor/photo/banana-leaf--w768.avif 768w, /images/decor/photo/banana-leaf--w1200.avif 1200w",
-    "webpSrcSet": "/images/decor/photo/banana-leaf--w480.webp 480w, /images/decor/photo/banana-leaf--w768.webp 768w, /images/decor/photo/banana-leaf--w1200.webp 1200w"
+    "avifSrcSet": "/images/decor/photo/banana-leaf--w480.avif 480w, /images/decor/photo/banana-leaf--w768.avif 768w, /images/decor/photo/banana-leaf--w1200.avif 1200w, /images/decor/photo/banana-leaf--w1280.avif 1280w",
+    "webpSrcSet": "/images/decor/photo/banana-leaf--w480.webp 480w, /images/decor/photo/banana-leaf--w768.webp 768w, /images/decor/photo/banana-leaf--w1200.webp 1200w, /images/decor/photo/banana-leaf--w1280.webp 1280w"
   },
   "/images/decor/photo/fern.png": {
     "width": 868,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRkACAABXRUJQVlA4WAoAAAAQAAAADwAAFwAAQUxQSIEBAAAAAAAAAAAAAwATZgIAAAAAAAAAAQEAAQAHnHoABAAAAAAAAQACBw1LjM57FAAIAQAAAAANLGmUmoaln4lSEwACAAIRNmR/lKyGir29g08hAAADKGyUjpupf5adeoaMRCMGC0V3h4mQqn+Yn52biWcYABk6VnCIlp91pbWgpZx4NAscZ4OUjZKTd6ubkJaejk4WRY6Tm5WUmXqtqb6/sYgvAw4wR2F4o6B/rJqPhHl8PQsndJWnoa2Nbaamoa6bmHEiAUaTsLWnlXzBvpOFcWA6HDJZSV5+kJh4sbG+u7JxHQAAGn2onqOseKuqqLO9n0AHH4VXSZKpr4GLtKaqo4lpJiEWb6XCuqyQgK6or6eTRRYAIkecmpCurXmrqqGsomscAQNahpKzpZd9mcrDv59CDAAJFkKGqHypeoC2lmNfNwYAAAAKamTDnJtxhMNvBwABAAEADiTFXb9hPhQQQicAAQAAAgBINmGKAAICAAAAAAAAAAABCQM+CQACAAECAQAAAFZQOCCYAAAAkAMAnQEqEAAYAD7tYqlNqaWjojAIATAdiWwAnQwVEiETVGA50AD+R+6ttiI2tBPj+vAlmuQXzI+sEsEqeKJWSRi/oDlrTiMRRQz73/xzuf4tvnSZ+qW5VV9Sf3frt/jhT/xbkF+wyz5WVSh2/Jki0OsTi2veDCJyV8oiltyGqGn8Kfe9UihBgwyujE5bBHeW5jEVjjB0QAA=",
-    "avifSrcSet": "/images/decor/photo/fern--w480.avif 480w, /images/decor/photo/fern--w768.avif 768w",
-    "webpSrcSet": "/images/decor/photo/fern--w480.webp 480w, /images/decor/photo/fern--w768.webp 768w"
+    "avifSrcSet": "/images/decor/photo/fern--w480.avif 480w, /images/decor/photo/fern--w768.avif 768w, /images/decor/photo/fern--w868.avif 868w",
+    "webpSrcSet": "/images/decor/photo/fern--w480.webp 480w, /images/decor/photo/fern--w768.webp 768w, /images/decor/photo/fern--w868.webp 868w"
   },
   "/images/decor/photo/leaf-cluster-border.png": {
     "width": 1280,
     "height": 640,
     "blurDataURL": "data:image/webp;base64,UklGRgABAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSIEAAAAAAgABAAEAAwUAAQABAAEAAAQAQp8sAFZjFgEABjVkdhBwuaX/0xZ3inIlAGq9tN9n9PDA5MIlUIuJQRW5wdXDrNGozNLUOD+slXAvu9/uyLw5z7jt3RYWoJ9YFqHg7MpgB1h/6ZMAACRaHQAqRGRYBAIBAgQEAAAABwIAAAIBAAAAVlA4IFgAAAAwAgCdASoQAAgAA4BaJbACdLoAApve4a7zYAD+7Nuo08Y40PtPpxErdS7zrBGcU3OAPIMXGDRlOnSDfR2OLDb/z39gHpKZiT69rXfq0XviSPZzQMRpKegA",
-    "avifSrcSet": "/images/decor/photo/leaf-cluster-border--w480.avif 480w, /images/decor/photo/leaf-cluster-border--w768.avif 768w, /images/decor/photo/leaf-cluster-border--w1200.avif 1200w",
-    "webpSrcSet": "/images/decor/photo/leaf-cluster-border--w480.webp 480w, /images/decor/photo/leaf-cluster-border--w768.webp 768w, /images/decor/photo/leaf-cluster-border--w1200.webp 1200w"
+    "avifSrcSet": "/images/decor/photo/leaf-cluster-border--w480.avif 480w, /images/decor/photo/leaf-cluster-border--w768.avif 768w, /images/decor/photo/leaf-cluster-border--w1200.avif 1200w, /images/decor/photo/leaf-cluster-border--w1280.avif 1280w",
+    "webpSrcSet": "/images/decor/photo/leaf-cluster-border--w480.webp 480w, /images/decor/photo/leaf-cluster-border--w768.webp 768w, /images/decor/photo/leaf-cluster-border--w1200.webp 1200w, /images/decor/photo/leaf-cluster-border--w1280.webp 1280w"
   },
   "/images/decor/photo/monstera-1.png": {
     "width": 1280,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRjQBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSIkAAAABgJpt27Lsfl5colaXDUi6gztkWIAVoBHpFt2dRiX97u478HzHP0JETAD+V2MHSSHoyypIszSKWhAn4Hu78kJwclRfS3oQJxDpbDMQHFDsPzXAE4yHz4EXJEG3+FpU7CDOUO6ePYUhOyXg6exuJ16IUwRlc3+sgcAKeOp3f3HIGBDsfrsVxIEIPABWUDgghAAAAHACAJ0BKhAAEAADgFolsAJ0fwPZLIgssc4Q3FAA/tFBkiAlBJV8XjDsuCQcbUKusQGW26VuVENeD8EgO/i+d1vWEYHgW3e1Hk+STR6dsYVxNILh4wcw/0X1XQvVfXTVgfnVm6RWhMipcGu6Jy3EBrBkcyx8C0doAYyPBIq+JVNnXAAAAA==",
-    "avifSrcSet": "/images/decor/photo/monstera-1--w480.avif 480w, /images/decor/photo/monstera-1--w768.avif 768w, /images/decor/photo/monstera-1--w1200.avif 1200w",
-    "webpSrcSet": "/images/decor/photo/monstera-1--w480.webp 480w, /images/decor/photo/monstera-1--w768.webp 768w, /images/decor/photo/monstera-1--w1200.webp 1200w"
+    "avifSrcSet": "/images/decor/photo/monstera-1--w480.avif 480w, /images/decor/photo/monstera-1--w768.avif 768w, /images/decor/photo/monstera-1--w1200.avif 1200w, /images/decor/photo/monstera-1--w1280.avif 1280w",
+    "webpSrcSet": "/images/decor/photo/monstera-1--w480.webp 480w, /images/decor/photo/monstera-1--w768.webp 768w, /images/decor/photo/monstera-1--w1200.webp 1200w, /images/decor/photo/monstera-1--w1280.webp 1280w"
   },
   "/images/decor/photo/monstera-2.png": {
     "width": 1037,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRuABAABXRUJQVlA4WAoAAAAQAAAADwAAEwAAQUxQSAUBAAABkGvb2rFX+0PsVDYrO6lsu3JvVelyBU6VKsfsbJuVbVvv+z776CIiYgIAwHJsWPDfzpsNACwHFmJ6PYepKa2AhYCKqBXefEpRPGnBf+4hP3+jEVL40sUQjfDjUyojmnddjFJpXk+8QaHmuouSD0r4scFn9cZn8yYXdZsOvqXhp+hSb9+kUDQYCilaL/R0pMGyzvOnUbu/UfhA/aiB/U1E8dyeK1SieAb4QuGTY/1LVMbwVQyOUK/VhhQdoNDwYSiCs9MxfubGD5Ka87ABB/NUQgp3B8OybA+UUguFb2NhA7AQ9oFCw1s++NcCjlBTcyfsf+BilpqKM3D+YyFs/3fzYV88bAAAVlA4ILQAAACwBACdASoQABQAPu1iqU2ppaOiMAgBMB2JbACdMoMjkgzyQAehAPhnVt3dhJAAAP04x9OFLl+be1kR77BSGPfTybk2iDtm0jUZ5SEjc61So3eCJsgruFyIgx0qvUYMTpJg7BEMBqgBdQCuS3oeqrfpaFXP5aLoChaIi2XxK2bvHNUtlT1p0d34yPIDnb+q3bjGGaLcRO7L+6sluCBeHUxT9DNuORrv5Lq1tU1uWfyXVsTgAAA=",
-    "avifSrcSet": "/images/decor/photo/monstera-2--w480.avif 480w, /images/decor/photo/monstera-2--w768.avif 768w",
-    "webpSrcSet": "/images/decor/photo/monstera-2--w480.webp 480w, /images/decor/photo/monstera-2--w768.webp 768w"
+    "avifSrcSet": "/images/decor/photo/monstera-2--w480.avif 480w, /images/decor/photo/monstera-2--w768.avif 768w, /images/decor/photo/monstera-2--w1037.avif 1037w",
+    "webpSrcSet": "/images/decor/photo/monstera-2--w480.webp 480w, /images/decor/photo/monstera-2--w768.webp 768w, /images/decor/photo/monstera-2--w1037.webp 1037w"
   },
   "/images/decor/photo/monstera-3.png": {
     "width": 1000,
     "height": 780,
     "blurDataURL": "data:image/webp;base64,UklGRmwBAABXRUJQVlA4WAoAAAAQAAAADwAACwAAQUxQSLkAAAABgGrb1rFtn+f9/Kva9iWY8f++/NtMtm3bdrJt28h/MuN3ExGRAIjBJlQAFQUAIMQOVkmDWhxVVtzBAIbkm/Gukfio7hZ/YpB7Zo52Rk9XtPmCEUAcDf3PrT0f/LZm2oDAYP/1fPb28TqQP3ZhCwbZcE7XwcPmzfxyaJQOoLfQUNUYVdh/NLEuAwM8XnZq7ZHSPD9S3mUEAmeqyjjEVflH+2bEc5ATH24LUpiXnAYCIAJBPV4ICCytAABWUDggjAAAADACAJ0BKhAADAADgFolsAJ0ME5Ihkj6qdGAAPwbdlQa93U0s8Ojkz7cXWz7LjTp5y4ozzPkk+Shh++h+ntDsZ3eNqgDb1Ob+2h5wUC5pjE/+djQkFEvfNl/MzCkW5mIc8+2cAfmoJDRcfuyjEQfnWcvnD7vdEnCPy65emPHVNP8k9wJ8/89+NGL+AAA",
-    "avifSrcSet": "/images/decor/photo/monstera-3--w480.avif 480w, /images/decor/photo/monstera-3--w768.avif 768w",
-    "webpSrcSet": "/images/decor/photo/monstera-3--w480.webp 480w, /images/decor/photo/monstera-3--w768.webp 768w"
+    "avifSrcSet": "/images/decor/photo/monstera-3--w480.avif 480w, /images/decor/photo/monstera-3--w768.avif 768w, /images/decor/photo/monstera-3--w1000.avif 1000w",
+    "webpSrcSet": "/images/decor/photo/monstera-3--w480.webp 480w, /images/decor/photo/monstera-3--w768.webp 768w, /images/decor/photo/monstera-3--w1000.webp 1000w"
   },
   "/images/decor/photo/palm-cluster.png": {
     "width": 1280,
     "height": 641,
     "blurDataURL": "data:image/webp;base64,UklGRigBAABXRUJQVlA4WAoAAAAQAAAADwAABwAAQUxQSHgAAAABgJtt2/HsfhGzstGZnbNABrAGyARpkz2MATSJe3b87X+HiEj8Y4QIlTL8IQTgGlc4mYqaAELAzNnWdHd/3ndiIATe9vLz4/OyaGaUIBA1Dp+fp0k9YDaZGIV+8XkelM1iodpsUwOa8TxnZCCccYmMAW4/Bygl+AdWUDggigAAADACAJ0BKhAACAADgFolsAJ0BiomYAXSkrAAAP7U67t20NvTcRdecdMeYkZWQhUuHoJz38t+HVXaBkjx5hMXCKHY7u3mfHZNqY0Folyh2nHrwaf8QNe6tws5hKB9HtRxD642sEhx2TBWPfo5ea3ph2xXvVdcczWTgvThuXnd8tcTd+W7T+J9vgAAAA==",
-    "avifSrcSet": "/images/decor/photo/palm-cluster--w480.avif 480w, /images/decor/photo/palm-cluster--w768.avif 768w, /images/decor/photo/palm-cluster--w1200.avif 1200w",
-    "webpSrcSet": "/images/decor/photo/palm-cluster--w480.webp 480w, /images/decor/photo/palm-cluster--w768.webp 768w, /images/decor/photo/palm-cluster--w1200.webp 1200w"
+    "avifSrcSet": "/images/decor/photo/palm-cluster--w480.avif 480w, /images/decor/photo/palm-cluster--w768.avif 768w, /images/decor/photo/palm-cluster--w1200.avif 1200w, /images/decor/photo/palm-cluster--w1280.avif 1280w",
+    "webpSrcSet": "/images/decor/photo/palm-cluster--w480.webp 480w, /images/decor/photo/palm-cluster--w768.webp 768w, /images/decor/photo/palm-cluster--w1200.webp 1200w, /images/decor/photo/palm-cluster--w1280.webp 1280w"
   },
   "/images/decor/photo/palm-frond.png": {
     "width": 1280,
     "height": 914,
     "blurDataURL": "data:image/webp;base64,UklGRvYAAABXRUJQVlA4WAoAAAAQAAAADwAACgAAQUxQSJQAAAABgJpt27Ll/q1p/PdQksMEMAAHCWawCTTy07S6pb/h7s2Tu8P7Phe6Q0RMgBQIKtx3ekPvzEahNqWAkkONs3ieHcZ+QPEiz9cY5t0Hi0GVPJvj708KShc38PbPS716+OBv84xGw8u4f3BMqeIAM8CMhzNq1M6H/ca5z7a6iJbg7hX87ofRrJAGly9HunmhqWG4VGEJVlA4IDwAAACwAQCdASoQAAsAA4BaJbAAAp2fuvloAP7zMGUJKxfQGf3CRJdpJsLKwq5Vw/tp6EF//taU93Z50hQkAAA=",
-    "avifSrcSet": "/images/decor/photo/palm-frond--w480.avif 480w, /images/decor/photo/palm-frond--w768.avif 768w, /images/decor/photo/palm-frond--w1200.avif 1200w",
-    "webpSrcSet": "/images/decor/photo/palm-frond--w480.webp 480w, /images/decor/photo/palm-frond--w768.webp 768w, /images/decor/photo/palm-frond--w1200.webp 1200w"
+    "avifSrcSet": "/images/decor/photo/palm-frond--w480.avif 480w, /images/decor/photo/palm-frond--w768.avif 768w, /images/decor/photo/palm-frond--w1200.avif 1200w, /images/decor/photo/palm-frond--w1280.avif 1280w",
+    "webpSrcSet": "/images/decor/photo/palm-frond--w480.webp 480w, /images/decor/photo/palm-frond--w768.webp 768w, /images/decor/photo/palm-frond--w1200.webp 1200w, /images/decor/photo/palm-frond--w1280.webp 1280w"
   },
   "/images/decor/tropical-leaves.png": {
     "width": 74,
@@ -153,22 +153,22 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1066,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAADwBACdASoQABgAPu1kqU2ppaOiMAgBMB2JbACdMoR3AdDpBwJvrdCJOyQBPAX3goAA/q7F3q8mtlnJOeW1shG8xbPeZ6EAOd3/biZSOX9mB5bXcjeppCAUdwP1zMyYiY4c/uLTS5eomU+r07UiLzWeyb7LE8yfDCbnsr3i07oKZPW4/r22OUsah2HxU5HRJMXSV/z899irkADb+tZQ5b7KJbWLa9rVdq+AH6qkc5obSD5GNPzk8AAA",
-    "avifSrcSet": "/images/gallery-1--w480.avif 480w, /images/gallery-1--w768.avif 768w",
-    "webpSrcSet": "/images/gallery-1--w480.webp 480w, /images/gallery-1--w768.webp 768w"
+    "avifSrcSet": "/images/gallery-1--w480.avif 480w, /images/gallery-1--w768.avif 768w, /images/gallery-1--w1066.avif 1066w",
+    "webpSrcSet": "/images/gallery-1--w480.webp 480w, /images/gallery-1--w768.webp 768w, /images/gallery-1--w1066.webp 1066w"
   },
   "/images/gallery-2.jpg": {
     "width": 1066,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAABQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdAYx23vQRwwL3yYwgG95sAP54tuBk7x0RyNg2mWZFZZpcg67BzTcm70GsClLaRZSlX1ESoQVj0n1t5KiAQQXYSl+S0THo+kz/fMd5jc/CheXLYlzJd/TjxYd3t40ADRvmYvssWH2dMZbc3bpU43YT+ZTIAmSdjsir+uJesuxW5SzHba+8kDc9QITEkPNYkZiwr0hkAA==",
-    "avifSrcSet": "/images/gallery-2--w480.avif 480w, /images/gallery-2--w768.avif 768w",
-    "webpSrcSet": "/images/gallery-2--w480.webp 480w, /images/gallery-2--w768.webp 768w"
+    "avifSrcSet": "/images/gallery-2--w480.avif 480w, /images/gallery-2--w768.avif 768w, /images/gallery-2--w1066.avif 1066w",
+    "webpSrcSet": "/images/gallery-2--w480.webp 480w, /images/gallery-2--w768.webp 768w, /images/gallery-2--w1066.webp 1066w"
   },
   "/images/gallery-3.jpg": {
     "width": 1199,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoAluxFilQm82nPiefCAAPliJzBg1LDxLxW7rSPyKrgjHomckE/Y9uZbx4g5EMtVndtnxwTN+sSwnAD7F8d0wQ2jYES+ITorKzT7Gpm2GF/hh6Y1dYoiL20ZrwuxuNVhtuGxKpFfpN7rybu8x7Jp1/wkAAA=",
-    "avifSrcSet": "/images/gallery-3--w480.avif 480w, /images/gallery-3--w768.avif 768w",
-    "webpSrcSet": "/images/gallery-3--w480.webp 480w, /images/gallery-3--w768.webp 768w"
+    "avifSrcSet": "/images/gallery-3--w480.avif 480w, /images/gallery-3--w768.avif 768w, /images/gallery-3--w1199.avif 1199w",
+    "webpSrcSet": "/images/gallery-3--w480.webp 480w, /images/gallery-3--w768.webp 768w, /images/gallery-3--w1199.webp 1199w"
   },
   "/images/gallery-4.jpg": {
     "width": 1600,
@@ -181,8 +181,8 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1066,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAACQBACdASoQABgAPu1iqU2ppaQiMAgBMB2JZgCdAYxs1Zds7upW+FjIGFm16QAA/tREqKhVRtx1HM63gaa5TvVC6+Q9PQ0yB/mCw8ktWdn/WSpk6buN4cxCY/CkCfbEmTcHvY+v8GiK9CQN0L1UNfoqSkz5YRyyGkVQTfZcwNrSvGgV628NUvqD/PaAPLW8HoDz1m3ffCT4l9igyxfwmiWO/kAAAA==",
-    "avifSrcSet": "/images/gallery-5--w480.avif 480w, /images/gallery-5--w768.avif 768w",
-    "webpSrcSet": "/images/gallery-5--w480.webp 480w, /images/gallery-5--w768.webp 768w"
+    "avifSrcSet": "/images/gallery-5--w480.avif 480w, /images/gallery-5--w768.avif 768w, /images/gallery-5--w1066.avif 1066w",
+    "webpSrcSet": "/images/gallery-5--w480.webp 480w, /images/gallery-5--w768.webp 768w, /images/gallery-5--w1066.webp 1066w"
   },
   "/images/gallery-6.jpg": {
     "width": 1600,
@@ -195,197 +195,197 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1199,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYgBWAQ/4DzZaTv3PfzHuVhngAP7g2kvI3ZrH+o51VTGOMG9AXhp5y+bLob7EX/EnwQ9Hi+NPk9DUPVgDA61cd6JzDnQYiDMbGr+9LRXcOur7l1mFeWYLC0dzG2wK9V/DiG+Ktrw/xTuMckzXvupnzwAAAA==",
-    "avifSrcSet": "/images/gallery-7--w480.avif 480w, /images/gallery-7--w768.avif 768w",
-    "webpSrcSet": "/images/gallery-7--w480.webp 480w, /images/gallery-7--w768.webp 768w"
+    "avifSrcSet": "/images/gallery-7--w480.avif 480w, /images/gallery-7--w768.avif 768w, /images/gallery-7--w1199.avif 1199w",
+    "webpSrcSet": "/images/gallery-7--w480.webp 480w, /images/gallery-7--w768.webp 768w, /images/gallery-7--w1199.webp 1199w"
   },
   "/images/gallery-8.jpg": {
     "width": 1066,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAABwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdAYv+yUo3Q1AEKTyAFdhPAAD+3I6RDLp+0BFhP+RKerMqcXiDATuF9B3wllCGkwrjVdYK1lAdHjTcDT6OGQN0QYhoeoO8KKnJFr+u1N1aUoWTNcKtk0k3gpXYIgPY13aSXWXviuLBHRVdW9TjeTRJBeVbu8tNWPAjIC3+S2RfgLAVdVBOxaW7GmAA",
-    "avifSrcSet": "/images/gallery-8--w480.avif 480w, /images/gallery-8--w768.avif 768w",
-    "webpSrcSet": "/images/gallery-8--w480.webp 480w, /images/gallery-8--w768.webp 768w"
+    "avifSrcSet": "/images/gallery-8--w480.avif 480w, /images/gallery-8--w768.avif 768w, /images/gallery-8--w1066.avif 1066w",
+    "webpSrcSet": "/images/gallery-8--w480.webp 480w, /images/gallery-8--w768.webp 768w, /images/gallery-8--w1066.webp 1066w"
   },
   "/images/hero-bowl.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABwAgCdASoQABAAA4BaJbACdAYuHjYFT5R4FI0AAP703xPiHrdgwIfX+8/BiLahi/1ooHvfZ/b09xL3ve1vMpdYu6833c7YgVG4CiyUDOF521zkOhRdLUwv/wBemrVBoZWK2Hn1opgXuyPBL63KfTjTHe0pndeZ1yDgAA==",
-    "avifSrcSet": "/images/hero-bowl--w480.avif 480w, /images/hero-bowl--w768.avif 768w",
-    "webpSrcSet": "/images/hero-bowl--w480.webp 480w, /images/hero-bowl--w768.webp 768w"
+    "avifSrcSet": "/images/hero-bowl--w480.avif 480w, /images/hero-bowl--w768.avif 768w, /images/hero-bowl--w1024.avif 1024w",
+    "webpSrcSet": "/images/hero-bowl--w480.webp 480w, /images/hero-bowl--w768.webp 768w, /images/hero-bowl--w1024.webp 1024w"
   },
   "/images/hero-coffee.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoQABAAA4BaJYgCdAEVJu/sggAA/uybEmsnL0TLYk+yk9f3BwGm3dslzNfSCkUz1TZ070pkcnbdKgJ7T+2vQ3tf29ceIHTRiFUiydTEPKBSdsFWqtJ42ebifgAAAA==",
-    "avifSrcSet": "/images/hero-coffee--w480.avif 480w, /images/hero-coffee--w768.avif 768w",
-    "webpSrcSet": "/images/hero-coffee--w480.webp 480w, /images/hero-coffee--w768.webp 768w"
+    "avifSrcSet": "/images/hero-coffee--w480.avif 480w, /images/hero-coffee--w768.avif 768w, /images/hero-coffee--w1024.avif 1024w",
+    "webpSrcSet": "/images/hero-coffee--w480.webp 480w, /images/hero-coffee--w768.webp 768w, /images/hero-coffee--w1024.webp 1024w"
   },
   "/images/hero-interior.jpg": {
     "width": 1199,
     "height": 1600,
     "blurDataURL": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAABwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoMYAEI8xjh+12jxK56cAAD88Z6uEjs+8Rwg+YRPbsAmY74LVjUk1zwFLnXvlUS2xls4soFXwr7VrgBydNGIKrL1adCO4KbvwRJNoflojg/6US//m2ZB6y4C2dF7MM7FGz+ahLewhBaZ9FNVA33ERIxs0mlhsh2uNMAAAA==",
-    "avifSrcSet": "/images/hero-interior--w480.avif 480w, /images/hero-interior--w768.avif 768w",
-    "webpSrcSet": "/images/hero-interior--w480.webp 480w, /images/hero-interior--w768.webp 768w"
+    "avifSrcSet": "/images/hero-interior--w480.avif 480w, /images/hero-interior--w768.avif 768w, /images/hero-interior--w1199.avif 1199w",
+    "webpSrcSet": "/images/hero-interior--w480.webp 480w, /images/hero-interior--w768.webp 768w, /images/hero-interior--w1199.webp 1199w"
   },
   "/images/ingredients/free-range-eggs.jpg": {
     "width": 600,
     "height": 600,
     "blurDataURL": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABQAgCdASoQABAAA4BaJaACdAYu5QzcLE4dMAAA/k157ygX/YRuzlL8GOTyIn1vduww+r/FSEpOBNMf0wjL4MuYdfODwyXy5UbEVi/3yews9UNXONHDRm68oOhdVrlznjpMgOvCvYp8qp9jK1jgIR089utcRhkNWk0eXIAA",
-    "avifSrcSet": "/images/ingredients/free-range-eggs--w480.avif 480w",
-    "webpSrcSet": "/images/ingredients/free-range-eggs--w480.webp 480w"
+    "avifSrcSet": "/images/ingredients/free-range-eggs--w480.avif 480w, /images/ingredients/free-range-eggs--w600.avif 600w",
+    "webpSrcSet": "/images/ingredients/free-range-eggs--w480.webp 480w, /images/ingredients/free-range-eggs--w600.webp 600w"
   },
   "/images/ingredients/natural-sweetness.jpg": {
     "width": 600,
     "height": 600,
     "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABwAgCdASoQABAAA4BaJbACdAYulqicFIGRZ6wAAP7qTbEE0fxn3eTGwK5uV2Wjk3e3kFMeEiSAHRFXpczEW8e00xdFgXuMyQDROj77JZ6RTZGypf1v+1Auj2S3ScO8/vJ4lx3d3KGK8qHr9KKtExZXm577T2inyuAAAA==",
-    "avifSrcSet": "/images/ingredients/natural-sweetness--w480.avif 480w",
-    "webpSrcSet": "/images/ingredients/natural-sweetness--w480.webp 480w"
+    "avifSrcSet": "/images/ingredients/natural-sweetness--w480.avif 480w, /images/ingredients/natural-sweetness--w600.avif 600w",
+    "webpSrcSet": "/images/ingredients/natural-sweetness--w480.webp 480w, /images/ingredients/natural-sweetness--w600.webp 600w"
   },
   "/images/ingredients/no-frying.jpg": {
     "width": 600,
     "height": 600,
     "blurDataURL": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACwAgCdASoQABAAA4BaJbACdH8GJ/i1m4hJrTmjUcAA/urbl76ZYZJragfRzHecaRo3Xt5IndQAiF8AkyUQdENe4aHwQFf83xGwmlXTd8WS8GdzwaZWwaowWrcBjFugSJeaUO5iqhwg48yFD8p57qwnsWUv0SkbCeVTT3EUYD7AK7mRRa7vgScE/Z0HxsOAAAA=",
-    "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w",
-    "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w"
+    "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w, /images/ingredients/no-frying--w600.avif 600w",
+    "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w, /images/ingredients/no-frying--w600.webp 600w"
   },
   "/images/ingredients/olive-oil.jpg": {
     "width": 600,
     "height": 600,
     "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADQAQCdASoQABAAA4BaJagCdADGvn7hgAD+67o9+dV/pqesZRvtPQCOr0GqpzGWxmKgny0EpZsZqJhRF+wfrEnvAgo6rdud1A/r4OnvQ80WVnPXPk1xKLSzqaOSjlrJTo/ynd4ekOr2QAAA",
-    "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w",
-    "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w"
+    "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w, /images/ingredients/olive-oil--w600.avif 600w",
+    "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w, /images/ingredients/olive-oil--w600.webp 600w"
   },
   "/images/ingredients/sourdough.jpg": {
     "width": 600,
     "height": 600,
     "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQABAAA4BaJYgC7AEO/vBv/ijQAP75DkOsNb7Xc0DGlcKQzLBOmg6W1tG+ZTifvas2FcmzWWK3gwsSqLtLeHNc+X7IAA==",
-    "avifSrcSet": "/images/ingredients/sourdough--w480.avif 480w",
-    "webpSrcSet": "/images/ingredients/sourdough--w480.webp 480w"
+    "avifSrcSet": "/images/ingredients/sourdough--w480.avif 480w, /images/ingredients/sourdough--w600.avif 600w",
+    "webpSrcSet": "/images/ingredients/sourdough--w480.webp 480w, /images/ingredients/sourdough--w600.webp 600w"
   },
   "/images/ingredients/whole-grains.jpg": {
     "width": 600,
     "height": 600,
     "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQABAAA4BaJZgCdH8AF77/bdJ/5YAA/vQrY+mZtxPE1Z1ya/lgRSOo1aQSr8c7turkq8xMl6MxSJRK1bxawF8yMO/iGppGZVz9glpxCvkAhyuLB6O6w1jyGArQAA==",
-    "avifSrcSet": "/images/ingredients/whole-grains--w480.avif 480w",
-    "webpSrcSet": "/images/ingredients/whole-grains--w480.webp 480w"
+    "avifSrcSet": "/images/ingredients/whole-grains--w480.avif 480w, /images/ingredients/whole-grains--w600.avif 600w",
+    "webpSrcSet": "/images/ingredients/whole-grains--w480.webp 480w, /images/ingredients/whole-grains--w600.webp 600w"
   },
   "/images/keep-rising-2.jpg": {
     "width": 1080,
     "height": 1439,
     "blurDataURL": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAACwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZAC2yywTnAnN05mFHUUJbEh4Un4AAP6iElADtG670rKEraC6PepbZmkvDUhxZtWrTQyRkDf0223yVNNgQ6ef4Rs3uSSz2GCMTgKu1c24Arh2dyOxWFt2y/Ad7oi8+4467Q7EMHMnqgRChiw57Q9KdkGDMqccEtbgkyPG7GelBdS1MAA=",
-    "avifSrcSet": "/images/keep-rising-2--w480.avif 480w, /images/keep-rising-2--w768.avif 768w",
-    "webpSrcSet": "/images/keep-rising-2--w480.webp 480w, /images/keep-rising-2--w768.webp 768w"
+    "avifSrcSet": "/images/keep-rising-2--w480.avif 480w, /images/keep-rising-2--w768.avif 768w, /images/keep-rising-2--w1080.avif 1080w",
+    "webpSrcSet": "/images/keep-rising-2--w480.webp 480w, /images/keep-rising-2--w768.webp 768w, /images/keep-rising-2--w1080.webp 1080w"
   },
   "/images/keep-rising-team.jpg": {
     "width": 1080,
     "height": 1440,
     "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JYwCdAYvq1fCHVHEyba8o+QAA2/jzhFOuXNCjjSBmbD0OPqKsAgVDxyXu/IFAnJdQiO6A71GTfYSY92wUYNF46eW8dDfPXRBCC/CH16cubq43ajSBvFpiea5OwyDbJpkB32pbSG7cpbyxlbJcRDjwAAA=",
-    "avifSrcSet": "/images/keep-rising-team--w480.avif 480w, /images/keep-rising-team--w768.avif 768w",
-    "webpSrcSet": "/images/keep-rising-team--w480.webp 480w, /images/keep-rising-team--w768.webp 768w"
+    "avifSrcSet": "/images/keep-rising-team--w480.avif 480w, /images/keep-rising-team--w768.avif 768w, /images/keep-rising-team--w1080.avif 1080w",
+    "webpSrcSet": "/images/keep-rising-team--w480.webp 480w, /images/keep-rising-team--w768.webp 768w, /images/keep-rising-team--w1080.webp 1080w"
   },
   "/images/keep-rising.jpg": {
     "width": 841,
     "height": 1115,
     "blurDataURL": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAACwAwCdASoQABUAPu1kq04ppaQiMAgBMB2JaAAAUvzYkJc5U832AAD+vhUT36eLtXu3X7zFoeeFXw+pjTN535QntUnloAsyYfxGxG0o1kD8XHHUyWr5JoTTjJdxrW37Yq1F+4PSYa93/UwRQEqh0X45w2UPi0jgM+eWf9PrzykaAAAA",
-    "avifSrcSet": "/images/keep-rising--w480.avif 480w, /images/keep-rising--w768.avif 768w",
-    "webpSrcSet": "/images/keep-rising--w480.webp 480w, /images/keep-rising--w768.webp 768w"
+    "avifSrcSet": "/images/keep-rising--w480.avif 480w, /images/keep-rising--w768.avif 768w, /images/keep-rising--w841.avif 841w",
+    "webpSrcSet": "/images/keep-rising--w480.webp 480w, /images/keep-rising--w768.webp 768w, /images/keep-rising--w841.webp 841w"
   },
   "/images/menu-acai.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACQAgCdASoQABAAA4BaJbACdAYtB20tMBFpT1FoAAD9/AYPE3jOJ4x65fRbPoObXlv1RIX4yv+FuccoulC1YlWfyyR3wNvGqxfPGSVMLiA3bEmSFxeW1fr1Jaur4clJ4fhSkCOH8xGv8F/A+a6wXd+NSI/G2OiuII3W2zXqKaqZ/4Sm2Tny/yvQAAA=",
-    "avifSrcSet": "/images/menu-acai--w480.avif 480w, /images/menu-acai--w768.avif 768w",
-    "webpSrcSet": "/images/menu-acai--w480.webp 480w, /images/menu-acai--w768.webp 768w"
+    "avifSrcSet": "/images/menu-acai--w480.avif 480w, /images/menu-acai--w768.avif 768w, /images/menu-acai--w1024.avif 1024w",
+    "webpSrcSet": "/images/menu-acai--w480.webp 480w, /images/menu-acai--w768.webp 768w, /images/menu-acai--w1024.webp 1024w"
   },
   "/images/menu-avocado-toast.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwAgCdASoQABAAA4BaJbACdAYuv21Oijx3NAWkAP5PJJfkYY3NxtQNGf3WCM3Q+HGn4SRxCn7aXGX83sXaY3nGD3vRsuB757NZHXnMisEK/22jjXiGXHk0sIO1zKfCpvQ0P6TJ2xH3XtMLURhJHm0QkfokF1+b+IzRJaEziYC31e5RPoAAAA==",
-    "avifSrcSet": "/images/menu-avocado-toast--w480.avif 480w, /images/menu-avocado-toast--w768.avif 768w",
-    "webpSrcSet": "/images/menu-avocado-toast--w480.webp 480w, /images/menu-avocado-toast--w768.webp 768w"
+    "avifSrcSet": "/images/menu-avocado-toast--w480.avif 480w, /images/menu-avocado-toast--w768.avif 768w, /images/menu-avocado-toast--w1024.avif 1024w",
+    "webpSrcSet": "/images/menu-avocado-toast--w480.webp 480w, /images/menu-avocado-toast--w768.webp 768w, /images/menu-avocado-toast--w1024.webp 1024w"
   },
   "/images/menu-freddo.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQABAAA4BaJbACdAELZGUyOJxwAAD+0fkaG83quZSiO/yn6EXYGmHVaY6+T2L0eGeRvIOtkFyz4wcbzzW8G2w2RJCZ94VOz/LJPUHLjDDJb3qpQlFDhWKdgPAL3LAA",
-    "avifSrcSet": "/images/menu-freddo--w480.avif 480w, /images/menu-freddo--w768.avif 768w",
-    "webpSrcSet": "/images/menu-freddo--w480.webp 480w, /images/menu-freddo--w768.webp 768w"
+    "avifSrcSet": "/images/menu-freddo--w480.avif 480w, /images/menu-freddo--w768.avif 768w, /images/menu-freddo--w1024.avif 1024w",
+    "webpSrcSet": "/images/menu-freddo--w480.webp 480w, /images/menu-freddo--w768.webp 768w, /images/menu-freddo--w1024.webp 1024w"
   },
   "/images/menu-poke-teriyaki.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAgCdASoQABAAA4BaJbACdH8AqQDDpTEl+I06I8AA/vUeQZb96v8yVSxMBZTJEfWRkw66Cvc0/xX8+kT1f4clsvxp9mDUblgZeSvAsl2fjXpbbBSuV5ER6Ik5mw5CNMll6nqyU2fubip0dtb4xapnhR0fgrtdHe/wfucKrfCAAA==",
-    "avifSrcSet": "/images/menu-poke-teriyaki--w480.avif 480w, /images/menu-poke-teriyaki--w768.avif 768w",
-    "webpSrcSet": "/images/menu-poke-teriyaki--w480.webp 480w, /images/menu-poke-teriyaki--w768.webp 768w"
+    "avifSrcSet": "/images/menu-poke-teriyaki--w480.avif 480w, /images/menu-poke-teriyaki--w768.avif 768w, /images/menu-poke-teriyaki--w1024.avif 1024w",
+    "webpSrcSet": "/images/menu-poke-teriyaki--w480.webp 480w, /images/menu-poke-teriyaki--w768.webp 768w, /images/menu-poke-teriyaki--w1024.webp 1024w"
   },
   "/images/menu-smoothie.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQABAAA4BaJbACdADHY0ji2vyGeAD+8N77XRlvoM7iijRe9beXMuQu5k6wuRcppnIbRPtVyH1ai9Y7C+BHNMjypeNoOgrcRz1iPt4vLh3FCVMngEJUW4Udq9NrqMZjhAA=",
-    "avifSrcSet": "/images/menu-smoothie--w480.avif 480w, /images/menu-smoothie--w768.avif 768w",
-    "webpSrcSet": "/images/menu-smoothie--w480.webp 480w, /images/menu-smoothie--w768.webp 768w"
+    "avifSrcSet": "/images/menu-smoothie--w480.avif 480w, /images/menu-smoothie--w768.avif 768w, /images/menu-smoothie--w1024.avif 1024w",
+    "webpSrcSet": "/images/menu-smoothie--w480.webp 480w, /images/menu-smoothie--w768.webp 768w, /images/menu-smoothie--w1024.webp 1024w"
   },
   "/images/menu-vegan-poke.jpg": {
     "width": 1024,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAADQAgCdASoQABAAA4BaJbACdH8EwADk/RaDVjx0VS6AAP7c27S0Go16tMe1j/+whrTlwrUvEPefvHdCAJvKysdqZjskXWImFABlO/omkQi7hwOfrq4zosYPRJgvAfcGkHhVy4Hnel2SIQZv9OvEKLv85hdc8bwefuhtn/3R/RV5kYphyWoJBiKXEoAAAA==",
-    "avifSrcSet": "/images/menu-vegan-poke--w480.avif 480w, /images/menu-vegan-poke--w768.avif 768w",
-    "webpSrcSet": "/images/menu-vegan-poke--w480.webp 480w, /images/menu-vegan-poke--w768.webp 768w"
+    "avifSrcSet": "/images/menu-vegan-poke--w480.avif 480w, /images/menu-vegan-poke--w768.avif 768w, /images/menu-vegan-poke--w1024.avif 1024w",
+    "webpSrcSet": "/images/menu-vegan-poke--w480.webp 480w, /images/menu-vegan-poke--w768.webp 768w, /images/menu-vegan-poke--w1024.webp 1024w"
   },
   "/images/menu/drink-cucumber-2-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACxG1yB032BVsJRUfbC7XYAAP7wy0hEGYZqVWw6feQ8EnSNVSJJC6/GTjh1KaKsf3re+LoVqDNfbvrGMWI2UEKyTbngamjU7zq+qm/yteEZOj8DqK4VyYm9rCy3d/3rkpgbOrtR8Zn+zuAAAA==",
-    "avifSrcSet": "/images/menu/drink-cucumber-2-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-cucumber-2-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-cucumber-2-poster--w480.avif 480w, /images/menu/drink-cucumber-2-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-cucumber-2-poster--w480.webp 480w, /images/menu/drink-cucumber-2-poster--w720.webp 720w"
   },
   "/images/menu/drink-cucumber-herbs-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdL1yB032BV0s4BOj5X8AA/vDLSEQZhmpVbDp95DwSdI1VIkkLr8ZOOSIeHNBVhi9e7citnm+pZXhzJkAJgi1lhbeKhmOZJWpU0SPgt49MCQ6VPDJCeZeX6F7UrLPTWG9OEO2Lf3tX4WFgAA==",
-    "avifSrcSet": "/images/menu/drink-cucumber-herbs-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-cucumber-herbs-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-cucumber-herbs-poster--w480.avif 480w, /images/menu/drink-cucumber-herbs-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-cucumber-herbs-poster--w480.webp 480w, /images/menu/drink-cucumber-herbs-poster--w720.webp 720w"
   },
   "/images/menu/drink-lillet-spritz-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdL1yB033didya80fMZWgAAP7wy0hEGYZqVWxSbtJ7lRGnPiyVd82iZsOc/M3tFfwt5lEbR9XjPJ8q0o76cSwlHQ4Ov8ltoTAJxkJPtykm8edm4qVjYAr0wybHWKeI7NNDx+IN87PmQIl1AAAA",
-    "avifSrcSet": "/images/menu/drink-lillet-spritz-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-lillet-spritz-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-lillet-spritz-poster--w480.avif 480w, /images/menu/drink-lillet-spritz-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-lillet-spritz-poster--w480.webp 480w, /images/menu/drink-lillet-spritz-poster--w720.webp 720w"
   },
   "/images/menu/drink-lillet-strawberry-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdL1yCFKNZq5Yfq1m/Q5MgAAD+8MtIRBmGalVsOn3id9Wyl8SDodCWEzONX0tBm+TFEIvm/rPS/S99E6m3gGD975zizZ6KQmAR+MWqoPALiB42HblJlIXFoRLlBw9NYb04Q9qSh57du5NowAAA",
-    "avifSrcSet": "/images/menu/drink-lillet-strawberry-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-lillet-strawberry-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-lillet-strawberry-poster--w480.avif 480w, /images/menu/drink-lillet-strawberry-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-lillet-strawberry-poster--w480.webp 480w, /images/menu/drink-lillet-strawberry-poster--w720.webp 720w"
   },
   "/images/menu/drink-pink-low-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAACQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoC2AAjwhmR0WFCgIvLdCgAA/u6xZPloch9YgGklHSFoVp95++tMLCzQSVVOailcGY99q6LfwqzrJpOX5Xe273LpENN4PNHO/IaJ7l0LAi4rzFk5A6xJJ3B12WraMDohFKWY08SApJJOt59mBRl8YtAA",
-    "avifSrcSet": "/images/menu/drink-pink-low-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-pink-low-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-pink-low-poster--w480.avif 480w, /images/menu/drink-pink-low-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-pink-low-poster--w480.webp 480w, /images/menu/drink-pink-low-poster--w720.webp 720w"
   },
   "/images/menu/drink-red-low-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADQAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdABwbTrXrKWxjAHAA/ux9EFs7a9HZ43UKsTS0IE8T4ft2NKwY2Djv52FgJv+oYUGJ9RlE7ozT5Q5odcuz8RbIKgIAyZqck3KNNnBYYQGbNUaAo8Afbo3sMFQx2YkG5mlsinPvWPAA",
-    "avifSrcSet": "/images/menu/drink-red-low-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-red-low-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-red-low-poster--w480.avif 480w, /images/menu/drink-red-low-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-red-low-poster--w480.webp 480w, /images/menu/drink-red-low-poster--w720.webp 720w"
   },
   "/images/menu/drink-white-lemon-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoADT5WSCiaE67Jp09oAAP7sEUW87chKN/843GhM+TDOdGkrmOcyB8Bmce3i9KcdyfYZHq5s3qqENOsU2ys9rgHDA6HAbnrB1USQI8iuqKL2+fZ4Agqp7A7ozCpvEGmJZRi3lrrofwDXcAAA",
-    "avifSrcSet": "/images/menu/drink-white-lemon-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-white-lemon-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-white-lemon-poster--w480.avif 480w, /images/menu/drink-white-lemon-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-white-lemon-poster--w480.webp 480w, /images/menu/drink-white-lemon-poster--w720.webp 720w"
   },
   "/images/menu/drink-yellow-lemon-poster.jpg": {
     "width": 720,
     "height": 966,
     "blurDataURL": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoADYjTy1czSmaL6AAD+7GwK8qG+09a3HowThCREXOu46Yj/KOw6ydXflY3R993r9W7sDmOZBsyHoGhgAXigMam3gFxuFt43UfLq2vxBizr06G2zk5sgqn+xaxRjzyoIDpHcSVB9Dmu9OC5L6HO0BETIAAA=",
-    "avifSrcSet": "/images/menu/drink-yellow-lemon-poster--w480.avif 480w",
-    "webpSrcSet": "/images/menu/drink-yellow-lemon-poster--w480.webp 480w"
+    "avifSrcSet": "/images/menu/drink-yellow-lemon-poster--w480.avif 480w, /images/menu/drink-yellow-lemon-poster--w720.avif 720w",
+    "webpSrcSet": "/images/menu/drink-yellow-lemon-poster--w480.webp 480w, /images/menu/drink-yellow-lemon-poster--w720.webp 720w"
   },
   "/images/menu/glyka-0001.jpg": {
     "width": 1600,
@@ -566,15 +566,15 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 1920,
     "height": 1277,
     "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAsAA4BaJbACdADxIp065k+AAP7SBpD4sG3gf7BUZHXhWi+fKrtZ797wvVQ1oCiTzNp8umLjZL7etRE/hD8vjDBBODaxO33vm+nIm49d7SMQ9EQpOQAA",
-    "avifSrcSet": "/images/mess-logo-interior.jpg--w480.avif 480w, /images/mess-logo-interior.jpg--w768.avif 768w, /images/mess-logo-interior.jpg--w1200.avif 1200w, /images/mess-logo-interior.jpg--w1600.avif 1600w",
-    "webpSrcSet": "/images/mess-logo-interior.jpg--w480.webp 480w, /images/mess-logo-interior.jpg--w768.webp 768w, /images/mess-logo-interior.jpg--w1200.webp 1200w, /images/mess-logo-interior.jpg--w1600.webp 1600w"
+    "avifSrcSet": "/images/mess-logo-interior.jpg--w480.avif 480w, /images/mess-logo-interior.jpg--w768.avif 768w, /images/mess-logo-interior.jpg--w1200.avif 1200w, /images/mess-logo-interior.jpg--w1600.avif 1600w, /images/mess-logo-interior.jpg--w1920.avif 1920w",
+    "webpSrcSet": "/images/mess-logo-interior.jpg--w480.webp 480w, /images/mess-logo-interior.jpg--w768.webp 768w, /images/mess-logo-interior.jpg--w1200.webp 1200w, /images/mess-logo-interior.jpg--w1600.webp 1600w, /images/mess-logo-interior.jpg--w1920.webp 1920w"
   },
   "/images/mess-philosophy-poster.jpg": {
     "width": 720,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAADQAwCdASoQABwAPu1krU6ppaSiMAgBMB2JQBOgBDjmybFLeCMGdQAA/tq+8mAXOoPixxr3dPYr57SjdQ8JRjwFjcOCM9eixp76rmzf4v0gGgtnbJvozZOX4PDg6weLGToaVnMimngyq8qRMAA=",
-    "avifSrcSet": "/images/mess-philosophy-poster--w480.avif 480w",
-    "webpSrcSet": "/images/mess-philosophy-poster--w480.webp 480w"
+    "avifSrcSet": "/images/mess-philosophy-poster--w480.avif 480w, /images/mess-philosophy-poster--w720.avif 720w",
+    "webpSrcSet": "/images/mess-philosophy-poster--w480.webp 480w, /images/mess-philosophy-poster--w720.webp 720w"
   },
   "/images/raw/about-plants-light.png": {
     "width": 472,
@@ -587,22 +587,22 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "width": 940,
     "height": 1024,
     "blurDataURL": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBACdASoQABIAPu1iqU2ppaOiMAgBMB2JQBadZYA2j4fi2CbY6ni4ZgAA/psYb7RGJtesBAgiNBzj2CUT3/DNsC1aoffQmhkAqL9FeSmXvOLgH05O/ipgd5d59opKenj++qbx/rch5k+Tz876zNFyUF/GUCKy0Y864xAA",
-    "avifSrcSet": "/images/raw/about-space-start--w480.avif 480w, /images/raw/about-space-start--w768.avif 768w",
-    "webpSrcSet": "/images/raw/about-space-start--w480.webp 480w, /images/raw/about-space-start--w768.webp 768w"
+    "avifSrcSet": "/images/raw/about-space-start--w480.avif 480w, /images/raw/about-space-start--w768.avif 768w, /images/raw/about-space-start--w940.avif 940w",
+    "webpSrcSet": "/images/raw/about-space-start--w480.webp 480w, /images/raw/about-space-start--w768.webp 768w, /images/raw/about-space-start--w940.webp 940w"
   },
   "/images/raw/gallery-food-35.png": {
     "width": 1024,
     "height": 681,
     "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAsAA4BaJagCdADp9M2vAAAA+gHNIk1RvNOvBLYfr97ijSgFP1KeMVYP09Bj5cUb1c42KYWkAwesntkI5oXw5BVRGvF2enwAAA==",
-    "avifSrcSet": "/images/raw/gallery-food-35--w480.avif 480w, /images/raw/gallery-food-35--w768.avif 768w",
-    "webpSrcSet": "/images/raw/gallery-food-35--w480.webp 480w, /images/raw/gallery-food-35--w768.webp 768w"
+    "avifSrcSet": "/images/raw/gallery-food-35--w480.avif 480w, /images/raw/gallery-food-35--w768.avif 768w, /images/raw/gallery-food-35--w1024.avif 1024w",
+    "webpSrcSet": "/images/raw/gallery-food-35--w480.webp 480w, /images/raw/gallery-food-35--w768.webp 768w, /images/raw/gallery-food-35--w1024.webp 1024w"
   },
   "/images/raw/gallery-hero-still.png": {
     "width": 980,
     "height": 737,
     "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAwAA4BaJZQCdAEPCbnqCGPQAP3EZ8W3kh6taYpY8DeNJB24yp+cFq6cvdiuTXCPGc9UIRPp0n1+ZCod9rE4SgxwxnUUHvk9Z9rYtdDYkEAA",
-    "avifSrcSet": "/images/raw/gallery-hero-still--w480.avif 480w, /images/raw/gallery-hero-still--w768.avif 768w",
-    "webpSrcSet": "/images/raw/gallery-hero-still--w480.webp 480w, /images/raw/gallery-hero-still--w768.webp 768w"
+    "avifSrcSet": "/images/raw/gallery-hero-still--w480.avif 480w, /images/raw/gallery-hero-still--w768.avif 768w, /images/raw/gallery-hero-still--w980.avif 980w",
+    "webpSrcSet": "/images/raw/gallery-hero-still--w480.webp 480w, /images/raw/gallery-hero-still--w768.webp 768w, /images/raw/gallery-hero-still--w980.webp 980w"
   },
   "/images/raw/mess-internal-0027-1.png": {
     "width": 768,
