@@ -2,7 +2,7 @@
 title: "Avocado Toast με αυγό ποσέ"
 slug: "avocado-toast-me-avgo-pose"
 excerpt: "Το signature μας toast ξαναγεννιέται στο σπίτι σου: προζυμένιο ψωμί, guacamole από το μηδέν, φέτα, ντοματίνια και ένα τέλεια ποσέ αυγό από πάνω."
-category: "kouzina"
+category: "brunch"
 cover: "/images/menu/piata-0009.jpg"
 coverAlt: "Avocado toast σε προζυμένιο ψωμί με αυγό ποσέ και ντοματίνια"
 author:

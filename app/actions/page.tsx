@@ -1,14 +1,9 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
-import ActionsShell from '@/components/events/actions-shell'
-import FeaturedNextEvent from '@/components/events/featured-next-event'
 import ActionsHeroHeader from '@/components/events/actions-hero-header'
-import ActionsManifesto from '@/components/events/actions-manifesto'
-import EventsArchiveList from '@/components/events/events-archive-list'
-import ActionSpotlight from '@/components/events/action-spotlight'
-import PreFooterCta from '@/components/pre-footer-cta'
+import KeepRisingActions from '@/components/events/keep-rising-actions'
 import FooterSection from '@/components/footer-section'
-import { getAllEvents, getEventBySlug, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
+import { getAllEvents, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
 import { buildPageMetadata } from '@/lib/metadata'
 import { getSettings } from '@/lib/settings'
 
@@ -30,16 +25,9 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function ActionsPage() {
   const settings = getSettings()
-  const upcomingEvents = getUpcomingEvents()
-  const pastEvents = getPastEvents()
-  const keepRisingSpotlight = getEventBySlug('keep-rising')
-  const featured = upcomingEvents[0] ?? null
-  const restUpcoming = upcomingEvents.slice(1)
-  const noUpcoming = upcomingEvents.length === 0
-
-  const spotlight = keepRisingSpotlight ? (
-    <ActionSpotlight event={keepRisingSpotlight} />
-  ) : null
+  const upcoming = getUpcomingEvents()
+  const past = getPastEvents()
+  const featured = upcoming[0] ?? null
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
@@ -54,31 +42,7 @@ export default function ActionsPage() {
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </div>
-      <ActionsShell
-        upcomingEvents={upcomingEvents}
-        restUpcoming={restUpcoming}
-        settings={settings}
-        aboveHero={
-          <>
-            <ActionsManifesto />
-            {noUpcoming && spotlight}
-          </>
-        }
-      >
-        {featured && <FeaturedNextEvent event={featured} settings={settings} />}
-      </ActionsShell>
-      {!noUpcoming && spotlight}
-      {pastEvents.length > 0 && <EventsArchiveList pastEvents={pastEvents} />}
-      <PreFooterCta
-        variant="charcoal"
-        eyebrow="ΘΕΛΕΙΣ ΝΑ ΚΛΕΙΣΕΙΣ ΘΕΣΗ;"
-        heading="Μία φόρμα. Λίγα λεπτά."
-        body="Διάλεξε event ή πες μας τι έχεις στο μυαλό σου — θα στήσουμε το υπόλοιπο μαζί."
-        primaryLabel="Κράτηση"
-        primaryHref="/reservations"
-        secondaryLabel="WhatsApp"
-        secondaryHref={`https://wa.me/${settings.whatsapp.replace(/[^\d]/g, '')}`}
-      />
+      <KeepRisingActions upcoming={upcoming} past={past} settings={settings} />
       <FooterSection />
     </main>
   )

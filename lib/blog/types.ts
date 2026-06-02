@@ -1,4 +1,4 @@
-export type PostCategory = 'kafes' | 'kouzina' | 'koinotita' | 'events'
+export type PostCategory = 'brunch' | 'bowls' | 'rofimata' | 'glyka'
 
 export type Post = {
   slug: string

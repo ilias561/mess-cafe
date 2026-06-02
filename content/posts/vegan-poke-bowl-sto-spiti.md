@@ -2,7 +2,7 @@
 title: "Vegan Poke Bowl στο σπίτι"
 slug: "vegan-poke-bowl-sto-spiti"
 excerpt: "Το αγαπημένο μας vegan bowl με άγριο ρύζι, γλυκοπατάτα και σπόρους κύμινου — μια συνταγή που μπορείς να φτιάξεις εύκολα στην κουζίνα σου."
-category: "kouzina"
+category: "bowls"
 cover: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Vegan poke bowl με ρύζι, γλυκοπατάτα και πράσινα λαχανικά"
 author:

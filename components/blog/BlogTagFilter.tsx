@@ -7,11 +7,11 @@ import type { Post, PostCategory } from '@/lib/blog/types'
 type FilterKey = 'all' | PostCategory
 
 const PILLS: { key: FilterKey; label: string }[] = [
-  { key: 'all', label: 'All' },
-  { key: 'kafes', label: 'Coffee' },
-  { key: 'kouzina', label: 'Kitchen' },
-  { key: 'koinotita', label: 'Community' },
-  { key: 'events', label: 'Events' },
+  { key: 'all', label: 'Όλες' },
+  { key: 'brunch', label: 'Brunch' },
+  { key: 'bowls', label: 'Bowls' },
+  { key: 'rofimata', label: 'Ροφήματα' },
+  { key: 'glyka', label: 'Γλυκά' },
 ]
 
 type BlogTagFilterProps = {

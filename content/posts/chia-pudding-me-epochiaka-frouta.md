@@ -2,7 +2,7 @@
 title: "Chia Pudding με εποχιακά φρούτα"
 slug: "chia-pudding-me-epochiaka-frouta"
 excerpt: "Πέντε υλικά, πέντε λεπτά προετοιμασία και ένα πρωινό που μπορείς να ετοιμάσεις βράδυ για βράδυ — γεμάτο ωμέγα-3, φυτικές ίνες και χρώμα."
-category: "kouzina"
+category: "brunch"
 cover: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Chia pudding σε γυάλινα ποτήρια με φρέσκα φρούτα και granola"
 author:

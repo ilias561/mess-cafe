@@ -5,7 +5,6 @@ import { scrollToId } from '@/lib/lenis'
 import {
   AnaglyphHeading,
   CornerTicks,
-  Eyebrow,
   NumberedCaption,
 } from '@/components/decor/ornaments'
 
@@ -40,92 +39,86 @@ const DOORS: Door[] = [
   },
 ]
 
+/**
+ * Fullscreen split chooser: two doors fill the viewport (side by side on
+ * desktop, stacked halves on mobile). Picking one scrolls to that section.
+ */
 export default function ChoiceDoors() {
   const reduce = useReducedMotion()
 
   return (
     <section
       aria-label="Επιλογές πλοήγησης"
-      className="relative bg-forest px-6 py-20 md:px-12 md:py-24"
+      className="relative grid h-[100svh] grid-cols-1 grid-rows-2 bg-forest md:grid-cols-2 md:grid-rows-1"
     >
-      <div className="mx-auto max-w-[1400px]">
-        <div className="mb-12 text-center md:mb-16">
-          <h1 className="sr-only">Φαγητό ως Φάρμακο — M.E.S.S.</h1>
-          <Eyebrow tone="light">ΦΑΓΗΤΟ ΩΣ ΦΑΡΜΑΚΟ</Eyebrow>
-          <AnaglyphHeading
-            as="h2"
-            tone="dark"
-            className="mt-4 font-serif text-[clamp(34px,5vw,64px)] leading-[1.05] tracking-tight"
+      <h1 className="sr-only">Φαγητό ως Φάρμακο — M.E.S.S.</h1>
+
+      {DOORS.map((door, i) => {
+        const side = i === 0 ? 'left' : 'right'
+        const isFirst = i === 0
+        return (
+          <a
+            key={door.target}
+            href={door.href}
+            onClick={(e) => {
+              e.preventDefault()
+              scrollToId(door.target)
+            }}
+            className="ui-focus-ring group relative block h-full w-full overflow-hidden"
           >
-            Τι θέλεις να δεις;
-          </AnaglyphHeading>
-          <p className="mx-auto mt-5 max-w-[52ch] font-serif text-[clamp(15px,1.3vw,18px)] italic leading-relaxed text-charcoal/70">
-            Διάλεξε μία από τις δύο πόρτες. Μπορείς πάντα να γυρίσεις πίσω.
-          </p>
-        </div>
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  side === 'left'
+                    ? 'linear-gradient(120deg, #0e2208 0%, #1d3a16 60%, #2d5a27 100%)'
+                    : 'linear-gradient(240deg, #0e2208 0%, #1d3a16 60%, #2d5a27 100%)',
+              }}
+            />
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
-          {DOORS.map((door, i) => {
-            const side = i === 0 ? 'left' : 'right'
-            return (
-              <a
-                key={door.target}
-                href={door.href}
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToId(door.target)
-                }}
-                className="ui-focus-ring ui-press group relative block aspect-[3/4] md:aspect-[4/5]"
-                style={{ perspective: '1200px' }}
+            {/* hover wash — brightens the chosen half */}
+            <m.span
+              aria-hidden
+              className="absolute inset-0 bg-white"
+              initial={false}
+              animate={{ opacity: 0 }}
+              whileHover={reduce ? undefined : { opacity: 0.06 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            />
+
+            {/* mustard seam between the two doors */}
+            {isFirst && (
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px bg-mustard/50 md:inset-x-auto md:inset-y-0 md:right-0 md:h-auto md:w-px"
+              />
+            )}
+
+            <CornerTicks />
+
+            <div className="relative z-10 flex h-full flex-col items-center justify-center gap-6 p-10 text-center md:p-16">
+              <NumberedCaption index={door.index} label={door.eyebrow} className="mt-0" />
+
+              <AnaglyphHeading
+                as="h2"
+                tone="dark"
+                className="font-serif text-[clamp(30px,4vw,56px)] leading-[1.08] tracking-tight"
               >
-                <m.div
-                  className="relative h-full w-full overflow-hidden"
-                  style={{
-                    background:
-                      side === 'left'
-                        ? 'linear-gradient(120deg, #0e2208 0%, #1d3a16 60%, #2d5a27 100%)'
-                        : 'linear-gradient(240deg, #0e2208 0%, #1d3a16 60%, #2d5a27 100%)',
-                    transformOrigin: side === 'left' ? 'left center' : 'right center',
-                  }}
-                  initial={false}
-                  whileHover={reduce ? undefined : { rotateY: side === 'left' ? -4 : 4 }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <span
-                    aria-hidden
-                    className={`pointer-events-none absolute inset-y-0 ${
-                      side === 'left' ? 'right-0' : 'left-0'
-                    } w-px bg-mustard/60`}
-                  />
+                {door.title}
+              </AnaglyphHeading>
 
-                  <CornerTicks />
+              <p className="max-w-[32ch] font-serif text-[clamp(15px,1.2vw,18px)] italic leading-relaxed text-charcoal/70">
+                {door.blurb}
+              </p>
 
-                  <div className="relative z-10 flex h-full flex-col items-center justify-between p-8 text-center md:p-12">
-                    <NumberedCaption index={door.index} label={door.eyebrow} className="mt-0" />
-
-                    <div className="flex flex-col items-center gap-5">
-                      <AnaglyphHeading
-                        as="h2"
-                        tone="dark"
-                        className="font-serif text-[clamp(26px,3vw,38px)] leading-[1.1] tracking-tight"
-                      >
-                        {door.title}
-                      </AnaglyphHeading>
-                      <p className="max-w-[28ch] font-serif text-[clamp(14px,1.1vw,16px)] italic leading-relaxed text-charcoal/70">
-                        {door.blurb}
-                      </p>
-                    </div>
-
-                    <span className="font-sans text-[12px] uppercase tracking-[0.17em] text-mustard transition-colors duration-250 group-hover:text-charcoal">
-                      {door.cta}
-                    </span>
-                  </div>
-                </m.div>
-              </a>
-            )
-          })}
-        </div>
-      </div>
+              <span className="mt-2 inline-flex items-center font-sans text-[12px] uppercase tracking-[0.18em] text-mustard transition-colors duration-300 group-hover:text-charcoal">
+                {door.cta}
+              </span>
+            </div>
+          </a>
+        )
+      })}
     </section>
   )
 }

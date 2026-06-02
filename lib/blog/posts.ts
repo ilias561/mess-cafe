@@ -6,10 +6,10 @@ import type { Post, PostCategory } from './types'
 export type { Post, PostCategory }
 
 const CATEGORY_LABELS: Record<PostCategory, string> = {
-  kafes: 'Καφές',
-  kouzina: 'Κουζίνα',
-  koinotita: 'Κοινότητα',
-  events: 'Events',
+  brunch: 'Brunch',
+  bowls: 'Bowls',
+  rofimata: 'Ροφήματα',
+  glyka: 'Γλυκά',
 }
 
 const POSTS_DIR = path.join(process.cwd(), 'content/posts')

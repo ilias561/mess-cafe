@@ -2,7 +2,7 @@
 title: "Healthy Chocolate Cake με γλυκοπατάτα και χουρμάδες"
 slug: "healthy-chocolate-cake-glykopatata"
 excerpt: "Το vegan κέικ σοκολάτας του M.E.S.S. χωρίς ίχνος ζάχαρης — γλυκοπατάτα για υγρασία, χουρμάδες για φυσική γλυκύτητα, κακάο για βαθιά γεύση."
-category: "kouzina"
+category: "glyka"
 cover: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Σκούρο κέικ σοκολάτας κομμένο σε φέτες με ξηρούς καρπούς από πάνω"
 author:

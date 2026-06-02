@@ -43,6 +43,20 @@ export default function PhilosophySection() {
     >
       <ScrollLeaves />
 
+      {/* Dissolve the leaf border into flat green at the very bottom so this
+          section hands off smoothly to the plain-green café reveal below —
+          otherwise the dense leaves meet flat green with an abrupt texture jump.
+          Sits above the leaves (z-[1]) but below the content (z-10); leaves
+          everywhere else are untouched. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-[34vh]"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgba(45,90,39,0) 0%, rgba(45,90,39,0) 16%, rgba(45,90,39,0.62) 56%, rgb(45,90,39) 100%)',
+        }}
+      />
+
       <div className="relative z-10 mx-auto max-w-[1400px]">
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">

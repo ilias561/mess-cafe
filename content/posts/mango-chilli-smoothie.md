@@ -2,7 +2,7 @@
 title: "Mango-Chilli Smoothie: η συνταγή που δεν περίμενες"
 slug: "mango-chilli-smoothie"
 excerpt: "Γλυκό μάνγκο, καυτό τσίλι, ξινό λάιμ και χειροποίητο γάλα καρυδιών — ένα smoothie που ξυπνά τις αισθήσεις και επιταχύνει τον μεταβολισμό."
-category: "kouzina"
+category: "rofimata"
 cover: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=1800&q=80&auto=format&fit=crop"
 coverAlt: "Κίτρινο mango smoothie σε ψηλό ποτήρι με φέτες μάνγκο"
 author:

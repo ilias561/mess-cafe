@@ -1,10 +1,10 @@
 import type { PostCategory } from '@/lib/blog/posts'
 
 const categoryStyles: Record<PostCategory, string> = {
-  kafes: 'border-mustard/50 text-charcoal',
-  kouzina: 'border-olive/40 text-olive',
-  koinotita: 'border-charcoal/30 text-charcoal',
-  events: 'border-amber/60 text-charcoal',
+  brunch: 'border-mustard/50 text-charcoal',
+  bowls: 'border-olive/40 text-olive',
+  rofimata: 'border-amber/60 text-charcoal',
+  glyka: 'border-terracotta/60 text-charcoal',
 }
 
 type CategoryPillProps = {
