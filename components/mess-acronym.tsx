@@ -66,7 +66,7 @@ export default function MessAcronym() {
     <m.section
       ref={sectionRef}
       aria-label="M.E.S.S. — Modular, Events, Sustainable, Space"
-      className="border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-14 md:min-h-[75vh] md:px-12 md:py-20"
+      className="border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-14 md:min-h-[50vh] md:px-12 md:py-20"
       style={reduce || !isDesktop ? undefined : { backgroundPositionY: bgShift }}
     >
       <div className="mx-auto max-w-[1400px]">

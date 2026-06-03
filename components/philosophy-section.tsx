@@ -60,7 +60,7 @@ export default function PhilosophySection() {
       <div className="relative z-10 mx-auto max-w-[1400px]">
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-5">
+          <div className="md:col-start-2 md:col-span-4 md:pt-40">
             <div className="md:sticky md:top-28">
               <Reveal>
                 <Eyebrow tone="dark">Η φιλοσοφία μας</Eyebrow>
@@ -99,7 +99,7 @@ export default function PhilosophySection() {
             </div>
           </div>
 
-          <div className="md:col-span-7">
+          <div className="md:col-start-7 md:col-span-6 md:pt-65">
             <MaskRevealBlock direction="up">
               <Tile aspect="aspect-video">
                 <AmbientVideo
@@ -217,7 +217,7 @@ function SplitSpread() {
     <div className="relative mt-16 md:mt-24">
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start md:gap-8">
-        <div className="md:col-start-1 md:col-span-5 md:-translate-y-4">
+        <div className="md:col-start-2 md:col-span-5 md:-translate-y-4">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
               src={images.new1}
@@ -227,7 +227,7 @@ function SplitSpread() {
             />
           </MaskRevealBlock>
         </div>
-        <div className="md:col-start-8 md:col-span-4 md:translate-y-16">
+        <div className="md:col-start-8 md:col-span-4 md:-translate-y-4">
           <MaskRevealBlock direction="up" delay={0.15}>
             <KenBurnsTile
               src={images.aboutInterior}
@@ -239,8 +239,8 @@ function SplitSpread() {
         </div>
       </div>
 
-      <div className="mt-24 grid grid-cols-1 gap-6 md:mt-36 md:grid-cols-12 md:items-start md:gap-8">
-        <div className="md:col-start-2 md:col-span-4 md:translate-y-12">
+      <div className="mt-24 grid grid-cols-1 gap-6 md:mt-36 md:grid-cols-12 md:items-start md:gap-16">
+        <div className="md:col-start-2 md:col-span-4 md:-translate-y-22">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
               src={images.aboutPlants}
