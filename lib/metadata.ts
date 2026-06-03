@@ -16,11 +16,16 @@ type PageMetadataInput = {
   image?: OgImageInput
 }
 
-const DEFAULT_OG_IMAGE = '/images/hero-interior.jpg'
+export const DEFAULT_OG_IMAGE: OgImageInput = {
+  url: '/images/hero-interior.jpg',
+  alt: 'M.E.S.S. Café — Ιωάννινα',
+  width: 1200,
+  height: 630,
+}
 
 /** Always returns an absolute https:// URL for Open Graph images. */
 export function resolveOgImageUrl(url: string): string {
-  const trimmed = url?.trim() || DEFAULT_OG_IMAGE
+  const trimmed = url?.trim() || DEFAULT_OG_IMAGE.url
   if (trimmed.startsWith('https://')) return trimmed
   if (trimmed.startsWith('http://')) {
     return `https://${trimmed.slice('http://'.length)}`
@@ -28,7 +33,7 @@ export function resolveOgImageUrl(url: string): string {
   const path = trimmed.startsWith('/') ? trimmed : `/${trimmed}`
   const resolved = absoluteUrl(path)
   if (!resolved.startsWith('https://')) {
-    return absoluteUrl(DEFAULT_OG_IMAGE)
+    return absoluteUrl(DEFAULT_OG_IMAGE.url)
   }
   return resolved
 }
@@ -50,7 +55,7 @@ export function buildPageMetadata({
   image,
 }: PageMetadataInput): Metadata {
   const url = absoluteUrl(path)
-  const ogImage = image ? buildOgImage(image) : undefined
+  const ogImage = buildOgImage(image ?? DEFAULT_OG_IMAGE)
 
   return {
     title,

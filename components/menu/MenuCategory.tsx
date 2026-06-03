@@ -4,7 +4,7 @@ import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuCategory as MenuCategoryType, MenuItem as MenuItemType, MenuLayout } from '@/lib/menu-data'
 import { extras, getCategoryLayout } from '@/lib/menu-data'
-import { MenuFeatureRow, MenuGridItem, MenuListRow } from './MenuItem'
+import { MenuFeatureRow, MenuGridItem, MenuListRow, MenuCardItem } from './MenuItem'
 
 function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'brunch') {
@@ -114,6 +114,29 @@ function CategoryBody({
 }) {
   if (layout === 'list') {
     return <ListGroup items={category.items} className="mt-12" showNutrition={showNutrition} />
+  }
+
+  if (layout === 'card') {
+    const media = category.items.filter(hasMedia)
+    const noMedia = category.items.filter((i) => !hasMedia(i))
+    return (
+      <>
+        {media.length > 0 && (
+          <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-12 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3">
+            {media.map((item, i) => (
+              <MenuCardItem key={item.name} item={item} index={i} />
+            ))}
+          </div>
+        )}
+        {noMedia.length > 0 && (
+          <ListGroup
+            items={noMedia}
+            showNutrition={showNutrition}
+            className={media.length > 0 ? 'mt-12 border-t border-line/40 pt-10 md:mt-16' : 'mt-12'}
+          />
+        )}
+      </>
+    )
   }
 
   const media = category.items.filter(hasMedia)

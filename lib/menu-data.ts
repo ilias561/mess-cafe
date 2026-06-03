@@ -20,7 +20,7 @@ export type MenuItem = {
   ingredientsImage?: string
 }
 
-export type MenuLayout = 'feature' | 'grid' | 'list'
+export type MenuLayout = 'feature' | 'grid' | 'list' | 'card'
 
 export type MenuCategory = {
   id: string
@@ -105,7 +105,7 @@ export const menuData: MenuCategory[] = [
     id: 'bowls',
     title: 'BOWLS',
     titleGr: 'Μπολ',
-    layout: 'feature',
+    layout: 'card',
     items: [
       {
         name: 'Vegan Poke Bowl',

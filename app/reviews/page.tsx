@@ -9,6 +9,12 @@ export const metadata: Metadata = buildPageMetadata({
   title: 'Όσοι μας γνώρισαν — M.E.S.S.',
   description: 'Όλες οι αξιολογήσεις από επισκέπτες που γνώρισαν το M.E.S.S. στα Ιωάννινα.',
   path: '/reviews',
+  image: {
+    url: '/images/about-2.jpg',
+    alt: 'M.E.S.S. Café — θέα στη λίμνη',
+    width: 1200,
+    height: 630,
+  },
 })
 
 export default function ReviewsPage() {

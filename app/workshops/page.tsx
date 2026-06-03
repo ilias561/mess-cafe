@@ -12,6 +12,12 @@ export const metadata: Metadata = buildPageMetadata({
   description:
     'Workshops, events και κρατήσεις χώρου στο M.E.S.S. — δύο αίθουσες και πατάρι στο ΚΕΠΑΒΙ, Ιωάννινα.',
   path: '/workshops',
+  image: {
+    url: '/images/mess-philosophy-poster.jpg',
+    alt: 'M.E.S.S. — χώρος για workshops και events',
+    width: 1200,
+    height: 630,
+  },
 })
 
 export default function WorkshopsPage() {

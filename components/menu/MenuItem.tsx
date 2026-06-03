@@ -407,6 +407,44 @@ export function MenuGridItem({
   )
 }
 
+export function MenuCardItem({ item, index }: { item: MenuItemType; index: number }) {
+  const reduce = useReducedMotion()
+  const hasMedia = Boolean(item.image || item.video)
+  if (!hasMedia) return null
+
+  return (
+    <m.article {...itemMotionProps(index)}>
+      <m.div
+        className="group relative aspect-square w-full overflow-hidden rounded-[10px] border border-line/60 bg-bone-warm shadow-[0_10px_30px_rgba(14,34,8,0.35)]"
+        initial={false}
+        whileHover={reduce ? undefined : { y: -6 }}
+        transition={{ duration: 0.4, ease: EASE }}
+      >
+        {item.video ? (
+          <MenuItemMedia item={item} />
+        ) : (
+          <img
+            src={item.image}
+            alt={item.name}
+            className="h-full w-full scale-105 object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-black/65 to-transparent"
+        />
+
+        <h3 className="absolute left-3.5 top-3 z-10 max-w-[80%] font-sans text-[12px] font-bold uppercase leading-[1.2] tracking-[0.08em] text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] sm:text-[13px]">
+          {item.name}
+        </h3>
+      </m.div>
+    </m.article>
+  )
+}
+
 export function MenuListRow({
   item,
   index,

@@ -11,17 +11,17 @@ export type ImageManifestEntry = {
 export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/111/mess-internal-0006.jpg": {
     "width": 1600,
-    "height": 2134,
-    "blurDataURL": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAACwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoMYD8ABFzLdR+MHkcQPcK3AAP4Fnw0p1cSF86gFREwk7jteG9g4XSeHCyCx5LnYaXgjEMPGC/KUCzAByv7qABtyoBa5utRQzhsJNoml2vFNUQFQNZbUtuSX2pCIavfXXf3WTJBmfjzJZCmSXVw56xjZpNLDt0lNFJ4AAA==",
+    "height": 1066,
+    "blurDataURL": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAsAA4BaJbAC7AD2Oa3pFp5qwAD+heilH7xeq0iAUigfQ7eDuarRivgtWwsBbw6VA0Ij9Tlc/vGxXKxarIGO7WYGC9WoRbggZBZJtxKwbqpJT3nAJrN95JQ4wfW3u6gAAA==",
     "avifSrcSet": "/images/111/mess-internal-0006--w480.avif 480w, /images/111/mess-internal-0006--w768.avif 768w, /images/111/mess-internal-0006--w1200.avif 1200w, /images/111/mess-internal-0006--w1600.avif 1600w",
     "webpSrcSet": "/images/111/mess-internal-0006--w480.webp 480w, /images/111/mess-internal-0006--w768.webp 768w, /images/111/mess-internal-0006--w1200.webp 1200w, /images/111/mess-internal-0006--w1600.webp 1600w"
   },
   "/images/111/mess-internal-0007.jpg": {
-    "width": 1600,
-    "height": 2134,
-    "blurDataURL": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoMYAC9iIr2EEYPhuc6AAPlhOw968pwFAMV771BsCqH71zD7FT9uv5kWI0hmrgOCfvC7xJKqrip3toxY1bvlRdpyW8lVWITorKzT7GP1USnUQh3cvW4/mOb6/8BVO9C7ksuikQCvZf/J3ZCgHjpkBO+M2PgAAA==",
-    "avifSrcSet": "/images/111/mess-internal-0007--w480.avif 480w, /images/111/mess-internal-0007--w768.avif 768w, /images/111/mess-internal-0007--w1200.avif 1200w, /images/111/mess-internal-0007--w1600.avif 1600w",
-    "webpSrcSet": "/images/111/mess-internal-0007--w480.webp 480w, /images/111/mess-internal-0007--w768.webp 768w, /images/111/mess-internal-0007--w1200.webp 1200w, /images/111/mess-internal-0007--w1600.webp 1600w"
+    "width": 768,
+    "height": 1153,
+    "blurDataURL": "data:image/webp;base64,UklGRvAAAABXRUJQVlA4IOQAAABQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdMoAlsRG/DG5YDGTksp6AAP64QOEMvcLyL2G8MNwgKYjhr6/q9CnfF3Gs458S+atUw13IaPMgY3MqsAv+mXGPHAR9cEkQ3yPHJe6Jt8bgn+crMSaZr/Z9p5Av5pw5ByJ+O2ulTRz00Pn7u2jm0H/DiQ+9eREh7KTKn9KRLvoRm3axyvzqN8Inc80Ummyi/49lFffpvoK3GaduRIOnJOzBplzwNfxO58/12B5aC7wuA//qlmq+Q+RuV2wqBDT341ChfpiCxzoAAAA=",
+    "avifSrcSet": "/images/111/mess-internal-0007--w480.avif 480w, /images/111/mess-internal-0007--w768.avif 768w",
+    "webpSrcSet": "/images/111/mess-internal-0007--w480.webp 480w, /images/111/mess-internal-0007--w768.webp 768w"
   },
   "/images/111/mess-internal-0009.jpg": {
     "width": 1600,
@@ -52,16 +52,16 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/111/mess-internal-0034--w480.webp 480w, /images/111/mess-internal-0034--w768.webp 768w, /images/111/mess-internal-0034--w1200.webp 1200w, /images/111/mess-internal-0034--w1600.webp 1600w"
   },
   "/images/about-1.jpg": {
-    "width": 1199,
+    "width": 1066,
     "height": 1600,
-    "blurDataURL": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAABwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoMYAEI8xjh+12jxK56cAAD88Z6uEjs+8Rwg+YRPbsAmY74LVjUk1zwFLnXvlUS2xls4soFXwr7VrgBydNGIKrL1adCO4KbvwRJNoflojg/6US//m2ZB6y4C2dF7MM7FGz+ahLewhBaZ9FNVA33ERIxs0mlhsh2uNMAAAA==",
-    "avifSrcSet": "/images/about-1--w480.avif 480w, /images/about-1--w768.avif 768w, /images/about-1--w1199.avif 1199w",
-    "webpSrcSet": "/images/about-1--w480.webp 480w, /images/about-1--w768.webp 768w, /images/about-1--w1199.webp 1199w"
+    "blurDataURL": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdIExgvhfuhjPpWi70RN6jogAA/ni24GSgoOOrJ7CctTbB24F26tAPqLtCM5SeIGzUhBdYlb47n+UCc7pzQdHXVUIa441FG2KxmZ5NwpFruv3+3G21V/lv7zdlMJhXU11g3ptKwmhP1QKxtrlJteP2t56MMxSHeK0uv7+OCKJlSAKeoJj7hQPKo5TOJITMNBwyd7AAAA==",
+    "avifSrcSet": "/images/about-1--w480.avif 480w, /images/about-1--w768.avif 768w, /images/about-1--w1066.avif 1066w",
+    "webpSrcSet": "/images/about-1--w480.webp 480w, /images/about-1--w768.webp 768w, /images/about-1--w1066.webp 1066w"
   },
   "/images/about-2.jpg": {
     "width": 1600,
     "height": 1066,
-    "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADQAQCdASoQAAsAA4BaJbACdAEV+EtuAAD+a1R/3RaUb889fY+TdDPSYaUKIvObUDbcej8FYwPzJ/CiE3+CQBNbaFtPF94D3DLHGUqzwlwwZmmJjbB3snYyFzc84xfk24QcrgZiKdgov1AA",
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQAAsAA4BaJaACdAYt9qvVMfoKOgAA/uzk0kjAyFleEVkT+2sYej+wHp+sCUvFgVpu8R7tfpllOoQRx1276E34qmfme62UzidJ36Gf+uj3AG1MMpBAEAZz+1AAAA==",
     "avifSrcSet": "/images/about-2--w480.avif 480w, /images/about-2--w768.avif 768w, /images/about-2--w1200.avif 1200w, /images/about-2--w1600.avif 1600w",
     "webpSrcSet": "/images/about-2--w480.webp 480w, /images/about-2--w768.webp 768w, /images/about-2--w1200.webp 1200w, /images/about-2--w1600.webp 1600w"
   },
@@ -73,11 +73,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/about-3--w480.webp 480w, /images/about-3--w768.webp 768w, /images/about-3--w1066.webp 1066w"
   },
   "/images/about-4.jpg": {
-    "width": 1600,
-    "height": 1066,
-    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJbACdAEOua2kQ4AA/sYCctzX0tFZT51uCGHmiQzz6x5uVO2SkvT2x1yQWU6pAL5IBp/81an2Ch8fr1oAY3+Mxhl58YPaNt1qowx95PkwAA==",
-    "avifSrcSet": "/images/about-4--w480.avif 480w, /images/about-4--w768.avif 768w, /images/about-4--w1200.avif 1200w, /images/about-4--w1600.avif 1600w",
-    "webpSrcSet": "/images/about-4--w480.webp 480w, /images/about-4--w768.webp 768w, /images/about-4--w1200.webp 1200w, /images/about-4--w1600.webp 1600w"
+    "width": 480,
+    "height": 319,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAoAA4BaJbACdAD5NIwchlwAAP7eAUlvAH2z8pNL1exJra3rnKNKogSt+AjHu/l18OpbvKp43zjXnhrerFUXR7rtia5blnHIzDj975vpyJuPXdSbswsovAAAAA==",
+    "avifSrcSet": "/images/about-4--w480.avif 480w",
+    "webpSrcSet": "/images/about-4--w480.webp 480w"
   },
   "/images/blog/placeholder.jpg": {
     "width": 1200,
@@ -218,13 +218,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAACQBACdASoQABgAPu1iqU2ppaQiMAgBMB2JZgCdAYxs1Zds7upW+FjIGFm16QAA/tREqKhVRtx1HM63gaa5TvVC6+Q9PQ0yB/mCw8ktWdn/WSpk6buN4cxCY/CkCfbEmTcHvY+v8GiK9CQN0L1UNfoqSkz5YRyyGkVQTfZcwNrSvGgV628NUvqD/PaAPLW8HoDz1m3ffCT4l9igyxfwmiWO/kAAAA==",
     "avifSrcSet": "/images/gallery-5--w480.avif 480w, /images/gallery-5--w768.avif 768w, /images/gallery-5--w1066.avif 1066w",
     "webpSrcSet": "/images/gallery-5--w480.webp 480w, /images/gallery-5--w768.webp 768w, /images/gallery-5--w1066.webp 1066w"
-  },
-  "/images/gallery-6.jpg": {
-    "width": 1600,
-    "height": 1066,
-    "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADwAQCdASoQAAsAA4BaJbAC7AD2IHHX/igA/oXopR+8XqtIgFd0c9mLFvkjPd+eqYlVPQqYf8TcpDcnu1bL7dkrYnflAjtO12EtkU1kx0R//01ugRuc1bGA/sAHeAE1m+8kocYPrbtKAAAA",
-    "avifSrcSet": "/images/gallery-6--w480.avif 480w, /images/gallery-6--w768.avif 768w, /images/gallery-6--w1200.avif 1200w, /images/gallery-6--w1600.avif 1600w",
-    "webpSrcSet": "/images/gallery-6--w480.webp 480w, /images/gallery-6--w768.webp 768w, /images/gallery-6--w1200.webp 1200w, /images/gallery-6--w1600.webp 1600w"
   },
   "/images/gallery-7.jpg": {
     "width": 1199,
