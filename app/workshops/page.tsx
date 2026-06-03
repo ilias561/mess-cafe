@@ -4,7 +4,9 @@ import FooterSection from '@/components/footer-section'
 import BookingForm from '@/components/reservations/booking-form'
 import { Suspense } from 'react'
 import EventsGrid from '@/components/events/events-grid'
+import VenueSpacesSection from '@/components/workshops/venue-spaces-section'
 import { buildPageMetadata } from '@/lib/metadata'
+import { buildUpcomingEventsJsonLd } from '@/lib/events/event-json-ld'
 import { getPastEvents, getUpcomingEvents } from '@/lib/events/events'
 
 export const metadata: Metadata = buildPageMetadata({
@@ -28,9 +30,13 @@ export default function WorkshopsPage() {
     title: event.title,
     date: event.date,
   }))
+  const eventsJsonLd = buildUpcomingEventsJsonLd(upcomingEvents)
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
+      {eventsJsonLd ? (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventsJsonLd) }} />
+      ) : null}
       <Navigation />
       <section className="px-6 pt-36 md:px-12 md:pt-44">
         <div className="mx-auto max-w-[1400px]">
@@ -42,8 +48,21 @@ export default function WorkshopsPage() {
             και events, τα οποία ενημερώνονται μέσα από τη σελίδα μας στο Instagram. Μπορείτε επίσης να κλείσετε τον
             δικό σας χώρο για τα events σας.
           </p>
+          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 font-sans text-[12px] uppercase tracking-[0.14em] text-olive">
+            <li>2 αίθουσες</li>
+            <li aria-hidden="true" className="text-line/60">
+              ·
+            </li>
+            <li>πατάρι</li>
+            <li aria-hidden="true" className="text-line/60">
+              ·
+            </li>
+            <li>{/* TODO(owner): total or per-room capacity */}χωρητικότητα · σύντομα</li>
+          </ul>
         </div>
       </section>
+
+      <VenueSpacesSection />
 
       {/* Workshops page intentionally hides the past-events archive */}
       <EventsGrid upcomingEvents={upcomingEvents} pastEvents={[]} />

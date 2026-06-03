@@ -25,7 +25,7 @@ const EVENT_KIND_OPTIONS = [
 ] as const
 
 const INPUT_CLASSNAME =
-  'ui-field w-full rounded-[2px] border border-line/50 bg-bone px-4 py-3 font-sans text-[15px] text-charcoal focus:outline-none'
+  'ui-field w-full rounded-[2px] border border-charcoal/25 bg-charcoal px-4 py-3 font-sans text-[15px] text-ink-dark placeholder:text-ink-dark/45 disabled:cursor-not-allowed disabled:opacity-60'
 
 function todayDateString() {
   return new Date().toISOString().split('T')[0]
@@ -227,7 +227,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
                 aria-describedby={errors.consent ? 'consent-error' : undefined}
                 aria-invalid={errors.consent ? true : undefined}
                 {...register('consent')}
-                className="mt-1 h-4 w-4 shrink-0 rounded border-line/50 text-mustard focus:ring-mustard"
+                className="ui-field mt-1 h-4 w-4 shrink-0 rounded border-charcoal/30 bg-charcoal text-mustard"
               />
               <span className="font-sans text-[13px] leading-relaxed text-concrete">
                 Έχω διαβάσει την{' '}

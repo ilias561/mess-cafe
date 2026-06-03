@@ -7,6 +7,16 @@ type EventsGridProps = {
   pastEvents: Event[]
 }
 
+function upcomingGridClass(count: number) {
+  if (count === 1) {
+    return 'mt-10 mx-auto grid max-w-[520px] grid-cols-1 justify-items-center gap-6'
+  }
+  if (count === 2) {
+    return 'mt-10 mx-auto grid max-w-[920px] grid-cols-1 gap-6 md:grid-cols-2 md:gap-8'
+  }
+  return 'mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3'
+}
+
 export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridProps) {
   return (
     <>
@@ -16,7 +26,7 @@ export default function EventsGrid({ upcomingEvents, pastEvents }: EventsGridPro
             <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">ΕΠΟΜΕΝΕΣ ΕΚΔΗΛΩΣΕΙΣ</p>
           </SectionReveal>
           {upcomingEvents.length > 0 ? (
-            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+            <div className={upcomingGridClass(upcomingEvents.length)}>
               {upcomingEvents.map((event) => (
                 <EventCard key={event.slug} event={event} />
               ))}

@@ -6,8 +6,8 @@ import PostBody from '@/components/blog/post-body'
 import EventHero from '@/components/events/event-hero'
 import EventBookingCta from '@/components/events/event-booking-cta'
 import RelatedEvents from '@/components/events/related-events'
+import { buildEventJsonLd } from '@/lib/events/event-json-ld'
 import { buildOgImage, buildPageMetadata } from '@/lib/metadata'
-import { absoluteUrl } from '@/lib/site-url'
 import { getAllEvents, getEventBySlug } from '@/lib/events/events'
 
 type EventPageProps = {
@@ -57,33 +57,7 @@ export default async function EventPage({ params }: EventPageProps) {
 
   if (!event) notFound()
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Event',
-    name: event.title,
-    description: event.description,
-    image: absoluteUrl(event.coverImage),
-    url: absoluteUrl(`/actions/${event.slug}`),
-    startDate: event.date,
-    eventStatus: 'https://schema.org/EventScheduled',
-    location: {
-      '@type': 'Place',
-      name: event.location || 'M.E.S.S.',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Ναπολέοντος Ζέρβα 12',
-        addressLocality: 'Ιωάννινα',
-        postalCode: '45332',
-        addressCountry: 'GR',
-      },
-    },
-    organizer: {
-      '@type': 'Organization',
-      name: 'M.E.S.S.',
-      url: absoluteUrl('/'),
-    },
-    inLanguage: 'el',
-  }
+  const jsonLd = buildEventJsonLd(event)
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
