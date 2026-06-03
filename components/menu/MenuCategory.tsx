@@ -2,9 +2,9 @@
 
 import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
-import type { MenuCategory as MenuCategoryType, MenuItem as MenuItemType, MenuLayout } from '@/lib/menu-data'
-import { extras, getCategoryLayout } from '@/lib/menu-data'
-import { MenuFeatureRow, MenuGridItem, MenuListRow, MenuCardItem } from './MenuItem'
+import type { MenuCategory as MenuCategoryType, MenuItem as MenuItemType } from '@/lib/menu-data'
+import { extras } from '@/lib/menu-data'
+import { MenuDishCard, MenuListRow } from './MenuItem'
 
 function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'brunch') {
@@ -47,36 +47,24 @@ const editorialIntro: Partial<Record<string, string>> = {
   treats: 'Γλυκά και snacks με ελαφριά σύσταση και ισορροπημένη γεύση.',
 }
 
-function resolveLayout(category: MenuCategoryType): MenuLayout {
-  return category.layout ?? (getCategoryLayout(category) === 'visual' ? 'feature' : 'list')
-}
-
 function CategoryHeader({ category, index }: { category: MenuCategoryType; index: number }) {
   return (
     <m.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.75, ease: EASE }}
-      className="border-b border-line/40 pb-8"
+      transition={{ duration: 0.7, ease: EASE }}
+      className="flex items-end gap-5 border-b border-line/50 pb-5 md:gap-7"
     >
-      <div className="md:flex md:items-end md:justify-between md:gap-8">
-        <div className="min-w-0">
-          <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
-            <span className="tabular-nums text-olive/50">{String(index + 1).padStart(2, '0')}</span>
-            <span className="mx-2 text-olive/40">·</span>
-            {category.title}
-          </p>
-          <h2 className="type-category u-balance mt-2 font-serif italic tracking-tight text-charcoal">
-            {category.titleGr}
-          </h2>
-        </div>
+      <span className="font-serif text-[clamp(40px,6vw,68px)] font-light leading-[0.8] text-mustard/30">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+      <div className="min-w-0">
+        <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-olive">{category.title}</p>
+        <h2 className="type-category u-balance font-serif italic leading-[1.05] tracking-tight text-charcoal">
+          {category.titleGr}
+        </h2>
       </div>
-      {editorialIntro[category.id] && (
-        <p className="mt-4 max-w-[60ch] font-sans text-[15px] leading-relaxed text-concrete">
-          {editorialIntro[category.id]}
-        </p>
-      )}
     </m.div>
   )
 }
@@ -105,65 +93,30 @@ function ListGroup({
 
 function CategoryBody({
   category,
-  layout,
   showNutrition,
 }: {
   category: MenuCategoryType
-  layout: MenuLayout
   showNutrition: boolean
 }) {
-  if (layout === 'list') {
-    return <ListGroup items={category.items} className="mt-12" showNutrition={showNutrition} />
-  }
-
-  if (layout === 'card') {
-    const media = category.items.filter(hasMedia)
-    const noMedia = category.items.filter((i) => !hasMedia(i))
-    return (
-      <>
-        {media.length > 0 && (
-          <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-12 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3">
-            {media.map((item, i) => (
-              <MenuCardItem key={item.name} item={item} index={i} />
-            ))}
-          </div>
-        )}
-        {noMedia.length > 0 && (
-          <ListGroup
-            items={noMedia}
-            showNutrition={showNutrition}
-            className={media.length > 0 ? 'mt-12 border-t border-line/40 pt-10 md:mt-16' : 'mt-12'}
-          />
-        )}
-      </>
-    )
-  }
-
   const media = category.items.filter(hasMedia)
   const noMedia = category.items.filter((i) => !hasMedia(i))
 
+  if (media.length === 0) {
+    return <ListGroup items={category.items} className="mt-10" showNutrition={showNutrition} />
+  }
+
   return (
     <>
-      {media.length > 0 &&
-        (layout === 'feature' ? (
-          <div className="mt-12 flex flex-col gap-16 md:mt-16 md:gap-24">
-            {media.map((item, i) => (
-              <MenuFeatureRow key={item.name} item={item} index={i} showNutrition={showNutrition} />
-            ))}
-          </div>
-        ) : (
-          <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:mt-12 sm:gap-x-8 sm:gap-y-12 lg:grid-cols-3">
-            {media.map((item, i) => (
-              <MenuGridItem key={item.name} item={item} index={i} showNutrition={showNutrition} />
-            ))}
-          </div>
+      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+        {media.map((item, i) => (
+          <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
         ))}
-
+      </div>
       {noMedia.length > 0 && (
         <ListGroup
           items={noMedia}
           showNutrition={showNutrition}
-          className={media.length > 0 ? 'mt-12 border-t border-line/40 pt-10 md:mt-16' : 'mt-12'}
+          className="mt-12 border-t border-line/40 pt-10"
         />
       )}
     </>
@@ -179,16 +132,21 @@ export default function MenuCategory({
   index: number
   showFooterBeat?: boolean
 }) {
-  const backgrounds = ['bg-bone', 'bg-bone-warm', 'bg-bone'] as const
-  const bg = backgrounds[index % backgrounds.length]
-  const layout = resolveLayout(category)
   const showNutrition = !category.hideNutrition
 
   return (
-    <section id={category.id} className={`scroll-mt-[140px] ${bg} px-6 py-20 md:scroll-mt-[120px] md:px-12 md:py-32`}>
+    <section
+      id={category.id}
+      className="scroll-mt-[140px] bg-bone px-6 py-20 md:scroll-mt-[120px] md:px-12 md:py-32"
+    >
       <div className="mx-auto max-w-[1400px]">
         <CategoryHeader category={category} index={index} />
-        <CategoryBody category={category} layout={layout} showNutrition={showNutrition} />
+        {editorialIntro[category.id] && (
+          <p className="mt-4 max-w-[60ch] font-sans text-[15px] leading-relaxed text-concrete">
+            {editorialIntro[category.id]}
+          </p>
+        )}
+        <CategoryBody category={category} showNutrition={showNutrition} />
         <ExtrasBox categoryId={category.id} />
 
         {showFooterBeat && (

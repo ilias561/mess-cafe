@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import { useEffect, useRef } from 'react'
-import { m, useReducedMotion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuItem as MenuItemType, Nutrition } from '@/lib/menu-data'
 
@@ -234,40 +234,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
   return null
 }
 
-function NameChip({ name }: { name: string }) {
-  return (
-    <span className="absolute left-0 top-4 z-20 max-w-[62%] bg-canopy-night px-3.5 py-2 font-sans text-[12px] font-bold uppercase leading-[1.2] tracking-[0.08em] text-charcoal shadow-[0_4px_18px_rgba(14,34,8,0.45)] sm:left-3 sm:text-[13px]">
-      {/* alt scheme if owner wants the mustard peak tie-in: bg-mustard text-ink-dark */}
-      {name}
-    </span>
-  )
-}
-
-function CutoutMedia({ item, reduce }: { item: MenuItemType; reduce: boolean | null }) {
-  return (
-    <m.div
-      className="relative flex aspect-square w-full items-center justify-center"
-      initial={false}
-      whileHover={reduce ? undefined : { y: -6 }}
-      transition={{ duration: 0.4, ease: EASE }}
-    >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute bottom-[12%] left-1/2 h-5 w-3/5 -translate-x-1/2 rounded-[50%]"
-        style={{ background: 'radial-gradient(ellipse, rgba(14,34,8,0.55) 0%, rgba(14,34,8,0) 70%)' }}
-      />
-      <img
-        src={item.cutout}
-        alt={item.name}
-        className="relative z-10 h-full w-full object-contain drop-shadow-[0_10px_22px_rgba(14,34,8,0.35)]"
-        loading="lazy"
-        decoding="async"
-      />
-    </m.div>
-  )
-}
-
-export function MenuFeatureRow({
+export function MenuDishCard({
   item,
   index,
   showNutrition = true,
@@ -277,170 +244,38 @@ export function MenuFeatureRow({
   showNutrition?: boolean
 }) {
   const { isSignature } = getItemBadges(item)
-  const flip = index % 2 === 1
-  const reduce = useReducedMotion()
-  const hasCutout = Boolean(item.cutout)
-
-  const content = (
-    <div className={flip ? 'md:order-1' : ''}>
-      {isSignature && <SignatureEyebrow />}
-      {hasCutout && (
-        <>
-          <h3 className="sr-only">{item.name}</h3>
-          <DietaryTags badges={item.badges} />
-        </>
-      )}
-      {!hasCutout && (
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h3 className="type-card u-balance font-serif italic tracking-tight text-charcoal">
-            {item.name}
-          </h3>
-          <DietaryTags badges={item.badges} />
-        </div>
-      )}
-      <p className="mt-3 font-sans text-[15px] leading-relaxed text-concrete">{item.desc}</p>
-      {item.benefit && <BenefitNote text={item.benefit} className="mt-3" />}
-      {showNutrition && item.nutrition && <NutritionDisclosure nutrition={item.nutrition} />}
-    </div>
-  )
-
   return (
     <m.article
       {...itemMotionProps(index)}
-      className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-12 lg:gap-16"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-line/60 bg-bone-warm shadow-[0_6px_24px_rgba(14,34,8,0.35)]"
     >
-      <div className={flip ? 'md:order-2' : ''}>
-        {hasCutout ? (
-          <div
-            className={`relative w-full sm:mx-auto sm:max-w-[300px] md:max-w-[380px] ${
-              flip ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'
-            }`}
-          >
-            <CutoutMedia item={item} reduce={reduce} />
-            <NameChip name={item.name} />
-          </div>
-        ) : (
-          <div
-            className={`w-full overflow-hidden rounded-[6px] sm:mx-auto sm:max-w-[300px] md:max-w-[380px] ${
-              item.video ? 'bg-bone-warm' : ''
-            } ${flip ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'}`}
-          >
-            {item.video ? (
-              <div className="aspect-[3/2] w-full sm:aspect-[4/5]">
-                <MenuItemMedia item={item} />
-              </div>
-            ) : (
-              <MenuItemMedia item={item} />
-            )}
-          </div>
-        )}
-      </div>
-      {content}
-    </m.article>
-  )
-}
-
-export function MenuGridItem({
-  item,
-  index,
-  showNutrition = true,
-}: {
-  item: MenuItemType
-  index: number
-  showNutrition?: boolean
-}) {
-  const { isSignature } = getItemBadges(item)
-  const reduce = useReducedMotion()
-  const hasCutout = Boolean(item.cutout)
-  const hasMedia = Boolean(item.image || item.video)
-
-  return (
-    <m.article {...itemMotionProps(index)} className="flex flex-col">
-      {hasCutout ? (
-        <div className="relative">
-          <CutoutMedia item={item} reduce={reduce} />
-          <NameChip name={item.name} />
-        </div>
-      ) : (
-        hasMedia && (
-          <div className={`w-full overflow-hidden rounded-[6px] ${item.video ? 'bg-bone-warm' : ''}`}>
-            {item.video ? (
-              <div className="aspect-square w-full sm:aspect-[4/5]">
-                <MenuItemMedia item={item} />
-              </div>
-            ) : (
-              <MenuItemMedia item={item} />
-            )}
-          </div>
-        )
-      )}
-      <div className={hasMedia || hasCutout ? 'mt-3.5' : ''}>
-        {isSignature && <SignatureEyebrow />}
-        {hasCutout ? (
-          <>
-            <h3 className="sr-only">{item.name}</h3>
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-              <DietaryTags badges={item.badges} />
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-            <h3 className="font-serif text-[17px] italic leading-[1.15] tracking-tight text-charcoal sm:text-[20px]">
-              {item.name}
-            </h3>
-            <DietaryTags badges={item.badges} />
-          </div>
-        )}
-        <p className="mt-1.5 font-sans text-[13px] leading-relaxed text-concrete sm:text-[14px]">
-          {item.desc}
-        </p>
-        {item.benefit && (
-          <BenefitNote text={item.benefit} className="mt-2.5 hidden text-[13px] sm:flex" />
-        )}
-        {showNutrition && item.nutrition && (
-          <div className="hidden sm:block">
-            <NutritionDisclosure nutrition={item.nutrition} compact />
-          </div>
-        )}
-      </div>
-    </m.article>
-  )
-}
-
-export function MenuCardItem({ item, index }: { item: MenuItemType; index: number }) {
-  const reduce = useReducedMotion()
-  const hasMedia = Boolean(item.image || item.video)
-  if (!hasMedia) return null
-
-  return (
-    <m.article {...itemMotionProps(index)}>
-      <m.div
-        className="group relative aspect-square w-full overflow-hidden rounded-[10px] border border-line/60 bg-bone-warm shadow-[0_10px_30px_rgba(14,34,8,0.35)]"
-        initial={false}
-        whileHover={reduce ? undefined : { y: -6 }}
-        transition={{ duration: 0.4, ease: EASE }}
-      >
+      <div className="aspect-[4/3] overflow-hidden bg-canopy-night">
         {item.video ? (
           <MenuItemMedia item={item} />
         ) : (
           <img
             src={item.image}
             alt={item.name}
-            className="h-full w-full scale-105 object-cover transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
             decoding="async"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
           />
         )}
-
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-black/65 to-transparent"
-        />
-
-        <h3 className="absolute left-3.5 top-3 z-10 max-w-[80%] font-sans text-[12px] font-bold uppercase leading-[1.2] tracking-[0.08em] text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)] sm:text-[13px]">
-          {item.name}
-        </h3>
-      </m.div>
+      </div>
+      <div className="flex flex-col p-5">
+        {isSignature && <SignatureEyebrow />}
+        <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+          <h3 className="min-w-0 font-serif text-[20px] italic leading-snug tracking-tight text-charcoal">
+            {item.name}
+          </h3>
+          <DietaryTags badges={item.badges} />
+        </div>
+        {item.desc && (
+          <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
+        )}
+        {item.benefit && <BenefitNote text={item.benefit} className="mt-3 text-[13px]" />}
+        {showNutrition && item.nutrition && <NutritionDisclosure nutrition={item.nutrition} compact />}
+      </div>
     </m.article>
   )
 }
