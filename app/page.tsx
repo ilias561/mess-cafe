@@ -9,6 +9,7 @@ import PhilosophySection from '@/components/philosophy-section'
 import ActionsSection from '@/components/actions-section'
 import ExpandCoverReveal from '@/components/expand-cover-reveal'
 import { images } from '@/lib/images'
+import { buildFaqJsonLd } from '@/lib/faq-schema'
 import ContactSection from '@/components/contact-section'
 import FooterSection from '@/components/footer-section'
 
@@ -29,9 +30,14 @@ export default function Home() {
   const keepRising = getEventBySlug('keep-rising')
   const actionCards = [keepRisingNext, keepRising].filter((e): e is Event => !!e)
   const settings = getSettings()
+  const faqJsonLd = buildFaqJsonLd()
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Navigation />
       <Hero />
       <HeroCaption />

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
 import CloudflareAnalytics from '@/components/analytics/CloudflareAnalytics'
 import { PHONE_NUMBER } from '@/lib/constants'
+import { featuredQuote, reviews } from '@/lib/reviews-data'
 import { absoluteUrl, getSiteUrl } from '@/lib/site-url'
 import AnchorScroll from '@/components/anchor-scroll'
 import PageLoader from '@/components/page-loader'
@@ -66,9 +67,17 @@ export const viewport: Viewport = {
   themeColor: '#2b2b28',
 }
 
+/** First-party review nodes built from the data shown in the on-page reviews section. */
+const schemaReviews = [featuredQuote, ...reviews.slice(1, 3)].map((review) => ({
+  '@type': 'Review',
+  author: { '@type': 'Person', name: review.name },
+  reviewRating: { '@type': 'Rating', ratingValue: review.rating, bestRating: 5 },
+  reviewBody: review.text,
+}))
+
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'CafeOrCoffeeShop',
   name: 'M.E.S.S.',
   alternateName: 'M.E.S.S. Specialty Coffee & Brunch',
   url: siteUrl,
@@ -113,6 +122,15 @@ const jsonLd = {
   priceRange: '€€',
   currenciesAccepted: 'EUR',
   paymentAccepted: 'Cash, Credit Card',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8', // first-party: matches the 4.8 rating chip in components/reviews-section.tsx
+    bestRating: '5',
+    // TODO(owner): add reviewCount from the live Google Business Profile.
+    // Deliberately omitted (not shipped as 0) so we never publish a fabricated
+    // count; the AggregateRating becomes rich-result-eligible once this is set.
+  },
+  review: schemaReviews,
   sameAs: [
     'https://www.instagram.com/m.e.s.s._ioannina/',
     'https://www.facebook.com/people/MESS-Ioannina/61572192848077/',
