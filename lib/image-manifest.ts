@@ -590,13 +590,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/menu/piata-0031--w480.avif 480w, /images/menu/piata-0031--w768.avif 768w, /images/menu/piata-0031--w1200.avif 1200w, /images/menu/piata-0031--w1600.avif 1600w",
     "webpSrcSet": "/images/menu/piata-0031--w480.webp 480w, /images/menu/piata-0031--w768.webp 768w, /images/menu/piata-0031--w1200.webp 1200w, /images/menu/piata-0031--w1600.webp 1600w"
   },
-  "/images/mess-logo-interior.jpg.jpg": {
-    "width": 1920,
-    "height": 1277,
-    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAsAA4BaJbACdADxIp065k+AAP7SBpD4sG3gf7BUZHXhWi+fKrtZ797wvVQ1oCiTzNp8umLjZL7etRE/hD8vjDBBODaxO33vm+nIm49d7SMQ9EQpOQAA",
-    "avifSrcSet": "/images/mess-logo-interior.jpg--w480.avif 480w, /images/mess-logo-interior.jpg--w768.avif 768w, /images/mess-logo-interior.jpg--w1200.avif 1200w, /images/mess-logo-interior.jpg--w1600.avif 1600w, /images/mess-logo-interior.jpg--w1920.avif 1920w",
-    "webpSrcSet": "/images/mess-logo-interior.jpg--w480.webp 480w, /images/mess-logo-interior.jpg--w768.webp 768w, /images/mess-logo-interior.jpg--w1200.webp 1200w, /images/mess-logo-interior.jpg--w1600.webp 1600w, /images/mess-logo-interior.jpg--w1920.webp 1920w"
-  },
   "/images/mess-philosophy-poster.jpg": {
     "width": 720,
     "height": 1280,

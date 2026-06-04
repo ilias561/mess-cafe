@@ -77,3 +77,9 @@ KICKOFF-FOR-C2.md
 mobile-screens/
 scripts/mobile-shots.mjs
 scripts/video-check.mjs
+
+# Stray dev artifacts at repo root — screenshots, logs, scratch HTML, AI dumps
+/*.png
+/text.html
+dev.log
+/THIS ONE CLAUDE/
