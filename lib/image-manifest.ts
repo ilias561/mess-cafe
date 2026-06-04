@@ -317,41 +317,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/keep-rising--w480.avif 480w, /images/keep-rising--w768.avif 768w, /images/keep-rising--w841.avif 841w",
     "webpSrcSet": "/images/keep-rising--w480.webp 480w, /images/keep-rising--w768.webp 768w, /images/keep-rising--w841.webp 841w"
   },
-  "/images/leaves/fan-palm.png": {
-    "width": 5000,
-    "height": 3333,
-    "blurDataURL": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4WAoAAAAQAAAADwAACgAAQUxQSFoAAAABcFtr25q8X9xK96QL7jIAFR0TuDMFNdNQMZBNQr7DCBExAfgzERFPsiSRReVimEqceH6/TSOG1L8+H8u6WCXmp9f30JGrYBbr/SwBk0TVBrFgBBA4gOqCfgBWUDggTgAAADACAJ0BKhAACwADgFolqAJ0fwCCcMFOd3gAAP7jQbepuMW+j34hWyixwUaUxhk5EVoYFj9E/rqHw88gAKLXtlqLn9uYGfAofqupJkAAAA==",
-    "avifSrcSet": "/images/leaves/fan-palm--w480.avif 480w, /images/leaves/fan-palm--w768.avif 768w, /images/leaves/fan-palm--w1200.avif 1200w, /images/leaves/fan-palm--w1600.avif 1600w, /images/leaves/fan-palm--w2048.avif 2048w",
-    "webpSrcSet": "/images/leaves/fan-palm--w480.webp 480w, /images/leaves/fan-palm--w768.webp 768w, /images/leaves/fan-palm--w1200.webp 1200w, /images/leaves/fan-palm--w1600.webp 1600w, /images/leaves/fan-palm--w2048.webp 2048w"
-  },
-  "/images/leaves/monstera-cluster.png": {
-    "width": 4000,
-    "height": 6000,
-    "blurDataURL": "data:image/webp;base64,UklGRq4BAABXRUJQVlA4WAoAAAAQAAAADwAAFwAAQUxQSOYAAAABgLJt2/lX+/28v/9sW9FGXt2xqKQPsuOfZm/Ja2ZTs9WWbNv63TMjYgLwD0W+JgqivqRgawF5J/LOUH7cmwgBBFAACrc4nxMIE4GZAUrwcDx4VmADDck7C1lQuF8xkglR1Y7dfGSJAivDBpr8Bji2wscH5oJpMMDpjLpOPnFcjj3g7BO9yfsnXX9kFa7SzKZ5d02SOm/i8XC9yJu20dme5dMnpkPdHF7op3PzNaYGp/hUE+BsyciTzJwNRwiggLDhXXLNLisASmkAELnKO7ZA4WMNdo1kB76oYJKdJF+BKHxb077zdVZQOCCiAAAA8AQAnQEqEAAYAD7tYqlNqaWjojAIATAdiWwAnQ4gDeDCIU3VYtfv39McnlSt/v5AAPqDr9fN4pRR6lrUe4K7Y79KRBGmctcY3G/F7oK1X+VWT1SPdYJpRmqruHgn4jdaNWIiGNYfdfDYOr8VXiInRG/J232KwtLCGjSy6sxQbQY22G8jQpWZVHT+AwuxbyW4z251u+r7+5/4vmtMStrI+aAA",
-    "avifSrcSet": "/images/leaves/monstera-cluster--w480.avif 480w, /images/leaves/monstera-cluster--w768.avif 768w, /images/leaves/monstera-cluster--w1200.avif 1200w, /images/leaves/monstera-cluster--w1600.avif 1600w, /images/leaves/monstera-cluster--w2048.avif 2048w",
-    "webpSrcSet": "/images/leaves/monstera-cluster--w480.webp 480w, /images/leaves/monstera-cluster--w768.webp 768w, /images/leaves/monstera-cluster--w1200.webp 1200w, /images/leaves/monstera-cluster--w1600.webp 1600w, /images/leaves/monstera-cluster--w2048.webp 2048w"
-  },
-  "/images/leaves/monstera-full.png": {
-    "width": 6676,
-    "height": 7038,
-    "blurDataURL": "data:image/webp;base64,UklGRmwBAABXRUJQVlA4WAoAAAAQAAAADwAAEAAAQUxQSL8AAAABgHLbtqpV/z7ne1/8cHeJ3hgkTa6N6m7R9ScwaA7RM8md5O7uDp+e8t6LiAmAOjN0GwhgPQSK8waTBiN+xv6YDw1C8K6YZbjQAwSAENY3JGap3kwBA1DQZs+6lZehjxAQAEaPTPeK3B2XQQEIvDp7bbZLwWy7mvHwdfRPftcHGkwAQBiTD7NdxhrfwsGAglox2/9sr3LmBgII/tfyl78lH6lgAGDkLHYbE7aTwVAlgnswmBiaDNcIMEOvSywYqgBWUDgghgAAADAEAJ0BKhAAEQA+7WKpTamlo6IwCAEwHYlsAKwR+qLWWcI6v2OUnOrtwAD+y2YIaVYihHaiiBu9HfxNbgo2YJi2zOF/saNikp0NWs3UJPorLXaJLDGRRvKQKHE7AKwOi9/EKFbNze0QHGVmHOckr+4oHa0M6KUcllAjmEg/Rr/tHbd4AAAA",
-    "avifSrcSet": "/images/leaves/monstera-full--w480.avif 480w, /images/leaves/monstera-full--w768.avif 768w, /images/leaves/monstera-full--w1200.avif 1200w, /images/leaves/monstera-full--w1600.avif 1600w, /images/leaves/monstera-full--w2048.avif 2048w",
-    "webpSrcSet": "/images/leaves/monstera-full--w480.webp 480w, /images/leaves/monstera-full--w768.webp 768w, /images/leaves/monstera-full--w1200.webp 1200w, /images/leaves/monstera-full--w1600.webp 1600w, /images/leaves/monstera-full--w2048.webp 2048w"
-  },
-  "/images/leaves/monstera-large-1.png": {
-    "width": 2400,
-    "height": 2400,
-    "blurDataURL": "data:image/webp;base64,UklGRmYBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSMUAAAABgCrJtmpnX/yDB2FSaEmiQpW4VBSTTUWxevLaKGbJzMycSGZmOPcscR7+QUQobNsGKYz3CPlCSXILRZVFoTpBViUiJdii6a5ZS3dE1MJR1uB0Fpu7AKyE3DxX/ogZdYDxX+QbqN5xmg3hm/2jPwfNfUQSqbswAbw1YdZwGhcMzPfs4I/jfV8Ea01aYvYcTA78kVAvGMebsQ3z1+ktcu1ksj4u70IEJxXNNXeeAnefjJzagAuYHGONv4ycU9Lj/11V4RP/AABWUDggegAAAFACAJ0BKhAAEAADgFolsAJ0OIA3iAiGCG/iUAD+y/1dNrxPKo6fF161bzyx/ZRh7si1WU8bLMeTNErKgl/YFIUB7q5H5zVLaZNT24Mk/c03JCWui9v4rponfaszkIrO133xIYTc1d3njst6Mc8kpXYcGCrNvWUKAAAA",
-    "avifSrcSet": "/images/leaves/monstera-large-1--w480.avif 480w, /images/leaves/monstera-large-1--w768.avif 768w, /images/leaves/monstera-large-1--w1200.avif 1200w, /images/leaves/monstera-large-1--w1600.avif 1600w, /images/leaves/monstera-large-1--w2048.avif 2048w",
-    "webpSrcSet": "/images/leaves/monstera-large-1--w480.webp 480w, /images/leaves/monstera-large-1--w768.webp 768w, /images/leaves/monstera-large-1--w1200.webp 1200w, /images/leaves/monstera-large-1--w1600.webp 1600w, /images/leaves/monstera-large-1--w2048.webp 2048w"
-  },
-  "/images/leaves/monstera-large-2.png": {
-    "width": 2400,
-    "height": 2400,
-    "blurDataURL": "data:image/webp;base64,UklGRlQBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSMAAAAABgLpt2/FX+f1+37x1s27ZtlHtRSR768tKRrVtJdu2je+e0iJiAqCCbF4u9Ey+vL+9vXyMAkhLDklMLX8hqXAIAkGDt/ytcGeEAhgil4tmqbwrTKkG0NlpqRu7SxaX8NQKEA7qMUdUPjlje89GQEIBPz+U9xemtPDhVwPfPtmXxPEKPgMyXBV+ct3o8rqHrQAklPCVd4Yz3KnSASCgf0zu6O49+kHGb+EZGWphU2IOWfwlAKhJkAT+lmVZgizhPwJWUDggbgAAAFACAJ0BKhAAEAADgFolsAJ0BiqGTOGvgeMJgAD+8XnHujD6unjCMeEv8chDQJJ4k2DxJtIpjLFzstpA9BaF8FkNEbXNIEzdT0+O2mTfMVXHRKaaPPsnNTDkJEfdvgk33FjyRA1zFTDx3t3laHAA",
-    "avifSrcSet": "/images/leaves/monstera-large-2--w480.avif 480w, /images/leaves/monstera-large-2--w768.avif 768w, /images/leaves/monstera-large-2--w1200.avif 1200w, /images/leaves/monstera-large-2--w1600.avif 1600w, /images/leaves/monstera-large-2--w2048.avif 2048w",
-    "webpSrcSet": "/images/leaves/monstera-large-2--w480.webp 480w, /images/leaves/monstera-large-2--w768.webp 768w, /images/leaves/monstera-large-2--w1200.webp 1200w, /images/leaves/monstera-large-2--w1600.webp 1600w, /images/leaves/monstera-large-2--w2048.webp 2048w"
-  },
   "/images/menu-acai.jpg": {
     "width": 1024,
     "height": 1024,
