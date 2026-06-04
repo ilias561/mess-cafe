@@ -37,7 +37,6 @@ export const metadata: Metadata = {
   title: 'M.E.S.S. — Specialty Coffee & Brunch · Ιωάννινα',
   description:
     'Specialty coffee, healthy brunch και θέα στη λίμνη στο ΚΕΠΑΒΙ, Ιωάννινα. Φαγητό ως φάρμακο — poke bowls, acai, smoothies, γλυκά χωρίς ζάχαρη. Ανοιχτά 08:00–23:00, 7 μέρες.',
-  keywords: ['specialty coffee Ioannina', 'καφές Ιωάννινα', 'brunch Ioannina', 'MESS café', 'ΚΕΠΑΒΙ', 'vegan Ioannina', 'acai bowl', 'poke bowl', 'υγιεινό φαγητό Ιωάννινα', 'καφέ λίμνη Ιωαννίνων'],
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -115,8 +114,8 @@ const jsonLd = {
   currenciesAccepted: 'EUR',
   paymentAccepted: 'Cash, Credit Card',
   sameAs: [
-    '[ΣΥΜΠΛΗΡΩΣΕ: Instagram URL]',
-    '[ΣΥΜΠΛΗΡΩΣΕ: Facebook URL]',
+    'https://www.instagram.com/m.e.s.s._ioannina/',
+    'https://www.facebook.com/people/MESS-Ioannina/61572192848077/',
     'https://www.google.com/maps/place/M.E.S.S./@39.6624739,20.8602479',
   ],
 }
