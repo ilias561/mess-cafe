@@ -27,6 +27,30 @@ const WEBP_QUALITY = 81
 const RASTER_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp'])
 const OUTPUT_RE = /--w\d+\.(avif|webp)$/i
 
+// Static 1200×630 Open Graph / social-share card. Static export = no runtime
+// image generation, so this committed asset is what every share scraper fetches.
+const OG_WIDTH = 1200
+const OG_HEIGHT = 630
+const OG_OUTPUT = join(IMAGES_ROOT, 'og-image.jpg')
+// Landscape sources only (center-cropped to 1200×630). Portrait shots crop badly.
+const OG_SOURCE_CANDIDATES = [
+  join(IMAGES_ROOT, 'about-2.jpg'),
+  join(IMAGES_ROOT, '111', 'mess-internal-0006.jpg'),
+]
+
+async function generateOgImage() {
+  const source = OG_SOURCE_CANDIDATES.find((p) => existsSync(p))
+  if (!source) {
+    console.warn('OG image: no source candidate found, skipping og-image.jpg')
+    return
+  }
+  await sharp(source)
+    .resize(OG_WIDTH, OG_HEIGHT, { fit: 'cover', position: 'centre' })
+    .jpeg({ quality: 80, mozjpeg: true })
+    .toFile(OG_OUTPUT)
+  console.log(`OG image: wrote ${publicPath(OG_OUTPUT)} (${OG_WIDTH}×${OG_HEIGHT}) from ${publicPath(source)}`)
+}
+
 function walk(dir, files = []) {
   for (const name of readdirSync(dir)) {
     const abs = join(dir, name)
@@ -161,6 +185,8 @@ async function main() {
     const ext = extname(abs).toLowerCase()
     if (!RASTER_EXT.has(ext)) return false
     if (OUTPUT_RE.test(basename(abs))) return false
+    // og-image.jpg is a fixed 1200×630 share card — it needs no responsive variants.
+    if (basename(abs) === 'og-image.jpg') return false
     return true
   })
 
@@ -194,6 +220,8 @@ async function main() {
   writeCache(nextCache)
   writeManifest(manifest)
   console.log(`Image optimize done: ${processed} processed, ${skipped} cached, ${Object.keys(manifest).length} in manifest`)
+
+  await generateOgImage()
 }
 
 main().catch((err) => {

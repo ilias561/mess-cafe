@@ -50,13 +50,13 @@ export const metadata: Metadata = {
       'Specialty coffee, healthy brunch και θέα στη λίμνη στο ΚΕΠΑΒΙ, Ιωάννινα. Φαγητό ως φάρμακο — poke bowls, acai, smoothies, γλυκά χωρίς ζάχαρη. Ανοιχτά 08:00–23:00.',
     type: 'website',
     locale: 'el_GR',
-    images: [{ url: '/images/hero-interior.jpg', width: 1200, height: 630, alt: 'M.E.S.S. Café — Ιωάννινα' }],
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'M.E.S.S. Café — Ιωάννινα' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'M.E.S.S. — Specialty Coffee & Brunch · Ιωάννινα',
     description: 'Specialty coffee, healthy brunch και θέα στη λίμνη στο ΚΕΠΑΒΙ, Ιωάννινα.',
-    images: ['/images/hero-interior.jpg'],
+    images: ['/images/og-image.jpg'],
   },
 }
 

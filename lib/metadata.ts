@@ -17,7 +17,7 @@ type PageMetadataInput = {
 }
 
 export const DEFAULT_OG_IMAGE: OgImageInput = {
-  url: '/images/hero-interior.jpg',
+  url: '/images/og-image.jpg',
   alt: 'M.E.S.S. Café — Ιωάννινα',
   width: 1200,
   height: 630,
