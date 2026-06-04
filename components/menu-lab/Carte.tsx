@@ -193,7 +193,7 @@ function Hero() {
     <header ref={ref} className="relative flex min-h-[58vh] items-end overflow-hidden">
       <m.img
         src={HERO_IMAGE}
-        alt=""
+        alt="Πιάτο από το μενού του M.E.S.S."
         style={reduce ? undefined : { y }}
         className="absolute left-0 top-[-9%] h-[118%] w-full object-cover"
       />

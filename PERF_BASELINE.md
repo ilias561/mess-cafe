@@ -115,6 +115,22 @@ Completed 2026-05-29 on `perf-visual-upgrade` @ `20ea23d`.
 - **Image fidelity:** 86 sources in `image-manifest`; AVIF q60 / WebP q81 — verify 3–4 hero/gallery frames at 100% zoom in browser.
 - **Fonts:** Inter includes `greek`; **Fraunces has no Google Fonts Greek subset** — Greek serif headings use metric-matched fallback (`adjustFontFallback` + `display: swap`).
 
+## LCP audit (Task 9, 2026-06-04)
+
+The above-the-fold LCP element on `/` is the **hero video poster**, not the
+460 KB `hero-interior.jpg` (which is no longer rendered in the hero — it now
+only feeds the share card / business JSON-LD images):
+
+- **Mobile:** `public/videos/hero-mobile-frame-1.jpg` (~76 KB) rendered with
+  `loading="eager"` + `fetchPriority="high"` — already the correct LCP hint.
+- **Desktop:** `public/videos/hero-desktop-poster.jpg` (~102 KB) as the `<video>`
+  poster.
+
+Both posters are small and already prioritized, so **no `<link rel="preload">`
+was added** — over-preloading (or preloading a `/videos/` JPEG that already has
+`fetchPriority="high"`) would hurt rather than help. Re-evaluate only if a
+measured LCP regression appears (Lighthouse CLI is not installed in this env).
+
 ## Runtime wins (expected)
 
 - `FadeImage` serves `<picture>` AVIF/WebP with LQIP blur for manifest entries.
