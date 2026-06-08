@@ -36,7 +36,15 @@ export default function BookingInfo({ settings }: BookingInfoProps) {
         >
           Στείλε μας WhatsApp
         </a>
-        <p className="mt-4 text-center font-sans text-[13px] text-concrete">Ή τηλεφώνησε: {settings.phone}</p>
+        <p className="mt-4 text-center font-sans text-[13px] text-concrete">
+          Ή τηλεφώνησε:{' '}
+          <a
+            href={`tel:${settings.phone.replace(/\s+/g, '')}`}
+            className="inline-flex min-h-[44px] items-center text-charcoal underline decoration-mustard/60 underline-offset-2 md:min-h-0"
+          >
+            {settings.phone}
+          </a>
+        </p>
       </div>
     </aside>
   )

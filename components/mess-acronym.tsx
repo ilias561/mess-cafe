@@ -66,20 +66,20 @@ export default function MessAcronym() {
     <m.section
       ref={sectionRef}
       aria-label="M.E.S.S. — Modular, Events, Sustainable, Space"
-      className="border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-14 md:min-h-[50vh] md:px-12 md:py-20"
+      className="border-y border-line bg-gradient-to-b from-cream via-bone-warm to-bone-warm px-6 py-10 md:min-h-[50vh] md:px-12 md:py-20"
       style={reduce || !isDesktop ? undefined : { backgroundPositionY: bgShift }}
     >
       <div className="mx-auto max-w-[1400px]">
         <p className="text-center font-sans text-[11px] uppercase tracking-[0.16em] text-olive">Τι σημαίνει M.E.S.S.</p>
 
         <m.div
-          className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-6"
+          className="mt-8 grid grid-cols-1 gap-5 md:mt-12 md:grid-cols-4 md:gap-6"
           style={reduce || !isDesktop ? undefined : { scale: rowScale }}
         >
           {messPillars.map((pillar, idx) => (
             <m.article
               key={`${pillar.letter}-${pillar.word}-${idx}`}
-              className="ui-card-elevated group/col flex flex-col gap-3 rounded-[3px] border border-line/40 bg-bone-warm p-6 transition-opacity duration-250 focus-within:opacity-100 md:p-5"
+              className="ui-card-elevated group/col flex flex-col gap-2 rounded-[2px] border border-line/40 bg-bone-warm p-5 transition-opacity duration-250 focus-within:opacity-100 md:gap-3"
               tabIndex={0}
               onHoverStart={() => setHoveredIndex(idx)}
               onHoverEnd={() => setHoveredIndex(null)}

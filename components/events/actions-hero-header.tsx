@@ -294,7 +294,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                 </p>
               </div>
             ) : (
-              <div className="max-w-[100vw] overflow-x-hidden">
+              <div className="w-full overflow-x-hidden">
               <div className="actions-hero-marquee-group -mx-6 md:-mx-12">
                 <div className="overflow-hidden">
                   <div className="marquee-track flex w-max font-sans text-[11px] uppercase tracking-[0.18em] text-olive/70">
@@ -333,7 +333,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
               >
                 <Link
                   href={`/actions/${nextEvent.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full border border-line bg-bone-warm px-3 py-[7px] font-sans text-[11px] tracking-[0.02em] text-charcoal transition-colors hover:border-charcoal/40"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-bone-warm px-4 py-2 font-sans text-[11px] tracking-[0.02em] text-charcoal transition-colors hover:border-charcoal/40 md:min-h-0 md:px-3 md:py-[7px]"
                 >
                   <span className="h-[5px] w-[5px] rounded-full bg-terracotta" />
                   <span className="text-concrete">

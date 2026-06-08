@@ -1,7 +1,7 @@
 'use client'
 
-import { type CSSProperties } from 'react'
-import { m, useReducedMotion } from 'framer-motion'
+import { useEffect, useRef, type CSSProperties } from 'react'
+import { m, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
 
 type Leaf = {
   key: string
@@ -232,8 +232,59 @@ function StaticLeaf({ leaf }: { leaf: Leaf }) {
  * Render as the first child inside a `position: relative` section, and give the
  * content wrapper a higher stacking order (e.g. `relative z-10`).
  */
+/**
+ * Live scroll progress for an element, read from its getBoundingClientRect on
+ * each scroll frame (rAF-throttled, idle at rest) + a ResizeObserver on <body>.
+ * Deliberately NOT framer's useScroll: that caches the target's offset on mount
+ * and only re-measures on resize, so the images lazy-loading ABOVE this section
+ * shift its position and leave the progress permanently ~0.3 ahead. This reads
+ * the live rect, so it stays accurate. 0 ≈ section top at viewport bottom,
+ * 1 ≈ section top reaching the top of the viewport.
+ */
+function useRectProgress() {
+  const ref = useRef<HTMLDivElement>(null)
+  const progress = useMotionValue(0)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    let raf = 0
+    const measure = () => {
+      raf = 0
+      const r = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      const p = (vh - r.top) / (vh * 0.95)
+      progress.set(Math.min(1, Math.max(0, p)))
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(measure)
+    }
+    measure()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    const ro = new ResizeObserver(measure)
+    ro.observe(document.body)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      ro.disconnect()
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [progress])
+  return { ref, progress }
+}
+
 export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }) {
   const reduce = useReducedMotion() ?? false
+  const { ref, progress } = useRectProgress()
+
+  // Leaves materialise progressively across the scroll-in instead of one fire-once
+  // fade — the canopy grows denser as you scroll deeper into the section.
+  const opacity = useTransform(progress, [0.18, 0.78], [0, 1])
+  const scale = useTransform(progress, [0.18, 0.78], [1.08, 1])
+  const y = useTransform(progress, [0.18, 0.78], [26, 0])
+  // GPU-promote only while the reveal is actually in motion; de-promote once
+  // fully shown so the image-dense layer scrolls for free afterward.
+  const willChange = useTransform(progress, (p) =>
+    p > 0.001 && p < 0.999 ? 'opacity, transform' : 'auto',
+  )
 
   const content = (
     <>
@@ -247,17 +298,13 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
   )
 
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+    <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-0">
       {reduce ? (
         <div className="absolute inset-0">{content}</div>
       ) : (
         <m.div
           className="absolute inset-0"
-          style={{ transformOrigin: 'center' }}
-          initial={{ opacity: 0, scale: 1.06, y: 18 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true, margin: '0px 0px -25% 0px' }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          style={{ opacity, scale, y, willChange, transformOrigin: 'center' }}
         >
           {content}
         </m.div>

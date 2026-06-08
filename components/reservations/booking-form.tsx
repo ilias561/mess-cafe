@@ -25,7 +25,7 @@ const EVENT_KIND_OPTIONS = [
 ] as const
 
 const INPUT_CLASSNAME =
-  'ui-field w-full rounded-[2px] border border-charcoal/25 bg-charcoal px-4 py-3 font-sans text-[15px] text-ink-dark placeholder:text-ink-dark/45 disabled:cursor-not-allowed disabled:opacity-60'
+  'ui-field w-full min-h-[44px] rounded-[2px] border border-charcoal/25 bg-charcoal px-4 py-3 font-sans text-[16px] md:text-[15px] text-ink-dark placeholder:text-ink-dark/55 disabled:cursor-not-allowed disabled:opacity-60'
 
 function todayDateString() {
   return new Date().toISOString().split('T')[0]
@@ -130,7 +130,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label htmlFor="name" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
+            <label htmlFor="name" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal">
               Ονοματεπώνυμο
             </label>
             <input id="name" type="text" autoComplete="name" aria-describedby={errors.name ? 'name-error' : undefined} {...register('name')} className={INPUT_CLASSNAME} />
@@ -138,7 +138,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
+            <label htmlFor="email" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal">
               Email
             </label>
             <input id="email" type="email" autoComplete="email" aria-describedby={errors.email ? 'email-error' : undefined} {...register('email')} className={INPUT_CLASSNAME} />
@@ -146,7 +146,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           </div>
 
           <div>
-            <label htmlFor="phone" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
+            <label htmlFor="phone" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal">
               Τηλέφωνο
             </label>
             <input id="phone" type="tel" autoComplete="tel" aria-describedby={errors.phone ? 'phone-error' : undefined} {...register('phone')} className={INPUT_CLASSNAME} />
@@ -156,7 +156,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <div>
             <label
               htmlFor="eventType"
-              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal"
+              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal"
             >
               Είδος εκδήλωσης
             </label>
@@ -185,7 +185,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           </div>
 
           <div>
-            <label htmlFor="date" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
+            <label htmlFor="date" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal">
               Ημερομηνία
             </label>
             <input id="date" type="date" min={minDate} {...register('date')} className={INPUT_CLASSNAME} />
@@ -193,7 +193,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           </div>
 
           <div>
-            <label htmlFor="guests" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal">
+            <label htmlFor="guests" className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal">
               Αριθμός ατόμων
             </label>
             <input id="guests" type="number" min={1} max={200} {...register('guests')} className={INPUT_CLASSNAME} />
@@ -203,7 +203,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <div>
             <label
               htmlFor="message"
-              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal"
+              className="mb-2 block font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal"
             >
               Μήνυμα
             </label>
@@ -220,15 +220,17 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
           <div>
-            <label htmlFor="consent" className="flex cursor-pointer items-start gap-3">
-              <input
-                id="consent"
-                type="checkbox"
-                aria-describedby={errors.consent ? 'consent-error' : undefined}
-                aria-invalid={errors.consent ? true : undefined}
-                {...register('consent')}
-                className="ui-field mt-1 h-4 w-4 shrink-0 rounded border-charcoal/30 bg-charcoal text-mustard"
-              />
+            <label htmlFor="consent" className="flex min-h-[44px] cursor-pointer items-start gap-3 py-1">
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center">
+                <input
+                  id="consent"
+                  type="checkbox"
+                  aria-describedby={errors.consent ? 'consent-error' : undefined}
+                  aria-invalid={errors.consent ? true : undefined}
+                  {...register('consent')}
+                  className="ui-field h-5 w-5 shrink-0 rounded border-charcoal/30 bg-charcoal text-mustard"
+                />
+              </span>
               <span className="font-sans text-[13px] leading-relaxed text-concrete">
                 Έχω διαβάσει την{' '}
                 <Link href="/privacy" className="ui-link text-charcoal">
@@ -253,7 +255,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
                   setStatus('idle')
                   setSubmitError('')
                 }}
-                className="ui-link mt-3 font-sans text-[12px] uppercase tracking-[0.14em] text-charcoal"
+                className="ui-link mt-3 inline-flex min-h-[44px] items-center font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal md:min-h-0"
               >
                 Δοκίμασε ξανά
               </button>
@@ -263,7 +265,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
           <button
             type="submit"
             disabled={isSubmitting}
-            className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-lg hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
+            className="ui-interactive inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
           >
             {isSubmitting ? 'Αποστολή...' : 'Στείλε κράτηση'}
           </button>

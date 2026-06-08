@@ -62,7 +62,7 @@ function ReviewCard({ review }: { review: Review }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Κριτική από ${review.name}`}
-      className="flex h-full w-[min(320px,80vw)] shrink-0 flex-col gap-3 rounded-2xl bg-white p-5 shadow-[0_1px_3px_rgba(0,0,0,0.12),0_4px_16px_rgba(0,0,0,0.06)] transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(0,0,0,0.18),0_8px_24px_rgba(0,0,0,0.1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard"
+      className="ui-card-elevated flex h-full w-[min(300px,78vw)] shrink-0 flex-col gap-2.5 rounded-[2px] bg-white p-4 transition-shadow duration-150 hover:shadow-[0_12px_32px_rgba(14,34,8,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard md:w-[min(320px,80vw)] md:gap-3 md:p-5"
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 items-center gap-3">
@@ -144,7 +144,7 @@ export default function ReviewsSection() {
               href="https://www.google.com/maps/search/M.E.S.S.+Ioannina"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-3 rounded-xl bg-white/95 px-4 py-2.5 shadow-[0_1px_3px_rgba(0,0,0,0.1),0_4px_12px_rgba(0,0,0,0.06)] ring-1 ring-black/[0.04] transition hover:shadow-[0_2px_8px_rgba(0,0,0,0.15)]"
+              className="ui-card-elevated mt-8 inline-flex min-h-[44px] items-center gap-3 rounded-[2px] bg-white/95 px-4 py-2.5 ring-1 ring-black/[0.04] transition hover:shadow-[0_12px_32px_rgba(14,34,8,0.15)]"
             >
               <GoogleLogo className="h-5 w-5" />
               <div>
@@ -188,7 +188,7 @@ export default function ReviewsSection() {
             <HairlineRule origin="left" className="w-12" />
             <Link
               href="/reviews"
-              className="ui-link font-sans text-[12px] uppercase tracking-[0.17em] text-charcoal/70 hover:text-mustard"
+              className="ui-link inline-flex min-h-[44px] items-center font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal/70 hover:text-mustard md:min-h-0"
             >
               Όλες οι αξιολογήσεις →
             </Link>

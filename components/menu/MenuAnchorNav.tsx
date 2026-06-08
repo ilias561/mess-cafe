@@ -43,7 +43,7 @@ export default function MenuAnchorNav() {
     if (!el) return
     // Measure the actual anchor-nav height so the section heading clears the
     // sticky stack on every viewport (mobile is 2 rows tall, desktop is 1).
-    const anchorH = navRef.current?.offsetHeight ?? 52
+    const anchorH = navRef.current?.offsetHeight ?? 112
     const top = el.getBoundingClientRect().top + window.scrollY - (NAV_HEIGHT + anchorH)
     window.scrollTo({ top, behavior: 'smooth' })
   }
@@ -58,7 +58,7 @@ export default function MenuAnchorNav() {
         {/* Back to home */}
         <Link
           href="/"
-          className="flex w-fit shrink-0 items-center gap-1.5 font-sans text-[12px] uppercase tracking-[0.14em] text-concrete transition-colors hover:text-charcoal"
+          className="inline-flex min-h-11 w-fit shrink-0 items-center gap-1.5 py-1 font-sans text-[12px] uppercase tracking-[0.14em] text-concrete transition-colors hover:text-charcoal lg:min-h-0 lg:py-0"
         >
           <svg
             viewBox="0 0 16 16"
@@ -70,14 +70,14 @@ export default function MenuAnchorNav() {
           Αρχική
         </Link>
 
-        <div className="no-scrollbar flex w-full flex-nowrap gap-5 overflow-x-auto lg:flex-wrap lg:justify-end">
+        <div className="no-scrollbar -mx-1 flex w-full flex-nowrap gap-2.5 overflow-x-auto scroll-pl-1 scroll-pr-6 lg:mx-0 lg:flex-wrap lg:justify-end lg:gap-5 lg:scroll-pl-0 lg:scroll-pr-0">
           {anchors.map(({ id, label }) => (
             <button
               key={id}
               type="button"
               onClick={() => scrollTo(id)}
               aria-label={`Μετάβαση στην ενότητα ${label}`}
-              className={`ui-link shrink-0 rounded-full px-3.5 py-1.5 font-sans text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:rounded-none lg:border-b lg:px-0 lg:py-1 lg:pb-1 ${
+              className={`ui-link inline-flex min-h-11 shrink-0 items-center rounded-full px-4 py-2 font-sans text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:min-h-0 lg:rounded-none lg:border-b lg:px-0 lg:py-1 lg:pb-1 ${
                 active === id
                   ? 'bg-mustard text-ink-dark lg:bg-transparent lg:border-mustard lg:text-charcoal'
                   : 'bg-bone-warm/60 text-concrete hover:text-charcoal lg:bg-transparent lg:border-transparent'

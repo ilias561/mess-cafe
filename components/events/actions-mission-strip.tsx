@@ -582,7 +582,7 @@ export default function ActionsMissionStrip({
               }}
               whileHover={prefersReducedMotion ? undefined : { y: -6 }}
               className={cn(
-                'group relative overflow-hidden rounded-[6px] border border-line/40 transition-shadow duration-250',
+                'ui-card-elevated group relative overflow-hidden rounded-[2px] border border-line/40 transition-shadow duration-250',
                 cardBottomBorder[pillar.accent],
                 isLead
                   ? 'flex flex-row items-start gap-3 bg-bone-warm p-4 md:flex-col md:gap-0 md:p-0'
@@ -732,7 +732,7 @@ export default function ActionsMissionStrip({
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={2025} />
               </span>
-              <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
+              <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.16em] text-olive">
                 από το
               </span>
             </m.div>
@@ -750,7 +750,7 @@ export default function ActionsMissionStrip({
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={12} />
               </span>
-              <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
+              <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.16em] text-olive">
                 δράσεις
               </span>
             </m.div>
@@ -768,7 +768,7 @@ export default function ActionsMissionStrip({
               <span className="font-serif text-[clamp(28px,3.5vw,40px)] leading-none text-mustard">
                 <CountUp to={80} suffix="+" />
               </span>
-              <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
+              <span className="mt-3 font-sans text-[10px] uppercase tracking-[0.16em] text-olive">
                 παιδιά υποστηρίξαμε
               </span>
             </m.div>

@@ -359,15 +359,15 @@ export default function Hero() {
 
           <m.p
             {...reveal(1900, 1100)}
-            className="hero-text-shadow mx-auto mt-10 max-w-[560px] font-sans text-[15px] leading-relaxed text-white/90 md:text-[17px]"
+            className="hero-text-shadow mx-auto mt-7 max-w-[560px] font-sans text-[15px] leading-relaxed text-white/90 md:mt-10 md:text-[17px]"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </m.p>
 
-          <m.div {...reveal(2500, 900)} className="mt-8">
+          <m.div {...reveal(2500, 900)} className="mt-6 md:mt-8">
             <Link
               href="/#map"
-              className="ui-link hero-text-shadow relative inline-block font-sans text-sm font-medium text-white"
+              className="ui-link hero-text-shadow relative inline-flex min-h-11 items-center py-2.5 font-sans text-sm font-medium text-white md:min-h-0 md:py-0"
             >
               <span className="absolute bottom-0 left-0 h-px w-full bg-mustard" />
               Βρες μας

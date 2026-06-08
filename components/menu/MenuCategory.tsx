@@ -11,13 +11,13 @@ function ExtrasBox({ categoryId }: { categoryId: string }) {
     return (
       <div className="ui-card-elevated mt-8 grid gap-4 rounded-sm border border-line/40 p-6 sm:grid-cols-2">
         <div>
-          <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
+          <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.16em] text-olive">
             {extras.vegExtras.label}
           </p>
           <p className="font-sans text-[13px] leading-relaxed text-concrete">{extras.vegExtras.items}</p>
         </div>
         <div>
-          <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
+          <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.16em] text-olive">
             {extras.proteinExtras.label}
           </p>
           <p className="font-sans text-[13px] leading-relaxed text-concrete">{extras.proteinExtras.items}</p>
@@ -28,7 +28,7 @@ function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'bowls' || categoryId === 'salads') {
     return (
       <div className="ui-card-elevated mt-8 rounded-sm border border-line/40 p-6">
-        <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.18em] text-olive">
+        <p className="mb-1 font-sans text-[10px] uppercase tracking-[0.16em] text-olive">
           {extras.fruitExtras.label}
         </p>
         <p className="font-sans text-[13px] leading-relaxed text-concrete">{extras.fruitExtras.items}</p>
@@ -54,7 +54,7 @@ function CategoryHeader({ category, index }: { category: MenuCategoryType; index
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.7, ease: EASE }}
-      className="flex items-end gap-5 border-b border-line/50 pb-5 md:gap-7"
+      className="flex items-end gap-4 border-b border-line/50 pb-4 md:gap-7 md:pb-5"
     >
       <span className="font-serif text-[clamp(40px,6vw,68px)] font-light leading-[0.8] text-mustard/30">
         {String(index + 1).padStart(2, '0')}
@@ -83,7 +83,7 @@ function ListGroup({
   showNutrition?: boolean
 }) {
   return (
-    <div className={`grid grid-cols-1 gap-x-16 gap-y-6 md:grid-cols-2 ${className}`}>
+    <div className={`grid grid-cols-1 gap-x-16 gap-y-4 md:grid-cols-2 md:gap-y-6 ${className}`}>
       {items.map((item, i) => (
         <MenuListRow key={item.name} item={item} index={i} showNutrition={showNutrition} />
       ))}
@@ -105,9 +105,13 @@ function CategoryBody({
     return <ListGroup items={category.items} className="mt-10" showNutrition={showNutrition} />
   }
 
+  // Avoid a lone orphan card in the last row: a 3-col grid leaves 1 behind when
+  // count % 3 === 1 (e.g. 4 → 3+1, 7 → 3+3+1). Bump those to 4 columns.
+  const lgCols = media.length % 3 === 1 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+
   return (
     <>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-8 lg:grid-cols-3">
+      <div className={`mt-8 grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 md:mt-10 md:gap-8 ${lgCols}`}>
         {media.map((item, i) => (
           <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
         ))}
@@ -116,7 +120,7 @@ function CategoryBody({
         <ListGroup
           items={noMedia}
           showNutrition={showNutrition}
-          className="mt-12 border-t border-line/40 pt-10"
+          className="mt-10 border-t border-line/40 pt-8 md:mt-12 md:pt-10"
         />
       )}
     </>
@@ -137,12 +141,12 @@ export default function MenuCategory({
   return (
     <section
       id={category.id}
-      className="scroll-mt-[140px] bg-bone px-6 py-20 md:scroll-mt-[120px] md:px-12 md:py-32"
+      className="scroll-mt-[180px] bg-bone px-6 py-14 md:px-12 md:py-20 lg:scroll-mt-[120px] lg:py-32"
     >
       <div className="mx-auto max-w-[1400px]">
         <CategoryHeader category={category} index={index} />
         {editorialIntro[category.id] && (
-          <p className="mt-4 max-w-[60ch] font-sans text-[15px] leading-relaxed text-concrete">
+          <p className="mt-3 max-w-[60ch] font-sans text-[15px] leading-relaxed text-concrete md:mt-4">
             {editorialIntro[category.id]}
           </p>
         )}
@@ -150,7 +154,7 @@ export default function MenuCategory({
         <ExtrasBox categoryId={category.id} />
 
         {showFooterBeat && (
-          <div className="mt-16 flex items-center justify-center gap-4 md:mt-24">
+          <div className="mt-12 flex items-center justify-center gap-4 md:mt-16 lg:mt-24">
             <span className="h-px w-10 bg-line" />
             <span className="font-serif text-[15px] italic tracking-[0.15em] text-olive/40">M.E.S.S.</span>
             <span className="h-px w-10 bg-line" />

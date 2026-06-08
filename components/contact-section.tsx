@@ -16,7 +16,7 @@ import {
 import type { Settings } from '@/lib/settings'
 
 const INPUT_BASE =
-  'ui-field w-full rounded-[3px] border border-charcoal/20 bg-white/[0.04] backdrop-blur-[2px] px-4 py-3.5 font-sans text-[15px] text-charcoal placeholder:text-charcoal/45 focus:outline-none'
+  'ui-field w-full min-h-[44px] rounded-[2px] border border-charcoal/20 bg-white/[0.04] backdrop-blur-[2px] px-4 py-3.5 font-sans text-[16px] md:text-[15px] text-charcoal placeholder:text-charcoal/55 focus:outline-none'
 
 type ContactSectionProps = {
   settings?: Settings
@@ -84,7 +84,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
   return (
     <section
       id="contact"
-      className="relative bg-forest px-6 py-20 md:px-12 md:py-24"
+      className="scroll-mt-28 relative bg-forest px-6 py-20 md:px-12 md:py-24"
     >
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16 lg:grid-cols-5">
@@ -113,12 +113,17 @@ export default function ContactSection({ settings }: ContactSectionProps) {
             <p className="mt-2 font-serif text-[15px] italic text-charcoal">{hoursLine}</p>
             <HairlineRule origin="left" className="my-4 w-12" />
             <MicroEyebrow className="text-mustard/80">Τηλέφωνο</MicroEyebrow>
-            <p className="mt-2 font-sans text-[14px] text-charcoal">{phoneLine}</p>
+            <a
+              href={`tel:${phoneLine.replace(/\s+/g, '')}`}
+              className="mt-2 inline-flex min-h-[44px] items-center font-sans text-[14px] text-charcoal md:min-h-0"
+            >
+              {phoneLine}
+            </a>
           </Reveal>
 
           <Reveal direction="up" className="lg:col-span-2" aria-live="polite">
             {status === 'success' ? (
-              <div className="rounded-2xl bg-mustard/8 p-8 ring-1 ring-mustard/40">
+              <div className="rounded-[2px] bg-mustard/8 p-8 ring-1 ring-mustard/40">
                 <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-mustard/80">
                   ΕΥΧΑΡΙΣΤΟΥΜΕ
                 </p>
@@ -132,7 +137,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
             ) : (
               <form onSubmit={handleSubmit} className="grid gap-4 md:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/70">
+                  <label htmlFor="contact-name" className="font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal/70">
                     Όνομα
                   </label>
                   <input
@@ -146,7 +151,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/70">
+                  <label htmlFor="contact-email" className="font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal/70">
                     Email
                   </label>
                   <input
@@ -160,7 +165,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   />
                 </div>
                 <div className="flex flex-col gap-1.5 md:col-span-2">
-                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.18em] text-charcoal/70">
+                  <label htmlFor="contact-message" className="font-sans text-[11px] uppercase tracking-[0.16em] text-charcoal/70">
                     Μήνυμα
                   </label>
                   <textarea
@@ -183,16 +188,18 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   <p className="font-sans text-[12px] text-red-300 md:col-span-2">{errorMsg}</p>
                 )}
                 <div className="md:col-span-2">
-                  <label className="flex cursor-pointer items-start gap-3">
-                    <input
-                      type="checkbox"
-                      checked={consent}
-                      onChange={(e) => {
-                        setConsent(e.target.checked)
-                        if (e.target.checked) setConsentError('')
-                      }}
-                      className="mt-1 h-4 w-4 shrink-0 rounded border-charcoal/30 text-mustard focus:ring-mustard"
-                    />
+                  <label className="flex min-h-[44px] cursor-pointer items-start gap-3 py-1">
+                    <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center">
+                      <input
+                        type="checkbox"
+                        checked={consent}
+                        onChange={(e) => {
+                          setConsent(e.target.checked)
+                          if (e.target.checked) setConsentError('')
+                        }}
+                        className="h-5 w-5 shrink-0 rounded border-charcoal/30 text-mustard focus:ring-mustard"
+                      />
+                    </span>
                     <span className="font-sans text-[13px] leading-relaxed text-charcoal/70">
                       Έχω διαβάσει την{' '}
                       <Link
@@ -214,7 +221,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
+                    className="ui-interactive inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
                   >
                     {sending ? 'Αποστολή...' : 'Στείλε μήνυμα'}
                   </button>

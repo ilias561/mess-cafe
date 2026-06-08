@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, type RefObject, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type RefObject, type ReactNode } from 'react'
 import {
   m,
   useMotionTemplate,
@@ -25,11 +25,13 @@ import { FadeImage } from '@/components/fade-image'
  * lazy-load offset bug framer's `useScroll` has), and exactly one layer is
  * GPU-promoted, only while it's animating.
  */
-const PIN_VH = 250 // pinned scroll length of the café beat
+const DESKTOP_PIN_VH = 250 // pinned scroll length of the café beat (desktop)
+const MOBILE_PIN_VH = 170 // shorter pin on phones — same reveal, less scroll
 // How much the next section overlaps to cover the photo. With PIN_VH 250 the
 // café grows over the first ~quarter, holds, then the cover rises (≥100 = ≥1vh
 // is required, else the photo unpins before it's covered).
-const COVER_VH = 100
+const DESKTOP_COVER_VH = 100
+const MOBILE_COVER_VH = 72
 
 /**
  * Progress 0→1 across the pin, from the pin's LIVE position each scroll/resize/
@@ -77,6 +79,19 @@ export default function ExpandCoverReveal({
   const pinRef = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
   const p = usePinProgress(pinRef)
+  const [pinVh, setPinVh] = useState(MOBILE_PIN_VH)
+  const [coverVh, setCoverVh] = useState(MOBILE_COVER_VH)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const sync = () => {
+      setPinVh(mq.matches ? DESKTOP_PIN_VH : MOBILE_PIN_VH)
+      setCoverVh(mq.matches ? DESKTOP_COVER_VH : MOBILE_COVER_VH)
+    }
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   // The grow: a centred clip-path window opens to full-bleed over the first
   // ~quarter. The image underneath is always full-screen object-cover, so it
@@ -106,7 +121,7 @@ export default function ExpandCoverReveal({
 
   return (
     <section className="relative" style={{ background }}>
-      <div ref={pinRef} className="relative" style={{ height: `${PIN_VH}vh` }}>
+      <div ref={pinRef} className="relative" style={{ height: `${pinVh}vh` }}>
         <div className="sticky top-0 z-0 h-[100svh] overflow-hidden">
           {/* café — full-screen object-cover, revealed through a growing window */}
           <m.div
@@ -119,7 +134,7 @@ export default function ExpandCoverReveal({
       </div>
 
       {/* the next section rises up and covers the held photo */}
-      <div className="relative z-10" style={{ marginTop: `-${COVER_VH}vh` }}>
+      <div className="relative z-10" style={{ marginTop: `-${coverVh}vh` }}>
         {children}
       </div>
     </section>

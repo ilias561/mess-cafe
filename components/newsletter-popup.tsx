@@ -5,6 +5,10 @@ import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
 import { X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
+import {
+  dispatchNewsletterClose,
+  dispatchNewsletterOpen,
+} from '@/lib/overlay-events'
 import { subscribeToNewsletter } from '@/lib/newsletter/subscribe'
 
 const SESSION_DISMISSED_KEY = 'mess_newsletter_dismissed_session'
@@ -19,11 +23,19 @@ function shouldSkipPath(pathname: string) {
     || pathname === '/_not-found'
 }
 
+function isPermanentlyDismissed() {
+  if (sessionStorage.getItem(SESSION_DISMISSED_KEY) === '1') return true
+  if (localStorage.getItem(LOCAL_SUBSCRIBED_KEY) === '1') return true
+  const dismissedUntil = Number(localStorage.getItem(LOCAL_DISMISSED_UNTIL_KEY) ?? 0)
+  return dismissedUntil > Date.now()
+}
+
 export default function NewsletterPopup() {
   const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
   const dialogRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
+  const [footerInView, setFooterInView] = useState(false)
   const [email, setEmail] = useState('')
   const [acceptedGdpr, setAcceptedGdpr] = useState(false)
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -41,18 +53,13 @@ export default function NewsletterPopup() {
   }, [])
 
   useEffect(() => {
-    setOpen(false)
-    setStatus('idle')
-    setError('')
-    setAcceptedGdpr(false)
-    setEmail('')
+    if (shouldSkipPath(pathname)) {
+      setOpen(false)
+    }
+  }, [pathname])
 
-    if (shouldSkipPath(pathname)) return
-    if (sessionStorage.getItem(SESSION_DISMISSED_KEY) === '1') return
-    if (localStorage.getItem(LOCAL_SUBSCRIBED_KEY) === '1') return
-
-    const dismissedUntil = Number(localStorage.getItem(LOCAL_DISMISSED_UNTIL_KEY) ?? 0)
-    if (dismissedUntil > Date.now()) return
+  useEffect(() => {
+    if (shouldSkipPath(pathname) || isPermanentlyDismissed()) return
 
     let shown = false
     const showPopup = () => {
@@ -76,7 +83,33 @@ export default function NewsletterPopup() {
       window.clearTimeout(timer)
       window.removeEventListener('scroll', onScroll)
     }
-  }, [pathname])
+    // Intentionally mount-only: do not re-trigger entrance on client route changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    // Coordinate the WhatsApp float off the popup's actual VISIBILITY, not just
+    // `open` — the popup hides itself at the footer (open stays true), and the
+    // float should reappear there instead of staying suppressed for the session.
+    if (open && !footerInView) {
+      dispatchNewsletterOpen()
+    } else {
+      dispatchNewsletterClose()
+    }
+  }, [open, footerInView])
+
+  useEffect(() => {
+    if (!open) return
+    const footer = document.getElementById('footer')
+    if (!footer) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setFooterInView(entry.isIntersecting),
+      { threshold: 0.08, rootMargin: '0px 0px -48px 0px' },
+    )
+    observer.observe(footer)
+    return () => observer.disconnect()
+  }, [open])
 
   useEffect(() => {
     if (!open || !dialogRef.current) return
@@ -125,32 +158,34 @@ export default function NewsletterPopup() {
     sessionStorage.setItem(SESSION_DISMISSED_KEY, '1')
   }
 
+  const visible = open && !footerInView
+
   return (
     <AnimatePresence>
-      {open && (
+      {visible && (
         <m.div
           initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
           animate={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
           exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="fixed bottom-[88px] right-6 z-[120] w-[calc(100%-48px)] max-w-[380px] md:bottom-6 md:right-6"
+          className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] right-[calc(1rem+env(safe-area-inset-right,0px))] z-[120] w-[calc(100%-48px)] max-w-[380px] md:bottom-6 md:right-6"
           role="dialog"
           aria-labelledby="newsletter-title"
           aria-describedby="newsletter-description"
           ref={dialogRef}
         >
-          <div className="rounded-[3px] border border-charcoal/15 border-t-terracotta bg-cream p-4 shadow-[0_16px_38px_rgba(43,43,40,0.16)]">
+          <div className="rounded-[2px] border border-charcoal/15 border-t-terracotta bg-cream p-4 shadow-[0_16px_38px_rgba(43,43,40,0.16)]">
             <button
               type="button"
               aria-label="Κλείσιμο"
               onClick={dismiss}
-              className="ui-interactive absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-charcoal/70 hover:bg-charcoal/8"
+              className="ui-interactive absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full text-charcoal/70 hover:bg-charcoal/8 md:right-3 md:top-3 md:h-9 md:w-9"
             >
               <X className="h-4 w-4" aria-hidden />
             </button>
 
-            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.17em] text-terracotta">NEWSLETTER</p>
-            <h3 id="newsletter-title" className="mt-2 font-serif text-[22px] leading-tight text-charcoal">
+            <p className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-terracotta">NEWSLETTER</p>
+            <h3 id="newsletter-title" className="u-balance mt-2 font-serif text-[22px] leading-tight text-charcoal">
               Ιστορίες, menu, events.
             </h3>
             <p id="newsletter-description" className="mt-1 font-sans text-[13px] text-concrete">
@@ -172,7 +207,7 @@ export default function NewsletterPopup() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="ui-field w-full rounded-[2px] border border-line/70 bg-charcoal/10 px-3 py-2.5 font-sans text-[14px] text-charcoal"
+                  className="ui-field w-full rounded-[2px] border border-line/70 bg-charcoal/10 px-3 py-2.5 font-sans text-[14px] text-charcoal placeholder:text-charcoal/55"
                 />
                 <label className="flex items-start gap-2">
                   <input
@@ -188,7 +223,7 @@ export default function NewsletterPopup() {
                 <button
                   type="submit"
                   disabled={shouldDisable}
-                  className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+                  className="ui-interactive w-full rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
                 </button>

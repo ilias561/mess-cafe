@@ -23,14 +23,16 @@ export default function CountUp({ to, suffix = '', duration = 1.2, className }: 
     return () => controls.stop()
   }, [duration, inView, reduce, to, value])
 
+  const classes = ['tabular-nums', className].filter(Boolean).join(' ')
+
   if (reduce) {
     return (
-      <span ref={ref} className={className}>
+      <span ref={ref} className={classes}>
         {to}
         {suffix}
       </span>
     )
   }
 
-  return <m.span ref={ref} className={className}>{rounded}</m.span>
+  return <m.span ref={ref} className={classes}>{rounded}</m.span>
 }

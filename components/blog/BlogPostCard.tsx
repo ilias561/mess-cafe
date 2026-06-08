@@ -11,7 +11,7 @@ export default function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link
       href={`/food-for-medicine/${post.slug}`}
-      className="ui-focus-ring ui-press group block cursor-pointer bg-cream transition-shadow duration-150 ease-out hover:shadow-sm"
+      className="ui-card-elevated ui-focus-ring ui-press group block cursor-pointer bg-cream"
     >
       {/* Cover image — aspect-[4/3], no radius, darken on hover */}
       <div className="aspect-[4/3] overflow-hidden">

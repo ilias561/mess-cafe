@@ -6,7 +6,7 @@ import { ingredientStandards } from '@/lib/ingredient-standards'
 
 export default function IngredientStandards() {
   return (
-    <section className="bg-bone px-6 py-20 md:px-12 md:py-24">
+    <section className="bg-bone px-6 py-14 md:px-12 md:py-24">
       <div className="mx-auto max-w-[1400px]">
         <m.div
           initial={{ opacity: 0, y: 24 }}
@@ -25,7 +25,7 @@ export default function IngredientStandards() {
           </p>
         </m.div>
 
-        <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-9 sm:grid-cols-3 md:mt-14 lg:grid-cols-6">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-14 md:gap-8 lg:grid-cols-3">
           {ingredientStandards.map((it, i) => (
             <m.article
               key={it.slug}
@@ -33,13 +33,13 @@ export default function IngredientStandards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.55, ease: EASE, delay: i * 0.05 }}
-              className="flex flex-col items-start"
+              className="ui-card-elevated group overflow-hidden rounded-[2px] border border-line/60 bg-bone-warm"
             >
-              <div className="aspect-square w-full max-w-[96px] overflow-hidden rounded-full bg-bone-warm">
+              <div className="aspect-[16/10] w-full overflow-hidden bg-canopy-night">
                 <img
                   src={`/images/ingredients/${it.slug}.jpg`}
                   alt={it.name}
-                  className="h-full w-full object-cover"
+                  className="ui-img-hover h-full w-full object-cover"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
@@ -47,10 +47,12 @@ export default function IngredientStandards() {
                   }}
                 />
               </div>
-              <h3 className="mt-3 font-serif text-[16px] italic leading-snug tracking-tight text-charcoal">
-                {it.name}
-              </h3>
-              <p className="mt-1 font-sans text-[12px] leading-relaxed text-concrete">{it.better}</p>
+              <div className="p-5">
+                <h3 className="font-serif text-[18px] italic leading-snug tracking-tight text-charcoal">
+                  {it.name}
+                </h3>
+                <p className="mt-1.5 font-sans text-[13px] leading-relaxed text-concrete">{it.better}</p>
+              </div>
             </m.article>
           ))}
         </div>

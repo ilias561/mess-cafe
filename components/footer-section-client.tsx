@@ -45,7 +45,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           <div className="mt-8">
             <a
               href={`tel:${primaryPhoneHref}`}
-              className="ui-interactive inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:shadow-lg hover:bg-amber"
+              className="ui-interactive inline-flex items-center gap-2.5 rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber"
             >
               {settings.phone} — Κάλεσέ μας
             </a>
@@ -69,7 +69,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">PHONE</p>
             <a
               href={`tel:${primaryPhoneHref}`}
-              className="ui-link font-sans text-sm text-charcoal underline-offset-4 hover:text-mustard hover:underline"
+              className="ui-link inline-flex min-h-11 items-center py-2 font-sans text-sm text-charcoal underline-offset-4 hover:text-mustard hover:underline md:min-h-0 md:py-0"
             >
               {settings.phone}
             </a>
@@ -83,7 +83,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="M.E.S.S. στο Instagram"
-                className="ui-link inline-flex items-center gap-1.5 font-sans text-sm text-charcoal underline-offset-4 hover:text-mustard hover:underline"
+                className="ui-link inline-flex min-h-11 items-center gap-1.5 py-2 font-sans text-sm text-charcoal underline-offset-4 hover:text-mustard hover:underline md:min-h-0 md:py-0"
               >
                 {settings.instagram.replace('https://', '')}
                 <ExternalLink className="h-3 w-3 shrink-0 opacity-60" strokeWidth={1.5} aria-hidden />
@@ -94,14 +94,14 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
 
         <Reveal
           id="map"
-          className="mt-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]"
+          className="scroll-mt-28 mt-16 grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]"
         >
           {/* Street-view video thumbnail — links to Google Maps video */}
           <a
             href="https://www.google.com/maps/place/M.E.S.S./@39.6624739,20.8602479,3a,75y,90t/data=!3m8!1e5!3m6!1sCIHM0ogKEICAgMDohajpTw!2e10!3e10!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAPNQkAGiYrFrT8ZbNAp3Z8_vhvLZR3byorPn3yDkWB4zC3fVxpW2Un6WoNIiPxBWywq6qV-nMQqE9R6Gm27PvvwiPFcObQw_5Mfx37QC67ZqO4q0-O8AwPggDTwk0E5dJ2ELg4q-KK4X%3Dw203-h114-k-no!7i960!8i540!4m11!1m2!2m1!1zzpnPic6szr3Ovc65zr3OsSBtZXNz!3m7!1s0x135be9a182aaef6f:0x8faae1439da23f07!8m2!3d39.6624739!4d20.8602479!10e5!15sChXOmc-JzqzOvc69zrnOvc6xIG1lc3NaFyIVzrnPic6szr3Ovc65zr3OsSBtZXNzkgELY29mZmVlX3Nob3DgAQA!16s%2Fg%2F11wvls4by2?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative h-[360px] overflow-hidden rounded-2xl border border-mustard/20 block"
+            className="group relative h-[360px] overflow-hidden rounded-[2px] border border-mustard/20 block"
             aria-label="Δες το M.E.S.S. σε Street View"
           >
             {/* Thumbnail image from Google Maps */}
@@ -110,7 +110,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
               alt="Άποψη Street View της εισόδου του M.E.S.S."
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover opacity-90 transition-opacity duration-500 ease-out group-hover:opacity-100"
+              className="ui-img-hover opacity-90 transition-opacity duration-500 ease-out group-hover:opacity-100"
             />
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-black/20 transition-opacity duration-250 group-hover:bg-black/10" />
@@ -127,7 +127,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
           </a>
 
           {/* Map — consent gate (GDPR: Google Maps sets cookies on load) */}
-          <div className="relative h-[360px] overflow-hidden rounded-2xl border border-mustard/20">
+          <div className="relative h-[360px] overflow-hidden rounded-[2px] border border-mustard/20">
             {mapConsent ? (
               <iframe
                 title="M.E.S.S. — χάρτης τοποθεσίας"
@@ -148,7 +148,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
                 <button
                   type="button"
                   onClick={() => setMapConsent(true)}
-                  className="ui-interactive rounded-full border border-mustard/40 bg-mustard/10 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal/70 hover:border-mustard hover:bg-mustard/20 hover:text-charcoal"
+                  className="ui-interactive inline-flex min-h-11 items-center rounded-full border border-mustard/40 bg-mustard/10 px-5 py-2.5 font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal/70 hover:border-mustard hover:bg-mustard/20 hover:text-charcoal"
                 >
                   Φόρτωση χάρτη
                 </button>
@@ -162,19 +162,19 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 font-sans text-[12px] text-charcoal/55"
             aria-label="Νομικές πληροφορίες"
           >
-            <Link href="/privacy" className="ui-link hover:text-charcoal">
+            <Link href="/privacy" className="ui-link inline-flex min-h-11 items-center px-1.5 py-2 hover:text-charcoal md:min-h-0 md:px-0 md:py-0">
               Πολιτική Απορρήτου
             </Link>
             <span aria-hidden className="text-charcoal/30">
               ·
             </span>
-            <Link href="/cookies" className="ui-link hover:text-charcoal">
+            <Link href="/cookies" className="ui-link inline-flex min-h-11 items-center px-1.5 py-2 hover:text-charcoal md:min-h-0 md:px-0 md:py-0">
               Πολιτική Cookies
             </Link>
             <span aria-hidden className="text-charcoal/30">
               ·
             </span>
-            <Link href="/terms" className="ui-link hover:text-charcoal">
+            <Link href="/terms" className="ui-link inline-flex min-h-11 items-center px-1.5 py-2 hover:text-charcoal md:min-h-0 md:px-0 md:py-0">
               Όροι Χρήσης
             </Link>
           </nav>

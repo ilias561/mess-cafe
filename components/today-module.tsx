@@ -146,7 +146,7 @@ export default function TodayModule({ events }: TodayModuleProps) {
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-3 rounded-2xl border border-mustard/35 bg-cream/60 p-4">
+                  <div className="space-y-3 rounded-[2px] border border-mustard/35 bg-cream/60 p-4">
                     <p className="font-sans text-sm text-charcoal/70 transition-opacity duration-500" key={suggestionIndex}>
                       {suggestions[suggestionIndex]}
                     </p>

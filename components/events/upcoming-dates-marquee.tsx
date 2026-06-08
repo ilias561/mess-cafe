@@ -9,8 +9,8 @@ export default function UpcomingDatesMarquee({ events }: Props) {
   if (events.length === 0) return null
 
   return (
-    <div className="overflow-hidden bg-olive-deep py-3.5" aria-hidden>
-      <div className="marquee-track flex whitespace-nowrap">
+    <div className="w-full max-w-full overflow-hidden bg-olive-deep py-3.5" aria-hidden>
+      <div className="marquee-track flex w-max max-w-none whitespace-nowrap">
         {[...events, ...events].map((event, i) => (
           <Fragment key={`${event.slug}-${i}`}>
             <span className="mx-[14px] text-mustard">·</span>

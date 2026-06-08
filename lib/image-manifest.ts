@@ -72,12 +72,12 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/about-3--w480.avif 480w, /images/about-3--w768.avif 768w, /images/about-3--w1066.avif 1066w",
     "webpSrcSet": "/images/about-3--w480.webp 480w, /images/about-3--w768.webp 768w, /images/about-3--w1066.webp 1066w"
   },
-  "/images/about-4.jpg": {
-    "width": 480,
-    "height": 319,
-    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAoAA4BaJbACdAD5NIwchlwAAP7eAUlvAH2z8pNL1exJra3rnKNKogSt+AjHu/l18OpbvKp43zjXnhrerFUXR7rtia5blnHIzDj975vpyJuPXdSbswsovAAAAA==",
-    "avifSrcSet": "/images/about-4--w480.avif 480w",
-    "webpSrcSet": "/images/about-4--w480.webp 480w"
+  "/images/about-4.webp": {
+    "width": 1920,
+    "height": 1277,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwAgCdASoQAAsAA4BaJbACdAYqrzYL4P72K2kAAP7R/rW1ygLwCcDmpbh2i+ckOP/0bU5mNKhU55INXfcwQdCnwPcCifPyX8af2ifY2N3WLg/vfN9ORNx672kYh0qXsHAAAA==",
+    "avifSrcSet": "/images/about-4--w480.avif 480w, /images/about-4--w768.avif 768w, /images/about-4--w1200.avif 1200w, /images/about-4--w1600.avif 1600w, /images/about-4--w1920.avif 1920w",
+    "webpSrcSet": "/images/about-4--w480.webp 480w, /images/about-4--w768.webp 768w, /images/about-4--w1200.webp 1200w, /images/about-4--w1600.webp 1600w, /images/about-4--w1920.webp 1920w"
   },
   "/images/blog/placeholder.jpg": {
     "width": 1200,
@@ -631,6 +631,13 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAABwBACdASoQABUAPu1iqk2ppaQiMAgBMB2JaADCjBAAMzbGayqG3c2CHalyAAD+8N6GdGvj9wIRflFSKgBK+arTIM46EuSLC6+Tzk/hzHvl16G1zQt+HWXYNd+qBEh/7j1SoeaCrry/Cma5FvjQDbykhze3gX/j1GmeZZw7wzCfX6CCaFJJ0mpfHAePfOTN/wVTyTbOv1/1K1K9Vf/O/by/6iUHuAAA",
     "avifSrcSet": "/images/raw/mess-internal-0027-1--w480.avif 480w, /images/raw/mess-internal-0027-1--w768.avif 768w",
     "webpSrcSet": "/images/raw/mess-internal-0027-1--w480.webp 480w, /images/raw/mess-internal-0027-1--w768.webp 768w"
+  },
+  "/images/recipes-door.jpg": {
+    "width": 1600,
+    "height": 2000,
+    "blurDataURL": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JbACdMoQMAk/xbBKoHRUmJqk72rAA/XjKc9HsFvLcTprfAe8g9AKDKKK1VePpCrPqJFHFJBWMb5Ir7nA8Kma0PkFWK/jL4B4mi6mEHZV8id/O/E4R0zKdDrOyg6M4zgnyp3nf+XFF3qyth34y4C2rAigjl1cbYtu1yYtsIVWp7Q6R7VvFQAAA",
+    "avifSrcSet": "/images/recipes-door--w480.avif 480w, /images/recipes-door--w768.avif 768w, /images/recipes-door--w1200.avif 1200w, /images/recipes-door--w1600.avif 1600w",
+    "webpSrcSet": "/images/recipes-door--w480.webp 480w, /images/recipes-door--w768.webp 768w, /images/recipes-door--w1200.webp 1200w, /images/recipes-door--w1600.webp 1600w"
   },
 }
 

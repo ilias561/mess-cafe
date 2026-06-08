@@ -73,7 +73,7 @@ export default function GalleryMenuPreview() {
             </p>
             <Link
               href="/food-for-medicine#menu"
-              className="ui-link mt-10 inline-flex items-center gap-4 font-sans text-[12px] uppercase tracking-[0.17em] text-ink-dark hover:text-ink-dark/70"
+              className="ui-link mt-10 inline-flex min-h-11 items-center gap-4 py-2 font-sans text-[12px] uppercase tracking-[0.16em] text-ink-dark hover:text-ink-dark/70 md:min-h-0 md:py-0"
             >
               <span aria-hidden className="block h-px w-10 bg-ink-dark/40" />
               Δείτε το μενού μας →

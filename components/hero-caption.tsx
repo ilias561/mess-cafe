@@ -8,7 +8,7 @@ export default function HeroCaption() {
   const reduce = useReducedMotion()
 
   return (
-    <div className="border-y border-line/25 bg-bone px-6 py-6 md:px-12">
+    <div className="border-y border-line/25 bg-bone px-6 py-4 md:px-12 md:py-6">
       <div className="mx-auto max-w-[760px] text-center">
         <SplitText
           as="p"

@@ -11,7 +11,7 @@ export default function EventHero({ event }: { event: Event }) {
 
         <Link
           href="/actions"
-          className="mb-10 inline-flex items-center gap-2 font-sans text-[12px] uppercase tracking-[0.16em] text-olive transition-colors duration-150 hover:text-charcoal"
+          className="mb-10 inline-flex min-h-[44px] items-center gap-2 font-sans text-[12px] uppercase tracking-[0.16em] text-olive transition-colors duration-150 hover:text-charcoal md:min-h-0"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           Δράσεις

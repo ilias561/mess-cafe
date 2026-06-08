@@ -43,6 +43,8 @@ export default function PhilosophySection() {
     >
       <ScrollLeaves />
 
+      <MysteryCurtain />
+
       {/* Dissolve the leaf border into flat green at the very bottom so this
           section hands off smoothly to the plain-green café reveal below —
           otherwise the dense leaves meet flat green with an abrupt texture jump.
@@ -59,7 +61,7 @@ export default function PhilosophySection() {
 
       <div className="relative z-10 mx-auto max-w-[1400px]">
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-16">
           <div className="md:col-start-2 md:col-span-4 md:pt-40">
             <div className="md:sticky md:top-28">
               <Reveal>
@@ -77,10 +79,10 @@ export default function PhilosophySection() {
                 </p>
               </Reveal>
 
-              <Reveal asGroup gap={0.1} delay={0.15} className="mt-12 flex flex-col">
+              <Reveal asGroup gap={0.1} delay={0.15} className="mt-8 flex flex-col md:mt-12">
                 {philosophyGoals.map((goal, index) => (
                   <Reveal.Item key={goal}>
-                    <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-line py-6 first:border-t-0 first:pt-0">
+                    <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-line py-4 first:border-t-0 first:pt-0 md:py-6">
                       <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard tabular-nums">
                         {String(index + 1).padStart(2, '0')}
                       </span>
@@ -92,7 +94,7 @@ export default function PhilosophySection() {
                 ))}
               </Reveal>
 
-              <Reveal delay={0.35} className="mt-12 inline-flex items-center gap-3">
+              <Reveal delay={0.35} className="mt-8 inline-flex items-center gap-3 md:mt-12">
                 <span aria-hidden className="block h-px w-6 bg-charcoal/30" />
                 <MicroEyebrow>M.E.S.S. · ΚΕΠΑΒΙ, Ιωάννινα</MicroEyebrow>
               </Reveal>
@@ -123,6 +125,30 @@ export default function PhilosophySection() {
   )
 }
 
+// Mystery reveal: an opaque forest-green curtain (matching the green of the
+// M.E.S.S. acronym section above) covers the whole philosophy section, so while
+// you scroll toward it you see only continuous flat green — no leaves peeking in.
+// A 1px sentinel at the section top drives an IntersectionObserver (NOT useScroll,
+// which caches a stale offset here once the images above lazy-load): once the
+// section top scrolls past ~30% from the top of the viewport, the curtain fades
+// out and the canopy + content are revealed all at once. Fires once.
+function MysteryCurtain() {
+  const reduce = useReducedMotion()
+  const sentinel = useRef<HTMLDivElement>(null)
+  const revealed = useInView(sentinel, { once: true, margin: '0px 0px -45% 0px' })
+  if (reduce) return null
+  return (
+    <>
+      <div ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-0 h-px w-full" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-20 bg-[#2d5a27] transition-opacity duration-[900ms] ease-out"
+        style={{ opacity: revealed ? 0 : 1 }}
+      />
+    </>
+  )
+}
+
 function Centerpiece() {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
@@ -134,8 +160,8 @@ function Centerpiece() {
   const textY = useTransform(scrollYProgress, [0, 1], ['-4%', '4%'])
 
   return (
-    <div ref={ref} className="relative isolate overflow-x-clip py-6 md:py-12">
-      <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-12 md:gap-12">
+    <div ref={ref} className="relative isolate overflow-x-clip py-4 md:py-12">
+      <div className="grid grid-cols-1 items-center gap-7 md:grid-cols-12 md:gap-12">
 
         <m.div
           className="md:col-start-2 md:col-span-5"
@@ -214,7 +240,7 @@ function Centerpiece() {
 
 function SplitSpread() {
   return (
-    <div className="relative mt-16 md:mt-24">
+    <div className="relative mt-10 md:mt-24">
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start md:gap-8">
         <div className="md:col-start-2 md:col-span-5 md:-translate-y-4">
@@ -239,12 +265,12 @@ function SplitSpread() {
         </div>
       </div>
 
-      <div className="mt-24 grid grid-cols-1 gap-6 md:mt-36 md:grid-cols-12 md:items-start md:gap-16">
+      <div className="mt-14 grid grid-cols-1 gap-6 md:mt-36 md:grid-cols-12 md:items-start md:gap-16">
         <div className="md:col-start-2 md:col-span-4 md:-translate-y-22">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
               src={images.aboutPlants}
-              alt="Πυκνή βλάστηση σε μπετόνινο τοίχο"
+              alt="Εσωτερικός χώρος με πράσινο και ξύλινη οροφή"
               aspect="aspect-[4/5]"
               sizes="(max-width: 768px) 100vw, 30vw"
             />

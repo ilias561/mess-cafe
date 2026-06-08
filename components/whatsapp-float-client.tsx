@@ -1,13 +1,29 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import {
+  NEWSLETTER_CLOSE_EVENT,
+  NEWSLETTER_OPEN_EVENT,
+} from '@/lib/overlay-events'
 
 type Props = { whatsappNumber: string }
 
 export default function WhatsAppFloatClient({ whatsappNumber }: Props) {
   const pathname = usePathname()
-  const btnRef   = useRef<HTMLAnchorElement>(null)
+  const btnRef = useRef<HTMLAnchorElement>(null)
+  const [newsletterOpen, setNewsletterOpen] = useState(false)
+
+  useEffect(() => {
+    const onOpen = () => setNewsletterOpen(true)
+    const onClose = () => setNewsletterOpen(false)
+    window.addEventListener(NEWSLETTER_OPEN_EVENT, onOpen)
+    window.addEventListener(NEWSLETTER_CLOSE_EVENT, onClose)
+    return () => {
+      window.removeEventListener(NEWSLETTER_OPEN_EVENT, onOpen)
+      window.removeEventListener(NEWSLETTER_CLOSE_EVENT, onClose)
+    }
+  }, [])
 
   useEffect(() => {
     if (pathname !== '/') return
@@ -15,8 +31,8 @@ export default function WhatsAppFloatClient({ whatsappNumber }: Props) {
     if (!btn) return
 
     const update = () => {
-      // Hero section is 600vh; sticky viewport = 100vh → scrollable distance = 500vh
-      const heroScrollEnd = window.innerHeight * 5
+      // Hero is min-h-screen (~one viewport); fade in over ~80% of that scroll distance
+      const heroScrollEnd = window.innerHeight * 0.8
       const p = Math.min(1, window.scrollY / heroScrollEnd)
       // opacity: 0.12 at top → 1 after hero; scale: 0.5 → 1
       const opacity = 0.12 + p * 0.88
@@ -45,6 +61,7 @@ export default function WhatsAppFloatClient({ whatsappNumber }: Props) {
   }, [pathname])
 
   if (pathname === '/admin' || pathname.startsWith('/admin/')) return null
+  if (newsletterOpen) return null
 
   return (
     <a
@@ -53,7 +70,7 @@ export default function WhatsAppFloatClient({ whatsappNumber }: Props) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Επικοινωνία στο WhatsApp"
-      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-[opacity,transform] duration-500 hover:scale-110"
+      className="ui-interactive fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] right-[calc(1rem+env(safe-area-inset-right,0px))] z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_8px_24px_rgba(14,34,8,0.28)] md:bottom-6 md:right-6"
       style={{ transformOrigin: 'bottom right' }}
     >
       <svg viewBox="0 0 24 24" className="h-7 w-7 fill-white" aria-hidden>

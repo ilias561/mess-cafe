@@ -469,7 +469,7 @@ export default function Navigation() {
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   aria-label="Κλείσιμο μενού"
-                  className="ui-interactive flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-olive-deep text-charcoal hover:bg-olive-deep/90 active:bg-olive-deep/80"
+                  className="ui-interactive flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-olive-deep text-charcoal hover:bg-olive-deep/90 active:bg-olive-deep/80"
                 >
                   <X className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden />
                 </button>
@@ -539,7 +539,7 @@ export default function Navigation() {
                   href="https://www.instagram.com/m.e.s.s._ioannina/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ui-link inline-flex w-fit items-center gap-2 font-sans text-[13px] text-espresso/70 hover:text-espresso"
+                  className="ui-link inline-flex min-h-11 w-fit items-center gap-2 py-2 font-sans text-[13px] text-espresso/70 hover:text-espresso"
                 >
                   <Instagram className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden />
                   @m.e.s.s._ioannina

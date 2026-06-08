@@ -20,7 +20,7 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
       viewport={{ once: true, margin: '-60px' }}
       whileHover={{ y: -3 }}
       transition={{ duration: 0.7, ease: EASE }}
-      className="ui-focus-ring group/card relative overflow-hidden rounded-[3px] transition-shadow duration-150 hover:shadow-[0_14px_28px_rgba(43,43,40,0.12)]"
+      className="ui-card-elevated ui-focus-ring group group/card relative overflow-hidden rounded-[2px] transition-shadow duration-150 hover:shadow-[0_12px_32px_rgba(14,34,8,0.32)]"
     >
       <Link
         href={`/actions/${event.slug}`}
@@ -33,7 +33,7 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
             fill
             loading="lazy"
             sizes="(max-width: 768px) 100vw, 420px"
-            className={`object-cover transition-[transform,filter] duration-[700ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:scale-[1.05] group-hover/card:[filter:sepia(0.15)_saturate(1.1)] ${dimmed ? 'opacity-70' : ''}`}
+            className={`ui-img-hover group-hover/card:[filter:sepia(0.15)_saturate(1.1)] ${dimmed ? 'opacity-70' : ''}`}
             style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
@@ -41,11 +41,11 @@ export default function EventCard({ event, dimmed = false }: EventCardProps) {
             <span className="tabular-nums">{formatGreekDate(event.date)}</span>
           </div>
           <div className="absolute bottom-5 left-5 right-5 text-charcoal">
-            <p className="font-sans text-[10px] uppercase tracking-[0.18em] text-mustard">{event.categoryLabel}</p>
-            <h3 className="ui-link mt-2 font-serif text-[clamp(22px,2.6vw,30px)] leading-[1.1] tracking-[-0.01em]">
+            <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-mustard">{event.categoryLabel}</p>
+            <h3 className="ui-link u-balance mt-2 font-serif text-[clamp(22px,2.6vw,30px)] leading-[1.1] tracking-[-0.01em]">
               {event.title}
             </h3>
-            <span className="ui-link mt-3 inline-flex items-center gap-1 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal/90 underline decoration-terracotta underline-offset-[5px]">
+            <span className="ui-link mt-3 inline-flex items-center gap-1 font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal/90 underline decoration-terracotta underline-offset-[5px]">
               Μάθε περισσότερα →
             </span>
           </div>

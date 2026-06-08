@@ -49,8 +49,8 @@ function DietTags({ badges }: { badges?: MenuItem['badges'] }) {
 const reveal = (i = 0) => ({
   initial: { opacity: 0, y: 18 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-50px' },
-  transition: { duration: 0.55, ease: EASE, delay: Math.min(i, 6) * 0.05 },
+  viewport: { once: true, amount: 0.15 },
+  transition: { duration: 0.55, ease: EASE, delay: Math.min(i, 4) * 0.03 },
 })
 
 function DishCard({ item, index }: { item: MenuItem; index: number }) {
@@ -59,22 +59,22 @@ function DishCard({ item, index }: { item: MenuItem; index: number }) {
   return (
     <m.article
       {...reveal(index)}
-      className="group overflow-hidden rounded-2xl bg-white shadow-[0_6px_24px_rgba(20,48,15,0.10)] ring-1 ring-black/[0.04]"
+      className="ui-card-elevated group flex h-full flex-col overflow-hidden rounded-[2px] bg-white ring-1 ring-black/[0.04]"
     >
       {src && (
-        <div className="aspect-[4/3] overflow-hidden bg-[#e9e2d2]">
+        <div className="aspect-[16/10] overflow-hidden bg-[#e9e2d2] md:aspect-[4/3]">
           <img
             src={src}
             alt={item.name}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+            className="ui-img-hover h-full w-full object-cover"
           />
         </div>
       )}
-      <div className="p-5">
+      <div className="flex flex-1 flex-col p-4 md:p-5">
         <div className="flex items-baseline gap-2.5">
-          <h3 className="min-w-0 font-serif text-[20px] leading-snug tracking-tight" style={{ color: C.ink }}>
+          <h3 className="min-w-0 font-serif text-[19px] leading-snug tracking-tight md:text-[20px]" style={{ color: C.ink }}>
             {item.name}
             {signature && <span className="ml-1.5 align-middle text-[13px]" style={{ color: C.gold }}>✦</span>}
           </h3>
@@ -93,7 +93,7 @@ function DishCard({ item, index }: { item: MenuItem; index: number }) {
 function ListRow({ item, index }: { item: MenuItem; index: number }) {
   const signature = item.badges?.includes('signature')
   return (
-    <m.article {...reveal(index)} className="break-inside-avoid border-b border-black/[0.08] py-4 first:pt-0">
+    <m.article {...reveal(index)} className="break-inside-avoid border-b border-black/[0.08] py-3 first:pt-0 md:py-4">
       <div className="flex items-baseline gap-2.5">
         <h3 className="min-w-0 font-serif text-[19px] leading-snug tracking-tight md:text-[20px]" style={{ color: C.ink }}>
           {item.name}
@@ -136,11 +136,11 @@ function CategorySection({ category, index }: { category: MenuCategory; index: n
   const withMedia = category.items.filter((i) => i.image || i.video)
   const noMedia = category.items.filter((i) => !(i.image || i.video))
   return (
-    <section id={category.id} className="scroll-mt-24 px-6 py-16 md:px-12 md:py-20">
+    <section id={category.id} className="scroll-mt-24 px-6 py-12 md:px-12 md:py-20">
       <div className="mx-auto max-w-[1240px]">
         <m.div
           {...reveal()}
-          className="flex items-end gap-5 border-b border-black/10 pb-5 md:gap-7"
+          className="flex items-end gap-4 border-b border-black/10 pb-4 md:gap-7 md:pb-5"
         >
           <span className="font-serif text-[clamp(40px,6vw,68px)] font-light leading-[0.8]" style={{ color: C.gold }}>
             {String(index + 1).padStart(2, '0')}
@@ -157,13 +157,13 @@ function CategorySection({ category, index }: { category: MenuCategory; index: n
 
         {cards ? (
           <>
-            <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-10 md:gap-8 lg:grid-cols-3">
+            <div className="mt-6 grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 md:mt-10 md:gap-8 lg:grid-cols-3">
               {withMedia.map((item, i) => (
                 <DishCard key={item.name} item={item} index={i} />
               ))}
             </div>
             {noMedia.length > 0 && (
-              <div className="mt-10 border-t border-black/[0.08] pt-8 md:columns-2 md:gap-x-16">
+              <div className="mt-8 border-t border-black/[0.08] pt-6 md:mt-10 md:pt-8 md:columns-2 md:gap-x-16">
                 {noMedia.map((item, i) => (
                   <ListRow key={item.name} item={item} index={i} />
                 ))}
@@ -171,7 +171,7 @@ function CategorySection({ category, index }: { category: MenuCategory; index: n
             )}
           </>
         ) : (
-          <div className="mt-8 md:columns-2 md:gap-x-16">
+          <div className="mt-6 md:mt-8 md:columns-2 md:gap-x-16">
             {category.items.map((item, i) => (
               <ListRow key={item.name} item={item} index={i} />
             ))}

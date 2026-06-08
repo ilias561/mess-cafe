@@ -26,8 +26,8 @@ function itemMotionProps(index: number) {
   return {
     initial: { opacity: 0, y: 16 } as const,
     whileInView: { opacity: 1, y: 0 } as const,
-    viewport: { once: true, margin: '-40px' } as const,
-    transition: { duration: 0.55, ease: EASE, delay: index * 0.04 },
+    viewport: { once: true, amount: 0.15 } as const,
+    transition: { duration: 0.55, ease: EASE, delay: Math.min(index, 4) * 0.03 },
   }
 }
 
@@ -83,7 +83,7 @@ export function NutritionDisclosure({
 }) {
   return (
     <details className="group mt-4 border-t border-line/60 pt-3">
-      <summary className="flex cursor-pointer list-none items-center gap-2 font-sans text-[12px] font-medium tabular-nums tracking-wide text-olive/80 marker:hidden">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 font-sans text-[12px] font-medium tabular-nums tracking-wide text-olive/80 marker:hidden md:min-h-0">
         <span>{nutrition.calories} kcal</span>
         <span className="text-olive/45">· Διατροφικά</span>
         <svg
@@ -99,12 +99,33 @@ export function NutritionDisclosure({
   )
 }
 
+/** Always-visible nutrition panel (no toggle) for the dish cards. */
+export function NutritionPanel({
+  nutrition,
+  compact = false,
+  className = '',
+}: {
+  nutrition: Nutrition
+  compact?: boolean
+  className?: string
+}) {
+  return (
+    <div className={`border-t border-line/60 pt-3 ${className}`}>
+      <p className="mb-2.5 flex items-center gap-2 font-sans text-[12px] font-medium tabular-nums tracking-wide text-olive/80">
+        <span>{nutrition.calories} kcal</span>
+        <span className="text-olive/45">· Διατροφικά</span>
+      </p>
+      <MacroStrip nutrition={nutrition} compact={compact} />
+    </div>
+  )
+}
+
 export function MacroStrip({ nutrition, compact = false }: { nutrition: Nutrition; compact?: boolean }) {
   return (
     <dl className={`grid grid-cols-3 gap-x-4 gap-y-3 ${compact ? '' : 'sm:grid-cols-6'}`}>
       {MACRO_FIELDS.map(({ key, label, unit }) => (
         <div key={key} className="flex min-w-0 flex-col gap-0.5">
-          <dt className="truncate font-sans text-[9px] font-medium uppercase tracking-[0.14em] text-olive/70">
+          <dt className="truncate font-sans text-[9px] font-medium uppercase tracking-[0.16em] text-olive/70">
             {label}
           </dt>
           <dd className="font-sans text-[15px] font-medium tabular-nums text-charcoal">
@@ -210,7 +231,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
         playsInline
         preload="metadata"
         {...({ 'webkit-playsinline': 'true', 'x5-playsinline': 'true' } as Record<string, string>)}
-        className="h-full w-full object-cover"
+        className="h-full w-full object-contain"
         aria-label={item.name}
         onEnded={(e) => {
           e.currentTarget.pause()
@@ -224,7 +245,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
       <img
         src={item.image}
         alt={item.name}
-        className="block h-auto w-full rounded-[6px]"
+        className="block h-auto w-full rounded-[2px]"
         loading="lazy"
         decoding="async"
       />
@@ -247,9 +268,9 @@ export function MenuDishCard({
   return (
     <m.article
       {...itemMotionProps(index)}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-line/60 bg-bone-warm shadow-[0_6px_24px_rgba(14,34,8,0.35)]"
+      className="ui-card-elevated group flex h-full flex-col overflow-hidden rounded-[2px] border border-line/60 bg-bone-warm"
     >
-      <div className="aspect-[4/3] overflow-hidden bg-canopy-night">
+      <div className="aspect-[16/10] overflow-hidden bg-canopy-night md:aspect-[4/3]">
         {item.video ? (
           <MenuItemMedia item={item} />
         ) : (
@@ -258,23 +279,25 @@ export function MenuDishCard({
             alt={item.name}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+            className="ui-img-hover h-full w-full object-contain"
           />
         )}
       </div>
-      <div className="flex flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 md:p-5">
         {isSignature && <SignatureEyebrow />}
         <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-          <h3 className="min-w-0 font-serif text-[20px] italic leading-snug tracking-tight text-charcoal">
+          <h3 className="u-balance min-w-0 font-serif text-[19px] italic leading-snug tracking-tight text-charcoal md:text-[20px]">
             {item.name}
           </h3>
           <DietaryTags badges={item.badges} />
         </div>
         {item.desc && (
-          <p className="mt-2 font-sans text-[14px] leading-relaxed text-concrete">{item.desc}</p>
+          <p className="mt-1.5 font-sans text-[14px] leading-relaxed text-concrete md:mt-2">{item.desc}</p>
         )}
-        {item.benefit && <BenefitNote text={item.benefit} className="mt-3 text-[13px]" />}
-        {showNutrition && item.nutrition && <NutritionDisclosure nutrition={item.nutrition} compact />}
+        {item.benefit && <BenefitNote text={item.benefit} className="mt-2 text-[13px] md:mt-3" />}
+        {showNutrition && item.nutrition && (
+          <NutritionPanel nutrition={item.nutrition} compact className="mt-4 md:mt-5 lg:mt-auto" />
+        )}
       </div>
     </m.article>
   )
@@ -293,19 +316,19 @@ export function MenuListRow({
   return (
     <m.article
       {...itemMotionProps(index)}
-      className="relative border-b border-line/40 pb-5 transition-colors hover:bg-bone-warm/60 md:rounded-sm md:px-3 md:-mx-3 md:pb-5 before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-mustard before:opacity-0 before:transition-opacity hover:before:opacity-100"
+      className="relative border-b border-line/40 pb-4 transition-colors hover:bg-bone-warm/60 md:rounded-sm md:px-3 md:-mx-3 md:pb-5 before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-mustard before:opacity-0 before:transition-opacity hover:before:opacity-100"
     >
       {isSignature && <SignatureEyebrow />}
       <div className="flex items-baseline justify-between gap-4">
         <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-1">
-          <h3 className="font-serif text-[20px] italic leading-snug tracking-tight text-charcoal">
+          <h3 className="font-serif text-[19px] italic leading-snug tracking-tight text-charcoal md:text-[20px]">
             {item.name}
           </h3>
           <DietaryTags badges={item.badges} />
         </div>
         {showNutrition && item.nutrition && <CaloriesTag calories={item.nutrition.calories} />}
       </div>
-      <p className="mt-1.5 font-sans text-[13px] leading-relaxed text-concrete md:text-[14px]">
+      <p className="mt-1 font-sans text-[13px] leading-relaxed text-concrete md:mt-1.5 md:text-[14px]">
         {item.desc}
       </p>
       {item.benefit && <BenefitNote text={item.benefit} className="mt-2 text-[13px]" />}

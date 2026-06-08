@@ -113,7 +113,7 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
                 κοινωνικών δράσεων, τις οποίες θα βρείτε{' '}
                 <Link
                   href="/actions"
-                  className="ui-link font-medium text-charcoal"
+                  className="ui-link inline-flex min-h-11 items-center py-1 font-medium text-charcoal md:min-h-0 md:py-0"
                 >
                   παρακάτω
                 </Link>
@@ -139,12 +139,12 @@ export default function ActionsSection({ actionCards }: ActionsSectionProps) {
             </>
           )}
 
-          <div className="mt-20 grid grid-cols-12 md:mt-28">
+          <div className="mt-12 grid grid-cols-12 md:mt-28">
             <div className="col-span-12 flex items-center gap-5 md:col-span-7 md:col-start-2">
               <HairlineRule origin="left" className="w-16" />
               <Link
                 href="/actions"
-                className="ui-link font-sans text-[12px] uppercase tracking-[0.17em] text-charcoal hover:text-mustard"
+                className="ui-link inline-flex min-h-11 items-center py-2.5 font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal hover:text-mustard md:min-h-0 md:py-0"
               >
                 {hasMore
                   ? `Δες όλες τις δράσεις (${actionCards.length}) →`
@@ -180,7 +180,7 @@ function ActionSpread({
     <Reveal.Item>
       <Link
         href={`/actions/${card.slug}`}
-        className="group/spread mt-24 block grid grid-cols-1 gap-8 md:mt-36 md:grid-cols-12 md:gap-8"
+        className="group/spread mt-14 block grid grid-cols-1 gap-6 md:mt-36 md:grid-cols-12 md:gap-8"
       >
         <div className={`order-1 ${imageCol}`}>
           <MaskRevealBlock direction={side === 'left' ? 'left' : 'up'}>

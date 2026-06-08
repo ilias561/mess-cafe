@@ -6,7 +6,7 @@ import PreFooterCta from '@/components/pre-footer-cta'
 import CurtainReveal from '@/components/food-for-medicine/curtain-reveal'
 import ChoiceDoors from '@/components/food-for-medicine/choice-doors'
 import { ReleaseDivider } from '@/components/decor/ornaments'
-import BlogTagFilter from '@/components/blog/BlogTagFilter'
+import TipsCategoryFilter from '@/components/food-for-medicine/tips-category-filter'
 import TipsGrid from '@/components/blog/tips-grid'
 import MenuHeader from '@/components/menu/MenuHeader'
 import MenuAnchorNav from '@/components/menu/MenuAnchorNav'
@@ -23,9 +23,9 @@ const INSTAGRAM_URL = 'https://www.instagram.com/m.e.s.s._ioannina/'
 const firstPost = getAllPosts()[0]
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Φαγητό ως Φάρμακο — Μενού, συνταγές & κόλπα κουζίνας | M.E.S.S.',
+  title: 'Φαγητό ως Φάρμακο — Μενού, tips & κόλπα κουζίνας | M.E.S.S.',
   description:
-    'Το πλήρες μενού του M.E.S.S., συνταγές και κόλπα κουζίνας — όλα φτιαγμένα με τοπικά υλικά και τη φιλοσοφία «φαγητό ως φάρμακο».',
+    'Το πλήρες μενού του M.E.S.S., tips και κόλπα κουζίνας — όλα φτιαγμένα με τοπικά υλικά και τη φιλοσοφία «φαγητό ως φάρμακο».',
   path: '/food-for-medicine',
   ...(firstPost
     ? {
@@ -85,16 +85,16 @@ export default function BlogPage() {
 
       <ReleaseDivider label="Από την κουζίνα μας" />
 
-      <section id="recipes" className="scroll-mt-28 mt-14 border-t border-line/30 px-6 py-20 md:px-12 md:py-24">
+      <section id="tips" className="scroll-mt-28 mt-14 border-t border-line/30 px-6 py-20 md:px-12 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="type-section-md u-balance font-serif tracking-tight text-charcoal">
-            Συνταγές &amp; κόλπα κουζίνας με M.E.S.S.
+            Tips &amp; κόλπα κουζίνας
           </h2>
           <p className="mt-3 max-w-[56ch] font-sans text-[15px] leading-relaxed text-concrete">
             Πιάτα από το μενού μας, εξηγημένα με απλά βήματα και τα γιατί πίσω από κάθε υλικό.
           </p>
           <div className="mt-8">
-            <BlogTagFilter posts={posts} />
+            <TipsCategoryFilter posts={posts} />
           </div>
         </div>
       </section>
@@ -131,7 +131,7 @@ export default function BlogPage() {
                   </p>
                 </div>
               </div>
-              <span className="inline-flex shrink-0 items-center rounded-full bg-mustard px-7 py-3 font-sans text-sm font-medium text-ink-dark transition-colors duration-150 group-hover:bg-amber">
+              <span className="inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-full bg-mustard px-7 py-3 font-sans text-sm font-medium text-ink-dark transition-colors duration-150 group-hover:bg-amber">
                 Ακολούθησέ μας →
               </span>
             </a>
@@ -143,7 +143,7 @@ export default function BlogPage() {
         variant="mustard"
         eyebrow="ΜΗ ΧΑΣΕΙΣ ΕΠΟΜΕΝΑ"
         heading="Έλα να μαγειρέψουμε μαζί."
-        body="Κάθε εβδομάδα νέες συνταγές, νέα στο μενού και ιστορίες από την κουζίνα — πρώτα στο Instagram μας."
+        body="Κάθε εβδομάδα νέα tips & κόλπα, νέα στο μενού και ιστορίες από την κουζίνα — πρώτα στο Instagram μας."
         primaryLabel="Instagram"
         primaryHref={INSTAGRAM_URL}
         secondaryLabel="Η φιλοσοφία μας"

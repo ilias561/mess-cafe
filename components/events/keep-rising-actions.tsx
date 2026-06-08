@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { m, useReducedMotion } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import { formatGreekDate } from '@/lib/format-date'
+import { EASE } from '@/lib/motion'
 import type { Event } from '@/lib/events/events'
 import type { Settings } from '@/lib/settings'
 
@@ -35,7 +36,7 @@ export default function KeepRisingActions({
   return (
     <section className="bg-bone px-6 py-20 md:px-12 md:py-28">
       <div className="mx-auto max-w-[1100px]">
-        <p className="font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
+        <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">
           ΟΙ ΔΡΑΣΕΙΣ ΜΑΣ
         </p>
 
@@ -109,7 +110,7 @@ function TabButton({
       aria-selected={active}
       onClick={onClick}
       disabled={disabled}
-      className={`relative -mb-px px-4 py-3 font-sans text-[12px] uppercase tracking-[0.16em] transition-colors disabled:cursor-not-allowed disabled:opacity-30 ${
+      className={`relative -mb-px inline-flex min-h-[44px] items-center px-4 py-3 font-sans text-[12px] uppercase tracking-[0.16em] transition-colors disabled:cursor-not-allowed disabled:opacity-30 md:min-h-0 ${
         active ? 'text-charcoal' : 'text-charcoal/45 hover:text-charcoal/70'
       }`}
     >
@@ -117,7 +118,7 @@ function TabButton({
       <span className="ml-1.5 text-charcoal/35">{count}</span>
       <span
         aria-hidden
-        className={`absolute inset-x-0 -bottom-px h-[2px] origin-left bg-mustard transition-transform duration-300 ease-out ${
+        className={`absolute inset-x-0 -bottom-px h-[2px] origin-left bg-mustard transition-transform duration-250 ease-out ${
           active ? 'scale-x-100' : 'scale-x-0'
         }`}
       />
@@ -146,7 +147,7 @@ function ActionCard({
       initial={reduce ? false : { opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, ease: EASE }}
       className="grid grid-cols-1 items-center gap-7 md:grid-cols-2 md:gap-12"
     >
       <Link
@@ -158,11 +159,11 @@ function ActionCard({
           alt={event.coverAlt || `Δράση: ${event.title}`}
           fill
           sizes="(min-width: 768px) 50vw, 92vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          className="ui-img-hover object-cover"
           style={{ objectPosition: event.coverObjectPosition ?? 'center' }}
         />
         {variant === 'past' && (
-          <span className="absolute left-4 top-4 rounded-full bg-charcoal/65 px-3 py-1 font-sans text-[10px] uppercase tracking-[0.14em] text-white backdrop-blur-sm">
+          <span className="absolute left-4 top-4 rounded-full bg-charcoal/65 px-3 py-1 font-sans text-[10px] uppercase tracking-[0.16em] text-white backdrop-blur-sm">
             Ολοκληρώθηκε
           </span>
         )}
@@ -174,7 +175,7 @@ function ActionCard({
           <span className="text-terracotta">{event.categoryLabel}</span>
         </p>
         <h2 className="mt-3 font-serif text-[clamp(26px,3.4vw,38px)] leading-[1.06] tracking-[-0.02em] text-charcoal">
-          <Link href={href} className="transition-colors duration-300 hover:text-mustard">
+          <Link href={href} className="transition-colors duration-250 hover:text-mustard">
             {event.title}
           </Link>
         </h2>
@@ -186,7 +187,7 @@ function ActionCard({
             <>
               <Link
                 href={href}
-                className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-ink-dark hover:bg-amber hover:shadow-md"
+                className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-6 py-3 font-sans text-[12px] uppercase tracking-[0.16em] text-ink-dark hover:bg-amber"
               >
                 Κράτηση →
               </Link>
@@ -194,7 +195,7 @@ function ActionCard({
                 href={`https://wa.me/${waPhone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.18em] text-charcoal hover:shadow-md"
+                className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal"
               >
                 WhatsApp
               </a>
@@ -202,7 +203,7 @@ function ActionCard({
           ) : (
             <Link
               href={href}
-              className="ui-link font-sans text-[13px] uppercase tracking-[0.14em] text-charcoal hover:text-mustard"
+              className="ui-link inline-flex min-h-[44px] items-center font-sans text-[13px] uppercase tracking-[0.16em] text-charcoal hover:text-mustard md:min-h-0"
             >
               Δες τη δράση →
             </Link>

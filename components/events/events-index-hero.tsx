@@ -72,13 +72,13 @@ export default function EventsIndexHero({
             >
               <a
                 href={proposeHref}
-                className="font-sans text-[14px] text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2"
+                className="inline-flex min-h-[44px] items-center font-sans text-[14px] text-charcoal underline decoration-terracotta underline-offset-[5px] hover:decoration-2 md:min-h-0"
               >
                 Πρότεινε δράση →
               </a>
               <Link
                 href="/#map"
-                className="font-sans text-[14px] text-charcoal underline decoration-mustard underline-offset-[5px] hover:decoration-2"
+                className="inline-flex min-h-[44px] items-center font-sans text-[14px] text-charcoal underline decoration-mustard underline-offset-[5px] hover:decoration-2 md:min-h-0"
               >
                 Δες πού είμαστε →
               </Link>
@@ -117,7 +117,7 @@ export default function EventsIndexHero({
             <m.div {...fadeUpDelayed(0.02)} className="mt-3">
               <Link
                 href={`/actions/${nextEvent.slug}`}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-bone-warm px-3 py-[7px] font-sans text-[11px] tracking-[0.02em] transition-colors hover:border-charcoal/40"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-bone-warm px-4 py-2 font-sans text-[11px] tracking-[0.02em] transition-colors hover:border-charcoal/40 md:min-h-0 md:px-3 md:py-[7px]"
               >
                 <span className="h-[5px] w-[5px] rounded-full bg-terracotta" />
                 <span className="text-concrete">
@@ -152,7 +152,7 @@ export default function EventsIndexHero({
                 aria-pressed={activeCategory === null}
                 onClick={() => onCategoryChange(null)}
                 className={cn(
-                  'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
+                  'ui-interactive inline-flex min-h-[44px] items-center gap-[5px] rounded-full border px-4 py-2 font-sans text-[11px] md:min-h-0 md:px-[11px] md:py-[5px]',
                   activeCategory === null
                     ? 'border-charcoal/40 bg-olive-deep text-charcoal'
                     : 'border-line text-charcoal hover:border-charcoal/40',
@@ -171,7 +171,7 @@ export default function EventsIndexHero({
                   aria-pressed={activeCategory === label}
                   onClick={() => onCategoryChange(label)}
                   className={cn(
-                    'ui-interactive inline-flex items-center gap-[5px] rounded-full border px-[11px] py-[5px] font-sans text-[11px]',
+                    'ui-interactive inline-flex min-h-[44px] items-center gap-[5px] rounded-full border px-4 py-2 font-sans text-[11px] md:min-h-0 md:px-[11px] md:py-[5px]',
                     activeCategory === label
                       ? 'border-charcoal/40 bg-olive-deep text-charcoal'
                       : 'border-line text-charcoal hover:border-charcoal/40',
@@ -189,7 +189,7 @@ export default function EventsIndexHero({
           <m.div {...fadeUpDelayed(0.11)} className="mt-3">
             <a
               href="#upcoming"
-              className="ui-interactive inline-block rounded-full bg-mustard px-[15px] py-[9px] font-sans text-[11px] uppercase tracking-[0.14em] text-ink-dark hover:bg-amber"
+              className="ui-interactive inline-flex min-h-[44px] items-center rounded-full bg-mustard px-5 py-3 font-sans text-[11px] uppercase tracking-[0.14em] text-ink-dark hover:bg-amber md:min-h-0 md:px-[15px] md:py-[9px]"
             >
               Δες πρόγραμμα ↓
             </a>
