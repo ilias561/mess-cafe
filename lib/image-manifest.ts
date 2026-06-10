@@ -65,13 +65,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/111/mess-internal-0010--w480.avif 480w, /images/111/mess-internal-0010--w768.avif 768w, /images/111/mess-internal-0010--w1200.avif 1200w, /images/111/mess-internal-0010--w1600.avif 1600w, /images/111/mess-internal-0010--w2000.avif 2000w",
     "webpSrcSet": "/images/111/mess-internal-0010--w480.webp 480w, /images/111/mess-internal-0010--w768.webp 768w, /images/111/mess-internal-0010--w1200.webp 1200w, /images/111/mess-internal-0010--w1600.webp 1600w, /images/111/mess-internal-0010--w2000.webp 2000w"
   },
-  "/images/111/mess-internal-0014.jpg": {
-    "width": 2000,
-    "height": 1333,
-    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAsAA4BaJbACdAYwTFyP6oZwAP6tRfLoIyXkUVBJTAKsP5ITFox5VmQP60CoT1MXsYCtanqa3E1UZnsrLq4Snwb1nvUeCbIUgBeyZGJeIT7iNAAAAA==",
-    "avifSrcSet": "/images/111/mess-internal-0014--w480.avif 480w, /images/111/mess-internal-0014--w768.avif 768w, /images/111/mess-internal-0014--w1200.avif 1200w, /images/111/mess-internal-0014--w1600.avif 1600w, /images/111/mess-internal-0014--w2000.avif 2000w",
-    "webpSrcSet": "/images/111/mess-internal-0014--w480.webp 480w, /images/111/mess-internal-0014--w768.webp 768w, /images/111/mess-internal-0014--w1200.webp 1200w, /images/111/mess-internal-0014--w1600.webp 1600w, /images/111/mess-internal-0014--w2000.webp 2000w"
-  },
   "/images/111/mess-internal-0015.jpg": {
     "width": 2000,
     "height": 1333,
@@ -113,13 +106,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdMoBOACN6BKO1oP6vwSAmNcAA/CWEvLNseXf7K6kpsfJF+ayrR8Acc5ER3cCF3aoeaEyINB2QHJ7n7Do7xlKnwNPR73ykKneSWaaubIKVKkbSxBgTSAat26MtLXeceG4w7ZvfE6hOnS/p9IfBJWjy7bYwf7GjnxFsWvxGtSDwgUsc0ikmJE+9mPvXIIqSJNpvum4AAA==",
     "avifSrcSet": "/images/111/mess-internal-0023--w480.avif 480w, /images/111/mess-internal-0023--w768.avif 768w, /images/111/mess-internal-0023--w1200.avif 1200w, /images/111/mess-internal-0023--w1500.avif 1500w",
     "webpSrcSet": "/images/111/mess-internal-0023--w480.webp 480w, /images/111/mess-internal-0023--w768.webp 768w, /images/111/mess-internal-0023--w1200.webp 1200w, /images/111/mess-internal-0023--w1500.webp 1500w"
-  },
-  "/images/111/mess-internal-0024.jpg": {
-    "width": 2000,
-    "height": 1333,
-    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJagC7ADdIke3JQAA/sJtOzeRoadfIoe4wbw90qWELdtMyG2ry6fBWPHpDB3390/4MXyM7qsgBmhH9wYUKQ8QLcccnfYXz/35QAGa4CQAAA==",
-    "avifSrcSet": "/images/111/mess-internal-0024--w480.avif 480w, /images/111/mess-internal-0024--w768.avif 768w, /images/111/mess-internal-0024--w1200.avif 1200w, /images/111/mess-internal-0024--w1600.avif 1600w, /images/111/mess-internal-0024--w2000.avif 2000w",
-    "webpSrcSet": "/images/111/mess-internal-0024--w480.webp 480w, /images/111/mess-internal-0024--w768.webp 768w, /images/111/mess-internal-0024--w1200.webp 1200w, /images/111/mess-internal-0024--w1600.webp 1600w, /images/111/mess-internal-0024--w2000.webp 2000w"
   },
   "/images/111/mess-internal-0030.jpg": {
     "width": 1600,
@@ -380,55 +366,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/menu-vegan-poke--w480.avif 480w, /images/menu-vegan-poke--w768.avif 768w, /images/menu-vegan-poke--w1024.avif 1024w",
     "webpSrcSet": "/images/menu-vegan-poke--w480.webp 480w, /images/menu-vegan-poke--w768.webp 768w, /images/menu-vegan-poke--w1024.webp 1024w"
   },
-  "/images/menu/drink-cucumber-2-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACxG1yB032BVsJRUfbC7XYAAP7wy0hEGYZqVWw6feQ8EnSNVSJJC6/GTjh1KaKsf3re+LoVqDNfbvrGMWI2UEKyTbngamjU7zq+qm/yteEZOj8DqK4VyYm9rCy3d/3rkpgbOrtR8Zn+zuAAAA==",
-    "avifSrcSet": "/images/menu/drink-cucumber-2-poster--w480.avif 480w, /images/menu/drink-cucumber-2-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-cucumber-2-poster--w480.webp 480w, /images/menu/drink-cucumber-2-poster--w720.webp 720w"
-  },
-  "/images/menu/drink-cucumber-herbs-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdL1yB032BV0s4BOj5X8AA/vDLSEQZhmpVbDp95DwSdI1VIkkLr8ZOOSIeHNBVhi9e7citnm+pZXhzJkAJgi1lhbeKhmOZJWpU0SPgt49MCQ6VPDJCeZeX6F7UrLPTWG9OEO2Lf3tX4WFgAA==",
-    "avifSrcSet": "/images/menu/drink-cucumber-herbs-poster--w480.avif 480w, /images/menu/drink-cucumber-herbs-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-cucumber-herbs-poster--w480.webp 480w, /images/menu/drink-cucumber-herbs-poster--w720.webp 720w"
-  },
-  "/images/menu/drink-lillet-spritz-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdL1yB033didya80fMZWgAAP7wy0hEGYZqVWxSbtJ7lRGnPiyVd82iZsOc/M3tFfwt5lEbR9XjPJ8q0o76cSwlHQ4Ov8ltoTAJxkJPtykm8edm4qVjYAr0wybHWKeI7NNDx+IN87PmQIl1AAAA",
-    "avifSrcSet": "/images/menu/drink-lillet-spritz-poster--w480.avif 480w, /images/menu/drink-lillet-spritz-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-lillet-spritz-poster--w480.webp 480w, /images/menu/drink-lillet-spritz-poster--w720.webp 720w"
-  },
-  "/images/menu/drink-lillet-strawberry-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdL1yCFKNZq5Yfq1m/Q5MgAAD+8MtIRBmGalVsOn3id9Wyl8SDodCWEzONX0tBm+TFEIvm/rPS/S99E6m3gGD975zizZ6KQmAR+MWqoPALiB42HblJlIXFoRLlBw9NYb04Q9qSh57du5NowAAA",
-    "avifSrcSet": "/images/menu/drink-lillet-strawberry-poster--w480.avif 480w, /images/menu/drink-lillet-strawberry-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-lillet-strawberry-poster--w480.webp 480w, /images/menu/drink-lillet-strawberry-poster--w720.webp 720w"
-  },
-  "/images/menu/drink-pink-low-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAACQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoC2AAjwhmR0WFCgIvLdCgAA/u6xZPloch9YgGklHSFoVp95++tMLCzQSVVOailcGY99q6LfwqzrJpOX5Xe273LpENN4PNHO/IaJ7l0LAi4rzFk5A6xJJ3B12WraMDohFKWY08SApJJOt59mBRl8YtAA",
-    "avifSrcSet": "/images/menu/drink-pink-low-poster--w480.avif 480w, /images/menu/drink-pink-low-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-pink-low-poster--w480.webp 480w, /images/menu/drink-pink-low-poster--w720.webp 720w"
-  },
-  "/images/menu/drink-red-low-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAADQAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdABwbTrXrKWxjAHAA/ux9EFs7a9HZ43UKsTS0IE8T4ft2NKwY2Djv52FgJv+oYUGJ9RlE7ozT5Q5odcuz8RbIKgIAyZqck3KNNnBYYQGbNUaAo8Afbo3sMFQx2YkG5mlsinPvWPAA",
-    "avifSrcSet": "/images/menu/drink-red-low-poster--w480.avif 480w, /images/menu/drink-red-low-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-red-low-poster--w480.webp 480w, /images/menu/drink-red-low-poster--w720.webp 720w"
-  },
-  "/images/menu/drink-white-lemon-poster.jpg": {
-    "width": 720,
-    "height": 966,
-    "blurDataURL": "data:image/webp;base64,UklGRpQAAABXRUJQVlA4IIgAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoADT5WSCiaE67Jp09oAAP7sEUW87chKN/843GhM+TDOdGkrmOcyB8Bmce3i9KcdyfYZHq5s3qqENOsU2ys9rgHDA6HAbnrB1USQI8iuqKL2+fZ4Agqp7A7ozCpvEGmJZRi3lrrofwDXcAAA",
-    "avifSrcSet": "/images/menu/drink-white-lemon-poster--w480.avif 480w, /images/menu/drink-white-lemon-poster--w720.avif 720w",
-    "webpSrcSet": "/images/menu/drink-white-lemon-poster--w480.webp 480w, /images/menu/drink-white-lemon-poster--w720.webp 720w"
-  },
   "/images/menu/drink-yellow-lemon-poster.jpg": {
     "width": 720,
     "height": 966,
@@ -505,13 +442,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAABQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoAvQBrCztWP1XuAP2cAAP7wy97EXq8PTp+JSL0x0UjGlfSCb7+uFL4GQdDomtU7UBXgIrYh0zt/mM2qEiuG7a0o76cR3xS2hbV05CPgngFvOFIb897loJ14jCyeGQfH0nFyBVxsprvJmAck57sNMXpDAAA=",
     "avifSrcSet": "/images/menu/kokteil-0003--w480.avif 480w, /images/menu/kokteil-0003--w768.avif 768w, /images/menu/kokteil-0003--w1200.avif 1200w, /images/menu/kokteil-0003--w1600.avif 1600w",
     "webpSrcSet": "/images/menu/kokteil-0003--w480.webp 480w, /images/menu/kokteil-0003--w768.webp 768w, /images/menu/kokteil-0003--w1200.webp 1200w, /images/menu/kokteil-0003--w1600.webp 1600w"
-  },
-  "/images/menu/kokteil-0004.jpg": {
-    "width": 1600,
-    "height": 2133,
-    "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoCGACQL1Uyc++LTO3JQMoAA/vDJcZHSM7e83QBhRL8ru0Ik88eLDDNbdt5gu7E54xqFVDfdZ4EsH0281AxkzwQLXB0O6SXJgqcqgMNo5d9gzT3UBKsAsVKByXiqyytp/FoeNF/iC4vDYT6EAAA=",
-    "avifSrcSet": "/images/menu/kokteil-0004--w480.avif 480w, /images/menu/kokteil-0004--w768.avif 768w, /images/menu/kokteil-0004--w1200.avif 1200w, /images/menu/kokteil-0004--w1600.avif 1600w",
-    "webpSrcSet": "/images/menu/kokteil-0004--w480.webp 480w, /images/menu/kokteil-0004--w768.webp 768w, /images/menu/kokteil-0004--w1200.webp 1200w, /images/menu/kokteil-0004--w1600.webp 1600w"
   },
   "/images/menu/kokteil-0005.jpg": {
     "width": 1600,
