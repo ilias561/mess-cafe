@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Navigation from '@/components/navigation'
+import StaticPicture from '@/components/static-picture'
 import ActionsHeroHeader from '@/components/events/actions-hero-header'
 import KeepRisingActions from '@/components/events/keep-rising-actions'
 import FooterSection from '@/components/footer-section'
@@ -34,11 +35,12 @@ export default function ActionsPage() {
       <Navigation />
       <ActionsHeroHeader nextEvent={featured} />
       <div className="relative w-full overflow-hidden" style={{ height: 'clamp(250px, 40vw, 500px)' }}>
-        <img
+        <StaticPicture
           src="/images/111/mess-internal-0034.jpg"
           alt="Ο εσωτερικός χώρος M.E.S.S. με πινακίδα #Keep Rising"
           loading="lazy"
           decoding="async"
+          sizes="100vw"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </div>

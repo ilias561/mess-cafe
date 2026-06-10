@@ -157,10 +157,10 @@ const PHILOSOPHY_LEAVES = buildLeaves()
 
 function LeafImg({
   name,
-  w,
   filter = LEAF_FILTER,
 }: {
   name: string
+  /** Accepted for caller symmetry; rendering always uses the w480 variant (see below). */
   w: number
   filter?: string
 }) {

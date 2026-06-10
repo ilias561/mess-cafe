@@ -47,7 +47,7 @@ export const menuData: MenuCategory[] = [
         name: 'Spread Mix',
         desc: 'Επιλογή από spreads και ψωμί της ημέρας.',
         price: '6.5€',
-        image: '/images/menu/piata-0013.jpg',
+        image: '/images/menu/piata-0018.jpg',
         nutrition: { calories: 280, protein: 7, carbs: 38, fat: 11, sugar: 5, fiber: 3 },
         benefit:
           'Τα σπιτικά spreads με ψωμί προσφέρουν ενέργεια, φυτικές ίνες και απαραίτητα θρεπτικά συστατικά για ξεκίνημα της ημέρας.',
@@ -67,7 +67,7 @@ export const menuData: MenuCategory[] = [
         desc: '3 υλικά της επιλογής σας.',
         price: '7€',
         badges: ['vegetarian'],
-        image: '/images/menu/piata-0018.jpg',
+        image: '/images/menu/piata-0013.jpg',
         nutrition: { calories: 340, protein: 19, carbs: 7, fat: 26, sugar: 2, fiber: 1 },
         benefit: 'Τα αυγά παρέχουν χολίνη και λουτεΐνη που προάγουν την υγεία του εγκεφάλου και των ματιών.',
       },
@@ -76,7 +76,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Προζυμένιο ψωμί, parmigiana, σέβρ, γρούγιερ, μανιτάρια πλευρώτους. Συνοδεύεται με chutney μάνγκο.',
         price: '7€',
         badges: ['vegetarian'],
-        image: '/images/menu/piata-0020.jpg',
+        image: '/images/menu/piata-0015.jpg',
         nutrition: { calories: 480, protein: 22, carbs: 36, fat: 28, sugar: 8, fiber: 3 },
         benefit:
           'Τα μανιτάρια πλευρώτους ενισχύουν το ανοσοποιητικό και συνδυαστικά με τυριά παρέχουν ασβέστιο και βιταμίνη D.',
@@ -94,7 +94,7 @@ export const menuData: MenuCategory[] = [
         name: 'Apaki On Toast',
         desc: 'Προζυμένιο ψωμί, apaki, αυγό, ντοματίνια, ρόκα.',
         price: '10€',
-        image: '/images/menu/piata-0015.jpg',
+        image: '/images/menu/piata-0028.jpg',
         nutrition: { calories: 390, protein: 22, carbs: 34, fat: 18, sugar: 4, fiber: 3 },
         benefit:
           'Το apaki, πλούσιο σε πρωτεΐνη, μαζί με ρόκα και ντοματίνια προσφέρουν σίδηρο, αντιοξειδωτικά και ζωτική ενέργεια.',
@@ -112,7 +112,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Άγριο ρύζι τηγανισμένο σε λάδι καρύδας, γλυκοπατάτα, αράκας, καλαμπόκι, ρόκα, φασόλια κόκκινα, φρέσκο κρεμμύδι, σπόροι από μαύρο κύμινο.',
         price: '8€',
         badges: ['vegan'],
-        image: '/images/menu/piata-0028.jpg',
+        image: '/images/menu-vegan-poke.jpg',
         nutrition: { calories: 430, protein: 12, carbs: 68, fat: 13, sugar: 9, fiber: 11 },
         benefit:
           'Το άγριο ρύζι, τα φασόλια και η γλυκοπατάτα παρέχουν φυτικές ίνες, φυτική πρωτεΐνη και αντιφλεγμονώδη συστατικά.',
@@ -122,7 +122,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Αυγό ποσέ, μπέικον, αβοκάντο, μανιτάρια, ντοματίνια, ρόκα, προζυμένιο ψωμί με μυρωδικά.',
         price: '9€',
         badges: ['signature'],
-        image: '/images/menu/piata-0022.jpg',
+        image: '/images/menu/piata-0020.jpg',
         nutrition: { calories: 520, protein: 26, carbs: 32, fat: 31, sugar: 4, fiber: 5 },
         benefit:
           'Ο συνδυασμός αυγού, αβοκάντο και μανιταριών προσφέρει πρωτεΐνη, υγιή λιπαρά και βιταμίνες του συμπλέγματος Β.',
@@ -132,7 +132,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Άγριο ρύζι τηγανισμένο σε λάδι καρύδας, κοτόπουλο τεριγιάκι, καρότο, λάχανο κόκκινο, κρεμμύδι, ραπανάκι, κολοκύθι, αυγό ποσέ, άσπρο και μαύρο σουσάμι.',
         price: '11€',
         badges: ['signature'],
-        image: '/images/menu/piata-0025.jpg',
+        image: '/images/menu/piata-0022.jpg',
         nutrition: { calories: 580, protein: 36, carbs: 58, fat: 18, sugar: 10, fiber: 6 },
         benefit:
           'Το κοτόπουλο τεριγιάκι με άγριο ρύζι και λαχανικά προσφέρουν πλήρη πρωτεΐνη, αντιοξειδωτικά και ενέργεια για όλη την ημέρα.',
@@ -141,7 +141,7 @@ export const menuData: MenuCategory[] = [
         name: 'Chicken Pineapple Poke Bowl',
         desc: 'Κοτόπουλο, ανανάς, ρύζι, λαχανικά, σως τροπική.',
         price: '12€',
-        image: '/images/menu/piata-0031.jpg',
+        image: '/images/menu/piata-0025.jpg',
         nutrition: { calories: 540, protein: 32, carbs: 62, fat: 14, sugar: 16, fiber: 5 },
         benefit:
           'Ο ανανάς περιέχει βρομελαΐνη που βοηθά την πέψη, ενώ το κοτόπουλο και το ρύζι δίνουν ισορροπημένη ενέργεια.',
@@ -336,7 +336,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Blueberries, χειροποίητο γάλα αμυγδάλου, μπανάνα, μέλι.',
         price: '6€',
         badges: ['vegetarian'],
-        video: '/images/menu/drink-pink-low.mp4',
+        image: '/images/menu/kokteil-0008.jpg',
         nutrition: { calories: 240, protein: 4, carbs: 44, fat: 7, sugar: 30, fiber: 5 },
         benefit:
           'Τα blueberries και η μπανάνα παρέχουν ανθοκυανίνες, κάλιο και φυσικά σάκχαρα για ενέργεια και προστασία του εγκεφάλου.',
@@ -355,7 +355,7 @@ export const menuData: MenuCategory[] = [
         name: 'Fresh O.J.',
         desc: 'Φρεσκοστυμμένος χυμός πορτοκαλιού.',
         price: '5€',
-        video: '/images/menu/drink-lillet-spritz.mp4',
+        image: '/images/menu/kokteil-0007.jpg',
         nutrition: { calories: 120, protein: 2, carbs: 28, fat: 0, sugar: 22, fiber: 1 },
         benefit:
           'Ο φρεσκοστυμμένος χυμός πορτοκαλιού είναι πλούσιος σε βιταμίνη C και βιοφλαβονοειδή που ενισχύουν το ανοσοποιητικό.',
@@ -364,7 +364,7 @@ export const menuData: MenuCategory[] = [
         name: 'Homemade Pink Lemonade',
         desc: 'Σπιτική ροζ λεμονάδα.',
         price: '4€',
-        video: '/images/menu/drink-lillet-strawberry.mp4',
+        image: '/images/menu/kokteil-0006.jpg',
         nutrition: { calories: 110, protein: 0, carbs: 28, fat: 0, sugar: 26, fiber: 0 },
         benefit: 'Η σπιτική λεμονάδα με λεμόνι παρέχει βιταμίνη C και αλκαλοποιεί τον οργανισμό για φρεσκάδα και ενυδάτωση.',
       },
@@ -372,7 +372,7 @@ export const menuData: MenuCategory[] = [
         name: 'Natural Pink Lemonade',
         desc: 'Φυσική ροζ λεμονάδα.',
         price: '4.5€',
-        video: '/images/menu/drink-white-lemon.mp4',
+        image: '/images/menu/kokteil-0001.jpg',
         nutrition: { calories: 100, protein: 0, carbs: 25, fat: 0, sugar: 23, fiber: 0 },
         benefit:
           'Η φυσική ροζ λεμονάδα χωρίς τεχνητά πρόσθετα προσφέρει βιταμίνη C και αντιοξειδωτικά ανθοκυανίνης για ενυδάτωση.',
@@ -381,7 +381,7 @@ export const menuData: MenuCategory[] = [
         name: 'Mixed Juice',
         desc: 'Μείγμα εποχιακών φρούτων.',
         price: '6€',
-        video: '/images/menu/drink-red-low.mp4',
+        image: '/images/menu/kokteil-0003.jpg',
         nutrition: { calories: 140, protein: 1, carbs: 34, fat: 0, sugar: 28, fiber: 2 },
         benefit:
           'Ο χυμός εποχιακών φρούτων προσφέρει ποικιλία βιταμινών, μετάλλων και αντιοξειδωτικών για ολιστική θρέψη.',
@@ -390,7 +390,7 @@ export const menuData: MenuCategory[] = [
         name: 'Kombucha',
         desc: 'Ζυμωμένο τσάι, ελαφρύ και δροσιστικό.',
         price: '4€',
-        video: '/images/menu/drink-cucumber-herbs.mp4',
+        image: '/images/menu/kokteil-0005.jpg',
         nutrition: { calories: 40, protein: 0, carbs: 9, fat: 0, sugar: 6, fiber: 0 },
         benefit:
           'Το kombucha περιέχει ζωντανά προβιοτικά, οργανικά οξέα και αντιοξειδωτικά που υποστηρίζουν την υγεία του εντέρου και της πέψης.',
@@ -408,7 +408,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Χειροποίητο με ελάχιστη ζάχαρη.',
         price: '2.5€',
         badges: ['vegetarian'],
-        image: '/images/menu/glyka-0001.jpg',
+        image: '/images/menu/glyka-0006.jpg',
         nutrition: { calories: 210, protein: 4, carbs: 36, fat: 7, sugar: 14, fiber: 2 },
         benefit: 'Η χειροποίητη μπανανόπιτα με ελάχιστη ζάχαρη παρέχει κάλιο, φυσικά σάκχαρα και ίνες για σταθερή ενέργεια.',
       },
@@ -417,7 +417,6 @@ export const menuData: MenuCategory[] = [
         desc: 'Σπόροι chia, φυτικό γάλα, εποχιακά φρούτα.',
         price: '4€',
         badges: ['vegan'],
-        image: '/images/menu/glyka-0002.jpg',
         nutrition: { calories: 260, protein: 7, carbs: 32, fat: 12, sugar: 14, fiber: 10 },
         benefit:
           'Οι σπόροι chia είναι πλούσιοι σε ωμέγα-3 λιπαρά οξέα, ασβέστιο και ίνες που προάγουν κορεσμό και υγεία εντέρου.',
@@ -427,7 +426,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Χωρίς ψήσιμο, ελαφρύ και δροσιστικό.',
         price: '4€',
         badges: ['vegetarian'],
-        image: '/images/menu/glyka-0003.jpg',
+        image: '/images/menu/glyka-0001.jpg',
         nutrition: { calories: 310, protein: 6, carbs: 28, fat: 19, sugar: 18, fiber: 1 },
         benefit:
           'Το no-bake cheesecake διατηρεί τα ενεργά έλαια και τα θρεπτικά συστατικά της βάσης του, προσφέροντας γλυκιά απόλαυση με ελαφρύ προφίλ.',
@@ -437,7 +436,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Με γλυκοπατάτα, χουρμάδες, χωρίς ζάχαρη.',
         price: '3.5€',
         badges: ['vegan'],
-        image: '/images/menu/glyka-0004.jpg',
+        image: '/images/menu/glyka-0005.jpg',
         nutrition: { calories: 290, protein: 5, carbs: 48, fat: 10, sugar: 22, fiber: 6 },
         benefit:
           'Η γλυκοπατάτα και οι χουρμάδες αντικαθιστούν τη ζάχαρη προσφέροντας φυτικές ίνες, β-καροτίνη και φυσική γλυκύτητα.',

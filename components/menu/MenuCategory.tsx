@@ -4,7 +4,7 @@ import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import type { MenuCategory as MenuCategoryType, MenuItem as MenuItemType } from '@/lib/menu-data'
 import { extras } from '@/lib/menu-data'
-import { MenuDishCard, MenuListRow } from './MenuItem'
+import { BenefitNote, DietaryTags, MenuDishCard, MenuItemMedia, MenuListRow } from './MenuItem'
 
 function ExtrasBox({ categoryId }: { categoryId: string }) {
   if (categoryId === 'brunch') {
@@ -73,6 +73,42 @@ function hasMedia(i: MenuItemType) {
   return Boolean(i.image || i.video)
 }
 
+/** Full-width editorial band for the one item that carries a video: the clip
+ *  plays once when scrolled into view, the rest of the category stays photos. */
+function FeaturedDrink({ item }: { item: MenuItemType }) {
+  return (
+    <m.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: EASE }}
+      className="ui-card-elevated mt-8 overflow-hidden rounded-[2px] border border-line/60 bg-canopy-night md:mt-10 md:grid md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+    >
+      <div className="relative aspect-[4/5] sm:aspect-[3/4] md:aspect-auto md:min-h-[440px] lg:min-h-[520px]">
+        {/* The drink sits in the lower third of the clip — bias the crop there. */}
+        <MenuItemMedia item={item} className="absolute inset-0 h-full w-full object-cover object-[50%_72%]" />
+      </div>
+      <div className="flex flex-col justify-center gap-4 p-7 sm:p-9 md:gap-5 md:p-12 lg:p-16">
+        <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard">✦ Signature</p>
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+          <h3 className="u-balance min-w-0 font-serif text-[clamp(30px,4.5vw,46px)] italic leading-[1.05] tracking-tight text-charcoal">
+            {item.name}
+          </h3>
+          <DietaryTags badges={item.badges} />
+        </div>
+        {item.desc && (
+          <p className="max-w-[48ch] font-sans text-[15px] leading-relaxed text-concrete">{item.desc}</p>
+        )}
+        {item.benefit && (
+          <div className="border-t border-line/60 pt-4 md:pt-5">
+            <BenefitNote text={item.benefit} className="max-w-[52ch] text-[14px]" />
+          </div>
+        )}
+      </div>
+    </m.div>
+  )
+}
+
 function ListGroup({
   items,
   className = '',
@@ -105,17 +141,29 @@ function CategoryBody({
     return <ListGroup items={category.items} className="mt-10" showNutrition={showNutrition} />
   }
 
+  // One item with a video becomes the category's featured introduction;
+  // everything else renders as photo cards.
+  const featured = media.find((i) => i.video)
+  const cards = featured ? media.filter((i) => i !== featured) : media
+
   // Avoid a lone orphan card in the last row: a 3-col grid leaves 1 behind when
   // count % 3 === 1 (e.g. 4 → 3+1, 7 → 3+3+1). Bump those to 4 columns.
-  const lgCols = media.length % 3 === 1 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+  const lgCols = cards.length % 3 === 1 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
 
   return (
     <>
-      <div className={`mt-8 grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 md:mt-10 md:gap-8 ${lgCols}`}>
-        {media.map((item, i) => (
-          <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
-        ))}
-      </div>
+      {featured && <FeaturedDrink item={featured} />}
+      {cards.length > 0 && (
+        <div
+          className={`grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 md:gap-8 ${lgCols} ${
+            featured ? 'mt-5 md:mt-8' : 'mt-8 md:mt-10'
+          }`}
+        >
+          {cards.map((item, i) => (
+            <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
+          ))}
+        </div>
+      )}
       {noMedia.length > 0 && (
         <ListGroup
           items={noMedia}

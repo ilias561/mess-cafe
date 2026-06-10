@@ -2,6 +2,7 @@
 
 import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
+import StaticPicture from '@/components/static-picture'
 import { ingredientStandards } from '@/lib/ingredient-standards'
 
 export default function IngredientStandards() {
@@ -36,12 +37,13 @@ export default function IngredientStandards() {
               className="ui-card-elevated group overflow-hidden rounded-[2px] border border-line/60 bg-bone-warm"
             >
               <div className="aspect-[16/10] w-full overflow-hidden bg-canopy-night">
-                <img
+                <StaticPicture
                   src={`/images/ingredients/${it.slug}.jpg`}
                   alt={it.name}
                   className="ui-img-hover h-full w-full object-cover"
                   loading="lazy"
                   decoding="async"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                   }}

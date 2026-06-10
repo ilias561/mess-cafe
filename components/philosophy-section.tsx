@@ -246,8 +246,8 @@ function SplitSpread() {
         <div className="md:col-start-2 md:col-span-5 md:-translate-y-4">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
-              src={images.new1}
-              alt="Εσωτερικός χώρος του καφέ με φυσικό φως"
+              src={images.philosophyBright}
+              alt="Φωτεινή γωνιά του καφέ με φυσικό φως και θέα στη λίμνη"
               aspect="aspect-[3/2]"
               sizes="(max-width: 768px) 100vw, 40vw"
             />
@@ -256,8 +256,8 @@ function SplitSpread() {
         <div className="md:col-start-8 md:col-span-4 md:-translate-y-4">
           <MaskRevealBlock direction="up" delay={0.15}>
             <KenBurnsTile
-              src={images.aboutInterior}
-              alt="Εσωτερικός χώρος, γενικό πλάνο"
+              src={images.philosophyStairs}
+              alt="Η σκάλα προς το πατάρι, πλαισιωμένη από φυτά"
               aspect="aspect-[4/5]"
               sizes="(max-width: 768px) 100vw, 30vw"
             />
@@ -269,8 +269,8 @@ function SplitSpread() {
         <div className="md:col-start-2 md:col-span-4 md:-translate-y-22">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
-              src={images.aboutPlants}
-              alt="Εσωτερικός χώρος με πράσινο και ξύλινη οροφή"
+              src={images.philosophyCounter}
+              alt="Ο πάγκος self service πλαισιωμένος από φυτά"
               aspect="aspect-[4/5]"
               sizes="(max-width: 768px) 100vw, 30vw"
             />
@@ -279,8 +279,8 @@ function SplitSpread() {
         <div className="md:col-start-7 md:col-span-6 md:-translate-y-4">
           <MaskRevealBlock direction="up" delay={0.15}>
             <KenBurnsTile
-              src={images.new2}
-              alt="Λεπτομέρεια διακόσμησης και υλικών στον χώρο"
+              src={images.philosophyMaterials}
+              alt="Λεπτομέρεια από τον τοίχο με φυτά και τις ανοξείδωτες επιφάνειες"
               aspect="aspect-[3/2]"
               sizes="(max-width: 768px) 100vw, 45vw"
             />

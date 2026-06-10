@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react'
 import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
+import StaticPicture from '@/components/static-picture'
+import { getImageManifestEntry } from '@/lib/image-manifest'
 import type { MenuItem as MenuItemType, Nutrition } from '@/lib/menu-data'
 
 const DIET_TAG: Record<string, { short: string; label: string }> = {
@@ -166,7 +168,13 @@ export function MenuLegendInline() {
   )
 }
 
-function MenuItemMedia({ item }: { item: MenuItemType }) {
+export function MenuItemMedia({
+  item,
+  className = 'h-full w-full object-contain',
+}: {
+  item: MenuItemType
+  className?: string
+}) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -231,7 +239,7 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
         playsInline
         preload="metadata"
         {...({ 'webkit-playsinline': 'true', 'x5-playsinline': 'true' } as Record<string, string>)}
-        className="h-full w-full object-contain"
+        className={className}
         aria-label={item.name}
         onEnded={(e) => {
           e.currentTarget.pause()
@@ -240,18 +248,8 @@ function MenuItemMedia({ item }: { item: MenuItemType }) {
     )
   }
 
-  if (item.image) {
-    return (
-      <img
-        src={item.image}
-        alt={item.name}
-        className="block h-auto w-full rounded-[2px]"
-        loading="lazy"
-        decoding="async"
-      />
-    )
-  }
-
+  // Only rendered with `item.video` set (see MenuDishCard); images go through
+  // StaticPicture in the card itself.
   return null
 }
 
@@ -265,23 +263,29 @@ export function MenuDishCard({
   showNutrition?: boolean
 }) {
   const { isSignature } = getItemBadges(item)
+  // Portrait photos (e.g. the cocktail shoot) get a portrait box so object-cover
+  // doesn't decapitate the glass; landscape food shots keep the wide box.
+  const entry = item.image ? getImageManifestEntry(item.image) : undefined
+  const isPortrait = entry ? entry.height > entry.width : false
+  const mediaAspect = isPortrait ? 'aspect-[3/4]' : 'aspect-[16/10] md:aspect-[4/3]'
   return (
     <m.article
       {...itemMotionProps(index)}
       className="ui-card-elevated group flex h-full flex-col overflow-hidden rounded-[2px] border border-line/60 bg-bone-warm"
     >
-      <div className="aspect-[16/10] overflow-hidden bg-canopy-night md:aspect-[4/3]">
+      <div className={`overflow-hidden bg-canopy-night ${mediaAspect}`}>
         {item.video ? (
           <MenuItemMedia item={item} />
-        ) : (
-          <img
+        ) : item.image ? (
+          <StaticPicture
             src={item.image}
             alt={item.name}
             loading="lazy"
             decoding="async"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             className="ui-img-hover h-full w-full object-contain"
           />
-        )}
+        ) : null}
       </div>
       <div className="flex flex-1 flex-col p-4 md:p-5">
         {isSignature && <SignatureEyebrow />}

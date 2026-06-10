@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useId, useRef, useSyncExternalStore } from 'react'
+import { Fragment, useId, useRef, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import {
   m,

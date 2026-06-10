@@ -9,6 +9,27 @@ export type ImageManifestEntry = {
 }
 
 export const imageManifest: Record<string, ImageManifestEntry> = {
+  "/images/111/mess-internal-0002.jpg": {
+    "width": 2000,
+    "height": 1500,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAwAA4BaJbACdAEQ0EKbr4gAAP67avpcMlUbWYerUTM8FqHdGuotaGqwBT9x4/CaXXd1eoujQxIKJbKinZE/+lJZro+tUz9lLcmSlcLNn7hBC3j0HIKiTzFAAA==",
+    "avifSrcSet": "/images/111/mess-internal-0002--w480.avif 480w, /images/111/mess-internal-0002--w768.avif 768w, /images/111/mess-internal-0002--w1200.avif 1200w, /images/111/mess-internal-0002--w1600.avif 1600w, /images/111/mess-internal-0002--w2000.avif 2000w",
+    "webpSrcSet": "/images/111/mess-internal-0002--w480.webp 480w, /images/111/mess-internal-0002--w768.webp 768w, /images/111/mess-internal-0002--w1200.webp 1200w, /images/111/mess-internal-0002--w1600.webp 1600w, /images/111/mess-internal-0002--w2000.webp 2000w"
+  },
+  "/images/111/mess-internal-0004.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "blurDataURL": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAwAgCdASoQAAsAA4BaJbACdAYv1Vt3gvaxAAD+7P/eFTACn5fs3yDyeqT8pr8tAbnJc/TorKrdA+MhZW8KOok2GrtbQcPBcNfE1NlN0WrvPp/3Z/vJFzLduUg72sLrccjJtMqhYZamf4+pPSI8AA==",
+    "avifSrcSet": "/images/111/mess-internal-0004--w480.avif 480w, /images/111/mess-internal-0004--w768.avif 768w, /images/111/mess-internal-0004--w1200.avif 1200w, /images/111/mess-internal-0004--w1600.avif 1600w, /images/111/mess-internal-0004--w2000.avif 2000w",
+    "webpSrcSet": "/images/111/mess-internal-0004--w480.webp 480w, /images/111/mess-internal-0004--w768.webp 768w, /images/111/mess-internal-0004--w1200.webp 1200w, /images/111/mess-internal-0004--w1600.webp 1600w, /images/111/mess-internal-0004--w2000.webp 2000w"
+  },
+  "/images/111/mess-internal-0005.jpg": {
+    "width": 1500,
+    "height": 2250,
+    "blurDataURL": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAADQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbAC7DiAByukG0JclTnaO9nwdbcj8gAD4W2NZABjkMxZ/9UgpYZUnU+Jap5I7JJO3SwbhqCMnwWqeBr0m/NZjw3WhInPecbwiIHSLZHje+ntG/lDk+BSM8aAEUKrw2FOKvEnEy5ynKexqpHTXd+KvfJLh5njFOheMO+vDcbD5w/aOZqxBlkjTiU1YlDvNfS5wJqLeiME3I3UIIiZ7oBWC/6qHkWDRDwAAAA==",
+    "avifSrcSet": "/images/111/mess-internal-0005--w480.avif 480w, /images/111/mess-internal-0005--w768.avif 768w, /images/111/mess-internal-0005--w1200.avif 1200w, /images/111/mess-internal-0005--w1500.avif 1500w",
+    "webpSrcSet": "/images/111/mess-internal-0005--w480.webp 480w, /images/111/mess-internal-0005--w768.webp 768w, /images/111/mess-internal-0005--w1200.webp 1200w, /images/111/mess-internal-0005--w1500.webp 1500w"
+  },
   "/images/111/mess-internal-0006.jpg": {
     "width": 1600,
     "height": 1066,
@@ -30,12 +51,40 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/111/mess-internal-0009--w480.avif 480w, /images/111/mess-internal-0009--w768.avif 768w, /images/111/mess-internal-0009--w1200.avif 1200w, /images/111/mess-internal-0009--w1600.avif 1600w",
     "webpSrcSet": "/images/111/mess-internal-0009--w480.webp 480w, /images/111/mess-internal-0009--w768.webp 768w, /images/111/mess-internal-0009--w1200.webp 1200w, /images/111/mess-internal-0009--w1600.webp 1600w"
   },
+  "/images/111/mess-internal-0014.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoQAAsAA4BaJbACdAYwTFyP6oZwAP6tRfLoIyXkUVBJTAKsP5ITFox5VmQP60CoT1MXsYCtanqa3E1UZnsrLq4Snwb1nvUeCbIUgBeyZGJeIT7iNAAAAA==",
+    "avifSrcSet": "/images/111/mess-internal-0014--w480.avif 480w, /images/111/mess-internal-0014--w768.avif 768w, /images/111/mess-internal-0014--w1200.avif 1200w, /images/111/mess-internal-0014--w1600.avif 1600w, /images/111/mess-internal-0014--w2000.avif 2000w",
+    "webpSrcSet": "/images/111/mess-internal-0014--w480.webp 480w, /images/111/mess-internal-0014--w768.webp 768w, /images/111/mess-internal-0014--w1200.webp 1200w, /images/111/mess-internal-0014--w1600.webp 1600w, /images/111/mess-internal-0014--w2000.webp 2000w"
+  },
+  "/images/111/mess-internal-0015.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "blurDataURL": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADwAQCdASoQAAsAA4BaJbAC7AD1mf2IHhAA/oXopR+8XqtIgFIoH0O36BXR3K3no6ZDhXJcN2gQSjeVkjIznH15plVtzy57/qthHkC8GW0/UW8TlKRITVB+OUdXaAN0woT9wtvpTJVwAA==",
+    "avifSrcSet": "/images/111/mess-internal-0015--w480.avif 480w, /images/111/mess-internal-0015--w768.avif 768w, /images/111/mess-internal-0015--w1200.avif 1200w, /images/111/mess-internal-0015--w1600.avif 1600w, /images/111/mess-internal-0015--w2000.avif 2000w",
+    "webpSrcSet": "/images/111/mess-internal-0015--w480.webp 480w, /images/111/mess-internal-0015--w768.webp 768w, /images/111/mess-internal-0015--w1200.webp 1200w, /images/111/mess-internal-0015--w1600.webp 1600w, /images/111/mess-internal-0015--w2000.webp 2000w"
+  },
   "/images/111/mess-internal-0016.jpg": {
     "width": 1600,
     "height": 2400,
     "blurDataURL": "data:image/webp;base64,UklGRu4AAABXRUJQVlA4IOIAAAAwBACdASoQABgAPu1iqU2ppaQiMAgBMB2JbACdMoAlsRGs1s3sueVqx3wA/rhA4Qy9wvIvYbww3KQXpOZJNhOr0KZU4R9NL8O0s0M4kObnKK305UM/ZVjMd7NMasr2DLlISPKS8yj/Gbwx2FIJAqITlFHFELigm4z7EWUuP0PiVQBcwovVje8x04Qor25SLMJOwWtjULL1UUP+W1tE+F73DoZ54fmikzTeexLdUVlvj/d+sKIGANjotbERgcf43f4nc+f67A8sxqICL/8pZqvkPkbldsKgQ2xCghBX2pTkC4AA",
     "avifSrcSet": "/images/111/mess-internal-0016--w480.avif 480w, /images/111/mess-internal-0016--w768.avif 768w, /images/111/mess-internal-0016--w1200.avif 1200w, /images/111/mess-internal-0016--w1600.avif 1600w",
     "webpSrcSet": "/images/111/mess-internal-0016--w480.webp 480w, /images/111/mess-internal-0016--w768.webp 768w, /images/111/mess-internal-0016--w1200.webp 1200w, /images/111/mess-internal-0016--w1600.webp 1600w"
+  },
+  "/images/111/mess-internal-0023.jpg": {
+    "width": 1500,
+    "height": 2250,
+    "blurDataURL": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdMoBOACN6BKO1oP6vwSAmNcAA/CWEvLNseXf7K6kpsfJF+ayrR8Acc5ER3cCF3aoeaEyINB2QHJ7n7Do7xlKnwNPR73ykKneSWaaubIKVKkbSxBgTSAat26MtLXeceG4w7ZvfE6hOnS/p9IfBJWjy7bYwf7GjnxFsWvxGtSDwgUsc0ikmJE+9mPvXIIqSJNpvum4AAA==",
+    "avifSrcSet": "/images/111/mess-internal-0023--w480.avif 480w, /images/111/mess-internal-0023--w768.avif 768w, /images/111/mess-internal-0023--w1200.avif 1200w, /images/111/mess-internal-0023--w1500.avif 1500w",
+    "webpSrcSet": "/images/111/mess-internal-0023--w480.webp 480w, /images/111/mess-internal-0023--w768.webp 768w, /images/111/mess-internal-0023--w1200.webp 1200w, /images/111/mess-internal-0023--w1500.webp 1500w"
+  },
+  "/images/111/mess-internal-0024.jpg": {
+    "width": 2000,
+    "height": 1333,
+    "blurDataURL": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJagC7ADdIke3JQAA/sJtOzeRoadfIoe4wbw90qWELdtMyG2ry6fBWPHpDB3390/4MXyM7qsgBmhH9wYUKQ8QLcccnfYXz/35QAGa4CQAAA==",
+    "avifSrcSet": "/images/111/mess-internal-0024--w480.avif 480w, /images/111/mess-internal-0024--w768.avif 768w, /images/111/mess-internal-0024--w1200.avif 1200w, /images/111/mess-internal-0024--w1600.avif 1600w, /images/111/mess-internal-0024--w2000.avif 2000w",
+    "webpSrcSet": "/images/111/mess-internal-0024--w480.webp 480w, /images/111/mess-internal-0024--w768.webp 768w, /images/111/mess-internal-0024--w1200.webp 1200w, /images/111/mess-internal-0024--w1600.webp 1600w, /images/111/mess-internal-0024--w2000.webp 2000w"
   },
   "/images/111/mess-internal-0030.jpg": {
     "width": 1600,
@@ -78,13 +127,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABwAgCdASoQAAsAA4BaJbACdAYqrzYL4P72K2kAAP7R/rW1ygLwCcDmpbh2i+ckOP/0bU5mNKhU55INXfcwQdCnwPcCifPyX8af2ifY2N3WLg/vfN9ORNx672kYh0qXsHAAAA==",
     "avifSrcSet": "/images/about-4--w480.avif 480w, /images/about-4--w768.avif 768w, /images/about-4--w1200.avif 1200w, /images/about-4--w1600.avif 1600w, /images/about-4--w1920.avif 1920w",
     "webpSrcSet": "/images/about-4--w480.webp 480w, /images/about-4--w768.webp 768w, /images/about-4--w1200.webp 1200w, /images/about-4--w1600.webp 1600w, /images/about-4--w1920.webp 1920w"
-  },
-  "/images/blog/placeholder.jpg": {
-    "width": 1200,
-    "height": 900,
-    "blurDataURL": "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAABwAQCdASoQAAwAA4BaJYwCdAFAAAD+8bjxdPkQAAA=",
-    "avifSrcSet": "/images/blog/placeholder--w480.avif 480w, /images/blog/placeholder--w768.avif 768w, /images/blog/placeholder--w1200.avif 1200w",
-    "webpSrcSet": "/images/blog/placeholder--w480.webp 480w, /images/blog/placeholder--w768.webp 768w, /images/blog/placeholder--w1200.webp 1200w"
   },
   "/images/decor/photo/banana-leaf.png": {
     "width": 1280,
@@ -177,13 +219,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/decor/photo/split-leaf-2--w480.avif 480w, /images/decor/photo/split-leaf-2--w768.avif 768w, /images/decor/photo/split-leaf-2--w1179.avif 1179w",
     "webpSrcSet": "/images/decor/photo/split-leaf-2--w480.webp 480w, /images/decor/photo/split-leaf-2--w768.webp 768w, /images/decor/photo/split-leaf-2--w1179.webp 1179w"
   },
-  "/images/decor/tropical-leaves.png": {
-    "width": 74,
-    "height": 441,
-    "blurDataURL": "data:image/webp;base64,UklGRvwBAABXRUJQVlA4IPABAADwCQCdASoQAF8APt1cpE2opSOiNUgBEBuJZQDBl6r+7mkJwBbGZWLB3S7swj5jf+Gi9W1wOMWGuTlcv5/ZxINYguHWrHXkAA3dNeINBse9g1vi5OW88UZgAP7sr6VBf55QPYZDc5vxmzcBmgccQ+jC6FLjSPop1M7fh/94VEVWLbNwouH31Gi5ms8WXNYlcPKfBYkYVbSxQfluHH9Kw+9MyzB5GwBAUtmhIPdMf5yJ7RtoyuqUuPWfOJ3c7jbDimfo8o2tKu/FNhzZH8UcSw9wKmT32dg3sQhIhy7fenXFTpm5coJPDK3+K5z1Wf4ONRH4/PoxFtO/Z6MgrwXS5poMg4zEV4r3fX0UV731UdwKUbOv7eh86rNqxR5N0G1gnLNyHTBrOg7zBR8+2aPKP3rzhgVatc07cf9G/GVE6dyTBESkud9ehoFmKG1h3GL1X2bgceogwIDpzpzc6p5fFDNlO2qVTATPIFxAQRfKmJ8g+VlFV4eN8LOGduEuf0D88HqQplhYrOd3lxXTZymErYuJUWywJ/2/7pdGfnMqIn0WI7bz+sDxHAq1Lfdca0b3DrN8V58npxgvfNK2SmKyjD0r7RmMHNRMF01dkM9LwohLxUs1m2ecDrp0M3JmDvgZxbQpSCIxZoCKuO7MUY7BrgAA",
-    "avifSrcSet": "/images/decor/tropical-leaves--w74.avif 74w",
-    "webpSrcSet": "/images/decor/tropical-leaves--w74.webp 74w"
-  },
   "/images/gallery-1.jpg": {
     "width": 1066,
     "height": 1600,
@@ -232,20 +267,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAABwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdAYv+yUo3Q1AEKTyAFdhPAAD+3I6RDLp+0BFhP+RKerMqcXiDATuF9B3wllCGkwrjVdYK1lAdHjTcDT6OGQN0QYhoeoO8KKnJFr+u1N1aUoWTNcKtk0k3gpXYIgPY13aSXWXviuLBHRVdW9TjeTRJBeVbu8tNWPAjIC3+S2RfgLAVdVBOxaW7GmAA",
     "avifSrcSet": "/images/gallery-8--w480.avif 480w, /images/gallery-8--w768.avif 768w, /images/gallery-8--w1066.avif 1066w",
     "webpSrcSet": "/images/gallery-8--w480.webp 480w, /images/gallery-8--w768.webp 768w, /images/gallery-8--w1066.webp 1066w"
-  },
-  "/images/hero-bowl.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABwAgCdASoQABAAA4BaJbACdAYuHjYFT5R4FI0AAP703xPiHrdgwIfX+8/BiLahi/1ooHvfZ/b09xL3ve1vMpdYu6833c7YgVG4CiyUDOF521zkOhRdLUwv/wBemrVBoZWK2Hn1opgXuyPBL63KfTjTHe0pndeZ1yDgAA==",
-    "avifSrcSet": "/images/hero-bowl--w480.avif 480w, /images/hero-bowl--w768.avif 768w, /images/hero-bowl--w1024.avif 1024w",
-    "webpSrcSet": "/images/hero-bowl--w480.webp 480w, /images/hero-bowl--w768.webp 768w, /images/hero-bowl--w1024.webp 1024w"
-  },
-  "/images/hero-coffee.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoQABAAA4BaJYgCdAEVJu/sggAA/uybEmsnL0TLYk+yk9f3BwGm3dslzNfSCkUz1TZ070pkcnbdKgJ7T+2vQ3tf29ceIHTRiFUiydTEPKBSdsFWqtJ42ebifgAAAA==",
-    "avifSrcSet": "/images/hero-coffee--w480.avif 480w, /images/hero-coffee--w768.avif 768w, /images/hero-coffee--w1024.avif 1024w",
-    "webpSrcSet": "/images/hero-coffee--w480.webp 480w, /images/hero-coffee--w768.webp 768w, /images/hero-coffee--w1024.webp 1024w"
   },
   "/images/hero-interior.jpg": {
     "width": 1199,
@@ -316,41 +337,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAACwAwCdASoQABUAPu1kq04ppaQiMAgBMB2JaAAAUvzYkJc5U832AAD+vhUT36eLtXu3X7zFoeeFXw+pjTN535QntUnloAsyYfxGxG0o1kD8XHHUyWr5JoTTjJdxrW37Yq1F+4PSYa93/UwRQEqh0X45w2UPi0jgM+eWf9PrzykaAAAA",
     "avifSrcSet": "/images/keep-rising--w480.avif 480w, /images/keep-rising--w768.avif 768w, /images/keep-rising--w841.avif 841w",
     "webpSrcSet": "/images/keep-rising--w480.webp 480w, /images/keep-rising--w768.webp 768w, /images/keep-rising--w841.webp 841w"
-  },
-  "/images/menu-acai.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACQAgCdASoQABAAA4BaJbACdAYtB20tMBFpT1FoAAD9/AYPE3jOJ4x65fRbPoObXlv1RIX4yv+FuccoulC1YlWfyyR3wNvGqxfPGSVMLiA3bEmSFxeW1fr1Jaur4clJ4fhSkCOH8xGv8F/A+a6wXd+NSI/G2OiuII3W2zXqKaqZ/4Sm2Tny/yvQAAA=",
-    "avifSrcSet": "/images/menu-acai--w480.avif 480w, /images/menu-acai--w768.avif 768w, /images/menu-acai--w1024.avif 1024w",
-    "webpSrcSet": "/images/menu-acai--w480.webp 480w, /images/menu-acai--w768.webp 768w, /images/menu-acai--w1024.webp 1024w"
-  },
-  "/images/menu-avocado-toast.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAABwAgCdASoQABAAA4BaJbACdAYuv21Oijx3NAWkAP5PJJfkYY3NxtQNGf3WCM3Q+HGn4SRxCn7aXGX83sXaY3nGD3vRsuB757NZHXnMisEK/22jjXiGXHk0sIO1zKfCpvQ0P6TJ2xH3XtMLURhJHm0QkfokF1+b+IzRJaEziYC31e5RPoAAAA==",
-    "avifSrcSet": "/images/menu-avocado-toast--w480.avif 480w, /images/menu-avocado-toast--w768.avif 768w, /images/menu-avocado-toast--w1024.avif 1024w",
-    "webpSrcSet": "/images/menu-avocado-toast--w480.webp 480w, /images/menu-avocado-toast--w768.webp 768w, /images/menu-avocado-toast--w1024.webp 1024w"
-  },
-  "/images/menu-freddo.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQABAAA4BaJbACdAELZGUyOJxwAAD+0fkaG83quZSiO/yn6EXYGmHVaY6+T2L0eGeRvIOtkFyz4wcbzzW8G2w2RJCZ94VOz/LJPUHLjDDJb3qpQlFDhWKdgPAL3LAA",
-    "avifSrcSet": "/images/menu-freddo--w480.avif 480w, /images/menu-freddo--w768.avif 768w, /images/menu-freddo--w1024.avif 1024w",
-    "webpSrcSet": "/images/menu-freddo--w480.webp 480w, /images/menu-freddo--w768.webp 768w, /images/menu-freddo--w1024.webp 1024w"
-  },
-  "/images/menu-poke-teriyaki.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAgCdASoQABAAA4BaJbACdH8AqQDDpTEl+I06I8AA/vUeQZb96v8yVSxMBZTJEfWRkw66Cvc0/xX8+kT1f4clsvxp9mDUblgZeSvAsl2fjXpbbBSuV5ER6Ik5mw5CNMll6nqyU2fubip0dtb4xapnhR0fgrtdHe/wfucKrfCAAA==",
-    "avifSrcSet": "/images/menu-poke-teriyaki--w480.avif 480w, /images/menu-poke-teriyaki--w768.avif 768w, /images/menu-poke-teriyaki--w1024.avif 1024w",
-    "webpSrcSet": "/images/menu-poke-teriyaki--w480.webp 480w, /images/menu-poke-teriyaki--w768.webp 768w, /images/menu-poke-teriyaki--w1024.webp 1024w"
-  },
-  "/images/menu-smoothie.jpg": {
-    "width": 1024,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQABAAA4BaJbACdADHY0ji2vyGeAD+8N77XRlvoM7iijRe9beXMuQu5k6wuRcppnIbRPtVyH1ai9Y7C+BHNMjypeNoOgrcRz1iPt4vLh3FCVMngEJUW4Udq9NrqMZjhAA=",
-    "avifSrcSet": "/images/menu-smoothie--w480.avif 480w, /images/menu-smoothie--w768.avif 768w, /images/menu-smoothie--w1024.avif 1024w",
-    "webpSrcSet": "/images/menu-smoothie--w480.webp 480w, /images/menu-smoothie--w768.webp 768w, /images/menu-smoothie--w1024.webp 1024w"
   },
   "/images/menu-vegan-poke.jpg": {
     "width": 1024,
@@ -597,47 +583,12 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/mess-philosophy-poster--w480.avif 480w, /images/mess-philosophy-poster--w720.avif 720w",
     "webpSrcSet": "/images/mess-philosophy-poster--w480.webp 480w, /images/mess-philosophy-poster--w720.webp 720w"
   },
-  "/images/raw/about-plants-light.png": {
-    "width": 472,
-    "height": 287,
-    "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAoAA4BaJZACdAf2BadgGT1hAAD+7PbYv9f19G2sdtFnuDQ9lz4fH5nqJOkWP+oz5JPzKVzNLfvTYYJDyYiByNFEPsgHvuOZtNJze8iOXmj9NyRyjfDzI+nEqYAA",
-    "avifSrcSet": "/images/raw/about-plants-light--w472.avif 472w",
-    "webpSrcSet": "/images/raw/about-plants-light--w472.webp 472w"
-  },
-  "/images/raw/about-space-start.png": {
-    "width": 940,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBACdASoQABIAPu1iqU2ppaOiMAgBMB2JQBadZYA2j4fi2CbY6ni4ZgAA/psYb7RGJtesBAgiNBzj2CUT3/DNsC1aoffQmhkAqL9FeSmXvOLgH05O/ipgd5d59opKenj++qbx/rch5k+Tz876zNFyUF/GUCKy0Y864xAA",
-    "avifSrcSet": "/images/raw/about-space-start--w480.avif 480w, /images/raw/about-space-start--w768.avif 768w, /images/raw/about-space-start--w940.avif 940w",
-    "webpSrcSet": "/images/raw/about-space-start--w480.webp 480w, /images/raw/about-space-start--w768.webp 768w, /images/raw/about-space-start--w940.webp 940w"
-  },
-  "/images/raw/gallery-food-35.png": {
-    "width": 1024,
-    "height": 681,
-    "blurDataURL": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADwAQCdASoQAAsAA4BaJagCdADp9M2vAAAA+gHNIk1RvNOvBLYfr97ijSgFP1KeMVYP09Bj5cUb1c42KYWkAwesntkI5oXw5BVRGvF2enwAAA==",
-    "avifSrcSet": "/images/raw/gallery-food-35--w480.avif 480w, /images/raw/gallery-food-35--w768.avif 768w, /images/raw/gallery-food-35--w1024.avif 1024w",
-    "webpSrcSet": "/images/raw/gallery-food-35--w480.webp 480w, /images/raw/gallery-food-35--w768.webp 768w, /images/raw/gallery-food-35--w1024.webp 1024w"
-  },
-  "/images/raw/gallery-hero-still.png": {
-    "width": 980,
-    "height": 737,
-    "blurDataURL": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAQAgCdASoQAAwAA4BaJZQCdAEPCbnqCGPQAP3EZ8W3kh6taYpY8DeNJB24yp+cFq6cvdiuTXCPGc9UIRPp0n1+ZCod9rE4SgxwxnUUHvk9Z9rYtdDYkEAA",
-    "avifSrcSet": "/images/raw/gallery-hero-still--w480.avif 480w, /images/raw/gallery-hero-still--w768.avif 768w, /images/raw/gallery-hero-still--w980.avif 980w",
-    "webpSrcSet": "/images/raw/gallery-hero-still--w480.webp 480w, /images/raw/gallery-hero-still--w768.webp 768w, /images/raw/gallery-hero-still--w980.webp 980w"
-  },
-  "/images/raw/mess-internal-0027-1.png": {
-    "width": 768,
-    "height": 1024,
-    "blurDataURL": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAABwBACdASoQABUAPu1iqk2ppaQiMAgBMB2JaADCjBAAMzbGayqG3c2CHalyAAD+8N6GdGvj9wIRflFSKgBK+arTIM46EuSLC6+Tzk/hzHvl16G1zQt+HWXYNd+qBEh/7j1SoeaCrry/Cma5FvjQDbykhze3gX/j1GmeZZw7wzCfX6CCaFJJ0mpfHAePfOTN/wVTyTbOv1/1K1K9Vf/O/by/6iUHuAAA",
-    "avifSrcSet": "/images/raw/mess-internal-0027-1--w480.avif 480w, /images/raw/mess-internal-0027-1--w768.avif 768w",
-    "webpSrcSet": "/images/raw/mess-internal-0027-1--w480.webp 480w, /images/raw/mess-internal-0027-1--w768.webp 768w"
-  },
-  "/images/recipes-door.jpg": {
+  "/images/nutrition-tips.jpg": {
     "width": 1600,
-    "height": 2000,
-    "blurDataURL": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAACQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JbACdMoQMAk/xbBKoHRUmJqk72rAA/XjKc9HsFvLcTprfAe8g9AKDKKK1VePpCrPqJFHFJBWMb5Ir7nA8Kma0PkFWK/jL4B4mi6mEHZV8id/O/E4R0zKdDrOyg6M4zgnyp3nf+XFF3qyth34y4C2rAigjl1cbYtu1yYtsIVWp7Q6R7VvFQAAA",
-    "avifSrcSet": "/images/recipes-door--w480.avif 480w, /images/recipes-door--w768.avif 768w, /images/recipes-door--w1200.avif 1200w, /images/recipes-door--w1600.avif 1600w",
-    "webpSrcSet": "/images/recipes-door--w480.webp 480w, /images/recipes-door--w768.webp 768w, /images/recipes-door--w1200.webp 1200w, /images/recipes-door--w1600.webp 1600w"
+    "height": 2420,
+    "blurDataURL": "data:image/webp;base64,UklGRt4AAABXRUJQVlA4INIAAABQBQCdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdMoR3IsB9gEmAzqA3VHQX/l4GMB2nLgAA/qXUW/X3FUV7XMP6hPPfqPCQcWAJvVJKfyEwairvXEYQ2tLHFF8zaE7b6q6omDuY6cBmY6mofcA2XVhEPlVpAAX5TKX5bgzfuRjZ1U7lMRSmXwHsoGDWLnmdZ9g4UUNcafV/WAzNjFWnfR6QOPbYw+vj9Fw0bbG9etMtF16tn12wl7iCL3x73PvSgXP5A5Dz4Zle+KfNmTBR/rwAAAA=",
+    "avifSrcSet": "/images/nutrition-tips--w480.avif 480w, /images/nutrition-tips--w768.avif 768w, /images/nutrition-tips--w1200.avif 1200w, /images/nutrition-tips--w1600.avif 1600w",
+    "webpSrcSet": "/images/nutrition-tips--w480.webp 480w, /images/nutrition-tips--w768.webp 768w, /images/nutrition-tips--w1200.webp 1200w, /images/nutrition-tips--w1600.webp 1600w"
   },
 }
 

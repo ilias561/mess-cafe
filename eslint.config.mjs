@@ -9,12 +9,19 @@ export default defineConfig([
     '.next/**',
     'out/**',
     'node_modules/**',
-    'public/videos/_orig/**',
   ]),
   {
+    rules: {
+      // `_`-prefixed bindings mark intentionally dropped values (e.g. pulling
+      // a prop out of a rest spread so it never reaches the DOM).
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
     files: [
-      'components/ui/**',
-      'hooks/**',
       'workers/**',
       'components/page-loader.tsx',
       'components/hero.tsx',

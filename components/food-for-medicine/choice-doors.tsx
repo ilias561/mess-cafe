@@ -1,159 +1,214 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { m, useReducedMotion } from 'framer-motion'
 import { scrollToId } from '@/lib/lenis'
-import {
-  AnaglyphHeading,
-  CornerTicks,
-  NumberedCaption,
-} from '@/components/decor/ornaments'
-import { FadeImage } from '@/components/fade-image'
-import { EASE } from '@/lib/motion'
+import { videoSrc } from '@/lib/media'
 
-type Door = {
-  index: '01' | '02'
+const BG = 'rgb(5,46,31)' // matches the clip's own dark-green backdrop
+// gentle, premium easing for the copy reveal
+const SMOOTH = [0.22, 1, 0.36, 1] as const
+
+type Option = {
   href: '#menu' | '#tips'
   target: 'menu' | 'tips'
-  eyebrow: string
-  title: string
-  blurb: string
-  cta: string
-  image: string
+  label: string
+  primary?: boolean
 }
 
-const DOORS: Door[] = [
-  {
-    index: '01',
-    href: '#menu',
-    target: 'menu',
-    eyebrow: 'ΤΟ ΜΕΝΟΥ',
-    title: 'Δες το Μενού',
-    blurb: 'Όλα τα πιάτα και ροφήματα — με τα υλικά, την ιστορία και τη φιλοσοφία τους.',
-    cta: 'Προς το μενού →',
-    image: '/images/menu/piata-0028.jpg',
-  },
-  {
-    index: '02',
-    href: '#tips',
-    target: 'tips',
-    eyebrow: 'ΑΠΟ ΤΗΝ ΚΟΥΖΙΝΑ ΜΑΣ',
-    title: 'Tips & κόλπα κουζίνας',
-    blurb: 'Κόλπα κουζίνας και tips από το M.E.S.S. για να τα φτιάξεις στο σπίτι.',
-    cta: 'Προς τα tips →',
-    image: '/images/recipes-door.jpg',
-  },
+const OPTIONS: Option[] = [
+  { href: '#menu', target: 'menu', label: 'Δες το Μενού', primary: true },
+  { href: '#tips', target: 'tips', label: 'Tips για πιο θρεπτικά πιάτα' },
 ]
 
 /**
- * Fullscreen split chooser: two photo "doors" fill the viewport (side by side on
- * desktop, stacked halves on mobile). Each previews where it leads; hovering one
- * brightens + zooms its photo and dims the other. Picking one scrolls to it.
+ * Menu entry hero. A top-down dish clip plays once (at 0.75× for a calmer feel),
+ * then the copy + the two options (Menu / Tips) reveal with a soft blur-up.
+ *
+ * Layout is responsive:
+ *  · Desktop — full-bleed `contain` clip, copy overlaid low in the frame.
+ *  · Mobile — clip pinned to the top, cropped ~10% on each side (aspect 16/15
+ *    `cover`), with the copy stacked below it on clean green.
+ *
+ * Reveal is driven by the video's `ended` event with fallbacks so the chooser
+ * always appears (reduced-motion / blocked autoplay show it at once; a timeout
+ * covers an `ended` that never fires). Playback waits for the site loader so the
+ * clip isn't hidden behind the splash.
  */
 export default function ChoiceDoors() {
   const reduce = useReducedMotion()
-  const [hovered, setHovered] = useState<number | null>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [videoRevealed, setVideoRevealed] = useState(false)
+  // Reduced motion skips the clip-driven reveal entirely (derived, not set in
+  // an effect, so there is no extra render pass).
+  const revealed = videoRevealed || reduce === true
+
+  useEffect(() => {
+    if (reduce) return
+    const video = videoRef.current
+
+    let started = false
+    let revealTimer = 0
+    const start = () => {
+      if (started) return
+      started = true
+      if (!video) {
+        setVideoRevealed(true)
+        return
+      }
+      video.playbackRate = 0.75 // 25% slower
+      void video.play().catch(() => setVideoRevealed(true))
+      // reveal the copy a beat into playback, so it appears *while* the clip
+      // plays instead of after it ends (no dead space)
+      revealTimer = window.setTimeout(() => setVideoRevealed(true), 800)
+    }
+
+    const w = window as Window & { __messLoaderComplete?: boolean }
+    let guard = 0
+    if (w.__messLoaderComplete) {
+      // queue the kick-off so the effect body itself stays side-effect-light
+      guard = window.setTimeout(start, 0)
+    } else {
+      window.addEventListener('mess:loader-complete', start, { once: true })
+      guard = window.setTimeout(start, 3000)
+    }
+
+    return () => {
+      window.removeEventListener('mess:loader-complete', start)
+      if (guard) window.clearTimeout(guard)
+      if (revealTimer) window.clearTimeout(revealTimer)
+    }
+  }, [reduce])
+
+  // soft blur-up reveal, staggered
+  const reveal = (delay: number) => ({
+    initial: false as const,
+    animate: revealed
+      ? { opacity: 1, y: 0, filter: 'blur(0px)' }
+      : { opacity: 0, y: 22, filter: 'blur(8px)' },
+    transition: { duration: 1.05, ease: SMOOTH, delay: revealed ? delay : 0 },
+  })
 
   return (
     <section
-      aria-label="Επιλογές πλοήγησης"
-      className="relative grid h-[100svh] grid-cols-1 grid-rows-2 bg-forest md:grid-cols-2 md:grid-rows-1"
+      aria-label="Φαγητό ως Φάρμακο — επιλογές"
+      className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden md:block md:h-[100svh] md:min-h-[560px]"
+      style={{ backgroundColor: BG }}
     >
-      <h1 className="sr-only">Φαγητό ως Φάρμακο — M.E.S.S.</h1>
+      {/* soft radial lift behind the plate (desktop) — depth without muddiness */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 hidden md:block"
+        style={{
+          background:
+            'radial-gradient(ellipse 58% 56% at 50% 42%, rgba(36,92,52,0.5), rgba(5,46,31,0) 70%)',
+        }}
+      />
 
-      {DOORS.map((door, i) => {
-        const isFirst = i === 0
-        const dimmed = hovered !== null && hovered !== i
-        return (
-          <a
-            key={door.target}
-            href={door.href}
-            onClick={(e) => {
-              e.preventDefault()
-              scrollToId(door.target)
-            }}
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
-            onFocus={() => setHovered(i)}
-            onBlur={() => setHovered(null)}
-            className="ui-focus-ring group relative block h-full w-full overflow-hidden"
-          >
-            {/* full-bleed photo — zooms when this door is hovered. FadeImage serves
-                the pre-generated avif/webp derivatives (static export) + blur-up,
-                instead of the multi-hundred-KB raw JPEG. Both doors are above the
-                fold, so load eagerly; the first is the LCP candidate (priority). */}
-            <m.div
-              aria-hidden
-              className="absolute inset-0"
-              initial={false}
-              animate={{ scale: !reduce && hovered === i ? 1.06 : 1 }}
-              transition={{ duration: 0.8, ease: EASE }}
-            >
-              <FadeImage
-                src={door.image}
-                alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority={isFirst}
-                loading={isFirst ? undefined : 'eager'}
-                className="object-cover"
-              />
-            </m.div>
+      {/* clip — mobile: top block, ~10% cropped each side (aspect 16/15 cover);
+          desktop: full-bleed, padded to clear the navbar, contained (no crop) */}
+      <div className="relative z-0 aspect-[16/15] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:pt-[84px] md:pb-7">
+        <video
+          ref={videoRef}
+          className="h-full w-full object-cover object-center md:object-contain"
+          poster={videoSrc('/videos/menu-hero-poster.jpg')}
+          src={videoSrc('/videos/menu-hero.mp4')}
+          muted
+          playsInline
+          preload="auto"
+          onEnded={() => setVideoRevealed(true)}
+          onError={() => setVideoRevealed(true)}
+        />
+        {/* soft fade where the clip meets the copy (mobile only) */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 md:hidden"
+          style={{ background: `linear-gradient(to bottom, rgba(5,46,31,0), ${BG})` }}
+        />
+      </div>
 
-            {/* dark scrim for legibility — lifts a touch on hover, deepens when dimmed */}
-            <m.div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  'linear-gradient(to top, rgba(14,34,8,0.88) 0%, rgba(14,34,8,0.5) 50%, rgba(14,34,8,0.8) 100%)',
+      {/* legibility scrim (desktop only) — weighted to the bottom where copy sits */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] hidden md:block"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(5,46,31,0.96) 0%, rgba(5,46,31,0.82) 16%, rgba(5,46,31,0.35) 38%, rgba(5,46,31,0) 58%)',
+        }}
+      />
+
+      {/* editorial side rails — fill the gutters either side of the plate on wide
+          screens; width is the exact gutter (0 when there is none) */}
+      {([
+        { side: 'left' as const, label: 'ΙΩΑΝΝΙΝΑ · ΗΠΕΙΡΟΣ' },
+        { side: 'right' as const, label: '#KEEPRISING · EST. 2025' },
+      ]).map(({ side, label }) => (
+        <div
+          key={side}
+          aria-hidden
+          className={`pointer-events-none absolute inset-y-0 z-[2] hidden items-center justify-center overflow-hidden md:flex ${
+            side === 'left' ? 'left-0' : 'right-0'
+          }`}
+          style={{ width: 'max(0px, calc((100vw - (100svh * 1.3333)) / 2))' }}
+        >
+          <div className="flex flex-col items-center gap-6">
+            <span className="block h-20 w-px bg-gradient-to-b from-transparent to-mustard/40" />
+            <span className="rotate-180 font-sans text-[10px] uppercase tracking-[0.34em] text-mustard/65 [writing-mode:vertical-rl]">
+              {label}
+            </span>
+            <span className="block h-20 w-px bg-gradient-to-t from-transparent to-mustard/40" />
+          </div>
+        </div>
+      ))}
+
+      {/* copy + options — mobile: stacked below the clip; desktop: overlaid low */}
+      <div className="relative z-10 px-6 pb-12 pt-7 text-center md:absolute md:inset-0 md:flex md:h-full md:flex-col md:items-center md:justify-end md:px-12 md:pb-[9vh] md:pt-0">
+        <m.p
+          {...reveal(0.0)}
+          className="hero-text-shadow font-sans text-[11px] uppercase tracking-[0.2em] text-mustard/85"
+        >
+          M.E.S.S. · Ο κατάλογος μας
+        </m.p>
+
+        <m.h1
+          {...reveal(0.12)}
+          className="hero-text-shadow-display mt-3 font-serif text-[clamp(32px,5.5vw,64px)] leading-[1.02] tracking-tight text-balance text-white"
+        >
+          Φαγητό ως <span className="italic text-mustard">Φάρμακο</span>
+        </m.h1>
+
+        <m.p
+          {...reveal(0.22)}
+          className="hero-text-shadow mx-auto mt-4 max-w-[560px] font-sans text-[14px] leading-relaxed text-white/85 md:text-[16px]"
+        >
+          Διάλεξε διαδρομή — το πλήρες μενού μας ή τα tips μας για πιο θρεπτικά πιάτα.
+        </m.p>
+
+        <m.div
+          {...reveal(0.34)}
+          className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4"
+          style={{ pointerEvents: revealed ? 'auto' : 'none' }}
+        >
+          {OPTIONS.map((opt) => (
+            <a
+              key={opt.target}
+              href={opt.href}
+              onClick={(e) => {
+                e.preventDefault()
+                scrollToId(opt.target)
               }}
-              initial={false}
-              animate={{ opacity: hovered === i ? 0.82 : 1 }}
-              transition={{ duration: 0.5, ease: EASE }}
-            />
-
-            {/* dim wash on the non-hovered door */}
-            <m.div
-              aria-hidden
-              className="absolute inset-0 bg-canopy-night"
-              initial={false}
-              animate={{ opacity: dimmed ? 0.5 : 0 }}
-              transition={{ duration: 0.5, ease: EASE }}
-            />
-
-            {/* mustard seam between the two doors */}
-            {isFirst && (
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px bg-mustard/50 md:inset-x-auto md:inset-y-0 md:right-0 md:h-auto md:w-px"
-              />
-            )}
-
-            <CornerTicks />
-
-            <div className="relative z-10 flex h-full min-h-0 flex-col items-center justify-center gap-3 px-5 py-4 text-center md:gap-6 md:p-16">
-              <NumberedCaption index={door.index} label={door.eyebrow} className="mt-0" />
-
-              <AnaglyphHeading
-                as="h2"
-                tone="dark"
-                className="font-serif text-[clamp(24px,4vw,56px)] leading-[1.08] tracking-tight"
-              >
-                {door.title}
-              </AnaglyphHeading>
-
-              <p className="max-w-[32ch] font-serif text-[clamp(13px,1.2vw,18px)] italic leading-snug text-charcoal/80 md:leading-relaxed max-md:line-clamp-2">
-                {door.blurb}
-              </p>
-
-              <span className="mt-1 inline-flex min-h-[44px] items-center justify-center gap-2 px-3 font-sans text-[12px] uppercase tracking-[0.16em] text-mustard transition-colors duration-250 group-hover:text-charcoal md:mt-2 md:min-h-0 md:px-0">
-                {door.cta}
-              </span>
-            </div>
-          </a>
-        )
-      })}
+              tabIndex={revealed ? undefined : -1}
+              className={
+                opt.primary
+                  ? 'ui-focus-ring inline-flex min-h-[48px] items-center justify-center rounded-full bg-mustard px-8 py-3 font-sans text-sm font-medium text-ink-dark transition-colors duration-200 hover:bg-amber'
+                  : 'ui-focus-ring inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/40 bg-white/5 px-8 py-3 font-sans text-sm font-medium text-white backdrop-blur-sm transition-colors duration-200 hover:border-mustard hover:text-mustard'
+              }
+            >
+              {opt.label} →
+            </a>
+          ))}
+        </m.div>
+      </div>
     </section>
   )
 }

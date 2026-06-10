@@ -7,7 +7,7 @@ const ALLOWED_ORIGINS = [
   "https://www.messcafe.gr",
 ];
 
-export default {
+const handler = {
   async fetch(request, env) {
     const url = new URL(request.url);
 
@@ -19,12 +19,14 @@ export default {
       return handleCallback(url, env);
     }
 
-    return new Response("M.E.S.S. CMS Auth Worker — running", {
+    return new Response("M.E.S.S. CMS Auth Worker ï¿½ running", {
       status: 200,
       headers: { "Content-Type": "text/plain" },
     });
   },
 };
+
+export default handler;
 
 async function handleAuth(url, env) {
   const scope = url.searchParams.get("scope") || "repo,user";
@@ -86,7 +88,11 @@ function renderPostMessage(status, content) {
 <p>Authorizing, please wait...</p>
 <script>
 (function() {
+  // Only ever hand the token to the CMS admin origins â€” never e.origin blindly,
+  // or any page that opened this popup could capture the GitHub token.
+  var allowedOrigins = ${JSON.stringify(ALLOWED_ORIGINS)};
   function receiveMessage(e) {
+    if (allowedOrigins.indexOf(e.origin) === -1) return;
     window.opener.postMessage(${safeMessage}, e.origin);
     window.removeEventListener("message", receiveMessage, false);
   }

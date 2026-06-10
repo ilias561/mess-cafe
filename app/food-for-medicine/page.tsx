@@ -3,10 +3,9 @@ import { Instagram } from 'lucide-react'
 import Navigation from '@/components/navigation'
 import FooterSection from '@/components/footer-section'
 import PreFooterCta from '@/components/pre-footer-cta'
-import CurtainReveal from '@/components/food-for-medicine/curtain-reveal'
 import ChoiceDoors from '@/components/food-for-medicine/choice-doors'
 import { ReleaseDivider } from '@/components/decor/ornaments'
-import TipsCategoryFilter from '@/components/food-for-medicine/tips-category-filter'
+import NutritionTips from '@/components/food-for-medicine/nutrition-tips'
 import TipsGrid from '@/components/blog/tips-grid'
 import MenuHeader from '@/components/menu/MenuHeader'
 import MenuAnchorNav from '@/components/menu/MenuAnchorNav'
@@ -23,9 +22,9 @@ const INSTAGRAM_URL = 'https://www.instagram.com/m.e.s.s._ioannina/'
 const firstPost = getAllPosts()[0]
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Φαγητό ως Φάρμακο — Μενού, tips & κόλπα κουζίνας | M.E.S.S.',
+  title: 'Φαγητό ως Φάρμακο — Μενού & tips για πιο θρεπτικά πιάτα | M.E.S.S.',
   description:
-    'Το πλήρες μενού του M.E.S.S., tips και κόλπα κουζίνας — όλα φτιαγμένα με τοπικά υλικά και τη φιλοσοφία «φαγητό ως φάρμακο».',
+    'Το πλήρες μενού του M.E.S.S. και tips για πιο θρεπτικά πιάτα — όλα φτιαγμένα με τοπικά υλικά και τη φιλοσοφία «φαγητό ως φάρμακο».',
   path: '/food-for-medicine',
   ...(firstPost
     ? {
@@ -38,7 +37,6 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function BlogPage() {
-  const posts = getAllPosts()
   const tips = getAllTips()
   const PHILOSOPHY_INDEX = 3
   const beforePhilosophy = menuData.slice(0, PHILOSOPHY_INDEX)
@@ -52,7 +50,6 @@ export default function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(menuJsonLd) }}
       />
       <Navigation />
-      <CurtainReveal />
       <ChoiceDoors />
 
       <section id="menu" aria-labelledby="ffm-menu-heading" className="scroll-mt-28">
@@ -88,13 +85,13 @@ export default function BlogPage() {
       <section id="tips" className="scroll-mt-28 mt-14 border-t border-line/30 px-6 py-20 md:px-12 md:py-24">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="type-section-md u-balance font-serif tracking-tight text-charcoal">
-            Tips &amp; κόλπα κουζίνας
+            Tips για πιο θρεπτικά πιάτα
           </h2>
           <p className="mt-3 max-w-[56ch] font-sans text-[15px] leading-relaxed text-concrete">
-            Πιάτα από το μενού μας, εξηγημένα με απλά βήματα και τα γιατί πίσω από κάθε υλικό.
+            Μικρά μυστικά από την κουζίνα μας που κάνουν κάθε πιάτο πιο θρεπτικό — και τα γιατί πίσω από κάθε υλικό.
           </p>
-          <div className="mt-8">
-            <TipsCategoryFilter posts={posts} />
+          <div className="mt-12 md:mt-16">
+            <NutritionTips />
           </div>
         </div>
       </section>
@@ -143,7 +140,7 @@ export default function BlogPage() {
         variant="mustard"
         eyebrow="ΜΗ ΧΑΣΕΙΣ ΕΠΟΜΕΝΑ"
         heading="Έλα να μαγειρέψουμε μαζί."
-        body="Κάθε εβδομάδα νέα tips & κόλπα, νέα στο μενού και ιστορίες από την κουζίνα — πρώτα στο Instagram μας."
+        body="Κάθε εβδομάδα νέα tips για πιο θρεπτικά πιάτα, νέα στο μενού και ιστορίες από την κουζίνα — πρώτα στο Instagram μας."
         primaryLabel="Instagram"
         primaryHref={INSTAGRAM_URL}
         secondaryLabel="Η φιλοσοφία μας"

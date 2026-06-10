@@ -7,7 +7,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { PHONE_NUMBER } from '@/lib/constants'
-import { getOpenStatus } from '@/lib/hours'
 import { scrollToId } from '@/lib/lenis'
 import { EASE, ease } from '@/lib/motion'
 
@@ -17,7 +16,7 @@ const MOBILE_MENU_ID = 'mobile-menu-drawer'
 const RESERVATIONS_LABEL = 'Κράτηση για event' as const
 
 const navLinks = [
-  { label: 'Ποιοι είμαστε / Η φιλοσοφία μας', href: '/#philosophy', sectionId: 'philosophy', isCta: false },
+  { label: 'Η φιλοσοφία μας', href: '/#philosophy', sectionId: 'philosophy', isCta: false },
   { label: 'Οι στόχοι μας', href: '/#actions', sectionId: 'actions', isCta: false },
   { label: '#keeprising', href: '/actions', sectionId: null, isCta: false },
   { label: 'Φαγητό ως Φάρμακο', href: '/food-for-medicine', sectionId: null, isCta: false },
@@ -36,72 +35,6 @@ function isNavLinkActive(link: NavLink, pathname: string, activeSection: string 
 
   // Other routes: exact match or nested path (never treat `/` as prefix of other routes)
   return pathname === link.href || pathname.startsWith(`${link.href}/`)
-}
-
-function MobileDrawerHoursChip({ className = '' }: { className?: string }) {
-  const status = getOpenStatus()
-  return (
-    <span
-      className={`inline-flex max-w-[min(100%,200px)] items-center gap-1.5 ${className}`}
-      title={status.label}
-      aria-live="polite"
-    >
-      <span className="relative flex h-1.5 w-1.5 shrink-0">
-        {status.open && (
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
-        )}
-        <span
-          className={`relative inline-flex h-1.5 w-1.5 rounded-full ${status.open ? 'bg-emerald-500' : 'bg-mustard'}`}
-        />
-      </span>
-      <span className="font-sans text-[11px] font-medium tracking-wide text-espresso">
-        {status.open ? 'Ανοιχτά τώρα' : status.label}
-      </span>
-    </span>
-  )
-}
-
-function OpenBadge({
-  light = false,
-  showText = true,
-  showLabelAlways = false,
-  className = '',
-}: {
-  light?: boolean
-  showText?: boolean
-  /** When true, status label is visible at all breakpoints (e.g. mobile menu drawer). */
-  showLabelAlways?: boolean
-  className?: string
-}) {
-  const status = getOpenStatus()
-  const dotColor = status.open
-    ? 'bg-green-600'
-    : 'bg-mustard'
-  const textColor = light
-    ? 'text-white/90'
-    : 'text-charcoal/70'
-  const pulseColor = status.open ? 'bg-green-400' : 'bg-mustard'
-  const titleText = status.label
-
-  return (
-    <span
-      className={`flex items-center gap-2 font-sans text-[12px] font-medium ${textColor} ${className}`}
-      title={titleText}
-      aria-label={titleText}
-    >
-      <span className="relative flex h-2 w-2 shrink-0">
-        {status.open && (
-          <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-70 ${pulseColor}`} />
-        )}
-        <span className={`relative inline-flex h-2 w-2 rounded-full ${dotColor}`} />
-      </span>
-      {showText && (
-        <span className={showLabelAlways ? 'max-w-[min(100%,220px)] leading-snug' : 'hidden xl:inline'}>
-          {status.label}
-        </span>
-      )}
-    </span>
-  )
 }
 
 function BrandLogo({ compact = false }: { compact?: boolean }) {

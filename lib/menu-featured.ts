@@ -14,13 +14,13 @@ export const featuredMenuItems: (MenuItem & { cat: string })[] = [
     name: 'Teriyaki Chicken Poke Bowl',
     desc: 'Άγριο ρύζι, κοτόπουλο τεριγιάκι, λαχανικά, αυγό ποσέ, σουσάμι.',
     price: '11€',
-    image: '/images/menu/piata-0025.jpg',
+    image: '/images/menu/piata-0022.jpg',
   },
   {
     cat: 'TREATS',
-    name: 'Chia Pudding',
-    desc: 'Σπόροι chia, φυτικό γάλα, εποχιακά φρούτα.',
-    price: '4€',
-    image: '/images/menu/glyka-0002.jpg',
+    name: 'Chocolate Cake',
+    desc: 'Με γλυκοπατάτα, χουρμάδες, χωρίς ζάχαρη.',
+    price: '3.5€',
+    image: '/images/menu/glyka-0005.jpg',
   },
 ]

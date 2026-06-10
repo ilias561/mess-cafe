@@ -2,7 +2,7 @@
 
 import Image, { type ImageProps } from 'next/image'
 import { useReducedMotion } from 'framer-motion'
-import { useState, type CSSProperties, type SyntheticEvent } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type SyntheticEvent } from 'react'
 import { duration as d, ease } from '@/lib/motion'
 import { getImageManifestEntry } from '@/lib/image-manifest'
 
@@ -17,7 +17,15 @@ export type FadeImageProps = Omit<ImageProps, 'onLoadingComplete'> & {
 
 export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImageProps) {
   const reduceMotion = useReducedMotion()
+  const imgRef = useRef<HTMLImageElement>(null)
   const [imageLoaded, setImageLoaded] = useState(false)
+
+  // The load event can fire before hydration attaches onLoad (native lazy
+  // loading prefetches far ahead), leaving the image stuck at opacity 0.
+  useEffect(() => {
+    const img = imgRef.current
+    if (img?.complete && img.naturalWidth > 0) setImageLoaded(true)
+  }, [])
   const loaded = reduceMotion === true || imageLoaded
   const {
     style: imageStyle,
@@ -86,8 +94,8 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
           {manifest.webpSrcSet ? (
             <source type="image/webp" srcSet={manifest.webpSrcSet} sizes={resolvedSizes} />
           ) : null}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            ref={imgRef}
             src={srcKey}
             alt={props.alt}
             width={isFill ? undefined : (width ?? manifest.width)}
@@ -112,6 +120,8 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
     <span style={spanStyle} className={isFill ? 'min-h-0' : 'h-full w-full'}>
       <Image
         {...imgRest}
+        ref={imgRef}
+        alt={props.alt}
         src={src}
         width={width}
         height={height}

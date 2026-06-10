@@ -18,7 +18,10 @@ const LOCAL_SUBSCRIBED_KEY = 'mess_newsletter_subscribed'
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000
 
 function shouldSkipPath(pathname: string) {
+  // /food-for-medicine: don't interrupt menu browsing — the page is very long,
+  // so the 60%-scroll trigger fires right in the middle of reading dishes.
   return pathname.startsWith('/reservations')
+    || pathname.startsWith('/food-for-medicine')
     || pathname.startsWith('/admin')
     || pathname === '/_not-found'
 }

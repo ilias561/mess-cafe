@@ -28,7 +28,7 @@ export default function ThankYouPage() {
               Επιστροφή στην αρχική
             </Link>
             <Link
-              href="/food-for-medicine#menu"
+              href="/food-for-medicine"
               className="ui-interactive inline-flex min-h-[44px] items-center rounded-full border border-charcoal/30 px-8 py-3.5 font-sans text-sm font-medium text-charcoal hover:border-charcoal/60"
             >
               Δες το μενού

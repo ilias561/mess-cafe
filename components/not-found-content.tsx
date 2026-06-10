@@ -39,7 +39,7 @@ export default function NotFoundContent() {
             Επιστροφή στην αρχική
           </Link>
           <Link
-            href="/food-for-medicine#menu"
+            href="/food-for-medicine"
             className="ui-interactive rounded-full bg-mustard px-8 py-3.5 font-sans text-sm font-medium text-ink-dark hover:bg-amber "
           >
             Δες το μενού
