@@ -57,6 +57,10 @@ export default function WorkshopsPage() {
             <li aria-hidden="true" className="text-line/60">
               ·
             </li>
+            <li>ημιυπαίθριος διάδρομος</li>
+            <li aria-hidden="true" className="text-line/60">
+              ·
+            </li>
             <li>{/* TODO(owner): total or per-room capacity */}χωρητικότητα · σύντομα</li>
           </ul>
         </div>

@@ -149,12 +149,12 @@ export default function ReviewsSection() {
               <GoogleLogo className="h-5 w-5" />
               <div>
                 <div className="flex items-center gap-1">
-                  <span className="font-serif text-[20px] leading-none text-[#202124]">4.8</span>
+                  <span className="font-serif text-[20px] leading-none text-[#202124]">4.7</span>
                   <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 fill-[#FBBC04]" aria-hidden>
                     <path d="M10 1l2.47 5.82L18 7.64l-4.35 3.93L15.1 18 10 14.9 4.9 18l1.45-6.43L2 7.64l5.53-.82L10 1z" />
                   </svg>
                 </div>
-                <p className="font-sans text-[10px] text-[#5f6368]">165 αξιολογήσεις</p>
+                <p className="font-sans text-[10px] text-[#5f6368]">195 αξιολογήσεις</p>
               </div>
             </a>
           </div>

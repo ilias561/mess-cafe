@@ -68,8 +68,6 @@ export default function Navigation() {
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [hasPastHero, setHasPastHero] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
@@ -129,29 +127,6 @@ export default function Navigation() {
     }
   }, [])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      const hero = document.getElementById('hero')
-      const heroHeight =
-        hero && hero.offsetHeight > 0 ? hero.offsetHeight : window.innerHeight
-      const inHero = pathname === '/' && currentScrollY < heroHeight
-      if (currentScrollY < 120 || inHero) {
-        // Always show nav at top and during hero scroll-scrub
-        setIsVisible(true)
-      } else if (currentScrollY > lastScrollY && pathname === '/') {
-        // Collapse nav on scroll-down only after hero on homepage
-        setIsVisible(false)
-      } else {
-        setIsVisible(true)
-      }
-      setLastScrollY(currentScrollY)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollY, pathname])
-
   // Body scroll lock when mobile menu open
   useEffect(() => {
     if (!menuOpen) return
@@ -164,8 +139,6 @@ export default function Navigation() {
 
   useEffect(() => {
     setMenuOpen(false)
-    // Ensure nav is visible when landing on any non-homepage route
-    if (pathname !== '/') setIsVisible(true)
   }, [pathname])
 
   // ESC closes mobile menu
@@ -242,10 +215,10 @@ export default function Navigation() {
         Μετάβαση στο περιεχόμενο
       </a>
 
+      {/* Header stays pinned on every route — the homepage used to collapse it on
+          scroll-down, which left the section links unreachable mid-page. */}
       <m.header
         className={`fixed top-0 right-0 left-0 z-50 transition-[height,background-color,border-color] duration-250 ease-in-out ${navHeight} ${headerClasses}`}
-        animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ duration: 0.3, ease: EASE }}
       >
         <div className="relative mx-auto flex h-full max-w-[1440px] items-center justify-between gap-3 px-5 lg:gap-4 lg:px-8">
           <Link

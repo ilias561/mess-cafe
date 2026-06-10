@@ -9,7 +9,7 @@ export const images = {
   philosophyBright: '/images/111/mess-internal-0004.jpg',
   philosophyStairs: '/images/111/mess-internal-0005.jpg',
   philosophyCounter: '/images/111/mess-internal-0023.jpg',
-  philosophyMaterials: '/images/111/mess-internal-0024.jpg',
+  philosophyHall: '/images/111/mess-internal-0018.jpg',
   messPhilosophyPoster: '/images/mess-philosophy-poster.jpg',
 } as const
 

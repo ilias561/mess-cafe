@@ -215,6 +215,52 @@ export const menuData: MenuCategory[] = [
     ],
   },
   {
+    id: 'treats',
+    title: 'HEALTHY TREATS & SNACKS',
+    titleGr: 'Γλυκά & Snacks',
+    layout: 'grid',
+    items: [
+      {
+        name: 'Banana Bread',
+        desc: 'Χειροποίητο με ελάχιστη ζάχαρη.',
+        price: '2.5€',
+        badges: ['vegetarian'],
+        image: '/images/menu/glyka-0006.jpg',
+        nutrition: { calories: 210, protein: 4, carbs: 36, fat: 7, sugar: 14, fiber: 2 },
+        benefit: 'Η χειροποίητη μπανανόπιτα με ελάχιστη ζάχαρη παρέχει κάλιο, φυσικά σάκχαρα και ίνες για σταθερή ενέργεια.',
+      },
+      {
+        name: 'Chia Pudding',
+        desc: 'Σπόροι chia, φυτικό γάλα, εποχιακά φρούτα.',
+        price: '4€',
+        badges: ['vegan'],
+        nutrition: { calories: 260, protein: 7, carbs: 32, fat: 12, sugar: 14, fiber: 10 },
+        benefit:
+          'Οι σπόροι chia είναι πλούσιοι σε ωμέγα-3 λιπαρά οξέα, ασβέστιο και ίνες που προάγουν κορεσμό και υγεία εντέρου.',
+      },
+      {
+        name: 'Βάσικο Cheesecake',
+        desc: 'Χωρίς ψήσιμο, ελαφρύ και δροσιστικό.',
+        price: '4€',
+        badges: ['vegetarian'],
+        image: '/images/menu/glyka-0001.jpg',
+        nutrition: { calories: 310, protein: 6, carbs: 28, fat: 19, sugar: 18, fiber: 1 },
+        benefit:
+          'Το no-bake cheesecake διατηρεί τα ενεργά έλαια και τα θρεπτικά συστατικά της βάσης του, προσφέροντας γλυκιά απόλαυση με ελαφρύ προφίλ.',
+      },
+      {
+        name: 'Chocolate Cake',
+        desc: 'Με γλυκοπατάτα, χουρμάδες, χωρίς ζάχαρη.',
+        price: '3.5€',
+        badges: ['vegan'],
+        image: '/images/menu/glyka-0005.jpg',
+        nutrition: { calories: 290, protein: 5, carbs: 48, fat: 10, sugar: 22, fiber: 6 },
+        benefit:
+          'Η γλυκοπατάτα και οι χουρμάδες αντικαθιστούν τη ζάχαρη προσφέροντας φυτικές ίνες, β-καροτίνη και φυσική γλυκύτητα.',
+      },
+    ],
+  },
+  {
     id: 'coffee',
     title: 'COFFEE & TEA',
     titleGr: 'Καφές & Τσάι',
@@ -394,52 +440,6 @@ export const menuData: MenuCategory[] = [
         nutrition: { calories: 40, protein: 0, carbs: 9, fat: 0, sugar: 6, fiber: 0 },
         benefit:
           'Το kombucha περιέχει ζωντανά προβιοτικά, οργανικά οξέα και αντιοξειδωτικά που υποστηρίζουν την υγεία του εντέρου και της πέψης.',
-      },
-    ],
-  },
-  {
-    id: 'treats',
-    title: 'HEALTHY TREATS & SNACKS',
-    titleGr: 'Γλυκά & Snacks',
-    layout: 'grid',
-    items: [
-      {
-        name: 'Banana Bread',
-        desc: 'Χειροποίητο με ελάχιστη ζάχαρη.',
-        price: '2.5€',
-        badges: ['vegetarian'],
-        image: '/images/menu/glyka-0006.jpg',
-        nutrition: { calories: 210, protein: 4, carbs: 36, fat: 7, sugar: 14, fiber: 2 },
-        benefit: 'Η χειροποίητη μπανανόπιτα με ελάχιστη ζάχαρη παρέχει κάλιο, φυσικά σάκχαρα και ίνες για σταθερή ενέργεια.',
-      },
-      {
-        name: 'Chia Pudding',
-        desc: 'Σπόροι chia, φυτικό γάλα, εποχιακά φρούτα.',
-        price: '4€',
-        badges: ['vegan'],
-        nutrition: { calories: 260, protein: 7, carbs: 32, fat: 12, sugar: 14, fiber: 10 },
-        benefit:
-          'Οι σπόροι chia είναι πλούσιοι σε ωμέγα-3 λιπαρά οξέα, ασβέστιο και ίνες που προάγουν κορεσμό και υγεία εντέρου.',
-      },
-      {
-        name: 'Βάσικο Cheesecake',
-        desc: 'Χωρίς ψήσιμο, ελαφρύ και δροσιστικό.',
-        price: '4€',
-        badges: ['vegetarian'],
-        image: '/images/menu/glyka-0001.jpg',
-        nutrition: { calories: 310, protein: 6, carbs: 28, fat: 19, sugar: 18, fiber: 1 },
-        benefit:
-          'Το no-bake cheesecake διατηρεί τα ενεργά έλαια και τα θρεπτικά συστατικά της βάσης του, προσφέροντας γλυκιά απόλαυση με ελαφρύ προφίλ.',
-      },
-      {
-        name: 'Chocolate Cake',
-        desc: 'Με γλυκοπατάτα, χουρμάδες, χωρίς ζάχαρη.',
-        price: '3.5€',
-        badges: ['vegan'],
-        image: '/images/menu/glyka-0005.jpg',
-        nutrition: { calories: 290, protein: 5, carbs: 48, fat: 10, sugar: 22, fiber: 6 },
-        benefit:
-          'Η γλυκοπατάτα και οι χουρμάδες αντικαθιστούν τη ζάχαρη προσφέροντας φυτικές ίνες, β-καροτίνη και φυσική γλυκύτητα.',
       },
     ],
   },

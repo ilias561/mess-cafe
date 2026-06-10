@@ -8,9 +8,9 @@ const anchors = [
   { id: 'bowls', label: 'Bowls' },
   { id: 'salads', label: 'Salads' },
   { id: 'wraps', label: 'Wraps' },
+  { id: 'treats', label: 'Treats' },
   { id: 'coffee', label: 'Coffee' },
   { id: 'smoothies', label: 'Smoothies' },
-  { id: 'treats', label: 'Treats' },
 ]
 
 // Matches Navigation's `h-16` (64px) on non-hero pages. The anchor nav sits flush

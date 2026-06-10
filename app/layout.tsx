@@ -124,11 +124,11 @@ const jsonLd = {
   paymentAccepted: 'Cash, Credit Card',
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.8', // first-party: matches the 4.8 rating chip in components/reviews-section.tsx
+    // Live Google Business Profile values (checked 2026-06-10) — keep in sync
+    // with the rating chip in components/reviews-section.tsx.
+    ratingValue: '4.7',
     bestRating: '5',
-    // TODO(owner): add reviewCount from the live Google Business Profile.
-    // Deliberately omitted (not shipped as 0) so we never publish a fabricated
-    // count; the AggregateRating becomes rich-result-eligible once this is set.
+    reviewCount: 195,
   },
   review: schemaReviews,
   sameAs: [

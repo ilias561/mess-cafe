@@ -283,7 +283,9 @@ export function MenuDishCard({
             loading="lazy"
             decoding="async"
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="ui-img-hover h-full w-full object-contain"
+            // Not ui-img-hover: that helper hardcodes object-cover, which beats the
+            // object-contain utility and crops square/portrait dishes into the box.
+            className="h-full w-full object-contain transition-[transform,filter] duration-500 ease-out motion-safe:group-hover:scale-[1.03] motion-safe:group-hover:brightness-110"
           />
         ) : null}
       </div>
