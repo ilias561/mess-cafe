@@ -95,6 +95,11 @@ function FeaturedDrink({ item }: { item: MenuItemType }) {
             {item.name}
           </h3>
           <DietaryTags badges={item.badges} />
+          {item.price && (
+            <span className="ml-auto shrink-0 font-sans text-[16px] font-medium tabular-nums text-charcoal">
+              {item.price}
+            </span>
+          )}
         </div>
         {item.desc && (
           <p className="max-w-[48ch] font-sans text-[15px] leading-relaxed text-concrete">{item.desc}</p>
