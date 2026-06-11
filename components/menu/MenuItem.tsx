@@ -296,11 +296,6 @@ export function MenuDishCard({
             {item.name}
           </h3>
           <DietaryTags badges={item.badges} />
-          {item.price && (
-            <span className="ml-auto shrink-0 font-sans text-[15px] font-medium tabular-nums text-charcoal">
-              {item.price}
-            </span>
-          )}
         </div>
         {item.desc && (
           <p className="mt-1.5 font-sans text-[14px] leading-relaxed text-concrete md:mt-2">{item.desc}</p>
@@ -337,14 +332,7 @@ export function MenuListRow({
           </h3>
           <DietaryTags badges={item.badges} />
         </div>
-        <div className="flex shrink-0 items-baseline gap-3">
-          {item.price && (
-            <span className="font-sans text-[15px] font-medium tabular-nums text-charcoal">
-              {item.price}
-            </span>
-          )}
-          {showNutrition && item.nutrition && <CaloriesTag calories={item.nutrition.calories} />}
-        </div>
+        {showNutrition && item.nutrition && <CaloriesTag calories={item.nutrition.calories} />}
       </div>
       <p className="mt-1 font-sans text-[13px] leading-relaxed text-concrete md:mt-1.5 md:text-[14px]">
         {item.desc}
