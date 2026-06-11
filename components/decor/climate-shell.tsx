@@ -100,7 +100,7 @@ export function ClimateShell({
       className={`scroll-mt-28 relative ${className ?? ''}`}
       style={staticBg}
     >
-      {!reduce && (
+      {!reduce && !isMobile && (
         <>
           <m.div
             aria-hidden
@@ -114,11 +114,30 @@ export function ClimateShell({
           />
         </>
       )}
+      {!reduce && isMobile && (
+        <>
+          {/* Static stand-ins for the scroll-driven crossfade: same enter/exit
+              color ramp, painted once — no animated section-sized layers on iOS. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[26vh]"
+            style={{ background: `linear-gradient(to bottom, ${bgEnter}, transparent)` }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26vh]"
+            style={{ background: `linear-gradient(to top, ${exit}, transparent)` }}
+          />
+        </>
+      )}
       <m.div
         className={`relative z-10 isolate border-t border-line/30${contentClipping ? ' overflow-hidden' : ''}`}
         style={chrome ? chromeStyle : reduce ? staticBg : undefined}
       >
-        {chrome && (
+        {/* Ring + vignette are full-section-sized layers with scroll-animated
+            opacity — on iOS each one re-composites the whole (multi-thousand-px)
+            section through the entry/exit zones, so phones skip them. */}
+        {chrome && !isMobile && (
           <m.div
             aria-hidden
             className={`pointer-events-none absolute inset-0 z-30 rounded-[inherit] ring-1 ${ringClassName}`}
@@ -126,7 +145,7 @@ export function ClimateShell({
           />
         )}
 
-        {vignette && (
+        {vignette && !isMobile && (
           <m.div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-[5] rounded-[inherit]"

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useIsMobile } from '@/lib/use-is-mobile'
 
 interface AmbientVideoProps {
   /** Single src — loops forever */
@@ -18,6 +19,9 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
   const ref = useRef<HTMLVideoElement>(null)
   const playlist = srcs && srcs.length > 1 ? srcs : null
   const [index, setIndex] = useState(0)
+  // Phones get the poster as a plain image — these ambient clips are 1–6.5MB
+  // each, and decoding them while scrolling is a large part of the mobile jank.
+  const isMobile = useIsMobile()
 
   const activeSrc = playlist ? playlist[index] : (src ?? '')
 
@@ -69,6 +73,20 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
     video.load()
     video.play().catch(() => {})
   }, [index, playlist])
+
+  if (isMobile && poster) {
+    return (
+      <img
+        src={poster}
+        alt={ariaLabel ?? ''}
+        loading="lazy"
+        decoding="async"
+        className={className}
+        aria-hidden={ariaHidden}
+        style={style}
+      />
+    )
+  }
 
   return (
     <video

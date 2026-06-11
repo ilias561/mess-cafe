@@ -135,9 +135,12 @@ export default function PhilosophySection() {
 // out and the canopy + content are revealed all at once. Fires once.
 function MysteryCurtain() {
   const reduce = useReducedMotion()
+  // A section-sized solid overlay with a 900ms opacity transition — one more
+  // huge composited layer iOS doesn't need; phones show the content directly.
+  const isMobile = useIsMobile()
   const sentinel = useRef<HTMLDivElement>(null)
   const revealed = useInView(sentinel, { once: true, margin: '0px 0px -45% 0px' })
-  if (reduce) return null
+  if (reduce || isMobile) return null
   return (
     <>
       <div ref={sentinel} aria-hidden className="pointer-events-none absolute left-0 top-0 h-px w-full" />
