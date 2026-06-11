@@ -48,7 +48,7 @@ export default function PostBody({ markdown, variant = 'article' }: PostBodyProp
   const renderBlock = (block: string, index: number) => {
     if (block.startsWith('## ')) {
       return (
-        <h2 key={`h2-${index}`} className="mt-16 mb-6 font-serif text-[clamp(28px,3.4vw,40px)] leading-[1.1] tracking-[-0.01em] text-charcoal">
+        <h2 key={`h2-${index}`} className="mt-16 mb-6 font-serif text-[clamp(22px,3.4vw,40px)] leading-[1.1] tracking-[-0.01em] text-charcoal">
           {block.replace(/^## /, '')}
         </h2>
       )

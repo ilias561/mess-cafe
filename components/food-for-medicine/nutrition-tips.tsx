@@ -87,7 +87,7 @@ export default function NutritionTips() {
           >
             <span
               aria-hidden
-              className="font-serif text-[clamp(28px,3vw,36px)] leading-none text-mustard/80"
+              className="font-serif text-[clamp(24px,3vw,36px)] leading-none text-mustard/80"
             >
               {String(i + 1).padStart(2, '0')}
             </span>

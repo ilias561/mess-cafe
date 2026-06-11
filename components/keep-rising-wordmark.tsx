@@ -8,7 +8,7 @@ export default function KeepRisingWordmark({ className = '', as: Tag = 'h2' }: K
   return (
     <Tag
       className={`font-serif font-semibold uppercase tracking-[-0.02em] text-white ${className}`}
-      style={{ fontSize: 'clamp(48px, 8vw, 120px)', lineHeight: 1 }}
+      style={{ fontSize: 'clamp(36px, 8vw, 120px)', lineHeight: 1 }}
     >
       #KEEPRISING
     </Tag>

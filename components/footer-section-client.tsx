@@ -38,7 +38,7 @@ export default function FooterSectionClient({ settings }: FooterSectionClientPro
             OPEN DAILY · {settings.hours.map((slot) => `${slot.day} ${slot.open}—${slot.close}`).join(' · ')}
           </p>
 
-          <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(36px,9vw,140px)] text-charcoal">
+          <h2 className="font-serif leading-[1.1] tracking-normal [text-rendering:optimizeLegibility] text-[clamp(32px,9vw,140px)] text-charcoal">
             Σε περιμένουμε.
           </h2>
 

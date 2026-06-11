@@ -56,7 +56,7 @@ function CategoryHeader({ category, index }: { category: MenuCategoryType; index
       transition={{ duration: 0.7, ease: EASE }}
       className="flex items-end gap-4 border-b border-line/50 pb-4 md:gap-7 md:pb-5"
     >
-      <span className="font-serif text-[clamp(40px,6vw,68px)] font-light leading-[0.8] text-mustard/30">
+      <span className="font-serif text-[clamp(32px,6vw,68px)] font-light leading-[0.8] text-mustard/30">
         {String(index + 1).padStart(2, '0')}
       </span>
       <div className="min-w-0">
@@ -91,7 +91,7 @@ function FeaturedDrink({ item }: { item: MenuItemType }) {
       <div className="flex flex-col justify-center gap-4 p-7 sm:p-9 md:gap-5 md:p-12 lg:p-16">
         <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-mustard">✦ Signature</p>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
-          <h3 className="u-balance min-w-0 font-serif text-[clamp(30px,4.5vw,46px)] italic leading-[1.05] tracking-tight text-charcoal">
+          <h3 className="u-balance min-w-0 font-serif text-[clamp(26px,4.5vw,46px)] italic leading-[1.05] tracking-tight text-charcoal">
             {item.name}
           </h3>
           <DietaryTags badges={item.badges} />

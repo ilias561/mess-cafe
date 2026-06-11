@@ -95,7 +95,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                 <SplitText
                   as="span"
                   text="Πες μας τι σκέφτεσαι."
-                  className="block font-serif text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-tight"
+                  className="block font-serif text-[clamp(26px,4.5vw,56px)] leading-[1.05] tracking-tight"
                 />
               </AnaglyphHeading>
             </ScrollDrift>
@@ -127,7 +127,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                 <p className="font-sans text-[10px] uppercase tracking-[0.16em] text-mustard/80">
                   ΕΥΧΑΡΙΣΤΟΥΜΕ
                 </p>
-                <h3 className="mt-3 font-serif text-[clamp(24px,3vw,34px)] leading-[1.1] text-charcoal">
+                <h3 className="mt-3 font-serif text-[clamp(20px,3vw,34px)] leading-[1.1] text-charcoal">
                   Λάβαμε το μήνυμά σου!
                 </h3>
                 <p className="mt-2 font-sans text-[14px] leading-relaxed text-charcoal/70">

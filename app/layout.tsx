@@ -144,7 +144,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="el" className={`${fraunces.variable} ${inter.variable}`}>
+    // Inline style: Lightning CSS strips -webkit-text-size-adjust from the CSS
+    // bundle, but iOS Safari only honors the -webkit- prefix.
+    <html
+      lang="el"
+      className={`${fraunces.variable} ${inter.variable}`}
+      style={{ WebkitTextSizeAdjust: '100%' }}
+    >
       <head>
         <link rel="preconnect" href="https://static.cloudflareinsights.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />

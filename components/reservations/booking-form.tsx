@@ -122,7 +122,7 @@ export default function BookingForm({ events, showEventKindSelect = false }: Boo
     <div aria-live="polite">
       {status === 'success' ? (
         <div className="border border-line/30 bg-bone-warm p-8">
-          <h2 className="font-serif text-[clamp(30px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
+          <h2 className="font-serif text-[clamp(26px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
             Ευχαριστούμε!
           </h2>
           <p className="mt-4 font-sans text-[16px] leading-[1.7] text-concrete">Θα επικοινωνήσουμε μαζί σου σύντομα.</p>

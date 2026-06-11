@@ -14,7 +14,7 @@ export default function ThankYouPage() {
       <Navigation />
       <section className="flex min-h-[70vh] items-center px-6 md:px-12">
         <div className="mx-auto w-full max-w-[1400px] text-center md:text-left">
-          <h1 className="font-serif text-[clamp(36px,8vw,96px)] leading-[0.98] tracking-[-0.03em] text-charcoal">
+          <h1 className="font-serif text-[clamp(28px,8vw,96px)] leading-[0.98] tracking-[-0.03em] text-charcoal">
             Ευχαριστούμε!
           </h1>
           <p className="mx-auto mt-6 max-w-[48ch] font-sans text-[16px] leading-relaxed text-concrete md:mx-0 md:text-[17px]">

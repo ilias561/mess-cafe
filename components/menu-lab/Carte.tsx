@@ -142,14 +142,14 @@ function CategorySection({ category, index }: { category: MenuCategory; index: n
           {...reveal()}
           className="flex items-end gap-4 border-b border-black/10 pb-4 md:gap-7 md:pb-5"
         >
-          <span className="font-serif text-[clamp(40px,6vw,68px)] font-light leading-[0.8]" style={{ color: C.gold }}>
+          <span className="font-serif text-[clamp(32px,6vw,68px)] font-light leading-[0.8]" style={{ color: C.gold }}>
             {String(index + 1).padStart(2, '0')}
           </span>
           <div className="min-w-0">
             <p className="font-sans text-[11px] uppercase tracking-[0.22em]" style={{ color: '#2d5a27' }}>
               {category.title}
             </p>
-            <h2 className="font-serif text-[clamp(28px,4vw,44px)] italic leading-[1.05] tracking-tight" style={{ color: C.ink }}>
+            <h2 className="font-serif text-[clamp(24px,4vw,44px)] italic leading-[1.05] tracking-tight" style={{ color: C.ink }}>
               {category.titleGr}
             </h2>
           </div>
@@ -207,7 +207,7 @@ function Hero() {
         <p className="font-sans text-[11px] uppercase tracking-[0.3em]" style={{ color: '#e8b547' }}>
           M.E.S.S. · Ιωάννινα
         </p>
-        <h1 className="mt-4 font-serif text-[clamp(52px,10vw,124px)] italic leading-[0.85] tracking-tight text-[#f3efe3]">
+        <h1 className="mt-4 font-serif text-[clamp(40px,10vw,124px)] italic leading-[0.85] tracking-tight text-[#f3efe3]">
           Μενού
         </h1>
         <p className="mt-5 max-w-[48ch] font-sans text-[15px] leading-relaxed text-[#e7e2d4]">

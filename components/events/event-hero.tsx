@@ -38,7 +38,7 @@ export default function EventHero({ event }: { event: Event }) {
               {event.categoryLabel}
             </div>
 
-            <h1 className="mt-5 font-serif text-[clamp(30px,4vw,56px)] leading-[1.03] tracking-[-0.01em] text-charcoal">
+            <h1 className="mt-5 font-serif text-[clamp(26px,4vw,56px)] leading-[1.03] tracking-[-0.01em] text-charcoal">
               {event.title}
             </h1>
 

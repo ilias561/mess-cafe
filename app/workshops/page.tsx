@@ -40,7 +40,7 @@ export default function WorkshopsPage() {
       <Navigation />
       <section className="px-6 pt-36 md:px-12 md:pt-44">
         <div className="mx-auto max-w-[1400px]">
-          <h1 className="font-serif text-[clamp(40px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
+          <h1 className="font-serif text-[clamp(32px,5.5vw,72px)] leading-[1.02] tracking-[-0.02em] text-charcoal">
             Workshops &amp; Events
           </h1>
           <p className="mt-8 max-w-[72ch] font-serif text-[18px] italic leading-relaxed text-charcoal/70 md:text-[20px]">
@@ -73,7 +73,7 @@ export default function WorkshopsPage() {
 
       <section className="border-t border-line/30 px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[720px]">
-          <h2 className="font-serif text-[clamp(28px,4vw,40px)] tracking-tight text-charcoal">Κλείσε τον χώρο σου</h2>
+          <h2 className="font-serif text-[clamp(24px,4vw,40px)] tracking-tight text-charcoal">Κλείσε τον χώρο σου</h2>
           <p className="mt-4 font-sans text-[15px] leading-relaxed text-concrete">
             Συμπλήρωσε τη φόρμα για να οργανώσουμε μαζί το workshop ή το event σου.
           </p>

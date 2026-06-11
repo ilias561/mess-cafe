@@ -176,7 +176,7 @@ export default function ActionsHeroHeader({ nextEvent }: Props) {
                     : undefined
                 }
               >
-                <h1 className="font-serif text-[clamp(40px,5.5vw,72px)] leading-[0.98] tracking-[-0.02em] text-charcoal">
+                <h1 className="font-serif text-[clamp(32px,5.5vw,72px)] leading-[0.98] tracking-[-0.02em] text-charcoal">
                   {heroWords.map((word, i) => {
                     const isLast = i === heroWords.length - 1
                     if (isLast) {

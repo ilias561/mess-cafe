@@ -9,7 +9,7 @@ export default function VenueSpacesSection() {
       <div className="mx-auto max-w-[1400px]">
         <SectionReveal>
           <p className="font-sans text-[11px] uppercase tracking-[0.16em] text-olive">ΟΙ ΧΩΡΟΙ ΜΑΣ</p>
-          <h2 className="mt-5 font-serif text-[clamp(28px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
+          <h2 className="mt-5 font-serif text-[clamp(24px,4vw,44px)] leading-[1.05] tracking-[-0.02em] text-charcoal">
             Δύο αίθουσες, ένα πατάρι &amp; ο διάδρομος ανάμεσά τους
           </h2>
           <p className="mt-4 max-w-[60ch] font-sans text-[15px] leading-relaxed text-concrete">
@@ -34,7 +34,7 @@ export default function VenueSpacesSection() {
                   ))}
                 </div>
                 <div className="mt-6 flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-                  <h3 className="font-serif text-[clamp(24px,2.6vw,32px)] leading-tight tracking-[-0.01em] text-charcoal">
+                  <h3 className="font-serif text-[clamp(20px,2.6vw,32px)] leading-tight tracking-[-0.01em] text-charcoal">
                     {space.name}
                   </h3>
                   <p className="font-sans text-[11px] uppercase tracking-[0.14em] text-olive">

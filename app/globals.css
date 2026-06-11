@@ -135,13 +135,13 @@
   }
 
   h1 {
-    font-size: clamp(64px, 10vw, 168px);
+    font-size: clamp(48px, 10vw, 168px);
     line-height: 1.02;
     letter-spacing: -0.02em;
   }
 
   h2 {
-    font-size: clamp(40px, 6vw, 88px);
+    font-size: clamp(30px, 6vw, 88px);
     line-height: 1.05;
   }
 
@@ -171,14 +171,14 @@
 
 /* Shared editorial type scale — centralizes ad-hoc clamp() headings */
 :root {
-  --type-display: clamp(40px, 6vw, 76px);
-  --type-hero: clamp(40px, 5.5vw, 72px);
-  --type-section: clamp(34px, 4.6vw, 52px);
-  --type-section-sm: clamp(32px, 3.4vw, 46px);
-  --type-section-md: clamp(28px, 3.5vw, 40px);
-  --type-category: clamp(32px, 4.5vw, 56px);
-  --type-menu-title: clamp(44px, 6.5vw, 92px);
-  --type-card: clamp(24px, 3vw, 32px);
+  --type-display: clamp(32px, 6vw, 76px);
+  --type-hero: clamp(32px, 5.5vw, 72px);
+  --type-section: clamp(26px, 4.6vw, 52px);
+  --type-section-sm: clamp(24px, 3.4vw, 46px);
+  --type-section-md: clamp(22px, 3.5vw, 40px);
+  --type-category: clamp(26px, 4.5vw, 56px);
+  --type-menu-title: clamp(34px, 6.5vw, 92px);
+  --type-card: clamp(20px, 3vw, 32px);
 }
 
 /* Lenis smooth scroll — disable native smooth so Lenis owns the scroll */
@@ -251,7 +251,7 @@ html.lenis body {
 
 /* Hero headline fluid sizing */
 .hero-headline {
-  font-size: clamp(46px, 7vw, 112px);
+  font-size: clamp(34px, 7vw, 112px);
   line-height: 1;
   letter-spacing: -0.02em;
 }

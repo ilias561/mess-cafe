@@ -172,7 +172,7 @@ export default function ChoiceDoors() {
 
         <m.h1
           {...reveal(0.12)}
-          className="hero-text-shadow-display mt-3 font-serif text-[clamp(32px,5.5vw,64px)] leading-[1.02] tracking-tight text-balance text-white"
+          className="hero-text-shadow-display mt-3 font-serif text-[clamp(26px,5.5vw,64px)] leading-[1.02] tracking-tight text-balance text-white"
         >
           Φαγητό ως <span className="italic text-mustard">Φάρμακο</span>
         </m.h1>

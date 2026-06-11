@@ -300,7 +300,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16, scale: 0.96 }}
             animate={loaderReady ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ delay: 0.5, duration: 1.2, ease: EASE }}
-            className="flex items-center gap-5"
+            className="flex items-center gap-4 md:gap-5"
           >
             <m.div
               animate={prefersReducedMotion || !heroInView ? {} : { y: [0, -8, 0] }}
@@ -313,10 +313,10 @@ export default function Hero() {
                 width={88}
                 height={88}
                 priority
-                className="hero-text-shadow h-20 w-20 rounded-full object-cover md:h-28 md:w-28 lg:h-[172px] lg:w-[172px]"
+                className="hero-text-shadow h-16 w-16 rounded-full object-cover md:h-28 md:w-28 lg:h-[172px] lg:w-[172px]"
               />
             </m.div>
-            <span className="hero-text-shadow font-serif text-[52px] font-medium leading-none tracking-tight text-white md:text-[76px] lg:text-[132px]">
+            <span className="hero-text-shadow font-serif text-[40px] font-medium leading-none tracking-tight text-white md:text-[76px] lg:text-[132px]">
               M.E.S.S.
             </span>
           </m.div>

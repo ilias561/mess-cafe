@@ -92,7 +92,7 @@ export default function MessAcronym() {
             >
               <m.p
                 className="font-serif leading-none tracking-tight text-charcoal"
-                style={{ fontSize: 'clamp(120px,18vw,240px)' }}
+                style={{ fontSize: 'clamp(90px,18vw,240px)' }}
                 aria-hidden
                 initial={
                   reduce
@@ -113,7 +113,7 @@ export default function MessAcronym() {
               </m.p>
               <div>
                 <m.p
-                  className="inline-block border-b border-transparent font-serif text-[32px] leading-snug tracking-tight text-charcoal transition-all duration-250 group-hover/col:-translate-y-1 group-hover/col:border-mustard group-focus-within/col:-translate-y-1 group-focus-within/col:border-mustard"
+                  className="inline-block border-b border-transparent font-serif text-[24px] md:text-[32px] leading-snug tracking-tight text-charcoal transition-all duration-250 group-hover/col:-translate-y-1 group-hover/col:border-mustard group-focus-within/col:-translate-y-1 group-focus-within/col:border-mustard"
                   initial={reduce ? false : { opacity: 0, y: 8 }}
                   whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-10% 0px' }}
