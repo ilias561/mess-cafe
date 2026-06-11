@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from 'react'
 import { m, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useIsMobile } from '@/lib/use-is-mobile'
 
 export type ClimateParticleVariant = 'mustard' | 'dust' | 'shimmer' | 'none'
 
@@ -43,6 +44,8 @@ export function ClimateShell({
   // shells × `particleCount` particles, the framer keyframe loops otherwise tick
   // on the main thread for the whole page regardless of scroll position.
   const inView = useInView(ref, { margin: '0px 0px -5% 0px' })
+  // Particles are infinite main-thread keyframe loops — skipped on phones.
+  const isMobile = useIsMobile()
   const exit = bgExit ?? bgEnter
 
   const { scrollYProgress } = useScroll({
@@ -138,7 +141,7 @@ export function ClimateShell({
           />
         )}
 
-        {!reduce && particles !== 'none' && inView && (
+        {!reduce && !isMobile && particles !== 'none' && inView && (
           <m.div
             aria-hidden
             className="pointer-events-none absolute inset-0 z-[6]"

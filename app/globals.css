@@ -124,6 +124,14 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
+  /* A fixed mix-blend-mode layer forces iOS Safari to re-composite the whole
+     viewport on every scroll frame — the grain is invisible at phone DPI anyway. */
+  @media (max-width: 767px) {
+    body::after {
+      display: none;
+    }
+  }
+
   h1,
   h2,
   h3 {
@@ -247,6 +255,19 @@ html.lenis body {
 .leaf-sway {
   animation: leafSway 7s ease-in-out infinite;
   transform-origin: 50% 10%;
+}
+
+/* Border-leaf color crush. drop-shadow is a per-image raster-time blur —
+   affordable on desktop GPUs, a frame killer across ~170 leaves on phones,
+   so mobile keeps the color grade only. */
+.leaf-filter {
+  filter: brightness(0.42) saturate(1.45) contrast(1.08) hue-rotate(-8deg)
+    drop-shadow(0 10px 16px rgba(0, 0, 0, 0.45));
+}
+@media (max-width: 767px) {
+  .leaf-filter {
+    filter: brightness(0.42) saturate(1.45) contrast(1.08) hue-rotate(-8deg);
+  }
 }
 
 /* Hero headline fluid sizing */

@@ -16,6 +16,7 @@ import {
   MicroEyebrow,
 } from '@/components/decor/ornaments'
 import { VIEWPORT_ONCE, ease } from '@/lib/motion'
+import { useIsMobile } from '@/lib/use-is-mobile'
 import { videoSrc } from '@/lib/media'
 import { images } from '@/lib/images'
 
@@ -155,6 +156,8 @@ function Centerpiece() {
   // Gate the two infinite keyframe loops below to on-screen — repeat:Infinity
   // otherwise ticks on the main thread for the whole session even scrolled away.
   const inView = useInView(ref, { margin: '200px' })
+  // Phones skip parallax + the infinite loops; entrance reveals stay.
+  const still = (useIsMobile() || reduce) ?? false
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const videoY = useTransform(scrollYProgress, [0, 1], ['8%', '-8%'])
   const textY = useTransform(scrollYProgress, [0, 1], ['-4%', '4%'])
@@ -165,7 +168,7 @@ function Centerpiece() {
 
         <m.div
           className="md:col-start-2 md:col-span-5"
-          style={reduce ? undefined : { y: videoY }}
+          style={still ? undefined : { y: videoY }}
           initial={reduce ? false : { opacity: 0, x: -60, scale: 0.96 }}
           whileInView={reduce ? undefined : { opacity: 1, x: 0, scale: 1 }}
           viewport={VIEWPORT_ONCE}
@@ -175,9 +178,9 @@ function Centerpiece() {
             <div className="relative aspect-[9/16] w-full max-w-[380px] overflow-hidden">
               <m.div
                 className="absolute inset-0"
-                animate={!reduce && inView ? { scale: [1, 1.06, 1] } : undefined}
+                animate={!still && inView ? { scale: [1, 1.06, 1] } : undefined}
                 transition={
-                  reduce
+                  still
                     ? undefined
                     : { duration: 12, repeat: Infinity, ease: 'easeInOut' }
                 }
@@ -198,7 +201,7 @@ function Centerpiece() {
 
         <m.div
           className="md:col-start-8 md:col-span-4"
-          style={reduce ? undefined : { y: textY }}
+          style={still ? undefined : { y: textY }}
           initial={reduce ? false : { opacity: 0, x: 40 }}
           whileInView={reduce ? undefined : { opacity: 1, x: 0 }}
           viewport={VIEWPORT_ONCE}
@@ -222,9 +225,9 @@ function Centerpiece() {
 
           <m.div
             className="mt-10 flex items-center gap-3"
-            animate={!reduce && inView ? { x: [0, 6, 0] } : undefined}
+            animate={!still && inView ? { x: [0, 6, 0] } : undefined}
             transition={
-              reduce
+              still
                 ? undefined
                 : { duration: 7, repeat: Infinity, ease: 'easeInOut' }
             }
@@ -311,6 +314,9 @@ function KenBurnsTile({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  // Phones get a static tile — 4 scroll-linked transforms re-composite on every
+  // frame, and the Ken Burns drift barely reads on a 390px-wide image anyway.
+  const still = (useIsMobile() || reduce) ?? false
   // will-change only while near the viewport — an unconditional one keeps each of
   // the 4 tiles GPU-promoted (in VRAM) even when scrolled far away.
   const inView = useInView(ref, { margin: '200px' })
@@ -324,7 +330,7 @@ function KenBurnsTile({
         <div className={`relative w-full overflow-hidden ring-1 ring-ink-dark/15 ${aspect}`}>
           <m.div
             className="absolute inset-0"
-            style={reduce ? undefined : { scale, y, willChange: inView ? 'transform' : 'auto' }}
+            style={still ? undefined : { scale, y, willChange: inView ? 'transform' : 'auto' }}
           >
             <FadeImage
               src={src}

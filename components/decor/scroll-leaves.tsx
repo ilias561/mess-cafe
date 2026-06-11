@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type CSSProperties } from 'react'
 import { m, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
+import { useIsMobile } from '@/lib/use-is-mobile'
 
 type Leaf = {
   key: string
@@ -23,6 +24,8 @@ type Leaf = {
   swayDelay: number
   /** Only a subset parallax-drift (keeps animated element count in check). */
   animated: boolean
+  /** Culled below md — phones keep ~¼ of the border (front layer, every other leaf). */
+  mobileHidden: boolean
 }
 
 // Bushy `fern` stays dominant (~45%) — it's the multi-leaf cluster that builds
@@ -48,10 +51,9 @@ const POOL = [
   'leaf-cluster-border',
 ]
 
-// Crush to a dark forest green and steer any stray warm/cool casts toward green.
-// (When real dark assets are supplied, dial this back toward brightness(0.85).)
-const LEAF_FILTER =
-  'brightness(0.42) saturate(1.45) contrast(1.08) hue-rotate(-8deg) drop-shadow(0 10px 16px rgba(0,0,0,0.45))'
+// Color crush lives in the `.leaf-filter` class (globals.css) so mobile can
+// drop the expensive drop-shadow via media query.
+// (When real dark assets are supplied, dial it back toward brightness(0.85).)
 
 // Big, faint background leaves — a slightly *lighter* tonal whisper so they read
 // as a watermark against the dark-green bg rather than vanishing into it.
@@ -87,13 +89,15 @@ const pick = (r: number) => POOL[Math.floor(r * POOL.length) % POOL.length]
 function buildLeaves(): Leaf[] {
   const leaves: Leaf[] = []
   let i = 0
-  const push = (l: Omit<Leaf, 'key' | 'animated' | 'swayDur' | 'swayDelay'>) => {
+  const push = (l: Omit<Leaf, 'key' | 'animated' | 'swayDur' | 'swayDelay' | 'mobileHidden'> & { layer: number }) => {
+    const { layer, ...rest } = l
     leaves.push({
-      ...l,
+      ...rest,
       key: `k${i}`,
       animated: i % 12 === 0,
       swayDur: round(5.5 + rand(i, 9) * 4),
       swayDelay: round(-rand(i, 10) * 6),
+      mobileHidden: layer === 1 || i % 2 === 1,
     })
     i++
   }
@@ -109,6 +113,7 @@ function buildLeaves(): Leaf[] {
         const w = (layer === 0 ? 170 : 130) + Math.round(r1 * 170)
         const bleed = -((layer === 0 ? 4 : 40) + Math.round(r2 * 70))
         push({
+          layer,
           name: pick(r1),
           w,
           pos:
@@ -135,6 +140,7 @@ function buildLeaves(): Leaf[] {
         const w = (layer === 0 ? 170 : 130) + Math.round(r1 * 170)
         const bleed = -((layer === 0 ? 6 : 46) + Math.round(r2 * 60))
         push({
+          layer,
           name: pick(r2),
           w,
           pos:
@@ -157,11 +163,12 @@ const PHILOSOPHY_LEAVES = buildLeaves()
 
 function LeafImg({
   name,
-  filter = LEAF_FILTER,
+  filter,
 }: {
   name: string
   /** Accepted for caller symmetry; rendering always uses the w480 variant (see below). */
   w: number
+  /** Custom inline filter (watermarks); border leaves use `.leaf-filter` so mobile can drop the drop-shadow. */
   filter?: string
 }) {
   const base = `/images/decor/photo/${name}`
@@ -180,8 +187,8 @@ function LeafImg({
         loading="lazy"
         decoding="async"
         draggable={false}
-        style={{ filter }}
-        className="block h-auto w-full select-none"
+        style={filter ? { filter } : undefined}
+        className={`block h-auto w-full select-none${filter ? '' : ' leaf-filter'}`}
       />
     </picture>
   )
@@ -191,7 +198,7 @@ function LeafImg({
 function WatermarkLeaf({ leaf }: { leaf: (typeof WATERMARKS)[number] }) {
   return (
     <div
-      className="absolute"
+      className="absolute max-md:hidden"
       style={{
         ...leaf.pos,
         transform: `rotate(${leaf.rot}deg) scaleX(${leaf.flip ? -1 : 1})`,
@@ -207,7 +214,7 @@ function WatermarkLeaf({ leaf }: { leaf: (typeof WATERMARKS)[number] }) {
 function StaticLeaf({ leaf }: { leaf: Leaf }) {
   return (
     <div
-      className="absolute"
+      className={leaf.mobileHidden ? 'absolute max-md:hidden' : 'absolute'}
       style={{
         ...leaf.pos,
         transform: `rotate(${leaf.rot}deg) scaleX(${leaf.flip ? -1 : 1})`,
@@ -273,6 +280,10 @@ function useRectProgress() {
 
 export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }) {
   const reduce = useReducedMotion() ?? false
+  // Phones get the static branch: animating scale/y on a layer spanning the whole
+  // section forces iOS to re-raster every leaf mid-scroll. The MysteryCurtain
+  // still provides the reveal moment there.
+  const isMobile = useIsMobile()
   const { ref, progress } = useRectProgress()
 
   // Leaves materialise progressively across the scroll-in instead of one fire-once
@@ -299,7 +310,7 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
 
   return (
     <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {reduce ? (
+      {reduce || isMobile ? (
         <div className="absolute inset-0">{content}</div>
       ) : (
         <m.div
