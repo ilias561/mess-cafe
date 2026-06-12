@@ -121,13 +121,17 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
           }
         >
           {item.image ? (
+            // 135vw: the 4/5 box crops a landscape-ish dish photo by HEIGHT
+            // (~88vw × 1.25 × aspect), so width-based sizes under-pick — the
+            // 65vw cap fetched w768 for ~1560 device px (0.49×, visibly
+            // pixelated). 135vw → w1600 on 3× phones, w1200 on 2×.
             <FadeImage
               src={item.image}
               alt={item.name}
               fill
               unoptimized
               loading="lazy"
-              sizes="(max-width: 768px) 65vw, 42vw"
+              sizes="(max-width: 768px) 135vw, 42vw"
               className="object-cover"
             />
           ) : null}
@@ -194,13 +198,17 @@ function TastingRailRow({
           {item.image ? (
             <MaskRevealBlock direction="up" className={`${thumbCol}`}>
               <div className="relative aspect-square w-full overflow-hidden">
+                {/* 100vw: the square crops the wider dish photo by height
+                    (~88vw × aspect ≈ 107vw of source needed) — 100vw lands on
+                    w1200 at 3× DPR (0.96× fit); the old 65vw cap fetched w768
+                    (0.61×, soft). */}
                 <FadeImage
                   src={item.image}
                   alt={item.name}
                   fill
                   unoptimized
                   loading="lazy"
-                  sizes="(max-width: 768px) 65vw, 22vw"
+                  sizes="(max-width: 768px) 100vw, 22vw"
                   className="object-cover"
                 />
               </div>

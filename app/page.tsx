@@ -46,6 +46,8 @@ export default function Home() {
       <ExpandCoverReveal
         src={images.aboutBar}
         alt="Μπαρ specialty coffee και περιοχή σερβιρίσματος"
+        mobileSrc={images.aboutLounge}
+        mobileAlt="Γωνιά καθιστικού με μεγάλα τροπικά φυτά και πορτοκαλί ανάκλιντρο"
       >
         <ActionsSection actionCards={actionCards} />
       </ExpandCoverReveal>

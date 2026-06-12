@@ -132,17 +132,48 @@ if (pinInfo == null) {
   check('café grow reaches full-bleed while parked', scale > 0.98, `scale=${scale.toFixed(2)}`)
 }
 
-// 7. no oversized image variants fetched on a 3x phone — except the café
-// grow photo (about-2): it paints full-screen on ~1170 device px, where
-// w1200 is the CORRECT variant, not a leak (it was visibly pixelated at w768)
-const fatImages = await page.evaluate(() =>
-  [...document.querySelectorAll('img')]
-    .map((i) => i.currentSrc)
-    .filter((s) => /--w(1200|1500|1600|2000)\./.test(s))
-    .filter((s) => !/\/about-2--/.test(s))
-    .map((s) => s.split('/').pop()),
+// 7. every responsive image must fetch a variant matched to its PAINTED size.
+// Undersized reads as pixelation on a 3× screen (the café grow photo and the
+// philosophy tiles both shipped that way); oversized wastes the ~13 Mbps
+// budget. For object-cover images the need is max(width, height × aspect) —
+// a portrait screen crops a landscape photo by HEIGHT, and width-only math is
+// exactly why the grow photo stayed soft even after its w1200 bump.
+// settle pass first: park at the bottom so every lazy/IO-gated image below
+// the grow pin has a currentSrc before auditing (the dish images at 0.49×
+// slipped through an early audit exactly this way)
+await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+await page.waitForTimeout(1500)
+const imgFit = await page.evaluate(() => {
+  const bad = { undersized: [], oversized: [] }
+  for (const img of document.querySelectorAll('img')) {
+    const m = (img.currentSrc || '').match(/--w(\d+)\./)
+    if (!m || !img.naturalWidth) continue
+    const r = img.getBoundingClientRect()
+    if (r.width < 10 || r.height < 10) continue
+    const aspect = img.naturalWidth / img.naturalHeight
+    const cover = getComputedStyle(img).objectFit === 'cover'
+    const neededCss = cover ? Math.max(r.width, r.height * aspect) : r.width
+    const needed = Math.round(neededCss * devicePixelRatio)
+    const ratio = Number(m[1]) / needed
+    const tag = `${img.currentSrc.split('/').pop()} ${m[1]}w for ${needed}px`
+    // bar = 0.75: the philosophy tiles drew a real-iPhone pixelation report at
+    // 0.75×, so anything below that is a regression. Rotated decor silhouettes
+    // are exempt — rotation inflates the bounding rect, overstating need.
+    if (ratio < 0.75 && !img.currentSrc.includes('/decor/photo/')) bad.undersized.push(tag)
+    if (ratio > 1.8) bad.oversized.push(tag)
+  }
+  return bad
+})
+check(
+  'no undersized (pixelated) image variants',
+  imgFit.undersized.length === 0,
+  imgFit.undersized.slice(0, 3).join(', '),
 )
-check('no w1200+ image variants on mobile', fatImages.length === 0, fatImages.slice(0, 3).join(', '))
+check(
+  'no oversized image variants',
+  imgFit.oversized.length === 0,
+  imgFit.oversized.slice(0, 3).join(', '),
+)
 
 // 8. the page can never pan sideways (real-iPhone report on /workshops) —
 // behavioral test: actively try to scroll the page horizontally

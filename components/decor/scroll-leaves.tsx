@@ -193,11 +193,12 @@ const MOBILE_GHOSTS = [
 
 function LeafImg({
   name,
+  w,
   filter,
   eager,
 }: {
   name: string
-  /** Accepted for caller symmetry; rendering always uses the w480 variant (see below). */
+  /** Rendered width in px — picks w768 above 480, else w480. */
   w: number
   /** Custom inline filter (watermarks); border leaves use `.leaf-filter` so mobile can drop the drop-shadow. */
   filter?: string
@@ -207,8 +208,10 @@ function LeafImg({
   const base = `/images/decor/photo/${name}`
   // Border leaves render at 130–340px of dark, filtered decorative foliage —
   // w480 is plenty even on retina and ~halves decoded texture memory vs w768
-  // (168 leaves at w768 was exhausting GPU memory → pixelation + jank).
-  const v = 'w480'
+  // (168 leaves at w768 was exhausting GPU memory → pixelation + jank). The
+  // few big ghosts/watermarks (w ≥ 768) DO take w768: phones paint the mobile
+  // ghosts at ~290px × 3 DPR ≈ 900 device px, where w480 reads as pixels.
+  const v = w >= 768 ? 'w768' : 'w480'
   return (
     <picture>
       <source type="image/avif" srcSet={`${base}--${v}.avif`} />
@@ -308,7 +311,7 @@ function MobileGhost({
       }}
     >
       <div ref={innerRef} style={{ opacity: 0, transform: 'translateY(18px)' }}>
-        <LeafImg name={ghost.name} w={480} filter={WATERMARK_FILTER} eager={near} />
+        <LeafImg name={ghost.name} w={768} filter={WATERMARK_FILTER} eager={near} />
       </div>
     </div>
   )
@@ -436,7 +439,8 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
         const img = new Image()
         img.fetchPriority = 'low'
         img.decoding = 'async'
-        img.src = `/images/decor/photo/${name}--w480.avif`
+        // ghosts render w768 on phones (see LeafImg); the desktop border is w480
+        img.src = `/images/decor/photo/${name}--${isMobile ? 'w768' : 'w480'}.avif`
       }
     }, 2500)
     return () => window.clearTimeout(t)
@@ -482,7 +486,7 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
                 opacity: g.opacity,
               }}
             >
-              <LeafImg name={g.name} w={480} filter={WATERMARK_FILTER} eager={near} />
+              <LeafImg name={g.name} w={768} filter={WATERMARK_FILTER} eager={near} />
             </div>
           ) : (
             <MobileGhost key={g.key} ghost={g} near={near} sways={gi % 3 === 0} swayDur={8 + (gi % 4) * 1.5} />

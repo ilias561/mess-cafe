@@ -244,6 +244,11 @@ function Centerpiece() {
   )
 }
 
+// Tile `sizes`: phones paint these ~88vw (ClimateShell px-6) — ~1030 device px
+// on a 3× iPhone, so they must pick w1200 (the old 65vw cap fetched w768, a
+// 1.4× upscale that read as pixels on real iPhones). Desktop values are the
+// painted width × 1.24, the Ken Burns max zoom, so the tiles stay sharp at
+// full magnification.
 function SplitSpread() {
   return (
     <div className="relative mt-10 md:mt-24">
@@ -255,7 +260,7 @@ function SplitSpread() {
               src={images.philosophyBright}
               alt="Φωτεινή γωνιά του καφέ με φυσικό φως και θέα στη λίμνη"
               aspect="aspect-[3/2]"
-              sizes="(max-width: 768px) 65vw, 40vw"
+              sizes="(max-width: 768px) 88vw, 50vw"
             />
           </MaskRevealBlock>
         </div>
@@ -265,7 +270,7 @@ function SplitSpread() {
               src={images.philosophyCounter}
               alt="Ο πάγκος self service πλαισιωμένος από φυτά"
               aspect="aspect-[4/5]"
-              sizes="(max-width: 768px) 65vw, 30vw"
+              sizes="(max-width: 768px) 88vw, 37vw"
             />
           </MaskRevealBlock>
         </div>
@@ -278,7 +283,7 @@ function SplitSpread() {
               src={images.philosophyStairs}
               alt="Η σκάλα προς το πατάρι, πλαισιωμένη από φυτά"
               aspect="aspect-[4/5]"
-              sizes="(max-width: 768px) 65vw, 30vw"
+              sizes="(max-width: 768px) 88vw, 37vw"
             />
           </MaskRevealBlock>
         </div>
@@ -288,7 +293,7 @@ function SplitSpread() {
               src={images.philosophyHall}
               alt="Η αίθουσα με τα κίτρινα τραπέζια και τα έργα τέχνης στον τοίχο"
               aspect="aspect-[3/2]"
-              sizes="(max-width: 768px) 65vw, 45vw"
+              sizes="(max-width: 768px) 88vw, 56vw"
             />
           </MaskRevealBlock>
         </div>

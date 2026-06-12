@@ -7,6 +7,10 @@ export const images = {
   // can't pick responsive variants, and the 708KB original throttled phones.
   aboutInterior: '/images/about-editorial-poster.jpg',
   aboutBar: '/images/about-2.jpg',
+  // Portrait (1600×2400) counterpart for the café grow on phones — the
+  // landscape about-2 needs ~2530 device px of HEIGHT to cover a 3× phone
+  // screen and tops out at 1066, so it can never be sharp there.
+  aboutLounge: '/images/111/mess-internal-0016.jpg',
   aboutPlants: '/images/gallery-1.jpg',
   philosophyBright: '/images/111/mess-internal-0004.jpg',
   philosophyStairs: '/images/111/mess-internal-0005.jpg',

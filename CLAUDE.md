@@ -29,9 +29,15 @@ Static Next.js export (`output: "export"`) on Cloudflare Pages.
    Safari URL bar collapses.
 5. **Lenis stays off touch devices** (`hover: none`); all scroll helpers must
    keep their native fallbacks (`lib/lenis.ts#scrollToId`).
-6. **Image bytes:** 3× iPhones multiply `sizes` by DPR — `100vw` fetches
-   w1200/w1500 variants. Cap `sizes` so phones get ≤ w768 (~65vw at 100vw-wide).
-   `<video poster>` can't use srcset → posters need dedicated ≤ ~200KB files.
+6. **Image bytes — match the variant to PAINTED device px** (smoke check 7
+   enforces both directions). 3× iPhones multiply `sizes` by DPR, so `100vw`
+   on a small image overfetches — but blanket caps backfire: the old "≤w768
+   on phones" rule pixelated the philosophy tiles AND the café grow photo on
+   real iPhones. For `object-cover` the need is max(width, height × aspect);
+   a landscape photo covering a portrait screen is HEIGHT-driven — express
+   `sizes` in vh there, or art-direct a portrait source (see
+   expand-cover-reveal). `<video poster>` can't use srcset → posters need
+   dedicated ≤ ~200KB files.
 7. **Media fetch order:** images pre-fetch ~1.5 viewports ahead (built into
    `FadeImage` and `scroll-leaves`); videos on phones fetch only when actually
    on screen (`ambient-video.tsx`) so they don't starve image downloads.

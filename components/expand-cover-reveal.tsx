@@ -26,10 +26,13 @@ import { useIsMobile } from '@/lib/use-is-mobile'
  * lazy-load offset bug framer's `useScroll` has), and exactly one layer is
  * GPU-promoted, only while it's animating.
  *
- * sizes="100vw" everywhere is a DELIBERATE exception to mobile rule #6 (cap
- * phones at ≤w768): this photo is painted full-screen on 3× displays
- * (~1170 device px), and the 65vw cap made the page's centerpiece visibly
- * pixelated on real iPhones. w1200 AVIF is ~107KB — worth it here only.
+ * Phones are art-directed to a PORTRAIT photo (`mobileSrc`): object-cover on a
+ * portrait screen is height-driven, so the landscape `src` (1600×1066) would
+ * need ~2530 device px of height on a 3× iPhone — a 2.4–3.2× upscale that
+ * reads as pixels no matter which width variant is fetched. A 2/3 portrait
+ * source covers the same screen at ~1.06×. `sizes` on the phone branches is
+ * expressed in vh for the same reason — the browser picks variants by WIDTH,
+ * and width-based sizes under-pick for a height-fit cover crop.
  */
 const DESKTOP_PIN_VH = 250 // pinned scroll length of the café beat (desktop)
 const MOBILE_PIN_VH = 170 // shorter pin on phones — same reveal, less scroll
@@ -74,16 +77,27 @@ function usePinProgress(pinRef: RefObject<HTMLDivElement | null>) {
 export default function ExpandCoverReveal({
   src,
   alt,
+  mobileSrc,
+  mobileAlt,
   background = '#2d5a27',
   children,
 }: {
   src: string
   alt: string
+  /** Portrait variant for phones — see the art-direction note above. */
+  mobileSrc?: string
+  mobileAlt?: string
   background?: string
   children: ReactNode
 }) {
   const pinRef = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  const phoneSrc = mobileSrc ?? src
+  const phoneAlt = mobileAlt ?? alt
+  // Height-driven cover need expressed as a width for the variant picker:
+  // 100lvh × image aspect. 67vh fits the 2/3 portrait (→ w1600 at 3× DPR,
+  // w1200 at 2×); the landscape fallback needs 150vh (3/2 aspect).
+  const phoneSizes = mobileSrc ? '67vh' : '150vh'
   // Phones keep the grow beat but transform-only (see mobile branch below):
   // the desktop clip-path animation re-rasterizes the full-screen layer every
   // frame on iOS, which is exactly the jank class the mobile perf pass removed.
@@ -226,7 +240,13 @@ export default function ExpandCoverReveal({
       <section className="relative" style={{ background }}>
         <div className="relative h-[100svh] overflow-hidden">
           <div className="absolute inset-0">
-            <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+            <FadeImage
+              src={isMobile ? phoneSrc : src}
+              alt={isMobile ? phoneAlt : alt}
+              fill
+              sizes={isMobile ? phoneSizes : '100vw'}
+              className="object-cover"
+            />
           </div>
         </div>
         {children}
@@ -248,7 +268,7 @@ export default function ExpandCoverReveal({
               style={{ transform: 'scale(0.74)', borderRadius: '16px' }}
             >
               <div ref={growInnerRef} className="absolute inset-0" style={{ transform: 'scale(1.3514)' }}>
-                <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+                <FadeImage src={phoneSrc} alt={phoneAlt} fill sizes={phoneSizes} className="object-cover" />
               </div>
             </div>
           </div>
