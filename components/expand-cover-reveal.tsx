@@ -79,10 +79,9 @@ export default function ExpandCoverReveal({
 }) {
   const pinRef = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
-  // Phones skip the pin entirely: animating clip-path + scale on a full-screen
-  // image layer every scroll frame is the same class of full-section animated
-  // layer the rest of the mobile perf pass removed, and the 170vh pin with a
-  // 100svh sticky child jumps when the iOS URL bar collapses (vh ≠ svh).
+  // Phones keep the grow beat but transform-only (see mobile branch below):
+  // the desktop clip-path animation re-rasterizes the full-screen layer every
+  // frame on iOS, which is exactly the jank class the mobile perf pass removed.
   const isMobile = useIsMobile()
   const p = usePinProgress(pinRef)
   const [pinVh, setPinVh] = useState(MOBILE_PIN_VH)
@@ -111,7 +110,17 @@ export default function ExpandCoverReveal({
   const scale = useTransform(p, [0, 1], [1.0, 1.12])
   const imgWillChange = useTransform(p, (v) => (v > 0.001 && v < 0.72 ? 'transform, clip-path' : 'auto'))
 
-  if (reduce || isMobile) {
+  // Mobile grow — transform-only, so iOS composites it without re-rasterizing:
+  // the outer window scales up from a centred frame to full-bleed while the
+  // image counter-scales, staying visually full-size (same trick, zero clip-path).
+  const mOuter = useTransform(reveal, [0, 1], [0.74, 1])
+  const mInner = useTransform(mOuter, (s) => 1 / s)
+  // Constant radius while framed, dropped near full-bleed — a single style flip
+  // instead of a per-frame border-radius repaint.
+  const mRadius = useTransform(mOuter, (s) => (s < 0.99 ? '16px' : '0px'))
+  const mWillChange = useTransform(p, (v) => (v > 0.001 && v < 0.3 ? 'transform' : 'auto'))
+
+  if (reduce) {
     // No pin/scroll — a calm full-bleed café, then the section.
     return (
       <section className="relative" style={{ background }}>
@@ -121,6 +130,30 @@ export default function ExpandCoverReveal({
           </div>
         </div>
         {children}
+      </section>
+    )
+  }
+
+  if (isMobile) {
+    // svh everywhere: vh-sized pins jump when the iOS URL bar collapses.
+    return (
+      <section className="relative" style={{ background }}>
+        <div ref={pinRef} className="relative" style={{ height: `${pinVh}svh` }}>
+          <div className="sticky top-0 z-0 h-[100svh] overflow-hidden">
+            <m.div
+              className="absolute inset-0 overflow-hidden"
+              style={{ scale: mOuter, borderRadius: mRadius, willChange: mWillChange }}
+            >
+              <m.div className="absolute inset-0" style={{ scale: mInner }}>
+                <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+              </m.div>
+            </m.div>
+          </div>
+        </div>
+
+        <div className="relative z-10" style={{ marginTop: `-${coverVh}svh` }}>
+          {children}
+        </div>
       </section>
     )
   }
