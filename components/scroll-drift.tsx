@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from 'react'
 import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useIsMobile } from '@/lib/use-is-mobile'
 
 type ScrollDriftProps = {
   children: ReactNode
@@ -14,13 +15,16 @@ type ScrollDriftProps = {
 export default function ScrollDrift({ children, className, distance = 40 }: ScrollDriftProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reduceMotion = useReducedMotion()
+  // The drift is a desktop garnish — on phones it's one more scroll-linked
+  // transform per element with barely-visible payoff.
+  const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
   const y = useTransform(scrollYProgress, [0, 1], [distance, -distance])
 
-  if (reduceMotion) return <div className={className}>{children}</div>
+  if (reduceMotion || isMobile) return <div className={className}>{children}</div>
 
   return (
     <m.div ref={ref} style={{ y }} className={className}>

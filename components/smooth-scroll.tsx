@@ -10,6 +10,9 @@ export default function SmoothScroll() {
 
   useEffect(() => {
     if (reduceMotion) return
+    // Touch devices scroll natively — Lenis only smooths wheel input, so on
+    // phones/tablets it's a permanent rAF loop with zero visible benefit.
+    if (window.matchMedia('(hover: none)').matches) return
 
     // lerp (frame-rate-independent catch-up) instead of a fixed 1.1s duration:
     // duration-based smoothing replays every wheel tick over 1.1s, which reads

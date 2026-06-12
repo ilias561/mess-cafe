@@ -19,8 +19,9 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
   const ref = useRef<HTMLVideoElement>(null)
   const playlist = srcs && srcs.length > 1 ? srcs : null
   const [index, setIndex] = useState(0)
-  // Phones get the poster as a plain image — these ambient clips are 1–6.5MB
-  // each, and decoding them while scrolling is a large part of the mobile jank.
+  // Phones keep the videos (poster-only mobile read as "videos are broken") but
+  // defer all fetching until the IO below is about to play them — these clips
+  // are 1–6.5MB each, so eager metadata fetches add up on mobile data.
   const isMobile = useIsMobile()
 
   const activeSrc = playlist ? playlist[index] : (src ?? '')
@@ -74,20 +75,6 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
     video.play().catch(() => {})
   }, [index, playlist])
 
-  if (isMobile && poster) {
-    return (
-      <img
-        src={poster}
-        alt={ariaLabel ?? ''}
-        loading="lazy"
-        decoding="async"
-        className={className}
-        aria-hidden={ariaHidden}
-        style={style}
-      />
-    )
-  }
-
   return (
     <video
       ref={ref}
@@ -96,7 +83,7 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
       muted
       loop={!playlist}
       playsInline
-      preload="metadata"
+      preload={isMobile ? 'none' : 'metadata'}
       className={className}
       aria-label={ariaLabel}
       aria-hidden={ariaHidden}

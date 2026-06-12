@@ -24,7 +24,7 @@ type Leaf = {
   swayDelay: number
   /** Only a subset parallax-drift (keeps animated element count in check). */
   animated: boolean
-  /** Culled below md — phones keep ~¼ of the border (front layer, every other leaf). */
+  /** Culled below md — phones keep the full front layer, drop the deep-bleed back layer. */
   mobileHidden: boolean
 }
 
@@ -97,7 +97,9 @@ function buildLeaves(): Leaf[] {
       animated: i % 12 === 0,
       swayDur: round(5.5 + rand(i, 9) * 4),
       swayDelay: round(-rand(i, 10) * 6),
-      mobileHidden: layer === 1 || i % 2 === 1,
+      // Front layer survives whole on phones — culling every other leaf too
+      // (the old ¼ rule) left visible gaps that read as broken/missing plants.
+      mobileHidden: layer === 1,
     })
     i++
   }

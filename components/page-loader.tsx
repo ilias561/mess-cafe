@@ -5,6 +5,7 @@ import { AnimatePresence, m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 import {
   CURTAIN_SLIDE_MS,
+  HOLD_FINISH_MS,
   LOADER_HOLD_MS,
   LOADING_DURATION_MS,
   UNDERLINE_DURATION_MS,
@@ -66,7 +67,7 @@ export default function PageLoader() {
           className="fixed inset-0 z-[200] overflow-hidden bg-forest"
           initial={{ y: 0 }}
           animate={{ y: '-100%' }}
-          transition={{ duration: CURTAIN_SLIDE_MS / 1000, delay: skipAnimation ? 0 : 1.48, ease: EASE }}
+          transition={{ duration: CURTAIN_SLIDE_MS / 1000, delay: skipAnimation ? 0 : HOLD_FINISH_MS / 1000, ease: EASE }}
         >
           <div className="absolute left-1/2 top-1/2 w-fit -translate-x-1/2 -translate-y-1/2">
             <span className="inline-flex overflow-hidden font-serif text-[clamp(30px,5vw,44px)] tracking-tight text-charcoal">

@@ -131,6 +131,9 @@ export default function Hero() {
   const prefersReducedMotion = useReducedMotion()
   const [mobileFrameIx, setMobileFrameIx] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)
+  // While the mobile clip is actually playing, the frame <img> behind it is
+  // invisible — cycling it would decode a full-screen JPG every 2.5s for nothing.
+  const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false)
 
   // Only the clip matching the current viewport should ever load — prevents
   // mobile downloading the desktop clip (and vice-versa).
@@ -192,12 +195,27 @@ export default function Hero() {
   }, [prefersReducedMotion, isDesktop, loaderReady])
 
   useEffect(() => {
-    if (prefersReducedMotion || !heroInView) return
+    const video = mobileVideoRef.current
+    if (!video) return
+    const onPlaying = () => setMobileVideoPlaying(true)
+    const onStopped = () => setMobileVideoPlaying(false)
+    video.addEventListener('playing', onPlaying)
+    video.addEventListener('pause', onStopped)
+    video.addEventListener('ended', onStopped)
+    return () => {
+      video.removeEventListener('playing', onPlaying)
+      video.removeEventListener('pause', onStopped)
+      video.removeEventListener('ended', onStopped)
+    }
+  }, [loaderReady])
+
+  useEffect(() => {
+    if (prefersReducedMotion || !heroInView || mobileVideoPlaying) return
     const interval = window.setInterval(() => {
       setMobileFrameIx((i) => (i + 1) % mobileFramePaths.length)
     }, 2500)
     return () => window.clearInterval(interval)
-  }, [prefersReducedMotion, heroInView, mobileFramePaths.length])
+  }, [prefersReducedMotion, heroInView, mobileVideoPlaying, mobileFramePaths.length])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
@@ -323,7 +341,7 @@ export default function Hero() {
 
           <div className="flex w-full flex-1 flex-col items-center justify-end pb-[5vh]">
           <m.p
-            {...reveal(700, 1000)}
+            {...reveal(350, 1000)}
             className="hero-text-shadow font-sans text-[11px] tracking-[0.2em] text-white/75 uppercase"
           >
             SPECIALTY COFFEE &mdash; HEALTHY BRUNCH &mdash; IOANNINA &middot; #KEEPRISING
@@ -346,7 +364,7 @@ export default function Hero() {
                     transition={
                       prefersReducedMotion
                         ? { duration: 0.2, delay: 0 }
-                        : { delay: 1.1 + i * 0.1, duration: 0.9, ease: EASE }
+                        : { delay: 0.45 + i * 0.08, duration: 0.9, ease: EASE }
                     }
                   >
                     {word}
@@ -358,13 +376,13 @@ export default function Hero() {
           </h1>
 
           <m.p
-            {...reveal(1900, 1100)}
+            {...reveal(1000, 1100)}
             className="hero-text-shadow mx-auto mt-7 max-w-[560px] font-sans text-[15px] leading-relaxed text-white/90 md:mt-10 md:text-[17px]"
           >
             {'Καλώς ήρθατε στο M.E.S.S. Έναν πολυχώρο μπροστά στην λίμνη των Ιωαννίνων που έχει ως σκοπό την ανάδειξη κοινωνικών και καλλιτεχνικών δρώμενων καθώς και το ευ ζην.'}
           </m.p>
 
-          <m.div {...reveal(2500, 900)} className="mt-6 md:mt-8">
+          <m.div {...reveal(1400, 900)} className="mt-6 md:mt-8">
             <Link
               href="/#map"
               className="ui-link hero-text-shadow relative inline-flex min-h-11 items-center py-2.5 font-sans text-sm font-medium text-white md:min-h-0 md:py-0"
@@ -379,7 +397,7 @@ export default function Hero() {
           <m.p
             initial={{ opacity: 0 }}
             animate={loaderReady ? { opacity: 1 } : {}}
-            transition={{ delay: 2.8, duration: 0.8, ease: EASE }}
+            transition={{ delay: 1.7, duration: 0.8, ease: EASE }}
             className="hero-text-shadow pointer-events-none absolute right-6 bottom-8 font-sans text-[10px] tracking-[0.25em] text-white/40 uppercase md:right-12 md:bottom-10"
             aria-hidden
           >
@@ -390,7 +408,7 @@ export default function Hero() {
           <m.div
             initial={{ opacity: 0 }}
             animate={loaderReady ? { opacity: 1 } : {}}
-            transition={{ delay: 3.2, duration: 1, ease: EASE }}
+            transition={{ delay: 2, duration: 1, ease: EASE }}
             className="pointer-events-none absolute bottom-8 left-1/2 z-[3] -translate-x-1/2 md:bottom-10"
             aria-hidden
           >

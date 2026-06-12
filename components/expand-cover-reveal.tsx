@@ -9,6 +9,7 @@ import {
   useTransform,
 } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
+import { useIsMobile } from '@/lib/use-is-mobile'
 
 /**
  * The philosophy → actions seam — one simple, premium cinematic beat.
@@ -78,6 +79,11 @@ export default function ExpandCoverReveal({
 }) {
   const pinRef = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  // Phones skip the pin entirely: animating clip-path + scale on a full-screen
+  // image layer every scroll frame is the same class of full-section animated
+  // layer the rest of the mobile perf pass removed, and the 170vh pin with a
+  // 100svh sticky child jumps when the iOS URL bar collapses (vh ≠ svh).
+  const isMobile = useIsMobile()
   const p = usePinProgress(pinRef)
   const [pinVh, setPinVh] = useState(MOBILE_PIN_VH)
   const [coverVh, setCoverVh] = useState(MOBILE_COVER_VH)
@@ -105,7 +111,7 @@ export default function ExpandCoverReveal({
   const scale = useTransform(p, [0, 1], [1.0, 1.12])
   const imgWillChange = useTransform(p, (v) => (v > 0.001 && v < 0.72 ? 'transform, clip-path' : 'auto'))
 
-  if (reduce) {
+  if (reduce || isMobile) {
     // No pin/scroll — a calm full-bleed café, then the section.
     return (
       <section className="relative" style={{ background }}>
