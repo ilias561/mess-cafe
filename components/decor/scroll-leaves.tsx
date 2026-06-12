@@ -309,11 +309,11 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
     return () => io.disconnect()
   }, [ref, near])
 
-  // Cold-cache insurance: on a first visit the hero downloads own the bandwidth
-  // exactly when the user starts scrolling, and the leaves lose the race even
-  // with the eager flip. Warm the unique files quietly ~2.5s after mount so
-  // they're cached long before any scroll reaches the section.
+  // Cold-cache insurance: warm the unique files quietly ~2.5s after mount so
+  // they're cached long before any scroll reaches the section. Desktop only —
+  // phones don't render the border at all (user decision 2026-06-12).
   useEffect(() => {
+    if (isMobile) return
     const t = window.setTimeout(() => {
       const unique = [...new Set([...POOL, 'fan-palm'])]
       for (const name of unique) {
@@ -324,7 +324,7 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
       }
     }, 2500)
     return () => window.clearTimeout(t)
-  }, [])
+  }, [isMobile])
 
   // Leaves materialise progressively across the scroll-in instead of one fire-once
   // fade — the canopy grows denser as you scroll deeper into the section.
@@ -348,9 +348,13 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
     </>
   )
 
+  // Phones: no leaf border at all (user decision 2026-06-12) — the philosophy
+  // section runs flat green + content on mobile.
+  if (isMobile) return null
+
   return (
     <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-0">
-      {reduce || isMobile ? (
+      {reduce ? (
         <div className="absolute inset-0">{content}</div>
       ) : (
         <m.div

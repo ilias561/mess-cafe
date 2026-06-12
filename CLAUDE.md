@@ -2,11 +2,16 @@
 
 Static Next.js export (`output: "export"`) on Cloudflare Pages.
 
-## Deploys are MANUAL
+## Deploys are AUTOMATIC on push (since 2026-06-12)
 
-- `git push` does **not** deploy. Production only updates via `npm run cf:deploy`.
+- The repo is git-connected to Cloudflare Pages: **every push to `main`
+  deploys production** (Cloudflare builds it; a "Cloudflare Pages" check
+  appears on the commit). `npm run cf:deploy` still works for a manual
+  direct-upload deploy.
+- Therefore: never push a commit you wouldn't put in front of a customer,
+  and treat a red WebKit CI run on `main` as a production incident.
 - When replacing any file under `public/videos/`, bump `CACHE_BUST` in `lib/media.ts`.
-- Before deploying: `npm run check:mobile` (see Verification below).
+- Before pushing: `npm run check:mobile` (see Verification below).
 
 ## Mobile rules (<768px) — every one of these exists because it broke on a real iPhone
 
@@ -43,11 +48,35 @@ Static Next.js export (`output: "export"`) on Cloudflare Pages.
 1. `npm run check:mobile` — builds nothing; serves `out/` and runs the smoke
    suite (`scripts/mobile-check.mjs`) in Chromium mobile emulation with
    throttled network. Run `npm run build` first.
-2. GitHub Actions runs the same suite in **real WebKit** (Safari engine) on
-   every push — check the run before/after deploying.
-3. Chromium emulation passing is NOT proof for scroll/GPU behavior. If a
-   change touches scroll-linked or animated code paths, the WebKit CI run is
-   the minimum bar, and a real-device check is the gold standard.
+2. **Real WebKit locally** (pushes deploy prod now, so verify BEFORE pushing —
+   playwright's WebKit needs Ubuntu libs this Arch host doesn't have; run it
+   in a container with the host's downloaded browsers mounted in):
+
+   ```sh
+   docker run -d --name mess-webkit --network=host \
+     -v "$PWD":/work -v ~/.cache/ms-playwright:/ms-pw \
+     -e PLAYWRIGHT_BROWSERS_PATH=/ms-pw -w /work ubuntu:24.04 sleep 7200
+   docker exec mess-webkit bash -c 'apt-get update -qq && \
+     apt-get install -y -qq curl ca-certificates && \
+     curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+     apt-get install -y -qq nodejs && npx playwright install-deps webkit'
+   docker exec -e PW_ENGINE=webkit mess-webkit \
+     node scripts/mobile-check.mjs http://127.0.0.1:8750
+   ```
+
+   (Don't bother with `mcr.microsoft.com/playwright` — its registry kept
+   resetting the 1.5GB layer on this connection, 2026-06-12.)
+3. GitHub Actions runs the same suite in real WebKit on every push; failures
+   land as check-run annotations readable via the public API.
+4. Chromium emulation passing is NOT proof for scroll/GPU behavior. If a
+   change touches scroll-linked or animated code paths, real WebKit is the
+   minimum bar, and a real-device check is the gold standard.
+5. Headless-WebKit facts learned the hard way (probe, 2026-06-12): its rAF
+   can tick ~2×/s — anything driven by a JS rAF loop (framer's `animate()`)
+   stalls there, and on real iPhones the same loop starves mid-scroll. Its
+   IntersectionObservers can fire once at observe-time and never again.
+   One-shot effects must run on WAAPI (`element.animate`) with multiple
+   independent triggers (geometry check + scroll listener + IO).
 
 ## Design constraints (user decisions — do not revisit)
 

@@ -86,25 +86,14 @@ for (let y = 0; y <= height; y += 320) {
   await page.waitForTimeout(60)
 }
 
-// 4. philosophy leaves painted shortly after arrival
+// 4. philosophy leaf border is desktop-only (user decision 2026-06-12) —
+// phones must render NO leaf images and fetch none of their bytes
 await page.evaluate(() => document.getElementById('philosophy')?.scrollIntoView())
 await page.waitForTimeout(1500)
-const leafStats = await page.evaluate(() => {
-  const vh = window.innerHeight
-  const onScreen = [...document.querySelectorAll('img[src*="/decor/photo/"]')].filter((i) => {
-    const r = i.getBoundingClientRect()
-    return r.bottom > 0 && r.top < vh && r.width > 0
-  })
-  return {
-    visible: onScreen.length,
-    loaded: onScreen.filter((i) => i.complete && i.naturalWidth > 0).length,
-  }
-})
-check(
-  'philosophy leaves painted at arrival',
-  leafStats.visible > 0 && leafStats.loaded === leafStats.visible,
-  `${leafStats.loaded}/${leafStats.visible}`,
+const leafCount = await page.evaluate(
+  () => document.querySelectorAll('img[src*="/decor/photo/"]').length,
 )
+check('no philosophy leaf images on mobile', leafCount === 0, `${leafCount} found`)
 
 // 5. ambient videos exist as <video> on mobile (poster-only regression guard)
 const ambientVideos = await page.evaluate(
@@ -144,7 +133,28 @@ const fatImages = await page.evaluate(() =>
 )
 check('no w1200+ image variants on mobile', fatImages.length === 0, fatImages.slice(0, 3).join(', '))
 
-// 8. error rollups
+// 8. the page can never pan sideways (real-iPhone report on /workshops) —
+// behavioral test: actively try to scroll the page horizontally
+for (const path of ['/', '/workshops/']) {
+  if (path !== '/') {
+    await page.goto(base + path, { waitUntil: 'load', timeout: 45000 })
+    await page.waitForTimeout(800)
+  }
+  const panned = await page.evaluate(async () => {
+    const results = []
+    const h = document.documentElement.scrollHeight
+    for (const y of [0, h * 0.35, h * 0.7]) {
+      window.scrollTo(120, y)
+      await new Promise((r) => setTimeout(r, 50))
+      if (window.scrollX > 0) results.push(`scrollX=${Math.round(window.scrollX)}@y=${Math.round(y)}`)
+    }
+    window.scrollTo(0, 0)
+    return results
+  })
+  check(`no horizontal page pan on ${path}`, panned.length === 0, panned.join(', '))
+}
+
+// 9. error rollups
 check('zero JS errors across the run', pageErrors.length === 0, pageErrors.slice(0, 2).join(' | '))
 check('zero broken same-origin assets', failedAssets.length === 0, failedAssets.slice(0, 3).join(' | '))
 

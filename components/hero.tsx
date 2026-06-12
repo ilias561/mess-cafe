@@ -236,7 +236,13 @@ export default function Hero() {
           transition={
             prefersReducedMotion
               ? { duration: 0.2 }
-              : { duration: 1.1, ease: EASE, delay: 0.05 }
+              : isDesktop
+                ? { duration: 1.1, ease: EASE, delay: 0.05 }
+                : // Phones: single style flip, no entry zoom — animating
+                  // scale/opacity on this screen-sized layer re-composites the
+                  // whole hero every frame on iOS (mobile rule #3), right when
+                  // hydration + the clip's decoder already own the main thread.
+                  { duration: 0 }
           }
         >
           {/* Mobile clip */}
@@ -366,7 +372,17 @@ export default function Hero() {
                     transition={
                       prefersReducedMotion
                         ? { duration: 0.2, delay: 0 }
-                        : { delay: 0.45 + i * 0.08, duration: 0.9, ease: EASE }
+                        : isDesktop
+                          ? { delay: 0.45 + i * 0.08, duration: 0.9, ease: EASE }
+                          : // Phones: y/opacity only — scrubbing blur() forces a
+                            // GPU re-raster of every word every frame (mobile
+                            // rule #2). The filter snaps once at word start.
+                            {
+                              delay: 0.45 + i * 0.08,
+                              duration: 0.9,
+                              ease: EASE,
+                              filter: { delay: 0.45 + i * 0.08, duration: 0 },
+                            }
                     }
                   >
                     {word}

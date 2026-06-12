@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState, type RefObject, type ReactNode } from 'react'
 import {
-  animate,
   m,
   useMotionTemplate,
   useMotionValue,
@@ -115,43 +114,106 @@ export default function ExpandCoverReveal({
   // works in emulators but on real iPhones scroll events reach JS *behind* the
   // compositor's scrolling, so a grow tied to the first ~150px of scroll lags
   // and reads as stuck. Instead: when the framed café fills the screen, play
-  // the grow once as a 1s animation (outer window scales up, image counter-
-  // scales to stay full-size — pure compositor work, no clip-path re-raster).
+  // the grow once (outer window scales up, image counter-scales to stay
+  // full-size — pure compositor work, no clip-path re-raster).
+  //
+  // The animation runs via WAAPI (element.animate), NOT framer's animate():
+  // framer drives values from a main-thread rAF loop, which starves exactly
+  // when iOS is mid-scroll — WAAPI transform animations run on the compositor
+  // and survive a busy main thread. Keyframes pair outer/inner as exact
+  // reciprocals so the image never visibly changes size while the window grows.
   const stickyRef = useRef<HTMLDivElement>(null)
-  const mOuter = useMotionValue(0.74)
-  const mInner = useTransform(mOuter, (s) => 1 / s)
-  const mRadius = useTransform(mOuter, (s) => (s < 0.99 ? '16px' : '0px'))
-  const [grown, setGrown] = useState(false)
-  // Two independent triggers — WebKit CI proved the ratio-threshold observer
-  // alone never fires there (scale stayed 0.74, same symptom as the real
-  // iPhone). Band observer: fires when the sticky photo crosses the middle of
-  // the viewport. Fallback: the pin-progress scroll listener — late on iOS but
-  // late is fine for a trigger.
+  const growOuterRef = useRef<HTMLDivElement>(null)
+  const growInnerRef = useRef<HTMLDivElement>(null)
+  const grownRef = useRef(false)
+
   useEffect(() => {
-    if (!isMobile || grown) return
-    const el = stickyRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
+    if (!isMobile) return
+    const sticky = stickyRef.current
+    const outer = growOuterRef.current
+    const inner = growInnerRef.current
+    if (!sticky || !outer || !inner) return
+
+    // Rotation round-trip (portrait → landscape ≥768px → portrait) remounts
+    // the branch with the framed initial styles — if the grow already played,
+    // pin the grown state instead of replaying or staying stuck at 0.74.
+    if (grownRef.current) {
+      outer.style.transform = 'scale(1)'
+      inner.style.transform = 'scale(1)'
+      outer.style.borderRadius = '0px'
+      return
+    }
+
+    const grow = () => {
+      if (grownRef.current) return
+      grownRef.current = true
+      cleanup()
+      const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
+      const steps = 21
+      const outerFrames: Keyframe[] = []
+      const innerFrames: Keyframe[] = []
+      for (let i = 0; i < steps; i++) {
+        const s = 0.74 + 0.26 * easeOut(i / (steps - 1))
+        outerFrames.push({ transform: `scale(${s})` })
+        innerFrames.push({ transform: `scale(${1 / s})` })
+      }
+      const opts: KeyframeAnimationOptions = { duration: 950, easing: 'linear', fill: 'forwards' }
+      // Pin the final transform inline BEFORE starting (fill:'forwards' keeps
+      // the last frame anyway, but inline styles survive even a cancelled
+      // fill). The 16px radius drops as a single style flip when the grow
+      // lands — never animated (per-frame border-radius re-rasters on iOS).
+      outer.style.transform = 'scale(1)'
+      inner.style.transform = 'scale(1)'
+      if (typeof outer.animate === 'function') {
+        const anim = outer.animate(outerFrames, opts)
+        inner.animate(innerFrames, opts)
+        anim.finished
+          .then(() => {
+            outer.style.borderRadius = '0px'
+          })
+          .catch(() => {})
+      } else {
+        outer.style.borderRadius = '0px'
+      }
+    }
+
+    // Trigger = "the framed café has reached its pinned, filling-the-screen
+    // moment". Three independent paths, each self-removing, because WebKit
+    // has now eaten two single-trigger designs (ratio-threshold IO, then
+    // band IO + framer scroll fallback — both stuck at scale 0.74 in CI):
+    //  1. immediate geometry check (handles landing mid-pin / reload)
+    //  2. plain scroll listener reading the pin rect (no framer indirection)
+    //  3. viewport-middle band IntersectionObserver
+    const pin = sticky.parentElement as HTMLElement
+    const shouldGrow = () => {
+      const r = pin.getBoundingClientRect()
+      // sticky engages when the pin top reaches the viewport top; fire just
+      // before that so the grow is playing as the frame settles into place
+      return r.top < window.innerHeight * 0.18 && r.bottom > 0
+    }
+    const onScroll = () => {
+      if (shouldGrow()) grow()
+    }
+    let io: IntersectionObserver | null = null
+    const cleanup = () => {
+      window.removeEventListener('scroll', onScroll)
+      io?.disconnect()
+      io = null
+    }
+    if (shouldGrow()) {
+      grow()
+      return cleanup
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setGrown(true)
+        if (entry.isIntersecting) grow()
       },
       { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
     )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [isMobile, grown])
-  useEffect(() => {
-    if (!isMobile || grown) return
-    const unsub = p.on('change', (v) => {
-      if (v > 0.04) setGrown(true)
-    })
-    return unsub
-  }, [isMobile, grown, p])
-  useEffect(() => {
-    if (!grown) return
-    const anim = animate(mOuter, 1, { duration: 1.0, ease: [0.22, 1, 0.36, 1] })
-    return () => anim.stop()
-  }, [grown, mOuter])
+    io.observe(sticky)
+    return cleanup
+  }, [isMobile])
 
   if (reduce) {
     // No pin/scroll — a calm full-bleed café, then the section.
@@ -175,14 +237,15 @@ export default function ExpandCoverReveal({
       <section className="relative" style={{ background }}>
         <div ref={pinRef} className="relative" style={{ height: `${pinVh}svh` }}>
           <div ref={stickyRef} className="sticky top-0 z-0 h-[100lvh] overflow-hidden">
-            <m.div
+            <div
+              ref={growOuterRef}
               className="absolute inset-0 overflow-hidden"
-              style={{ scale: mOuter, borderRadius: mRadius }}
+              style={{ transform: 'scale(0.74)', borderRadius: '16px' }}
             >
-              <m.div className="absolute inset-0" style={{ scale: mInner }}>
+              <div ref={growInnerRef} className="absolute inset-0" style={{ transform: 'scale(1.3514)' }}>
                 <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
-              </m.div>
-            </m.div>
+              </div>
+            </div>
           </div>
         </div>
 
