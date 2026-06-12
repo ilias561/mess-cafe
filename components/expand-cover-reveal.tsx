@@ -25,6 +25,11 @@ import { useIsMobile } from '@/lib/use-is-mobile'
  * scale-to-cover hit). Progress is read from the pin's live rect (immune to the
  * lazy-load offset bug framer's `useScroll` has), and exactly one layer is
  * GPU-promoted, only while it's animating.
+ *
+ * sizes="100vw" everywhere is a DELIBERATE exception to mobile rule #6 (cap
+ * phones at ≤w768): this photo is painted full-screen on 3× displays
+ * (~1170 device px), and the 65vw cap made the page's centerpiece visibly
+ * pixelated on real iPhones. w1200 AVIF is ~107KB — worth it here only.
  */
 const DESKTOP_PIN_VH = 250 // pinned scroll length of the café beat (desktop)
 const MOBILE_PIN_VH = 170 // shorter pin on phones — same reveal, less scroll
@@ -221,7 +226,7 @@ export default function ExpandCoverReveal({
       <section className="relative" style={{ background }}>
         <div className="relative h-[100svh] overflow-hidden">
           <div className="absolute inset-0">
-            <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
+            <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
           </div>
         </div>
         {children}
@@ -243,7 +248,7 @@ export default function ExpandCoverReveal({
               style={{ transform: 'scale(0.74)', borderRadius: '16px' }}
             >
               <div ref={growInnerRef} className="absolute inset-0" style={{ transform: 'scale(1.3514)' }}>
-                <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
+                <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
               </div>
             </div>
           </div>
@@ -265,7 +270,7 @@ export default function ExpandCoverReveal({
             className="absolute inset-0"
             style={{ scale, clipPath: clip, WebkitClipPath: clip, willChange: imgWillChange }}
           >
-            <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
+            <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
           </m.div>
         </div>
       </div>

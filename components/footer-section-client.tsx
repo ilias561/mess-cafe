@@ -13,7 +13,10 @@ type FooterSectionClientProps = {
   variant?: 'full' | 'minimal'
 }
 
-const mapEmbedSrc = 'https://www.google.com/maps?q=Archbishop+Makariou+11+45221+Ioannina+Greece&output=embed'
+// Pin the business itself (M.E.S.S. GBP listing, cid = decimal of the
+// 0x8faae1439da23f07 place id in the Street View link below) — a typed street
+// address here drifted to the wrong block before; the cid can't.
+const mapEmbedSrc = 'https://maps.google.com/maps?cid=10352334373988220679&output=embed'
 
 export default function FooterSectionClient({ settings }: FooterSectionClientProps) {
   const primaryPhoneHref = settings.phone.replace(/\s+/g, '')

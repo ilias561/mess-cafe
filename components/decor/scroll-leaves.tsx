@@ -163,6 +163,34 @@ function buildLeaves(): Leaf[] {
 
 const PHILOSOPHY_LEAVES = buildLeaves()
 
+// Phones: the full generated border crowded a 390px viewport into mush — so
+// mobile gets a sparse hanging canopy fringing the TOP edge only, echoing the
+// real café's ceiling greenery (see the hero photo). Hand-placed, not
+// generated; same crushed-photo assets and .leaf-filter as desktop so the two
+// read as one design. 3 unique files ≈ ~100KB of w480 AVIF.
+// Mobile's whole leaf story (user call 2026-06-12: no top canopy/border on
+// phones) — ambient background noise like the desktop WATERMARKS: big ghost
+// silhouettes peeking in from the side edges all the way down, behind the
+// content (overflow-hidden crops the off-edge halves). Deliberately more
+// present than desktop's 0.12-0.14 — on phones this layer IS the foliage.
+// 4 unique files, all w480.
+const MOBILE_GHOSTS = [
+  // offsets stay shallow (-10..-16%) so most of each leaf is INSIDE the frame
+  // and reads as a full silhouette, not a sliver emerging from the edge
+  { key: 'mg0', name: 'fern', pos: { top: '0.5%', left: '-12%', width: '290px' }, rot: 18, flip: false, opacity: 0.24 },
+  { key: 'mg1', name: 'monstera-vine', pos: { top: '7%', right: '-14%', width: '290px' }, rot: -12, flip: true, opacity: 0.22 },
+  { key: 'mg2', name: 'split-leaf-2', pos: { top: '14%', left: '-10%', width: '250px' }, rot: -22, flip: false, opacity: 0.22 },
+  { key: 'mg3', name: 'fan-palm', pos: { top: '21%', right: '-16%', width: '310px' }, rot: 10, flip: false, opacity: 0.24 },
+  { key: 'mg4', name: 'fern', pos: { top: '28%', left: '-14%', width: '300px' }, rot: -14, flip: true, opacity: 0.22 },
+  { key: 'mg5', name: 'monstera-vine', pos: { top: '36%', right: '-12%', width: '270px' }, rot: 14, flip: false, opacity: 0.22 },
+  { key: 'mg6', name: 'fan-palm', pos: { top: '44%', left: '-16%', width: '300px' }, rot: -8, flip: true, opacity: 0.24 },
+  { key: 'mg7', name: 'split-leaf-2', pos: { top: '52%', right: '-10%', width: '260px' }, rot: 24, flip: true, opacity: 0.22 },
+  { key: 'mg8', name: 'fern', pos: { top: '60%', left: '-12%', width: '290px' }, rot: 16, flip: false, opacity: 0.22 },
+  { key: 'mg9', name: 'monstera-vine', pos: { top: '69%', right: '-14%', width: '280px' }, rot: -10, flip: true, opacity: 0.22 },
+  { key: 'mg10', name: 'fan-palm', pos: { top: '78%', left: '-13%', width: '300px' }, rot: 8, flip: false, opacity: 0.24 },
+  { key: 'mg11', name: 'split-leaf-2', pos: { top: '86%', right: '-12%', width: '270px' }, rot: -18, flip: true, opacity: 0.22 },
+] as const
+
 function LeafImg({
   name,
   filter,
@@ -196,6 +224,93 @@ function LeafImg({
         className={`block h-auto w-full select-none${filter ? '' : ' leaf-filter'}`}
       />
     </picture>
+  )
+}
+
+// Mobile ghost with life: drifts in once when it enters the viewport (WAAPI —
+// same engine-proof pattern as the café grow: per-leaf IO with positive
+// margins + a near-based timeout fallback so no engine leaves it invisible),
+// then a few keep an ultra-slow compositor sway (same budget class as the
+// climate particles that already run on phones).
+function MobileGhost({
+  ghost,
+  near,
+  sways,
+  swayDur,
+}: {
+  ghost: (typeof MOBILE_GHOSTS)[number]
+  near: boolean
+  sways: boolean
+  swayDur: number
+}) {
+  const innerRef = useRef<HTMLDivElement>(null)
+  const firedRef = useRef(false)
+
+  useEffect(() => {
+    const el = innerRef.current
+    if (!el || firedRef.current) return
+
+    const settle = () => {
+      el.style.opacity = '1'
+      el.style.transform = 'translateY(0)'
+    }
+    const fire = () => {
+      if (firedRef.current) return
+      firedRef.current = true
+      io.disconnect()
+      if (typeof el.animate !== 'function') {
+        settle()
+        if (sways) el.classList.add('leaf-sway')
+        return
+      }
+      const anim = el.animate(
+        [
+          { opacity: 0, transform: 'translateY(18px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        { duration: 1100, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'backwards' },
+      )
+      anim.finished
+        .then(() => {
+          settle()
+          // cancel so the finished fill can't sit above the CSS sway animation
+          anim.cancel()
+          if (sways) {
+            el.style.animationDuration = `${swayDur}s`
+            el.classList.add('leaf-sway')
+          }
+        })
+        .catch(settle)
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) fire()
+      },
+      { rootMargin: '12% 0px' },
+    )
+    io.observe(el)
+    let t = 0
+    if (near) t = window.setTimeout(fire, 3000)
+    return () => {
+      io.disconnect()
+      if (t) window.clearTimeout(t)
+    }
+  }, [near, sways, swayDur])
+
+  return (
+    <div
+      className="absolute"
+      style={{
+        ...ghost.pos,
+        transform: `rotate(${ghost.rot}deg) scaleX(${ghost.flip ? -1 : 1})`,
+        opacity: ghost.opacity,
+      }}
+    >
+      <div ref={innerRef} style={{ opacity: 0, transform: 'translateY(18px)' }}>
+        <LeafImg name={ghost.name} w={480} filter={WATERMARK_FILTER} eager={near} />
+      </div>
+    </div>
   )
 }
 
@@ -310,12 +425,13 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
   }, [ref, near])
 
   // Cold-cache insurance: warm the unique files quietly ~2.5s after mount so
-  // they're cached long before any scroll reaches the section. Desktop only —
-  // phones don't render the border at all (user decision 2026-06-12).
+  // they're cached long before any scroll reaches the section. Phones only
+  // need the canopy's 3 files.
   useEffect(() => {
-    if (isMobile) return
     const t = window.setTimeout(() => {
-      const unique = [...new Set([...POOL, 'fan-palm'])]
+      const unique = isMobile
+        ? [...new Set(MOBILE_GHOSTS.map((g) => g.name))]
+        : [...new Set([...POOL, 'fan-palm'])]
       for (const name of unique) {
         const img = new Image()
         img.fetchPriority = 'low'
@@ -348,9 +464,33 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
     </>
   )
 
-  // Phones: no leaf border at all (user decision 2026-06-12) — the philosophy
-  // section runs flat green + content on mobile.
-  if (isMobile) return null
+  // Phones: ghost silhouettes that drift in once on arrival; every 3rd one
+  // keeps an ultra-slow sway. transform/opacity only, each leaf its own tiny
+  // layer (never a section-sized animated layer). The overflow-hidden crops
+  // the off-edge bleeds.
+  if (isMobile) {
+    return (
+      <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {MOBILE_GHOSTS.map((g, gi) =>
+          reduce ? (
+            <div
+              key={g.key}
+              className="absolute"
+              style={{
+                ...g.pos,
+                transform: `rotate(${g.rot}deg) scaleX(${g.flip ? -1 : 1})`,
+                opacity: g.opacity,
+              }}
+            >
+              <LeafImg name={g.name} w={480} filter={WATERMARK_FILTER} eager={near} />
+            </div>
+          ) : (
+            <MobileGhost key={g.key} ghost={g} near={near} sways={gi % 3 === 0} swayDur={8 + (gi % 4) * 1.5} />
+          ),
+        )}
+      </div>
+    )
+  }
 
   return (
     <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-0">

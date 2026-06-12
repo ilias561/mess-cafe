@@ -86,14 +86,22 @@ for (let y = 0; y <= height; y += 320) {
   await page.waitForTimeout(60)
 }
 
-// 4. philosophy leaf border is desktop-only (user decision 2026-06-12) —
-// phones must render NO leaf images and fetch none of their bytes
+// 4. phones render the sparse canopy + ghost layer ONLY (≤12 leaves, all
+// painted at arrival) — not the full desktop border, and never zero
 await page.evaluate(() => document.getElementById('philosophy')?.scrollIntoView())
 await page.waitForTimeout(1500)
-const leafCount = await page.evaluate(
-  () => document.querySelectorAll('img[src*="/decor/photo/"]').length,
+const leafStats = await page.evaluate(() => {
+  const imgs = [...document.querySelectorAll('img[src*="/decor/photo/"]')]
+  return {
+    count: imgs.length,
+    loaded: imgs.filter((i) => i.complete && i.naturalWidth > 0).length,
+  }
+})
+check(
+  'philosophy ghost leaves on mobile: sparse and painted',
+  leafStats.count > 0 && leafStats.count <= 14 && leafStats.loaded === leafStats.count,
+  `${leafStats.loaded}/${leafStats.count} leaves`,
 )
-check('no philosophy leaf images on mobile', leafCount === 0, `${leafCount} found`)
 
 // 5. ambient videos exist as <video> on mobile (poster-only regression guard)
 const ambientVideos = await page.evaluate(
@@ -124,11 +132,14 @@ if (pinInfo == null) {
   check('café grow reaches full-bleed while parked', scale > 0.98, `scale=${scale.toFixed(2)}`)
 }
 
-// 7. no oversized image variants fetched on a 3x phone
+// 7. no oversized image variants fetched on a 3x phone — except the café
+// grow photo (about-2): it paints full-screen on ~1170 device px, where
+// w1200 is the CORRECT variant, not a leak (it was visibly pixelated at w768)
 const fatImages = await page.evaluate(() =>
   [...document.querySelectorAll('img')]
     .map((i) => i.currentSrc)
     .filter((s) => /--w(1200|1500|1600|2000)\./.test(s))
+    .filter((s) => !/\/about-2--/.test(s))
     .map((s) => s.split('/').pop()),
 )
 check('no w1200+ image variants on mobile', fatImages.length === 0, fatImages.slice(0, 3).join(', '))
