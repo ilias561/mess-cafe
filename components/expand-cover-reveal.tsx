@@ -122,19 +122,31 @@ export default function ExpandCoverReveal({
   const mInner = useTransform(mOuter, (s) => 1 / s)
   const mRadius = useTransform(mOuter, (s) => (s < 0.99 ? '16px' : '0px'))
   const [grown, setGrown] = useState(false)
+  // Two independent triggers — WebKit CI proved the ratio-threshold observer
+  // alone never fires there (scale stayed 0.74, same symptom as the real
+  // iPhone). Band observer: fires when the sticky photo crosses the middle of
+  // the viewport. Fallback: the pin-progress scroll listener — late on iOS but
+  // late is fine for a trigger.
   useEffect(() => {
     if (!isMobile || grown) return
     const el = stickyRef.current
     if (!el) return
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.intersectionRatio >= 0.55) setGrown(true)
+        if (entry.isIntersecting) setGrown(true)
       },
-      { threshold: [0.55] },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
     )
     io.observe(el)
     return () => io.disconnect()
   }, [isMobile, grown])
+  useEffect(() => {
+    if (!isMobile || grown) return
+    const unsub = p.on('change', (v) => {
+      if (v > 0.04) setGrown(true)
+    })
+    return unsub
+  }, [isMobile, grown, p])
   useEffect(() => {
     if (!grown) return
     const anim = animate(mOuter, 1, { duration: 1.0, ease: [0.22, 1, 0.36, 1] })

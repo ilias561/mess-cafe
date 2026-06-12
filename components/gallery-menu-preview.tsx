@@ -127,7 +127,7 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
               fill
               unoptimized
               loading="lazy"
-              sizes="(max-width: 768px) 100vw, 42vw"
+              sizes="(max-width: 768px) 65vw, 42vw"
               className="object-cover"
             />
           ) : null}
@@ -200,7 +200,7 @@ function TastingRailRow({
                   fill
                   unoptimized
                   loading="lazy"
-                  sizes="(max-width: 768px) 100vw, 22vw"
+                  sizes="(max-width: 768px) 65vw, 22vw"
                   className="object-cover"
                 />
               </div>
