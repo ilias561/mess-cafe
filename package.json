@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint .",
     "sync-r2": "node scripts/sync-r2.mjs",
-    "cf:deploy": "npm run build && wrangler pages deploy out --project-name=mess-cafe"
+    "cf:deploy": "npm run build && wrangler pages deploy out --project-name=mess-cafe",
+    "check:mobile": "node scripts/mobile-check.mjs http://127.0.0.1:8750"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

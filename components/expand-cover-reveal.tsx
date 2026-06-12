@@ -147,7 +147,7 @@ export default function ExpandCoverReveal({
       <section className="relative" style={{ background }}>
         <div className="relative h-[100svh] overflow-hidden">
           <div className="absolute inset-0">
-            <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+            <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
           </div>
         </div>
         {children}
@@ -166,7 +166,7 @@ export default function ExpandCoverReveal({
               style={{ scale: mOuter, borderRadius: mRadius }}
             >
               <m.div className="absolute inset-0" style={{ scale: mInner }}>
-                <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+                <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
               </m.div>
             </m.div>
           </div>
@@ -188,7 +188,7 @@ export default function ExpandCoverReveal({
             className="absolute inset-0"
             style={{ scale, clipPath: clip, WebkitClipPath: clip, willChange: imgWillChange }}
           >
-            <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
+            <FadeImage src={src} alt={alt} fill sizes="(max-width: 768px) 65vw, 100vw" className="object-cover" />
           </m.div>
         </div>
       </div>

@@ -1,0 +1,39 @@
+name: mobile-check
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build static export
+        run: npm run build
+
+      # Real WebKit (Safari engine) — the only emulation that reproduces iOS
+      # scroll/compositor behavior. Chromium adds network throttling coverage.
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps webkit chromium
+
+      - name: Serve build
+        run: |
+          python3 -m http.server 8750 --directory out --bind 127.0.0.1 &
+          sleep 2
+
+      - name: Smoke (WebKit / real Safari engine)
+        run: PW_ENGINE=webkit node scripts/mobile-check.mjs http://127.0.0.1:8750
+
+      - name: Smoke (Chromium, throttled to ~13 Mbps)
+        run: node scripts/mobile-check.mjs http://127.0.0.1:8750

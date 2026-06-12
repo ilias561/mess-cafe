@@ -149,6 +149,13 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/about-4--w480.avif 480w, /images/about-4--w768.avif 768w, /images/about-4--w1200.avif 1200w, /images/about-4--w1600.avif 1600w, /images/about-4--w1920.avif 1920w",
     "webpSrcSet": "/images/about-4--w480.webp 480w, /images/about-4--w768.webp 768w, /images/about-4--w1200.webp 1200w, /images/about-4--w1600.webp 1600w, /images/about-4--w1920.webp 1920w"
   },
+  "/images/about-editorial-poster.jpg": {
+    "width": 820,
+    "height": 1230,
+    "blurDataURL": "data:image/webp;base64,UklGRrwAAABXRUJQVlA4ILAAAACQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JaACdIExguBWZhkoh4y4QWtLOzQAA/ni23eBFZsQJwRIYCqbYNDW5WFOBsgHBLkilhK46J5LWwYDqVicoKUXT0exmuqM/6n1Q0ajnllzhOI24t78dqF3zOBy0Cjv215s5oQLXwOzck+nByVpCFs4C5poZix77WrVLbEoqFf0e6n8DdnF21q/aSL6dlIhD5lVWaNqj0AAAAA==",
+    "avifSrcSet": "/images/about-editorial-poster--w480.avif 480w, /images/about-editorial-poster--w768.avif 768w, /images/about-editorial-poster--w820.avif 820w",
+    "webpSrcSet": "/images/about-editorial-poster--w480.webp 480w, /images/about-editorial-poster--w768.webp 768w, /images/about-editorial-poster--w820.webp 820w"
+  },
   "/images/decor/photo/banana-leaf.png": {
     "width": 1280,
     "height": 785,
