@@ -22,7 +22,14 @@ const engine = engineName === 'webkit' ? webkit : chromium
 const failures = []
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  [${engineName}] ${name}${detail ? ` — ${detail}` : ''}`)
-  if (!ok) failures.push(name)
+  if (!ok) {
+    failures.push(name)
+    // GitHub annotation — readable via the public check-runs API even when
+    // raw logs require admin rights
+    if (process.env.GITHUB_ACTIONS) {
+      console.log(`::error title=mobile-check [${engineName}]::${name}${detail ? ` — ${detail}` : ''}`)
+    }
+  }
 }
 
 const browser = await engine.launch()
