@@ -30,8 +30,11 @@ export default function PageLoader() {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const hasSeenLoader = sessionStorage.getItem(SESSION_KEY) === '1'
+    // Phones skip the splash entirely — on mobile connections it stacks ~1.4s
+    // of brand animation on top of already-slower downloads. Desktop keeps it.
+    const isMobile = window.matchMedia('(max-width: 767px)').matches
 
-    if (prefersReducedMotion || hasSeenLoader) {
+    if (prefersReducedMotion || hasSeenLoader || isMobile) {
       setSkipAnimation(true)
       setVisible(false)
       completeLoader()
