@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, type CSSProperties } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { m, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
 import { useIsMobile } from '@/lib/use-is-mobile'
 
@@ -166,12 +166,15 @@ const PHILOSOPHY_LEAVES = buildLeaves()
 function LeafImg({
   name,
   filter,
+  eager,
 }: {
   name: string
   /** Accepted for caller symmetry; rendering always uses the w480 variant (see below). */
   w: number
   /** Custom inline filter (watermarks); border leaves use `.leaf-filter` so mobile can drop the drop-shadow. */
   filter?: string
+  /** Section is near the viewport — fetch now instead of waiting for native lazy. */
+  eager?: boolean
 }) {
   const base = `/images/decor/photo/${name}`
   // Border leaves render at 130–340px of dark, filtered decorative foliage —
@@ -186,7 +189,7 @@ function LeafImg({
         src={`${base}.png`}
         alt=""
         aria-hidden
-        loading="lazy"
+        loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         draggable={false}
         style={filter ? { filter } : undefined}
@@ -213,7 +216,7 @@ function WatermarkLeaf({ leaf }: { leaf: (typeof WATERMARKS)[number] }) {
 }
 
 // Truly static — no animation, no compositor layer. The bulk of the border.
-function StaticLeaf({ leaf }: { leaf: Leaf }) {
+function StaticLeaf({ leaf, eager }: { leaf: Leaf; eager?: boolean }) {
   return (
     <div
       className={leaf.mobileHidden ? 'absolute max-md:hidden' : 'absolute'}
@@ -222,7 +225,7 @@ function StaticLeaf({ leaf }: { leaf: Leaf }) {
         transform: `rotate(${leaf.rot}deg) scaleX(${leaf.flip ? -1 : 1})`,
       }}
     >
-      <LeafImg name={leaf.name} w={leaf.w} />
+      <LeafImg name={leaf.name} w={leaf.w} eager={eager} />
     </div>
   )
 }
@@ -288,6 +291,24 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
   const isMobile = useIsMobile()
   const { ref, progress } = useRectProgress()
 
+  // Native lazy fires too late on iOS mid-scroll — leaves visibly pop in after
+  // arrival. Flip the whole border to eager once the section is within ~1.5
+  // viewports; the border is only ~8 unique files (~320KB AVIF) so the early
+  // fetch is cheap and the canopy is fully painted by the time it's on screen.
+  const [near, setNear] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || near) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setNear(true)
+      },
+      { rootMargin: '150% 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [ref, near])
+
   // Leaves materialise progressively across the scroll-in instead of one fire-once
   // fade — the canopy grows denser as you scroll deeper into the section.
   const opacity = useTransform(progress, [0.18, 0.78], [0, 1])
@@ -305,7 +326,7 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
         <WatermarkLeaf key={wm.key} leaf={wm} />
       ))}
       {leaves.map((leaf) => (
-        <StaticLeaf key={leaf.key} leaf={leaf} />
+        <StaticLeaf key={leaf.key} leaf={leaf} eager={near} />
       ))}
     </>
   )

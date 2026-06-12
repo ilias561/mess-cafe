@@ -26,6 +26,23 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
     const img = imgRef.current
     if (img?.complete && img.naturalWidth > 0) setImageLoaded(true)
   }, [])
+
+  // Native lazy loading fires too late on iOS mid-scroll — images visibly pop
+  // in after they're already on screen. Flip to eager once the image is within
+  // ~1.5 viewports so it's fetched and decoded before the user reaches it.
+  const [nearView, setNearView] = useState(false)
+  useEffect(() => {
+    const img = imgRef.current
+    if (!img || nearView) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setNearView(true)
+      },
+      { rootMargin: '150% 0px' },
+    )
+    io.observe(img)
+    return () => io.disconnect()
+  }, [nearView])
   const loaded = reduceMotion === true || imageLoaded
   const {
     style: imageStyle,
@@ -43,7 +60,7 @@ export function FadeImage({ skeleton = DEFAULT_SKELETON, ...props }: FadeImagePr
     ...imgRest
   } = props
   const isFill = Boolean(fill)
-  const resolvedLoading = priority ? 'eager' : (loading ?? 'lazy')
+  const resolvedLoading = priority || nearView ? 'eager' : (loading ?? 'lazy')
   const resolvedDecoding = decoding ?? 'async'
   const srcKey = typeof src === 'string' ? src : undefined
   const manifest = srcKey ? getImageManifestEntry(srcKey) : undefined
