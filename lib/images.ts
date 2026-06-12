@@ -3,7 +3,9 @@
  */
 export const images = {
   heroInterior: '/images/hero-interior.jpg',
-  aboutInterior: '/images/about-1.jpg',
+  // 820w q7 re-cut of about-1.jpg — it only serves as a <video poster>, which
+  // can't pick responsive variants, and the 708KB original throttled phones.
+  aboutInterior: '/images/about-editorial-poster.jpg',
   aboutBar: '/images/about-2.jpg',
   aboutPlants: '/images/gallery-1.jpg',
   philosophyBright: '/images/111/mess-internal-0004.jpg',

@@ -255,7 +255,7 @@ function SplitSpread() {
               src={images.philosophyBright}
               alt="Φωτεινή γωνιά του καφέ με φυσικό φως και θέα στη λίμνη"
               aspect="aspect-[3/2]"
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 65vw, 40vw"
             />
           </MaskRevealBlock>
         </div>
@@ -265,7 +265,7 @@ function SplitSpread() {
               src={images.philosophyCounter}
               alt="Ο πάγκος self service πλαισιωμένος από φυτά"
               aspect="aspect-[4/5]"
-              sizes="(max-width: 768px) 100vw, 30vw"
+              sizes="(max-width: 768px) 65vw, 30vw"
             />
           </MaskRevealBlock>
         </div>
@@ -278,7 +278,7 @@ function SplitSpread() {
               src={images.philosophyStairs}
               alt="Η σκάλα προς το πατάρι, πλαισιωμένη από φυτά"
               aspect="aspect-[4/5]"
-              sizes="(max-width: 768px) 100vw, 30vw"
+              sizes="(max-width: 768px) 65vw, 30vw"
             />
           </MaskRevealBlock>
         </div>
@@ -288,7 +288,7 @@ function SplitSpread() {
               src={images.philosophyHall}
               alt="Η αίθουσα με τα κίτρινα τραπέζια και τα έργα τέχνης στον τοίχο"
               aspect="aspect-[3/2]"
-              sizes="(max-width: 768px) 100vw, 45vw"
+              sizes="(max-width: 768px) 65vw, 45vw"
             />
           </MaskRevealBlock>
         </div>

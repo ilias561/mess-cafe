@@ -36,8 +36,10 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
     const conn = (navigator as unknown as { connection?: { effectiveType?: string } }).connection
     if (conn?.effectiveType === 'slow-2g' || conn?.effectiveType === '2g') return
 
-    // rootMargin fires 400px before the video enters the viewport,
-    // giving the browser time to buffer before the user reaches it
+    // Desktop: start buffering 400px early. Phones: wait until the clip is
+    // genuinely on screen — these are MB-scale files, and fetching them ahead
+    // of the viewport starves the section photos on slow mobile connections
+    // (images sat on their blur placeholders while the videos downloaded).
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -48,12 +50,14 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
           }
         })
       },
-      { threshold: 0, rootMargin: '400px 0px' },
+      isMobile
+        ? { threshold: 0.15, rootMargin: '0px' }
+        : { threshold: 0, rootMargin: '400px 0px' },
     )
 
     observer.observe(video)
     return () => observer.disconnect()
-  }, [])
+  }, [isMobile])
 
   // Advance playlist when a video ends
   useEffect(() => {

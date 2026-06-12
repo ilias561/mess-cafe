@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type RefObject, type ReactNode } from 'react'
 import {
+  animate,
   m,
   useMotionTemplate,
   useMotionValue,
@@ -110,15 +111,35 @@ export default function ExpandCoverReveal({
   const scale = useTransform(p, [0, 1], [1.0, 1.12])
   const imgWillChange = useTransform(p, (v) => (v > 0.001 && v < 0.72 ? 'transform, clip-path' : 'auto'))
 
-  // Mobile grow — transform-only, so iOS composites it without re-rasterizing:
-  // the outer window scales up from a centred frame to full-bleed while the
-  // image counter-scales, staying visually full-size (same trick, zero clip-path).
-  const mOuter = useTransform(reveal, [0, 1], [0.74, 1])
+  // Mobile grow — transform-only AND time-based. Scroll-scrubbing the grow
+  // works in emulators but on real iPhones scroll events reach JS *behind* the
+  // compositor's scrolling, so a grow tied to the first ~150px of scroll lags
+  // and reads as stuck. Instead: when the framed café fills the screen, play
+  // the grow once as a 1s animation (outer window scales up, image counter-
+  // scales to stay full-size — pure compositor work, no clip-path re-raster).
+  const stickyRef = useRef<HTMLDivElement>(null)
+  const mOuter = useMotionValue(0.74)
   const mInner = useTransform(mOuter, (s) => 1 / s)
-  // Constant radius while framed, dropped near full-bleed — a single style flip
-  // instead of a per-frame border-radius repaint.
   const mRadius = useTransform(mOuter, (s) => (s < 0.99 ? '16px' : '0px'))
-  const mWillChange = useTransform(p, (v) => (v > 0.001 && v < 0.3 ? 'transform' : 'auto'))
+  const [grown, setGrown] = useState(false)
+  useEffect(() => {
+    if (!isMobile || grown) return
+    const el = stickyRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.intersectionRatio >= 0.55) setGrown(true)
+      },
+      { threshold: [0.55] },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [isMobile, grown])
+  useEffect(() => {
+    if (!grown) return
+    const anim = animate(mOuter, 1, { duration: 1.0, ease: [0.22, 1, 0.36, 1] })
+    return () => anim.stop()
+  }, [grown, mOuter])
 
   if (reduce) {
     // No pin/scroll — a calm full-bleed café, then the section.
@@ -139,10 +160,10 @@ export default function ExpandCoverReveal({
     return (
       <section className="relative" style={{ background }}>
         <div ref={pinRef} className="relative" style={{ height: `${pinVh}svh` }}>
-          <div className="sticky top-0 z-0 h-[100svh] overflow-hidden">
+          <div ref={stickyRef} className="sticky top-0 z-0 h-[100svh] overflow-hidden">
             <m.div
               className="absolute inset-0 overflow-hidden"
-              style={{ scale: mOuter, borderRadius: mRadius, willChange: mWillChange }}
+              style={{ scale: mOuter, borderRadius: mRadius }}
             >
               <m.div className="absolute inset-0" style={{ scale: mInner }}>
                 <FadeImage src={src} alt={alt} fill sizes="100vw" className="object-cover" />
