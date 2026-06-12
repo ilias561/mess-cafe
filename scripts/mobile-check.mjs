@@ -19,6 +19,20 @@ if (!base) {
 const engineName = process.env.PW_ENGINE === 'webkit' ? 'webkit' : 'chromium'
 const engine = engineName === 'webkit' ? webkit : chromium
 
+// A crash (page.goto timeout, evaluate during nav, target gone) must still
+// land as a readable check-run annotation — raw CI logs need admin rights,
+// and a bare "exit code 1" cost a whole debugging round-trip (2026-06-12).
+for (const event of ['uncaughtException', 'unhandledRejection']) {
+  process.on(event, (err) => {
+    const msg = String(err?.message || err).split('\n')[0]
+    console.error(`CRASH [${engineName}] ${msg}`)
+    if (process.env.GITHUB_ACTIONS) {
+      console.log(`::error title=mobile-check [${engineName}] crashed::${msg}`)
+    }
+    process.exit(1)
+  })
+}
+
 const failures = []
 const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  [${engineName}] ${name}${detail ? ` — ${detail}` : ''}`)
