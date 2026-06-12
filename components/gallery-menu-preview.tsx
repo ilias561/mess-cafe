@@ -112,7 +112,11 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
 
   return (
     <figure ref={ref} className="relative">
-      <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden border border-ink-dark/30">
+      {/* Square, not 4/5: the dish photos are 4:3 with the round plate spanning
+          ~66% of the width — a 4/5 cover crop shows only 60% and slices the
+          plate's sides off (user report 2026-06-12); square shows 75%, the
+          whole plate with margin. */}
+      <div className="relative mx-auto aspect-square w-full max-w-[420px] overflow-hidden border border-ink-dark/30">
         <m.div
           className="absolute inset-0"
           animate={!reduce && inView ? { scale: [1, 1.04, 1] } : undefined}
@@ -121,10 +125,10 @@ function MenuHeroDish({ item }: { item: (typeof featuredMenuItems)[0] }) {
           }
         >
           {item.image ? (
-            // 135vw: the 4/5 box crops a landscape-ish dish photo by HEIGHT
-            // (~88vw × 1.25 × aspect), so width-based sizes under-pick — the
-            // 65vw cap fetched w768 for ~1560 device px (0.49×, visibly
-            // pixelated). 135vw → w1600 on 3× phones, w1200 on 2×.
+            // 135vw: the square box crops the 4:3 dish photo by HEIGHT
+            // (~88vw × 4/3 ≈ 117vw of source needed), so width-based sizes
+            // under-pick — the 65vw cap fetched w768 for ~1400+ device px
+            // (visibly pixelated). 135vw → w1600 on 3× phones, w1200 on 2×.
             <FadeImage
               src={item.image}
               alt={item.name}
@@ -160,9 +164,11 @@ function TastingRailRow({
   zigzag: boolean
   showRuleAbove: boolean
 }) {
+  // one column wider than the original 2/3-span — the thumbs read too small
+  // next to the type on desktop (user report 2026-06-12)
   const thumbCol = zigzag
-    ? 'md:col-start-10 md:col-span-2'
-    : 'md:col-start-9 md:col-span-3'
+    ? 'md:col-start-9 md:col-span-3'
+    : 'md:col-start-8 md:col-span-4'
 
   return (
     <Reveal.Item>
