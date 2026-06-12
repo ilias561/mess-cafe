@@ -252,7 +252,6 @@ function SplitSpread() {
         <div className="md:col-start-2 md:col-span-5 md:-translate-y-4">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
-              num="01"
               src={images.philosophyBright}
               alt="Φωτεινή γωνιά του καφέ με φυσικό φως και θέα στη λίμνη"
               aspect="aspect-[3/2]"
@@ -263,7 +262,6 @@ function SplitSpread() {
         <div className="md:col-start-8 md:col-span-4 md:-translate-y-4">
           <MaskRevealBlock direction="up" delay={0.15}>
             <KenBurnsTile
-              num="02"
               src={images.philosophyCounter}
               alt="Ο πάγκος self service πλαισιωμένος από φυτά"
               aspect="aspect-[4/5]"
@@ -277,7 +275,6 @@ function SplitSpread() {
         <div className="md:col-start-2 md:col-span-4 md:-translate-y-22">
           <MaskRevealBlock direction="left">
             <KenBurnsTile
-              num="03"
               src={images.philosophyStairs}
               alt="Η σκάλα προς το πατάρι, πλαισιωμένη από φυτά"
               aspect="aspect-[4/5]"
@@ -288,7 +285,6 @@ function SplitSpread() {
         <div className="md:col-start-7 md:col-span-6 md:-translate-y-4">
           <MaskRevealBlock direction="up" delay={0.15}>
             <KenBurnsTile
-              num="04"
               src={images.philosophyHall}
               alt="Η αίθουσα με τα κίτρινα τραπέζια και τα έργα τέχνης στον τοίχο"
               aspect="aspect-[3/2]"
@@ -303,13 +299,11 @@ function SplitSpread() {
 }
 
 function KenBurnsTile({
-  num,
   src,
   alt,
   aspect,
   sizes,
 }: {
-  num: string
   src: string
   alt: string
   aspect: string
@@ -345,12 +339,6 @@ function KenBurnsTile({
               className="ui-img-hover"
             />
           </m.div>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute left-2 top-2 z-10 bg-espresso/85 px-2 py-1 font-sans text-[10px] uppercase tracking-[0.16em] text-mustard tabular-nums"
-          >
-            {num}
-          </span>
         </div>
       </div>
     </figure>

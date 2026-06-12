@@ -20,6 +20,7 @@ const NAV_HEIGHT = 64
 export default function MenuAnchorNav() {
   const [active, setActive] = useState('brunch')
   const navRef = useRef<HTMLElement>(null)
+  const stripRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -37,6 +38,17 @@ export default function MenuAnchorNav() {
     })
     return () => observers.forEach((o) => o.disconnect())
   }, [])
+
+  // Keep the active chip in view as the page scrolls past sections — on phones
+  // the strip overflows, so without this the highlight walks off-screen.
+  // Scrolled manually on the strip (not scrollIntoView) so the page never moves.
+  useEffect(() => {
+    const strip = stripRef.current
+    const chip = strip?.querySelector<HTMLButtonElement>(`[data-anchor="${active}"]`)
+    if (!strip || !chip || strip.scrollWidth <= strip.clientWidth) return
+    const target = chip.offsetLeft - (strip.clientWidth - chip.offsetWidth) / 2
+    strip.scrollTo({ left: Math.max(0, target), behavior: 'smooth' })
+  }, [active])
 
   function scrollTo(id: string) {
     const el = document.getElementById(id)
@@ -70,11 +82,15 @@ export default function MenuAnchorNav() {
           Αρχική
         </Link>
 
-        <div className="no-scrollbar -mx-1 flex w-full flex-nowrap gap-2.5 overflow-x-auto scroll-pl-1 scroll-pr-6 lg:mx-0 lg:flex-wrap lg:justify-end lg:gap-5 lg:scroll-pl-0 lg:scroll-pr-0">
+        <div
+          ref={stripRef}
+          className="no-scrollbar -mx-1 flex w-full flex-nowrap gap-2.5 overflow-x-auto scroll-pl-1 scroll-pr-6 lg:mx-0 lg:flex-wrap lg:justify-end lg:gap-5 lg:scroll-pl-0 lg:scroll-pr-0"
+        >
           {anchors.map(({ id, label }) => (
             <button
               key={id}
               type="button"
+              data-anchor={id}
               onClick={() => scrollTo(id)}
               aria-label={`Μετάβαση στην ενότητα ${label}`}
               className={`ui-link inline-flex min-h-11 shrink-0 items-center rounded-full px-4 py-2 font-sans text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mustard focus-visible:ring-offset-2 lg:min-h-0 lg:rounded-none lg:border-b lg:px-0 lg:py-1 lg:pb-1 ${

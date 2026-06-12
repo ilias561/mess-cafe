@@ -105,12 +105,12 @@ export default function ChoiceDoors() {
         }}
       />
 
-      {/* clip — mobile: top block, ~10% cropped each side (aspect 16/15 cover);
-          desktop: full-bleed, padded to clear the navbar, contained (no crop) */}
-      <div className="relative z-0 aspect-[16/15] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:pt-[84px] md:pb-7">
+      {/* clip — mobile: top block at the clip's own 1444×1080 aspect, contained
+          (nothing cropped); desktop: full-bleed, padded to clear the navbar */}
+      <div className="relative z-0 aspect-[1444/1080] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:pt-[84px] md:pb-7">
         <video
           ref={videoRef}
-          className="h-full w-full object-cover object-center md:object-contain"
+          className="h-full w-full object-contain object-center"
           poster={videoSrc('/videos/menu-hero-poster.jpg')}
           src={videoSrc('/videos/menu-hero.mp4')}
           muted
