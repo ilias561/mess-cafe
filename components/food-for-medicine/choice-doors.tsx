@@ -106,8 +106,9 @@ export default function ChoiceDoors() {
       />
 
       {/* clip — mobile: top block at the clip's own 1444×1080 aspect, contained
-          (nothing cropped); desktop: full-bleed, padded to clear the navbar */}
-      <div className="relative z-0 aspect-[1444/1080] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:pt-[84px] md:pb-7">
+          (nothing cropped) and pushed below the fixed h-16 navbar, which
+          otherwise overlaps the top of the plate; desktop: full-bleed, padded */}
+      <div className="relative z-0 mt-16 aspect-[1444/1080] w-full overflow-hidden md:absolute md:inset-0 md:mt-0 md:aspect-auto md:pt-[84px] md:pb-7">
         <video
           ref={videoRef}
           className="h-full w-full object-contain object-center"

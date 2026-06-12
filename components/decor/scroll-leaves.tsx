@@ -309,6 +309,23 @@ export function ScrollLeaves({ leaves = PHILOSOPHY_LEAVES }: { leaves?: Leaf[] }
     return () => io.disconnect()
   }, [ref, near])
 
+  // Cold-cache insurance: on a first visit the hero downloads own the bandwidth
+  // exactly when the user starts scrolling, and the leaves lose the race even
+  // with the eager flip. Warm the unique files quietly ~2.5s after mount so
+  // they're cached long before any scroll reaches the section.
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      const unique = [...new Set([...POOL, 'fan-palm'])]
+      for (const name of unique) {
+        const img = new Image()
+        img.fetchPriority = 'low'
+        img.decoding = 'async'
+        img.src = `/images/decor/photo/${name}--w480.avif`
+      }
+    }, 2500)
+    return () => window.clearTimeout(t)
+  }, [])
+
   // Leaves materialise progressively across the scroll-in instead of one fire-once
   // fade — the canopy grows denser as you scroll deeper into the section.
   const opacity = useTransform(progress, [0.18, 0.78], [0, 1])

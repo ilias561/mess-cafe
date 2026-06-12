@@ -250,9 +250,14 @@ export default function Hero() {
               fetchPriority="high"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
+            {/* Single H.264 source on purpose: a <source> list with HEVC first
+                has no runtime fallback if the HEVC file is fetchable but fails
+                to decode — the element just shows the poster. H.264 decodes
+                everywhere and is only ~300KB heavier after the re-encode. */}
             {!prefersReducedMotion && (
               <video
                 ref={mobileVideoRef}
+                src={videoSrc('/videos/hero-mobile.mp4')}
                 poster={videoSrc('/videos/hero-mobile-poster.jpg')}
                 muted
                 playsInline
@@ -264,10 +269,7 @@ export default function Hero() {
                 title="M.E.S.S. — Ο χώρος μας"
                 className="absolute inset-0 h-full w-full object-cover object-center [transform:translateZ(0)]"
                 style={{ willChange: 'transform' }}
-              >
-                <source src={videoSrc('/videos/hero-mobile.hevc.mp4')} type='video/mp4; codecs="hvc1"' />
-                <source src={videoSrc('/videos/hero-mobile.mp4')} type="video/mp4" />
-              </video>
+              />
             )}
           </div>
 

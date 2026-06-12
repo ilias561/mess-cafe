@@ -156,11 +156,13 @@ export default function ExpandCoverReveal({
   }
 
   if (isMobile) {
-    // svh everywhere: vh-sized pins jump when the iOS URL bar collapses.
+    // Pin/cover offsets in svh (stable when the iOS URL bar collapses), but the
+    // photo itself is 100lvh: at scale 1 it must cover the FULL screen even with
+    // the bar collapsed — 100svh leaves a viewport-chrome-sized band of green.
     return (
       <section className="relative" style={{ background }}>
         <div ref={pinRef} className="relative" style={{ height: `${pinVh}svh` }}>
-          <div ref={stickyRef} className="sticky top-0 z-0 h-[100svh] overflow-hidden">
+          <div ref={stickyRef} className="sticky top-0 z-0 h-[100lvh] overflow-hidden">
             <m.div
               className="absolute inset-0 overflow-hidden"
               style={{ scale: mOuter, borderRadius: mRadius }}
