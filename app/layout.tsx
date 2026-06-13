@@ -4,6 +4,7 @@ import CloudflareAnalytics from '@/components/analytics/CloudflareAnalytics'
 import { PHONE_NUMBER } from '@/lib/constants'
 import { featuredQuote, reviews } from '@/lib/reviews-data'
 import { absoluteUrl, getSiteUrl } from '@/lib/site-url'
+import { videoSrc } from '@/lib/media'
 import AnchorScroll from '@/components/anchor-scroll'
 import PageLoader from '@/components/page-loader'
 import DeferredOverlays from '@/components/deferred-overlays'
@@ -152,6 +153,16 @@ export default function RootLayout({
       style={{ WebkitTextSizeAdjust: '100%' }}
     >
       <head>
+        {/* Mobile hero LCP: the full-bleed poster is the largest paint on phones.
+            media-scoped so desktop (which shows a different clip) never fetches it,
+            and the URL matches the <img>/<video poster> exactly so it dedupes. */}
+        <link
+          rel="preload"
+          as="image"
+          href={videoSrc('/videos/hero-mobile-poster.jpg')}
+          media="(max-width: 767px)"
+          fetchPriority="high"
+        />
         <link rel="preconnect" href="https://static.cloudflareinsights.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
       </head>

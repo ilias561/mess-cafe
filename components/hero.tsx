@@ -123,17 +123,13 @@ export default function Hero() {
   const mobileVideoRef = useRef<HTMLVideoElement | null>(null)
   const desktopVideoRef = useRef<HTMLVideoElement | null>(null)
   const sectionRef = useRef<HTMLElement | null>(null)
-  // Stop the hero's infinite loops (logo bob, scroll-cue pulse, mobile-frame
-  // cycle) once it's scrolled out of view — no idle main-thread churn down-page.
+  // Stop the hero's infinite loops (logo bob, scroll-cue pulse) once it's
+  // scrolled out of view — no idle main-thread churn down-page.
   const heroInView = useInView(sectionRef)
 
   const [loaderReady, setLoaderReady] = useState(false)
   const prefersReducedMotion = useReducedMotion()
-  const [mobileFrameIx, setMobileFrameIx] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)
-  // While the mobile clip is actually playing, the frame <img> behind it is
-  // invisible — cycling it would decode a full-screen JPG every 2.5s for nothing.
-  const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false)
 
   // Only the clip matching the current viewport should ever load — prevents
   // mobile downloading the desktop clip (and vice-versa).
@@ -146,10 +142,7 @@ export default function Hero() {
   }, [])
 
   const desktopClip = useMemo(() => videoSrc('/videos/main-page-animation.mp4'), [])
-  const mobileFramePaths = useMemo(
-    () => [1, 2, 3, 4].map((n) => `/videos/hero-mobile-frame-${n}.jpg`),
-    [],
-  )
+  const mobilePoster = useMemo(() => videoSrc('/videos/hero-mobile-poster.jpg'), [])
 
   const reveal = (delayMs: number, durationMs: number) => ({
     initial: prefersReducedMotion ? { opacity: 0, y: 0 } : { opacity: 0, y: 16 },
@@ -194,29 +187,6 @@ export default function Hero() {
     return () => video.removeEventListener('timeupdate', onTime)
   }, [prefersReducedMotion, isDesktop, loaderReady])
 
-  useEffect(() => {
-    const video = mobileVideoRef.current
-    if (!video) return
-    const onPlaying = () => setMobileVideoPlaying(true)
-    const onStopped = () => setMobileVideoPlaying(false)
-    video.addEventListener('playing', onPlaying)
-    video.addEventListener('pause', onStopped)
-    video.addEventListener('ended', onStopped)
-    return () => {
-      video.removeEventListener('playing', onPlaying)
-      video.removeEventListener('pause', onStopped)
-      video.removeEventListener('ended', onStopped)
-    }
-  }, [loaderReady])
-
-  useEffect(() => {
-    if (prefersReducedMotion || !heroInView || mobileVideoPlaying) return
-    const interval = window.setInterval(() => {
-      setMobileFrameIx((i) => (i + 1) % mobileFramePaths.length)
-    }, 2500)
-    return () => window.clearInterval(interval)
-  }, [prefersReducedMotion, heroInView, mobileVideoPlaying, mobileFramePaths.length])
-
   const heroWords = 'A quiet kind of chaos.'.split(' ')
 
   return (
@@ -248,7 +218,7 @@ export default function Hero() {
           {/* Mobile clip */}
           <div className="absolute inset-0 md:hidden">
             <img
-              src={videoSrc(mobileFramePaths[mobileFrameIx] ?? '/videos/hero-mobile-poster.jpg')}
+              src={mobilePoster}
               alt=""
               aria-hidden
               loading="eager"
@@ -264,7 +234,7 @@ export default function Hero() {
               <video
                 ref={mobileVideoRef}
                 src={videoSrc('/videos/hero-mobile.mp4')}
-                poster={videoSrc('/videos/hero-mobile-poster.jpg')}
+                poster={mobilePoster}
                 muted
                 playsInline
                 controls={false}

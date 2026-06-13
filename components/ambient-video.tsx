@@ -19,9 +19,14 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
   const ref = useRef<HTMLVideoElement>(null)
   const playlist = srcs && srcs.length > 1 ? srcs : null
   const [index, setIndex] = useState(0)
-  // Phones keep the videos (poster-only mobile read as "videos are broken") but
-  // defer all fetching until the IO below is about to play them — these clips
-  // are 1–6.5MB each, so eager metadata fetches add up on mobile data.
+  // Defer ALL video fetching until the IntersectionObserver below calls play()
+  // (play() forces the load). preload stays "none" on every device: useIsMobile
+  // is false during SSR, so `isMobile ? 'none' : 'metadata'` shipped
+  // preload="metadata" in the initial HTML on EVERY device — phones included —
+  // and the client flip to "none" lands too late to stop the browser issuing a
+  // metadata range request per clip at load, contending with the hero on the
+  // ~13 Mbps link. isMobile only tunes the IO margins below — desktop still
+  // buffers 400px early via the play() call, so nothing regresses there.
   const isMobile = useIsMobile()
 
   const activeSrc = playlist ? playlist[index] : (src ?? '')
@@ -87,7 +92,7 @@ export default function AmbientVideo({ src, srcs, className, poster, ariaLabel, 
       muted
       loop={!playlist}
       playsInline
-      preload={isMobile ? 'none' : 'metadata'}
+      preload="none"
       className={className}
       aria-label={ariaLabel}
       aria-hidden={ariaHidden}
