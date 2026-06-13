@@ -39,18 +39,17 @@ export function getCategoryLayout(category: MenuCategory): 'visual' | 'list' {
 export const menuData: MenuCategory[] = [
   {
     id: 'brunch',
-    title: 'BREAKFAST & BRUNCH',
-    titleGr: 'Πρωινό & Brunch',
+    title: 'BREAKFAST',
+    titleGr: 'Πρωινό',
     layout: 'feature',
     items: [
       {
         name: 'Spread Mix',
-        desc: 'Επιλογή από spreads και ψωμί της ημέρας.',
+        desc: 'Δύο φέτες προζυμένιου ψωμιού — μία με γουακαμόλε, μία με φυστικοβούτυρο. Απόλυτη ισορροπία μεταξύ αλμυρού και γλυκού.',
         price: '6.5€',
         image: '/images/menu/piata-0018.jpg',
         nutrition: { calories: 280, protein: 7, carbs: 38, fat: 11, sugar: 5, fiber: 3 },
-        benefit:
-          'Τα σπιτικά spreads με ψωμί προσφέρουν ενέργεια, φυτικές ίνες και απαραίτητα θρεπτικά συστατικά για ξεκίνημα της ημέρας.',
+        benefit: 'Φυτικές ίνες, ιχνοστοιχεία και ω-3 λιπαρά.',
       },
       {
         name: 'Classic Omelette',
@@ -60,26 +59,26 @@ export const menuData: MenuCategory[] = [
         image: '/images/menu/piata-0016.jpg',
         nutrition: { calories: 320, protein: 18, carbs: 6, fat: 24, sugar: 2, fiber: 1 },
         benefit:
-          'Τα αυγά είναι πλούσια σε πρωτεΐνη υψηλής βιολογικής αξίας και βιταμίνες Β που υποστηρίζουν τον μεταβολισμό.',
+          'Το αυγό θεωρείται η πιο θρεπτική τροφή για τον άνθρωπο — εμείς το κάνουμε και νόστιμο.',
       },
       {
         name: 'Scrambled Eggs',
-        desc: '3 υλικά της επιλογής σας.',
+        desc: 'Αυγά χτυπημένα με γιαούρτι, μαύρο κύμινο και ηλιέλαιο.',
         price: '7€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0013.jpg',
         nutrition: { calories: 340, protein: 19, carbs: 7, fat: 26, sugar: 2, fiber: 1 },
-        benefit: 'Τα αυγά παρέχουν χολίνη και λουτεΐνη που προάγουν την υγεία του εγκεφάλου και των ματιών.',
+        benefit: 'Πρωτεϊνική βόμβα για το ξεκίνημα της μέρας σου.',
       },
       {
         name: 'Grilled Cheese with Mushrooms',
-        desc: 'Προζυμένιο ψωμί, parmigiana, σέβρ, γρούγιερ, μανιτάρια πλευρώτους. Συνοδεύεται με chutney μάνγκο.',
+        desc: 'Προζυμένιο ψωμί, μιξ από παλαιωμένες γραβιέρες, μανιτάρια πλευρώτους. Συνοδεύεται με chutney μάνγκο.',
         price: '7€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0015.jpg',
         nutrition: { calories: 480, protein: 22, carbs: 36, fat: 28, sugar: 8, fiber: 3 },
         benefit:
-          'Τα μανιτάρια πλευρώτους ενισχύουν το ανοσοποιητικό και συνδυαστικά με τυριά παρέχουν ασβέστιο και βιταμίνη D.',
+          'Οι παλαιωμένες γραβιέρες αποτελούν βασική πηγή προβιοτικών και ενζύμων — το πεπτικό σου θα το ευγνωμονεί.',
       },
       {
         name: 'Avocado Toast',
@@ -88,16 +87,33 @@ export const menuData: MenuCategory[] = [
         badges: ['vegetarian', 'signature'],
         image: '/images/menu/piata-0009.jpg',
         nutrition: { calories: 420, protein: 14, carbs: 38, fat: 24, sugar: 4, fiber: 9 },
-        benefit: 'Το αβοκάντο και το προζυμένιο ψωμί δίνουν καλά λιπαρά και ίνες για παρατεταμένη ενέργεια.',
+        benefit:
+          'Το πιο ολοκληρωμένο πιάτο μας! Πρωτεΐνη, καλά λιπαρά, ω-3 και ιχνοστοιχεία, συνοδευμένα με πολλή γεύση.',
       },
       {
         name: 'Apaki On Toast',
-        desc: 'Προζυμένιο ψωμί, apaki, αυγό, ντοματίνια, ρόκα.',
+        desc: 'Ψωμί με μασκαρπόνε, αυγό, απάκι, ντοματίνια, προσούτο.',
         price: '10€',
         image: '/images/menu/piata-0028.jpg',
         nutrition: { calories: 390, protein: 22, carbs: 34, fat: 18, sugar: 4, fiber: 3 },
         benefit:
-          'Το apaki, πλούσιο σε πρωτεΐνη, μαζί με ρόκα και ντοματίνια προσφέρουν σίδηρο, αντιοξειδωτικά και ζωτική ενέργεια.',
+          'Για όσους πεινάνε και το εννοούν — μια ολοκληρωμένη λύση που θα σε κρατήσει όλη μέρα.',
+      },
+      {
+        name: 'All Red On Toast',
+        desc: 'Προζυμένιο ψωμί, mousse γαλοτύρι, chutney τομάτας με φράουλα, γλασαρισμένο apaki κοτόπουλου, λάδι βασιλικού και κρέμα βαλσάμικου.',
+        price: '9€',
+        nutrition: { calories: 410, protein: 20, carbs: 36, fat: 19, sugar: 9, fiber: 3 },
+        benefit:
+          'Αντιοξειδωτικά από την τομάτα και τη φράουλα, με πρωτεΐνη από το κοτόπουλο — γεύση και ισορροπία.',
+      },
+      {
+        name: 'Kayannas On Toast',
+        desc: 'Προζυμένιο ψωμί, σάλτσα kayanna με αυγά, φέτα και ζουμερό λουκάνικο μαύρου χοίρου με λευκή τρούφα.',
+        price: '10€',
+        nutrition: { calories: 470, protein: 24, carbs: 32, fat: 27, sugar: 3, fiber: 2 },
+        benefit:
+          'Πλήρης πρωτεΐνη από αυγά και λουκάνικο μαύρου χοίρου, για ένα χορταστικό ξεκίνημα.',
       },
     ],
   },

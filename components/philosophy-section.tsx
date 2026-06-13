@@ -11,7 +11,6 @@ import { ScrollLeaves } from '@/components/decor/scroll-leaves'
 import {
   AnaglyphHeading,
   CornerTicks,
-  Eyebrow,
   HairlineRule,
   MicroEyebrow,
 } from '@/components/decor/ornaments'
@@ -21,9 +20,9 @@ import { videoSrc } from '@/lib/media'
 import { images } from '@/lib/images'
 
 const philosophyGoals = [
-  'Να επικεντρωθεί στην υγεία.',
-  'Να δημιουργήσει κοινότητα.',
-  'Να μαζέψει ανθρώπους ίδιας φιλοσοφίας — έναν χώρο που δρα ως μαγνήτης για ανθρώπους της ίδιας νοοτροπίας.',
+  'Να βάζει την υγεία στο επίκεντρο.',
+  'Να χτίζει κοινότητα.',
+  'Να φέρνει κοντά ανθρώπους με κοινή νοοτροπία.',
 ] as const
 
 const philosophyVideo = videoSrc('/videos/mess-philosophy.mp4')
@@ -66,13 +65,8 @@ export default function PhilosophySection() {
           <div className="md:col-start-2 md:col-span-4 md:pt-40">
             <div className="md:sticky md:top-28">
               <Reveal>
-                <Eyebrow tone="dark">Η φιλοσοφία μας</Eyebrow>
-
-                <h2 className="type-section u-balance mt-7 font-serif text-charcoal">
-                  Ποιοι είμαστε{' '}
-                  <span className="italic text-mustard">&amp;</span>
-                  <br className="hidden sm:block" />{' '}
-                  η φιλοσοφία μας
+                <h2 className="type-section u-balance font-serif text-charcoal">
+                  Η <span className="italic text-mustard">φιλοσοφία</span> μας
                 </h2>
 
                 <p className="mt-7 max-w-[44ch] font-serif text-[clamp(17px,1.4vw,20px)] italic leading-[1.55] text-charcoal/70">
@@ -83,8 +77,8 @@ export default function PhilosophySection() {
               <Reveal asGroup gap={0.1} delay={0.15} className="mt-8 flex flex-col md:mt-12">
                 {philosophyGoals.map((goal, index) => (
                   <Reveal.Item key={goal}>
-                    <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-line py-4 first:border-t-0 first:pt-0 md:py-6">
-                      <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard tabular-nums">
+                    <div className="grid grid-cols-[auto_1fr] items-start gap-x-6 border-t border-line py-4 first:border-t-0 first:pt-0 md:py-6">
+                      <span className="mt-[3px] font-sans text-[12px] uppercase tracking-[0.16em] text-mustard tabular-nums md:mt-[5px]">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <p className="font-serif text-[clamp(19px,1.55vw,22px)] leading-snug tracking-[-0.005em] text-charcoal">
@@ -212,18 +206,14 @@ function Centerpiece() {
         >
           <div className="flex items-center gap-3">
             <HairlineRule origin="left" className="w-12" delay={0.5} />
-            <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-olive">
-              Η σκηνή μας
-            </span>
           </div>
 
           <AnaglyphHeading as="h3" tone="light" className="mt-6">
-            Ένας χώρος{' '}
-            <span className="italic text-mustard">σε κίνηση</span>
+            Οι <span className="italic text-mustard">εγκαταστάσεις</span> μας
           </AnaglyphHeading>
 
           <p className="mt-6 max-w-[34ch] font-serif text-[clamp(15px,1.3vw,18px)] italic leading-[1.55] text-charcoal/70">
-            Μικρές στιγμές από την καθημερινότητα στο M.E.S.S. — φως, υλικά, άνθρωποι.
+            Ένας χώρος που αναπνέει άπλετο φυσικό φως, οξυγόνο, και απίστευτη θέα που μαγνητίζει.
           </p>
 
           <m.div

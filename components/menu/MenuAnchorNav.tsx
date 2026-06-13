@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 const anchors = [
-  { id: 'brunch', label: 'Brunch' },
+  { id: 'brunch', label: 'Breakfast' },
   { id: 'bowls', label: 'Bowls' },
   { id: 'salads', label: 'Salads' },
   { id: 'wraps', label: 'Wraps' },

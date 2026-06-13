@@ -130,6 +130,9 @@ export default function Hero() {
   const [loaderReady, setLoaderReady] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const [isDesktop, setIsDesktop] = useState(false)
+  // The desktop clip plays once and freezes on its last (dark) frame; lift its
+  // brightness over the final stretch so the held image doesn't read as murky.
+  const [desktopEnded, setDesktopEnded] = useState(false)
 
   // Only the clip matching the current viewport should ever load — prevents
   // mobile downloading the desktop clip (and vice-versa).
@@ -180,11 +183,19 @@ export default function Hero() {
     if (!video) return
     const onTime = () => {
       if (!video.duration) return
-      const rate = video.currentTime < video.duration * 0.59 ? 1.75 : 1
+      const progress = video.currentTime / video.duration
+      const rate = progress < 0.59 ? 1.75 : 1
       if (video.playbackRate !== rate) video.playbackRate = rate
+      // Start the brighten ramp before the freeze so it lands lifted at the end.
+      if (progress > 0.82) setDesktopEnded(true)
     }
+    const onEnded = () => setDesktopEnded(true)
     video.addEventListener('timeupdate', onTime)
-    return () => video.removeEventListener('timeupdate', onTime)
+    video.addEventListener('ended', onEnded)
+    return () => {
+      video.removeEventListener('timeupdate', onTime)
+      video.removeEventListener('ended', onEnded)
+    }
   }, [prefersReducedMotion, isDesktop, loaderReady])
 
   const heroWords = 'A quiet kind of chaos.'.split(' ')
@@ -259,6 +270,10 @@ export default function Hero() {
               preload="none"
               poster={videoSrc('/videos/hero-desktop-poster.jpg')}
               className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
+              style={{
+                filter: desktopEnded ? 'brightness(1.16) saturate(1.04)' : 'brightness(1)',
+                transition: 'filter 1400ms ease-out',
+              }}
               aria-hidden
               title="M.E.S.S. — Ο χώρος μας"
             />

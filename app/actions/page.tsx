@@ -3,6 +3,7 @@ import Navigation from '@/components/navigation'
 import StaticPicture from '@/components/static-picture'
 import ActionsHeroHeader from '@/components/events/actions-hero-header'
 import KeepRisingActions from '@/components/events/keep-rising-actions'
+import NewsletterSignup from '@/components/newsletter-signup'
 import FooterSection from '@/components/footer-section'
 import { getAllEvents, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
 import { buildPageMetadata } from '@/lib/metadata'
@@ -45,6 +46,7 @@ export default function ActionsPage() {
         />
       </div>
       <KeepRisingActions upcoming={upcoming} past={past} settings={settings} />
+      <NewsletterSignup />
       <FooterSection />
     </main>
   )
