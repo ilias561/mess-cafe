@@ -87,11 +87,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/111/mess-internal-0018--w480.webp 480w, /images/111/mess-internal-0018--w768.webp 768w, /images/111/mess-internal-0018--w1200.webp 1200w, /images/111/mess-internal-0018--w1600.webp 1600w, /images/111/mess-internal-0018--w2000.webp 2000w"
   },
   "/images/111/mess-internal-0019.jpg": {
-    "width": 2000,
-    "height": 1333,
-    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJaACdAEDPvWRwvgAAP7slT5W7BgsDRr5Wad8K/VXYV/+iXcF48DzRSX2pimqdK9EXmn3del7K+uHPD+MPPlU1v2pbjC+uS27ABi4gjAIBAAyg4AAAA==",
-    "avifSrcSet": "/images/111/mess-internal-0019--w480.avif 480w, /images/111/mess-internal-0019--w768.avif 768w, /images/111/mess-internal-0019--w1200.avif 1200w, /images/111/mess-internal-0019--w1600.avif 1600w, /images/111/mess-internal-0019--w2000.avif 2000w",
-    "webpSrcSet": "/images/111/mess-internal-0019--w480.webp 480w, /images/111/mess-internal-0019--w768.webp 768w, /images/111/mess-internal-0019--w1200.webp 1200w, /images/111/mess-internal-0019--w1600.webp 1600w, /images/111/mess-internal-0019--w2000.webp 2000w"
+    "width": 1264,
+    "height": 842,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJagCdAED8E9rc3AAAP7lJwemYWXYE2e+IW0DVLiwxbJF/J90n7gy5/LQrMm6Re//HQNa8T2xZ0MTzg/OgXWT11VvqM10haNvCDaY5ZkUxAt3MuoAAA==",
+    "avifSrcSet": "/images/111/mess-internal-0019--w480.avif 480w, /images/111/mess-internal-0019--w768.avif 768w, /images/111/mess-internal-0019--w1200.avif 1200w, /images/111/mess-internal-0019--w1264.avif 1264w",
+    "webpSrcSet": "/images/111/mess-internal-0019--w480.webp 480w, /images/111/mess-internal-0019--w768.webp 768w, /images/111/mess-internal-0019--w1200.webp 1200w, /images/111/mess-internal-0019--w1264.webp 1264w"
   },
   "/images/111/mess-internal-0020.jpg": {
     "width": 2000,
@@ -129,11 +129,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/about-1--w480.webp 480w, /images/about-1--w768.webp 768w, /images/about-1--w1066.webp 1066w"
   },
   "/images/about-2.jpg": {
-    "width": 1600,
-    "height": 1066,
-    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQAgCdASoQAAsAA4BaJaACdAYt9qvVMfoKOgAA/uzk0kjAyFleEVkT+2sYej+wHp+sCUvFgVpu8R7tfpllOoQRx1276E34qmfme62UzidJ36Gf+uj3AG1MMpBAEAZz+1AAAA==",
-    "avifSrcSet": "/images/about-2--w480.avif 480w, /images/about-2--w768.avif 768w, /images/about-2--w1200.avif 1200w, /images/about-2--w1600.avif 1600w",
-    "webpSrcSet": "/images/about-2--w480.webp 480w, /images/about-2--w768.webp 768w, /images/about-2--w1200.webp 1200w, /images/about-2--w1600.webp 1600w"
+    "width": 1264,
+    "height": 842,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJagCdAED8E9rc3AAAP7lJwemYWXYE2e+IW0DVLiwxbJF/J90n7gy5/LQrMm6Re//HQNa8T2xZ0MTzg/OgXWT11VvqM10haNvCDaY5ZkUxAt3MuoAAA==",
+    "avifSrcSet": "/images/about-2--w480.avif 480w, /images/about-2--w768.avif 768w, /images/about-2--w1200.avif 1200w, /images/about-2--w1264.avif 1264w",
+    "webpSrcSet": "/images/about-2--w480.webp 480w, /images/about-2--w768.webp 768w, /images/about-2--w1200.webp 1200w, /images/about-2--w1264.webp 1264w"
   },
   "/images/about-3.jpg": {
     "width": 1066,
@@ -303,13 +303,6 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/hero-interior--w480.avif 480w, /images/hero-interior--w768.avif 768w, /images/hero-interior--w1199.avif 1199w",
     "webpSrcSet": "/images/hero-interior--w480.webp 480w, /images/hero-interior--w768.webp 768w, /images/hero-interior--w1199.webp 1199w"
   },
-  "/images/ingredients/free-range-eggs.jpg": {
-    "width": 1600,
-    "height": 2133,
-    "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAACwAwCdASoQABUAPu1iqk2ppaQiMAgBMB2JYwCdACHhSecyBA8+2AD+5zO/lahUj7qbMPq4mcNpKiXpoC2cvDXDCpmPI4OeTV9tjH0XzEmVrYS946tdwAVY66b7ExbtN8GV55p9fR/eMIAA",
-    "avifSrcSet": "/images/ingredients/free-range-eggs--w480.avif 480w, /images/ingredients/free-range-eggs--w768.avif 768w, /images/ingredients/free-range-eggs--w1200.avif 1200w, /images/ingredients/free-range-eggs--w1600.avif 1600w",
-    "webpSrcSet": "/images/ingredients/free-range-eggs--w480.webp 480w, /images/ingredients/free-range-eggs--w768.webp 768w, /images/ingredients/free-range-eggs--w1200.webp 1200w, /images/ingredients/free-range-eggs--w1600.webp 1600w"
-  },
   "/images/ingredients/natural-sweetness.jpg": {
     "width": 600,
     "height": 600,
@@ -318,18 +311,25 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/ingredients/natural-sweetness--w480.webp 480w, /images/ingredients/natural-sweetness--w600.webp 600w"
   },
   "/images/ingredients/no-frying.jpg": {
-    "width": 1600,
-    "height": 1067,
-    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAsAA4BaJaACdAEaIvu+WdwAAP74Vilzi9Tcjpfxx6sXfOTWsR2LmJ41yN+uV48tq++Fwvj7JBOpQYvbGik8ed0BCauiAAA=",
-    "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w, /images/ingredients/no-frying--w768.avif 768w, /images/ingredients/no-frying--w1200.avif 1200w, /images/ingredients/no-frying--w1600.avif 1600w",
-    "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w, /images/ingredients/no-frying--w768.webp 768w, /images/ingredients/no-frying--w1200.webp 1200w, /images/ingredients/no-frying--w1600.webp 1600w"
+    "width": 1264,
+    "height": 848,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAwAgCdASoQAAsAA4BaJQBdgMYYnMohT5rDwAD+6qnij6a1r38t4Vd/Le3oJJJVaxtfqqpvsETHV5Vcla6Uwov7t3dV1poMiqdaTtMs57XgIlZRtJpd0v3MpuACUAAA",
+    "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w, /images/ingredients/no-frying--w768.avif 768w, /images/ingredients/no-frying--w1200.avif 1200w, /images/ingredients/no-frying--w1264.avif 1264w",
+    "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w, /images/ingredients/no-frying--w768.webp 768w, /images/ingredients/no-frying--w1200.webp 1200w, /images/ingredients/no-frying--w1264.webp 1264w"
   },
   "/images/ingredients/olive-oil.jpg": {
-    "width": 1600,
-    "height": 1071,
-    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAsAA4BaJYwCdAEQ/SfZgrZgAP7wdQhx651fcswxsLRh+cObaHz+fOMnINAP+4g74k0RBv4l0HKVcAA=",
-    "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w, /images/ingredients/olive-oil--w768.avif 768w, /images/ingredients/olive-oil--w1200.avif 1200w, /images/ingredients/olive-oil--w1600.avif 1600w",
-    "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w, /images/ingredients/olive-oil--w768.webp 768w, /images/ingredients/olive-oil--w1200.webp 1200w, /images/ingredients/olive-oil--w1600.webp 1600w"
+    "width": 1264,
+    "height": 848,
+    "blurDataURL": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACwAQCdASoQAAsAA4BaJYgC7ABZnQAAAP5kaJfqtZWvHxB4d9FMxuXrtExXishOAqQV+7M2su+EWT91V5vUHyHSH2AAAA==",
+    "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w, /images/ingredients/olive-oil--w768.avif 768w, /images/ingredients/olive-oil--w1200.avif 1200w, /images/ingredients/olive-oil--w1264.avif 1264w",
+    "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w, /images/ingredients/olive-oil--w768.webp 768w, /images/ingredients/olive-oil--w1200.webp 1200w, /images/ingredients/olive-oil--w1264.webp 1264w"
+  },
+  "/images/ingredients/plant-milk.jpg": {
+    "width": 1264,
+    "height": 848,
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAACwAQCdASoQAAsAA4BaJQBWAB0ytz5AAP7qqhEnNpfFjJfakj3rOP0cXhPHC6e8MU7JM/460jvvmk8hVRPafsJOuJvjMSigclU9j84sTeabDkPQerkhlm8i1Z4ageQlWGXAAA==",
+    "avifSrcSet": "/images/ingredients/plant-milk--w480.avif 480w, /images/ingredients/plant-milk--w768.avif 768w, /images/ingredients/plant-milk--w1200.avif 1200w, /images/ingredients/plant-milk--w1264.avif 1264w",
+    "webpSrcSet": "/images/ingredients/plant-milk--w480.webp 480w, /images/ingredients/plant-milk--w768.webp 768w, /images/ingredients/plant-milk--w1200.webp 1200w, /images/ingredients/plant-milk--w1264.webp 1264w"
   },
   "/images/ingredients/sourdough.jpg": {
     "width": 600,

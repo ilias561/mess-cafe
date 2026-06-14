@@ -17,9 +17,7 @@ export const ingredientStandards: IngredientStandard[] = [
       'Ψωμί αργής ωρίμανσης, ψημένο σε ξυλόφουρνο. Λέμε όχι στο βιομηχανικό ψωμί με βελτιωτικά.',
   },
   {
-    // Image still keyed to the old slug so the card keeps rendering a photo until
-    // the plant-milk shot lands — see note to user; swap /images/ingredients then.
-    slug: 'free-range-eggs',
+    slug: 'plant-milk',
     name: 'Χειροποίητα Φυτικά Γάλατα',
     better:
       'Μαγειρεύουμε τον καρπό από τα κτήματά μας και φτιάχνουμε για εσάς φυτικά γάλατα χωρίς συντηρητικά — από τη φάρμα στο τραπέζι σας.',
