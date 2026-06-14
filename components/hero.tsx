@@ -271,7 +271,7 @@ export default function Hero() {
               poster={videoSrc('/videos/hero-desktop-poster.jpg')}
               className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
               style={{
-                filter: desktopEnded ? 'brightness(1.16) saturate(1.04)' : 'brightness(1)',
+                filter: desktopEnded ? 'brightness(1.32) saturate(1.06)' : 'brightness(1)',
                 transition: 'filter 1400ms ease-out',
               }}
               aria-hidden
@@ -281,19 +281,25 @@ export default function Hero() {
         </m.div>
 
         {/* ── Legibility scrims (centered composition) ── */}
-        <div className="pointer-events-none absolute inset-0 z-[1] bg-black/45" aria-hidden />
-        <div
-          className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-transparent to-black/50"
-          aria-hidden
-        />
+        {/* Once the desktop clip freezes on its last (dark) frame, ease the whole
+            scrim stack down so the held image lifts out of the murk. The headline
+            keeps its text-shadow, so it stays legible. Desktop-only: desktopEnded
+            never flips on phones, so the scrims stay full there. */}
         <div
           className="pointer-events-none absolute inset-0 z-[1]"
-          style={{
-            background:
-              'radial-gradient(ellipse 70% 55% at 50% 42%, rgba(0,0,0,0.5), rgba(0,0,0,0) 72%)',
-          }}
+          style={{ opacity: desktopEnded ? 0.6 : 1, transition: 'opacity 1400ms ease-out' }}
           aria-hidden
-        />
+        >
+          <div className="absolute inset-0 bg-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/50" />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 70% 55% at 50% 42%, rgba(0,0,0,0.5), rgba(0,0,0,0) 72%)',
+            }}
+          />
+        </div>
 
         {/* ── Mustard corner accent frame ── */}
         <div
