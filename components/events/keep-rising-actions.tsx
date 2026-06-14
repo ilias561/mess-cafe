@@ -1,37 +1,27 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { m, useReducedMotion } from 'framer-motion'
 import { FadeImage } from '@/components/fade-image'
 import { formatGreekDate } from '@/lib/format-date'
 import { EASE } from '@/lib/motion'
 import type { Event } from '@/lib/events/events'
-import type { Settings } from '@/lib/settings'
 
-type Tab = 'upcoming' | 'past'
+type Variant = 'upcoming' | 'past'
 
 /**
- * #KeepRising actions — a deliberately simple page: a clean header, a toggle
- * between the upcoming actions and the archive, and the matching list of cards.
- * That's it. No marquee hero, manifesto, spotlight or extra CTAs.
+ * #KeepRising actions — a deliberately simple page: a clean header, then the
+ * upcoming actions and the archive listed one after the other, both always
+ * visible (no tabs to click). No marquee hero, manifesto or spotlight.
  */
 export default function KeepRisingActions({
   upcoming,
   past,
-  settings,
 }: {
   upcoming: Event[]
   past: Event[]
-  settings: Settings
 }) {
   const reduce = useReducedMotion()
-  const hasUpcoming = upcoming.length > 0
-  const hasPast = past.length > 0
-  const [tab, setTab] = useState<Tab>(hasUpcoming ? 'upcoming' : 'past')
-  const waPhone = settings.whatsapp.replace(/[^\d]/g, '')
-
-  const list = tab === 'upcoming' ? upcoming : past
 
   return (
     <section className="bg-bone px-6 py-20 md:px-12 md:py-28">
@@ -40,102 +30,75 @@ export default function KeepRisingActions({
           ΟΙ ΔΡΑΣΕΙΣ ΜΑΣ
         </p>
 
-        {/* toggle */}
-        <div role="tablist" aria-label="Δράσεις" className="mt-5 flex items-center gap-1 border-b border-line">
-          <TabButton
-            active={tab === 'upcoming'}
-            onClick={() => setTab('upcoming')}
-            label="Επερχόμενες"
-            count={upcoming.length}
-            disabled={!hasUpcoming}
-          />
-          <TabButton
-            active={tab === 'past'}
-            onClick={() => setTab('past')}
-            label="Αρχείο"
-            count={past.length}
-            disabled={!hasPast}
-          />
-        </div>
+        {/* Upcoming */}
+        <GroupHeading label="Επερχόμενες" count={upcoming.length} className="mt-6" />
+        {upcoming.length > 0 ? (
+          <ActionList events={upcoming} variant="upcoming" reduce={reduce} />
+        ) : (
+          <EmptyNote text="Σύντομα νέες δράσεις — μείνε συντονισμένος." />
+        )}
 
-        {/* list — keyed so it re-mounts and fades in on tab switch */}
-        <m.div
-          key={tab}
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.32, ease: 'easeOut' }}
-          className="mt-14 flex flex-col gap-20 md:gap-28"
-        >
-          {list.length === 0 ? (
-            <p className="py-16 text-center font-serif text-[18px] italic text-charcoal/50">
-              {tab === 'upcoming'
-                ? 'Σύντομα νέες δράσεις — μείνε συντονισμένος.'
-                : 'Δεν υπάρχουν παλαιότερες δράσεις ακόμη.'}
-            </p>
-          ) : (
-            list.map((event, i) => (
-              <ActionCard
-                key={event.slug}
-                event={event}
-                variant={tab}
-                waPhone={waPhone}
-                flip={i % 2 === 1}
-                reduce={reduce}
-              />
-            ))
-          )}
-        </m.div>
+        {/* Archive — always visible, no click needed */}
+        <GroupHeading label="Αρχείο" count={past.length} className="mt-20 md:mt-28" />
+        {past.length > 0 ? (
+          <ActionList events={past} variant="past" reduce={reduce} />
+        ) : (
+          <EmptyNote text="Δεν υπάρχουν παλαιότερες δράσεις ακόμη." />
+        )}
       </div>
     </section>
   )
 }
 
-function TabButton({
-  active,
-  onClick,
+function GroupHeading({
   label,
   count,
-  disabled,
+  className = '',
 }: {
-  active: boolean
-  onClick: () => void
   label: string
   count: number
-  disabled?: boolean
+  className?: string
 }) {
   return (
-    <button
-      type="button"
-      role="tab"
-      aria-selected={active}
-      onClick={onClick}
-      disabled={disabled}
-      className={`relative -mb-px inline-flex min-h-[44px] items-center px-4 py-3 font-sans text-[12px] uppercase tracking-[0.16em] transition-colors disabled:cursor-not-allowed disabled:opacity-30 md:min-h-0 ${
-        active ? 'text-charcoal' : 'text-charcoal/45 hover:text-charcoal/70'
-      }`}
-    >
-      {label}
-      <span className="ml-1.5 text-charcoal/35">{count}</span>
-      <span
-        aria-hidden
-        className={`absolute inset-x-0 -bottom-px h-[2px] origin-left bg-mustard transition-transform duration-250 ease-out ${
-          active ? 'scale-x-100' : 'scale-x-0'
-        }`}
-      />
-    </button>
+    <div className={`flex items-baseline gap-2 border-b border-line pb-3 ${className}`}>
+      <h2 className="font-sans text-[13px] uppercase tracking-[0.16em] text-charcoal">{label}</h2>
+      <span className="font-sans text-[12px] text-charcoal/35">{count}</span>
+    </div>
+  )
+}
+
+function ActionList({
+  events,
+  variant,
+  reduce,
+}: {
+  events: Event[]
+  variant: Variant
+  reduce: boolean | null
+}) {
+  return (
+    <div className="mt-12 flex flex-col gap-20 md:mt-14 md:gap-28">
+      {events.map((event, i) => (
+        <ActionCard key={event.slug} event={event} variant={variant} flip={i % 2 === 1} reduce={reduce} />
+      ))}
+    </div>
+  )
+}
+
+function EmptyNote({ text }: { text: string }) {
+  return (
+    <p className="mt-12 py-10 text-center font-serif text-[18px] italic text-charcoal/50">{text}</p>
   )
 }
 
 function ActionCard({
   event,
   variant,
-  waPhone,
   flip,
   reduce,
 }: {
   event: Event
-  variant: Tab
-  waPhone: string
+  variant: Variant
   flip: boolean
   reduce: boolean | null
 }) {
@@ -182,32 +145,13 @@ function ActionCard({
         <p className="mt-4 max-w-[48ch] font-serif text-[clamp(15px,1.2vw,17px)] italic leading-[1.55] text-charcoal/70">
           {event.description}
         </p>
-        <div className="mt-7 flex flex-wrap items-center gap-3">
-          {variant === 'upcoming' ? (
-            <>
-              <Link
-                href={href}
-                className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full bg-mustard px-6 py-3 font-sans text-[12px] uppercase tracking-[0.16em] text-ink-dark hover:bg-amber"
-              >
-                Κράτηση →
-              </Link>
-              <a
-                href={`https://wa.me/${waPhone}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="ui-interactive inline-flex min-h-[44px] items-center justify-center rounded-full border border-charcoal px-6 py-3 font-sans text-[12px] uppercase tracking-[0.16em] text-charcoal"
-              >
-                WhatsApp
-              </a>
-            </>
-          ) : (
-            <Link
-              href={href}
-              className="ui-link inline-flex min-h-[44px] items-center font-sans text-[13px] uppercase tracking-[0.16em] text-charcoal hover:text-mustard md:min-h-0"
-            >
-              Δες τη δράση →
-            </Link>
-          )}
+        <div className="mt-7">
+          <Link
+            href={href}
+            className="ui-link inline-flex min-h-[44px] items-center font-sans text-[13px] uppercase tracking-[0.16em] text-charcoal hover:text-mustard md:min-h-0"
+          >
+            Δες τη δράση →
+          </Link>
         </div>
       </div>
     </m.article>

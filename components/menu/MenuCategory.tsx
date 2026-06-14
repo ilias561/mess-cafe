@@ -147,17 +147,22 @@ function CategoryBody({
   const featured = media.find((i) => i.video)
   const cards = featured ? media.filter((i) => i !== featured) : media
 
-  // Breakfast: 2-up on phones; on desktop a 4-3 with the second row offset half a
-  // card (8-col grid, each card spans 2, the 5th card starts at col 2) so the
-  // bottom three nestle between the top four. Other categories: a 3-col grid,
+  // Breakfast: 1-up on phones, 2-up from sm; on desktop a 4-3 with the second row
+  // offset half a card (8-col grid, each card spans 2, the 5th card starts at col
+  // 2) so the bottom three nestle between the top four. A 5-card category gets the
+  // 3-2 version of the same trick (6-col grid, the 4th card starts at col 2) so
+  // the bottom two nestle between the top three. Other categories: a 3-col grid,
   // bumped to 4 when count % 3 === 1 to avoid a lone orphan in the last row.
   const isBrunch = category.id === 'brunch'
-  const baseCols = isBrunch ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'
+  const isThreeTwo = !isBrunch && cards.length === 5
+  const baseCols = 'grid-cols-1 sm:grid-cols-2'
   const lgCols = isBrunch
     ? 'lg:grid-cols-8'
-    : cards.length % 3 === 1
-      ? 'lg:grid-cols-4'
-      : 'lg:grid-cols-3'
+    : isThreeTwo
+      ? 'lg:grid-cols-6'
+      : cards.length % 3 === 1
+        ? 'lg:grid-cols-4'
+        : 'lg:grid-cols-3'
 
   return (
     <>
@@ -168,18 +173,22 @@ function CategoryBody({
             featured ? 'mt-5 md:mt-8' : 'mt-8 md:mt-10'
           }`}
         >
-          {cards.map((item, i) =>
-            isBrunch ? (
+          {cards.map((item, i) => {
+            // Brunch nestles the 5th card (start of the 3-row); the 3-2 nestles
+            // the 4th card (start of the 2-row). Both span 2 cols of their grid.
+            const nestled = isBrunch || isThreeTwo
+            const offsetStart = isBrunch ? i === 4 : i === 3
+            return nestled ? (
               <div
                 key={item.name}
-                className={`h-full lg:col-span-2 ${i === 4 ? 'lg:col-start-2' : ''}`}
+                className={`h-full lg:col-span-2 ${offsetStart ? 'lg:col-start-2' : ''}`}
               >
                 <MenuDishCard item={item} index={i} showNutrition={showNutrition} />
               </div>
             ) : (
               <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
-            ),
-          )}
+            )
+          })}
         </div>
       )}
       {noMedia.length > 0 && (

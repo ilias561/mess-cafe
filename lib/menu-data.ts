@@ -176,6 +176,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Bowl γιαουρτιού με τα υλικά της επιλογής σας.',
         price: '6€',
         badges: ['vegetarian'],
+        image: '/images/menu/yogurt-bowl.jpg',
         nutrition: { calories: 240, protein: 14, carbs: 26, fat: 8, sugar: 16, fiber: 3 },
         benefit:
           'Το γιαούρτι προσφέρει προβιοτικά και πρωτεΐνη υψηλής ποιότητας για ένα ελαφρύ, χορταστικό ξεκίνημα.',

@@ -87,11 +87,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/111/mess-internal-0018--w480.webp 480w, /images/111/mess-internal-0018--w768.webp 768w, /images/111/mess-internal-0018--w1200.webp 1200w, /images/111/mess-internal-0018--w1600.webp 1600w, /images/111/mess-internal-0018--w2000.webp 2000w"
   },
   "/images/111/mess-internal-0019.jpg": {
-    "width": 1264,
-    "height": 842,
-    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJagCdAED8E9rc3AAAP7lJwemYWXYE2e+IW0DVLiwxbJF/J90n7gy5/LQrMm6Re//HQNa8T2xZ0MTzg/OgXWT11VvqM10haNvCDaY5ZkUxAt3MuoAAA==",
-    "avifSrcSet": "/images/111/mess-internal-0019--w480.avif 480w, /images/111/mess-internal-0019--w768.avif 768w, /images/111/mess-internal-0019--w1200.avif 1200w, /images/111/mess-internal-0019--w1264.avif 1264w",
-    "webpSrcSet": "/images/111/mess-internal-0019--w480.webp 480w, /images/111/mess-internal-0019--w768.webp 768w, /images/111/mess-internal-0019--w1200.webp 1200w, /images/111/mess-internal-0019--w1264.webp 1264w"
+    "width": 1920,
+    "height": 1279,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAsAA4BaJagCdAED8E+zrlQAAP7lJweipT/u1DNVErg7jeTEJjWsmu0Jmxj4vO4NChdJ2b6bzNYCljMbu0KcH50E7rqvuerlBZtQGPLJdLBo4iNHw8QA",
+    "avifSrcSet": "/images/111/mess-internal-0019--w480.avif 480w, /images/111/mess-internal-0019--w768.avif 768w, /images/111/mess-internal-0019--w1200.avif 1200w, /images/111/mess-internal-0019--w1600.avif 1600w, /images/111/mess-internal-0019--w1920.avif 1920w",
+    "webpSrcSet": "/images/111/mess-internal-0019--w480.webp 480w, /images/111/mess-internal-0019--w768.webp 768w, /images/111/mess-internal-0019--w1200.webp 1200w, /images/111/mess-internal-0019--w1600.webp 1600w, /images/111/mess-internal-0019--w1920.webp 1920w"
   },
   "/images/111/mess-internal-0020.jpg": {
     "width": 2000,
@@ -129,11 +129,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/about-1--w480.webp 480w, /images/about-1--w768.webp 768w, /images/about-1--w1066.webp 1066w"
   },
   "/images/about-2.jpg": {
-    "width": 1264,
-    "height": 842,
-    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJagCdAED8E9rc3AAAP7lJwemYWXYE2e+IW0DVLiwxbJF/J90n7gy5/LQrMm6Re//HQNa8T2xZ0MTzg/OgXWT11VvqM10haNvCDaY5ZkUxAt3MuoAAA==",
-    "avifSrcSet": "/images/about-2--w480.avif 480w, /images/about-2--w768.avif 768w, /images/about-2--w1200.avif 1200w, /images/about-2--w1264.avif 1264w",
-    "webpSrcSet": "/images/about-2--w480.webp 480w, /images/about-2--w768.webp 768w, /images/about-2--w1200.webp 1200w, /images/about-2--w1264.webp 1264w"
+    "width": 1920,
+    "height": 1279,
+    "blurDataURL": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAAAQAgCdASoQAAsAA4BaJagCdAED8E+zrlQAAP7lJweipT/u1DNVErg7jeTEJjWsmu0Jmxj4vO4NChdJ2b6bzNYCljMbu0KcH50E7rqvuerlBZtQGPLJdLBo4iNHw8QA",
+    "avifSrcSet": "/images/about-2--w480.avif 480w, /images/about-2--w768.avif 768w, /images/about-2--w1200.avif 1200w, /images/about-2--w1600.avif 1600w, /images/about-2--w1920.avif 1920w",
+    "webpSrcSet": "/images/about-2--w480.webp 480w, /images/about-2--w768.webp 768w, /images/about-2--w1200.webp 1200w, /images/about-2--w1600.webp 1600w, /images/about-2--w1920.webp 1920w"
   },
   "/images/about-3.jpg": {
     "width": 1066,
@@ -561,6 +561,13 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "blurDataURL": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAABQAgCdASoQAAwAA4BaJbACdH8AFwD2/+eMLgAA/vaTRAqk16D4T+c+P3zHvKyTbgsDeMIKFpDtvUcL4Viu6O/LXtCQnSnzxFgEBtC//DfNfNhKIAAAAA==",
     "avifSrcSet": "/images/menu/piata-0031--w480.avif 480w, /images/menu/piata-0031--w768.avif 768w, /images/menu/piata-0031--w1200.avif 1200w, /images/menu/piata-0031--w1600.avif 1600w",
     "webpSrcSet": "/images/menu/piata-0031--w480.webp 480w, /images/menu/piata-0031--w768.webp 768w, /images/menu/piata-0031--w1200.webp 1200w, /images/menu/piata-0031--w1600.webp 1600w"
+  },
+  "/images/menu/yogurt-bowl.jpg": {
+    "width": 1195,
+    "height": 896,
+    "blurDataURL": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAABQAgCdASoQAAwAA4BaJbACdAYuRTJLePXkrwAA/vS01bU0/eoCO8bPc+u2KURAoLP+s//Wh1NryXr1PqEobiRfTL9FdNZjoKL2L/giv1Am5KXpLbHFgtitcgNZWwVxE+tHbaPO9YU4kk8l8JMhGv7fy+LQUlu0v64D2yYGC24AAA==",
+    "avifSrcSet": "/images/menu/yogurt-bowl--w480.avif 480w, /images/menu/yogurt-bowl--w768.avif 768w, /images/menu/yogurt-bowl--w1195.avif 1195w",
+    "webpSrcSet": "/images/menu/yogurt-bowl--w480.webp 480w, /images/menu/yogurt-bowl--w768.webp 768w, /images/menu/yogurt-bowl--w1195.webp 1195w"
   },
   "/images/mess-philosophy-poster.jpg": {
     "width": 720,

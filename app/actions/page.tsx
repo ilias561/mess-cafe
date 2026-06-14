@@ -7,7 +7,6 @@ import NewsletterSignup from '@/components/newsletter-signup'
 import FooterSection from '@/components/footer-section'
 import { getAllEvents, getPastEvents, getUpcomingEvents } from '@/lib/events/events'
 import { buildPageMetadata } from '@/lib/metadata'
-import { getSettings } from '@/lib/settings'
 
 const firstEventCover = getAllEvents()[0]
 
@@ -26,7 +25,6 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function ActionsPage() {
-  const settings = getSettings()
   const upcoming = getUpcomingEvents()
   const past = getPastEvents()
   const featured = upcoming[0] ?? null
@@ -45,7 +43,7 @@ export default function ActionsPage() {
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
       </div>
-      <KeepRisingActions upcoming={upcoming} past={past} settings={settings} />
+      <KeepRisingActions upcoming={upcoming} past={past} />
       <NewsletterSignup />
       <FooterSection />
     </main>

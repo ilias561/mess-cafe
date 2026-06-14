@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { m, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { getLenis } from '@/lib/lenis'
 import { FadeImage } from '@/components/fade-image'
 import AmbientVideo from '@/components/ambient-video'
 import { Reveal } from '@/components/reveal'
@@ -133,7 +134,36 @@ function MysteryCurtain() {
   // huge composited layer iOS doesn't need; phones show the content directly.
   const isMobile = useIsMobile()
   const sentinel = useRef<HTMLDivElement>(null)
-  const revealed = useInView(sentinel, { once: true, margin: '0px 0px -45% 0px' })
+  const [revealed, setRevealed] = useState(false)
+
+  // Lift the curtain once the section top scrolls up past ~55% of the viewport
+  // (mirrors the old `-45%` IntersectionObserver margin). The previous single
+  // `useInView` observer could get stuck on a client-side navigation (e.g.
+  // /menu → /), leaving the WHOLE section hidden behind the curtain — the bug
+  // this replaces. Instead we read real geometry on mount (covers a nav that
+  // lands already inside the section) AND on every scroll tick — native AND
+  // Lenis, since desktop scrolls through Lenis — so it can never miss. One-shot.
+  useEffect(() => {
+    if (reduce || isMobile) return
+    const el = sentinel.current
+    if (!el) return
+    const lenis = getLenis()
+    const check = () => {
+      if (el.getBoundingClientRect().top <= window.innerHeight * 0.55) {
+        setRevealed(true)
+        window.removeEventListener('scroll', check)
+        lenis?.off('scroll', check)
+      }
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    lenis?.on('scroll', check)
+    return () => {
+      window.removeEventListener('scroll', check)
+      lenis?.off('scroll', check)
+    }
+  }, [reduce, isMobile])
+
   if (reduce || isMobile) return null
   return (
     <>
