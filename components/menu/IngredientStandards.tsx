@@ -36,11 +36,22 @@ export default function IngredientStandards() {
               transition={{ duration: 0.55, ease: EASE, delay: i * 0.05 }}
               className="ui-card-elevated group overflow-hidden rounded-[2px] border border-line/60 bg-bone-warm"
             >
-              <div className="aspect-[16/10] w-full overflow-hidden bg-canopy-night">
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-canopy-night">
+                {/* Blurred cover fills the frame so the sharp image can sit
+                    `contain`ed (whole photo, never cropped) without dark bars. */}
+                <StaticPicture
+                  src={`/images/ingredients/${it.slug}.jpg`}
+                  alt=""
+                  aria-hidden
+                  className="absolute inset-0 h-full w-full scale-125 object-cover opacity-45 blur-2xl"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                />
                 <StaticPicture
                   src={`/images/ingredients/${it.slug}.jpg`}
                   alt={it.name}
-                  className="ui-img-hover h-full w-full object-cover"
+                  className="ui-img-hover absolute inset-0 h-full w-full object-contain"
                   loading="lazy"
                   decoding="async"
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"

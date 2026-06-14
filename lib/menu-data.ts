@@ -84,7 +84,7 @@ export const menuData: MenuCategory[] = [
         name: 'Apaki On Toast',
         desc: 'Ψωμί με μασκαρπόνε, αυγό, απάκι, ντοματίνια, προσούτο.',
         price: '10€',
-        image: '/images/menu/piata-0028.jpg',
+        image: '/images/menu/apaki-on-toast.jpg',
         nutrition: { calories: 390, protein: 22, carbs: 34, fat: 18, sugar: 4, fiber: 3 },
         benefit:
           'Για όσους πεινάνε και το εννοούν — μια ολοκληρωμένη λύση που θα σε κρατήσει όλη μέρα.',
@@ -103,6 +103,7 @@ export const menuData: MenuCategory[] = [
         name: 'All Red On Toast',
         desc: 'Προζυμένιο ψωμί, mousse γαλοτύρι, chutney τομάτας με φράουλα, γλασαρισμένο apaki κοτόπουλου, λάδι βασιλικού και κρέμα βαλσάμικου.',
         price: '9€',
+        image: '/images/menu/all-red-on-toast.jpg',
         nutrition: { calories: 410, protein: 20, carbs: 36, fat: 19, sugar: 9, fiber: 3 },
         benefit:
           'Αντιοξειδωτικά από την τομάτα και τη φράουλα, με πρωτεΐνη από το κοτόπουλο — γεύση και ισορροπία.',

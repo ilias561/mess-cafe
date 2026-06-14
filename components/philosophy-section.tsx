@@ -97,11 +97,6 @@ export default function PhilosophySection() {
           </div>
 
           <div className="md:col-start-7 md:col-span-6 md:pt-65">
-            <Reveal direction="up">
-              <p className="mb-5 max-w-[36ch] font-serif text-[clamp(17px,1.6vw,24px)] italic leading-snug text-mustard md:mb-6">
-                Έναν χώρο που δρα ως μαγνήτης για ανθρώπους της ίδιας νοοτροπίας.
-              </p>
-            </Reveal>
             <MaskRevealBlock direction="up">
               <Tile aspect="aspect-video">
                 <AmbientVideo

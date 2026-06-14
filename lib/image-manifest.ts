@@ -373,6 +373,20 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/menu-vegan-poke--w480.avif 480w, /images/menu-vegan-poke--w768.avif 768w, /images/menu-vegan-poke--w1024.avif 1024w",
     "webpSrcSet": "/images/menu-vegan-poke--w480.webp 480w, /images/menu-vegan-poke--w768.webp 768w, /images/menu-vegan-poke--w1024.webp 1024w"
   },
+  "/images/menu/all-red-on-toast.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "blurDataURL": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAACQAgCdASoQAAwAA4BaJbACdH8AgmigbUM0HLU+AAD+8bRG1trKH0VVv4q4ilKEgUnjR96kVzcZ3YGe3Z34dCWVO9dgd1Dw0Buz97+XDeHhg9NoC87Pwh6aeyk24kNWOw5Q2W7HrWqwvnInv79CAAAA",
+    "avifSrcSet": "/images/menu/all-red-on-toast--w480.avif 480w, /images/menu/all-red-on-toast--w768.avif 768w, /images/menu/all-red-on-toast--w1200.avif 1200w, /images/menu/all-red-on-toast--w1600.avif 1600w, /images/menu/all-red-on-toast--w2048.avif 2048w",
+    "webpSrcSet": "/images/menu/all-red-on-toast--w480.webp 480w, /images/menu/all-red-on-toast--w768.webp 768w, /images/menu/all-red-on-toast--w1200.webp 1200w, /images/menu/all-red-on-toast--w1600.webp 1600w, /images/menu/all-red-on-toast--w2048.webp 2048w"
+  },
+  "/images/menu/apaki-on-toast.jpg": {
+    "width": 2048,
+    "height": 1536,
+    "blurDataURL": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAABwAgCdASoQAAwAA4BaJbACdH8AFwbq0xuptqgAAP7xukDvpP5z4lj3GqC65bGWKejWnGJajk+v51QUwdyEYQN05vmNlwmq+frDgaAZpm/GbXLz0HQLU2Mvh60t14wURobzKgS8dI89dpvklKmQAAAA",
+    "avifSrcSet": "/images/menu/apaki-on-toast--w480.avif 480w, /images/menu/apaki-on-toast--w768.avif 768w, /images/menu/apaki-on-toast--w1200.avif 1200w, /images/menu/apaki-on-toast--w1600.avif 1600w, /images/menu/apaki-on-toast--w2048.avif 2048w",
+    "webpSrcSet": "/images/menu/apaki-on-toast--w480.webp 480w, /images/menu/apaki-on-toast--w768.webp 768w, /images/menu/apaki-on-toast--w1200.webp 1200w, /images/menu/apaki-on-toast--w1600.webp 1600w, /images/menu/apaki-on-toast--w2048.webp 2048w"
+  },
   "/images/menu/drink-yellow-lemon-poster.jpg": {
     "width": 720,
     "height": 966,

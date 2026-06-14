@@ -147,13 +147,14 @@ function CategoryBody({
   const featured = media.find((i) => i.video)
   const cards = featured ? media.filter((i) => i !== featured) : media
 
-  // Breakfast is laid out 2-up on phones and 4-up on desktop (4-2 for its 6 cards).
-  // Other categories: avoid a lone orphan card in the last row — a 3-col grid
-  // leaves 1 behind when count % 3 === 1 (e.g. 4 → 3+1, 7 → 3+3+1), so bump to 4.
+  // Breakfast: 2-up on phones; on desktop a 4-3 with the second row offset half a
+  // card (8-col grid, each card spans 2, the 5th card starts at col 2) so the
+  // bottom three nestle between the top four. Other categories: a 3-col grid,
+  // bumped to 4 when count % 3 === 1 to avoid a lone orphan in the last row.
   const isBrunch = category.id === 'brunch'
   const baseCols = isBrunch ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'
   const lgCols = isBrunch
-    ? 'lg:grid-cols-3'
+    ? 'lg:grid-cols-8'
     : cards.length % 3 === 1
       ? 'lg:grid-cols-4'
       : 'lg:grid-cols-3'
@@ -167,9 +168,18 @@ function CategoryBody({
             featured ? 'mt-5 md:mt-8' : 'mt-8 md:mt-10'
           }`}
         >
-          {cards.map((item, i) => (
-            <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
-          ))}
+          {cards.map((item, i) =>
+            isBrunch ? (
+              <div
+                key={item.name}
+                className={`h-full lg:col-span-2 ${i === 4 ? 'lg:col-start-2' : ''}`}
+              >
+                <MenuDishCard item={item} index={i} showNutrition={showNutrition} />
+              </div>
+            ) : (
+              <MenuDishCard key={item.name} item={item} index={i} showNutrition={showNutrition} />
+            ),
+          )}
         </div>
       )}
       {noMedia.length > 0 && (
