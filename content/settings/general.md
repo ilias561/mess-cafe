@@ -1,8 +1,8 @@
 ---
 addressLine1: "Οδός Ναπολέοντος Ζέρβα 12"
 addressLine2: "Ιωάννινα 45332"
-phone: "+30 6945 777808"
-whatsapp: "+30 6945 777808"
+phone: "+30 694 661 4169"
+whatsapp: "+30 694 661 4169"
 email: "info@messcafe.gr"
 hours:
   - day: "Δευ–Παρ"

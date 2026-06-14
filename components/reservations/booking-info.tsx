@@ -9,7 +9,7 @@ type BookingInfoProps = {
 }
 
 export default function BookingInfo({ settings }: BookingInfoProps) {
-  const whatsappNumber = normalizeWhatsappPhone(settings.whatsapp || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '306900000000')
+  const whatsappNumber = normalizeWhatsappPhone(settings.whatsapp || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '306946614169')
   const whatsappMessage = 'Γεια σας! Θα ήθελα να κλείσω εκδήλωση στο M.E.S.S.'
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
 

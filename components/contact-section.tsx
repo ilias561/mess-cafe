@@ -44,7 +44,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
     ? `${settings.addressLine1} · ${settings.addressLine2}`
     : 'ΚΕΠΑΒΙ · Ιωάννινα' // TODO: source from settings when prop omitted
   const hoursLine = settings ? formatHours(settings) : 'Δευτ–Κυρ · 08:00–22:00' // TODO: source from settings
-  const phoneLine = settings?.phone ?? '+30 6945 777808' // TODO: source from settings
+  const phoneLine = settings?.phone ?? '+30 694 661 4169' // TODO: source from settings
   const whatsappNumber = settings?.whatsapp || WHATSAPP_NUMBER
   const contactEmail = settings?.email || CONTACT_EMAIL
 

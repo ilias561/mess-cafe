@@ -7,6 +7,6 @@ function normalizeWhatsappPhone(value: string): string {
 
 export default function WhatsAppFloat() {
   const settings = getSettings()
-  const whatsappNumber = normalizeWhatsappPhone(settings.whatsapp || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '306900000000')
+  const whatsappNumber = normalizeWhatsappPhone(settings.whatsapp || process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '306946614169')
   return <WhatsAppFloatClient whatsappNumber={whatsappNumber} />
 }

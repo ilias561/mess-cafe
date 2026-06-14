@@ -12,7 +12,7 @@ function normalizeWhatsappPhone(value: string): string {
 
 export default function EventBookingCta({ event }: EventBookingCtaProps) {
   const settings = getSettings()
-  const phone = normalizeWhatsappPhone(settings.whatsapp || settings.phone || '306900000000')
+  const phone = normalizeWhatsappPhone(settings.whatsapp || settings.phone || '306946614169')
   const message = `Γεια σας! Θα ήθελα να κλείσω θέση για την εκδήλωση "${event.title}".`
   const whatsappHref = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 

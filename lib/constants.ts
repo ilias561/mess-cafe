@@ -1,4 +1,4 @@
-export const PHONE_NUMBER = '+306945777808'
-export const PHONE_DISPLAY = '694 577 7808'
-export const WHATSAPP_NUMBER = '306945777808'
+export const PHONE_NUMBER = '+306946614169'
+export const PHONE_DISPLAY = '694 661 4169'
+export const WHATSAPP_NUMBER = '306946614169'
 export const CONTACT_EMAIL = 'info@messcafe.gr'
