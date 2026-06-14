@@ -52,6 +52,16 @@ export const menuData: MenuCategory[] = [
         benefit: 'Φυτικές ίνες, ιχνοστοιχεία και ω-3 λιπαρά.',
       },
       {
+        name: 'Avocado on Toast',
+        desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
+        price: '9€',
+        badges: ['vegetarian', 'signature'],
+        image: '/images/menu/piata-0009.jpg',
+        nutrition: { calories: 420, protein: 14, carbs: 38, fat: 24, sugar: 4, fiber: 9 },
+        benefit:
+          'Το πιο ολοκληρωμένο πιάτο μας! Πρωτεΐνη, καλά λιπαρά, ω-3 και ιχνοστοιχεία, συνοδευμένα με πολλή γεύση.',
+      },
+      {
         name: 'Classic Omelette',
         desc: '3 υλικά της επιλογής σας.',
         price: '6.5€',
@@ -71,6 +81,15 @@ export const menuData: MenuCategory[] = [
         benefit: 'Πρωτεϊνική βόμβα για το ξεκίνημα της μέρας σου.',
       },
       {
+        name: 'Apaki On Toast',
+        desc: 'Ψωμί με μασκαρπόνε, αυγό, απάκι, ντοματίνια, προσούτο.',
+        price: '10€',
+        image: '/images/menu/piata-0028.jpg',
+        nutrition: { calories: 390, protein: 22, carbs: 34, fat: 18, sugar: 4, fiber: 3 },
+        benefit:
+          'Για όσους πεινάνε και το εννοούν — μια ολοκληρωμένη λύση που θα σε κρατήσει όλη μέρα.',
+      },
+      {
         name: 'Grilled Cheese with Mushrooms',
         desc: 'Προζυμένιο ψωμί, μιξ από παλαιωμένες γραβιέρες, μανιτάρια πλευρώτους. Συνοδεύεται με chutney μάνγκο.',
         price: '7€',
@@ -79,25 +98,6 @@ export const menuData: MenuCategory[] = [
         nutrition: { calories: 480, protein: 22, carbs: 36, fat: 28, sugar: 8, fiber: 3 },
         benefit:
           'Οι παλαιωμένες γραβιέρες αποτελούν βασική πηγή προβιοτικών και ενζύμων — το πεπτικό σου θα το ευγνωμονεί.',
-      },
-      {
-        name: 'Avocado on Toast',
-        desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
-        price: '9€',
-        badges: ['vegetarian', 'signature'],
-        image: '/images/menu/piata-0009.jpg',
-        nutrition: { calories: 420, protein: 14, carbs: 38, fat: 24, sugar: 4, fiber: 9 },
-        benefit:
-          'Το πιο ολοκληρωμένο πιάτο μας! Πρωτεΐνη, καλά λιπαρά, ω-3 και ιχνοστοιχεία, συνοδευμένα με πολλή γεύση.',
-      },
-      {
-        name: 'Apaki On Toast',
-        desc: 'Ψωμί με μασκαρπόνε, αυγό, απάκι, ντοματίνια, προσούτο.',
-        price: '10€',
-        image: '/images/menu/piata-0028.jpg',
-        nutrition: { calories: 390, protein: 22, carbs: 34, fat: 18, sugar: 4, fiber: 3 },
-        benefit:
-          'Για όσους πεινάνε και το εννοούν — μια ολοκληρωμένη λύση που θα σε κρατήσει όλη μέρα.',
       },
       {
         name: 'All Red On Toast',
@@ -378,10 +378,81 @@ export const menuData: MenuCategory[] = [
     ],
   },
   {
+    id: 'cocktails',
+    title: 'COCKTAILS',
+    titleGr: 'Cocktails',
+    layout: 'grid',
+    hideNutrition: true,
+    items: [
+      {
+        name: 'Aperol Spritz',
+        desc: 'Aperol, Prosecco, σόδα.',
+        price: '9€',
+        image: '/images/menu/kokteil-0008.jpg',
+      },
+      {
+        name: 'Negroni',
+        desc: 'Gin, Campari, Vermouth Rosso.',
+        price: '9€',
+        image: '/images/menu/kokteil-0007.jpg',
+      },
+      {
+        name: 'Paloma',
+        desc: 'Tequila Blanco, χυμός λάιμ, agave, pink soda.',
+        price: '9€',
+        image: '/images/menu/kokteil-0006.jpg',
+      },
+      {
+        name: 'Orange Spritz',
+        desc: 'Bacardi spiced, pineapple soda, χυμός λάιμ, κουρκουμάς & κανέλα.',
+        price: '10€',
+        badges: ['signature'],
+        image: '/images/menu/kokteil-0001.jpg',
+      },
+      {
+        name: 'Pink Spritz',
+        desc: 'Lillet pink, Campari, Prosecco, pink soda.',
+        price: '10€',
+        badges: ['signature'],
+        image: '/images/menu/kokteil-0003.jpg',
+      },
+      {
+        name: 'Yellow Spritz',
+        desc: 'Limoncello, Prosecco, Aegean tonic.',
+        price: '10€',
+        badges: ['signature'],
+        video: '/images/menu/drink-yellow-lemon.mp4',
+      },
+      {
+        name: 'Red Spritz',
+        desc: 'Λικέρ φράουλας, gin, pink soda, φύλλα βασιλικού, φράουλες.',
+        price: '10€',
+        badges: ['signature'],
+        image: '/images/menu/kokteil-0005.jpg',
+      },
+      {
+        name: 'Green Spritz',
+        desc: 'Gin, cucumber cordial, σόδα.',
+        price: '10€',
+        badges: ['signature'],
+      },
+      {
+        name: 'Japan Delight',
+        desc: 'Mocktail — Yuzu purée, red tea, σόδα.',
+        price: '8€',
+      },
+      {
+        name: 'Purple Spritz',
+        desc: 'Mocktail — μαρμελάδα blueberry, χυμός λάιμ, ginger beer.',
+        price: '8€',
+      },
+    ],
+  },
+  {
     id: 'smoothies',
     title: 'SMOOTHIES, JUICES & SOFT DRINKS',
     titleGr: 'Smoothies & Χυμοί',
-    layout: 'grid',
+    layout: 'list',
     hideNutrition: true,
     items: [
       {
@@ -389,8 +460,6 @@ export const menuData: MenuCategory[] = [
         desc: 'Blueberries, χειροποίητο γάλα αμυγδάλου, μπανάνα, μέλι.',
         price: '6€',
         badges: ['vegetarian'],
-        image: '/images/menu/kokteil-0008.jpg',
-        nutrition: { calories: 240, protein: 4, carbs: 44, fat: 7, sugar: 30, fiber: 5 },
         benefit:
           'Τα blueberries και η μπανάνα παρέχουν ανθοκυανίνες, κάλιο και φυσικά σάκχαρα για ενέργεια και προστασία του εγκεφάλου.',
       },
@@ -399,8 +468,6 @@ export const menuData: MenuCategory[] = [
         desc: 'Μάνγκο, τσίλι flakes, αγαύη, χειροποίητο γάλα καρυδιών και βρώμης, λάιμ.',
         price: '6€',
         badges: ['vegan', 'signature'],
-        video: '/images/menu/drink-yellow-lemon.mp4',
-        nutrition: { calories: 220, protein: 3, carbs: 42, fat: 6, sugar: 32, fiber: 4 },
         benefit:
           'Το μάνγκο με τσίλι και λάιμ ενισχύει τον μεταβολισμό, παρέχει βιταμίνη C και αντιοξειδωτικά για ανοσοποιητική θωράκιση.',
       },
@@ -408,8 +475,6 @@ export const menuData: MenuCategory[] = [
         name: 'Fresh O.J.',
         desc: 'Φρεσκοστυμμένος χυμός πορτοκαλιού.',
         price: '5€',
-        image: '/images/menu/kokteil-0007.jpg',
-        nutrition: { calories: 120, protein: 2, carbs: 28, fat: 0, sugar: 22, fiber: 1 },
         benefit:
           'Ο φρεσκοστυμμένος χυμός πορτοκαλιού είναι πλούσιος σε βιταμίνη C και βιοφλαβονοειδή που ενισχύουν το ανοσοποιητικό.',
       },
@@ -417,16 +482,12 @@ export const menuData: MenuCategory[] = [
         name: 'Homemade Pink Lemonade',
         desc: 'Σπιτική ροζ λεμονάδα.',
         price: '4€',
-        image: '/images/menu/kokteil-0006.jpg',
-        nutrition: { calories: 110, protein: 0, carbs: 28, fat: 0, sugar: 26, fiber: 0 },
         benefit: 'Η σπιτική λεμονάδα με λεμόνι παρέχει βιταμίνη C και αλκαλοποιεί τον οργανισμό για φρεσκάδα και ενυδάτωση.',
       },
       {
         name: 'Natural Pink Lemonade',
         desc: 'Φυσική ροζ λεμονάδα.',
         price: '4.5€',
-        image: '/images/menu/kokteil-0001.jpg',
-        nutrition: { calories: 100, protein: 0, carbs: 25, fat: 0, sugar: 23, fiber: 0 },
         benefit:
           'Η φυσική ροζ λεμονάδα χωρίς τεχνητά πρόσθετα προσφέρει βιταμίνη C και αντιοξειδωτικά ανθοκυανίνης για ενυδάτωση.',
       },
@@ -434,8 +495,6 @@ export const menuData: MenuCategory[] = [
         name: 'Mixed Juice',
         desc: 'Μείγμα εποχιακών φρούτων.',
         price: '6€',
-        image: '/images/menu/kokteil-0003.jpg',
-        nutrition: { calories: 140, protein: 1, carbs: 34, fat: 0, sugar: 28, fiber: 2 },
         benefit:
           'Ο χυμός εποχιακών φρούτων προσφέρει ποικιλία βιταμινών, μετάλλων και αντιοξειδωτικών για ολιστική θρέψη.',
       },
@@ -443,8 +502,6 @@ export const menuData: MenuCategory[] = [
         name: 'Kombucha',
         desc: 'Ζυμωμένο τσάι, ελαφρύ και δροσιστικό.',
         price: '4€',
-        image: '/images/menu/kokteil-0005.jpg',
-        nutrition: { calories: 40, protein: 0, carbs: 9, fat: 0, sugar: 6, fiber: 0 },
         benefit:
           'Το kombucha περιέχει ζωντανά προβιοτικά, οργανικά οξέα και αντιοξειδωτικά που υποστηρίζουν την υγεία του εντέρου και της πέψης.',
       },

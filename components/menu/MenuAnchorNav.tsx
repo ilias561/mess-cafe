@@ -10,6 +10,7 @@ const anchors = [
   { id: 'wraps', label: 'Wraps' },
   { id: 'treats', label: 'Treats' },
   { id: 'coffee', label: 'Coffee' },
+  { id: 'cocktails', label: 'Cocktails' },
   { id: 'smoothies', label: 'Smoothies' },
 ]
 

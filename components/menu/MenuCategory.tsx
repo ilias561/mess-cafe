@@ -44,6 +44,7 @@ const editorialIntro: Partial<Record<string, string>> = {
   salads: 'Σαλάτες με εποχικό χαρακτήρα, ζωντανή οξύτητα και χορταστικό τελείωμα.',
   coffee: 'Single origin εκχυλίσεις και ήπιες επιλογές για όλη τη διάρκεια της ημέρας.',
   smoothies: 'Μείγματα με πραγματικό φρούτο, φυσική γλυκύτητα και καθαρή ενέργεια.',
+  cocktails: 'Classic, signature spritz και mocktails — με φρέσκα υλικά και μεράκι.',
   treats: 'Γλυκά και snacks με ελαφριά σύσταση και ισορροπημένη γεύση.',
 }
 
@@ -152,7 +153,7 @@ function CategoryBody({
   const isBrunch = category.id === 'brunch'
   const baseCols = isBrunch ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'
   const lgCols = isBrunch
-    ? 'lg:grid-cols-4'
+    ? 'lg:grid-cols-3'
     : cards.length % 3 === 1
       ? 'lg:grid-cols-4'
       : 'lg:grid-cols-3'

@@ -319,15 +319,15 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   },
   "/images/ingredients/no-frying.jpg": {
     "width": 1600,
-    "height": 1600,
-    "blurDataURL": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQAgCdASoQABAAA4BaJbACdEf/i1r6du780eTkwAD+55LPD7+zw/7aB2f31JlJQnGCKeamkZQ+QOPHBqY4+VgveoFpvhOVSIB7eWAbPLT++Fp33KcPn/EDm7MBBOZ9e5W1PrByfrx4/7wd5v8p6GBAur5U37a3xTnFVoEFIbckQAd9uiKdkA0fKRejT7/GLaeAAA==",
+    "height": 1067,
+    "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAsAA4BaJaACdAEaIvu+WdwAAP74Vilzi9Tcjpfxx6sXfOTWsR2LmJ41yN+uV48tq++Fwvj7JBOpQYvbGik8ed0BCauiAAA=",
     "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w, /images/ingredients/no-frying--w768.avif 768w, /images/ingredients/no-frying--w1200.avif 1200w, /images/ingredients/no-frying--w1600.avif 1600w",
     "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w, /images/ingredients/no-frying--w768.webp 768w, /images/ingredients/no-frying--w1200.webp 1200w, /images/ingredients/no-frying--w1600.webp 1600w"
   },
   "/images/ingredients/olive-oil.jpg": {
     "width": 1600,
-    "height": 2220,
-    "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAQBACdASoQABYAPu1iqU2ppaOiMAgBMB2JYgC7AB0+Vx1++zJhq2l5QAD+uC+/aNvPW5sJdbASYC7opQ1waO7Y08piUhFqlcxDH6YdSolTx3MG52DcxW0L2jFGcjIGP4kgRrDeUbjkB7ef7/2KmfDbHWL6S8asV6C+NABMids7O8A0UxB63kzqoAA=",
+    "height": 1071,
+    "blurDataURL": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAQAgCdASoQAAsAA4BaJYwCdAEQ/SfZgrZgAP7wdQhx651fcswxsLRh+cObaHz+fOMnINAP+4g74k0RBv4l0HKVcAA=",
     "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w, /images/ingredients/olive-oil--w768.avif 768w, /images/ingredients/olive-oil--w1200.avif 1200w, /images/ingredients/olive-oil--w1600.avif 1600w",
     "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w, /images/ingredients/olive-oil--w768.webp 768w, /images/ingredients/olive-oil--w1200.webp 1200w, /images/ingredients/olive-oil--w1600.webp 1600w"
   },
