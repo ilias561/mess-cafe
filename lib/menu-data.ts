@@ -81,7 +81,7 @@ export const menuData: MenuCategory[] = [
           'Οι παλαιωμένες γραβιέρες αποτελούν βασική πηγή προβιοτικών και ενζύμων — το πεπτικό σου θα το ευγνωμονεί.',
       },
       {
-        name: 'Avocado Toast',
+        name: 'Avocado on Toast',
         desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
         price: '9€',
         badges: ['vegetarian', 'signature'],
@@ -119,8 +119,8 @@ export const menuData: MenuCategory[] = [
   },
   {
     id: 'bowls',
-    title: 'BOWLS',
-    titleGr: 'Μπολ',
+    title: 'BOWLS & LUNCH',
+    titleGr: 'Μπολ & Lunch',
     layout: 'card',
     items: [
       {
@@ -128,7 +128,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Άγριο ρύζι τηγανισμένο σε λάδι καρύδας, γλυκοπατάτα, αράκας, καλαμπόκι, ρόκα, φασόλια κόκκινα, φρέσκο κρεμμύδι, σπόροι από μαύρο κύμινο.',
         price: '8€',
         badges: ['vegan'],
-        image: '/images/menu-vegan-poke.jpg',
+        image: '/images/menu/piata-0028.jpg',
         nutrition: { calories: 430, protein: 12, carbs: 68, fat: 13, sugar: 9, fiber: 11 },
         benefit:
           'Το άγριο ρύζι, τα φασόλια και η γλυκοπατάτα παρέχουν φυτικές ίνες, φυτική πρωτεΐνη και αντιφλεγμονώδη συστατικά.',
@@ -170,6 +170,15 @@ export const menuData: MenuCategory[] = [
         benefit:
           'Οι γαρίδες είναι χαμηλές σε θερμίδες και πλούσιες σε ιώδιο και ψευδάργυρο που υποστηρίζουν τον μεταβολισμό.',
       },
+      {
+        name: 'Yogurt Bowl',
+        desc: 'Bowl γιαουρτιού με τα υλικά της επιλογής σας.',
+        price: '6€',
+        badges: ['vegetarian'],
+        nutrition: { calories: 240, protein: 14, carbs: 26, fat: 8, sugar: 16, fiber: 3 },
+        benefit:
+          'Το γιαούρτι προσφέρει προβιοτικά και πρωτεΐνη υψηλής ποιότητας για ένα ελαφρύ, χορταστικό ξεκίνημα.',
+      },
     ],
   },
   {
@@ -178,15 +187,6 @@ export const menuData: MenuCategory[] = [
     titleGr: 'Σαλάτες',
     layout: 'feature',
     items: [
-      {
-        name: 'Dakos Salad',
-        desc: 'Ντομάτα, φέτα, ελιές, παξιμάδι, ρίγανη, ελαιόλαδο.',
-        price: '8€',
-        badges: ['vegetarian'],
-        nutrition: { calories: 320, protein: 9, carbs: 34, fat: 17, sugar: 6, fiber: 5 },
-        benefit:
-          'Το ελαιόλαδο, η φέτα και οι ελιές αποτελούν τον πυρήνα της μεσογειακής διατροφής για υγεία καρδιάς και μακροζωία.',
-      },
       {
         name: 'Caesar Salad',
         desc: 'Iceberg, κρουτόν από ρεβύθια, κοτόπουλο sous vide, παρμεζάνα, MJ dressing.',
@@ -209,15 +209,6 @@ export const menuData: MenuCategory[] = [
         price: '7€',
         nutrition: { calories: 460, protein: 28, carbs: 52, fat: 14, sugar: 9, fiber: 4 },
         benefit: 'Το κοτόπουλο με λαχανικά σε τορτίγια δίνει ισορροπημένη αναλογία μακροθρεπτικών για σταθερή ενέργεια.',
-      },
-      {
-        name: 'Garden Burger',
-        desc: 'Μπιφτέκι λαχανικών με ρόκα, ντομάτα, σπιτική σος.',
-        price: '9€',
-        badges: ['vegan'],
-        nutrition: { calories: 410, protein: 16, carbs: 48, fat: 18, sugar: 7, fiber: 8 },
-        benefit:
-          'Το vegan μπιφτέκι λαχανικών με ρόκα και ντομάτα παρέχει φυτικές ίνες, φυτοχημικά και αντιοξειδωτικά χωρίς κορεσμένα λιπαρά.',
       },
       {
         name: 'Beef Tagliata',

@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const anchors = [
   { id: 'brunch', label: 'Breakfast' },
-  { id: 'bowls', label: 'Bowls' },
+  { id: 'bowls', label: 'Bowls & Lunch' },
   { id: 'salads', label: 'Salads' },
   { id: 'wraps', label: 'Wraps' },
   { id: 'treats', label: 'Treats' },

@@ -304,11 +304,11 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/hero-interior--w480.webp 480w, /images/hero-interior--w768.webp 768w, /images/hero-interior--w1199.webp 1199w"
   },
   "/images/ingredients/free-range-eggs.jpg": {
-    "width": 600,
-    "height": 600,
-    "blurDataURL": "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAABQAgCdASoQABAAA4BaJaACdAYu5QzcLE4dMAAA/k157ygX/YRuzlL8GOTyIn1vduww+r/FSEpOBNMf0wjL4MuYdfODwyXy5UbEVi/3yews9UNXONHDRm68oOhdVrlznjpMgOvCvYp8qp9jK1jgIR089utcRhkNWk0eXIAA",
-    "avifSrcSet": "/images/ingredients/free-range-eggs--w480.avif 480w, /images/ingredients/free-range-eggs--w600.avif 600w",
-    "webpSrcSet": "/images/ingredients/free-range-eggs--w480.webp 480w, /images/ingredients/free-range-eggs--w600.webp 600w"
+    "width": 1600,
+    "height": 2133,
+    "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAACwAwCdASoQABUAPu1iqk2ppaQiMAgBMB2JYwCdACHhSecyBA8+2AD+5zO/lahUj7qbMPq4mcNpKiXpoC2cvDXDCpmPI4OeTV9tjH0XzEmVrYS946tdwAVY66b7ExbtN8GV55p9fR/eMIAA",
+    "avifSrcSet": "/images/ingredients/free-range-eggs--w480.avif 480w, /images/ingredients/free-range-eggs--w768.avif 768w, /images/ingredients/free-range-eggs--w1200.avif 1200w, /images/ingredients/free-range-eggs--w1600.avif 1600w",
+    "webpSrcSet": "/images/ingredients/free-range-eggs--w480.webp 480w, /images/ingredients/free-range-eggs--w768.webp 768w, /images/ingredients/free-range-eggs--w1200.webp 1200w, /images/ingredients/free-range-eggs--w1600.webp 1600w"
   },
   "/images/ingredients/natural-sweetness.jpg": {
     "width": 600,
@@ -318,18 +318,18 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "webpSrcSet": "/images/ingredients/natural-sweetness--w480.webp 480w, /images/ingredients/natural-sweetness--w600.webp 600w"
   },
   "/images/ingredients/no-frying.jpg": {
-    "width": 600,
-    "height": 600,
-    "blurDataURL": "data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAACwAgCdASoQABAAA4BaJbACdH8GJ/i1m4hJrTmjUcAA/urbl76ZYZJragfRzHecaRo3Xt5IndQAiF8AkyUQdENe4aHwQFf83xGwmlXTd8WS8GdzwaZWwaowWrcBjFugSJeaUO5iqhwg48yFD8p57qwnsWUv0SkbCeVTT3EUYD7AK7mRRa7vgScE/Z0HxsOAAAA=",
-    "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w, /images/ingredients/no-frying--w600.avif 600w",
-    "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w, /images/ingredients/no-frying--w600.webp 600w"
+    "width": 1600,
+    "height": 1600,
+    "blurDataURL": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACQAgCdASoQABAAA4BaJbACdEf/i1r6du780eTkwAD+55LPD7+zw/7aB2f31JlJQnGCKeamkZQ+QOPHBqY4+VgveoFpvhOVSIB7eWAbPLT++Fp33KcPn/EDm7MBBOZ9e5W1PrByfrx4/7wd5v8p6GBAur5U37a3xTnFVoEFIbckQAd9uiKdkA0fKRejT7/GLaeAAA==",
+    "avifSrcSet": "/images/ingredients/no-frying--w480.avif 480w, /images/ingredients/no-frying--w768.avif 768w, /images/ingredients/no-frying--w1200.avif 1200w, /images/ingredients/no-frying--w1600.avif 1600w",
+    "webpSrcSet": "/images/ingredients/no-frying--w480.webp 480w, /images/ingredients/no-frying--w768.webp 768w, /images/ingredients/no-frying--w1200.webp 1200w, /images/ingredients/no-frying--w1600.webp 1600w"
   },
   "/images/ingredients/olive-oil.jpg": {
-    "width": 600,
-    "height": 600,
-    "blurDataURL": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAADQAQCdASoQABAAA4BaJagCdADGvn7hgAD+67o9+dV/pqesZRvtPQCOr0GqpzGWxmKgny0EpZsZqJhRF+wfrEnvAgo6rdud1A/r4OnvQ80WVnPXPk1xKLSzqaOSjlrJTo/ynd4ekOr2QAAA",
-    "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w, /images/ingredients/olive-oil--w600.avif 600w",
-    "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w, /images/ingredients/olive-oil--w600.webp 600w"
+    "width": 1600,
+    "height": 2220,
+    "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAAAQBACdASoQABYAPu1iqU2ppaOiMAgBMB2JYgC7AB0+Vx1++zJhq2l5QAD+uC+/aNvPW5sJdbASYC7opQ1waO7Y08piUhFqlcxDH6YdSolTx3MG52DcxW0L2jFGcjIGP4kgRrDeUbjkB7ef7/2KmfDbHWL6S8asV6C+NABMids7O8A0UxB63kzqoAA=",
+    "avifSrcSet": "/images/ingredients/olive-oil--w480.avif 480w, /images/ingredients/olive-oil--w768.avif 768w, /images/ingredients/olive-oil--w1200.avif 1200w, /images/ingredients/olive-oil--w1600.avif 1600w",
+    "webpSrcSet": "/images/ingredients/olive-oil--w480.webp 480w, /images/ingredients/olive-oil--w768.webp 768w, /images/ingredients/olive-oil--w1200.webp 1200w, /images/ingredients/olive-oil--w1600.webp 1600w"
   },
   "/images/ingredients/sourdough.jpg": {
     "width": 600,

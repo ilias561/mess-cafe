@@ -20,9 +20,9 @@ import { videoSrc } from '@/lib/media'
 import { images } from '@/lib/images'
 
 const philosophyGoals = [
-  'Να βάζει την υγεία στο επίκεντρο.',
-  'Να χτίζει κοινότητα.',
-  'Να φέρνει κοντά ανθρώπους με κοινή νοοτροπία.',
+  'Να επικεντρωθεί στην υγεία.',
+  'Να δημιουργήσει κοινότητα.',
+  'Να μαζέψει ανθρώπους ίδιας φιλοσοφίας — έναν χώρο που δρα ως μαγνήτης για ανθρώπους της ίδιας νοοτροπίας.',
 ] as const
 
 const philosophyVideo = videoSrc('/videos/mess-philosophy.mp4')
@@ -77,8 +77,8 @@ export default function PhilosophySection() {
               <Reveal asGroup gap={0.1} delay={0.15} className="mt-8 flex flex-col md:mt-12">
                 {philosophyGoals.map((goal, index) => (
                   <Reveal.Item key={goal}>
-                    <div className="grid grid-cols-[auto_1fr] items-start gap-x-6 border-t border-line py-4 first:border-t-0 first:pt-0 md:py-6">
-                      <span className="mt-[3px] font-sans text-[12px] uppercase tracking-[0.16em] text-mustard tabular-nums md:mt-[5px]">
+                    <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 border-t border-line py-4 first:border-t-0 first:pt-0 md:py-6">
+                      <span className="font-sans text-[11px] uppercase tracking-[0.16em] text-mustard tabular-nums">
                         {String(index + 1).padStart(2, '0')}
                       </span>
                       <p className="font-serif text-[clamp(19px,1.55vw,22px)] leading-snug tracking-[-0.005em] text-charcoal">
@@ -97,6 +97,11 @@ export default function PhilosophySection() {
           </div>
 
           <div className="md:col-start-7 md:col-span-6 md:pt-65">
+            <Reveal direction="up">
+              <p className="mb-5 max-w-[36ch] font-serif text-[clamp(17px,1.6vw,24px)] italic leading-snug text-mustard md:mb-6">
+                Έναν χώρο που δρα ως μαγνήτης για ανθρώπους της ίδιας νοοτροπίας.
+              </p>
+            </Reveal>
             <MaskRevealBlock direction="up">
               <Tile aspect="aspect-video">
                 <AmbientVideo

@@ -146,16 +146,23 @@ function CategoryBody({
   const featured = media.find((i) => i.video)
   const cards = featured ? media.filter((i) => i !== featured) : media
 
-  // Avoid a lone orphan card in the last row: a 3-col grid leaves 1 behind when
-  // count % 3 === 1 (e.g. 4 → 3+1, 7 → 3+3+1). Bump those to 4 columns.
-  const lgCols = cards.length % 3 === 1 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
+  // Breakfast is laid out 2-up on phones and 4-up on desktop (4-2 for its 6 cards).
+  // Other categories: avoid a lone orphan card in the last row — a 3-col grid
+  // leaves 1 behind when count % 3 === 1 (e.g. 4 → 3+1, 7 → 3+3+1), so bump to 4.
+  const isBrunch = category.id === 'brunch'
+  const baseCols = isBrunch ? 'grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'
+  const lgCols = isBrunch
+    ? 'lg:grid-cols-4'
+    : cards.length % 3 === 1
+      ? 'lg:grid-cols-4'
+      : 'lg:grid-cols-3'
 
   return (
     <>
       {featured && <FeaturedDrink item={featured} />}
       {cards.length > 0 && (
         <div
-          className={`grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 md:gap-8 ${lgCols} ${
+          className={`grid items-stretch gap-5 md:gap-8 ${baseCols} ${lgCols} ${
             featured ? 'mt-5 md:mt-8' : 'mt-8 md:mt-10'
           }`}
         >
