@@ -572,7 +572,7 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
   "/images/mess-philosophy-poster.jpg": {
     "width": 720,
     "height": 1280,
-    "blurDataURL": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAADQAwCdASoQABwAPu1krU6ppaSiMAgBMB2JQBOgBDjmybFLeCMGdQAA/tq+8mAXOoPixxr3dPYr57SjdQ8JRjwFjcOCM9eixp76rmzf4v0gGgtnbJvozZOX4PDg6weLGToaVnMimngyq8qRMAA=",
+    "blurDataURL": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAAAwBACdASoQABwAPu1iqU2ppaOiMAgBMB2JYwC7ACG0W+od2cu+wzHJFGAA/uji2OdLKdlV9ANrpHrIvtyyTcnop8VBtzmQW4uvBeCjl2xn35uSP8LsykPtpgez5WzNG7f2OO+eZjMkpmJgAAA=",
     "avifSrcSet": "/images/mess-philosophy-poster--w480.avif 480w, /images/mess-philosophy-poster--w720.avif 720w",
     "webpSrcSet": "/images/mess-philosophy-poster--w480.webp 480w, /images/mess-philosophy-poster--w720.webp 720w"
   },
