@@ -26,9 +26,8 @@ export const metadata: Metadata = buildPageMetadata({
 })
 
 export default function Home() {
-  const keepRisingNext = getEventBySlug('keep-rising-vol-3')
   const keepRising = getEventBySlug('keep-rising')
-  const actionCards = [keepRisingNext, keepRising].filter((e): e is Event => !!e)
+  const actionCards = [keepRising].filter((e): e is Event => !!e)
   const settings = getSettings()
   const faqJsonLd = buildFaqJsonLd()
 
