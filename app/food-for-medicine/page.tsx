@@ -137,7 +137,7 @@ export default function BlogPage() {
       </section>
 
       <PreFooterCta
-        variant="mustard"
+        variant="forest-gold"
         eyebrow="ΜΗ ΧΑΣΕΙΣ ΕΠΟΜΕΝΑ"
         heading="Έλα να μαγειρέψουμε μαζί."
         body="Κάθε εβδομάδα νέα tips για πιο θρεπτικά πιάτα, νέα στο μενού και ιστορίες από την κουζίνα — πρώτα στο Instagram μας."

@@ -5,7 +5,7 @@ import { m } from 'framer-motion'
 import { EASE } from '@/lib/motion'
 
 type PreFooterCtaProps = {
-  variant?: 'olive' | 'mustard' | 'charcoal'
+  variant?: 'olive' | 'forest-gold' | 'charcoal'
   eyebrow: string
   heading: string
   body?: string
@@ -23,12 +23,12 @@ const variantStyles = {
     primary: 'bg-mustard text-ink-dark hover:bg-amber',
     secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
   },
-  mustard: {
-    bg: 'bg-mustard',
-    text: 'text-charcoal',
-    eyebrow: 'text-charcoal/70',
-    primary: 'bg-forest text-charcoal hover:bg-olive',
-    secondary: 'border-charcoal/30 text-charcoal hover:border-charcoal/60',
+  'forest-gold': {
+    bg: 'bg-forest',
+    text: 'text-mustard',
+    eyebrow: 'text-mustard/70',
+    primary: 'bg-mustard text-ink-dark hover:bg-amber',
+    secondary: 'border-mustard/40 text-mustard hover:border-mustard/70',
   },
   charcoal: {
     bg: 'bg-forest',
