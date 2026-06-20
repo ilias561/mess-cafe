@@ -18,14 +18,14 @@ export default function MenuHeader() {
             M.E.S.S. · Ο κατάλογος
           </m.p>
 
-          <m.h1
+          <m.h2
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.08 }}
             className="type-menu-title u-balance mt-3 font-serif tracking-tight text-charcoal md:mt-4"
           >
             Το μενού μας.
-          </m.h1>
+          </m.h2>
 
           <m.p
             initial={{ opacity: 0, y: 20 }}

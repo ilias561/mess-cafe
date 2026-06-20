@@ -12,3 +12,13 @@ export function absoluteUrl(path: string): string {
   const normalized = path.startsWith('/') ? path : `/${path}`
   return `${base}${normalized}`
 }
+
+/**
+ * Absolute URL for a *page* (not an asset), always ending in a trailing slash to
+ * match Next's `trailingSlash: true` export — so sitemap/breadcrumb URLs line up
+ * exactly with the canonical URLs Next emits. Do not use for files (e.g. images).
+ */
+export function pageUrl(path: string): string {
+  const abs = absoluteUrl(path)
+  return abs.endsWith('/') ? abs : `${abs}/`
+}

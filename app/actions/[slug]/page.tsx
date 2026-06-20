@@ -7,6 +7,7 @@ import EventHero from '@/components/events/event-hero'
 import EventBookingCta from '@/components/events/event-booking-cta'
 import RelatedEvents from '@/components/events/related-events'
 import { buildEventJsonLd } from '@/lib/events/event-json-ld'
+import { buildBreadcrumbJsonLd } from '@/lib/breadcrumb-schema'
 import { buildOgImage, buildPageMetadata } from '@/lib/metadata'
 import { getAllEvents, getEventBySlug } from '@/lib/events/events'
 
@@ -58,10 +59,16 @@ export default async function EventPage({ params }: EventPageProps) {
   if (!event) notFound()
 
   const jsonLd = buildEventJsonLd(event)
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Αρχική', path: '/' },
+    { name: 'Δράσεις', path: '/actions' },
+    { name: event.title, path: `/actions/${event.slug}` },
+  ])
 
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Navigation />
       <EventHero event={event} />
       <PostBody markdown={event.body} />

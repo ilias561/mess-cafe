@@ -9,6 +9,7 @@ import ShareRow from '@/components/blog/share-row'
 import PreFooterCta from '@/components/pre-footer-cta'
 import { formatPostDate } from '@/lib/blog/format-date'
 import { buildOgImage, buildPageMetadata } from '@/lib/metadata'
+import { buildBreadcrumbJsonLd } from '@/lib/breadcrumb-schema'
 import { absoluteUrl, getSiteUrl } from '@/lib/site-url'
 import { getAllPosts, getPostBySlug } from '@/lib/blog/posts'
 
@@ -94,9 +95,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     inLanguage: 'el',
   }
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Αρχική', path: '/' },
+    { name: 'Φαγητό ως Φάρμακο', path: '/food-for-medicine' },
+    { name: post.title, path: `/food-for-medicine/${post.slug}` },
+  ])
+
   return (
     <main id="main-content" className="bg-bone text-charcoal">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <Navigation />
       <PostHero post={post} />
       <PostBody markdown={post.body} />
