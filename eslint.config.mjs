@@ -9,6 +9,9 @@ export default defineConfig([
     '.next/**',
     'out/**',
     'node_modules/**',
+    // Cloudflare Pages Functions run in the Workers runtime, not the Next app —
+    // don't lint them with the React/Next config.
+    'functions/**',
   ]),
   {
     rules: {

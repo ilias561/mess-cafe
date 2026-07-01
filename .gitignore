@@ -27,6 +27,8 @@ public/images/**/*--w*.webp
 # Environment variables
 .env*.local
 .env
+# Cloudflare Pages Function local secrets (wrangler pages dev)
+.dev.vars
 
 # Common ignores
 node_modules/

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import Link from 'next/link'
 import { subscribeToNewsletter } from '@/lib/newsletter/subscribe'
 
 // Standalone newsletter band for the #KeepRising (/actions) page — sits below
@@ -9,7 +10,9 @@ import { subscribeToNewsletter } from '@/lib/newsletter/subscribe'
 export default function NewsletterSignup() {
   const [email, setEmail] = useState('')
   const [consent, setConsent] = useState(false)
+  const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
 
   const disabled = status === 'loading' || !consent || email.trim().length === 0
@@ -19,12 +22,13 @@ export default function NewsletterSignup() {
     if (disabled) return
     setStatus('loading')
     setError('')
-    const result = await subscribeToNewsletter(email.trim())
+    const result = await subscribeToNewsletter(email.trim(), consent, honeypot)
     if (!result.ok) {
       setStatus('error')
       setError(result.message ?? 'Δεν ήταν δυνατή η εγγραφή. Δοκίμασε ξανά.')
       return
     }
+    setPending(Boolean(result.pending))
     setStatus('success')
   }
 
@@ -47,7 +51,9 @@ export default function NewsletterSignup() {
 
         {status === 'success' ? (
           <p className="mt-7 inline-flex rounded-[2px] bg-mustard/12 px-4 py-3 font-sans text-[14px] text-charcoal ring-1 ring-mustard/40">
-            Ευχαριστούμε! Έλεγξε το email σου για επιβεβαίωση.
+            {pending
+              ? 'Ευχαριστούμε! Έλεγξε το email σου για να επιβεβαιώσεις την εγγραφή.'
+              : 'Ευχαριστούμε! Η εγγραφή σου ολοκληρώθηκε.'}
           </p>
         ) : (
           <form onSubmit={onSubmit} className="mt-7 flex w-full max-w-[520px] flex-col gap-3" noValidate>
@@ -73,6 +79,17 @@ export default function NewsletterSignup() {
                 {status === 'loading' ? 'Αποστολή...' : 'Εγγραφή'}
               </button>
             </div>
+            {/* honeypot — hidden from users; bots fill it and get silently dropped */}
+            <input
+              type="text"
+              name="company"
+              value={honeypot}
+              onChange={(event) => setHoneypot(event.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+              className="hidden"
+            />
             <label className="flex items-start justify-center gap-3">
               <input
                 type="checkbox"
@@ -81,7 +98,11 @@ export default function NewsletterSignup() {
                 className="mt-0.5 h-4 w-4 accent-mustard"
               />
               <span className="font-sans text-[12px] leading-snug text-charcoal/60">
-                Συμφωνώ να λαμβάνω ενημερώσεις μέσω email.
+                Συμφωνώ να λαμβάνω ενημερώσεις μέσω email. Δες την{' '}
+                <Link href="/privacy" className="underline hover:text-charcoal">
+                  Πολιτική Απορρήτου
+                </Link>
+                .
               </span>
             </label>
             {status === 'error' && <p className="font-sans text-[12px] text-amber">{error}</p>}

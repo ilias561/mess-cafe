@@ -1,38 +1,30 @@
 type NewsletterSubscribeResult = {
   ok: boolean
+  /** true when a double-opt-in confirmation email was sent (visitor must click) */
+  pending?: boolean
   message?: string
 }
 
-export async function subscribeToNewsletter(email: string): Promise<NewsletterSubscribeResult> {
-  const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY
-  const listIdRaw = process.env.NEXT_PUBLIC_BREVO_LIST_ID
-  const listId = Number(listIdRaw)
-
-  // This key must be scoped to contacts:write only and rotated if leaked.
-  if (!apiKey || !listIdRaw || !Number.isFinite(listId)) {
-    console.info('Newsletter not configured')
-    return { ok: true }
-  }
-
+// The Brevo key lives server-side in the Cloudflare Pages Function at
+// /api/subscribe (functions/api/subscribe.js) — never in this client bundle.
+// In `next dev` / a plain static preview that endpoint doesn't exist, so the
+// call fails and the form shows an error; use `wrangler pages dev out` to test.
+export async function subscribeToNewsletter(
+  email: string,
+  consent = true,
+  honeypot = '',
+): Promise<NewsletterSubscribeResult> {
   try {
-    const response = await fetch('https://api.brevo.com/v3/contacts', {
+    const response = await fetch('/api/subscribe', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': apiKey,
-      },
-      body: JSON.stringify({
-        email,
-        listIds: [listId],
-        updateEnabled: true,
-      }),
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, consent, _gotcha: honeypot }),
     })
-
-    if (!response.ok) {
-      return { ok: false, message: 'Δεν ήταν δυνατή η εγγραφή. Δοκίμασε ξανά.' }
+    const data = (await response.json().catch(() => null)) as NewsletterSubscribeResult | null
+    if (!response.ok || !data?.ok) {
+      return { ok: false, message: data?.message ?? 'Δεν ήταν δυνατή η εγγραφή. Δοκίμασε ξανά.' }
     }
-
-    return { ok: true }
+    return { ok: true, pending: Boolean(data.pending) }
   } catch {
     return { ok: false, message: 'Σφάλμα δικτύου. Δοκίμασε ξανά.' }
   }

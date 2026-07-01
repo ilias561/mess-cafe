@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import { X } from 'lucide-react'
 import { EASE } from '@/lib/motion'
 import {
@@ -41,7 +42,9 @@ export default function NewsletterPopup() {
   const [footerInView, setFooterInView] = useState(false)
   const [email, setEmail] = useState('')
   const [acceptedGdpr, setAcceptedGdpr] = useState(false)
+  const [honeypot, setHoneypot] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
 
   const shouldDisable = useMemo(
@@ -149,13 +152,14 @@ export default function NewsletterPopup() {
 
     setStatus('loading')
     setError('')
-    const result = await subscribeToNewsletter(email.trim())
+    const result = await subscribeToNewsletter(email.trim(), acceptedGdpr, honeypot)
     if (!result.ok) {
       setStatus('error')
       setError(result.message ?? 'Δεν ήταν δυνατή η εγγραφή.')
       return
     }
 
+    setPending(Boolean(result.pending))
     setStatus('success')
     localStorage.setItem(LOCAL_SUBSCRIBED_KEY, '1')
     sessionStorage.setItem(SESSION_DISMISSED_KEY, '1')
@@ -197,7 +201,9 @@ export default function NewsletterPopup() {
 
             {status === 'success' ? (
               <p className="mt-4 rounded-[2px] bg-olive-deep px-3 py-2 font-sans text-[13px] text-charcoal">
-                Ευχαριστούμε! Έλεγξε το email σου.
+                {pending
+                  ? 'Ευχαριστούμε! Έλεγξε το email σου για επιβεβαίωση.'
+                  : 'Ευχαριστούμε! Η εγγραφή σου ολοκληρώθηκε.'}
               </p>
             ) : (
               <form onSubmit={onSubmit} className="mt-4 space-y-3">
@@ -212,6 +218,16 @@ export default function NewsletterPopup() {
                   autoComplete="email"
                   className="ui-field w-full rounded-[2px] border border-line/70 bg-charcoal/10 px-3 py-2.5 font-sans text-[14px] text-charcoal placeholder:text-charcoal/55"
                 />
+                <input
+                  type="text"
+                  name="company"
+                  value={honeypot}
+                  onChange={(event) => setHoneypot(event.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden
+                  className="hidden"
+                />
                 <label className="flex items-start gap-2">
                   <input
                     type="checkbox"
@@ -220,7 +236,10 @@ export default function NewsletterPopup() {
                     className="mt-0.5 h-4 w-4 accent-mustard"
                   />
                   <span className="font-sans text-[12px] leading-snug text-concrete">
-                    Συμφωνώ με την επικοινωνία μέσω email
+                    Συμφωνώ με την επικοινωνία μέσω email ·{' '}
+                    <Link href="/privacy" className="underline hover:text-charcoal">
+                      Πολιτική Απορρήτου
+                    </Link>
                   </span>
                 </label>
                 <button
