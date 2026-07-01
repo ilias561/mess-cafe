@@ -40,7 +40,9 @@ export default function TermsPage() {
       </p>
 
       <h2>Επικοινωνία</h2>
-      <p>[ΣΥΜΠΛΗΡΩΣΕ: email]</p>
+      <p>
+        Email: <a href="mailto:info@messcafe.gr">info@messcafe.gr</a>
+      </p>
     </LegalDocumentLayout>
   )
 }

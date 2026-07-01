@@ -35,6 +35,9 @@ export default function PrivacyPage() {
         <li>
           <strong>Φόρμα επικοινωνίας:</strong> όνομα, email, μήνυμα.
         </li>
+        <li>
+          <strong>Newsletter:</strong> διεύθυνση email (μόνο εφόσον εγγραφείς οικειοθελώς).
+        </li>
       </ul>
 
       <h2>Σκοπός επεξεργασίας</h2>
@@ -55,8 +58,9 @@ export default function PrivacyPage() {
       <h2>Αποδέκτες / εκτελούντες την επεξεργασία</h2>
       <ul>
         <li>
-          <strong>Web3Forms</strong> — αποστολή και παράδοση μηνυμάτων φόρμας στο email της
-          επιχείρησης (εκτελών επεξεργασία).
+          <strong>WhatsApp (Meta Platforms Ireland Ltd.) ή εφαρμογή email:</strong> οι φόρμες
+          κράτησης και επικοινωνίας δεν υποβάλλονται μέσω διακομιστή μας — ανοίγουν τη δική σας
+          εφαρμογή WhatsApp ή email, μέσω της οποίας αποστέλλετε εσείς το μήνυμα στην επιχείρηση.
         </li>
         <li>
           <strong>CallMeBot / WhatsApp</strong> — ειδοποίηση για νέες κρατήσεις (όταν είναι
@@ -64,6 +68,11 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Cloudflare</strong> — φιλοξενία του ιστότοπου και τεχνική ασφάλεια.
+        </li>
+        <li>
+          <strong>Brevo (Sendinblue GmbH, Γερμανία):</strong> διαχείριση της λίστας newsletter και
+          αποστολή email (εκτελών επεξεργασία εντός ΕΕ). Κάθε email περιλαμβάνει σύνδεσμο διαγραφής
+          από τη λίστα, ενεργό μόνο εφόσον έχεις εγγραφεί.
         </li>
       </ul>
 
@@ -93,7 +102,10 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Επικοινωνία για άσκηση δικαιωμάτων</h2>
-      <p>[ΣΥΜΠΛΗΡΩΣΕ: email επικοινωνίας]</p>
+      <p>
+        Email: <a href="mailto:info@messcafe.gr">info@messcafe.gr</a> · Τηλ.:{' '}
+        <a href="tel:+306946614169">694 661 4169</a>
+      </p>
 
       <h2>Cookies</h2>
       <p>
