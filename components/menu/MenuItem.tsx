@@ -20,8 +20,6 @@ const MACRO_FIELDS = [
   { key: 'protein', label: 'Πρωτεΐνη', unit: 'g' },
   { key: 'carbs', label: 'Υδατάνθρακες', unit: 'g' },
   { key: 'fat', label: 'Λιπαρά', unit: 'g' },
-  { key: 'sugar', label: 'Ζάχαρη', unit: 'g' },
-  { key: 'fiber', label: 'Ίνες', unit: 'g' },
 ] as const
 
 function itemMotionProps(index: number) {
@@ -124,7 +122,7 @@ export function NutritionPanel({
 
 export function MacroStrip({ nutrition, compact = false }: { nutrition: Nutrition; compact?: boolean }) {
   return (
-    <dl className={`grid grid-cols-3 gap-x-4 gap-y-3 ${compact ? '' : 'sm:grid-cols-6'}`}>
+    <dl className={`grid grid-cols-2 gap-x-4 gap-y-3 ${compact ? '' : 'sm:grid-cols-4'}`}>
       {MACRO_FIELDS.map(({ key, label, unit }) => (
         <div key={key} className="flex min-w-0 flex-col gap-0.5">
           <dt className="truncate font-sans text-[9px] font-medium uppercase tracking-[0.16em] text-olive/70">

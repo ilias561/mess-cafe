@@ -3,8 +3,6 @@ export type Nutrition = {
   protein: number
   carbs: number
   fat: number
-  sugar: number
-  fiber: number
 }
 
 export type MenuItem = {
@@ -48,7 +46,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Δύο φέτες προζυμένιου ψωμιού — μία με γουακαμόλε, μία με φυστικοβούτυρο. Απόλυτη ισορροπία μεταξύ αλμυρού και γλυκού.',
         price: '6.5€',
         image: '/images/menu/piata-0018.jpg',
-        nutrition: { calories: 280, protein: 7, carbs: 38, fat: 11, sugar: 5, fiber: 3 },
+        nutrition: { calories: 834.4, protein: 27.2, carbs: 95, fat: 41.4 },
         benefit: 'Φυτικές ίνες, ιχνοστοιχεία και ω-3 λιπαρά.',
       },
       {
@@ -57,7 +55,7 @@ export const menuData: MenuCategory[] = [
         price: '9€',
         badges: ['vegetarian', 'signature'],
         image: '/images/menu/piata-0009.jpg',
-        nutrition: { calories: 420, protein: 14, carbs: 38, fat: 24, sugar: 4, fiber: 9 },
+        nutrition: { calories: 966, protein: 39.9, carbs: 83.1, fat: 52.9 },
         benefit:
           'Το πιο ολοκληρωμένο πιάτο μας! Πρωτεΐνη, καλά λιπαρά, ω-3 και ιχνοστοιχεία, συνοδευμένα με πολλή γεύση.',
       },
@@ -67,7 +65,7 @@ export const menuData: MenuCategory[] = [
         price: '6.5€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0016.jpg',
-        nutrition: { calories: 320, protein: 18, carbs: 6, fat: 24, sugar: 2, fiber: 1 },
+        nutrition: { calories: 250, protein: 18.8, carbs: 1, fat: 17.2 },
         benefit:
           'Το αυγό θεωρείται η πιο θρεπτική τροφή για τον άνθρωπο — εμείς το κάνουμε και νόστιμο.',
       },
@@ -77,7 +75,7 @@ export const menuData: MenuCategory[] = [
         price: '7€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0013.jpg',
-        nutrition: { calories: 340, protein: 19, carbs: 7, fat: 26, sugar: 2, fiber: 1 },
+        nutrition: { calories: 451, protein: 25.4, carbs: 38.1, fat: 19.7 },
         benefit: 'Πρωτεϊνική βόμβα για το ξεκίνημα της μέρας σου.',
       },
       {
@@ -85,7 +83,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Ψωμί με μασκαρπόνε, αυγό, απάκι, ντοματίνια, προσούτο.',
         price: '10€',
         image: '/images/menu/apaki-on-toast.jpg',
-        nutrition: { calories: 390, protein: 22, carbs: 34, fat: 18, sugar: 4, fiber: 3 },
+        nutrition: { calories: 937, protein: 52, carbs: 70.3, fat: 47.6 },
         benefit:
           'Για όσους πεινάνε και το εννοούν — μια ολοκληρωμένη λύση που θα σε κρατήσει όλη μέρα.',
       },
@@ -95,7 +93,7 @@ export const menuData: MenuCategory[] = [
         price: '7€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0015.jpg',
-        nutrition: { calories: 480, protein: 22, carbs: 36, fat: 28, sugar: 8, fiber: 3 },
+        nutrition: { calories: 752.2, protein: 36.4, carbs: 80.7, fat: 30.8 },
         benefit:
           'Οι παλαιωμένες γραβιέρες αποτελούν βασική πηγή προβιοτικών και ενζύμων — το πεπτικό σου θα το ευγνωμονεί.',
       },
@@ -104,7 +102,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Προζυμένιο ψωμί, mousse γαλοτύρι, chutney τομάτας με φράουλα, γλασαρισμένο apaki κοτόπουλου, λάδι βασιλικού και κρέμα βαλσάμικου.',
         price: '9€',
         image: '/images/menu/all-red-on-toast.jpg',
-        nutrition: { calories: 410, protein: 20, carbs: 36, fat: 19, sugar: 9, fiber: 3 },
+        nutrition: { calories: 694.6, protein: 38.6, carbs: 97.8, fat: 15.7 },
         benefit:
           'Αντιοξειδωτικά από την τομάτα και τη φράουλα, με πρωτεΐνη από το κοτόπουλο — γεύση και ισορροπία.',
       },
@@ -112,7 +110,7 @@ export const menuData: MenuCategory[] = [
         name: 'Kayannas On Toast',
         desc: 'Προζυμένιο ψωμί, σάλτσα kayanna με αυγά, φέτα και ζουμερό λουκάνικο μαύρου χοίρου με λευκή τρούφα.',
         price: '10€',
-        nutrition: { calories: 470, protein: 24, carbs: 32, fat: 27, sugar: 3, fiber: 2 },
+        nutrition: { calories: 1137, protein: 53.9, carbs: 76.2, fat: 66.8 },
         benefit:
           'Πλήρης πρωτεΐνη από αυγά και λουκάνικο μαύρου χοίρου, για ένα χορταστικό ξεκίνημα.',
       },
@@ -130,7 +128,7 @@ export const menuData: MenuCategory[] = [
         price: '8€',
         badges: ['vegan'],
         image: '/images/menu/piata-0028.jpg',
-        nutrition: { calories: 430, protein: 12, carbs: 68, fat: 13, sugar: 9, fiber: 11 },
+        nutrition: { calories: 424.4, protein: 13.7, carbs: 58.7, fat: 16 },
         benefit:
           'Το άγριο ρύζι, τα φασόλια και η γλυκοπατάτα παρέχουν φυτικές ίνες, φυτική πρωτεΐνη και αντιφλεγμονώδη συστατικά.',
       },
@@ -140,7 +138,7 @@ export const menuData: MenuCategory[] = [
         price: '9€',
         badges: ['signature'],
         image: '/images/menu/piata-0020.jpg',
-        nutrition: { calories: 520, protein: 26, carbs: 32, fat: 31, sugar: 4, fiber: 5 },
+        nutrition: { calories: 889.4, protein: 47.5, carbs: 41.4, fat: 60 },
         benefit:
           'Ο συνδυασμός αυγού, αβοκάντο και μανιταριών προσφέρει πρωτεΐνη, υγιή λιπαρά και βιταμίνες του συμπλέγματος Β.',
       },
@@ -150,7 +148,7 @@ export const menuData: MenuCategory[] = [
         price: '11€',
         badges: ['signature'],
         image: '/images/menu/piata-0022.jpg',
-        nutrition: { calories: 580, protein: 36, carbs: 58, fat: 18, sugar: 10, fiber: 6 },
+        nutrition: { calories: 662.4, protein: 64.5, carbs: 58.1, fat: 17.9 },
         benefit:
           'Το κοτόπουλο τεριγιάκι με άγριο ρύζι και λαχανικά προσφέρουν πλήρη πρωτεΐνη, αντιοξειδωτικά και ενέργεια για όλη την ημέρα.',
       },
@@ -159,7 +157,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Κοτόπουλο, ανανάς, ρύζι, λαχανικά, σως τροπική.',
         price: '12€',
         image: '/images/menu/piata-0025.jpg',
-        nutrition: { calories: 540, protein: 32, carbs: 62, fat: 14, sugar: 16, fiber: 5 },
+        nutrition: { calories: 728.9, protein: 63.7, carbs: 67.1, fat: 23 },
         benefit:
           'Ο ανανάς περιέχει βρομελαΐνη που βοηθά την πέψη, ενώ το κοτόπουλο και το ρύζι δίνουν ισορροπημένη ενέργεια.',
       },
@@ -167,7 +165,6 @@ export const menuData: MenuCategory[] = [
         name: 'Noodles with Shrimps Poke Bowl',
         desc: 'Noodles, γαρίδες, λαχανικά, σως πικάντικη.',
         price: '9€',
-        nutrition: { calories: 490, protein: 28, carbs: 60, fat: 13, sugar: 7, fiber: 4 },
         benefit:
           'Οι γαρίδες είναι χαμηλές σε θερμίδες και πλούσιες σε ιώδιο και ψευδάργυρο που υποστηρίζουν τον μεταβολισμό.',
       },
@@ -177,7 +174,6 @@ export const menuData: MenuCategory[] = [
         price: '6€',
         badges: ['vegetarian'],
         image: '/images/menu/yogurt-bowl.jpg',
-        nutrition: { calories: 240, protein: 14, carbs: 26, fat: 8, sugar: 16, fiber: 3 },
         benefit:
           'Το γιαούρτι προσφέρει προβιοτικά και πρωτεΐνη υψηλής ποιότητας για ένα ελαφρύ, χορταστικό ξεκίνημα.',
       },
@@ -193,7 +189,7 @@ export const menuData: MenuCategory[] = [
         name: 'Caesar Salad',
         desc: 'Iceberg, κρουτόν από ρεβύθια, κοτόπουλο sous vide, παρμεζάνα, MJ dressing.',
         price: '10€',
-        nutrition: { calories: 440, protein: 32, carbs: 22, fat: 24, sugar: 4, fiber: 4 },
+        nutrition: { calories: 712.1, protein: 78, carbs: 17.1, fat: 35.2 },
         benefit:
           'Τα κρουτόν ρεβυθιών προσθέτουν φυτική πρωτεΐνη και ίνες, ενώ το κοτόπουλο sous vide διατηρεί τα θρεπτικά συστατικά του.',
       },
@@ -209,7 +205,7 @@ export const menuData: MenuCategory[] = [
         name: 'Sweet Chilly Chicken Wrap',
         desc: 'Κοτόπουλο σε σως sweet chilli, τορτίγια, λαχανικά.',
         price: '7€',
-        nutrition: { calories: 460, protein: 28, carbs: 52, fat: 14, sugar: 9, fiber: 4 },
+        nutrition: { calories: 821.1, protein: 67.2, carbs: 81.7, fat: 23.2 },
         benefit: 'Το κοτόπουλο με λαχανικά σε τορτίγια δίνει ισορροπημένη αναλογία μακροθρεπτικών για σταθερή ενέργεια.',
       },
       {
@@ -217,7 +213,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Μοσχαρίσιο tagliata, ρόκα, παρμεζάνα, balsamic, λάδι τρούφα.',
         price: '14€',
         badges: ['signature'],
-        nutrition: { calories: 520, protein: 38, carbs: 12, fat: 34, sugar: 3, fiber: 2 },
+        nutrition: { calories: 838.5, protein: 45.2, carbs: 26.2, fat: 59.5 },
         benefit:
           'Η μοσχαρίσια tagliata με λάδι τρούφας και παρμεζάνα παρέχει πλούσια πρωτεΐνη, σίδηρο και Β12 για ενέργεια και μυϊκή ανάπλαση.',
       },
@@ -235,7 +231,6 @@ export const menuData: MenuCategory[] = [
         price: '2.5€',
         badges: ['vegetarian'],
         image: '/images/menu/glyka-0006.jpg',
-        nutrition: { calories: 210, protein: 4, carbs: 36, fat: 7, sugar: 14, fiber: 2 },
         benefit: 'Η χειροποίητη μπανανόπιτα με ελάχιστη ζάχαρη παρέχει κάλιο, φυσικά σάκχαρα και ίνες για σταθερή ενέργεια.',
       },
       {
@@ -243,7 +238,6 @@ export const menuData: MenuCategory[] = [
         desc: 'Σπόροι chia, φυτικό γάλα, εποχιακά φρούτα.',
         price: '4€',
         badges: ['vegan'],
-        nutrition: { calories: 260, protein: 7, carbs: 32, fat: 12, sugar: 14, fiber: 10 },
         benefit:
           'Οι σπόροι chia είναι πλούσιοι σε ωμέγα-3 λιπαρά οξέα, ασβέστιο και ίνες που προάγουν κορεσμό και υγεία εντέρου.',
       },
@@ -253,7 +247,6 @@ export const menuData: MenuCategory[] = [
         price: '4€',
         badges: ['vegetarian'],
         image: '/images/menu/glyka-0001.jpg',
-        nutrition: { calories: 310, protein: 6, carbs: 28, fat: 19, sugar: 18, fiber: 1 },
         benefit:
           'Το no-bake cheesecake διατηρεί τα ενεργά έλαια και τα θρεπτικά συστατικά της βάσης του, προσφέροντας γλυκιά απόλαυση με ελαφρύ προφίλ.',
       },
@@ -263,7 +256,6 @@ export const menuData: MenuCategory[] = [
         price: '3.5€',
         badges: ['vegan'],
         image: '/images/menu/glyka-0005.jpg',
-        nutrition: { calories: 290, protein: 5, carbs: 48, fat: 10, sugar: 22, fiber: 6 },
         benefit:
           'Η γλυκοπατάτα και οι χουρμάδες αντικαθιστούν τη ζάχαρη προσφέροντας φυτικές ίνες, β-καροτίνη και φυσική γλυκύτητα.',
       },
@@ -280,31 +272,26 @@ export const menuData: MenuCategory[] = [
         name: 'Espresso',
         desc: 'Specialty single origin.',
         price: '2.5€',
-        nutrition: { calories: 2, protein: 0, carbs: 0, fat: 0, sugar: 0, fiber: 0 },
       },
       {
         name: 'Double Espresso',
         desc: 'Specialty single origin.',
         price: '3.8€',
-        nutrition: { calories: 5, protein: 0, carbs: 0, fat: 0, sugar: 0, fiber: 0 },
       },
       {
         name: 'Macchiato',
         desc: 'Espresso με αφρό γάλακτος.',
         price: '3€',
-        nutrition: { calories: 15, protein: 1, carbs: 1, fat: 1, sugar: 1, fiber: 0 },
       },
       {
         name: 'Double Macchiato',
         desc: 'Διπλό espresso με αφρό γάλακτος.',
         price: '4€',
-        nutrition: { calories: 25, protein: 1, carbs: 2, fat: 1, sugar: 1, fiber: 0 },
       },
       {
         name: 'Cappuccino',
         desc: 'Espresso, ζεστό γάλα, βελούδινος αφρός.',
         price: '3.8€',
-        nutrition: { calories: 90, protein: 5, carbs: 9, fat: 4, sugar: 8, fiber: 0 },
         benefit:
           'Το espresso αυξάνει την εγρήγορση και τον μεταβολισμό, ενώ το γάλα προσθέτει ασβέστιο για υγιή οστά.',
       },
@@ -312,7 +299,6 @@ export const menuData: MenuCategory[] = [
         name: 'Latte / Iced Latte',
         desc: 'Espresso με γάλα — ζεστό ή παγωμένο.',
         price: '4.5€',
-        nutrition: { calories: 150, protein: 8, carbs: 15, fat: 6, sugar: 13, fiber: 0 },
         benefit:
           'Ο συνδυασμός espresso και γάλακτος παρέχει ασβέστιο, πρωτεΐνη και καφεΐνη για ήπια, παρατεταμένη εγρήγορση.',
       },
@@ -320,13 +306,11 @@ export const menuData: MenuCategory[] = [
         name: 'Freddo Espresso',
         desc: 'Παγωμένο espresso.',
         price: '3.6€',
-        nutrition: { calories: 5, protein: 0, carbs: 1, fat: 0, sugar: 0, fiber: 0 },
       },
       {
         name: 'Freddo Cappuccino',
         desc: 'Freddo espresso με παγωμένο αφρό γάλακτος.',
         price: '4.3€',
-        nutrition: { calories: 70, protein: 4, carbs: 7, fat: 3, sugar: 6, fiber: 0 },
         benefit:
           'Παγωμένο espresso με αφρό γάλακτος — η δροσερή εκδοχή που συνδυάζει ασβέστιο και καφεΐνη για ευεξία και συγκέντρωση.',
       },
@@ -334,7 +318,6 @@ export const menuData: MenuCategory[] = [
         name: 'Raw Organic Cocoa',
         desc: 'Οργανικό κακάο χωρίς πρόσθετα.',
         price: '4€',
-        nutrition: { calories: 80, protein: 3, carbs: 12, fat: 3, sugar: 6, fiber: 3 },
         benefit:
           'Το ωμό βιολογικό κακάο είναι πλούσιο σε μαγνήσιο και φλαβονοειδή που προστατεύουν την καρδιά και ανεβάζουν τη διάθεση.',
       },
@@ -342,7 +325,6 @@ export const menuData: MenuCategory[] = [
         name: 'Aztec Cocoa',
         desc: 'Με κανέλα, μέλι και μπαχαρικά.',
         price: '5€',
-        nutrition: { calories: 140, protein: 3, carbs: 22, fat: 4, sugar: 16, fiber: 3 },
         benefit:
           'Η κανέλα και τα μπαχαρικά αυτού του ζεστού ρόφηματος βοηθούν στη ρύθμιση του σακχάρου και έχουν αντιφλεγμονώδεις ιδιότητες.',
       },
@@ -350,14 +332,12 @@ export const menuData: MenuCategory[] = [
         name: 'Σοκολάτα (Ζεστή / Κρύα)',
         desc: 'Με γάλα της επιλογής σας.',
         price: '4.5€',
-        nutrition: { calories: 220, protein: 7, carbs: 32, fat: 8, sugar: 28, fiber: 2 },
         benefit: 'Η σοκολάτα με γάλα παρέχει ασβέστιο, μαγνήσιο και θεοβρωμίνη για ήπια τόνωση και αίσθηση ευεξίας.',
       },
       {
         name: 'Matcha Latte',
         desc: 'Matcha με γάλα της επιλογής σας.',
         price: '4€',
-        nutrition: { calories: 130, protein: 6, carbs: 16, fat: 4, sugar: 12, fiber: 1 },
         benefit:
           'Το matcha με γάλα συνδυάζει L-theanine και καφεΐνη για ήρεμη εγρήγορση, αντιοξειδωτικά και ενίσχυση της συγκέντρωσης.',
       },
@@ -365,7 +345,6 @@ export const menuData: MenuCategory[] = [
         name: 'Matcha',
         desc: 'Παραδοσιακό matcha.',
         price: '4.5€',
-        nutrition: { calories: 35, protein: 2, carbs: 5, fat: 0, sugar: 1, fiber: 1 },
         benefit:
           'Το παραδοσιακό matcha είναι εξαιρετικά πλούσιο σε EGCG αντιοξειδωτικά που προστατεύουν τα κύτταρα και ενισχύουν τον μεταβολισμό.',
       },
@@ -373,7 +352,6 @@ export const menuData: MenuCategory[] = [
         name: 'Τσάι (Κρύο / Ζεστό)',
         desc: 'Τσάι σπιτικό, πράσινο, μαύρο.',
         price: '3.8€',
-        nutrition: { calories: 5, protein: 0, carbs: 1, fat: 0, sugar: 0, fiber: 0 },
         benefit:
           'Το πράσινο και μαύρο τσάι περιέχουν πολυφαινόλες και αντιοξειδωτικά που υποστηρίζουν την υγεία της καρδιάς και του ανοσοποιητικού.',
       },
