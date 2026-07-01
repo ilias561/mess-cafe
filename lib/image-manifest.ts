@@ -492,6 +492,34 @@ export const imageManifest: Record<string, ImageManifestEntry> = {
     "avifSrcSet": "/images/menu/kokteil-0008--w480.avif 480w, /images/menu/kokteil-0008--w768.avif 768w, /images/menu/kokteil-0008--w1200.avif 1200w, /images/menu/kokteil-0008--w1600.avif 1600w",
     "webpSrcSet": "/images/menu/kokteil-0008--w480.webp 480w, /images/menu/kokteil-0008--w768.webp 768w, /images/menu/kokteil-0008--w1200.webp 1200w, /images/menu/kokteil-0008--w1600.webp 1600w"
   },
+  "/images/menu/kokteil-aperol.jpg": {
+    "width": 1600,
+    "height": 2133,
+    "blurDataURL": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAAAQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoADPxO2c+fJdt6PsAD+8OVGDZhRbJdK81GCGyZbkV1h4UFE4NY3jDpsXrUNIRWBYTkTHveviPS1m7KmaPMsJjcrKiSMOOi1XstSQj0A0sNr8CHAif4din9F3k0NYEJQYXkkrsfppdnrt1pPjEAAAA==",
+    "avifSrcSet": "/images/menu/kokteil-aperol--w480.avif 480w, /images/menu/kokteil-aperol--w768.avif 768w, /images/menu/kokteil-aperol--w1200.avif 1200w, /images/menu/kokteil-aperol--w1600.avif 1600w",
+    "webpSrcSet": "/images/menu/kokteil-aperol--w480.webp 480w, /images/menu/kokteil-aperol--w768.webp 768w, /images/menu/kokteil-aperol--w1200.webp 1200w, /images/menu/kokteil-aperol--w1600.webp 1600w"
+  },
+  "/images/menu/kokteil-negroni.jpg": {
+    "width": 1600,
+    "height": 2133,
+    "blurDataURL": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoACZx+VIu5dj24h30AA/vK0sj33WTQ2s/QYGdi5ridQER65qrMoXgtwv4PdELw62yJ32bcxxOlFMgK4O7AFSMIsFyZAko9s6usoxH7wlwoFOhzC+ZnavyxoUHyFIvsexGdMWgAA",
+    "avifSrcSet": "/images/menu/kokteil-negroni--w480.avif 480w, /images/menu/kokteil-negroni--w768.avif 768w, /images/menu/kokteil-negroni--w1200.avif 1200w, /images/menu/kokteil-negroni--w1600.avif 1600w",
+    "webpSrcSet": "/images/menu/kokteil-negroni--w480.webp 480w, /images/menu/kokteil-negroni--w768.webp 768w, /images/menu/kokteil-negroni--w1200.webp 1200w, /images/menu/kokteil-negroni--w1600.webp 1600w"
+  },
+  "/images/menu/kokteil-paloma.jpg": {
+    "width": 1600,
+    "height": 2133,
+    "blurDataURL": "data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoRisAjPuT2GwUayBtAA/vK0zybIPUC+AWDi9I7AZLUG3FhnxJF5GUe+0RoKRIe4y7tTE9ylgvxIa88mnOkLz+2V1Ve26FZe0gPzeVQQbt6pf5mHNkd/0aahAEghK8EgiVV6JfAA",
+    "avifSrcSet": "/images/menu/kokteil-paloma--w480.avif 480w, /images/menu/kokteil-paloma--w768.avif 768w, /images/menu/kokteil-paloma--w1200.avif 1200w, /images/menu/kokteil-paloma--w1600.avif 1600w",
+    "webpSrcSet": "/images/menu/kokteil-paloma--w480.webp 480w, /images/menu/kokteil-paloma--w768.webp 768w, /images/menu/kokteil-paloma--w1200.webp 1200w, /images/menu/kokteil-paloma--w1600.webp 1600w"
+  },
+  "/images/menu/kokteil-pink.jpg": {
+    "width": 1600,
+    "height": 2133,
+    "blurDataURL": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAACwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JbACdMoCGACQL1Uyc++LTQiNnb60AAP7wyXGR0jO3vN0AYUS/K7tCJPPHivQrWIH6YLuxOeMahVQ33WeBLB9NvNQMZM8EC1wdDuklyYKnKoDDaOXfYM091Adg9074BSGSDq//xwL7v4GqMvtSUPATvgvwAAAA",
+    "avifSrcSet": "/images/menu/kokteil-pink--w480.avif 480w, /images/menu/kokteil-pink--w768.avif 768w, /images/menu/kokteil-pink--w1200.avif 1200w, /images/menu/kokteil-pink--w1600.avif 1600w",
+    "webpSrcSet": "/images/menu/kokteil-pink--w480.webp 480w, /images/menu/kokteil-pink--w768.webp 768w, /images/menu/kokteil-pink--w1200.webp 1200w, /images/menu/kokteil-pink--w1600.webp 1600w"
+  },
   "/images/menu/piata-0009.jpg": {
     "width": 1600,
     "height": 1200,

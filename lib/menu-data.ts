@@ -390,16 +390,19 @@ export const menuData: MenuCategory[] = [
         name: 'Aperol Spritz',
         desc: 'Aperol, Prosecco, σόδα.',
         price: '9€',
+        image: '/images/menu/kokteil-aperol.jpg',
       },
       {
         name: 'Negroni',
         desc: 'Gin, Campari, Vermouth Rosso.',
         price: '9€',
+        image: '/images/menu/kokteil-negroni.jpg',
       },
       {
         name: 'Paloma',
         desc: 'Tequila Blanco, χυμός λάιμ, agave, pink soda.',
         price: '9€',
+        image: '/images/menu/kokteil-paloma.jpg',
       },
       {
         name: 'Orange Spritz',
@@ -413,6 +416,7 @@ export const menuData: MenuCategory[] = [
         desc: 'Lillet pink, Campari, Prosecco, pink soda.',
         price: '10€',
         badges: ['signature'],
+        image: '/images/menu/kokteil-pink.jpg',
       },
       {
         name: 'Yellow Spritz',
