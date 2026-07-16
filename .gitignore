@@ -18,6 +18,8 @@ next.user-config.*
 # Build output
 out/
 .next/
+test-results/
+playwright-report/
 
 # Environment variables
 .env*.local
@@ -44,7 +46,15 @@ public/videos/
 # Working files (not for production)
 BLOG_CURSOR_PROMPT.md
 CURSOR_PROMPT*.md
-123.mp4
+SESSION_LOG.txt
+
+# Loose dev media at repo root (screenshots, source clips) — production assets live under public/
+/*.png
+/*.jpg
+/*.jpeg
+/*.mp4
+/*.mov
+/*.webm
 
 # Cowork session handoff (cross-session baton, not for git)
 HANDOFF.md
