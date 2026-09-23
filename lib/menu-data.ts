@@ -44,7 +44,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Spread Mix',
         desc: 'Δύο φέτες προζυμένιου ψωμιού — μία με γουακαμόλε, μία με φυστικοβούτυρο. Απόλυτη ισορροπία μεταξύ αλμυρού και γλυκού.',
-        price: '6.5€',
+        price: '7€',
         image: '/images/menu/piata-0018.jpg',
         nutrition: { calories: 834.4, protein: 27.2, carbs: 95, fat: 41.4 },
         benefit: 'Φυτικές ίνες, ιχνοστοιχεία και ω-3 λιπαρά.',
@@ -52,7 +52,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Avocado on Toast',
         desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
-        price: '9€',
+        price: '10€',
         badges: ['vegetarian', 'signature'],
         image: '/images/menu/piata-0009.jpg',
         nutrition: { calories: 966, protein: 39.9, carbs: 83.1, fat: 52.9 },
@@ -62,7 +62,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Classic Omelette',
         desc: '3 υλικά της επιλογής σας.',
-        price: '6.5€',
+        price: '7€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0016.jpg',
         nutrition: { calories: 250, protein: 18.8, carbs: 1, fat: 17.2 },
@@ -72,7 +72,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Scrambled Eggs',
         desc: 'Αυγά χτυπημένα με γιαούρτι, μαύρο κύμινο και ηλιέλαιο.',
-        price: '7€',
+        price: '8€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0013.jpg',
         nutrition: { calories: 451, protein: 25.4, carbs: 38.1, fat: 19.7 },
@@ -90,7 +90,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Grilled Cheese with Mushrooms',
         desc: 'Προζυμένιο ψωμί, μιξ από παλαιωμένες γραβιέρες, μανιτάρια πλευρώτους. Συνοδεύεται με chutney μάνγκο.',
-        price: '7€',
+        price: '8€',
         badges: ['vegetarian'],
         image: '/images/menu/piata-0015.jpg',
         nutrition: { calories: 752.2, protein: 36.4, carbs: 80.7, fat: 30.8 },
@@ -100,7 +100,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'All Red On Toast',
         desc: 'Προζυμένιο ψωμί, mousse γαλοτύρι, chutney τομάτας με φράουλα, γλασαρισμένο apaki κοτόπουλου, λάδι βασιλικού και κρέμα βαλσάμικου.',
-        price: '9€',
+        price: '10€',
         image: '/images/menu/all-red-on-toast.jpg',
         nutrition: { calories: 694.6, protein: 38.6, carbs: 97.8, fat: 15.7 },
         benefit:
@@ -125,7 +125,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Vegan Poke Bowl',
         desc: 'Άγριο ρύζι τηγανισμένο σε λάδι καρύδας, γλυκοπατάτα, αράκας, καλαμπόκι, ρόκα, φασόλια κόκκινα, φρέσκο κρεμμύδι, σπόροι από μαύρο κύμινο.',
-        price: '8€',
+        price: '9€',
         badges: ['vegan'],
         image: '/images/menu/piata-0028.jpg',
         nutrition: { calories: 424.4, protein: 13.7, carbs: 58.7, fat: 16 },
@@ -135,7 +135,7 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Breakfast Bowl',
         desc: 'Αυγό ποσέ, μπέικον, αβοκάντο, μανιτάρια, ντοματίνια, ρόκα, προζυμένιο ψωμί με μυρωδικά.',
-        price: '9€',
+        price: '10€',
         badges: ['signature'],
         image: '/images/menu/piata-0020.jpg',
         nutrition: { calories: 889.4, protein: 47.5, carbs: 41.4, fat: 60 },
@@ -145,12 +145,17 @@ export const menuData: MenuCategory[] = [
       {
         name: 'Teriyaki Chicken Poke Bowl',
         desc: 'Άγριο ρύζι τηγανισμένο σε λάδι καρύδας, κοτόπουλο τεριγιάκι, καρότο, λάχανο κόκκινο, κρεμμύδι, ραπανάκι, κολοκύθι, αυγό ποσέ, άσπρο και μαύρο σουσάμι.',
-        price: '11€',
+        price: '12€',
         badges: ['signature'],
         image: '/images/menu/piata-0022.jpg',
         nutrition: { calories: 662.4, protein: 64.5, carbs: 58.1, fat: 17.9 },
         benefit:
           'Το κοτόπουλο τεριγιάκι με άγριο ρύζι και λαχανικά προσφέρουν πλήρη πρωτεΐνη, αντιοξειδωτικά και ενέργεια για όλη την ημέρα.',
+      },
+      {
+        name: 'Power Bowl',
+        desc: '',
+        price: '14€',
       },
       {
         name: 'Chicken Pineapple Poke Bowl',
@@ -207,15 +212,6 @@ export const menuData: MenuCategory[] = [
         price: '7€',
         nutrition: { calories: 821.1, protein: 67.2, carbs: 81.7, fat: 23.2 },
         benefit: 'Το κοτόπουλο με λαχανικά σε τορτίγια δίνει ισορροπημένη αναλογία μακροθρεπτικών για σταθερή ενέργεια.',
-      },
-      {
-        name: 'Beef Tagliata',
-        desc: 'Μοσχαρίσιο tagliata, ρόκα, παρμεζάνα, balsamic, λάδι τρούφα.',
-        price: '14€',
-        badges: ['signature'],
-        nutrition: { calories: 838.5, protein: 45.2, carbs: 26.2, fat: 59.5 },
-        benefit:
-          'Η μοσχαρίσια tagliata με λάδι τρούφας και παρμεζάνα παρέχει πλούσια πρωτεΐνη, σίδηρο και Β12 για ενέργεια και μυϊκή ανάπλαση.',
       },
     ],
   },

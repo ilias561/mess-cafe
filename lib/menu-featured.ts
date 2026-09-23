@@ -6,14 +6,14 @@ export const featuredMenuItems: (MenuItem & { cat: string })[] = [
     cat: 'BRUNCH',
     name: 'Avocado Toast',
     desc: 'Προζυμένιο ψωμί, guacamole, φέτα, ντοματίνια, αυγό ποσέ.',
-    price: '9€',
+    price: '10€',
     image: '/images/menu/piata-0009.jpg',
   },
   {
     cat: 'BOWLS',
     name: 'Teriyaki Chicken Poke Bowl',
     desc: 'Άγριο ρύζι, κοτόπουλο τεριγιάκι, λαχανικά, αυγό ποσέ, σουσάμι.',
-    price: '11€',
+    price: '12€',
     image: '/images/menu/piata-0022.jpg',
   },
   {
