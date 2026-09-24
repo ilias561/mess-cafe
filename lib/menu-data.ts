@@ -153,11 +153,6 @@ export const menuData: MenuCategory[] = [
           'Το κοτόπουλο τεριγιάκι με άγριο ρύζι και λαχανικά προσφέρουν πλήρη πρωτεΐνη, αντιοξειδωτικά και ενέργεια για όλη την ημέρα.',
       },
       {
-        name: 'Power Bowl',
-        desc: '',
-        price: '14€',
-      },
-      {
         name: 'Chicken Pineapple Poke Bowl',
         desc: 'Κοτόπουλο, ανανάς, ρύζι, λαχανικά, σως τροπική.',
         price: '12€',
@@ -212,6 +207,15 @@ export const menuData: MenuCategory[] = [
         price: '7€',
         nutrition: { calories: 821.1, protein: 67.2, carbs: 81.7, fat: 23.2 },
         benefit: 'Το κοτόπουλο με λαχανικά σε τορτίγια δίνει ισορροπημένη αναλογία μακροθρεπτικών για σταθερή ενέργεια.',
+      },
+      {
+        name: 'Power Bowl',
+        desc: 'Μοσχαρίσιο tagliata, ρόκα, παρμεζάνα, balsamic, λάδι τρούφα.',
+        price: '14€',
+        badges: ['signature'],
+        nutrition: { calories: 838.5, protein: 45.2, carbs: 26.2, fat: 59.5 },
+        benefit:
+          'Η μοσχαρίσια tagliata με λάδι τρούφας και παρμεζάνα παρέχει πλούσια πρωτεΐνη, σίδηρο και Β12 για ενέργεια και μυϊκή ανάπλαση.',
       },
     ],
   },
